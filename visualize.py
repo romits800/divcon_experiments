@@ -43,7 +43,7 @@ def create_tex(texname, ind, field, title, d):
         print >> f, "\\hline" 
         print >> f, "\\multirow{2}{*}{benchmark}&\\multicolumn{2}{|c|}{mips}&\\multicolumn{2}{|c|}{hexagon}\\\\"
         print >> f, "\\cline{2-5}" 
-        print >> f, "&\\footnotesize dfs (%s/N)&\\footnotesize  lns (%s/N)&\\footnotesize dfs (%s/N)&\\footnotesize lns (%s/N)\\\\" %(ind, ind, ind, ind) 
+        print >> f, "&\\footnotesize dfs (%s\\textbackslash N)&\\footnotesize  lns (%s\\textbackslash N)&\\footnotesize dfs (%s\\textbackslash N)&\\footnotesize lns (%s\\textbackslash N)\\\\" %(ind, ind, ind, ind) 
         print >> f, "\\hline" 
 
         c = dict()
@@ -60,25 +60,25 @@ def create_tex(texname, ind, field, title, d):
             hexagondfs = d[benchmark].has_key("hexagon") and d[benchmark]["hexagon"].has_key("dfs")
             hexagonlns = d[benchmark].has_key("hexagon") and d[benchmark]["hexagon"].has_key("lns")
 
-            arg1 = str(d[benchmark]["mips"]["dfs"][field]) + "/" + str(d[benchmark]["mips"]["dfs"]["divs"]) if mipsdfs else "-"
+            arg1 = str(d[benchmark]["mips"]["dfs"][field]) + "\\textbackslash " + str(d[benchmark]["mips"]["dfs"]["divs"]) if mipsdfs else "-"
 
             if mipsdfs:
                 c["mips"]["dfs"]["sum"] += d[benchmark]["mips"]["dfs"][field]
                 c["mips"]["dfs"]["count"] += 1
 
-            arg2 = str(d[benchmark]["mips"]["lns"][field]) + "/" + str(d[benchmark]["mips"]["lns"]["divs"]) if mipslns else "-"
+            arg2 = str(d[benchmark]["mips"]["lns"][field]) + "\\textbackslash " + str(d[benchmark]["mips"]["lns"]["divs"]) if mipslns else "-"
 
             if mipslns:
                 c["mips"]["lns"]["sum"]+= d[benchmark]["mips"]["lns"][field]
                 c["mips"]["lns"]["count"] += 1
 
-            arg3 = str(d[benchmark]["hexagon"]["dfs"][field]) + "/" + str(d[benchmark]["hexagon"]["dfs"]["divs"]) if hexagondfs else "-"
+            arg3 = str(d[benchmark]["hexagon"]["dfs"][field]) + "\\textbackslash " + str(d[benchmark]["hexagon"]["dfs"]["divs"]) if hexagondfs else "-"
 
             if hexagondfs:
                 c["hexagon"]["dfs"]["sum"] += d[benchmark]["hexagon"]["dfs"][field]
                 c["hexagon"]["dfs"]["count"] += 1
 
-            arg4 = str(d[benchmark]["hexagon"]["lns"][field]) + "/" + str(d[benchmark]["hexagon"]["lns"]["divs"]) if hexagonlns else "-"
+            arg4 = str(d[benchmark]["hexagon"]["lns"][field]) + "\\textbackslash " + str(d[benchmark]["hexagon"]["lns"]["divs"]) if hexagonlns else "-"
 
             if hexagonlns:
                 c["hexagon"]["lns"]["sum"] += d[benchmark]["hexagon"]["lns"][field]
