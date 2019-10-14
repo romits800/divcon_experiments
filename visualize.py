@@ -104,7 +104,7 @@ def create_tex(texname, ind, field, title, d):
 
  
 
-def plot_all(field, d, title, yvalue):
+def plot_all(field, d, yvalue, title):
 
     def plot_arch(d, arch, ax):
 
@@ -133,7 +133,7 @@ def plot_all(field, d, title, yvalue):
 
         # Add some text for labels, title and custom x-axis tick labels, etc.
         ax.set_ylabel(yvalue)
-        ax.set_title(title)
+        ax.set_title(title + " (%s)"%arch)
         ax.set_xticks(x)
         ax.set_xticklabels(labels, rotation=30, ha="right", fontsize=7)
         ax.legend()
@@ -184,7 +184,7 @@ for benchmark in listdir(pathname):
             files = {h:files[h] for h in files if benchmark in h}
             cycles = {h:files[h]['cycles'] for h in files if files[h].has_key('cycles')}
             brcycles = {h:[ c for  c,j  in zip(files[h]['cycles'],files[h]['type']) if j == 1] for h in files if files[h].has_key('type') and files[h].has_key('cycles')}
-            extime = max([ files[h]['solver_time'] for h in files if files[h].has_key('solver_time') ]) # the maximum should be the last
+            extime = max([ files[h]['solver_time'] for h in files if files[h].has_key('solver_time') ])/1000. # the maximum should be the last
             fnames = [ fi for fi in cycles.keys() if fi.split(".")[0].isdigit()]
 
             ## Hamming Distance
@@ -248,13 +248,13 @@ for benchmark in listdir(pathname):
 
        
 
-create_tex("out_hamming",        "hamm",     "avg",    "%s, %s, %s, %s" %(s_metric, s_agap, s_constant, s_relax), d)
-create_tex("out_brhamming",     "brhamm",    "bravg",  "%s, %s, %s, %s" %(s_metric, s_agap, s_constant, s_relax),  d)
-create_tex("out_diffbrhamming", "diffhamm",  "brdiff",  "%s, %s, %s, %s" %(s_metric, s_agap, s_constant, s_relax), d)
-create_tex("out_extime",        "ms",        "extime",  "%s, %s, %s, %s" %(s_metric, s_agap, s_constant, s_relax), d)
+create_tex("out_hamming",       "hamm",     "avg",    "Hamming distance for %s, %s, %s, %s" %(s_metric, s_agap, s_constant, s_relax), d)
+create_tex("out_brhamming",     "brhamm",    "bravg",  "Hamming distance of branch instructions for %s, %s, %s, %s" %(s_metric, s_agap, s_constant, s_relax),  d)
+create_tex("out_diffbrhamming", "diffhamm",  "brdiff",  "Hamming distance of difference to branch instructions for %s, %s, %s, %s" %(s_metric, s_agap, s_constant, s_relax), d)
+create_tex("out_extime",        "ms",        "extime",  "Execution time (s) of the generation of the last variant for %s, %s, %s, %s" %(s_metric, s_agap, s_constant, s_relax), d)
 
 
-# plot_all("avg",    d, "Hamming Distance", 'Hamming Distance between DFS LNS')
-# plot_all("bravg",  d, "Hamming Distance", 'Branch Hamming Distance between DFS LNS')
-# plot_all("brdiff", d, "Hamming Distance", 'Diff Branch Hamming Distance between DFS LNS')
-# plot_all("extime", d, "Execution Time", 'Execution time')
+plot_all("avg",    d, "Hamming Distance", 'Hamming Distance between DFS LNS')
+plot_all("bravg",  d, "Hamming Distance", 'Branch Hamming Distance between DFS LNS')
+plot_all("brdiff", d, "Hamming Distance", 'Diff Branch Hamming Distance between DFS LNS')
+plot_all("extime", d, "Execution Time", 'Execution time')
