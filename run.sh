@@ -10,7 +10,7 @@ for arch in  mips hexagon #mips #arm
 do
     Arch="$(tr '[:lower:]' '[:upper:]' <<< ${arch:0:1})${arch:1}"
     # for i in /home/romi/didaktoriko/unison/unison-experiments/experiments/mips/selected-functions/size-toplas/gcc.attribs.handle_noinline_attribute.mir
-    for i in /home/romi/didaktoriko/unison/romi_unison/unison/src/unison/test/fast/${Arch}/speed/*[!m].mir
+    for i in /home/romi/didaktoriko/unison/romi_unison/divCon/src/unison/test/fast/${Arch}/speed/*[!m].mir
     #for i in /home/romi/didaktoriko/unison/unison-experiments/experiments/${arch}/selected-functions/size-toplas/*[!m].mir
 	
     do
