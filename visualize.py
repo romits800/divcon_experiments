@@ -15,21 +15,8 @@ import re
 
 import subprocess
 
-d = dict()
+import getopt
 
-if (len(sys.argv)!=6):
-    print "Give four arguments: $python onlyham_test.py <path of the measurments> <metric> <acceptable gap> <restart constant> <relax>"
-    exit(0)
-
-pathname = sys.argv[1]
-s_metric = sys.argv[2]
-s_agap = sys.argv[3]
-s_constant = sys.argv[4]
-s_relax = sys.argv[5]
-print s_metric
-print s_agap
-print s_constant
-print s_relax
 
 
 def create_tex(texname, ind, field, title, d):
@@ -156,6 +143,59 @@ def plot_all(field, d, yvalue, title):
     plot_arch(d, "hexagon", ax)
     plt.show()
 
+
+
+
+
+pathname = "divs/"   # sys.argv[1]
+s_metric = "hamming" # sys.argv[2]
+s_agap = "10"        # sys.argv[3]         #
+s_constant = "10000" # sys.argv[4]
+s_relax = "0.8"      # sys.argv[5]
+s_out = "hamming"
+
+
+
+try:
+    opts, args = getopt.getopt(sys.argv[1:],"hp:m:g:c:r:o:",["pathname=","metric=","agap=", "constant=", "relax=", "outmetric="])
+except getopt.GetoptError:
+    print "$ python onlyham_test.py -p <path of the measurments> -m <metric=hamming|br_hamming|diff_br_hamming> -g <acceptable gap>  -c <restart constant> -r <relax> -o <output metric = hamming|br_hamming|diff_br_hamming|extime|all>"
+    # print 'test.py -i <inputfile> -o <outputfile>'
+    sys.exit(2)
+
+for opt, arg in opts:
+    if opt == '-h':
+        print "$ python onlyham_test.py -p <path of the measurments> -m <metric=hamming|br_hamming|diff_br_hamming> -g <acceptable gap>  -c <restart constant> -r <relax> -o <output metric = hamming|br_hamming|diff_br_hamming|extime|all>"
+        sys.exit()
+    elif opt in ("-m", "--metric"):
+        s_metric = arg
+        print "metric ", opt, arg
+    elif opt in ("-g", "--agap"):
+        s_agap = arg
+        print "agap", opt, arg
+    elif opt in ("-p", "--pathname"):
+        pathname = arg
+        print "path", opt, arg
+    elif opt in ("-c", "--constant"):
+        s_constant = arg
+        print "c", opt, arg
+    elif opt in ("-r", "--relax"):
+        print "relax", opt, arg
+        s_relax = arg
+    elif opt in ("-o", "--outmetric"):
+        print "out", opt, arg
+        s_out = arg
+    else:
+        print "Not correct", opt
+
+d = dict()
+
+# if (len(sys.argv)!=6):
+#     print "Give four arguments: $python onlyham_test.py <path of the measurments> <metric> <acceptable gap> <restart constant> <relax>"
+#     exit(0)
+
+
+
 #div_monolithic_lns_mips_gcc.xexit.xexit_10_100_br_hamming_0.8_10000_constant.pickle
 for benchmark in listdir(pathname):
     d[benchmark] = dict()
@@ -246,15 +286,32 @@ for benchmark in listdir(pathname):
                     d[benchmark][arch][method]['brdiff']  = round(sumhd/count,2)
 
 
-       
+# Table
+if (s_out in ["hamming", "all"]):
+    title = "Hamming distance for %s, %s, %s, %s" %(s_metric, s_agap, s_constant, s_relax)
+    create_tex("out_hamming",       "hamm",     "avg", title, d)
 
-create_tex("out_hamming",       "hamm",     "avg",    "Hamming distance for %s, %s, %s, %s" %(s_metric, s_agap, s_constant, s_relax), d)
-create_tex("out_brhamming",     "brhamm",    "bravg",  "Hamming distance of branch instructions for %s, %s, %s, %s" %(s_metric, s_agap, s_constant, s_relax),  d)
-create_tex("out_diffbrhamming", "diffhamm",  "brdiff",  "Hamming distance of difference to branch instructions for %s, %s, %s, %s" %(s_metric, s_agap, s_constant, s_relax), d)
-create_tex("out_extime",        "ms",        "extime",  "Execution time (s) of the generation of the last variant for %s, %s, %s, %s" %(s_metric, s_agap, s_constant, s_relax), d)
+if (s_out in ["br_hamming", "all"]):
+    title = "Hamming distance of branch instructions for %s, %s, %s, %s" %(s_metric, s_agap, s_constant, s_relax)
+    create_tex("out_brhamming",     "brhamm",    "bravg",  title, d)
 
+if (s_out in ["diff_br_hamming", "all"]):
+    title = "Hamming distance of difference to branch instructions for %s, %s, %s, %s" %(s_metric, s_agap, s_constant, s_relax)
+    create_tex("out_diffbrhamming", "diffhamm",  "brdiff",  title, d)
 
-plot_all("avg",    d, "Hamming Distance", 'Hamming Distance between DFS LNS')
-plot_all("bravg",  d, "Hamming Distance", 'Branch Hamming Distance between DFS LNS')
-plot_all("brdiff", d, "Hamming Distance", 'Diff Branch Hamming Distance between DFS LNS')
-plot_all("extime", d, "Execution Time", 'Execution time')
+if (s_out in ["extime", "all"]):
+    title = "Execution time (s) of the generation of the last variant for %s, %s, %s, %s" %(s_metric, s_agap, s_constant, s_relax)
+    create_tex("out_extime",        "ms",        "extime",  title, d)
+
+# Plot
+if (s_out in ["hamming", "all"]):
+    plot_all("avg",    d, "Hamming Distance", 'Hamming Distance between DFS LNS')
+
+if (s_out in ["br_hamming", "all"]):
+    plot_all("bravg",  d, "Hamming Distance", 'Branch Hamming Distance between DFS LNS')
+
+if (s_out in ["diff_br_hamming", "all"]):
+    plot_all("brdiff", d, "Hamming Distance", 'Diff Branch Hamming Distance between DFS LNS')
+
+if (s_out in ["extime", "all"]):
+    plot_all("extime", d, "Execution Time", 'Execution time')
