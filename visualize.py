@@ -20,6 +20,7 @@ import getopt
 
 
 def create_tex(texname, ind, field, title, d):
+    names = sorted(d.keys())
     with open(texname + '.tex', 'w') as f:
         print >> f, "\\documentclass{standalone}"
         print >> f, "\\usepackage{multirow}"
@@ -30,7 +31,7 @@ def create_tex(texname, ind, field, title, d):
         print >> f, "\\hline" 
         print >> f, "\\multirow{2}{*}{benchmark}&\\multicolumn{2}{|c|}{mips}&\\multicolumn{2}{|c|}{hexagon}\\\\"
         print >> f, "\\cline{2-5}" 
-        print >> f, "&\\footnotesize dfs (%s\\textbackslash N)&\\footnotesize  lns (%s\\textbackslash N)&\\footnotesize dfs (%s\\textbackslash N)&\\footnotesize lns (%s\\textbackslash N)\\\\" %(ind, ind, ind, ind) 
+        print >> f, "&\\footnotesize dfs (%s\\textbackslash maxd (N))&\\footnotesize  lns (%s\\textbackslash maxd (N))&\\footnotesize dfs (%s\\textbackslash maxd (N))&\\footnotesize lns (%s\\textbackslash maxd (N))\\\\" %(ind, ind, ind, ind) 
         print >> f, "\\hline" 
 
         c = dict()
@@ -41,34 +42,34 @@ def create_tex(texname, ind, field, title, d):
         c["hexagon"]["dfs"] = {'sum':0.,'count':0.}
         c["hexagon"]["lns"] = {'sum':0.,'count':0.}
 
-        for benchmark in d:
+        for benchmark in names:
             mipsdfs = d[benchmark].has_key("mips") and d[benchmark]["mips"].has_key("dfs")
             mipslns = d[benchmark].has_key("mips") and d[benchmark]["mips"].has_key("lns")
             hexagondfs = d[benchmark].has_key("hexagon") and d[benchmark]["hexagon"].has_key("dfs")
             hexagonlns = d[benchmark].has_key("hexagon") and d[benchmark]["hexagon"].has_key("lns")
 
-            arg1 = str(d[benchmark]["mips"]["dfs"][field]) + "\\textbackslash " + str(d[benchmark]["mips"]["dfs"]["divs"]) if mipsdfs else "-"
+            arg1 = str(d[benchmark]["mips"]["dfs"][field]['num']) + "\\textbackslash " + str(d[benchmark]["mips"]["dfs"][field]['maxnum']) + " (" + str(d[benchmark]["mips"]["dfs"]["divs"]) + ")" if mipsdfs else "-"
 
             if mipsdfs:
-                c["mips"]["dfs"]["sum"] += d[benchmark]["mips"]["dfs"][field]
+                c["mips"]["dfs"]["sum"] += d[benchmark]["mips"]["dfs"][field]['num']
                 c["mips"]["dfs"]["count"] += 1
 
-            arg2 = str(d[benchmark]["mips"]["lns"][field]) + "\\textbackslash " + str(d[benchmark]["mips"]["lns"]["divs"]) if mipslns else "-"
+            arg2 = str(d[benchmark]["mips"]["lns"][field]['num']) + "\\textbackslash " + str(d[benchmark]["mips"]["lns"][field]['maxnum']) + " (" + str(d[benchmark]["mips"]["lns"]["divs"]) + ")" if mipslns else "-"
 
             if mipslns:
-                c["mips"]["lns"]["sum"]+= d[benchmark]["mips"]["lns"][field]
+                c["mips"]["lns"]["sum"]+= d[benchmark]["mips"]["lns"][field]['num']
                 c["mips"]["lns"]["count"] += 1
 
-            arg3 = str(d[benchmark]["hexagon"]["dfs"][field]) + "\\textbackslash " + str(d[benchmark]["hexagon"]["dfs"]["divs"]) if hexagondfs else "-"
+            arg3 = str(d[benchmark]["hexagon"]["dfs"][field]['num']) + "\\textbackslash " + str(d[benchmark]["hexagon"]["dfs"][field]['maxnum']) + " (" + str(d[benchmark]["hexagon"]["dfs"]["divs"]) + ")" if hexagondfs else "-"
 
             if hexagondfs:
-                c["hexagon"]["dfs"]["sum"] += d[benchmark]["hexagon"]["dfs"][field]
+                c["hexagon"]["dfs"]["sum"] += d[benchmark]["hexagon"]["dfs"][field]['num']
                 c["hexagon"]["dfs"]["count"] += 1
 
-            arg4 = str(d[benchmark]["hexagon"]["lns"][field]) + "\\textbackslash " + str(d[benchmark]["hexagon"]["lns"]["divs"]) if hexagonlns else "-"
+            arg4 = str(d[benchmark]["hexagon"]["lns"][field]['num']) + "\\textbackslash " + str(d[benchmark]["hexagon"]["lns"][field]['maxnum']) +  " (" + str(d[benchmark]["hexagon"]["lns"]["divs"]) + ")" if hexagonlns else "-"
 
             if hexagonlns:
-                c["hexagon"]["lns"]["sum"] += d[benchmark]["hexagon"]["lns"][field]
+                c["hexagon"]["lns"]["sum"] += d[benchmark]["hexagon"]["lns"][field]['num']
                 c["hexagon"]["lns"]["count"] += 1
 
             print >> f, "%s&%s&%s&%s&%s\\\\"%(benchmark.replace("_","\\_"), arg1, arg2, arg3, arg4)
@@ -108,8 +109,8 @@ def plot_all(field, d, yvalue, title):
 
 
         labels = d.keys()
-        dfs_means = [d[b][arch]["dfs"][field] if d[b].has_key(arch) and d[b][arch].has_key("dfs") else 0 for b in d]
-        lns_means = [d[b][arch]["lns"][field] if d[b].has_key(arch) and d[b][arch].has_key("lns") else 0 for b in d]
+        dfs_means = [d[b][arch]["dfs"][field]['num'] if d[b].has_key(arch) and d[b][arch].has_key("dfs") else 0 for b in d]
+        lns_means = [d[b][arch]["lns"][field]['num'] if d[b].has_key(arch) and d[b][arch].has_key("lns") else 0 for b in d]
 
         x = np.arange(len(labels))  # the label locations
         width = 0.35  # the width of the bars
@@ -122,7 +123,7 @@ def plot_all(field, d, yvalue, title):
         ax.set_ylabel(yvalue)
         ax.set_title(title + " (%s)"%arch)
         ax.set_xticks(x)
-        ax.set_xticklabels(labels, rotation=30, ha="right", fontsize=7)
+        ax.set_xticklabels(labels, rotation=30, ha="right", fontsize=6)
         ax.legend()
 
             
@@ -224,6 +225,7 @@ for benchmark in listdir(pathname):
             files = {h:files[h] for h in files if benchmark in h}
             cycles = {h:files[h]['cycles'] for h in files if files[h].has_key('cycles')}
             brcycles = {h:[ c for  c,j  in zip(files[h]['cycles'],files[h]['type']) if j == 1] for h in files if files[h].has_key('type') and files[h].has_key('cycles')}
+            cycles = {h:[ c for  c,j  in zip(files[h]['cycles'],files[h]['type']) if j in [0,1,2,3,14]] for h in files if files[h].has_key('type') and files[h].has_key('cycles')}
             extime = max([ files[h]['solver_time'] for h in files if files[h].has_key('solver_time') ])/1000. # the maximum should be the last
             fnames = [ fi for fi in cycles.keys() if fi.split(".")[0].isdigit()]
 
@@ -231,42 +233,48 @@ for benchmark in listdir(pathname):
             intd = dict()
             sumhd = 0
             count = 0
+            maxnum = 0
+
             for i in range(len(fnames)):
                 for j in range(i+1, len(fnames)):
                    f1,f2 = fnames[i],fnames[j]
                    intd[(f1,f2)] = sum([ (1. if k!=l else 0.) for (k,l) in zip(cycles[f1],cycles[f2])] ) #zip(files[f1],files[f2])
                    sumhd += intd[(f1,f2)]
                    count += 1.
+                maxnum = len(cycles[fnames[i]])
 
             if not count == 0:
                 if not d[benchmark].has_key(arch):
                     d[benchmark][arch] = dict()
-                d[benchmark][arch][method] = {'avg': round(sumhd/count,2), 'divs':len(fnames), 'extime': extime}
+                d[benchmark][arch][method] = {'avg': { 'num':round(sumhd/count,2),'maxnum': maxnum}, 'divs':len(fnames), 'extime': { 'num': extime, 'maxnum': 60*5.}}
 
 
             ## Branch Hamming Distance
             intd = dict()
             sumhd = 0
             count = 0
+            maxnum = 0
             for i in range(len(fnames)):
                 for j in range(i+1, len(fnames)):
                     f1,f2 = fnames[i],fnames[j]
                     intd[(f1,f2)] = sum([ (1. if k!=l else 0.) for (k,l) in zip(brcycles[f1],brcycles[f2])] ) #zip(files[f1],files[f2])
                     sumhd += intd[(f1,f2)]
                     count += 1.
+                maxnum = len(brcycles[fnames[i]])
 
             if not count == 0:
                 if not d[benchmark].has_key(arch):
                     d[benchmark][arch] = dict()
-                    d[benchmark][arch][method] = {'bravg': round(sumhd/count,4), 'divs': len(fnames), 'extime': extime}
+                    d[benchmark][arch][method] = {'bravg': {'num': round(sumhd/count,4), 'maxnum': maxnum}, 'divs': len(fnames), 'extime': { 'num': extime, 'maxnum': 60*5.}}
                 else:
-                    d[benchmark][arch][method]['bravg']  = round(sumhd/count,4)
+                    d[benchmark][arch][method]['bravg']  = {'num': round(sumhd/count,4), 'maxnum': maxnum}
 
 
             ## Branch Diff Hamming Distance
             intd = dict()
             sumhd = 0
             count = 0
+            maxnum = 0
             for i in range(len(fnames)):
                 for j in range(i+1, len(fnames)):
                     f1,f2 = fnames[i],fnames[j]
@@ -276,14 +284,15 @@ for benchmark in listdir(pathname):
                     intd[(f1,f2)] = sum([ (1. if k!=l else 0.) for (k,l) in zip(brcycles1,brcycles2)] ) #zip(files[f1],files[f2])
                     sumhd += intd[(f1,f2)]
                     count += 1.
+                    maxnum = len(brcycles1)
 
 
             if not count == 0:
                 if not d[benchmark].has_key(arch):
                     d[benchmark][arch] = dict()
-                    d[benchmark][arch][method] = {'brdiff': round(sumhd/count,2), 'divs':len(fnames), 'extime': extime}
+                    d[benchmark][arch][method] = {'brdiff': {'num': round(sumhd/count,2), 'maxnum': maxnum} , 'divs':len(fnames), 'extime': { 'num': extime, 'maxnum': 60*5.}}
                 else:
-                    d[benchmark][arch][method]['brdiff']  = round(sumhd/count,2)
+                    d[benchmark][arch][method]['brdiff']  = {'num': round(sumhd/count,2), 'maxnum': maxnum}
 
 
 # Table
@@ -299,9 +308,9 @@ if (s_out in ["diff_br_hamming", "all"]):
     title = "Hamming distance of difference to branch instructions for %s, %s, %s, %s" %(s_metric, s_agap, s_constant, s_relax)
     create_tex("out_diffbrhamming", "diffhamm",  "brdiff",  title, d)
 
-if (s_out in ["extime", "all"]):
-    title = "Execution time (s) of the generation of the last variant for %s, %s, %s, %s" %(s_metric, s_agap, s_constant, s_relax)
-    create_tex("out_extime",        "ms",        "extime",  title, d)
+# if (s_out in ["extime", "all"]):
+#     title = "Execution time (s) of the generation of the last variant for %s, %s, %s, %s" %(s_metric, s_agap, s_constant, s_relax)
+#     create_tex("out_extime",        "ms",        "extime",  title, d)
 
 # Plot
 if (s_out in ["hamming", "all"]):
