@@ -223,7 +223,7 @@ for benchmark in listdir(pathname):
             #arch = a.group(2)
             files = pickle.load(open(pathname + benchmark + "/" + pfile))
             files = {h:files[h] for h in files if benchmark in h}
-            cycles = {h:files[h]['cycles'] for h in files if files[h].has_key('cycles')}
+            # cycles = {h:files[h]['cycles'] for h in files if files[h].has_key('cycles')}
             brcycles = {h:[ c for  c,j  in zip(files[h]['cycles'],files[h]['type']) if j == 1] for h in files if files[h].has_key('type') and files[h].has_key('cycles')}
             cycles = {h:[ c for  c,j  in zip(files[h]['cycles'],files[h]['type']) if j in [0,1,2,3,14]] for h in files if files[h].has_key('type') and files[h].has_key('cycles')}
             extime = max([ files[h]['solver_time'] for h in files if files[h].has_key('solver_time') ])/1000. # the maximum should be the last
