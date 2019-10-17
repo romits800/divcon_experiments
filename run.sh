@@ -1,7 +1,7 @@
 #!/bin/bash -x
 
 
-flags="--disable-copy-dominance-constraints --disable-infinite-register-dominance-constraints --disable-operand-symmetry-breaking-constraints --disable-register-symmetry-breaking-constraints --disable-temporary-symmetry-breaking-constraints"
+flags="--disable-copy-dominance-constraints --disable-infinite-register-dominance-constraints --disable-operand-symmetry-breaking-constraints --disable-register-symmetry-breaking-constraints --disable-temporary-symmetry-breaking-constraints --disable-wcet-constraints"
 #TODO: update with --disable-wcet-constraints
 # flags="--disable-wcet-constraints --disable-copy-dominance-constraints --disable-infinite-register-dominance-constraints --disable-operand-symmetry-breaking-constraints --disable-register-symmetry-breaking-constraints --disable-temporary-symmetry-breaking-constraints"
 
@@ -81,7 +81,7 @@ do
         do
 	    for relax in 0.4 0.8
 	    do
-                for lp in 1000 10000 100000 
+                for lp in 10000 100000 
 		do
 		    for ndivs in 100 #100000 
 		    do
