@@ -19,7 +19,10 @@ import getopt
 
 
 def improvement(lns, dfs):
-    return round((float) ((lns-dfs)/dfs)*100,2)
+    if (lns >= dfs):
+        return round((float) ((lns-dfs)/dfs)*100,2)
+    else:
+        return -round((float) ((dfs-lns)/lns)*100,2)
 
 def create_tex(texname, ind, field, title, d):
     names = sorted(d.keys())
