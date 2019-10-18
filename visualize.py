@@ -18,6 +18,8 @@ import subprocess
 import getopt
 
 
+def improvement(lns, dfs):
+    return round((float) ((lns-dfs)/dfs)*100,2)
 
 def create_tex(texname, ind, field, title, d):
     names = sorted(d.keys())
@@ -25,13 +27,13 @@ def create_tex(texname, ind, field, title, d):
         print >> f, "\\documentclass{standalone}"
         print >> f, "\\usepackage{multirow}"
         print >> f, "\\begin{document}"
-        print >> f, "\\begin{tabular}{|l|cc|cc|}" 
+        print >> f, "\\begin{tabular}{|l|cc|c|cc|c|}" 
         print >> f, "\\hline" 
-        print >> f, "\\multicolumn{5}{|c|}{%s}\\\\" %title.replace("_","")
+        print >> f, "\\multicolumn{7}{|c|}{%s}\\\\" %title.replace("_","")
         print >> f, "\\hline" 
-        print >> f, "\\multirow{2}{*}{benchmark}&\\multicolumn{2}{|c|}{mips}&\\multicolumn{2}{|c|}{hexagon}\\\\"
-        print >> f, "\\cline{2-5}" 
-        print >> f, "&\\footnotesize dfs (%s\\textbackslash maxd (N))&\\footnotesize  lns (%s\\textbackslash maxd (N))&\\footnotesize dfs (%s\\textbackslash maxd (N))&\\footnotesize lns (%s\\textbackslash maxd (N))\\\\" %(ind, ind, ind, ind) 
+        print >> f, "\\multirow{2}{*}{benchmark}&\\multicolumn{3}{|c|}{mips}&\\multicolumn{3}{|c|}{hexagon}\\\\"
+        print >> f, "\\cline{2-7}" 
+        print >> f, "&\\footnotesize dfs (%s\\textbackslash maxd (N))&\\footnotesize  lns (%s\\textbackslash maxd (N))&\\footnotesize  improv. \\%% &\\footnotesize dfs (%s\\textbackslash maxd (N))&\\footnotesize lns (%s\\textbackslash maxd (N)) & \\footnotesize improv. \\%% \\\\" %( ind, ind, ind, ind) 
         print >> f, "\\hline" 
 
         c = dict()
@@ -48,39 +50,70 @@ def create_tex(texname, ind, field, title, d):
             hexagondfs = d[benchmark].has_key("hexagon") and d[benchmark]["hexagon"].has_key("dfs")
             hexagonlns = d[benchmark].has_key("hexagon") and d[benchmark]["hexagon"].has_key("lns")
 
-            arg1 = str(d[benchmark]["mips"]["dfs"][field]['num']) + "\\textbackslash " + str(d[benchmark]["mips"]["dfs"][field]['maxnum']) + " (" + str(d[benchmark]["mips"]["dfs"]["divs"]) + ")" if mipsdfs else "-"
+            arg1 = "-"
+            arg2 = "-"
+            if mipsdfs: 
+                dfsnum = d[benchmark]["mips"]["dfs"][field]['num']
+                dfsmaxnum = d[benchmark]["mips"]["dfs"][field]['maxnum']
+                dfsdivs = d[benchmark]["mips"]["dfs"]["divs"]
+                arg1 = "%.2f\\textbackslash %d (%d)" %(dfsnum, dfsmaxnum, dfsdivs)
 
-            if mipsdfs:
                 c["mips"]["dfs"]["sum"] += d[benchmark]["mips"]["dfs"][field]['num']
                 c["mips"]["dfs"]["count"] += 1
-
-            arg2 = str(d[benchmark]["mips"]["lns"][field]['num']) + "\\textbackslash " + str(d[benchmark]["mips"]["lns"][field]['maxnum']) + " (" + str(d[benchmark]["mips"]["lns"]["divs"]) + ")" if mipslns else "-"
-
-            if mipslns:
+                
+            if mipslns: 
+                lnsnum = d[benchmark]["mips"]["lns"][field]['num']
+                lnsmaxnum = d[benchmark]["mips"]["lns"][field]['maxnum']
+                lnsdivs = d[benchmark]["mips"]["lns"]["divs"]
+                arg2 = "%.2f\\textbackslash %d (%d)" %(lnsnum, lnsmaxnum, lnsdivs)
                 c["mips"]["lns"]["sum"]+= d[benchmark]["mips"]["lns"][field]['num']
                 c["mips"]["lns"]["count"] += 1
 
-            arg3 = str(d[benchmark]["hexagon"]["dfs"][field]['num']) + "\\textbackslash " + str(d[benchmark]["hexagon"]["dfs"][field]['maxnum']) + " (" + str(d[benchmark]["hexagon"]["dfs"]["divs"]) + ")" if hexagondfs else "-"
+            impr1 = "-"
+            if mipslns and mipsdfs:
+                lnsnum = d[benchmark]["mips"]["lns"][field]['num']
+                dfsnum = d[benchmark]["mips"]["dfs"][field]['num']
+                impr1 = "%.2f" %improvement(lnsnum, dfsnum)
 
-            if hexagondfs:
+            #arg2 = str(d[benchmark]["mips"]["lns"][field]['num']) + "\\textbackslash " + str(d[benchmark]["mips"]["lns"][field]['maxnum']) + " (" + str(d[benchmark]["mips"]["lns"]["divs"]) + ")" if mipslns and mipsdfs else "-" 
+
+            arg3 = "-"
+            arg4 = "-"
+            if hexagondfs: 
+                dfsnum = d[benchmark]["hexagon"]["dfs"][field]['num']
+                dfsmaxnum = d[benchmark]["hexagon"]["dfs"][field]['maxnum']
+                dfsdivs = d[benchmark]["hexagon"]["dfs"]["divs"]
+                arg3 = "%.2f\\textbackslash %d (%d)" %(dfsnum, dfsmaxnum, dfsdivs)
+
                 c["hexagon"]["dfs"]["sum"] += d[benchmark]["hexagon"]["dfs"][field]['num']
                 c["hexagon"]["dfs"]["count"] += 1
-
-            arg4 = str(d[benchmark]["hexagon"]["lns"][field]['num']) + "\\textbackslash " + str(d[benchmark]["hexagon"]["lns"][field]['maxnum']) +  " (" + str(d[benchmark]["hexagon"]["lns"]["divs"]) + ")" if hexagonlns else "-"
-
-            if hexagonlns:
-                c["hexagon"]["lns"]["sum"] += d[benchmark]["hexagon"]["lns"][field]['num']
+                
+            if hexagonlns: 
+                lnsnum = d[benchmark]["hexagon"]["lns"][field]['num']
+                lnsmaxnum = d[benchmark]["hexagon"]["lns"][field]['maxnum']
+                lnsdivs = d[benchmark]["hexagon"]["lns"]["divs"]
+                arg4 = "%.2f\\textbackslash %d (%d)" %(lnsnum, lnsmaxnum, lnsdivs)
+                c["hexagon"]["lns"]["sum"]+= d[benchmark]["hexagon"]["lns"][field]['num']
                 c["hexagon"]["lns"]["count"] += 1
 
-            print >> f, "%s&%s&%s&%s&%s\\\\"%(benchmark.replace("_","\\_"), arg1, arg2, arg3, arg4)
+            impr2 = "-"
+            if hexagonlns and hexagondfs:
+                lnsnum = d[benchmark]["hexagon"]["lns"][field]['num']
+                dfsnum = d[benchmark]["hexagon"]["dfs"][field]['num']
+                impr2 = "%.2f" %improvement(lnsnum, dfsnum)
+
+
+            print >> f, "%s&%s&%s&%s&%s&%s&%s\\\\"%(benchmark.replace("_","\\_"), arg1, arg2, impr1, arg3, arg4, impr2)
 
 
         arg1 = round(c["mips"]["dfs"]["sum"]/c["mips"]["dfs"]["count"],2)
         arg2 = round(c["mips"]["lns"]["sum"]/c["mips"]["lns"]["count"],2)
         arg3 = round(c["hexagon"]["dfs"]["sum"]/c["hexagon"]["dfs"]["count"],2)
         arg4 = round(c["hexagon"]["lns"]["sum"]/c["hexagon"]["lns"]["count"],2)
+        impr1 = improvement(arg2, arg1)
+        impr2 = improvement(arg4, arg3)
         print >> f, "\\hline" 
-        print >> f, "%s&%s&%s&%s&%s\\\\"%("average", arg1, arg2, arg3, arg4)
+        print >> f, "%s&%s&%s&%s&%s&%s&%s\\\\"%("average", arg1, arg2, impr1, arg3, arg4, impr2)
         print >> f, "\\hline" 
         print >> f, "\\end{tabular}" 
         print >> f, "\\end{document}" 
