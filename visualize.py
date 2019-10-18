@@ -196,13 +196,13 @@ s_out = "hamming"
 try:
     opts, args = getopt.getopt(sys.argv[1:],"hp:m:g:c:r:o:",["pathname=","metric=","agap=", "constant=", "relax=", "outmetric="])
 except getopt.GetoptError:
-    print "$ python onlyham_test.py -p <path of the measurments> -m <metric=hamming|br_hamming|diff_br_hamming> -g <acceptable gap>  -c <restart constant> -r <relax> -o <output metric = hamming|br_hamming|diff_br_hamming|extime|all>"
+    print "$ python onlyham_test.py -p <path of the measurments> -m <metric=hamming|br_hamming|diff_br_hamming> -g <acceptable gap>  -c <restart constant> -r <relax> -o <output metric = hamming|br_hamming|diff_br_hamming|stime|all>"
     # print 'test.py -i <inputfile> -o <outputfile>'
     sys.exit(2)
 
 for opt, arg in opts:
     if opt == '-h':
-        print "$ python onlyham_test.py -p <path of the measurments> -m <metric=hamming|br_hamming|diff_br_hamming> -g <acceptable gap>  -c <restart constant> -r <relax> -o <output metric = hamming|br_hamming|diff_br_hamming|extime|all>"
+        print "$ python onlyham_test.py -p <path of the measurments> -m <metric=hamming|br_hamming|diff_br_hamming> -g <acceptable gap>  -c <restart constant> -r <relax> -o <output metric = hamming|br_hamming|diff_br_hamming|stime|all>"
         sys.exit()
     elif opt in ("-m", "--metric"):
         s_metric = arg
@@ -262,7 +262,12 @@ for benchmark in listdir(pathname):
             # cycles = {h:files[h]['cycles'] for h in files if files[h].has_key('cycles')}
             brcycles = {h:[ c for  c,j  in zip(files[h]['cycles'],files[h]['type']) if j == 1] for h in files if files[h].has_key('type') and files[h].has_key('cycles')}
             cycles = {h:[ c for  c,j  in zip(files[h]['cycles'],files[h]['type']) if j in [0,1,2,3,14]] for h in files if files[h].has_key('type') and files[h].has_key('cycles')}
-            extime = max([ files[h]['solver_time'] for h in files if files[h].has_key('solver_time') ])/1000. # the maximum should be the last
+            stime = max([ files[h]['solver_time'] for h in files if files[h].has_key('solver_time') ])/1000. # the maximum should be the last
+            cost = [files[h]['cost'][0] for h in files if files[h].has_key('cost')]# the cost
+            if len(cost) > 0:
+                avgcost = sum(cost)/(len(cost))
+            else:
+                avgcost = 0
             fnames = [ fi for fi in cycles.keys() if fi.split(".")[0].isdigit()]
 
             ## Hamming Distance
@@ -282,7 +287,7 @@ for benchmark in listdir(pathname):
             if not count == 0:
                 if not d[benchmark].has_key(arch):
                     d[benchmark][arch] = dict()
-                d[benchmark][arch][method] = {'avg': { 'num':round(sumhd/count,2),'maxnum': maxnum}, 'divs':len(fnames), 'extime': { 'num': extime, 'maxnum': 60*5.}}
+                d[benchmark][arch][method] = {'avg': { 'num':round(sumhd/count,2),'maxnum': maxnum}, 'divs':len(fnames), 'cost': { 'num': avgcost, 'maxnum': 0}, 'stime': { 'num': stime, 'maxnum': 60*5.}}
 
 
             ## Branch Hamming Distance
@@ -301,7 +306,7 @@ for benchmark in listdir(pathname):
             if not count == 0:
                 if not d[benchmark].has_key(arch):
                     d[benchmark][arch] = dict()
-                    d[benchmark][arch][method] = {'bravg': {'num': round(sumhd/count,4), 'maxnum': maxnum}, 'divs': len(fnames), 'extime': { 'num': extime, 'maxnum': 60*5.}}
+                    d[benchmark][arch][method] = {'bravg': {'num': round(sumhd/count,4), 'maxnum': maxnum}, 'divs': len(fnames), 'cost': { 'num': avgcost, 'maxnum': 0}, 'stime': { 'num': stime, 'maxnum': 60*5.}}
                 else:
                     d[benchmark][arch][method]['bravg']  = {'num': round(sumhd/count,4), 'maxnum': maxnum}
 
@@ -326,7 +331,7 @@ for benchmark in listdir(pathname):
             if not count == 0:
                 if not d[benchmark].has_key(arch):
                     d[benchmark][arch] = dict()
-                    d[benchmark][arch][method] = {'brdiff': {'num': round(sumhd/count,2), 'maxnum': maxnum} , 'divs':len(fnames), 'extime': { 'num': extime, 'maxnum': 60*5.}}
+                    d[benchmark][arch][method] = {'brdiff': {'num': round(sumhd/count,2), 'maxnum': maxnum} , 'divs':len(fnames), 'cost': { 'num': avgcost, 'maxnum': 0}, 'stime': { 'num': stime, 'maxnum': 60*5.}}
                 else:
                     d[benchmark][arch][method]['brdiff']  = {'num': round(sumhd/count,2), 'maxnum': maxnum}
 
@@ -344,9 +349,14 @@ if (s_out in ["diff_br_hamming", "all"]):
     title = "Hamming distance of difference to branch instructions for %s, %s, %s, %s" %(s_metric, s_agap, s_constant, s_relax)
     create_tex("out_diffbrhamming", "diffhamm",  "brdiff",  title, d)
 
-# if (s_out in ["extime", "all"]):
+if (s_out in ["cost", "all"]):
+    title = "Cost in cycles for %s, %s, %s, %s" %(s_metric, s_agap, s_constant, s_relax)
+    create_tex("out_cost", "cost",  "cost",  title, d)
+
+
+# if (s_out in ["stime", "all"]):
 #     title = "Execution time (s) of the generation of the last variant for %s, %s, %s, %s" %(s_metric, s_agap, s_constant, s_relax)
-#     create_tex("out_extime",        "ms",        "extime",  title, d)
+#     create_tex("out_stime",        "ms",        "stime",  title, d)
 
 # Plot
 if (s_out in ["hamming", "all"]):
@@ -358,5 +368,8 @@ if (s_out in ["br_hamming", "all"]):
 if (s_out in ["diff_br_hamming", "all"]):
     plot_all("brdiff", d, "Hamming Distance", 'Diff Branch Hamming Distance between DFS LNS')
 
-if (s_out in ["extime", "all"]):
-    plot_all("extime", d, "Execution Time", 'Execution time')
+if (s_out in ["stime", "all"]):
+    plot_all("stime", d, "Solver Time", 'Solver time')
+
+if (s_out in ["cost", "all"]):
+    plot_all("cost", d, "Cost (cycles)", 'Cost (cycles)')
