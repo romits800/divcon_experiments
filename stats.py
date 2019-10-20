@@ -59,7 +59,7 @@ dist = dict()
 #     else:
 #         dist[d[files]] = 1
 # print dist
-    
+
 x = d.values()
 num_bins = max(x) - min(x)
 n, bins, patches = plt.hist(x, num_bins, normed=1, facecolor='blue', alpha=0.5)

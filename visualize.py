@@ -5,6 +5,7 @@ from os import listdir
 import numpy as np
 import matplotlib.mlab as mlab
 import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
 
 import json
 
@@ -183,56 +184,61 @@ def plot_all(field, d, yvalue, title):
 
 
 def plot_hist(field, d, yvalue, title):
-
     def plot_arch(d, arch, ax):
 
         labels = d.keys()
         dfs = [d[b][arch]["dfs"][field]['data'] if d[b].has_key(arch) and d[b][arch].has_key("dfs") else [0] for b in d]
         lns = [d[b][arch]["lns"][field]['data'] if d[b].has_key(arch) and d[b][arch].has_key("lns") else [0] for b in d]
 
-        x = np.arange(len(labels))  # the label locations
+        x = 2*np.arange(len(labels)) + 0.5 # the label locations
         width = 0.35  # the width of the bars
 
         #fig, ax = plt.subplots()
-        offset = 0
-        for b in d:
-            if d[b].has_key(arch) and d[b][arch].has_key("dfs"):
-                data = d[b][arch]["dfs"][field]['data']
-            else:
-                offset+=1
-                continue
-            innerwidth = 0.035
-            maxdata = max(data)
-            xx = [offset + (float)i/maxdata for i in data]
-            num_bins = max(data) - min(data)
-            offset += 1
-            rects = ax.hist(xx, num_bins, normed=1, innerwidth, alpha=0.5, facecolor = 'blue', label='DFS')
-        for b in d:
-            if d[b].has_key(arch) and d[b][arch].has_key("lns"):
-                data = d[b][arch]["lns"][field]['data']
-            else:
-                offset+=1
-                continue
-            innerwidth = 0.035
-            maxdata = max(data)
-            xx = [offset + (float)i/maxdata for i in data]
-            num_bins = max(data) - min(data)
-            offset += 1
-            rects = ax.hist(xx, num_bins, normed=1, innerwidth, alpha=0.5, facecolor = 'green', label='LNS')
+        lines = []
 
-            # rects = ax.bar(x - width/2, xx, innerwidth, alpha=0.5, color = 'blue', label='LNS')
-        # rects1 = ax.bar(x - width/2, dfs_means, width, color = 'blue', label='DFS') # 
-        # rects2 = ax.bar(x + width/2, lns_means, width, color = 'green', label='LNS')
+        offset = 0
+        for b in labels:
+            datalns = []
+            datadfs = []
+            if d[b].has_key(arch) and d[b][arch].has_key("dfs"):
+                datadfs = d[b][arch]["dfs"][field]['data']
+            else:
+                datadfs = [0]
+            if d[b].has_key(arch) and d[b][arch].has_key("lns"):
+                datalns = d[b][arch]["lns"][field]['data']
+            else:
+                datalns = [0]
+
+            # innerwidth = 0.035
+            maxdata = max([max(datadfs), max(datalns)])
+            if maxdata == 0:
+                offset += 2
+                continue
+
+            xxlns = [offset + i/maxdata for i in datalns]
+            xxdfs = [offset + i/maxdata for i in datadfs]
+
+            num_bins_lns = max(datalns) - min(datalns)
+            num_bins_dfs = max(datadfs) - min(datadfs)
+
+            n, bins, patches = ax.hist(xxdfs, num_bins_dfs, normed=True, alpha=0.5, facecolor = 'blue',  label='DFS')
+            n, bins, patches = ax.hist(xxlns, num_bins_lns, normed=True, alpha=0.5, facecolor = 'green', label='LNS')
+
+            offset += 2
+
 
         # Add some text for labels, title and custom x-axis tick labels, etc.
         ax.set_ylabel(yvalue)
         ax.set_title(title + " (%s)"%arch)
         ax.set_xticks(x)
         ax.set_xticklabels(labels, rotation=30, ha="right", fontsize=6)
-        ax.legend()
+        # ax.legend()
+        handles = [Rectangle((0,0),1,1,color=c,ec="k") for c in ['blue', 'green']]
+        labels= ["DFS","LNS"]
+        ax.legend(handles, labels)
 
-            
-        # autolabel(rects1)       # 
+
+        # autolabel(rects1)       #
         # autolabel(rects2)
 
         #fig.tight_layout()
@@ -402,6 +408,7 @@ for benchmark in listdir(pathname):
 
 
 # Table
+
 if (s_out in ["hamming", "all"]):
     title = "Hamming distance for %s, %s, %s, %s" %(s_metric, s_agap, s_constant, s_relax)
     create_tex("out_hamming",       "hamm",     "avg", title, d)
@@ -438,3 +445,20 @@ if (s_out in ["stime", "all"]):
 
 if (s_out in ["cost", "all"]):
     plot_all("cost", d, "Cost (cycles)", 'Cost (cycles)')
+
+
+
+if (s_out in ["hamming", "all"]):
+    plot_hist("avg",    d, "Hamming Distance", 'Hamming Distance between DFS LNS')
+
+if (s_out in ["br_hamming", "all"]):
+    plot_hist("bravg",  d, "Hamming Distance", 'Branch Hamming Distance between DFS LNS')
+
+if (s_out in ["diff_br_hamming", "all"]):
+    plot_hist("brdiff", d, "Hamming Distance", 'Diff Branch Hamming Distance between DFS LNS')
+
+if (s_out in ["stime", "all"]):
+    plot_hist("stime", d, "Solver Time", 'Solver time')
+
+if (s_out in ["cost", "all"]):
+    plot_hist("cost", d, "Cost (cycles)", 'Cost (cycles)')
