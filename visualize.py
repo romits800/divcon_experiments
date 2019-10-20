@@ -182,6 +182,71 @@ def plot_all(field, d, yvalue, title):
 
 
 
+def plot_hist(field, d, yvalue, title):
+
+    def plot_arch(d, arch, ax):
+
+        labels = d.keys()
+        dfs = [d[b][arch]["dfs"][field]['data'] if d[b].has_key(arch) and d[b][arch].has_key("dfs") else [0] for b in d]
+        lns = [d[b][arch]["lns"][field]['data'] if d[b].has_key(arch) and d[b][arch].has_key("lns") else [0] for b in d]
+
+        x = np.arange(len(labels))  # the label locations
+        width = 0.35  # the width of the bars
+
+        #fig, ax = plt.subplots()
+        offset = 0
+        for b in d:
+            if d[b].has_key(arch) and d[b][arch].has_key("dfs"):
+                data = d[b][arch]["dfs"][field]['data']
+            else:
+                offset+=1
+                continue
+            innerwidth = 0.035
+            maxdata = max(data)
+            xx = [offset + (float)i/maxdata for i in data]
+            num_bins = max(data) - min(data)
+            offset += 1
+            rects = ax.hist(xx, num_bins, normed=1, innerwidth, alpha=0.5, facecolor = 'blue', label='DFS')
+        for b in d:
+            if d[b].has_key(arch) and d[b][arch].has_key("lns"):
+                data = d[b][arch]["lns"][field]['data']
+            else:
+                offset+=1
+                continue
+            innerwidth = 0.035
+            maxdata = max(data)
+            xx = [offset + (float)i/maxdata for i in data]
+            num_bins = max(data) - min(data)
+            offset += 1
+            rects = ax.hist(xx, num_bins, normed=1, innerwidth, alpha=0.5, facecolor = 'green', label='LNS')
+
+            # rects = ax.bar(x - width/2, xx, innerwidth, alpha=0.5, color = 'blue', label='LNS')
+        # rects1 = ax.bar(x - width/2, dfs_means, width, color = 'blue', label='DFS') # 
+        # rects2 = ax.bar(x + width/2, lns_means, width, color = 'green', label='LNS')
+
+        # Add some text for labels, title and custom x-axis tick labels, etc.
+        ax.set_ylabel(yvalue)
+        ax.set_title(title + " (%s)"%arch)
+        ax.set_xticks(x)
+        ax.set_xticklabels(labels, rotation=30, ha="right", fontsize=6)
+        ax.legend()
+
+            
+        # autolabel(rects1)       # 
+        # autolabel(rects2)
+
+        #fig.tight_layout()
+
+        #plt.show()
+
+    ax = plt.subplot(2, 1, 1)
+    plot_arch(d, "mips", ax)
+    ax = plt.subplot(2, 1, 2)
+    plot_arch(d, "hexagon", ax)
+    plt.show()
+
+
+
 
 
 pathname = "divs/"   # sys.argv[1]
@@ -287,7 +352,7 @@ for benchmark in listdir(pathname):
             if not count == 0:
                 if not d[benchmark].has_key(arch):
                     d[benchmark][arch] = dict()
-                d[benchmark][arch][method] = {'avg': { 'num':round(sumhd/count,2),'maxnum': maxnum}, 'divs':len(fnames), 'cost': { 'num': avgcost, 'maxnum': 0}, 'stime': { 'num': stime, 'maxnum': 60*5.}}
+                d[benchmark][arch][method] = {'avg': { 'num':round(sumhd/count,2),'maxnum': maxnum, 'data': intd.values()}, 'divs':len(fnames), 'cost': { 'num': avgcost, 'maxnum': 0}, 'stime': { 'num': stime, 'maxnum': 60*5.}}
 
 
             ## Branch Hamming Distance
@@ -306,9 +371,9 @@ for benchmark in listdir(pathname):
             if not count == 0:
                 if not d[benchmark].has_key(arch):
                     d[benchmark][arch] = dict()
-                    d[benchmark][arch][method] = {'bravg': {'num': round(sumhd/count,4), 'maxnum': maxnum}, 'divs': len(fnames), 'cost': { 'num': avgcost, 'maxnum': 0}, 'stime': { 'num': stime, 'maxnum': 60*5.}}
+                    d[benchmark][arch][method] = {'bravg': {'num': round(sumhd/count,4), 'maxnum': maxnum, 'data': intd.values()}, 'divs': len(fnames), 'cost': { 'num': avgcost, 'maxnum': 0}, 'stime': { 'num': stime, 'maxnum': 60*5.}}
                 else:
-                    d[benchmark][arch][method]['bravg']  = {'num': round(sumhd/count,4), 'maxnum': maxnum}
+                    d[benchmark][arch][method]['bravg']  = {'num': round(sumhd/count,4), 'maxnum': maxnum, 'data': intd.values()}
 
 
             ## Branch Diff Hamming Distance
@@ -331,9 +396,9 @@ for benchmark in listdir(pathname):
             if not count == 0:
                 if not d[benchmark].has_key(arch):
                     d[benchmark][arch] = dict()
-                    d[benchmark][arch][method] = {'brdiff': {'num': round(sumhd/count,2), 'maxnum': maxnum} , 'divs':len(fnames), 'cost': { 'num': avgcost, 'maxnum': 0}, 'stime': { 'num': stime, 'maxnum': 60*5.}}
+                    d[benchmark][arch][method] = {'brdiff': {'num': round(sumhd/count,2), 'maxnum': maxnum, 'data': intd.values()} , 'divs':len(fnames), 'cost': { 'num': avgcost, 'maxnum': 0}, 'stime': { 'num': stime, 'maxnum': 60*5.}}
                 else:
-                    d[benchmark][arch][method]['brdiff']  = {'num': round(sumhd/count,2), 'maxnum': maxnum}
+                    d[benchmark][arch][method]['brdiff']  = {'num': round(sumhd/count,2), 'maxnum': maxnum, 'data': intd.values()}
 
 
 # Table
