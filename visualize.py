@@ -548,5 +548,20 @@ if (s_out in ["stime", "all"] and s_relax != "all"):
 if (s_out in ["cost", "all"] and s_relax != "all"):
     plot_hist("cost", s_relax, d,  "Cost (cycles)", 'Cost (cycles)')
 
-if (s_relax == "all"):
+
+
+if (s_out in ["hamming", "all"] and s_relax == "all"):
     plot_relax("avg", d, "Hamming Distance", "Hamming distance for different relax rates (0.4, 0.45, ..., 0.95)")
+
+if (s_out in ["br_hamming", "all"] and s_relax == "all"):
+    plot_relax("bravg", d,  "Hamming Distance", 'Branch Hamming Distance for different relax rates (0.4, 0.45, ..., 0.95)')
+
+if (s_out in ["diff_br_hamming", "all"] and s_relax == "all"):
+    plot_relax("brdiff",  d,  "Hamming Distance", 'Diff Branch Hamming Distance for different relax rates (0.4, 0.45, ..., 0.95)')
+
+if (s_out in ["stime", "all"] and s_relax == "all"):
+    plot_relax("stime",  d,  "Diversify Time", 'Diversify time for different relax rates (0.4, 0.45, ..., 0.95)')
+
+if (s_out in ["cost", "all"] and s_relax == "all"):
+    plot_relax("cost", d, "Cost (cycles)", "Cost (cycles) for different relax rates (0.4, 0.45, ..., 0.95)")
+
