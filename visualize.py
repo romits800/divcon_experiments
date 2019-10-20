@@ -182,6 +182,9 @@ def plot_all(field, relax, d, yvalue, title):
     plot_arch(d, "mips", ax)
     ax = plt.subplot(2, 1, 2)
     plot_arch(d, "hexagon", ax)
+
+    plt.subplots_adjust(hspace=0.3)
+
     plt.show()
 
 
@@ -196,7 +199,6 @@ def plot_hist(field, relax, d, yvalue, title):
         x = 2*np.arange(len(labels)) + 0.5 # the label locations
         width = 0.35  # the width of the bars
 
-        #fig, ax = plt.subplots()
         lines = []
 
         offset = 0
@@ -249,11 +251,85 @@ def plot_hist(field, relax, d, yvalue, title):
     plot_arch(d, "mips", ax)
     ax = plt.subplot(2, 1, 2)
     plot_arch(d, "hexagon", ax)
+    plt.subplots_adjust(hspace=0.3) #bottom=0.1, right=0.8, top=0.9)
     plt.show()
 
 
 
 
+def plot_relax(field, d, yvalue, title):
+
+    def plot_arch(d, b, arch, ax):
+
+        labels = d.keys()
+        # dfs_means = [d[b][arch]["dfs"][None][field]['num'] if d[b].has_key(arch) and d[b][arch].has_key("dfs") else 0 for b in d]
+        # lns = dict()
+        # for b in d:
+        #     lns[b] = []
+        #     if d[b].has_key(arch) and d[b][arch].has_key("lns"):
+        #         for r in d[b][arch]["lns"]:
+        if d[b].has_key(arch) and d[b][arch].has_key("lns"):
+            lns = [(r, d[b][arch]["lns"][str(r)][field]['num'])  for r in sorted(map(float,d[b][arch]["lns"].keys())) ]
+
+            x,y = zip(*lns)
+
+            # print b, x, y
+            ax.plot(x,y, linewidth=1.5, label="LNS")
+
+            if d[b].has_key(arch) and d[b][arch].has_key("dfs"):
+                v = d[b][arch]["dfs"][None][field]['num']
+                ax.plot(x, [v for _ in x], linewidth=1.5, label="DFS");
+
+            ymax = max(list(y)+[v])
+            ax.set_ylim(ymax=1.1*ymax)
+        ax.set_ylim(ymin=0)
+
+        # Add some text for labels, title and custom x-axis tick labels, etc.
+        ax.set_ylabel(yvalue, fontsize = 8)
+        ax.set_xlabel("relax rate", fontsize = 8)
+
+        # plt.rcParams.update({'font.size': 7})
+
+        ax.set_title(b + " (%s)"%arch, fontsize = 8)
+        # ax.set_xticks(x)
+        # ax.set_xticklabels(labels, rotation=30, ha="right", fontsize=6)
+        ax.legend(loc='lower right', fontsize = 8)
+
+
+        #fig.tight_layout()
+
+        #plt.show()
+
+    #plt.plot([1,2,3])
+    # now create a subplot which represents the top plot of a grid
+    # with 2 rows and 1 column. Since this subplot will overlap the
+    # first, the plot (and its axes) previously created, will be removed
+
+    n = 10
+    lims = [(i,i+n) for i in range(0,len(d), n)]
+    print lims
+    for (st,nsp) in lims:
+        # plt.figure()
+        # st = 0 # len(d) - number of subplots
+        # nsp = 5 # len(d) - number of subplots
+        # for j in [0,1]:
+        nl = (nsp-st)/2
+        print st, nsp, nl
+        for i,b in enumerate(d.keys()[st:st+nl]):
+            ax = plt.subplot(4, nl, i + 1)
+            plot_arch(d, b, "mips", ax)
+            ax = plt.subplot(4, nl, i + 1 + nl)
+            plot_arch(d, b, "hexagon", ax)
+        print "Second loop"
+        for i,b in enumerate(d.keys()[st+nl:nsp]):
+            ax = plt.subplot(4, nl, i + 1 + 2*nl)
+            plot_arch(d, b, "mips", ax)
+            ax = plt.subplot(4, nl, i + 1 + 3*nl)
+            plot_arch(d, b, "hexagon", ax)
+
+        plt.subplots_adjust(hspace=0.3) #bottom=0.1, right=0.8, top=0.9)
+        plt.suptitle(title, fontsize=20)
+        plt.show()
 
 pathname = "divs/"   # sys.argv[1]
 s_metric = "hamming" # sys.argv[2]
@@ -359,8 +435,10 @@ for benchmark in listdir(pathname):
             if not count == 0:
                 if not d[benchmark].has_key(arch):
                     d[benchmark][arch] = dict()
-                d[benchmark][arch][method] = {relax: {'avg': { 'num':round(sumhd/count,2),'maxnum': maxnum, 'data': intd.values()}, 'divs':len(fnames), 'cost': { 'num': avgcost, 'maxnum': 0}, 'stime': { 'num': stime, 'maxnum': 60*5.}}}
-
+                if not d[benchmark][arch].has_key(method):
+                    d[benchmark][arch][method] = {relax: {'avg': { 'num':round(sumhd/count,2),'maxnum': maxnum, 'data': intd.values()}, 'divs':len(fnames), 'cost': { 'num': avgcost, 'maxnum': 0}, 'stime': { 'num': stime, 'maxnum': 60*5.}}}
+                else:
+                    d[benchmark][arch][method][relax] ={'avg': { 'num':round(sumhd/count,2),'maxnum': maxnum, 'data': intd.values()}, 'divs':len(fnames), 'cost': { 'num': avgcost, 'maxnum': 0}, 'stime': { 'num': stime, 'maxnum': 60*5.}}
 
             ## Branch Hamming Distance
             intd = dict()
@@ -378,8 +456,11 @@ for benchmark in listdir(pathname):
             if not count == 0:
                 if not d[benchmark].has_key(arch):
                     d[benchmark][arch] = dict()
+                if not d[benchmark][arch].has_key(method):
                     d[benchmark][arch][method] = {relax: {'bravg': {'num': round(sumhd/count,4), 'maxnum': maxnum, 'data': intd.values()}, 'divs': len(fnames), 'cost': { 'num': avgcost, 'maxnum': 0}, 'stime': { 'num': stime, 'maxnum': 60*5.}}}
                 else:
+                    if not d[benchmark][arch][method].has_key(relax):
+                        d[benchmark][arch][method][relax] = dict()
                     d[benchmark][arch][method][relax]['bravg']  = {'num': round(sumhd/count,4), 'maxnum': maxnum, 'data': intd.values()}
 
 
@@ -403,26 +484,29 @@ for benchmark in listdir(pathname):
             if not count == 0:
                 if not d[benchmark].has_key(arch):
                     d[benchmark][arch] = dict()
+                if not d[benchmark][arch].has_key(method):
                     d[benchmark][arch][method] = {relax: {'brdiff': {'num': round(sumhd/count,2), 'maxnum': maxnum, 'data': intd.values()} , 'divs':len(fnames), 'cost': { 'num': avgcost, 'maxnum': 0}, 'stime': { 'num': stime, 'maxnum': 60*5.}}}
                 else:
+                    if not d[benchmark][arch][method].has_key(relax):
+                        d[benchmark][arch][method][relax] = dict()
                     d[benchmark][arch][method][relax]['brdiff']  = {'num': round(sumhd/count,2), 'maxnum': maxnum, 'data': intd.values()}
 
 
 # Table
 
-if (s_out in ["hamming", "all"] and relax != "all"):
+if (s_out in ["hamming", "all"] and s_relax != "all"):
     title = "Hamming distance for %s, %s, %s, %s" %(s_metric, s_agap, s_constant, s_relax)
     create_tex("out_hamming",       "hamm",    "avg", s_relax, title, d)
 
-if (s_out in ["br_hamming", "all"] and relax != "all"):
+if (s_out in ["br_hamming", "all"] and s_relax != "all"):
     title = "Hamming distance of branch instructions for %s, %s, %s, %s" %(s_metric, s_agap, s_constant, s_relax)
     create_tex("out_brhamming",     "brhamm",    "bravg",  s_relax, title, d)
 
-if (s_out in ["diff_br_hamming", "all"] and relax != "all"):
+if (s_out in ["diff_br_hamming", "all"] and s_relax != "all"):
     title = "Hamming distance of difference to branch instructions for %s, %s, %s, %s" %(s_metric, s_agap, s_constant, s_relax)
     create_tex("out_diffbrhamming", "diffhamm",  "brdiff",  s_relax, title, d)
 
-if (s_out in ["cost", "all"] and relax != "all"):
+if (s_out in ["cost", "all"] and s_relax != "all"):
     title = "Cost in cycles for %s, %s, %s, %s" %(s_metric, s_agap, s_constant, s_relax)
     create_tex("out_cost", "cost",  "cost",  s_relax, title, d)
 
@@ -432,34 +516,37 @@ if (s_out in ["cost", "all"] and relax != "all"):
 #     create_tex("out_stime",        "ms",        "stime",  title, d)
 
 # Plot
-if (s_out in ["hamming", "all"] and relax != "all"):
+if (s_out in ["hamming", "all"] and s_relax != "all"):
     plot_all("avg",    s_relax, d, "Hamming Distance", 'Hamming Distance between DFS LNS')
 
-if (s_out in ["br_hamming", "all"] and relax != "all"):
+if (s_out in ["br_hamming", "all"] and s_relax != "all"):
     plot_all("bravg",  s_relax, d,  "Hamming Distance", 'Branch Hamming Distance between DFS LNS')
 
-if (s_out in ["diff_br_hamming", "all"] and relax != "all"):
+if (s_out in ["diff_br_hamming", "all"] and s_relax != "all"):
     plot_all("brdiff", s_relax, d,  "Hamming Distance", 'Diff Branch Hamming Distance between DFS LNS')
 
-if (s_out in ["stime", "all"] and relax != "all"):
+if (s_out in ["stime", "all"] and s_relax != "all"):
     plot_all("stime", s_relax, d,  "Solver Time", 'Solver time')
 
-if (s_out in ["cost", "all"] and relax != "all"):
+if (s_out in ["cost", "all"] and s_relax != "all"):
     plot_all("cost", s_relax, d,  "Cost (cycles)", 'Cost (cycles)')
 
 
 
-if (s_out in ["hamming", "all"] and relax != "all"):
+if (s_out in ["hamming", "all"] and s_relax != "all"):
     plot_hist("avg",    s_relax, d,  "Hamming Distance", 'Hamming Distance between DFS LNS')
 
-if (s_out in ["br_hamming", "all"] and relax != "all"):
+if (s_out in ["br_hamming", "all"] and s_relax != "all"):
     plot_hist("bravg",  s_relax, d,  "Hamming Distance", 'Branch Hamming Distance between DFS LNS')
 
-if (s_out in ["diff_br_hamming", "all"] and relax != "all"):
+if (s_out in ["diff_br_hamming", "all"] and s_relax != "all"):
     plot_hist("brdiff", s_relax, d,  "Hamming Distance", 'Diff Branch Hamming Distance between DFS LNS')
 
-if (s_out in ["stime", "all"] and relax != "all"):
+if (s_out in ["stime", "all"] and s_relax != "all"):
     plot_hist("stime", s_relax, d,  "Solver Time", 'Solver time')
 
-if (s_out in ["cost", "all"] and relax != "all"):
+if (s_out in ["cost", "all"] and s_relax != "all"):
     plot_hist("cost", s_relax, d,  "Cost (cycles)", 'Cost (cycles)')
+
+if (s_relax == "all"):
+    plot_relax("avg", d, "Hamming Distance", "Hamming distance for different relax rates (0.4, 0.45, ..., 0.95)")
