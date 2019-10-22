@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/usr/bin/bash -x
 
 
 flags="--disable-copy-dominance-constraints --disable-infinite-register-dominance-constraints --disable-operand-symmetry-breaking-constraints --disable-register-symmetry-breaking-constraints --disable-temporary-symmetry-breaking-constraints --disable-wcet-constraints"
@@ -20,11 +20,17 @@ then
     mkdir $DIVS_PATH
 fi
 
+
+if [[ -z "${DIVCON_PATH}" ]]; then
+  	echo "DIVCON_PATH variable not set. It should contain the PATH of the divCon repo."
+	exit 0
+fi
+
  
 for arch in mips hexagon #mips #arm
 do
     Arch="$(tr '[:lower:]' '[:upper:]' <<< ${arch:0:1})${arch:1}"
-    for i in /home/romi/didaktoriko/unison/romi_unison/divCon/src/unison/test/fast/${Arch}/speed/*[!m].mir
+    for i in $DIVCON_PATH/src/unison/test/fast/${Arch}/speed/*[!m].mir
     #for i in /home/romi/didaktoriko/unison/unison-experiments/experiments/${arch}/selected-functions/size-toplas/*[!m].mir
 	
     do
