@@ -61,7 +61,7 @@ do
 	do
 	    for ndivs in 100
 	    do
-	        for dist in "diff_br_hamming" "hamming" "br_hamming"
+	        for dist in "br_hamming" #"diff_br_hamming" "hamming" "br_hamming"
 		do
 		    if [ ! -f $fnoextension.out.json ]; then
                         echo "File not found! Falling back to llvm basefile"
@@ -85,7 +85,7 @@ do
 		do
 		    for ndivs in 100 #100000 
 		    do
-                        for dist in "diff_br_hamming" "hamming" "br_hamming" 
+                        for dist in "br_hamming" #"diff_br_hamming" "hamming" "br_hamming" 
                         do
                             for rest in "constant"
                             do

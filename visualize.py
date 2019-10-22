@@ -262,12 +262,6 @@ def plot_relax(field, d, yvalue, title):
     def plot_arch(d, b, arch, ax):
 
         labels = d.keys()
-        # dfs_means = [d[b][arch]["dfs"][None][field]['num'] if d[b].has_key(arch) and d[b][arch].has_key("dfs") else 0 for b in d]
-        # lns = dict()
-        # for b in d:
-        #     lns[b] = []
-        #     if d[b].has_key(arch) and d[b][arch].has_key("lns"):
-        #         for r in d[b][arch]["lns"]:
         if d[b].has_key(arch) and d[b][arch].has_key("lns"):
             lns = [(r, d[b][arch]["lns"][str(r)][field]['num'])  for r in sorted(map(float,d[b][arch]["lns"].keys())) ]
 
@@ -284,52 +278,60 @@ def plot_relax(field, d, yvalue, title):
             ax.set_ylim(ymax=1.1*ymax)
         ax.set_ylim(ymin=0)
 
-        # Add some text for labels, title and custom x-axis tick labels, etc.
+        # Fontsize and labels
         ax.set_ylabel(yvalue, fontsize = 8)
         ax.set_xlabel("relax rate", fontsize = 8)
 
-        # plt.rcParams.update({'font.size': 7})
-
         ax.set_title(b + " (%s)"%arch, fontsize = 8)
-        # ax.set_xticks(x)
-        # ax.set_xticklabels(labels, rotation=30, ha="right", fontsize=6)
         ax.legend(loc='lower right', fontsize = 8)
 
+    def plot_subplots(arch, dk, st, nl, pos):
+        # dk = d.keys()
+        for i,b in enumerate(dk[st+pos*nl:st+(pos+1)*nl]):
+            ax = plt.subplot(4, nl, i + 1 + pos*nl)
+            plot_arch(d, b, arch, ax)
 
-        #fig.tight_layout()
-
-        #plt.show()
-
-    #plt.plot([1,2,3])
-    # now create a subplot which represents the top plot of a grid
-    # with 2 rows and 1 column. Since this subplot will overlap the
-    # first, the plot (and its axes) previously created, will be removed
-
-    n = 10
+    n = 20
     lims = [(i,i+n) for i in range(0,len(d), n)]
-    print lims
-    for (st,nsp) in lims:
-        # plt.figure()
-        # st = 0 # len(d) - number of subplots
-        # nsp = 5 # len(d) - number of subplots
-        # for j in [0,1]:
-        nl = (nsp-st)/2
-        print st, nsp, nl
-        for i,b in enumerate(d.keys()[st:st+nl]):
-            ax = plt.subplot(4, nl, i + 1)
-            plot_arch(d, b, "mips", ax)
-            ax = plt.subplot(4, nl, i + 1 + nl)
-            plot_arch(d, b, "hexagon", ax)
-        print "Second loop"
-        for i,b in enumerate(d.keys()[st+nl:nsp]):
-            ax = plt.subplot(4, nl, i + 1 + 2*nl)
-            plot_arch(d, b, "mips", ax)
-            ax = plt.subplot(4, nl, i + 1 + 3*nl)
-            plot_arch(d, b, "hexagon", ax)
+    dk = d.keys()
+    for arch in ["mips", "hexagon"]:
+        for (st,nsp) in lims:
+            nl = (nsp-st)/4
+            print st, nsp, nl
+            plot_subplots(arch, dk, st, nl, 0)
+            plot_subplots(arch, dk, st, nl, 1)
+            plot_subplots(arch, dk, st, nl, 2)
+            plot_subplots(arch, dk, st, nl, 3)
 
-        plt.subplots_adjust(hspace=0.3) #bottom=0.1, right=0.8, top=0.9)
-        plt.suptitle(title, fontsize=20)
-        plt.show()
+            plt.subplots_adjust(hspace=0.3) #bottom=0.1, right=0.8, top=0.9)
+            plt.suptitle(title, fontsize=20)
+            plt.show()
+
+    # n = 20
+    # lims = [(i,i+n) for i in range(0,len(d), n)]
+    # print lims
+    # for (st,nsp) in lims:
+    #     nl = (nsp-st)/4
+    #     print st, nsp, nl
+    #     for i,b in enumerate(d.keys()[st:st+nl]):
+    #         ax = plt.subplot(4, nl, i + 1)
+    #         plot_arch(d, b, "mips", ax)
+    #     print "Second loop"
+    #     for i,b in enumerate(d.keys()[st+nl:st+2*nl]):
+    #         ax = plt.subplot(4, nl, i + 1 + nl)
+    #         plot_arch(d, b, "mips", ax)
+    #     print "Third loop"
+    #     for i,b in enumerate(d.keys()[st+2*nl:st+3*nl]):
+    #         ax = plt.subplot(4, nl, i + 1 + 2*nl)
+    #         plot_arch(d, b, "mips", ax)
+    #     print "Forth loop"
+    #     for i,b in enumerate(d.keys()[st+3*nl:nsp]):
+    #         ax = plt.subplot(4, nl, i + 1 + 3*nl)
+    #         plot_arch(d, b, "mips", ax)
+
+        # plt.subplots_adjust(hspace=0.3) #bottom=0.1, right=0.8, top=0.9)
+        # plt.suptitle(title, fontsize=20)
+        # plt.show()
 
 pathname = "divs/"   # sys.argv[1]
 s_metric = "hamming" # sys.argv[2]
