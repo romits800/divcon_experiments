@@ -2,30 +2,32 @@
 
 from os import listdir
 
-import numpy as np
-import matplotlib.mlab as mlab
-import matplotlib.pyplot as plt
-
 import json
 
 import sys
 
+import pickle
+
 files = dict()
 
-if (len(sys.argv)<3):
-        print "Give two arguments"
-        exit(0)
+if (len(sys.argv) != 5):
+    print "Give four arguments:"
+    print "python stats.py <picklename> <benchname> <divsdirname> <resultdirname>"
+    exit(0) 
 
-for f in listdir("."):
-    if f.endswith("." + sys.argv[2] + ".out.json"):
+pname,bench,ddir,rdir = tuple(sys.argv[1:])
+
+for f in listdir(ddir):
+    if f.endswith("." + bench + ".out.json"):
         try:
-            files[f] = json.loads(open(f).read())
+            files[f] = json.loads(open(ddir + "/" + f).read())
         except:
+            print "Exception in file:", f
             continue
 
+
 if (len(sys.argv) > 1) and len(files)>0:
-    import pickle
-    pickle.dump(files, open(sys.argv[1] + ".pickle", "w"))
+    pickle.dump(files, open(rdir + "/" + pname + ".pickle", "w"))
 
 
 

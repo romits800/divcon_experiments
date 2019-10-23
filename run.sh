@@ -20,11 +20,19 @@ then
     mkdir $DIVS_PATH
 fi
 
+DIVS_DIR=divs_dir
+if [ $# -ge 2 ]
+then
+    DIVS_DIR=$2
+fi
+
+
 
 if [[ -z "${DIVCON_PATH}" ]]; then
   	echo "DIVCON_PATH variable not set. It should contain the PATH of the divCon repo."
 	exit 0
 fi
+
 
  
 for arch in mips hexagon #mips #arm
@@ -63,6 +71,10 @@ do
 	gecode-solver  -o $fnoextension.out.json --verbose $fnoextension.ext.json
 	#gecode-solver  -o $fnoextension.out.json --verbose $fnoextension.ext.json
 	
+        RESULT_PATH=${DIVS_PATH}/${fnoextension}
+
+	mkdir $RESULT_PATH
+
 	for agap in 10 20 #2 5 10 20 50
 	do
 	    for ndivs in 100
@@ -71,13 +83,13 @@ do
 		do
 		    if [ ! -f $fnoextension.out.json ]; then
                         echo "File not found! Falling back to llvm basefile"
-		        time timeout 5m gecode-diversify ${flags} --acceptable-gap $agap --div-method monolithic_dfs --distance ${dist} --number-divs $ndivs  -o $fnoextension.out.json --verbose $fnoextension.ext.json
+		        time timeout 5m gecode-diversify ${flags} --acceptable-gap $agap --div-method monolithic_dfs --distance ${dist} --number-divs $ndivs --divs-dir $DIVS_DIR  -o $fnoextension.out.json --verbose $fnoextension.ext.json
 		    else
-		        time timeout 5m gecode-diversify  ${flags} --acceptable-gap $agap  --div-method monolithic_dfs --distance ${dist} --number-divs $ndivs --solver-file $fnoextension.out.json --use-optimal-for-diversification -o $fnoextension.out.json --verbose $fnoextension.ext.json
+		        time timeout 5m gecode-diversify  ${flags} --acceptable-gap $agap  --div-method monolithic_dfs --distance ${dist} --number-divs $ndivs --solver-file $fnoextension.out.json --use-optimal-for-diversification --divs-dir $DIVS_DIR -o $fnoextension.out.json --verbose $fnoextension.ext.json
 		    fi
-		    python stats.py div_monolithic_dfs_${arch}_${fnoextension}_${agap}_${ndivs}_${dist} ${fnoextension} >> div_monolithic_dfs_${arch}_${fnoextension}_${agap}_${ndivs}_${dist}.txt
+		    python stats.py div_monolithic_dfs_${arch}_${fnoextension}_${agap}_${ndivs}_${dist} ${fnoextension}  ${DIVS_DIR} ${RESULT_PATH} 
 		    echo "Deleting the diversified files."
-		    rm *.$fnoextension.out.json
+		    rm ${DIVS_DIR}/*.$fnoextension.out.json
 		    #fi
 		done
 	    done #ndivs
@@ -97,13 +109,13 @@ do
                             do
                                 if [ ! -f $fnoextension.out.json ]; then
                                     echo "File not found! Falling back to llvm basefile"
-                                    time timeout 5m gecode-diversify  ${flags} --acceptable-gap $agap --relax $relax --seed 12 --distance ${dist} --restart $rest --restart-base $lp --number-divs $ndivs --div-method monolithic_lns -o $fnoextension.out.json --verbose $fnoextension.ext.json
+                                    time timeout 5m gecode-diversify  ${flags} --acceptable-gap $agap --relax $relax --seed 12 --distance ${dist} --restart $rest --restart-base $lp --number-divs $ndivs --div-method monolithic_lns --divs-dir $DIVS_DIR -o $fnoextension.out.json --verbose $fnoextension.ext.json
                                 else
-                                    time timeout 5m gecode-diversify  ${flags} --acceptable-gap $agap --relax $relax --seed 12 --distance ${dist} --restart $rest --restart-base $lp --number-divs $ndivs --solver-file $fnoextension.out.json --use-optimal-for-diversification --div-method monolithic_lns -o $fnoextension.out.json --verbose $fnoextension.ext.json
+                                    time timeout 5m gecode-diversify  ${flags} --acceptable-gap $agap --relax $relax --seed 12 --distance ${dist} --restart $rest --restart-base $lp --number-divs $ndivs --solver-file $fnoextension.out.json --use-optimal-for-diversification --div-method monolithic_lns --divs-dir $DIVS_DIR -o $fnoextension.out.json --verbose $fnoextension.ext.json
                                 fi
-                                python stats.py div_monolithic_lns_${arch}_${fnoextension}_${agap}_${ndivs}_${dist}_${relax}_${lp}_${rest} ${fnoextension} >> div_monolithic_lns_${arch}_${fnoextension}_${agap}_${ndivs}_${dist}_${relax}_${lp}_${rest}.txt
+                                python stats.py div_monolithic_lns_${arch}_${fnoextension}_${agap}_${ndivs}_${dist}_${relax}_${lp}_${rest} ${fnoextension} ${DIVS_DIR} ${RESULT_PATH} 
                                 echo "Deleting the diversified files."
-                                rm *.$fnoextension.out.json
+		                rm ${DIVS_DIR}/*.$fnoextension.out.json
 						#fi
                             done
                         done
@@ -112,10 +124,6 @@ do
             done #relax
 	done #agap
 
-	mkdir ${DIVS_PATH}/${fnoextension}
-	cp out ${DIVS_PATH}/${fnoextension}/
-
-	mv div_*${fnoextension}* ${DIVS_PATH}/${fnoextension}/
     done # files
 done # arch
 
