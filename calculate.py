@@ -146,7 +146,7 @@ for benchmark in listdir(pathname):
                 if not d[benchmark][arch][method][metric][agap].has_key(relax):
                     d[benchmark][arch][method][metric][agap][relax] = dict()
  
-                d[benchmark][arch][method][metric][agap][relax]['bravg']  = {'num': round(sumhd/count,4), 'maxnum': maxnum, 'data': intd.values()}
+             	d[benchmark][arch][method][metric][agap][relax] = {'bravg': {'num': round(sumhd/count,4), 'maxnum': maxnum, 'data': intd.values()}, 'divs': len(fnames), 'cost': { 'num': avgcost, 'maxnum': 0}, 'stime': { 'num': stime, 'maxnum': 60*5.}}
 
 
             ## Branch Diff Hamming Distance
@@ -178,7 +178,7 @@ for benchmark in listdir(pathname):
                 if not d[benchmark][arch][method][metric][agap].has_key(relax):
                     d[benchmark][arch][method][metric][agap][relax] = dict()
  
-                d[benchmark][arch][method][metric][agap][relax]['brdiff']  = {'num': round(sumhd/count,2), 'maxnum': maxnum, 'data': intd.values()}
+		d[benchmark][arch][method][metric][agap][relax] = {'brdiff': {'num': round(sumhd/count,2), 'maxnum': maxnum, 'data': intd.values()} , 'divs':len(fnames), 'cost': { 'num': avgcost, 'maxnum': 0}, 'stime': { 'num': stime, 'maxnum': 60*5.}}
 
 
 newpath = pathname.strip("/")
