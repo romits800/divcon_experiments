@@ -68,6 +68,9 @@ do
 	# /usr/local/bin/gecode-presolver
 	gecode-presolver -o $fnoextension.ext.json --verbose $fnoextension.json
 	# /usr/local/bin/gecode-solver
+	if [ ! -f $fnoextension.out.json ]; then
+            rm $fnoextension.out.json
+        fi
 	gecode-solver  -o $fnoextension.out.json --verbose $fnoextension.ext.json
 	#gecode-solver  -o $fnoextension.out.json --verbose $fnoextension.ext.json
 	
