@@ -25,7 +25,7 @@ def improvement(lns, dfs):
     else:
         return -round((float) ((dfs-lns)/lns)*100,2)
 
-def create_tex(texname, ind, field, relax, title, d):
+def create_tex(texname, ind, field, relax, title, d, metric, agap):
     names = sorted(d.keys())
     with open(texname + '.tex', 'w') as f:
         print >> f, "\\documentclass{standalone}"
@@ -49,36 +49,36 @@ def create_tex(texname, ind, field, relax, title, d):
         c["hexagon"]["lns"] = {'sum':0.,'count':0.}
 
         for benchmark in names:
-            mipsdfs = d[benchmark].has_key("mips") and d[benchmark]["mips"].has_key("dfs")
-            mipslns = d[benchmark].has_key("mips") and d[benchmark]["mips"].has_key("lns")
-            hexagondfs = d[benchmark].has_key("hexagon") and d[benchmark]["hexagon"].has_key("dfs")
-            hexagonlns = d[benchmark].has_key("hexagon") and d[benchmark]["hexagon"].has_key("lns")
+            mipsdfs = d[benchmark].has_key("mips") and d[benchmark]["mips"].has_key("dfs") and d[benchmark]["mips"]["dfs"].has_key(metric) and d[benchmark]["mips"]["dfs"][metric].has_key(agap) and d[benchmark]["mips"]["dfs"][metric][agap][None].has_key(field)
+	    mipslns = d[benchmark].has_key("mips") and d[benchmark]["mips"].has_key("lns") and d[benchmark]["mips"]["lns"].has_key(metric) and d[benchmark]["mips"]["lns"][metric].has_key(agap) and d[benchmark]["mips"]["lns"][metric][agap].has_key(relax) and d[benchmark]["mips"]["lns"][metric][agap][relax].has_key(field)
+            hexagondfs = d[benchmark].has_key("hexagon") and d[benchmark]["hexagon"].has_key("dfs") and d[benchmark]["hexagon"]["dfs"].has_key(metric) and d[benchmark]["hexagon"]["dfs"][metric].has_key(agap) and d[benchmark]["hexagon"]["dfs"][metric].has_key(agap)
+            hexagonlns = d[benchmark].has_key("hexagon") and d[benchmark]["hexagon"].has_key("lns") and d[benchmark]["hexagon"]["lns"].has_key(metric) and d[benchmark]["hexagon"]["lns"][metric].has_key(agap) and d[benchmark]["hexagon"]["lns"][metric][agap].has_key(relax) and d[benchmark]["hexagon"]["lns"][metric][agap][relax].has_key(field)
 
             arg1 = "-"
             arg2 = "-"
             if mipsdfs:
                 nrelax = None
-                dfsnum = d[benchmark]["mips"]["dfs"][nrelax][field]['num']
-                dfsmaxnum = d[benchmark]["mips"]["dfs"][nrelax][field]['maxnum']
-                dfsdivs = d[benchmark]["mips"]["dfs"][nrelax]["divs"]
+                dfsnum = d[benchmark]["mips"]["dfs"][metric][agap][nrelax][field]['num']
+                dfsmaxnum = d[benchmark]["mips"]["dfs"][metric][agap][nrelax][field]['maxnum']
+                dfsdivs = d[benchmark]["mips"]["dfs"][metric][agap][nrelax]["divs"]
                 arg1 = "%.2f\\textbackslash %d (%d)" %(dfsnum, dfsmaxnum, dfsdivs)
 
-                c["mips"]["dfs"]["sum"] += d[benchmark]["mips"]["dfs"][nrelax][field]['num']
+                c["mips"]["dfs"]["sum"] += d[benchmark]["mips"]["dfs"][metric][agap][nrelax][field]['num']
                 c["mips"]["dfs"]["count"] += 1
 
             if mipslns:
-                lnsnum = d[benchmark]["mips"]["lns"][relax][field]['num']
-                lnsmaxnum = d[benchmark]["mips"]["lns"][relax][field]['maxnum']
-                lnsdivs = d[benchmark]["mips"]["lns"][relax]["divs"]
+                lnsnum = d[benchmark]["mips"]["lns"][metric][agap][relax][field]['num']
+                lnsmaxnum = d[benchmark]["mips"]["lns"][metric][agap][relax][field]['maxnum']
+                lnsdivs = d[benchmark]["mips"]["lns"][metric][agap][relax]["divs"]
                 arg2 = "%.2f\\textbackslash %d (%d)" %(lnsnum, lnsmaxnum, lnsdivs)
-                c["mips"]["lns"]["sum"]+= d[benchmark]["mips"]["lns"][relax][field]['num']
+                c["mips"]["lns"]["sum"]+= d[benchmark]["mips"]["lns"][metric][agap][relax][field]['num']
                 c["mips"]["lns"]["count"] += 1
 
             impr1 = "-"
             if mipslns and mipsdfs:
                 nrelax = None
-                lnsnum = d[benchmark]["mips"]["lns"][relax][field]['num']
-                dfsnum = d[benchmark]["mips"]["dfs"][nrelax][field]['num']
+                lnsnum = d[benchmark]["mips"]["lns"][metric][agap][relax][field]['num']
+                dfsnum = d[benchmark]["mips"]["dfs"][metric][agap][nrelax][field]['num']
                 impr1 = "%.2f" %improvement(lnsnum, dfsnum)
 
             #arg2 = str(d[benchmark]["mips"]["lns"][relax][field]['num']) + "\\textbackslash " + str(d[benchmark]["mips"]["lns"][relax][field]['maxnum']) + " (" + str(d[benchmark]["mips"]["lns"]["divs"]) + ")" if mipslns and mipsdfs else "-"
@@ -87,26 +87,27 @@ def create_tex(texname, ind, field, relax, title, d):
             arg4 = "-"
             if hexagondfs:
                 nrelax = None
-                dfsnum = d[benchmark]["hexagon"]["dfs"][nrelax][field]['num']
-                dfsmaxnum = d[benchmark]["hexagon"]["dfs"][nrelax][field]['maxnum']
-                dfsdivs = d[benchmark]["hexagon"]["dfs"][nrelax]["divs"]
+                print d[benchmark]["hexagon"]["dfs"][metric][agap]
+                dfsnum = d[benchmark]["hexagon"]["dfs"][metric][agap][nrelax][field]['num']
+                dfsmaxnum = d[benchmark]["hexagon"]["dfs"][metric][agap][nrelax][field]['maxnum']
+                dfsdivs = d[benchmark]["hexagon"]["dfs"][metric][agap][nrelax]["divs"]
                 arg3 = "%.2f\\textbackslash %d (%d)" %(dfsnum, dfsmaxnum, dfsdivs)
 
-                c["hexagon"]["dfs"]["sum"] += d[benchmark]["hexagon"]["dfs"][nrelax][field]['num']
+                c["hexagon"]["dfs"]["sum"] += d[benchmark]["hexagon"]["dfs"][metric][agap][nrelax][field]['num']
                 c["hexagon"]["dfs"]["count"] += 1
                 
             if hexagonlns: 
-                lnsnum = d[benchmark]["hexagon"]["lns"][relax][field]['num']
-                lnsmaxnum = d[benchmark]["hexagon"]["lns"][relax][field]['maxnum']
-                lnsdivs = d[benchmark]["hexagon"]["lns"][relax]["divs"]
+                lnsnum = d[benchmark]["hexagon"]["lns"][metric][agap][relax][field]['num']
+                lnsmaxnum = d[benchmark]["hexagon"]["lns"][metric][agap][relax][field]['maxnum']
+                lnsdivs = d[benchmark]["hexagon"]["lns"][metric][agap][relax]["divs"]
                 arg4 = "%.2f\\textbackslash %d (%d)" %(lnsnum, lnsmaxnum, lnsdivs)
-                c["hexagon"]["lns"]["sum"]+= d[benchmark]["hexagon"]["lns"][relax][field]['num']
+                c["hexagon"]["lns"]["sum"]+= d[benchmark]["hexagon"]["lns"][metric][agap][relax][field]['num']
                 c["hexagon"]["lns"]["count"] += 1
 
             impr2 = "-"
             if hexagonlns and hexagondfs:
-                lnsnum = d[benchmark]["hexagon"]["lns"][relax][field]['num']
-                dfsnum = d[benchmark]["hexagon"]["dfs"][None][field]['num']
+                lnsnum = d[benchmark]["hexagon"]["lns"][metric][agap][relax][field]['num']
+                dfsnum = d[benchmark]["hexagon"]["dfs"][metric][agap][None][field]['num']
                 impr2 = "%.2f" %improvement(lnsnum, dfsnum)
 
 
@@ -149,8 +150,8 @@ def plot_all(field, relax, d, yvalue, title):
 
 
         labels = d.keys()
-        dfs_means = [d[b][arch]["dfs"][None][field]['num'] if d[b].has_key(arch) and d[b][arch].has_key("dfs") else 0 for b in d]
-        lns_means = [d[b][arch]["lns"][relax][field]['num'] if d[b].has_key(arch) and d[b][arch].has_key("lns") else 0 for b in d]
+        dfs_means = [d[b][arch]["dfs"][metric][agap][None][field]['num'] if d[b].has_key(arch) and d[b][arch].has_key("dfs") else 0 for b in d]
+        lns_means = [d[b][arch]["lns"][metric][agap][relax][field]['num'] if d[b].has_key(arch) and d[b][arch].has_key("lns") else 0 for b in d]
 
         x = np.arange(len(labels))  # the label locations
         width = 0.35  # the width of the bars
@@ -193,8 +194,8 @@ def plot_hist(field, relax, d, yvalue, title):
     def plot_arch(d, arch, ax):
 
         labels = d.keys()
-        dfs = [d[b][arch]["dfs"][None][field]['data'] if d[b].has_key(arch) and d[b][arch].has_key("dfs") else [0] for b in d]
-        lns = [d[b][arch]["lns"][relax][field]['data'] if d[b].has_key(arch) and d[b][arch].has_key("lns") else [0] for b in d]
+        dfs = [d[b][arch]["dfs"][metric][agap][None][field]['data'] if d[b].has_key(arch) and d[b][arch].has_key("dfs") else [0] for b in d]
+        lns = [d[b][arch]["lns"][metric][agap][relax][field]['data'] if d[b].has_key(arch) and d[b][arch].has_key("lns") else [0] for b in d]
 
         x = 2*np.arange(len(labels)) + 0.5 # the label locations
         width = 0.35  # the width of the bars
@@ -206,10 +207,10 @@ def plot_hist(field, relax, d, yvalue, title):
             datalns = [0]
             datadfs = [0]
             if d[b].has_key(arch) and d[b][arch].has_key("dfs"):
-                datadfs = d[b][arch]["dfs"][None][field]['data']
+                datadfs = d[b][arch]["dfs"][metric][agap][None][field]['data']
 
             if d[b].has_key(arch) and d[b][arch].has_key("lns"):
-                datalns = d[b][arch]["lns"][relax][field]['data']
+                datalns = d[b][arch]["lns"][metric][agap][relax][field]['data']
 
             # innerwidth = 0.035
             maxdata = max([max(datadfs), max(datalns)])
@@ -263,7 +264,7 @@ def plot_relax(field, d, yvalue, title):
 
         labels = d.keys()
         if d[b].has_key(arch) and d[b][arch].has_key("lns"):
-            lns = [(r, d[b][arch]["lns"][str(r)][field]['num'])  for r in sorted(map(float,d[b][arch]["lns"].keys())) ]
+            lns = [(r, d[b][arch]["lns"][metric][agap][str(r)][field]['num'])  for r in sorted(map(float,d[b][arch]["lns"].keys())) ]
 
             x,y = zip(*lns)
 
@@ -271,7 +272,7 @@ def plot_relax(field, d, yvalue, title):
             ax.plot(x,y, linewidth=1.5, label="LNS")
 
             if d[b].has_key(arch) and d[b][arch].has_key("dfs"):
-                v = d[b][arch]["dfs"][None][field]['num']
+                v = d[b][arch]["dfs"][metric][agap][None][field]['num']
                 ax.plot(x, [v for _ in x], linewidth=1.5, label="DFS");
 
             ymax = max(list(y)+[v])
@@ -345,7 +346,7 @@ s_out = "hamming"
 try:
     opts, args = getopt.getopt(sys.argv[1:],"hp:m:g:c:r:o:",["pathname=","metric=","agap=", "constant=", "relax=", "outmetric="])
 except getopt.GetoptError:
-    print "$ python onlyham_test.py -p <path of the measurments> -m <metric=hamming|br_hamming|diff_br_hamming> -g <acceptable gap>  -c <restart constant> -r <relax> -o <output metric = hamming|br_hamming|diff_br_hamming|stime|all>"
+    print "$ python onlyham_test.py -p <path of the measurments|pickle> -m <metric=hamming|br_hamming|diff_br_hamming> -g <acceptable gap>  -c <restart constant> -r <relax> -o <output metric = hamming|br_hamming|diff_br_hamming|stime|all>"
     # print 'test.py -i <inputfile> -o <outputfile>'
     sys.exit(2)
 
@@ -420,6 +421,22 @@ for benchmark in listdir(pathname):
                 avgcost = 0
             fnames = [ fi for fi in cycles.keys() if fi.split(".")[0].isdigit()]
 
+	    if not d[benchmark].has_key(arch):
+                    d[benchmark][arch] = dict()
+            if not d[benchmark][arch].has_key(method):
+                    d[benchmark][arch][method] = dict() #{relax: {'avg': { 'num':round(sumhd/count,2),'maxnum': maxnum, 'data': intd.values()}, 'divs':len(fnames), 'cost': { 'num': avgcost, 'maxnum': 0}, 'stime': { 'num': stime, 'maxnum': 60*5.}}}
+            if not d[benchmark][arch][method].has_key(metric):
+                   d[benchmark][arch][method][metric] = dict()
+            if not d[benchmark][arch][method][metric].has_key(agap):
+                   d[benchmark][arch][method][metric][agap] = dict()
+            if not d[benchmark][arch][method][metric][agap].has_key(relax):
+                    d[benchmark][arch][method][metric][agap][relax] = dict()
+ 
+            d[benchmark][arch][method][metric][agap][relax]['divs'] = len(fnames)
+            d[benchmark][arch][method][metric][agap][relax]['cost'] = { 'num': avgcost, 'maxnum': 0}
+            d[benchmark][arch][method][metric][agap][relax]['stime'] = { 'num': stime, 'maxnum': 0}
+
+
             ## Hamming Distance
             intd = dict()
             sumhd = 0
@@ -435,12 +452,7 @@ for benchmark in listdir(pathname):
                 maxnum = len(cycles[fnames[i]])
 
             if not count == 0:
-                if not d[benchmark].has_key(arch):
-                    d[benchmark][arch] = dict()
-                if not d[benchmark][arch].has_key(method):
-                    d[benchmark][arch][method] = {relax: {'avg': { 'num':round(sumhd/count,2),'maxnum': maxnum, 'data': intd.values()}, 'divs':len(fnames), 'cost': { 'num': avgcost, 'maxnum': 0}, 'stime': { 'num': stime, 'maxnum': 60*5.}}}
-                else:
-                    d[benchmark][arch][method][relax] ={'avg': { 'num':round(sumhd/count,2),'maxnum': maxnum, 'data': intd.values()}, 'divs':len(fnames), 'cost': { 'num': avgcost, 'maxnum': 0}, 'stime': { 'num': stime, 'maxnum': 60*5.}}
+                d[benchmark][arch][method][metric][agap][relax]['avg'] = { 'num':round(sumhd/count,2),'maxnum': maxnum, 'data': intd.values()}
 
             ## Branch Hamming Distance
             intd = dict()
@@ -456,15 +468,7 @@ for benchmark in listdir(pathname):
                 maxnum = len(brcycles[fnames[i]])
 
             if not count == 0:
-                if not d[benchmark].has_key(arch):
-                    d[benchmark][arch] = dict()
-                if not d[benchmark][arch].has_key(method):
-                    d[benchmark][arch][method] = {relax: {'bravg': {'num': round(sumhd/count,4), 'maxnum': maxnum, 'data': intd.values()}, 'divs': len(fnames), 'cost': { 'num': avgcost, 'maxnum': 0}, 'stime': { 'num': stime, 'maxnum': 60*5.}}}
-                else:
-                    if not d[benchmark][arch][method].has_key(relax):
-                        d[benchmark][arch][method][relax] = dict()
-                    d[benchmark][arch][method][relax]['bravg']  = {'num': round(sumhd/count,4), 'maxnum': maxnum, 'data': intd.values()}
-
+             	d[benchmark][arch][method][metric][agap][relax]['bravg'] = {'num': round(sumhd/count,4), 'maxnum': maxnum, 'data': intd.values()}
 
             ## Branch Diff Hamming Distance
             intd = dict()
@@ -484,33 +488,26 @@ for benchmark in listdir(pathname):
 
 
             if not count == 0:
-                if not d[benchmark].has_key(arch):
-                    d[benchmark][arch] = dict()
-                if not d[benchmark][arch].has_key(method):
-                    d[benchmark][arch][method] = {relax: {'brdiff': {'num': round(sumhd/count,2), 'maxnum': maxnum, 'data': intd.values()} , 'divs':len(fnames), 'cost': { 'num': avgcost, 'maxnum': 0}, 'stime': { 'num': stime, 'maxnum': 60*5.}}}
-                else:
-                    if not d[benchmark][arch][method].has_key(relax):
-                        d[benchmark][arch][method][relax] = dict()
-                    d[benchmark][arch][method][relax]['brdiff']  = {'num': round(sumhd/count,2), 'maxnum': maxnum, 'data': intd.values()}
+		d[benchmark][arch][method][metric][agap][relax][brdiff] = {'num': round(sumhd/count,2), 'maxnum': maxnum, 'data': intd.values()} 
 
 
 # Table
 
 if (s_out in ["hamming", "all"] and s_relax != "all"):
     title = "Hamming distance for %s, %s, %s, %s" %(s_metric, s_agap, s_constant, s_relax)
-    create_tex("out_hamming",       "hamm",    "avg", s_relax, title, d)
+    create_tex("out_hamming",       "hamm",    "avg", s_relax, title, d, metric, agap)
 
 if (s_out in ["br_hamming", "all"] and s_relax != "all"):
     title = "Hamming distance of branch instructions for %s, %s, %s, %s" %(s_metric, s_agap, s_constant, s_relax)
-    create_tex("out_brhamming",     "brhamm",    "bravg",  s_relax, title, d)
+    create_tex("out_brhamming",     "brhamm",    "bravg",  s_relax, title, d, metric, agap)
 
 if (s_out in ["diff_br_hamming", "all"] and s_relax != "all"):
     title = "Hamming distance of difference to branch instructions for %s, %s, %s, %s" %(s_metric, s_agap, s_constant, s_relax)
-    create_tex("out_diffbrhamming", "diffhamm",  "brdiff",  s_relax, title, d)
+    create_tex("out_diffbrhamming", "diffhamm",  "brdiff",  s_relax, title, d, metric, agap)
 
 if (s_out in ["cost", "all"] and s_relax != "all"):
     title = "Cost in cycles for %s, %s, %s, %s" %(s_metric, s_agap, s_constant, s_relax)
-    create_tex("out_cost", "cost",  "cost",  s_relax, title, d)
+    create_tex("out_cost", "cost",  "cost",  s_relax, title, d, metric, agap)
 
 
 # if (s_out in ["stime", "all"]):
@@ -519,51 +516,51 @@ if (s_out in ["cost", "all"] and s_relax != "all"):
 
 # Plot
 if (s_out in ["hamming", "all"] and s_relax != "all"):
-    plot_all("avg",    s_relax, d, "Hamming Distance", 'Hamming Distance between DFS LNS')
+    plot_all("avg",    s_relax, d, "Hamming Distance", 'Hamming Distance between DFS LNS', metric, agap)
 
 if (s_out in ["br_hamming", "all"] and s_relax != "all"):
-    plot_all("bravg",  s_relax, d,  "Hamming Distance", 'Branch Hamming Distance between DFS LNS')
+    plot_all("bravg",  s_relax, d,  "Hamming Distance", 'Branch Hamming Distance between DFS LNS', metric, agap)
 
 if (s_out in ["diff_br_hamming", "all"] and s_relax != "all"):
-    plot_all("brdiff", s_relax, d,  "Hamming Distance", 'Diff Branch Hamming Distance between DFS LNS')
+    plot_all("brdiff", s_relax, d,  "Hamming Distance", 'Diff Branch Hamming Distance between DFS LNS', metric, agap)
 
 if (s_out in ["stime", "all"] and s_relax != "all"):
-    plot_all("stime", s_relax, d,  "Solver Time", 'Solver time')
+    plot_all("stime", s_relax, d,  "Solver Time", 'Solver time', metric, agap)
 
 if (s_out in ["cost", "all"] and s_relax != "all"):
-    plot_all("cost", s_relax, d,  "Cost (cycles)", 'Cost (cycles)')
+    plot_all("cost", s_relax, d,  "Cost (cycles)", 'Cost (cycles)', metric, agap)
 
 
 
 if (s_out in ["hamming", "all"] and s_relax != "all"):
-    plot_hist("avg",    s_relax, d,  "Hamming Distance", 'Hamming Distance between DFS LNS')
+    plot_hist("avg",    s_relax, d,  "Hamming Distance", 'Hamming Distance between DFS LNS', metric, agap)
 
 if (s_out in ["br_hamming", "all"] and s_relax != "all"):
-    plot_hist("bravg",  s_relax, d,  "Hamming Distance", 'Branch Hamming Distance between DFS LNS')
+    plot_hist("bravg",  s_relax, d,  "Hamming Distance", 'Branch Hamming Distance between DFS LNS', metric, agap)
 
 if (s_out in ["diff_br_hamming", "all"] and s_relax != "all"):
-    plot_hist("brdiff", s_relax, d,  "Hamming Distance", 'Diff Branch Hamming Distance between DFS LNS')
+    plot_hist("brdiff", s_relax, d,  "Hamming Distance", 'Diff Branch Hamming Distance between DFS LNS', metric, agap)
 
 if (s_out in ["stime", "all"] and s_relax != "all"):
-    plot_hist("stime", s_relax, d,  "Solver Time", 'Solver time')
+    plot_hist("stime", s_relax, d,  "Solver Time", 'Solver time', metric, agap)
 
 if (s_out in ["cost", "all"] and s_relax != "all"):
-    plot_hist("cost", s_relax, d,  "Cost (cycles)", 'Cost (cycles)')
+    plot_hist("cost", s_relax, d,  "Cost (cycles)", 'Cost (cycles)', metric, agap)
 
 
 
 if (s_out in ["hamming", "all"] and s_relax == "all"):
-    plot_relax("avg", d, "Hamming Distance", "Hamming distance for different relax rates (0.4, 0.45, ..., 0.95)")
+    plot_relax("avg", d, "Hamming Distance", "Hamming distance for different relax rates (0.4, 0.45, ..., 0.95)", metric, agap)
 
 if (s_out in ["br_hamming", "all"] and s_relax == "all"):
-    plot_relax("bravg", d,  "Hamming Distance", 'Branch Hamming Distance for different relax rates (0.4, 0.45, ..., 0.95)')
+    plot_relax("bravg", d,  "Hamming Distance", 'Branch Hamming Distance for different relax rates (0.4, 0.45, ..., 0.95)', metric, agap)
 
 if (s_out in ["diff_br_hamming", "all"] and s_relax == "all"):
-    plot_relax("brdiff",  d,  "Hamming Distance", 'Diff Branch Hamming Distance for different relax rates (0.4, 0.45, ..., 0.95)')
+    plot_relax("brdiff",  d,  "Hamming Distance", 'Diff Branch Hamming Distance for different relax rates (0.4, 0.45, ..., 0.95)', metric, agap)
 
 if (s_out in ["stime", "all"] and s_relax == "all"):
-    plot_relax("stime",  d,  "Diversify Time", 'Diversify time for different relax rates (0.4, 0.45, ..., 0.95)')
+    plot_relax("stime",  d,  "Diversify Time", 'Diversify time for different relax rates (0.4, 0.45, ..., 0.95)', metric, agap)
 
 if (s_out in ["cost", "all"] and s_relax == "all"):
-    plot_relax("cost", d, "Cost (cycles)", "Cost (cycles) for different relax rates (0.4, 0.45, ..., 0.95)")
+    plot_relax("cost", d, "Cost (cycles)", "Cost (cycles) for different relax rates (0.4, 0.45, ..., 0.95)", metric, agap)
 
