@@ -12,12 +12,12 @@ import sys
 
 files = dict()
 
-if (len(sys.argv)<3):
-        print "Give two arguments"
+if (len(sys.argv)<2):
+        print "Give as argument the benchmark name"
         exit(0)
 
 for f in listdir("."):
-    if f.endswith("." + sys.argv[2] + ".out.json"):
+    if f.endswith("." + sys.argv[1] + ".out.json"):
         try:
             files[f] = json.loads(open(f).read())
         except:
