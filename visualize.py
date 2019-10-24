@@ -488,7 +488,7 @@ for benchmark in listdir(pathname):
 
 
             if not count == 0:
-		d[benchmark][arch][method][metric][agap][relax][brdiff] = {'num': round(sumhd/count,2), 'maxnum': maxnum, 'data': intd.values()} 
+		d[benchmark][arch][method][metric][agap][relax]['brdiff'] = {'num': round(sumhd/count,2), 'maxnum': maxnum, 'data': intd.values()} 
 
 
 # Table
