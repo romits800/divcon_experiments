@@ -8,6 +8,8 @@ flags="--disable-copy-dominance-constraints --disable-infinite-register-dominanc
 #missing_files="/home/romi/didaktoriko/unison/romi_unison/divCon/src/unison/test/fast/Hexagon/speed/mesa.api.glIndexd.mir /home/romi/didaktoriko/unison/romi_unison/divCon/src/unison/test/fast/Hexagon/speed/sphinx3.glist.glist_tail.mir /home/romi/didaktoriko/unison/romi_unison/divCon/src/unison/test/fast/Hexagon/speed/sphinx3.profile.ptmr_init.mir"
 
 #test_files="/home/romi/didaktoriko/unison/romi_unison/divCon/src/unison/test/fast/Mips/speed/gobmk.board.get_last_player.mir"
+# In kbytes: 10Gbytes
+ulimit -v 10485760
 
 DIVS_PATH=divs
 if [ $# -ge 1 ]

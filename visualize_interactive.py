@@ -69,7 +69,8 @@ def create_tex(texname, ind, field, relax, title, d, metric, agap):
         for benchmark in names:
             mipsdfs = d[benchmark].has_key("mips") and d[benchmark]["mips"].has_key("dfs") and d[benchmark]["mips"]["dfs"].has_key(metric) and d[benchmark]["mips"]["dfs"][metric].has_key(agap) and d[benchmark]["mips"]["dfs"][metric][agap][None].has_key(field)
 	    mipslns = d[benchmark].has_key("mips") and d[benchmark]["mips"].has_key("lns") and d[benchmark]["mips"]["lns"].has_key(metric) and d[benchmark]["mips"]["lns"][metric].has_key(agap) and d[benchmark]["mips"]["lns"][metric][agap].has_key(relax) and d[benchmark]["mips"]["lns"][metric][agap][relax].has_key(field)
-            hexagondfs = d[benchmark].has_key("hexagon") and d[benchmark]["hexagon"].has_key("dfs") and d[benchmark]["hexagon"]["dfs"].has_key(metric) and d[benchmark]["hexagon"]["dfs"][metric].has_key(agap) and d[benchmark]["hexagon"]["dfs"][metric].has_key(agap)
+
+            hexagondfs = d[benchmark].has_key("hexagon") and d[benchmark]["hexagon"].has_key("dfs") and d[benchmark]["hexagon"]["dfs"].has_key(metric) and d[benchmark]["hexagon"]["dfs"][metric].has_key(agap) and d[benchmark]["hexagon"]["dfs"][metric][agap][None].has_key(field)
             hexagonlns = d[benchmark].has_key("hexagon") and d[benchmark]["hexagon"].has_key("lns") and d[benchmark]["hexagon"]["lns"].has_key(metric) and d[benchmark]["hexagon"]["lns"][metric].has_key(agap) and d[benchmark]["hexagon"]["lns"][metric][agap].has_key(relax) and d[benchmark]["hexagon"]["lns"][metric][agap][relax].has_key(field)
 
             arg1 = "-"
@@ -131,10 +132,18 @@ def create_tex(texname, ind, field, relax, title, d, metric, agap):
             print >> f, "%s&%s&%s&%s&%s&%s&%s\\\\"%(benchmark.replace("_","\\_"), arg1, arg2, impr1, arg3, arg4, impr2)
 
 
-        arg1 = round(c["mips"]["dfs"]["sum"]/c["mips"]["dfs"]["count"],2)
-        arg2 = round(c["mips"]["lns"]["sum"]/c["mips"]["lns"]["count"],2)
-        arg3 = round(c["hexagon"]["dfs"]["sum"]/c["hexagon"]["dfs"]["count"],2)
-        arg4 = round(c["hexagon"]["lns"]["sum"]/c["hexagon"]["lns"]["count"],2)
+        arg1 = 0.
+        arg2 = 0.
+        arg3 = 0.
+        arg4 = 0.
+        if c["mips"]["dfs"]["count"] != 0:
+            arg1 = round(c["mips"]["dfs"]["sum"]/c["mips"]["dfs"]["count"],2)
+        if c["mips"]["lns"]["count"] != 0:
+            arg2 = round(c["mips"]["lns"]["sum"]/c["mips"]["lns"]["count"],2)
+        if c["hexagon"]["dfs"]["count"] != 0:
+            arg3 = round(c["hexagon"]["dfs"]["sum"]/c["hexagon"]["dfs"]["count"],2)
+        if c["hexagon"]["lns"]["count"] != 0:
+            arg4 = round(c["hexagon"]["lns"]["sum"]/c["hexagon"]["lns"]["count"],2)
         impr1 = improvement(arg2, arg1)
         impr2 = improvement(arg4, arg3)
         print >> f, "\\hline" 

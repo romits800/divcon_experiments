@@ -85,8 +85,8 @@ for benchmark in listdir(pathname):
             files = pickle.load(open(pathname + "/" +  benchmark + "/" + pfile))
             files = {h:files[h] for h in files if benchmark in h}
             # cycles = {h:files[h]['cycles'] for h in files if files[h].has_key('cycles')}
-            brcycles = {h:[ c for  c,j  in zip(files[h]['cycles'],files[h]['type']) if j in [1,2,3]] for h in files if files[h].has_key('type') and files[h].has_key('cycles')}
-            cycles = {h:[ c for  c,j  in zip(files[h]['cycles'],files[h]['type']) if j in [0,1,2,3,4,14]] for h in files if files[h].has_key('type') and files[h].has_key('cycles')}
+            brcycles = {h:[ c for  c,j  in zip(files[h]['global_cycles'],files[h]['type']) if j in [1,2,3]] for h in files if files[h].has_key('type') and files[h].has_key('global_cycles')}
+            cycles = {h:[ c for  c,j  in zip(files[h]['global_cycles'],files[h]['type']) if j in [0,1,2,3,4,14]] for h in files if files[h].has_key('type') and files[h].has_key('global_cycles')}
             stime = max([ files[h]['solver_time'] for h in files if files[h].has_key('solver_time') ])/1000. # the maximum should be the last
             cost = [files[h]['cost'][0] for h in files if files[h].has_key('cost')]# the cost
             
