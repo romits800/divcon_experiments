@@ -11,7 +11,7 @@ do
 done
 
 
-if [ $1 == "branch" ]
+if [ "$1" == "branch" ]
 then
     for i in {0..4}
     do
