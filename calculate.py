@@ -33,13 +33,13 @@ s_out = "hamming"
 try:
     opts, args = getopt.getopt(sys.argv[1:],"hp:",["pathname="])
 except getopt.GetoptError:
-    print "$ python onlyham_test.py -p <path of the measurments>"
+    print "$ python calculate.py -p <path of the measurments>"
     # print 'test.py -i <inputfile> -o <outputfile>'
     sys.exit(2)
 
 for opt, arg in opts:
     if opt == '-h':
-        print "$ python onlyham_test.py -p <path of the measurments>"
+        print "$ python calculate.py -p <path of the measurments>"
         sys.exit()
     elif opt in ("-p", "--pathname"):
         pathname = arg
