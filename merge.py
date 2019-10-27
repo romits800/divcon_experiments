@@ -88,7 +88,7 @@ for b in ds[0]:
                         if len(hamm)>0 and len(mhamm) > 0:
                             av = avg(hamm)
                             std = stdev(hamm, av)
-                            mn = avg(rhamm)
+                            mn = avg(hamm)
                             d[b][arch][method][metric][agap][relax]['avg'] = { 'num': av, 'stdev': std, 'maxnum': mn, 'data' : dhamm}
 
                         brhamm = [ds[di][b][arch][method][metric][agap][relax]['bravg']['num'] for di in ds if checkif(ds[di], b, arch, method, metric, agap, relax, 'bravg')]
