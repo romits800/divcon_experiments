@@ -2,8 +2,6 @@
 
 
 flags="--disable-copy-dominance-constraints --disable-infinite-register-dominance-constraints --disable-operand-symmetry-breaking-constraints --disable-register-symmetry-breaking-constraints --disable-temporary-symmetry-breaking-constraints --disable-wcet-constraints"
-#TODO: update with --disable-wcet-constraints
-# flags="--disable-wcet-constraints --disable-copy-dominance-constraints --disable-infinite-register-dominance-constraints --disable-operand-symmetry-breaking-constraints --disable-register-symmetry-breaking-constraints --disable-temporary-symmetry-breaking-constraints"
 
 #missing_files="/home/romi/didaktoriko/unison/romi_unison/divCon/src/unison/test/fast/Hexagon/speed/mesa.api.glIndexd.mir /home/romi/didaktoriko/unison/romi_unison/divCon/src/unison/test/fast/Hexagon/speed/sphinx3.glist.glist_tail.mir /home/romi/didaktoriko/unison/romi_unison/divCon/src/unison/test/fast/Hexagon/speed/sphinx3.profile.ptmr_init.mir"
 
@@ -74,7 +72,6 @@ do
             rm $fnoextension.out.json
         fi
 	gecode-solver  -o $fnoextension.out.json --verbose $fnoextension.ext.json
-	#gecode-solver  -o $fnoextension.out.json --verbose $fnoextension.ext.json
 	
         RESULT_PATH=${DIVS_PATH}/${fnoextension}
 
@@ -94,7 +91,7 @@ do
                         else
                             time timeout 5m gecode-diversify  ${flags} --acceptable-gap $agap  --div-method monolithic_dfs --distance ${dist} --number-divs $ndivs --solver-file $fnoextension.out.json --use-optimal-for-diversification --divs-dir $DIVS_DIR -o $fnoextension.out.json --branching ${branch} --verbose $fnoextension.ext.json
                         fi
-                        python stats.py div_monolithic_dfs_${arch}_${fnoextension}_${agap}_${ndivs}_${dist} ${fnoextension}  ${DIVS_DIR} ${RESULT_PATH} 
+                        python stats.py div_monolithic_dfs_${arch}_${fnoextension}_${agap}_${ndivs}_${dist}_${branch} ${fnoextension}  ${DIVS_DIR} ${RESULT_PATH} 
                         echo "Deleting the diversified files."
                         rm ${DIVS_DIR}/*.$fnoextension.out.json
                         #fi
@@ -110,7 +107,7 @@ do
                                     else
                                         time timeout 5m gecode-diversify  ${flags} --acceptable-gap $agap --relax $relax --seed 12 --distance ${dist} --restart $rest --restart-base $lp --number-divs $ndivs --solver-file $fnoextension.out.json --use-optimal-for-diversification --div-method monolithic_lns --divs-dir $DIVS_DIR -o $fnoextension.out.json --branching ${branch}  --verbose $fnoextension.ext.json
                                     fi
-                                    python stats.py div_monolithic_lns_${arch}_${fnoextension}_${agap}_${ndivs}_${dist}_${relax}_${lp}_${rest} ${fnoextension} ${DIVS_DIR} ${RESULT_PATH} 
+                                    python stats.py div_monolithic_lns_${arch}_${fnoextension}_${agap}_${ndivs}_${dist}_${branch}_${relax}_${lp}_${rest} ${fnoextension} ${DIVS_DIR} ${RESULT_PATH} 
                                     echo "Deleting the diversified files."
                                     rm ${DIVS_DIR}/*.$fnoextension.out.json
                                 done # rest

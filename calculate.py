@@ -58,13 +58,14 @@ d = dict()
 #div_monolithic_lns_mips_gcc.xexit.xexit_10_100_br_hamming_0.8_10000_constant.pickle
 for benchmark in listdir(pathname):
     d[benchmark] = dict()
-    pat = re.compile("div_monolithic_([^_]*)_([^_]*)_%s_([0-9]+)_([0-9]+)_([^0-9]+)(_.*|).pickle"  %benchmark)
+    pat = re.compile("div_monolithic_([^_]*)_([^_]*)_%s_([0-9]+)_([0-9]+)_([^0-9]*hamming)_([^_]+)(_.*|).pickle"  %benchmark)
     for pfile in listdir(pathname + "/" + benchmark + "/"):
         if pfile.endswith("pickle"):
             try:
                 a = re.match(pat,pfile)
-                method,arch,agap,divs,metric,rest = a.groups()
+                method,arch,agap,divs,metric,branch,rest = a.groups()
             except:
+                print "Exception: ", pfile
                 continue
             #if metric != s_metric  or agap != s_agap :
             #    continue
@@ -79,7 +80,7 @@ for benchmark in listdir(pathname):
                     #if constant != s_constant:
                     #    continue
                 except:
-                    print "Exception: ", rest
+                    print "Exception: ", rest, branch, pfile
 
             #arch = a.group(2)
             files = pickle.load(open(pathname + "/" +  benchmark + "/" + pfile))
@@ -97,19 +98,21 @@ for benchmark in listdir(pathname):
 
 
 	    if not d[benchmark].has_key(arch):
-                    d[benchmark][arch] = dict()
+                d[benchmark][arch] = dict()
             if not d[benchmark][arch].has_key(method):
-                    d[benchmark][arch][method] = dict() #{relax: {'avg': { 'num':round(sumhd/count,2),'maxnum': maxnum, 'data': intd.values()}, 'divs':len(fnames), 'cost': { 'num': avgcost, 'maxnum': 0}, 'stime': { 'num': stime, 'maxnum': 60*5.}}}
+                d[benchmark][arch][method] = dict() #{relax: {'avg': { 'num':round(sumhd/count,2),'maxnum': maxnum, 'data': intd.values()}, 'divs':len(fnames), 'cost': { 'num': avgcost, 'maxnum': 0}, 'stime': { 'num': stime, 'maxnum': 60*5.}}}
             if not d[benchmark][arch][method].has_key(metric):
-                   d[benchmark][arch][method][metric] = dict()
+                d[benchmark][arch][method][metric] = dict()
             if not d[benchmark][arch][method][metric].has_key(agap):
-                   d[benchmark][arch][method][metric][agap] = dict()
-            if not d[benchmark][arch][method][metric][agap].has_key(relax):
-                    d[benchmark][arch][method][metric][agap][relax] = dict()
+                d[benchmark][arch][method][metric][agap] = dict()
+            if not d[benchmark][arch][method][metric][agap].has_key(branch):
+                d[benchmark][arch][method][metric][agap][branch] = dict()
+            if not d[benchmark][arch][method][metric][agap][branch].has_key(relax):
+                d[benchmark][arch][method][metric][agap][branch][relax] = dict()
  
-            d[benchmark][arch][method][metric][agap][relax]['divs'] = len(fnames)
-            d[benchmark][arch][method][metric][agap][relax]['cost'] = { 'num': avgcost, 'maxnum': 0}
-            d[benchmark][arch][method][metric][agap][relax]['stime'] = { 'num': stime, 'maxnum': 0}
+            d[benchmark][arch][method][metric][agap][branch][relax]['divs'] = len(fnames)
+            d[benchmark][arch][method][metric][agap][branch][relax]['cost'] = { 'num': avgcost, 'maxnum': 0}
+            d[benchmark][arch][method][metric][agap][branch][relax]['stime'] = { 'num': stime, 'maxnum': 0}
 
 
             ## Hamming Distance
@@ -127,7 +130,7 @@ for benchmark in listdir(pathname):
                 maxnum = len(cycles[fnames[i]])
 
             if not count == 0:
-                d[benchmark][arch][method][metric][agap][relax]['avg'] = { 'num':round(sumhd/count,2),'maxnum': maxnum, 'data': intd.values()}
+                d[benchmark][arch][method][metric][agap][branch][relax]['avg'] = { 'num':round(sumhd/count,2),'maxnum': maxnum, 'data': intd.values()}
 
             ## Branch Hamming Distance
             intd = dict()
@@ -143,7 +146,7 @@ for benchmark in listdir(pathname):
                 maxnum = len(brcycles[fnames[i]])
 
             if not count == 0:
-             	d[benchmark][arch][method][metric][agap][relax]['bravg'] = {'num': round(sumhd/count,4), 'maxnum': maxnum, 'data': intd.values()}
+             	d[benchmark][arch][method][metric][agap][branch][relax]['bravg'] = {'num': round(sumhd/count,4), 'maxnum': maxnum, 'data': intd.values()}
 
 
             ## Branch Diff Hamming Distance
@@ -164,7 +167,7 @@ for benchmark in listdir(pathname):
 
 
             if not count == 0:
-		d[benchmark][arch][method][metric][agap][relax]['brdiff'] = {'num': round(sumhd/count,2), 'maxnum': maxnum, 'data': intd.values()} 
+		d[benchmark][arch][method][metric][agap][branch][relax]['brdiff'] = {'num': round(sumhd/count,2), 'maxnum': maxnum, 'data': intd.values()} 
 
 
 newpath = pathname.strip("/")

@@ -29,7 +29,7 @@ def improvement(lns, dfs):
 		return -1
 	return -round((float) ((dfs-lns)/lns)*100,2)
 
-def create_tex(texname, ind, field, relax, title, d, metric, agap):
+def create_tex(texname, ind, field, relax, title, d, metric, agap, branch):
     '''
 	texname: name of the output file
 	ind: name of the metric show in the table
@@ -67,37 +67,37 @@ def create_tex(texname, ind, field, relax, title, d, metric, agap):
         c["hexagon"]["lns"] = {'sum':0.,'count':0.}
 
         for benchmark in names:
-            mipsdfs = d[benchmark].has_key("mips") and d[benchmark]["mips"].has_key("dfs") and d[benchmark]["mips"]["dfs"].has_key(metric) and d[benchmark]["mips"]["dfs"][metric].has_key(agap) and d[benchmark]["mips"]["dfs"][metric][agap][None].has_key(field)
-	    mipslns = d[benchmark].has_key("mips") and d[benchmark]["mips"].has_key("lns") and d[benchmark]["mips"]["lns"].has_key(metric) and d[benchmark]["mips"]["lns"][metric].has_key(agap) and d[benchmark]["mips"]["lns"][metric][agap].has_key(relax) and d[benchmark]["mips"]["lns"][metric][agap][relax].has_key(field)
+            mipsdfs = d[benchmark].has_key("mips") and d[benchmark]["mips"].has_key("dfs") and d[benchmark]["mips"]["dfs"].has_key(metric) and d[benchmark]["mips"]["dfs"][metric].has_key(agap) and d[benchmark]["mips"]["dfs"][metric][agap][branch][None].has_key(field)
+	    mipslns = d[benchmark].has_key("mips") and d[benchmark]["mips"].has_key("lns") and d[benchmark]["mips"]["lns"].has_key(metric) and d[benchmark]["mips"]["lns"][metric].has_key(agap) and d[benchmark]["mips"]["lns"][metric][agap].has_key(branch) and d[benchmark]["mips"]["lns"][metric][agap][branch].has_key(relax) and d[benchmark]["mips"]["lns"][metric][agap][branch][relax].has_key(field)
 
-            hexagondfs = d[benchmark].has_key("hexagon") and d[benchmark]["hexagon"].has_key("dfs") and d[benchmark]["hexagon"]["dfs"].has_key(metric) and d[benchmark]["hexagon"]["dfs"][metric].has_key(agap) and d[benchmark]["hexagon"]["dfs"][metric][agap][None].has_key(field)
-            hexagonlns = d[benchmark].has_key("hexagon") and d[benchmark]["hexagon"].has_key("lns") and d[benchmark]["hexagon"]["lns"].has_key(metric) and d[benchmark]["hexagon"]["lns"][metric].has_key(agap) and d[benchmark]["hexagon"]["lns"][metric][agap].has_key(relax) and d[benchmark]["hexagon"]["lns"][metric][agap][relax].has_key(field)
+            hexagondfs = d[benchmark].has_key("hexagon") and d[benchmark]["hexagon"].has_key("dfs") and d[benchmark]["hexagon"]["dfs"].has_key(metric) and d[benchmark]["hexagon"]["dfs"][metric].has_key(agap) and d[benchmark]["hexagon"]["dfs"][metric][agap].has_key(branch) and d[benchmark]["hexagon"]["dfs"][metric][agap][branch][None].has_key(field)
+            hexagonlns = d[benchmark].has_key("hexagon") and d[benchmark]["hexagon"].has_key("lns") and d[benchmark]["hexagon"]["lns"].has_key(metric) and d[benchmark]["hexagon"]["lns"][metric].has_key(agap) and d[benchmark]["hexagon"]["lns"][metric][agap].has_key(branch) and d[benchmark]["hexagon"]["lns"][metric][agap][branch].has_key(relax) and d[benchmark]["hexagon"]["lns"][metric][agap][branch][relax].has_key(field)
 
             arg1 = "-"
             arg2 = "-"
             if mipsdfs:
                 nrelax = None
-                dfsnum = d[benchmark]["mips"]["dfs"][metric][agap][nrelax][field]['num']
-                dfsmaxnum = d[benchmark]["mips"]["dfs"][metric][agap][nrelax][field]['maxnum']
-                dfsdivs = d[benchmark]["mips"]["dfs"][metric][agap][nrelax]["divs"]
+                dfsnum = d[benchmark]["mips"]["dfs"][metric][agap][branch][nrelax][field]['num']
+                dfsmaxnum = d[benchmark]["mips"]["dfs"][metric][agap][branch][nrelax][field]['maxnum']
+                dfsdivs = d[benchmark]["mips"]["dfs"][metric][agap][branch][nrelax]["divs"]
                 arg1 = "%.2f\\textbackslash %d (%d)" %(dfsnum, dfsmaxnum, dfsdivs)
 
-                c["mips"]["dfs"]["sum"] += d[benchmark]["mips"]["dfs"][metric][agap][nrelax][field]['num']
+                c["mips"]["dfs"]["sum"] += d[benchmark]["mips"]["dfs"][metric][agap][branch][nrelax][field]['num']
                 c["mips"]["dfs"]["count"] += 1
 
             if mipslns:
-                lnsnum = d[benchmark]["mips"]["lns"][metric][agap][relax][field]['num']
-                lnsmaxnum = d[benchmark]["mips"]["lns"][metric][agap][relax][field]['maxnum']
-                lnsdivs = d[benchmark]["mips"]["lns"][metric][agap][relax]["divs"]
+                lnsnum = d[benchmark]["mips"]["lns"][metric][agap][branch][relax][field]['num']
+                lnsmaxnum = d[benchmark]["mips"]["lns"][metric][agap][branch][relax][field]['maxnum']
+                lnsdivs = d[benchmark]["mips"]["lns"][metric][agap][branch][relax]["divs"]
                 arg2 = "%.2f\\textbackslash %d (%d)" %(lnsnum, lnsmaxnum, lnsdivs)
-                c["mips"]["lns"]["sum"]+= d[benchmark]["mips"]["lns"][metric][agap][relax][field]['num']
+                c["mips"]["lns"]["sum"]+= d[benchmark]["mips"]["lns"][metric][agap][branch][relax][field]['num']
                 c["mips"]["lns"]["count"] += 1
 
             impr1 = "-"
             if mipslns and mipsdfs:
                 nrelax = None
-                lnsnum = d[benchmark]["mips"]["lns"][metric][agap][relax][field]['num']
-                dfsnum = d[benchmark]["mips"]["dfs"][metric][agap][nrelax][field]['num']
+                lnsnum = d[benchmark]["mips"]["lns"][metric][agap][branch][relax][field]['num']
+                dfsnum = d[benchmark]["mips"]["dfs"][metric][agap][branch][nrelax][field]['num']
                 impr1 = "%.2f" %improvement(lnsnum, dfsnum)
 
             #arg2 = str(d[benchmark]["mips"]["lns"][relax][field]['num']) + "\\textbackslash " + str(d[benchmark]["mips"]["lns"][relax][field]['maxnum']) + " (" + str(d[benchmark]["mips"]["lns"]["divs"]) + ")" if mipslns and mipsdfs else "-"
@@ -106,26 +106,26 @@ def create_tex(texname, ind, field, relax, title, d, metric, agap):
             arg4 = "-"
             if hexagondfs:
                 nrelax = None
-                dfsnum = d[benchmark]["hexagon"]["dfs"][metric][agap][nrelax][field]['num']
-                dfsmaxnum = d[benchmark]["hexagon"]["dfs"][metric][agap][nrelax][field]['maxnum']
-                dfsdivs = d[benchmark]["hexagon"]["dfs"][metric][agap][nrelax]["divs"]
+                dfsnum = d[benchmark]["hexagon"]["dfs"][metric][agap][branch][nrelax][field]['num']
+                dfsmaxnum = d[benchmark]["hexagon"]["dfs"][metric][agap][branch][nrelax][field]['maxnum']
+                dfsdivs = d[benchmark]["hexagon"]["dfs"][metric][agap][branch][nrelax]["divs"]
                 arg3 = "%.2f\\textbackslash %d (%d)" %(dfsnum, dfsmaxnum, dfsdivs)
 
-                c["hexagon"]["dfs"]["sum"] += d[benchmark]["hexagon"]["dfs"][metric][agap][nrelax][field]['num']
+                c["hexagon"]["dfs"]["sum"] += d[benchmark]["hexagon"]["dfs"][metric][agap][branch][nrelax][field]['num']
                 c["hexagon"]["dfs"]["count"] += 1
                 
             if hexagonlns: 
-                lnsnum = d[benchmark]["hexagon"]["lns"][metric][agap][relax][field]['num']
-                lnsmaxnum = d[benchmark]["hexagon"]["lns"][metric][agap][relax][field]['maxnum']
-                lnsdivs = d[benchmark]["hexagon"]["lns"][metric][agap][relax]["divs"]
+                lnsnum = d[benchmark]["hexagon"]["lns"][metric][agap][branch][relax][field]['num']
+                lnsmaxnum = d[benchmark]["hexagon"]["lns"][metric][agap][branch][relax][field]['maxnum']
+                lnsdivs = d[benchmark]["hexagon"]["lns"][metric][agap][branch][relax]["divs"]
                 arg4 = "%.2f\\textbackslash %d (%d)" %(lnsnum, lnsmaxnum, lnsdivs)
-                c["hexagon"]["lns"]["sum"]+= d[benchmark]["hexagon"]["lns"][metric][agap][relax][field]['num']
+                c["hexagon"]["lns"]["sum"]+= d[benchmark]["hexagon"]["lns"][metric][agap][branch][relax][field]['num']
                 c["hexagon"]["lns"]["count"] += 1
 
             impr2 = "-"
             if hexagonlns and hexagondfs:
-                lnsnum = d[benchmark]["hexagon"]["lns"][metric][agap][relax][field]['num']
-                dfsnum = d[benchmark]["hexagon"]["dfs"][metric][agap][None][field]['num']
+                lnsnum = d[benchmark]["hexagon"]["lns"][metric][agap][branch][relax][field]['num']
+                dfsnum = d[benchmark]["hexagon"]["dfs"][metric][agap][branch][None][field]['num']
                 impr2 = "%.2f" %improvement(lnsnum, dfsnum)
 
 
@@ -159,7 +159,7 @@ def create_tex(texname, ind, field, relax, title, d, metric, agap):
 
  
 
-def plot_all(field, relax, d, yvalue, title, metric, agap):
+def plot_all(field, relax, d, yvalue, title, metric, agap, branch):
     '''
 	field: 'avg', 'bravg', 'brdiff' output metric
 	relax: 0.4, 0.45, ..., 0.95 the relax rate
@@ -175,7 +175,7 @@ def plot_all(field, relax, d, yvalue, title, metric, agap):
 
     def constr(b, arch, method):
 	rel = None if method == "dfs" else relax
-        return d[b].has_key(arch) and d[b][arch].has_key(method) and d[b][arch][method].has_key(metric) and d[b][arch][method][metric].has_key(agap) and d[b][arch][method][metric][agap].has_key(rel) and d[b][arch][method][metric][agap][rel].has_key(field)
+        return d[b].has_key(arch) and d[b][arch].has_key(method) and d[b][arch][method].has_key(metric) and d[b][arch][method][metric].has_key(agap) and d[b][arch][method][metric][agap].has_key(branch) and d[b][arch][method][metric][agap][branch].has_key(rel) and d[b][arch][method][metric][agap][branch][rel].has_key(field)
 
 
     def plot_arch(d, arch, ax):
@@ -193,8 +193,8 @@ def plot_all(field, relax, d, yvalue, title, metric, agap):
 
 
         labels = d.keys()
-        dfs_means = [d[b][arch]["dfs"][metric][agap][None][field]['num'] if constr(b, arch, "dfs") else 0 for b in d]
-        lns_means = [d[b][arch]["lns"][metric][agap][relax][field]['num'] if constr(b, arch, "lns") else 0 for b in d]
+        dfs_means = [d[b][arch]["dfs"][metric][agap][branch][None][field]['num'] if constr(b, arch, "dfs") else 0 for b in d]
+        lns_means = [d[b][arch]["lns"][metric][agap][branch][relax][field]['num'] if constr(b, arch, "lns") else 0 for b in d]
 
         x = np.arange(len(labels))  # the label locations
         width = 0.35  # the width of the bars
@@ -233,7 +233,7 @@ def plot_all(field, relax, d, yvalue, title, metric, agap):
 
 
 
-def plot_hist(field, relax, d, yvalue, title, metric, agap):
+def plot_hist(field, relax, d, yvalue, title, metric, agap, branch):
     '''
 	field: 'avg', 'bravg', 'brdiff' output metric
 	relax: 0.4, 0.45, ..., 0.95 the relax rate
@@ -250,15 +250,15 @@ def plot_hist(field, relax, d, yvalue, title, metric, agap):
 
     def constr(b, arch,  method):
 	rel = None if method == "dfs" else relax
-        return d[b].has_key(arch) and d[b][arch].has_key(method) and d[b][arch][method].has_key(metric) and d[b][arch][method][metric].has_key(agap) and d[b][arch][method][metric][agap].has_key(rel) and d[b][arch][method][metric][agap][rel].has_key(field)
+        return d[b].has_key(arch) and d[b][arch].has_key(method) and d[b][arch][method].has_key(metric) and d[b][arch][method][metric].has_key(agap) and d[b][arch][method][metric][agap].has_key(branch) and d[b][arch][method][metric][agap][branch].has_key(rel) and d[b][arch][method][metric][agap][branch][rel].has_key(field)
 
 
     def plot_arch(d, arch, ax):
 
         labels = d.keys()
 
-        dfs = [d[b][arch]["dfs"][metric][agap][None][field]['data'] if constr(b, arch, "dfs") else [0] for b in d]
-        lns = [d[b][arch]["lns"][metric][agap][relax][field]['data'] if constr(b, arch, "lns") else [0] for b in d]
+        dfs = [d[b][arch]["dfs"][metric][agap][branch][None][field]['data'] if constr(b, arch, "dfs") else [0] for b in d]
+        lns = [d[b][arch]["lns"][metric][agap][branch][relax][field]['data'] if constr(b, arch, "lns") else [0] for b in d]
 
         x = 2*np.arange(len(labels)) + 0.5 # the label locations
         width = 0.35  # the width of the bars
@@ -270,10 +270,10 @@ def plot_hist(field, relax, d, yvalue, title, metric, agap):
             datalns = [0]
             datadfs = [0]
             if constr(b, arch, "dfs"):
-                datadfs = d[b][arch]["dfs"][metric][agap][None][field]['data']
+                datadfs = d[b][arch]["dfs"][metric][agap][branch][None][field]['data']
 
             if constr(b, arch, "lns"):
-                datalns = d[b][arch]["lns"][metric][agap][relax][field]['data']
+                datalns = d[b][arch]["lns"][metric][agap][branch][relax][field]['data']
 
             # innerwidth = 0.035
             maxdata = max([max(datadfs), max(datalns)])
@@ -325,7 +325,7 @@ def plot_hist(field, relax, d, yvalue, title, metric, agap):
 
 
 
-def plot_relax(field, d, yvalue, title, metric, agap):
+def plot_relax(field, d, yvalue, title, metric, agap, branch):
     '''
 	field: 'avg', 'bravg', 'brdiff' output metric
 	d: the dictionary with the measurements
@@ -334,15 +334,16 @@ def plot_relax(field, d, yvalue, title, metric, agap):
 	title: Title of the plot
 	metric: the metric of the measurement (from unison)
 	agap: 10, 20 allowed gap from the optimal solution
+	agap: original, random allowed gap from the optimal solution
     '''
     agap = str(agap)
 
 
     def constr(b, arch, method):
 	if method == "dfs":
-        	return d[b].has_key(arch) and d[b][arch].has_key(method) and d[b][arch][method].has_key(metric) and d[b][arch][method][metric].has_key(agap) and d[b][arch][method][metric][agap].has_key(None) and d[b][arch][method][metric][agap][None].has_key(field)
+        	return d[b].has_key(arch) and d[b][arch].has_key(method) and d[b][arch][method].has_key(metric) and d[b][arch][method][metric].has_key(agap) and d[b][arch][method][metric][agap].has_key(branch) and d[b][arch][method][metric][agap][branch].has_key(None) and d[b][arch][method][metric][agap][branch][None].has_key(field)
 	else:
-        	return d[b].has_key(arch) and d[b][arch].has_key(method) and d[b][arch][method].has_key(metric) and d[b][arch][method][metric].has_key(agap) and len(d[b][arch][method][metric][agap]) > 0 and d[b][arch][method][metric][agap][ d[b][arch][method][metric][agap].keys()[0]   ].has_key(field)
+        	return d[b].has_key(arch) and d[b][arch].has_key(method) and d[b][arch][method].has_key(metric) and d[b][arch][method][metric].has_key(agap) and d[b][arch][method][metric][agap].has_key(branch) and len(d[b][arch][method][metric][agap][branch]) > 0 and d[b][arch][method][metric][agap][branch][ d[b][arch][method][metric][agap][branch].keys()[0]   ].has_key(field)
 
 
 
@@ -350,7 +351,7 @@ def plot_relax(field, d, yvalue, title, metric, agap):
 
         labels = d.keys()
         if constr(b, arch, "lns"):
-            lns = [(r, d[b][arch]["lns"][metric][agap][str(r)][field]['num'])  for r in sorted(map(float,d[b][arch]["lns"][metric][agap].keys())) ]
+            lns = [(r, d[b][arch]["lns"][metric][agap][branch][str(r)][field]['num'])  for r in sorted(map(float,d[b][arch]["lns"][metric][agap][branch].keys())) ]
 
             x,y = zip(*lns)
 
@@ -358,7 +359,7 @@ def plot_relax(field, d, yvalue, title, metric, agap):
             ax.plot(x,y, linewidth=1.5, label="LNS")
 
             if constr(b, arch, "dfs"):
-                v = d[b][arch]["dfs"][metric][agap][None][field]['num']
+                v = d[b][arch]["dfs"][metric][agap][branch][None][field]['num']
                 ax.plot(x, [v for _ in x], linewidth=1.5, label="DFS");
 
             ymax = max(list(y)+[v])
@@ -394,7 +395,7 @@ def plot_relax(field, d, yvalue, title, metric, agap):
             plt.suptitle(title, fontsize=20)
             plt.show()
 
-def plot_relax_all(field, d, yvalue, title, metric, agap):
+def plot_relax_all(field, d, yvalue, title, metric, agap, branch):
     '''
 	field: 'avg', 'bravg', 'brdiff' output metric
 	d: the dictionary with the measurements
@@ -409,16 +410,16 @@ def plot_relax_all(field, d, yvalue, title, metric, agap):
 
     def constr(b, arch, method):
 	if method == "dfs":
-        	return d[b].has_key(arch) and d[b][arch].has_key(method) and d[b][arch][method].has_key(metric) and d[b][arch][method][metric].has_key(agap) and d[b][arch][method][metric][agap].has_key(None) and d[b][arch][method][metric][agap][None].has_key(field)
+        	return d[b].has_key(arch) and d[b][arch].has_key(method) and d[b][arch][method].has_key(metric) and d[b][arch][method][metric].has_key(agap) and d[b][arch][method][metric][agap].has_key(branch) and d[b][arch][method][metric][agap][branch].has_key(None) and d[b][arch][method][metric][agap][branch][None].has_key(field)
 	else:
-        	return d[b].has_key(arch) and d[b][arch].has_key(method) and d[b][arch][method].has_key(metric) and d[b][arch][method][metric].has_key(agap) and len(d[b][arch][method][metric][agap]) > 0 and d[b][arch][method][metric][agap][ d[b][arch][method][metric][agap].keys()[0]   ].has_key(field)
+        	return d[b].has_key(arch) and d[b][arch].has_key(method) and d[b][arch][method].has_key(metric) and d[b][arch][method][metric].has_key(agap) and d[b][arch][method][metric][agap].has_key(branch) and len(d[b][arch][method][metric][agap][branch]) > 0 and d[b][arch][method][metric][agap][branch][ d[b][arch][method][metric][agap][branch].keys()[0]   ].has_key(field)
 
     def plot_arch(d, arch, ax):
 
         labels = d.keys()
 	rs = []
         for r in np.arange(0.4,1.0, 0.05):
-		nums = [d[b][arch]["lns"][metric][agap][str(r)][field]['num'] for b in d if constr(b, arch, "lns")]	
+		nums = [d[b][arch]["lns"][metric][agap][branch][str(r)][field]['num'] for b in d if constr(b, arch, "lns")]	
 		if len(nums)> 0:
 			rs.append((r, sum(nums)/len(nums)))
 
@@ -429,7 +430,7 @@ def plot_relax_all(field, d, yvalue, title, metric, agap):
 
 	v = []
         if constr(b, arch, "dfs"):
-                v = d[b][arch]["dfs"][metric][agap][None][field]['num']
+                v = d[b][arch]["dfs"][metric][agap][branch][None][field]['num']
                 ax.plot(x, [v for _ in x], linewidth=1.5, label="DFS");
 
         ymax = max(list(y)+[v])
