@@ -8,8 +8,8 @@ run-par-br:
 	./run_par.sh branch
 
 merge:
-	./run_calculate
-	python merge &> outmerge
+	./run_calculate.sh
+	python merge.py &> outmerge
 
 clean: 
 	${RM} -rf divs_*
