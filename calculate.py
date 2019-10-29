@@ -53,6 +53,30 @@ d = dict()
 #     print "Give four arguments: $python onlyham_test.py <path of the measurments> <metric> <acceptable gap> <restart constant> <relax>"
 #     exit(0)
 
+def levenshtein_distance(s, t):
+        d = [[0 for i in range(len(s)+1)] for j in range(len(t)+1)]
+        for i in range(1, len(s)+1):
+                d[0][i] = i
+        for i in range(1, len(t)+1):
+                d[i][0] = i
+
+        for i in range(1, len(s)+1):
+                for j in range(1, len(t)+1):
+                        subcost = 0 if s[i-1] == t[j-1] else 1
+                        d[j][i] = min( d[j-1][i] + 1, d[j][i-1] +1 , d[j-1][i-1] + subcost)
+
+        return d[-1][-1]
+
+
+def reverse_order(c):
+        print c
+        # exit(0)
+        d = [0 for _ in range(max(c))]
+        for i,ci in enumerate(c):
+                if (ci == -1):
+                        continue
+                d[ci-1] = i
+        return d
 
 
 #div_monolithic_lns_mips_gcc.xexit.xexit_10_100_br_hamming_0.8_10000_constant.pickle
@@ -88,6 +112,7 @@ for benchmark in listdir(pathname):
             # cycles = {h:files[h]['cycles'] for h in files if files[h].has_key('cycles')}
             brcycles = {h:[ c for  c,j  in zip(files[h]['global_cycles'],files[h]['type']) if j in [1,2,3]] for h in files if files[h].has_key('type') and files[h].has_key('global_cycles')}
             cycles = {h:[ c for  c,j  in zip(files[h]['global_cycles'],files[h]['type']) if j in [0,1,2,3,4,14]] for h in files if files[h].has_key('type') and files[h].has_key('global_cycles')}
+            levcycles = {h:reverse_order(cycles[h]) for h in cycles }
             stime = max([ files[h]['solver_time'] for h in files if files[h].has_key('solver_time') ])/1000. # the maximum should be the last
             cost = [files[h]['cost'][0] for h in files if files[h].has_key('cost')]# the cost
             
@@ -168,6 +193,24 @@ for benchmark in listdir(pathname):
 
             if not count == 0:
 		d[benchmark][arch][method][metric][agap][branch][relax]['brdiff'] = {'num': round(sumhd/count,2), 'maxnum': maxnum, 'data': intd.values()} 
+
+            ## Levenshtein Distance
+            intd = dict()
+            sumhd = 0
+            count = 0
+            maxnum = 0
+            for i in range(len(fnames)):
+                for j in range(i+1, len(fnames)):
+                    f1,f2 = fnames[i],fnames[j]
+
+                    intd[(f1,f2)] = levenshtein_distance(levcycles[f1], levcycles[f2])
+                    sumhd += intd[(f1,f2)]
+                    count += 1.
+                    maxnum = len(levcycles[fnames[i])
+
+
+            if not count == 0:
+		d[benchmark][arch][method][metric][agap][branch][relax]['levenshtein'] = {'num': round(sumhd/count,2), 'maxnum': maxnum, 'data': intd.values()}
 
 
 newpath = pathname.strip("/")
