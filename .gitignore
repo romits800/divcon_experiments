@@ -6,3 +6,6 @@ div_*
 divs*
 *.pyc
 *#
+*~
+*.o
+*/*/diffs.txt

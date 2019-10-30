@@ -27,18 +27,12 @@ for f in listdir("."):
     # import pickle
     # pickle.dump(files, open(sys.argv[1] + ".pickle", "w"))
 
-for f in files:
-    try:
-        files[f] = files[f]['global_cycles']
-    except:
-        print "Error: no cycles"
-        print files[f]
-        continue
 
 print len(files)
 if (len(files) == 0):
     exit(0)
 
+cycles = {h:[ c for  c,j  in zip(files[h]['global_cycles'],files[h]['type']) if j in [0,1,2,3,4,14]] for h in files if files[h].has_key('type') and files[h].has_key('global_cycles')}
 
 fnames = files.keys()
 d = dict()
@@ -48,7 +42,7 @@ count = 0
 for i in range(len(fnames)-1):
     for j in range(i+1, i+1+len(fnames[i+1:])):
        f1,f2 = fnames[i],fnames[j]
-       d[(f1,f2)] = sum([ (1 if k!=l else 0) for (k,l) in zip(files[f1],files[f2])] ) #zip(files[f1],files[f2])
+       d[(f1,f2)] = sum([ (1 if k!=l else 0) for (k,l) in zip(cycles[f1],cycles[f2])] ) #zip(files[f1],files[f2])
        sumhd += d[(f1,f2)]
        count += 1
 
