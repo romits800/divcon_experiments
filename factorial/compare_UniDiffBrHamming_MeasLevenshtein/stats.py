@@ -51,8 +51,6 @@ def reverse_order(c):
 cycles = {h:[ c for  c,j  in zip(files[h]['global_cycles'],files[h]['type']) if j in [0,1,2,3,4,14]] for h in files if files[h].has_key('type') and files[h].has_key('global_cycles')}
 
 exorder = {h:reverse_order(cycles[h]) for h in cycles }
-print exorder
-print cycles
 
 if (len(cycles) == 0):
     exit(0)
