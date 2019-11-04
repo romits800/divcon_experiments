@@ -38,19 +38,21 @@ for f in listdir("."):
             continue
 
 def reverse_order(c):
-        print c
+        #print c
         # exit(0)
-        d = [0 for _ in range(max(c))]
+        d = [set() for _ in range(max(c)+1)]
         for i,ci in enumerate(c):
                 if (ci == -1):
                         continue
-                d[ci-1] = i
+                d[ci] |= {i}
         return d
 # if (len(sys.argv) > 1) and len(files)>0:
 
 cycles = {h:[ c for  c,j  in zip(files[h]['global_cycles'],files[h]['type']) if j in [0,1,2,3,4,14]] for h in files if files[h].has_key('type') and files[h].has_key('global_cycles')}
 
 exorder = {h:reverse_order(cycles[h]) for h in cycles }
+print exorder
+print cycles
 
 if (len(cycles) == 0):
     exit(0)
@@ -75,8 +77,8 @@ for di in d:
         else:
                 freq[d[di]] = [di]
 
-for fi in freq:
-        print fi, len(freq[fi])
+# for fi in freq:
+#        print fi, len(freq[fi])
 
 mink = min(freq.keys())
 maxk = max(freq.keys())
