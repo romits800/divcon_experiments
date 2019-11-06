@@ -75,8 +75,8 @@ for di in d:
         else:
                 freq[d[di]] = [di]
 
-# for fi in freq:
-#        print fi, len(freq[fi])
+for fi in freq:
+       print fi, len(freq[fi])
 
 mink = min(freq.keys())
 maxk = max(freq.keys())
