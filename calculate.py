@@ -69,7 +69,7 @@ def levenshtein_distance(s, t):
 
 
 def reverse_order(c):
-        print c
+        # print c
         # exit(0)
         d = [0 for _ in range(max(c))]
         for i,ci in enumerate(c):
@@ -82,7 +82,7 @@ def reverse_order(c):
 #div_monolithic_lns_mips_gcc.xexit.xexit_10_100_br_hamming_0.8_10000_constant.pickle
 for benchmark in listdir(pathname):
     d[benchmark] = dict()
-    pat = re.compile("div_monolithic_([^_]*)_([^_]*)_%s_([0-9]+)_([0-9]+)_([^0-9]*hamming)_([^_]+)(_.*|).pickle"  %benchmark)
+    pat = re.compile("div_monolithic_([^_]*)_([^_]*)_%s_([0-9]+)_([0-9]+)_([^0-9]*hamming|levenshtein)_([^_]+)(_.*|).pickle"  %benchmark)
     for pfile in listdir(pathname + "/" + benchmark + "/"):
         if pfile.endswith("pickle"):
             try:
@@ -206,7 +206,7 @@ for benchmark in listdir(pathname):
                     intd[(f1,f2)] = levenshtein_distance(levcycles[f1], levcycles[f2])
                     sumhd += intd[(f1,f2)]
                     count += 1.
-                    maxnum = len(levcycles[fnames[i])
+                    maxnum = len(levcycles[fnames[i]])
 
 
             if not count == 0:
