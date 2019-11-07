@@ -44,4 +44,7 @@ do
     inoext3="${inoext2%.*}"   # filename without extension 
     inoext4="${inoext3%.*}"   # filename without extension 
     llc $i -march=mips -mcpu=mips32 -disable-post-ra -disable-tail-duplicate -disable-branch-fold -disable-block-placement -start-after livedebugvars -o $inoext4.s
+
+    . /home/romi/opt/mcb32tools/environment
+    mipel-mcb32-elf-gcc -march=mips32r2 -msoft-float -Wa,-msoft-float -G 0 -ffreestanding -march=mips32r2 -msoft-float -Wa,-msoft-float -march=mips32r2 -msoft-float -msoft-float -c -MD -o $inoext4.s.o $inoext4.s
 done
