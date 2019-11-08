@@ -1,9 +1,10 @@
 #! /bin/bash -x
 input=$1
+func=$2
 
 export PATH=${PATH}:/home/romi/didaktoriko/unison/romi_unison/divCon/src/solvers/gecode:/home/romi/didaktoriko/unison/romi_unison/divCon/src/solvers/multi_backend/minizinc/:/home/romi/didaktoriko/unison/romi_unison/divCon/src/solvers/multi_backend/:/home/romi/didaktoriko/misc/minizinc/MiniZincIDE-2.1.2-bundle-linux-x86_64/ UNISON_DIR=/home/romi/didaktoriko/unison/romi_unison/divCon/ #/home/romi/didaktoriko/unison/romi_unison/divCon/src/solvers/multi_backend/portfolio-solver -o test.out.json  --verbose test.ext.json
 # /usr/local/bin/uni
-uni import --target=Mips $input.mir -o $input.uni --function=$input --maxblocksize=25 --goal=speed
+uni import --target=Mips $input.mir -o $input.uni --function=$func --maxblocksize=25 --goal=speed
 # /usr/local/bin/uni
 uni linearize --target=Mips $input.uni -o $input.lssa.uni
 # /usr/local/bin/uni
@@ -24,7 +25,7 @@ gecode-solver  -o $input.out.json --verbose $input.ext.json
 
 flags="--disable-copy-dominance-constraints --disable-infinite-register-dominance-constraints --disable-operand-symmetry-breaking-constraints --disable-register-symmetry-breaking-constraints --disable-temporary-symmetry-breaking-constraints --disable-wcet-constraints"
 
-gecode-diversify $flags --acceptable-gap 45 --relax 0.8 --seed 12 --number-divs 100 --restart constant --restart-base 10000 --distance hamming --div-method monolithic_lns -o $input.out.json --use-optimal-for-diversification --solver-file $input.out.json  --branching random --verbose $input.ext.json
+gecode-diversify $flags --acceptable-gap 45 --relax 0.8 --seed 12 --number-divs 10 --restart constant --restart-base 10000 --distance hamming --div-method monolithic_lns -o $input.out.json --use-optimal-for-diversification --solver-file $input.out.json  --branching random --verbose $input.ext.json
 
 
 for i in *.${input}.out.json; 
@@ -36,6 +37,7 @@ done
 #uni export --target=Mips $input.alt.uni -o $input.unison.mir --basefile=$input.llvm.mir --solfile=$input.out.json
 
 
+. /home/romi/opt/mcb32tools/environment
 
 for i in *.${input}.out.json.unison.mir
 do
@@ -45,6 +47,5 @@ do
     inoext4="${inoext3%.*}"   # filename without extension 
     llc $i -march=mips -mcpu=mips32 -disable-post-ra -disable-tail-duplicate -disable-branch-fold -disable-block-placement -start-after livedebugvars -o $inoext4.s
 
-    . /home/romi/opt/mcb32tools/environment
-    mipel-mcb32-elf-gcc -march=mips32r2 -msoft-float -Wa,-msoft-float -G 0 -ffreestanding -march=mips32r2 -msoft-float -Wa,-msoft-float -march=mips32r2 -msoft-float -msoft-float -c -MD -o $inoext4.s.o $inoext4.s
+    mipsel-mcb32-elf-gcc -march=mips32r2 -msoft-float -Wa,-msoft-float -G 0 -ffreestanding -march=mips32r2 -msoft-float -Wa,-msoft-float -march=mips32r2 -msoft-float -msoft-float -c -MD -o $inoext4.s.o $inoext4.s
 done
