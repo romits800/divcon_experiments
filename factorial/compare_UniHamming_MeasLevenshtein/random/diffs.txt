@@ -1,0 +1,6 @@
+2
+('68.factorial.out.json', '70.factorial.out.json')
+16
+('85.factorial.out.json', '20.factorial.out.json')
+4950.0
+Hdist: 10.6254545455
