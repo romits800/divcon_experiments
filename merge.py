@@ -76,12 +76,14 @@ for b in ds[0]:
                             cost = [ds[di][b][arch][method][metric][agap][branch][relax]['cost']['num'] for di in ds if checkif(ds[di], b, arch, method, metric, agap, branch, relax, 'cost')]
                             av = avg(cost)
                             std = stdev(cost, av)
-                            d[b][arch][method][metric][agap][branch][relax]['cost'] = { 'num': av, 'stdev': std, 'maxnum': 0}
+                            n = len(cost)
+                            d[b][arch][method][metric][agap][branch][relax]['cost'] = { 'num': av, 'stdev': std, 'n': n, 'maxnum': 0}
 
                             stime = [ds[di][b][arch][method][metric][agap][branch][relax]['stime']['num'] for di in ds if checkif(ds[di], b, arch, method, metric, agap, branch, relax, 'stime')]
                             av = avg(stime)
                             std = stdev(stime, av)
-                            d[b][arch][method][metric][agap][branch][relax]['stime'] = { 'num': av, 'stdev': std, 'maxnum': 0}
+                            n = len(stime)
+                            d[b][arch][method][metric][agap][branch][relax]['stime'] = { 'num': av, 'stdev': std, 'n': n, 'maxnum': 0}
 
                             
                             hamm = [ds[di][b][arch][method][metric][agap][branch][relax]['avg']['num'] for di in ds if checkif(ds[di], b, arch, method, metric, agap, branch, relax, 'avg')]
@@ -91,7 +93,8 @@ for b in ds[0]:
                                 av = avg(hamm)
                                 std = stdev(hamm, av)
                                 mn = avg(hamm)
-                                d[b][arch][method][metric][agap][branch][relax]['avg'] = { 'num': av, 'stdev': std, 'maxnum': mn, 'data' : dhamm}
+                                n = len(hamm)
+                                d[b][arch][method][metric][agap][branch][relax]['avg'] = { 'num': av, 'stdev': std, 'n': n, 'maxnum': mn, 'data' : dhamm}
 
                             brhamm = [ds[di][b][arch][method][metric][agap][branch][relax]['bravg']['num'] for di in ds if checkif(ds[di], b, arch, method, metric, agap, branch, relax, 'bravg')]
                             mbrhamm = [ds[di][b][arch][method][metric][agap][branch][relax]['bravg']['maxnum'] for di in ds if checkif(ds[di], b, arch, method, metric, agap, branch, relax, 'bravg')]
@@ -100,8 +103,9 @@ for b in ds[0]:
                                 av = avg(brhamm)
                                 std = stdev(brhamm, av)
                                 mn = avg(mbrhamm)
+                                n = len(brhamm)
      
-                                d[b][arch][method][metric][agap][branch][relax]['bravg'] = { 'num': av, 'stdev': std, 'maxnum': mn, 'data' : dbrhamm}
+                                d[b][arch][method][metric][agap][branch][relax]['bravg'] = { 'num': av, 'stdev': std, 'n': n, 'maxnum': mn, 'data' : dbrhamm}
 
 
                             brdiff = [ds[di][b][arch][method][metric][agap][branch][relax]['brdiff']['num'] for di in ds if checkif(ds[di], b, arch, method, metric, agap, branch, relax, 'brdiff')]
@@ -112,9 +116,24 @@ for b in ds[0]:
                                 av = avg(brdiff)
                                 std = stdev(brdiff, av)
                                 mn = avg(mbrdiff)
-                                d[b][arch][method][metric][agap][branch][relax]['brdiff'] = { 'num': av, 'stdev': std, 'maxnum': mn, 'data' : dbrdiff}
+                                n = len(brdiff)
+                                d[b][arch][method][metric][agap][branch][relax]['brdiff'] = { 'num': av, 'stdev': std, 'n': n, 'maxnum': mn, 'data' : dbrdiff}
+
+
+
+                            lev = [ds[di][b][arch][method][metric][agap][branch][relax]['levenshtein']['num'] for di in ds if checkif(ds[di], b, arch, method, metric, agap, branch, relax, 'levenshtein')]
+                            mlev = [ds[di][b][arch][method][metric][agap][branch][relax]['levenshtein']['maxnum'] for di in ds if checkif(ds[di], b, arch, method, metric, agap, branch, relax, 'levenshtein')]
+                            dlev = [i for di in ds if checkif(ds[di], b, arch, method, metric, agap, branch, relax, 'levenshtein') for i in ds[di][b][arch][method][metric][agap][branch][relax]['levenshtein']['data'] ]
+
+                            if len(lev)>0 and len(mlev) > 0:
+                                av = avg(lev)
+                                std = stdev(lev, av)
+                                mn = avg(mlev)
+                                n = len(lev)
+                                d[b][arch][method][metric][agap][branch][relax]['levenshtein'] = { 'num': av, 'stdev': std, 'n': n, 'maxnum': mn, 'data' : dlev}
 
                             d[b][arch][method][metric][agap][branch][relax]['num'] = num # number of iterations
+
 
 pickle.dump(d, open("divs.pickle", "w"))
 
