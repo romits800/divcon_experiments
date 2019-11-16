@@ -20,29 +20,47 @@ import getopt
 
 
 def improvement(lns, dfs):
-    if (lns >= dfs):
+    if (lns > dfs):
 	if dfs == 0:
-		return -1
+		return  -round((float) ((dfs - lns)/lns)*100,2)
         return round((float) ((lns-dfs)/dfs)*100,2)
-    else:
+    elif (dfs > lns):
         if lns == 0:
-		return -1
+		return  -round((float) ((lns - dfs)/dfs)*100,2)
 	return -round((float) ((dfs-lns)/lns)*100,2)
+    else:
+        return 0.0
 
-def create_tex(texname, ind, field, relax, title, d, metric, agap, branch):
+def get_ind(field):
+    if field == 'avg':
+        return 'hamm'
+    elif field == 'bravg':
+        return 'brhamm'
+    elif field == 'brdiff':
+        return 'brdiffhamm'
+    elif field == 'cost':
+        return 'cycles'
+    elif field == 'stime':
+        return 'ms'
+
+
+def create_tex(d, metric, field, relax, agap, branch, texname='outfile'):
     '''
-	texname: name of the output file
-	ind: name of the metric show in the table
-	field: 'avg', 'bravg', 'brdiff' output metric
-	relax: 0.4, 0.45, ..., 0.95 the relax rate
-	title: Title of the table
 	d: the dictionary with the measurements
 		e.g. d = pickle.load(open("divs.pickle"))
-	metric: the metric of the measurement (from unison)
+	metric: the metric of the measurement (from divcon - unison)
+	field: 'avg', 'bravg', 'brdiff' output metric
+	relax: 0.4, 0.45, ..., 0.95 the relax rate
 	agap: 10, 20 allowed gap from the optimal solution
+	branch: original, random, cloriginal, clrandom
+        texname: name of the output .tex file - default = 'outfile'
     ''' 
     agap = str(agap)
     relax = str(relax)
+
+    ind = get_ind(field)
+
+    title = "%s for measurements of (%s,%s,%s,%s)" %(field, str(relax), metric, str(agap), branch)
 
     names = sorted(d.keys())
     with open(texname + '.tex', 'w') as f:
@@ -67,7 +85,7 @@ def create_tex(texname, ind, field, relax, title, d, metric, agap, branch):
         c["hexagon"]["lns"] = {'sum':0.,'count':0.}
 
         for benchmark in names:
-            mipsdfs = d[benchmark].has_key("mips") and d[benchmark]["mips"].has_key("dfs") and d[benchmark]["mips"]["dfs"].has_key(metric) and d[benchmark]["mips"]["dfs"][metric].has_key(agap) and d[benchmark]["mips"]["dfs"][metric][agap][branch][None].has_key(field)
+            mipsdfs = d[benchmark].has_key("mips") and d[benchmark]["mips"].has_key("dfs") and d[benchmark]["mips"]["dfs"].has_key(metric) and d[benchmark]["mips"]["dfs"][metric].has_key(agap) and d[benchmark]["mips"]["dfs"][metric][agap].has_key(branch) and d[benchmark]["mips"]["dfs"][metric][agap][branch][None].has_key(field)
 	    mipslns = d[benchmark].has_key("mips") and d[benchmark]["mips"].has_key("lns") and d[benchmark]["mips"]["lns"].has_key(metric) and d[benchmark]["mips"]["lns"][metric].has_key(agap) and d[benchmark]["mips"]["lns"][metric][agap].has_key(branch) and d[benchmark]["mips"]["lns"][metric][agap][branch].has_key(relax) and d[benchmark]["mips"]["lns"][metric][agap][branch][relax].has_key(field)
 
             hexagondfs = d[benchmark].has_key("hexagon") and d[benchmark]["hexagon"].has_key("dfs") and d[benchmark]["hexagon"]["dfs"].has_key(metric) and d[benchmark]["hexagon"]["dfs"][metric].has_key(agap) and d[benchmark]["hexagon"]["dfs"][metric][agap].has_key(branch) and d[benchmark]["hexagon"]["dfs"][metric][agap][branch][None].has_key(field)
@@ -159,19 +177,21 @@ def create_tex(texname, ind, field, relax, title, d, metric, agap, branch):
 
  
 
-def plot_all(field, relax, d, yvalue, title, metric, agap, branch):
+def plot_all(d, metric, field, relax, agap, branch):
     '''
-	field: 'avg', 'bravg', 'brdiff' output metric
-	relax: 0.4, 0.45, ..., 0.95 the relax rate
 	d: the dictionary with the measurements
 		e.g. d = pickle.load(open("divs.pickle"))
-	yvalue: value on the y axis
-	title: Title of the plot
 	metric: the metric of the measurement (from unison)
+	field: 'avg', 'bravg', 'brdiff' output metric
+	relax: 0.4, 0.45, ..., 0.95 the relax rate
 	agap: 10, 20 allowed gap from the optimal solution
+	branch: original, random, cloriginal, clrandom
     '''
     agap = str(agap)
     relax = str(relax)
+    yvalue = get_ind(field)
+
+    title = "%s for measurements of (%s,%s,%s,%s)" %(field, str(relax), metric, str(agap), branch)
 
     def constr(b, arch, method):
 	rel = None if method == "dfs" else relax
@@ -232,20 +252,21 @@ def plot_all(field, relax, d, yvalue, title, metric, agap, branch):
     plt.show()
 
 
-
-def plot_hist(field, relax, d, yvalue, title, metric, agap, branch):
+def plot_hist(d, metric, field, relax, agap, branch):
     '''
-	field: 'avg', 'bravg', 'brdiff' output metric
-	relax: 0.4, 0.45, ..., 0.95 the relax rate
 	d: the dictionary with the measurements
 		e.g. d = pickle.load(open("divs.pickle"))
-	yvalue: value on the y axis
-	title: Title of the plot
 	metric: the metric of the measurement (from unison)
+	field: 'avg', 'bravg', 'brdiff' output metric
+	relax: 0.4, 0.45, ..., 0.95 the relax rate
 	agap: 10, 20 allowed gap from the optimal solution
+	branch: original, random, cloriginal, clrandom
     '''
     agap = str(agap)
     relax = str(relax)
+    yvalue = get_ind(field)
+
+    title = "%s for measurements of (%s,%s,%s,%s)" %(field, str(relax), metric, str(agap), branch)
 
 
     def constr(b, arch,  method):
@@ -325,19 +346,20 @@ def plot_hist(field, relax, d, yvalue, title, metric, agap, branch):
 
 
 
-def plot_relax(field, d, yvalue, title, metric, agap, branch):
+
+def plot_relax(d, metric, field, agap, branch):
     '''
-	field: 'avg', 'bravg', 'brdiff' output metric
 	d: the dictionary with the measurements
 		e.g. d = pickle.load(open("divs.pickle"))
-	yvalue: value on the y axis
-	title: Title of the plot
 	metric: the metric of the measurement (from unison)
+	field: 'avg', 'bravg', 'brdiff' output metric
 	agap: 10, 20 allowed gap from the optimal solution
-	agap: original, random allowed gap from the optimal solution
+	branch: original, random, cloriginal, clrandom
     '''
     agap = str(agap)
+    yvalue = get_ind(field)
 
+    title = "%s for measurements of (%s,%s,%s)" %(field, metric, str(agap), branch)
 
     def constr(b, arch, method):
 	if method == "dfs":
@@ -395,18 +417,22 @@ def plot_relax(field, d, yvalue, title, metric, agap, branch):
             plt.suptitle(title, fontsize=20)
             plt.show()
 
-def plot_relax_all(field, d, yvalue, title, metric, agap, branch):
+
+
+
+def plot_relax_all(d, metric, field, agap, branch):
     '''
-	field: 'avg', 'bravg', 'brdiff' output metric
 	d: the dictionary with the measurements
 		e.g. d = pickle.load(open("divs.pickle"))
-	yvalue: value on the y axis
-	title: Title of the plot
 	metric: the metric of the measurement (from unison)
+	field: 'avg', 'bravg', 'brdiff' output metric
 	agap: 10, 20 allowed gap from the optimal solution
+	branch: original, random, cloriginal, clrandom
     '''
     agap = str(agap)
+    yvalue = get_ind(field)
 
+    title = "%s for measurements of (%s,%s,%s)" %(field, metric, str(agap), branch)
 
     def constr(b, arch, method):
 	if method == "dfs":
@@ -418,22 +444,29 @@ def plot_relax_all(field, d, yvalue, title, metric, agap, branch):
 
         labels = d.keys()
 	rs = []
-        for r in np.arange(0.4,1.0, 0.05):
+        for r in np.arange(0.4,1.0, 0.1):
 		nums = [d[b][arch]["lns"][metric][agap][branch][str(r)][field]['num'] for b in d if constr(b, arch, "lns")]	
 		if len(nums)> 0:
 			rs.append((r, sum(nums)/len(nums)))
 
         x,y = zip(*rs)
+        print x, y
 
             # print b, x, y
-        ax.plot(x,y, linewidth=1.5, label="LNS")
+        ax.plot(x, y, linewidth=1.5, label="LNS")
 
-	v = []
-        if constr(b, arch, "dfs"):
-                v = d[b][arch]["dfs"][metric][agap][branch][None][field]['num']
-                ax.plot(x, [v for _ in x], linewidth=1.5, label="DFS");
+
+        v = 0
+        df = []
+        for b in d:
+            if constr(b, arch, "dfs"):
+                df.append(d[b][arch]["dfs"][metric][agap][branch][None][field]['num'])
+        if (len(df) > 0):
+            v = sum(df)/len(df)
+        ax.plot(x, [v for _ in x], linewidth=1.5, label="DFS");
 
         ymax = max(list(y)+[v])
+        print ymax
         ax.set_ylim(ymax=1.1*ymax)
         ax.set_ylim(ymin=0)
 
