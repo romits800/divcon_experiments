@@ -502,7 +502,7 @@ def plot_all_branching(d, metric, field, relax, agap):
     relax = str(relax)
     yvalue = get_ind(field)
 
-    title = "%s for measurements of (%s,%s,%s%%)" %(field, str(relax), metric, str(agap))
+    title = "%s for measurements of (%s, %s, %s%%)" %(field, str(relax), metric, str(agap))
 
     def constr(b, arch, branch, method):
 	rel = None if method == "dfs" else relax
