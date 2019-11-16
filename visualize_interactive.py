@@ -60,7 +60,7 @@ def create_tex(d, metric, field, relax, agap, branch, texname='outfile'):
 
     ind = get_ind(field)
 
-    title = "%s for measurements of (%s,%s,%s,%s)" %(field, str(relax), metric, str(agap), branch)
+    title = "%s for measurements of (%s, %s, %s%%, %s)" %(field, str(relax), metric, str(agap), branch)
 
     names = sorted(d.keys())
     with open(texname + '.tex', 'w') as f:
@@ -191,7 +191,7 @@ def plot_all(d, metric, field, relax, agap, branch):
     relax = str(relax)
     yvalue = get_ind(field)
 
-    title = "%s for measurements of (%s,%s,%s,%s)" %(field, str(relax), metric, str(agap), branch)
+    title = "%s for measurements of (%s, %s, %s%%, %s)" %(field, str(relax), metric, str(agap), branch)
 
     def constr(b, arch, method):
 	rel = None if method == "dfs" else relax
@@ -266,7 +266,7 @@ def plot_hist(d, metric, field, relax, agap, branch):
     relax = str(relax)
     yvalue = get_ind(field)
 
-    title = "%s for measurements of (%s,%s,%s,%s)" %(field, str(relax), metric, str(agap), branch)
+    title = "%s for measurements of (%s, %s, %s%%, %s)" %(field, str(relax), metric, str(agap), branch)
 
 
     def constr(b, arch,  method):
@@ -359,7 +359,7 @@ def plot_relax(d, metric, field, agap, branch):
     agap = str(agap)
     yvalue = get_ind(field)
 
-    title = "%s for measurements of (%s,%s,%s)" %(field, metric, str(agap), branch)
+    title = "%s for measurements of (%s, %s%%, %s)" %(field, metric, str(agap), branch)
 
     def constr(b, arch, method):
 	if method == "dfs":
@@ -432,7 +432,7 @@ def plot_relax_all(d, metric, field, agap, branch):
     agap = str(agap)
     yvalue = get_ind(field)
 
-    title = "%s for measurements of (%s,%s,%s)" %(field, metric, str(agap), branch)
+    title = "%s for measurements of (%s, %s%%, %s)" %(field, metric, str(agap), branch)
 
     def constr(b, arch, method):
 	if method == "dfs":
@@ -478,6 +478,91 @@ def plot_relax_all(d, metric, field, agap, branch):
         ax.legend(loc='lower right', fontsize = 8)
 
 
+    ax = plt.subplot(2, 1, 1)
+    plot_arch(d, "mips", ax)
+    ax = plt.subplot(2, 1, 2)
+    plot_arch(d, "hexagon", ax)
+
+    plt.subplots_adjust(hspace=0.5)
+
+    plt.show()
+
+
+def plot_all_branching(d, metric, field, relax, agap):
+    '''
+	d: the dictionary with the measurements
+		e.g. d = pickle.load(open("divs.pickle"))
+	metric: the metric of the measurement (from unison)
+	field: 'avg', 'bravg', 'brdiff' output metric
+	relax: 0.4, 0.45, ..., 0.95 the relax rate
+	agap: 10, 20 allowed gap from the optimal solution
+	branch: original, random, cloriginal, clrandom
+    '''
+    agap = str(agap)
+    relax = str(relax)
+    yvalue = get_ind(field)
+
+    title = "%s for measurements of (%s,%s,%s%%)" %(field, str(relax), metric, str(agap))
+
+    def constr(b, arch, branch, method):
+	rel = None if method == "dfs" else relax
+        return d[b].has_key(arch) and d[b][arch].has_key(method) and d[b][arch][method].has_key(metric) and d[b][arch][method][metric].has_key(agap) and d[b][arch][method][metric][agap].has_key(branch) and d[b][arch][method][metric][agap][branch].has_key(rel) and d[b][arch][method][metric][agap][branch][rel].has_key(field)
+
+
+    def plot_arch(d, arch, ax):
+
+        def autolabel(rects):
+            """Attach a text label above each bar in *rects*, displaying its height."""
+            for rect in rects:
+                height = rect.get_height()
+                ax.annotate('{}'.format(height),
+                        xy=(rect.get_x() + rect.get_width() / 2, height),
+                        xytext=(0, 3),  # 3 points vertical offset
+                        textcoords="offset points",
+                        rotation=90,
+                        ha='center', va='bottom', fontsize=6)
+
+
+        labels = d.keys()
+        dfs_means = dict()
+        lns_means = dict()
+        for branch in ["original", "random", "cloriginal", "clrandom"]:
+            dfs_means[branch] = [d[b][arch]["dfs"][metric][agap][branch][None][field]['num'] if constr(b, arch, branch, "dfs") else 0 for b in d]
+            lns_means[branch] = [d[b][arch]["lns"][metric][agap][branch][relax][field]['num'] if constr(b, arch, branch, "lns") else 0 for b in d]
+
+        x = 2*np.arange(len(labels))  # the label locations
+        width = 2*0.35  # the width of the bars
+
+        #fig, ax = plt.subplots()
+        
+        rects1 = []
+        rects2 = []
+        for i,branch in enumerate(["original", "cloriginal", "random", "clrandom"], 1):
+            rects1.append(ax.bar(x - 5*width/4+ i*width/4, dfs_means[branch], width/6, color = (0.1, 0.2, 0.2 + i*0.2), label='DFS (' + branch + ')'))
+        for i,branch in enumerate(["original", "cloriginal", "random", "clrandom"], 1):
+            rects2.append(ax.bar(x + i*width/4, lns_means[branch], width/6, color = (0.1, 0.2 + i*0.2, 0.2), label='LNS ('+branch + ')'))
+
+        # Add some text for labels, title and custom x-axis tick labels, etc.
+        ax.set_ylabel(yvalue)
+        ax.set_title(title + " (%s)"%arch)
+        ax.set_xticks(x)
+        ax.set_xticklabels(labels, rotation=30, ha="right", fontsize=6)
+        ax.legend()
+
+            
+        for rect in rects1:
+            autolabel(rect)
+        for rect in rects2:
+            autolabel(rect)
+
+        #fig.tight_layout()
+
+        #plt.show()
+
+    #plt.plot([1,2,3])
+    # now create a subplot which represents the top plot of a grid
+    # with 2 rows and 1 column. Since this subplot will overlap the
+    # first, the plot (and its axes) previously created, will be removed
     ax = plt.subplot(2, 1, 1)
     plot_arch(d, "mips", ax)
     ax = plt.subplot(2, 1, 2)
