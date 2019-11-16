@@ -4,6 +4,10 @@
 run-par:
 	./run_par.sh
 
+run-par-fast:
+	./run_par_fast.sh
+
+
 run-par-br:
 	./run_par.sh branch
 
@@ -12,5 +16,7 @@ merge:
 	python merge.py &> outmerge
 
 clean: 
-	${RM} -rf divs_* divs.pickle
 	${RM} *.json *.uni *.llvm.mir
+
+clean_divs:
+	${RM} -rf divs_* divs.pickle
