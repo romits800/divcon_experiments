@@ -18,6 +18,8 @@ import subprocess
 
 import getopt
 
+import math
+
 
 def improvement(lns, dfs):
     if (lns > dfs):
@@ -214,14 +216,23 @@ def plot_all(d, metric, field, relax, agap, branch):
 
         labels = d.keys()
         dfs_means = [d[b][arch]["dfs"][metric][agap][branch][None][field]['num'] if constr(b, arch, "dfs") else 0 for b in d]
+        # confidence interval
+        dfs_error = [2*d[b][arch]["dfs"][metric][agap][branch][None][field]['stdev']/math.sqrt(d[b][arch]["dfs"][metric][agap][branch][None]['num']) if constr(b, arch, "dfs") else 0 for b in d]
         lns_means = [d[b][arch]["lns"][metric][agap][branch][relax][field]['num'] if constr(b, arch, "lns") else 0 for b in d]
+        lns_error = [2*d[b][arch]["lns"][metric][agap][branch][relax][field]['stdev']/math.sqrt(d[b][arch]["lns"][metric][agap][branch][relax]['num']) if constr(b, arch, "lns") else 0 for b in d]
+
+        # Coefficient of variation
+        #lns_coef_of_var = [d[b][arch]["lns"][metric][agap][branch][relax][field]['stdev']/d[b][arch]["lns"][metric][agap][branch][relax][field]['num'] if constr(b, arch, "lns") else 0 for b in d]
+        #dfs_coef_of_var = [d[b][arch]["dfs"][metric][agap][branch][None][field]['stdev']/d[b][arch]["dfs"][metric][agap][branch][None][field]['num'] if constr(b, arch, "dfs") else 0 for b in d]
+        #print lns_coef_of_var
+        #print dfs_coef_of_var
 
         x = np.arange(len(labels))  # the label locations
         width = 0.35  # the width of the bars
 
         #fig, ax = plt.subplots()
-        rects1 = ax.bar(x - width/2, dfs_means, width, color = 'blue', label='DFS')
-        rects2 = ax.bar(x + width/2, lns_means, width, color = 'green', label='LNS')
+        rects1 = ax.bar(x - width/2, dfs_means, width, yerr=dfs_error, ecolor= 'black', color = 'blue', label='DFS')
+        rects2 = ax.bar(x + width/2, lns_means, width, yerr=lns_error, ecolor= 'black', color = 'green', label='LNS')
 
         # Add some text for labels, title and custom x-axis tick labels, etc.
         ax.set_ylabel(yvalue)
@@ -526,9 +537,21 @@ def plot_all_branching(d, metric, field, relax, agap):
         labels = d.keys()
         dfs_means = dict()
         lns_means = dict()
+        dfs_error = dict()
+        lns_error = dict()
         for branch in ["original", "random", "cloriginal", "clrandom"]:
             dfs_means[branch] = [d[b][arch]["dfs"][metric][agap][branch][None][field]['num'] if constr(b, arch, branch, "dfs") else 0 for b in d]
             lns_means[branch] = [d[b][arch]["lns"][metric][agap][branch][relax][field]['num'] if constr(b, arch, branch, "lns") else 0 for b in d]
+            dfs_error[branch] = [2*d[b][arch]["dfs"][metric][agap][branch][None][field]['stdev']/math.sqrt(d[b][arch]["dfs"][metric][agap][branch][None]['num']) if constr(b, arch, branch, "dfs") else 0 for b in d]
+            lns_error[branch] = [2*d[b][arch]["lns"][metric][agap][branch][relax][field]['stdev']/math.sqrt(d[b][arch]["lns"][metric][agap][branch][relax]['num']) if constr(b, arch, branch, "lns") else 0 for b in d]
+
+            #lns_coef_of_var = [d[b][arch]["lns"][metric][agap][branch][relax][field]['stdev']/d[b][arch]["lns"][metric][agap][branch][relax][field]['num'] if constr(b, arch,branch, "lns") else 0 for b in d]
+            #dfs_coef_of_var = [d[b][arch]["dfs"][metric][agap][branch][None][field]['stdev']/d[b][arch]["dfs"][metric][agap][branch][None][field]['num'] if constr(b, arch, branch,"dfs") else 0 for b in d]
+            #print lns_coef_of_var
+            #print dfs_coef_of_var
+
+
+
 
         x = 2*np.arange(len(labels))  # the label locations
         width = 2*0.35  # the width of the bars
@@ -538,9 +561,9 @@ def plot_all_branching(d, metric, field, relax, agap):
         rects1 = []
         rects2 = []
         for i,branch in enumerate(["original", "cloriginal", "random", "clrandom"], 1):
-            rects1.append(ax.bar(x - 5*width/4+ i*width/4, dfs_means[branch], width/6, color = (0.1, 0.2, 0.2 + i*0.2), label='DFS (' + branch + ')'))
+            rects1.append(ax.bar(x - 5*width/4+ i*width/4, dfs_means[branch], width/6, yerr=dfs_error[branch], ecolor='black', color = (0.4, 0.4, 0.2 + i*0.2), label='DFS (' + branch + ')'))
         for i,branch in enumerate(["original", "cloriginal", "random", "clrandom"], 1):
-            rects2.append(ax.bar(x + i*width/4, lns_means[branch], width/6, color = (0.1, 0.2 + i*0.2, 0.2), label='LNS ('+branch + ')'))
+            rects2.append(ax.bar(x + i*width/4, lns_means[branch], width/6, yerr=lns_error[branch], ecolor='black', color = (0.1, 0.2 + i*0.2, 0.2), label='LNS ('+branch + ')'))
 
         # Add some text for labels, title and custom x-axis tick labels, etc.
         ax.set_ylabel(yvalue)
