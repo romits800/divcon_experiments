@@ -65,6 +65,7 @@ for fi in freq:
 
 mink = min(freq.keys())
 maxk = max(freq.keys())
+print freq
 print mink
 print freq[mink][0]
 print maxk

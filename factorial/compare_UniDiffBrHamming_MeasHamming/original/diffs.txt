@@ -1,0 +1,19 @@
+100
+1 87
+2 83
+3 129
+4 190
+5 389
+6 597
+7 765
+8 839
+9 769
+10 557
+11 364
+12 181
+1
+('80.factorial.out.json', '82.factorial.out.json')
+12
+('3.factorial.out.json', '63.factorial.out.json')
+4950
+Hdist: 7.60828282828
