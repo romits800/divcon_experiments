@@ -81,6 +81,7 @@ def reverse_order(c):
 
 #div_monolithic_lns_mips_gcc.xexit.xexit_10_100_br_hamming_0.8_10000_constant.pickle
 for benchmark in listdir(pathname):
+    print benchmark
     d[benchmark] = dict()
     pat = re.compile("div_monolithic_([^_]*)_([^_]*)_%s_([0-9]+)_([0-9]+)_([^0-9]*hamming|levenshtein)_([^_]+)(_.*|).pickle"  %benchmark)
     for pfile in listdir(pathname + "/" + benchmark + "/"):
@@ -214,6 +215,7 @@ for benchmark in listdir(pathname):
 
 
 newpath = pathname.strip("/")
+print newpath
 initial = "/" if pathname.startswith("/") else ""
 pickle.dump(d, open(initial + newpath + ".pickle","w"))
 
