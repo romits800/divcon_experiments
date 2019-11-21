@@ -16,7 +16,7 @@ merge:
 	python merge.py &> outmerge
 
 clean: 
-	${RM} *.json *.uni *.llvm.mir
+	${RM} out* *.json *.uni *.llvm.mir
 
 clean_divs:
 	${RM} -rf divs_* divs.pickle

@@ -96,7 +96,7 @@ do
 
 	for agap in 10 20 #2 5 10 20 50
 	do
-	    for ndivs in 10
+	    for ndivs in 100
 	    do
 	        for dist in "hamming"
 		do
