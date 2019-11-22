@@ -62,7 +62,7 @@ def create_tex(d, metric, field, relax, agap, branch, texname='outfile'):
 
     ind = get_ind(field)
 
-    title = "%s for measurements of (%s, %s, %s%%, %s)" %(field, str(relax), metric, str(agap), branch)
+    title = "%s for measurements of (%s, %s, %s%%, %s)" %(ind.capitalize(), str(relax), metric, str(agap), branch)
 
     names = sorted(d.keys())
     with open(texname + '.tex', 'w') as f:
@@ -71,7 +71,7 @@ def create_tex(d, metric, field, relax, agap, branch, texname='outfile'):
         print >> f, "\\begin{document}"
         print >> f, "\\begin{tabular}{|l|cc|c|cc|c|}" 
         print >> f, "\\hline" 
-        print >> f, "\\multicolumn{7}{|c|}{%s}\\\\" %title.replace("_","")
+        print >> f, "\\multicolumn{7}{|c|}{%s}\\\\" %title.replace("_","").replace("%", "\\%")
         print >> f, "\\hline" 
         print >> f, "\\multirow{2}{*}{benchmark}&\\multicolumn{3}{|c|}{mips}&\\multicolumn{3}{|c|}{hexagon}\\\\"
         print >> f, "\\cline{2-7}" 
@@ -193,7 +193,7 @@ def plot_all(d, metric, field, relax, agap, branch):
     relax = str(relax)
     yvalue = get_ind(field)
 
-    title = "%s for measurements of (%s, %s, %s%%, %s)" %(field, str(relax), metric, str(agap), branch)
+    title = "%s for measurements of (%s, %s, %s%%, %s)" %(yvalue.capitalize(), str(relax), metric, str(agap), branch)
 
     def constr(b, arch, method):
 	rel = None if method == "dfs" else relax
@@ -277,7 +277,7 @@ def plot_hist(d, metric, field, relax, agap, branch):
     relax = str(relax)
     yvalue = get_ind(field)
 
-    title = "%s for measurements of (%s, %s, %s%%, %s)" %(field, str(relax), metric, str(agap), branch)
+    title = "%s for measurements of (%s, %s, %s%%, %s)" %(yvalue.capitalize(), str(relax), metric, str(agap), branch)
 
 
     def constr(b, arch,  method):
@@ -323,8 +323,11 @@ def plot_hist(d, metric, field, relax, agap, branch):
             num_bins_lns = int(max(datalns) - min(datalns))
             num_bins_dfs = int(max(datadfs) - min(datadfs))
 
-            n, bins, patches = ax.hist(xxdfs, num_bins_dfs, normed=True, alpha=0.5, facecolor = 'blue',  label='DFS')
-            n, bins, patches = ax.hist(xxlns, num_bins_lns, normed=True, alpha=0.5, facecolor = 'green', label='LNS')
+            if (num_bins_dfs > 0):
+                n, bins, patches = ax.hist(xxdfs, num_bins_dfs, normed=True, alpha=0.5, facecolor = 'blue',  label='DFS')
+
+            if (num_bins_lns > 0):
+                n, bins, patches = ax.hist(xxlns, num_bins_lns, normed=True, alpha=0.5, facecolor = 'green', label='LNS')
 
             offset += 2
 
@@ -370,7 +373,7 @@ def plot_relax(d, metric, field, agap, branch):
     agap = str(agap)
     yvalue = get_ind(field)
 
-    title = "%s for measurements of (%s, %s%%, %s)" %(field, metric, str(agap), branch)
+    title = "%s for measurements of (%s, %s%%, %s)" %(yvalue.capitalize(), metric, str(agap), branch)
 
     def constr(b, arch, method):
 	if method == "dfs":
@@ -384,12 +387,13 @@ def plot_relax(d, metric, field, agap, branch):
 
         labels = d.keys()
         if constr(b, arch, "lns"):
-            lns = [(r, d[b][arch]["lns"][metric][agap][branch][str(r)][field]['num'])  for r in sorted(map(float,d[b][arch]["lns"][metric][agap][branch].keys())) ]
+            lns = [(r, d[b][arch]["lns"][metric][agap][branch][str(r)][field]['num'], 2*d[b][arch]["lns"][metric][agap][branch][str(r)][field]['stdev']/math.sqrt(d[b][arch]["lns"][metric][agap][branch][str(r)]['num']))  for r in sorted(map(float,d[b][arch]["lns"][metric][agap][branch].keys())) ]
 
-            x,y = zip(*lns)
+            x,y,err = zip(*lns)
 
             # print b, x, y
-            ax.plot(x,y, linewidth=1.5, label="LNS")
+            ax.errorbar(x,y, yerr=err, linewidth=1.5, label="LNS")
+            #ax.plot(x,y, linewidth=1.5, label="LNS")
 
             if constr(b, arch, "dfs"):
                 v = d[b][arch]["dfs"][metric][agap][branch][None][field]['num']
@@ -443,7 +447,7 @@ def plot_relax_all(d, metric, field, agap, branch):
     agap = str(agap)
     yvalue = get_ind(field)
 
-    title = "%s for measurements of (%s, %s%%, %s)" %(field, metric, str(agap), branch)
+    title = "%s for measurements of (%s, %s%%, %s)" %(yvalue.capitalize(), metric, str(agap), branch)
 
     def constr(b, arch, method):
 	if method == "dfs":
@@ -457,14 +461,17 @@ def plot_relax_all(d, metric, field, agap, branch):
 	rs = []
         for r in np.arange(0.4,1.0, 0.1):
 		nums = [d[b][arch]["lns"][metric][agap][branch][str(r)][field]['num'] for b in d if constr(b, arch, "lns")]	
-		if len(nums)> 0:
-			rs.append((r, sum(nums)/len(nums)))
 
-        x,y = zip(*rs)
+                error = [2*d[b][arch]["lns"][metric][agap][branch][str(r)][field]['stdev']/math.sqrt(d[b][arch]["lns"][metric][agap][branch][str(r)]['num']) for b in d if constr(b, arch, "dfs")]
+		if len(nums)> 0 and len(error)>0:
+			rs.append((r, sum(nums)/len(nums), sum(error)/len(error)))
+
+        x,y,err = zip(*rs)
         print x, y
 
             # print b, x, y
-        ax.plot(x, y, linewidth=1.5, label="LNS")
+        ax.errorbar(x, y, yerr=err, linewidth=1.5, label="LNS")
+        #ax.plot(x, y, yerr=err, linewidth=1.5, label="LNS")
 
 
         v = 0
@@ -513,7 +520,7 @@ def plot_all_branching(d, metric, field, relax, agap):
     relax = str(relax)
     yvalue = get_ind(field)
 
-    title = "%s for measurements of (%s, %s, %s%%)" %(field, str(relax), metric, str(agap))
+    title = "%s for measurements of (%s, %s, %s%%)" %(yvalue.capitalize(), str(relax), metric, str(agap))
 
     def constr(b, arch, branch, method):
 	rel = None if method == "dfs" else relax
