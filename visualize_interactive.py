@@ -602,78 +602,83 @@ def plot_all_branching(d, metric, field, relax, agap):
 
     plt.show()
 
+def plot_maxdiv_time(d, metric, field, agap):
+    arch = 'mips'
+    algo = 'dfs'
+    br   = 'cloriginal'
+    l = dict()
+    fig = plt.figure()
+    ax = fig.add_subplot(1,1,1)
+
+    for b in d:
+        if not (d[b].has_key(arch) and d[b][arch].has_key(algo) and d[b][arch][algo].has_key(metric) and d[b][arch][algo][metric].has_key(agap) and d[b][arch][algo][metric][agap].has_key(br) and d[b][arch][algo][metric][agap][br][None].has_key(field)):
+                continue
+        cdict = dict(**d[b][arch][algo][metric][agap][br][None][field])
+        xy = [ (i, cdict[i]['stime']) for i in  cdict.keys()]
+        if len(xy) > 0:
+            x,y = zip(*xy)
+            plt.plot(x, y, label=b)
+            
+
+    plt.legend(loc='center right')
+    ax.set_yscale('log')
+
+    plt.show()
+
+def plot_maxdiv_dist(d, metric, field, agap):
+    arch = 'mips'
+    algo = 'dfs'
+    br   = 'cloriginal'
+    l = dict()
+    fig = plt.figure()
+    ax = fig.add_subplot(1,1,1)
+
+    for b in d:
+        if not (d[b].has_key(arch) and d[b][arch].has_key(algo) and d[b][arch][algo].has_key(metric) and d[b][arch][algo][metric].has_key(agap) and d[b][arch][algo][metric][agap].has_key(br) and d[b][arch][algo][metric][agap][br][None].has_key(field)):
+                continue
+        cdict = dict(**d[b][arch][algo][metric][agap][br][None][field])
+        xy = [ (i, cdict[i]['num']) for i in  cdict.keys()]
+        if len(xy) > 0:
+            x,y = zip(*xy)
+            plt.plot(x, y, label=b)
+            
+
+    plt.legend(loc='center right')
+
+    plt.show()
 
 
-# # Table
-# 
-# if (s_out in ["hamming", "all"] and s_relax != "all"):
-#     title = "Hamming distance for %s, %s, %s, %s" %(s_metric, s_agap, s_constant, s_relax)
-#     create_tex("out_hamming",       "hamm",    "avg", s_relax, title, d, s_metric, s_agap)
-# 
-# if (s_out in ["br_hamming", "all"] and s_relax != "all"):
-#     title = "Hamming distance of branch instructions for %s, %s, %s, %s" %(s_metric, s_agap, s_constant, s_relax)
-#     create_tex("out_brhamming",     "brhamm",    "bravg",  s_relax, title, d, s_metric, s_agap)
-# 
-# if (s_out in ["diff_br_hamming", "all"] and s_relax != "all"):
-#     title = "Hamming distance of difference to branch instructions for %s, %s, %s, %s" %(s_metric, s_agap, s_constant, s_relax)
-#     create_tex("out_diffbrhamming", "diffhamm",  "brdiff",  s_relax, title, d, s_metric, s_agap)
-# 
-# if (s_out in ["cost", "all"] and s_relax != "all"):
-#     title = "Cost in cycles for %s, %s, %s, %s" %(s_metric, s_agap, s_constant, s_relax)
-#     create_tex("out_cost", "cost",  "cost",  s_relax, title, d, s_metric, s_agap)
-# 
-# 
-# # if (s_out in ["stime", "all"]):
-# #     title = "Execution time (s) of the generation of the last variant for %s, %s, %s, %s" %(s_metric, s_agap, s_constant, s_relax)
-# #     create_tex("out_stime",        "ms",        "stime",  title, d)
-# 
-# # Plot
-# if (s_out in ["hamming", "all"] and s_relax != "all"):
-#     plot_all("avg",    s_relax, d, "Hamming Distance", 'Hamming Distance between DFS LNS', s_metric, s_agap)
-# 
-# if (s_out in ["br_hamming", "all"] and s_relax != "all"):
-#     plot_all("bravg",  s_relax, d,  "Hamming Distance", 'Branch Hamming Distance between DFS LNS', s_metric, s_agap)
-# 
-# if (s_out in ["diff_br_hamming", "all"] and s_relax != "all"):
-#     plot_all("brdiff", s_relax, d,  "Hamming Distance", 'Diff Branch Hamming Distance between DFS LNS', s_metric, s_agap)
-# 
-# if (s_out in ["stime", "all"] and s_relax != "all"):
-#     plot_all("stime", s_relax, d,  "Solver Time", 'Solver time', s_metric, s_agap)
-# 
-# if (s_out in ["cost", "all"] and s_relax != "all"):
-#     plot_all("cost", s_relax, d,  "Cost (cycles)", 'Cost (cycles)', s_metric, s_agap)
-# 
-# 
-# 
-# if (s_out in ["hamming", "all"] and s_relax != "all"):
-#     plot_hist("avg",    s_relax, d,  "Hamming Distance", 'Hamming Distance between DFS LNS', s_metric, s_agap)
-# 
-# if (s_out in ["br_hamming", "all"] and s_relax != "all"):
-#     plot_hist("bravg",  s_relax, d,  "Hamming Distance", 'Branch Hamming Distance between DFS LNS', s_metric, s_agap)
-# 
-# if (s_out in ["diff_br_hamming", "all"] and s_relax != "all"):
-#     plot_hist("brdiff", s_relax, d,  "Hamming Distance", 'Diff Branch Hamming Distance between DFS LNS', s_metric, s_agap)
-# 
-# if (s_out in ["stime", "all"] and s_relax != "all"):
-#     plot_hist("stime", s_relax, d,  "Solver Time", 'Solver time', s_metric, s_agap)
-# 
-# if (s_out in ["cost", "all"] and s_relax != "all"):
-#     plot_hist("cost", s_relax, d,  "Cost (cycles)", 'Cost (cycles)', s_metric, s_agap)
-# 
-# 
-# 
-# if (s_out in ["hamming", "all"] and s_relax == "all"):
-#     plot_relax("avg", d, "Hamming Distance", "Hamming distance for different relax rates (0.4, 0.45, ..., 0.95)", s_metric, s_agap)
-# 
-# if (s_out in ["br_hamming", "all"] and s_relax == "all"):
-#     plot_relax("bravg", d,  "Hamming Distance", 'Branch Hamming Distance for different relax rates (0.4, 0.45, ..., 0.95)', s_metric, s_agap)
-# 
-# if (s_out in ["diff_br_hamming", "all"] and s_relax == "all"):
-#     plot_relax("brdiff",  d,  "Hamming Distance", 'Diff Branch Hamming Distance for different relax rates (0.4, 0.45, ..., 0.95)', s_metric, s_agap)
-# 
-# if (s_out in ["stime", "all"] and s_relax == "all"):
-#     plot_relax("stime",  d,  "Diversify Time", 'Diversify time for different relax rates (0.4, 0.45, ..., 0.95)', s_metric, s_agap)
-# 
-# if (s_out in ["cost", "all"] and s_relax == "all"):
-#     plot_relax("cost", d, "Cost (cycles)", "Cost (cycles) for different relax rates (0.4, 0.45, ..., 0.95)", s_metric, s_agap)
-# 
+def plot_maxdiv_lns_dist(d_maxdiv, d_lns, b, metric, field, agap, relax):
+    arch = 'mips'
+    algo = 'dfs'
+    br   = 'cloriginal'
+    rel = str(relax)
+    agap = str(agap)
+    l = dict()
+    fig = plt.figure()
+    ax = fig.add_subplot(1,1,1)
+
+    if (d_maxdiv[b].has_key(arch) and d_maxdiv[b][arch].has_key(algo) and d_maxdiv[b][arch][algo].has_key(metric) and d_maxdiv[b][arch][algo][metric].has_key(agap) and d_maxdiv[b][arch][algo][metric][agap].has_key(br) and d_maxdiv[b][arch][algo][metric][agap][br][None].has_key(field)):
+        cdict = dict(**d_maxdiv[b][arch][algo][metric][agap][br][None][field])
+        xy = [ (i, cdict[i]['num']) for i in  cdict.keys()]
+        if len(xy) > 0:
+            x,y = zip(*xy)
+            plt.plot(x, y, label='max div')
+
+    algo = 'lns'
+    br   = 'clrandom'
+ 
+    if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(rel)) and d_lns[b][arch][algo][metric][agap][br][rel].has_key(field)):
+        cdict = dict(**d_lns[b][arch][algo][metric][agap][br][rel][field])
+        xy = [ (i, cdict[i]['num']) for i in  cdict.keys()]
+        if len(xy) > 0:
+            x,y = zip(*xy)
+            plt.plot(x, y, label='lns')
+                
+
+    plt.legend(loc='center right')
+
+    plt.show()
+
+
+ 
