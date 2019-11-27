@@ -94,13 +94,13 @@ do
 
 	mkdir $RESULT_PATH
 
-	for agap in 10 20 #2 5 10 20 50
+	for agap in 10 #20 #2 5 10 20 50
 	do
-	    for ndivs in 100
+	    for ndivs in 1000
 	    do
 	        for dist in "diff_br_hamming" "hamming" #"br_hamming"
 		do
-	            for branch in "random" "original" "clrandom" "cloriginal" # "original"
+	            for branch in "original" "clrandom" "cloriginal" # "original"
                     do
                         if [ ! -f $fnoextension.out.json ]; then
                             echo "File not found! Falling back to llvm basefile"
@@ -112,7 +112,7 @@ do
                         echo "Deleting the diversified files."
                         rm ${DIVS_DIR}/*.$fnoextension.out.json
                         #fi
-                        for relax in 0.4 0.5 0.6 0.7 0.8 0.9 
+                        for relax in 0.4 0.6 0.8 0.9 
                         do
                             for lp in 10000 #100000 
                             do
