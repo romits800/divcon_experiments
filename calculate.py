@@ -110,9 +110,17 @@ for benchmark in listdir(pathname):
             #arch = a.group(2)
             files = pickle.load(open(pathname + "/" +  benchmark + "/" + pfile))
             files = {h:files[h] for h in files if benchmark in h}
-            # cycles = {h:files[h]['cycles'] for h in files if files[h].has_key('cycles')}
-            brcycles = {h:[ c for  c,j  in zip(files[h]['global_cycles'],files[h]['type']) if j in [1,2,3]] for h in files if files[h].has_key('type') and files[h].has_key('global_cycles')}
-            cycles = {h:[ c for  c,j  in zip(files[h]['global_cycles'],files[h]['type']) if j in [0,1,2,3,4,14]] for h in files if files[h].has_key('type') and files[h].has_key('global_cycles')}
+
+            #####################
+            precycles = {h:[ (c,j) for  c,j  in zip(files[h]['global_cycles'],files[h]['type']) if j in [0,1,2,3,4,14]] for h in files if files[h].has_key('type') and files[h].has_key('global_cycles')}
+            cycles = {h: [c for c,j in precycles[h]] for h in precycles}
+            prebrcycles = {h:[ (i,c) for  i,(c,j)  in enumerate(precycles[h]) if j in [1,2,3]] for h in precycles}
+
+            doublebrcycles = {h:{j:(prebrcycles[h][j-1][0] if j>0 else 0)  for  j,(i,c)  in enumerate(prebrcycles[h]) } for h in prebrcycles}
+
+            brcycles = {h:[ c for  i,c  in prebrcycles[h]] for h in prebrcycles}
+            #####################
+ 
             levcycles = {h:reverse_order(cycles[h]) for h in cycles }
             stime = max([ files[h]['solver_time'] for h in files if files[h].has_key('solver_time') ])/1000. # the maximum should be the last
             cost = [files[h]['cost'][0] for h in files if files[h].has_key('cost')]# the cost
@@ -183,8 +191,9 @@ for benchmark in listdir(pathname):
             for i in range(len(fnames)):
                 for j in range(i+1, len(fnames)):
                     f1,f2 = fnames[i],fnames[j]
-                    brcycles1 = [c-cc for c in cycles[f1] for cc in brcycles[f1]] # '1' means branch
-                    brcycles2 = [c-cc for c in cycles[f2] for cc in brcycles[f2]] # '1' means branch
+
+                    brcycles1 = [c-cc for jj,(iii,cc) in enumerate(prebrcycles[f1]) for c in cycles[f1][doublebrcycles[f1][jj]:iii-1] ] 
+                    brcycles2 = [c-cc for jj,(iii,cc) in enumerate(prebrcycles[f2]) for c in cycles[f2][doublebrcycles[f1][jj]:iii-1] ] 
 
                     intd[(f1,f2)] = sum([ (1. if k!=l else 0.) for (k,l) in zip(brcycles1,brcycles2)] ) #zip(files[f1],files[f2])
                     sumhd += intd[(f1,f2)]
