@@ -94,9 +94,9 @@ do
 
 	mkdir $RESULT_PATH
 
-	for agap in 10 20 #2 5 10 20 50
+	for agap in 10 #20 #2 5 10 20 50
 	do
-	    for ndivs in 100
+	    for ndivs in 1000
 	    do
 	        for dist in "diff_br_hamming"
 		do
