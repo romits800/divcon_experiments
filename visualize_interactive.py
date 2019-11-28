@@ -217,9 +217,9 @@ def plot_all(d, metric, field, relax, agap, branch):
         labels = d.keys()
         dfs_means = [d[b][arch]["dfs"][metric][agap][branch][None][field]['num'] if constr(b, arch, "dfs") else 0 for b in d]
         # confidence interval
-        dfs_error = [2*d[b][arch]["dfs"][metric][agap][branch][None][field]['stdev']/math.sqrt(d[b][arch]["dfs"][metric][agap][branch][None]['num']) if constr(b, arch, "dfs") else 0 for b in d]
+        dfs_error = [2*d[b][arch]["dfs"][metric][agap][branch][None][field]['stdev']/math.sqrt(d[b][arch]["dfs"][metric][agap][branch][None][field]['n']) if constr(b, arch, "dfs") else 0 for b in d]
         lns_means = [d[b][arch]["lns"][metric][agap][branch][relax][field]['num'] if constr(b, arch, "lns") else 0 for b in d]
-        lns_error = [2*d[b][arch]["lns"][metric][agap][branch][relax][field]['stdev']/math.sqrt(d[b][arch]["lns"][metric][agap][branch][relax]['num']) if constr(b, arch, "lns") else 0 for b in d]
+        lns_error = [2*d[b][arch]["lns"][metric][agap][branch][relax][field]['stdev']/math.sqrt(d[b][arch]["lns"][metric][agap][branch][relax][field]['n']) if constr(b, arch, "lns") else 0 for b in d]
 
         # Coefficient of variation
         #lns_coef_of_var = [d[b][arch]["lns"][metric][agap][branch][relax][field]['stdev']/d[b][arch]["lns"][metric][agap][branch][relax][field]['num'] if constr(b, arch, "lns") else 0 for b in d]
@@ -387,7 +387,7 @@ def plot_relax(d, metric, field, agap, branch):
 
         labels = d.keys()
         if constr(b, arch, "lns"):
-            lns = [(r, d[b][arch]["lns"][metric][agap][branch][str(r)][field]['num'], 2*d[b][arch]["lns"][metric][agap][branch][str(r)][field]['stdev']/math.sqrt(d[b][arch]["lns"][metric][agap][branch][str(r)]['num']))  for r in sorted(map(float,d[b][arch]["lns"][metric][agap][branch].keys())) ]
+            lns = [(r, d[b][arch]["lns"][metric][agap][branch][str(r)][field]['num'], 2*d[b][arch]["lns"][metric][agap][branch][str(r)][field]['stdev']/math.sqrt(d[b][arch]["lns"][metric][agap][branch][str(r)][field['n']))  for r in sorted(map(float,d[b][arch]["lns"][metric][agap][branch].keys())) ]
 
             x,y,err = zip(*lns)
 
@@ -462,7 +462,7 @@ def plot_relax_all(d, metric, field, agap, branch):
         for r in np.arange(0.4,1.0, 0.1):
 		nums = [d[b][arch]["lns"][metric][agap][branch][str(r)][field]['num'] for b in d if constr(b, arch, "lns")]	
 
-                error = [2*d[b][arch]["lns"][metric][agap][branch][str(r)][field]['stdev']/math.sqrt(d[b][arch]["lns"][metric][agap][branch][str(r)]['num']) for b in d if constr(b, arch, "dfs")]
+                error = [2*d[b][arch]["lns"][metric][agap][branch][str(r)][field]['stdev']/math.sqrt(d[b][arch]["lns"][metric][agap][branch][str(r)][field]['n']) for b in d if constr(b, arch, "dfs")]
 		if len(nums)> 0 and len(error)>0:
 			rs.append((r, sum(nums)/len(nums), sum(error)/len(error)))
 
@@ -549,8 +549,8 @@ def plot_all_branching(d, metric, field, relax, agap):
         for branch in ["original", "random", "cloriginal", "clrandom"]:
             dfs_means[branch] = [d[b][arch]["dfs"][metric][agap][branch][None][field]['num'] if constr(b, arch, branch, "dfs") else 0 for b in d]
             lns_means[branch] = [d[b][arch]["lns"][metric][agap][branch][relax][field]['num'] if constr(b, arch, branch, "lns") else 0 for b in d]
-            dfs_error[branch] = [2*d[b][arch]["dfs"][metric][agap][branch][None][field]['stdev']/math.sqrt(d[b][arch]["dfs"][metric][agap][branch][None]['num']) if constr(b, arch, branch, "dfs") else 0 for b in d]
-            lns_error[branch] = [2*d[b][arch]["lns"][metric][agap][branch][relax][field]['stdev']/math.sqrt(d[b][arch]["lns"][metric][agap][branch][relax]['num']) if constr(b, arch, branch, "lns") else 0 for b in d]
+            dfs_error[branch] = [2*d[b][arch]["dfs"][metric][agap][branch][None][field]['stdev']/math.sqrt(d[b][arch]["dfs"][metric][agap][branch][None][field]['n']) if constr(b, arch, branch, "dfs") else 0 for b in d]
+            lns_error[branch] = [2*d[b][arch]["lns"][metric][agap][branch][relax][field]['stdev']/math.sqrt(d[b][arch]["lns"][metric][agap][branch][relax][field]['n']) if constr(b, arch, branch, "lns") else 0 for b in d]
 
             #lns_coef_of_var = [d[b][arch]["lns"][metric][agap][branch][relax][field]['stdev']/d[b][arch]["lns"][metric][agap][branch][relax][field]['num'] if constr(b, arch,branch, "lns") else 0 for b in d]
             #dfs_coef_of_var = [d[b][arch]["dfs"][metric][agap][branch][None][field]['stdev']/d[b][arch]["dfs"][metric][agap][branch][None][field]['num'] if constr(b, arch, branch,"dfs") else 0 for b in d]
@@ -622,6 +622,7 @@ def plot_maxdiv_time(d, metric, field, agap):
 
     plt.legend(loc='center right')
     ax.set_yscale('log')
+    ax.set_ylim(bottom=1)
 
     plt.show()
 
@@ -644,41 +645,117 @@ def plot_maxdiv_dist(d, metric, field, agap):
             
 
     plt.legend(loc='center right')
+    ax.set_ylim(bottom=0)
 
     plt.show()
 
 
 def plot_maxdiv_lns_dist(d_maxdiv, d_lns, b, metric, field, agap, relax):
     arch = 'mips'
-    algo = 'dfs'
-    br   = 'cloriginal'
     rel = str(relax)
     agap = str(agap)
     l = dict()
     fig = plt.figure()
     ax = fig.add_subplot(1,1,1)
 
+    # MaxDiversekSet
+    algo = 'dfs'
+    br   = 'cloriginal'
+ 
     if (d_maxdiv[b].has_key(arch) and d_maxdiv[b][arch].has_key(algo) and d_maxdiv[b][arch][algo].has_key(metric) and d_maxdiv[b][arch][algo][metric].has_key(agap) and d_maxdiv[b][arch][algo][metric][agap].has_key(br) and d_maxdiv[b][arch][algo][metric][agap][br][None].has_key(field)):
         cdict = dict(**d_maxdiv[b][arch][algo][metric][agap][br][None][field])
+        err = [ 2*cdict[i]['stdev']/cdict[i]['n'] for i in  cdict.keys()]
         xy = [ (i, cdict[i]['num']) for i in  cdict.keys()]
         if len(xy) > 0:
             x,y = zip(*xy)
-            plt.plot(x, y, label='max div')
+            plt.plot(x, y, yerr=err, label='MaxDiversekSet')
 
+    # Random search
+    algo = 'dfs'
+    br   = 'clrandom'
+ 
+    if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(rel) and d_lns[b][arch][algo][metric][agap][br][rel].has_key(field)):
+        cdict = dict(**d_lns[b][arch][algo][metric][agap][br][rel][field])
+        err = [ 2*cdict[i]['stdev']/cdict[i]['n'] for i in  cdict.keys()]
+        xy = [ (i, cdict[i]['num']) for i in  cdict.keys()]
+        if len(xy) > 0:
+            x,y = zip(*xy)
+            plt.plot(x, y, yerr=err, label='Random Search')
+ 
+    # LNS
     algo = 'lns'
     br   = 'clrandom'
  
-    if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(rel)) and d_lns[b][arch][algo][metric][agap][br][rel].has_key(field)):
+    if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(rel) and d_lns[b][arch][algo][metric][agap][br][rel].has_key(field)):
         cdict = dict(**d_lns[b][arch][algo][metric][agap][br][rel][field])
+        err = [ 2*cdict[i]['stdev']/cdict[i]['n'] for i in  cdict.keys()]
         xy = [ (i, cdict[i]['num']) for i in  cdict.keys()]
         if len(xy) > 0:
             x,y = zip(*xy)
-            plt.plot(x, y, label='lns')
+            plt.plot(x, y, yerr=err, label='LNS')
                 
 
+    ax.set_ylim(bottom=0)
     plt.legend(loc='center right')
+
+    plt.title(b)
 
     plt.show()
 
 
+
+def plot_maxdiv_lns_time(d_maxdiv, d_lns, b, metric, field, agap, relax):
+    arch = 'mips'
+    rel = str(relax)
+    agap = str(agap)
+    l = dict()
+    fig = plt.figure()
+    ax = fig.add_subplot(1,1,1)
+
+    # MaxDiversekSet
+    algo = 'dfs'
+    br   = 'cloriginal'
+    if (d_maxdiv[b].has_key(arch) and d_maxdiv[b][arch].has_key(algo) and d_maxdiv[b][arch][algo].has_key(metric) and d_maxdiv[b][arch][algo][metric].has_key(agap) and d_maxdiv[b][arch][algo][metric][agap].has_key(br) and d_maxdiv[b][arch][algo][metric][agap][br][None].has_key(field)):
+        cdict = dict(**d_maxdiv[b][arch][algo][metric][agap][br][None][field])
+        # confidence interval
+        err = [ 2*cdict[i]['stdev']/cdict[i]['n'] for i in  cdict.keys()]
+        xy = [ (i, cdict[i]['stime']) for i in  cdict.keys()]
+        if len(xy) > 0:
+            x,y = zip(*xy)
+            plt.plot(x, y, yerr=err, label='MaxDiversekSet')
+
+    # Random Search
+    algo = 'lns'
+    br   = 'clrandom'
  
+    if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(rel) and d_lns[b][arch][algo][metric][agap][br][rel].has_key(field)):
+        cdict = dict(**d_lns[b][arch][algo][metric][agap][br][rel][field])
+        err = [ 2*cdict[i]['stdev']/cdict[i]['n'] for i in  cdict.keys()]
+        xy = [ (i, cdict[i]['stime']) for i in  cdict.keys()]
+        if len(xy) > 0:
+            x,y = zip(*xy)
+            plt.plot(x, y, yerr=err, label='Random Search')
+ 
+    # LNS
+    algo = 'lns'
+    br   = 'clrandom'
+ 
+    if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(rel) and d_lns[b][arch][algo][metric][agap][br][rel].has_key(field)):
+        cdict = dict(**d_lns[b][arch][algo][metric][agap][br][rel][field])
+        err = [ 2*cdict[i]['stdev']/cdict[i]['n'] for i in  cdict.keys()]
+        xy = [ (i, cdict[i]['stime']) for i in  cdict.keys()]
+        if len(xy) > 0:
+            x,y = zip(*xy)
+            plt.plot(x, y, yerr=err, label='LNS')
+                
+
+    ax.set_yscale('log')
+    ax.set_ylim(bottom=1)
+    plt.legend(loc='center right')
+    
+    plt.title(b)
+
+    plt.show()
+
+
+
