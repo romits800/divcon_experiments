@@ -622,6 +622,7 @@ def plot_maxdiv_time(d, metric, field, agap):
 
     plt.legend(loc='center right')
     ax.set_yscale('log')
+    ax.set_ylim(bottom=1)
 
     plt.show()
 
@@ -644,6 +645,7 @@ def plot_maxdiv_dist(d, metric, field, agap):
             
 
     plt.legend(loc='center right')
+    ax.set_ylim(bottom=0)
 
     plt.show()
 
@@ -668,7 +670,7 @@ def plot_maxdiv_lns_dist(d_maxdiv, d_lns, b, metric, field, agap, relax):
     algo = 'lns'
     br   = 'clrandom'
  
-    if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(rel)) and d_lns[b][arch][algo][metric][agap][br][rel].has_key(field)):
+    if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(rel) and d_lns[b][arch][algo][metric][agap][br][rel].has_key(field)):
         cdict = dict(**d_lns[b][arch][algo][metric][agap][br][rel][field])
         xy = [ (i, cdict[i]['num']) for i in  cdict.keys()]
         if len(xy) > 0:
@@ -676,9 +678,50 @@ def plot_maxdiv_lns_dist(d_maxdiv, d_lns, b, metric, field, agap, relax):
             plt.plot(x, y, label='lns')
                 
 
+    ax.set_ylim(bottom=0)
     plt.legend(loc='center right')
+
+    plt.title(b)
 
     plt.show()
 
 
+
+def plot_maxdiv_lns_time(d_maxdiv, d_lns, b, metric, field, agap, relax):
+    arch = 'mips'
+    algo = 'dfs'
+    br   = 'cloriginal'
+    rel = str(relax)
+    agap = str(agap)
+    l = dict()
+    fig = plt.figure()
+    ax = fig.add_subplot(1,1,1)
+
+    if (d_maxdiv[b].has_key(arch) and d_maxdiv[b][arch].has_key(algo) and d_maxdiv[b][arch][algo].has_key(metric) and d_maxdiv[b][arch][algo][metric].has_key(agap) and d_maxdiv[b][arch][algo][metric][agap].has_key(br) and d_maxdiv[b][arch][algo][metric][agap][br][None].has_key(field)):
+        cdict = dict(**d_maxdiv[b][arch][algo][metric][agap][br][None][field])
+        xy = [ (i, cdict[i]['stime']) for i in  cdict.keys()]
+        if len(xy) > 0:
+            x,y = zip(*xy)
+            plt.plot(x, y, label='max div')
+
+    algo = 'lns'
+    br   = 'clrandom'
  
+    if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(rel) and d_lns[b][arch][algo][metric][agap][br][rel].has_key(field)):
+        cdict = dict(**d_lns[b][arch][algo][metric][agap][br][rel][field])
+        xy = [ (i, cdict[i]['stime']) for i in  cdict.keys()]
+        if len(xy) > 0:
+            x,y = zip(*xy)
+            plt.plot(x, y, label='lns')
+                
+
+    ax.set_yscale('log')
+    ax.set_ylim(bottom=1)
+    plt.legend(loc='center right')
+    
+    plt.title(b)
+
+    plt.show()
+
+
+
