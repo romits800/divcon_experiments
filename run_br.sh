@@ -51,7 +51,7 @@ fi
 
 
  
-for arch in mips hexagon #mips #arm
+for arch in mips #hexagon #mips #arm
 do
     Arch="$(tr '[:lower:]' '[:upper:]' <<< ${arch:0:1})${arch:1}"
     for i in $DIVCON_PATH/src/unison/test/fast/${Arch}/speed/*[!m].mir
