@@ -652,21 +652,35 @@ def plot_maxdiv_dist(d, metric, field, agap):
 
 def plot_maxdiv_lns_dist(d_maxdiv, d_lns, b, metric, field, agap, relax):
     arch = 'mips'
-    algo = 'dfs'
-    br   = 'cloriginal'
     rel = str(relax)
     agap = str(agap)
     l = dict()
     fig = plt.figure()
     ax = fig.add_subplot(1,1,1)
 
+    # MaxDiversekSet
+    algo = 'dfs'
+    br   = 'cloriginal'
+ 
     if (d_maxdiv[b].has_key(arch) and d_maxdiv[b][arch].has_key(algo) and d_maxdiv[b][arch][algo].has_key(metric) and d_maxdiv[b][arch][algo][metric].has_key(agap) and d_maxdiv[b][arch][algo][metric][agap].has_key(br) and d_maxdiv[b][arch][algo][metric][agap][br][None].has_key(field)):
         cdict = dict(**d_maxdiv[b][arch][algo][metric][agap][br][None][field])
         xy = [ (i, cdict[i]['num']) for i in  cdict.keys()]
         if len(xy) > 0:
             x,y = zip(*xy)
-            plt.plot(x, y, label='max div')
+            plt.plot(x, y, label='MaxDiversekSet')
 
+    # Random search
+    algo = 'dfs'
+    br   = 'clrandom'
+ 
+    if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(rel) and d_lns[b][arch][algo][metric][agap][br][rel].has_key(field)):
+        cdict = dict(**d_lns[b][arch][algo][metric][agap][br][rel][field])
+        xy = [ (i, cdict[i]['num']) for i in  cdict.keys()]
+        if len(xy) > 0:
+            x,y = zip(*xy)
+            plt.plot(x, y, label='Random Search')
+ 
+    # LNS
     algo = 'lns'
     br   = 'clrandom'
  
@@ -675,7 +689,7 @@ def plot_maxdiv_lns_dist(d_maxdiv, d_lns, b, metric, field, agap, relax):
         xy = [ (i, cdict[i]['num']) for i in  cdict.keys()]
         if len(xy) > 0:
             x,y = zip(*xy)
-            plt.plot(x, y, label='lns')
+            plt.plot(x, y, label='LNS')
                 
 
     ax.set_ylim(bottom=0)
@@ -689,21 +703,23 @@ def plot_maxdiv_lns_dist(d_maxdiv, d_lns, b, metric, field, agap, relax):
 
 def plot_maxdiv_lns_time(d_maxdiv, d_lns, b, metric, field, agap, relax):
     arch = 'mips'
-    algo = 'dfs'
-    br   = 'cloriginal'
     rel = str(relax)
     agap = str(agap)
     l = dict()
     fig = plt.figure()
     ax = fig.add_subplot(1,1,1)
 
+    # MaxDiversekSet
+    algo = 'dfs'
+    br   = 'cloriginal'
     if (d_maxdiv[b].has_key(arch) and d_maxdiv[b][arch].has_key(algo) and d_maxdiv[b][arch][algo].has_key(metric) and d_maxdiv[b][arch][algo][metric].has_key(agap) and d_maxdiv[b][arch][algo][metric][agap].has_key(br) and d_maxdiv[b][arch][algo][metric][agap][br][None].has_key(field)):
         cdict = dict(**d_maxdiv[b][arch][algo][metric][agap][br][None][field])
         xy = [ (i, cdict[i]['stime']) for i in  cdict.keys()]
         if len(xy) > 0:
             x,y = zip(*xy)
-            plt.plot(x, y, label='max div')
+            plt.plot(x, y, label='MaxDiversekSet')
 
+    # Random Search
     algo = 'lns'
     br   = 'clrandom'
  
@@ -712,7 +728,18 @@ def plot_maxdiv_lns_time(d_maxdiv, d_lns, b, metric, field, agap, relax):
         xy = [ (i, cdict[i]['stime']) for i in  cdict.keys()]
         if len(xy) > 0:
             x,y = zip(*xy)
-            plt.plot(x, y, label='lns')
+            plt.plot(x, y, label='Random Search')
+ 
+    # LNS
+    algo = 'lns'
+    br   = 'clrandom'
+ 
+    if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(rel) and d_lns[b][arch][algo][metric][agap][br][rel].has_key(field)):
+        cdict = dict(**d_lns[b][arch][algo][metric][agap][br][rel][field])
+        xy = [ (i, cdict[i]['stime']) for i in  cdict.keys()]
+        if len(xy) > 0:
+            x,y = zip(*xy)
+            plt.plot(x, y, label='LNS')
                 
 
     ax.set_yscale('log')
