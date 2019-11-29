@@ -780,7 +780,7 @@ def plot_maxdiv_lns_time_subplots(d_maxdiv, d_lns, bs, metric, field, agap, rela
 
             # confidence interval
             k = sorted(cdict.keys())
-            xy = [ (i, cdict[i]['stime'], 2*cdict[i]['stdev']/math.sqrt(cdict[i]['n'])) for i in  k]
+            xy = [ (i, cdict[i]['stime'], 2*cdict[i]['stime_stdev']/math.sqrt(cdict[i]['n'])) for i in  k]
             if len(xy) > 0:
                 x,y,err = zip(*xy)
                 ax.errorbar(x, y, yerr=err, linestyle=':', color='k', label='MaxDiversekSet')
@@ -791,7 +791,7 @@ def plot_maxdiv_lns_time_subplots(d_maxdiv, d_lns, bs, metric, field, agap, rela
         if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(None) and d_lns[b][arch][algo][metric][agap][br][None].has_key(field)):
             cdict = dict(**d_lns[b][arch][algo][metric][agap][br][None][field])
             k = sorted(cdict.keys())
-            xy = [ (i, cdict[i]['stime'], 2*cdict[i]['stdev']/math.sqrt(cdict[i]['n'])) for i in  k]
+            xy = [ (i, cdict[i]['stime'], 2*cdict[i]['stime_stdev']/math.sqrt(cdict[i]['n'])) for i in  k]
             if len(xy) > 0:
                 x,y,err = zip(*xy)
                 ax.errorbar(x, y, yerr=err, linestyle='-.', color='k', label='Random Search')
@@ -803,7 +803,7 @@ def plot_maxdiv_lns_time_subplots(d_maxdiv, d_lns, bs, metric, field, agap, rela
         if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(rel) and d_lns[b][arch][algo][metric][agap][br][rel].has_key(field)):
             cdict = dict(**d_lns[b][arch][algo][metric][agap][br][rel][field])
             k = sorted(cdict.keys())
-            xy = [ (i, cdict[i]['stime'], 2*cdict[i]['stdev']/math.sqrt(cdict[i]['n'])) for i in k]
+            xy = [ (i, cdict[i]['stime'], 2*cdict[i]['stime_stdev']/math.sqrt(cdict[i]['n'])) for i in k]
             if len(xy) > 0:
                 x,y,err = zip(*xy)
                 ax.errorbar(x, y, yerr=err, linestyle='--', color='k', label='LNS')
@@ -900,7 +900,7 @@ def plot_maxdiv_lns_dist_time_subplots(d_maxdiv, d_lns, bs, metric, field, agap,
     fig = plt.figure()
 
 
-    def plot_one(b, fa, ax):
+    def plot_one(b, fa, stdev, ax):
         # MaxDiversekSet
         algo = 'dfs'
         br   = 'cloriginal'
@@ -909,7 +909,7 @@ def plot_maxdiv_lns_dist_time_subplots(d_maxdiv, d_lns, bs, metric, field, agap,
 
             # confidence interval
             k = sorted(cdict.keys())
-            xy = [ (i, cdict[i][fa], 2*cdict[i]['stdev']/math.sqrt(cdict[i]['n'])) for i in  k]
+            xy = [ (i, cdict[i][fa], 2*cdict[i][stdev]/math.sqrt(cdict[i]['n'])) for i in  k]
             if len(xy) > 0:
                 x,y,err = zip(*xy)
                 ax.errorbar(x, y, yerr=err, linestyle=':', color='k', label='MaxDiversekSet')
@@ -920,7 +920,7 @@ def plot_maxdiv_lns_dist_time_subplots(d_maxdiv, d_lns, bs, metric, field, agap,
         if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(None) and d_lns[b][arch][algo][metric][agap][br][None].has_key(field)):
             cdict = dict(**d_lns[b][arch][algo][metric][agap][br][None][field])
             k = sorted(cdict.keys())
-            xy = [ (i, cdict[i][fa], 2*cdict[i]['stdev']/math.sqrt(cdict[i]['n'])) for i in  k]
+            xy = [ (i, cdict[i][fa], 2*cdict[i][stdev]/math.sqrt(cdict[i]['n'])) for i in  k]
             if len(xy) > 0:
                 x,y,err = zip(*xy)
                 ax.errorbar(x, y, yerr=err, linestyle='-.', color='k', label='Random Search')
@@ -932,7 +932,7 @@ def plot_maxdiv_lns_dist_time_subplots(d_maxdiv, d_lns, bs, metric, field, agap,
         if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(rel) and d_lns[b][arch][algo][metric][agap][br][rel].has_key(field)):
             cdict = dict(**d_lns[b][arch][algo][metric][agap][br][rel][field])
             k = sorted(cdict.keys())
-            xy = [ (i, cdict[i][fa], 2*cdict[i]['stdev']/math.sqrt(cdict[i]['n'])) for i in k]
+            xy = [ (i, cdict[i][fa], 2*cdict[i][stdev]/math.sqrt(cdict[i]['n'])) for i in k]
             if len(xy) > 0:
                 x,y,err = zip(*xy)
                 ax.errorbar(x, y, yerr=err, linestyle='--', color='k', label='LNS')
