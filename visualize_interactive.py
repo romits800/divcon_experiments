@@ -387,7 +387,7 @@ def plot_relax(d, metric, field, agap, branch):
 
         labels = d.keys()
         if constr(b, arch, "lns"):
-            lns = [(r, d[b][arch]["lns"][metric][agap][branch][str(r)][field]['num'], 2*d[b][arch]["lns"][metric][agap][branch][str(r)][field]['stdev']/math.sqrt(d[b][arch]["lns"][metric][agap][branch][str(r)][field['n']))  for r in sorted(map(float,d[b][arch]["lns"][metric][agap][branch].keys())) ]
+            lns = [(r, d[b][arch]["lns"][metric][agap][branch][str(r)][field]['num'], 2*d[b][arch]["lns"][metric][agap][branch][str(r)][field]['stdev']/math.sqrt(d[b][arch]["lns"][metric][agap][branch][str(r)][field]['n']))  for r in sorted(map(float,d[b][arch]["lns"][metric][agap][branch].keys())) ]
 
             x,y,err = zip(*lns)
 
@@ -664,23 +664,23 @@ def plot_maxdiv_lns_dist(d_maxdiv, d_lns, b, metric, field, agap, relax):
  
     if (d_maxdiv[b].has_key(arch) and d_maxdiv[b][arch].has_key(algo) and d_maxdiv[b][arch][algo].has_key(metric) and d_maxdiv[b][arch][algo][metric].has_key(agap) and d_maxdiv[b][arch][algo][metric][agap].has_key(br) and d_maxdiv[b][arch][algo][metric][agap][br][None].has_key(field)):
         cdict = dict(**d_maxdiv[b][arch][algo][metric][agap][br][None][field])
-        err = [ 2*cdict[i]['stdev']/cdict[i]['n'] for i in  cdict.keys()]
-        xy = [ (i, cdict[i]['num']) for i in  cdict.keys()]
+        k = sorted(cdict.keys())
+        xy = [ (i, cdict[i]['num'], 2*cdict[i]['stdev']/cdict[i]['n']) for i in  k]
         if len(xy) > 0:
-            x,y = zip(*xy)
-            plt.plot(x, y, yerr=err, label='MaxDiversekSet')
+            x,y,err = zip(*xy)
+            plt.errorbar(x, y, yerr=err, label='MaxDiversekSet')
 
     # Random search
     algo = 'dfs'
     br   = 'clrandom'
  
-    if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(rel) and d_lns[b][arch][algo][metric][agap][br][rel].has_key(field)):
-        cdict = dict(**d_lns[b][arch][algo][metric][agap][br][rel][field])
-        err = [ 2*cdict[i]['stdev']/cdict[i]['n'] for i in  cdict.keys()]
-        xy = [ (i, cdict[i]['num']) for i in  cdict.keys()]
+    if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(None) and d_lns[b][arch][algo][metric][agap][br][None].has_key(field)):
+        cdict = dict(**d_lns[b][arch][algo][metric][agap][br][None][field])
+        k = sorted(cdict.keys())
+        xy = [ (i, cdict[i]['num'], 2*cdict[i]['stdev']/cdict[i]['n']) for i in  k]
         if len(xy) > 0:
-            x,y = zip(*xy)
-            plt.plot(x, y, yerr=err, label='Random Search')
+            x,y,err = zip(*xy)
+            plt.errorbar(x, y, yerr=err, label='Random Search')
  
     # LNS
     algo = 'lns'
@@ -688,11 +688,11 @@ def plot_maxdiv_lns_dist(d_maxdiv, d_lns, b, metric, field, agap, relax):
  
     if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(rel) and d_lns[b][arch][algo][metric][agap][br][rel].has_key(field)):
         cdict = dict(**d_lns[b][arch][algo][metric][agap][br][rel][field])
-        err = [ 2*cdict[i]['stdev']/cdict[i]['n'] for i in  cdict.keys()]
-        xy = [ (i, cdict[i]['num']) for i in  cdict.keys()]
+        k = sorted(cdict.keys())
+        xy = [ (i, cdict[i]['num'], 2*cdict[i]['stdev']/cdict[i]['n']) for i in k ]
         if len(xy) > 0:
-            x,y = zip(*xy)
-            plt.plot(x, y, yerr=err, label='LNS')
+            x,y,err = zip(*xy)
+            plt.errorbar(x, y, yerr=err, label='LNS')
                 
 
     ax.set_ylim(bottom=0)
@@ -717,24 +717,26 @@ def plot_maxdiv_lns_time(d_maxdiv, d_lns, b, metric, field, agap, relax):
     br   = 'cloriginal'
     if (d_maxdiv[b].has_key(arch) and d_maxdiv[b][arch].has_key(algo) and d_maxdiv[b][arch][algo].has_key(metric) and d_maxdiv[b][arch][algo][metric].has_key(agap) and d_maxdiv[b][arch][algo][metric][agap].has_key(br) and d_maxdiv[b][arch][algo][metric][agap][br][None].has_key(field)):
         cdict = dict(**d_maxdiv[b][arch][algo][metric][agap][br][None][field])
+
         # confidence interval
-        err = [ 2*cdict[i]['stdev']/cdict[i]['n'] for i in  cdict.keys()]
-        xy = [ (i, cdict[i]['stime']) for i in  cdict.keys()]
+        k = sorted(cdict.keys())
+        xy = [ (i, cdict[i]['stime'], 2*cdict[i]['stdev']/cdict[i]['n']) for i in  k]
         if len(xy) > 0:
-            x,y = zip(*xy)
-            plt.plot(x, y, yerr=err, label='MaxDiversekSet')
+            print xy[0]
+            x,y,err = zip(*xy)
+            plt.errorbar(x, y, yerr=err, label='MaxDiversekSet')
 
     # Random Search
-    algo = 'lns'
+    algo = 'dfs'
     br   = 'clrandom'
  
-    if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(rel) and d_lns[b][arch][algo][metric][agap][br][rel].has_key(field)):
-        cdict = dict(**d_lns[b][arch][algo][metric][agap][br][rel][field])
-        err = [ 2*cdict[i]['stdev']/cdict[i]['n'] for i in  cdict.keys()]
-        xy = [ (i, cdict[i]['stime']) for i in  cdict.keys()]
+    if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(None) and d_lns[b][arch][algo][metric][agap][br][None].has_key(field)):
+        cdict = dict(**d_lns[b][arch][algo][metric][agap][br][None][field])
+        k = sorted(cdict.keys())
+        xy = [ (i, cdict[i]['stime'], 2*cdict[i]['stdev']/cdict[i]['n']) for i in  k]
         if len(xy) > 0:
-            x,y = zip(*xy)
-            plt.plot(x, y, yerr=err, label='Random Search')
+            x,y,err = zip(*xy)
+            plt.errorbar(x, y, yerr=err, label='Random Search')
  
     # LNS
     algo = 'lns'
@@ -742,11 +744,11 @@ def plot_maxdiv_lns_time(d_maxdiv, d_lns, b, metric, field, agap, relax):
  
     if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(rel) and d_lns[b][arch][algo][metric][agap][br][rel].has_key(field)):
         cdict = dict(**d_lns[b][arch][algo][metric][agap][br][rel][field])
-        err = [ 2*cdict[i]['stdev']/cdict[i]['n'] for i in  cdict.keys()]
-        xy = [ (i, cdict[i]['stime']) for i in  cdict.keys()]
+        k = sorted(cdict.keys())
+        xy = [ (i, cdict[i]['stime'], 2*cdict[i]['stdev']/cdict[i]['n']) for i in k]
         if len(xy) > 0:
-            x,y = zip(*xy)
-            plt.plot(x, y, yerr=err, label='LNS')
+            x,y,err = zip(*xy)
+            plt.errorbar(x, y, yerr=err, label='LNS')
                 
 
     ax.set_yscale('log')
