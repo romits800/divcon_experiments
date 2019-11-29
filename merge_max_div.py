@@ -130,7 +130,8 @@ for b in ds[0]:
                                 std = {i: stdev(hamm[i], av[i]) for i in hamm}
                                 mn = {i: avg(mhamm[i]) for i in mhamm}
                                 n = {i: len(hamm[i]) for i in hamm}
-                                d[b][arch][method][metric][agap][branch][relax]['avg'] = {i: { 'num': av[i], 'stdev': std[i], 'n': n[i], 'maxnum': mn[i], 'data' : dhamm[i] , 'stime': stime[i]} for i in hamm}
+                                st = {i: avg(stime[i]) for i in stime}
+                                d[b][arch][method][metric][agap][branch][relax]['avg'] = {i: { 'num': av[i], 'stdev': std[i], 'n': n[i], 'maxnum': mn[i], 'data' : dhamm[i] , 'stime': st[i]} for i in hamm}
 
                             (brhamm, mbrhamm, dbrhamm, stime) = create_dicts(ds, b, arch, method, metric, agap, branch, relax, 'bravg')
 
@@ -140,7 +141,8 @@ for b in ds[0]:
                                 std = {i: stdev(brhamm[i], av[i]) for i in brhamm}
                                 mn = {i: avg(mbrhamm[i]) for i in mbrhamm}
                                 n = {i: len(brhamm[i]) for i in brhamm}
-                                d[b][arch][method][metric][agap][branch][relax]['bravg'] = {i: { 'num': av[i], 'stdev': std[i], 'n': n[i], 'maxnum': mn[i], 'data' : dbrhamm[i], 'stime': stime[i] } for i in brhamm}
+                                st = {i: avg(stime[i]) for i in stime}
+                                d[b][arch][method][metric][agap][branch][relax]['bravg'] = {i: { 'num': av[i], 'stdev': std[i], 'n': n[i], 'maxnum': mn[i], 'data' : dbrhamm[i], 'stime': st[i] } for i in brhamm}
 
 
                             (brdiff, mbrdiff, dbrdiff, stime) = create_dicts(ds, b, arch, method, metric, agap, branch, relax, 'brdiff')
@@ -155,7 +157,8 @@ for b in ds[0]:
                                 std = {i: stdev(brdiff[i], av[i]) for i in brdiff}
                                 mn = {i: avg(mbrdiff[i]) for i in mbrdiff}
                                 n = {i: len(brdiff[i]) for i in brdiff}
-                                d[b][arch][method][metric][agap][branch][relax]['brdiff'] = {i: { 'num': av[i], 'stdev': std[i], 'n': n[i], 'maxnum': mn[i], 'data' : dbrdiff[i] , 'stime': stime[i]} for i in brdiff}
+                                st = {i: avg(stime[i]) for i in stime}
+                                d[b][arch][method][metric][agap][branch][relax]['brdiff'] = {i: { 'num': av[i], 'stdev': std[i], 'n': n[i], 'maxnum': mn[i], 'data' : dbrdiff[i] , 'stime': st[i]} for i in brdiff}
 
 
                             (levenshtein, mlevenshtein, dlevenshtein, stime) = create_dicts(ds, b, arch, method, metric, agap, branch, relax, 'levenshtein')
@@ -165,7 +168,8 @@ for b in ds[0]:
                                 std = {i: stdev(levenshtein[i], av[i]) for i in levenshtein}
                                 mn = {i: avg(mlevenshtein[i]) for i in mlevenshtein}
                                 n = {i: len(levenshtein[i]) for i in levenshtein}
-                                d[b][arch][method][metric][agap][branch][relax]['levenshtein'] = {i: { 'num': av[i], 'stdev': std[i], 'n': n[i], 'maxnum': mn[i], 'data' : dlevenshtein[i], 'stime': stime[i] } for i in levenshtein}
+                                st = {i: avg(stime[i]) for i in stime}
+                                d[b][arch][method][metric][agap][branch][relax]['levenshtein'] = {i: { 'num': av[i], 'stdev': std[i], 'n': n[i], 'maxnum': mn[i], 'data' : dlevenshtein[i], 'stime': st[i] } for i in levenshtein}
 
 
                             d[b][arch][method][metric][agap][branch][relax]['num'] = num # number of iterations
