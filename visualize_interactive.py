@@ -665,10 +665,10 @@ def plot_maxdiv_lns_dist(d_maxdiv, d_lns, b, metric, field, agap, relax):
     if (d_maxdiv[b].has_key(arch) and d_maxdiv[b][arch].has_key(algo) and d_maxdiv[b][arch][algo].has_key(metric) and d_maxdiv[b][arch][algo][metric].has_key(agap) and d_maxdiv[b][arch][algo][metric][agap].has_key(br) and d_maxdiv[b][arch][algo][metric][agap][br][None].has_key(field)):
         cdict = dict(**d_maxdiv[b][arch][algo][metric][agap][br][None][field])
         k = sorted(cdict.keys())
-        xy = [ (i, cdict[i]['num'], 2*cdict[i]['stdev']/cdict[i]['n']) for i in  k]
+        xy = [ (i, cdict[i]['num'], 2*cdict[i]['stdev']/math.sqrt(cdict[i]['n'])) for i in  k]
         if len(xy) > 0:
             x,y,err = zip(*xy)
-            plt.errorbar(x, y, yerr=err, label='MaxDiversekSet')
+            plt.errorbar(x, y, yerr=err, linestyle=':', color='k', label='MaxDiversekSet')
 
     # Random search
     algo = 'dfs'
@@ -677,10 +677,10 @@ def plot_maxdiv_lns_dist(d_maxdiv, d_lns, b, metric, field, agap, relax):
     if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(None) and d_lns[b][arch][algo][metric][agap][br][None].has_key(field)):
         cdict = dict(**d_lns[b][arch][algo][metric][agap][br][None][field])
         k = sorted(cdict.keys())
-        xy = [ (i, cdict[i]['num'], 2*cdict[i]['stdev']/cdict[i]['n']) for i in  k]
+        xy = [ (i, cdict[i]['num'], 2*cdict[i]['stdev']/math.sqrt(cdict[i]['n'])) for i in  k]
         if len(xy) > 0:
             x,y,err = zip(*xy)
-            plt.errorbar(x, y, yerr=err, label='Random Search')
+            plt.errorbar(x, y, yerr=err, linestyle='-.', color='k', label='Random Search')
  
     # LNS
     algo = 'lns'
@@ -689,10 +689,10 @@ def plot_maxdiv_lns_dist(d_maxdiv, d_lns, b, metric, field, agap, relax):
     if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(rel) and d_lns[b][arch][algo][metric][agap][br][rel].has_key(field)):
         cdict = dict(**d_lns[b][arch][algo][metric][agap][br][rel][field])
         k = sorted(cdict.keys())
-        xy = [ (i, cdict[i]['num'], 2*cdict[i]['stdev']/cdict[i]['n']) for i in k ]
+        xy = [ (i, cdict[i]['num'], 2*cdict[i]['stdev']/math.sqrt(cdict[i]['n'])) for i in k ]
         if len(xy) > 0:
             x,y,err = zip(*xy)
-            plt.errorbar(x, y, yerr=err, label='LNS')
+            plt.errorbar(x, y, yerr=err, linestyle='--', color='k', label='LNS')
                 
 
     ax.set_ylim(bottom=0)
@@ -721,10 +721,10 @@ def plot_maxdiv_lns_time(d_maxdiv, d_lns, b, metric, field, agap, relax):
 
         # confidence interval
         k = sorted(cdict.keys())
-        xy = [ (i, cdict[i]['stime'], 2*cdict[i]['stdev']/cdict[i]['n']) for i in  k]
+        xy = [ (i, cdict[i]['stime'], 2*cdict[i]['stdev']/math.sqrt(cdict[i]['n'])) for i in  k]
         if len(xy) > 0:
             x,y,err = zip(*xy)
-            plt.errorbar(x, y, yerr=err, color='b', label='MaxDiversekSet')
+            plt.errorbar(x, y, yerr=err, linestyle=':', color='k', label='MaxDiversekSet')
             active = True
     # Random Search
     algo = 'dfs'
@@ -733,10 +733,10 @@ def plot_maxdiv_lns_time(d_maxdiv, d_lns, b, metric, field, agap, relax):
     if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(None) and d_lns[b][arch][algo][metric][agap][br][None].has_key(field)):
         cdict = dict(**d_lns[b][arch][algo][metric][agap][br][None][field])
         k = sorted(cdict.keys())
-        xy = [ (i, cdict[i]['stime'], 2*cdict[i]['stdev']/cdict[i]['n']) for i in  k]
+        xy = [ (i, cdict[i]['stime'], 2*cdict[i]['stdev']/math.sqrt(cdict[i]['n'])) for i in  k]
         if len(xy) > 0:
             x,y,err = zip(*xy)
-            plt.errorbar(x, y, yerr=err, color='r', label='Random Search')
+            plt.errorbar(x, y, yerr=err, linestyle='-.', color='k', label='Random Search')
             active = True
  
     # LNS
@@ -746,10 +746,10 @@ def plot_maxdiv_lns_time(d_maxdiv, d_lns, b, metric, field, agap, relax):
     if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(rel) and d_lns[b][arch][algo][metric][agap][br][rel].has_key(field)):
         cdict = dict(**d_lns[b][arch][algo][metric][agap][br][rel][field])
         k = sorted(cdict.keys())
-        xy = [ (i, cdict[i]['stime'], 2*cdict[i]['stdev']/cdict[i]['n']) for i in k]
+        xy = [ (i, cdict[i]['stime'], 2*cdict[i]['stdev']/math.sqrt(cdict[i]['n'])) for i in k]
         if len(xy) > 0:
             x,y,err = zip(*xy)
-            plt.errorbar(x, y, yerr=err,color='g', label='LNS')
+            plt.errorbar(x, y, yerr=err, linestyle='--', color='k', label='LNS')
             active = True
                 
 
@@ -762,5 +762,197 @@ def plot_maxdiv_lns_time(d_maxdiv, d_lns, b, metric, field, agap, relax):
 
         plt.show()
 
+
+def plot_maxdiv_lns_time_subplots(d_maxdiv, d_lns, bs, metric, field, agap, relax):
+    arch = 'mips'
+    rel = str(relax)
+    agap = str(agap)
+    l = dict()
+    fig = plt.figure()
+
+
+    def plot_one(b, ax):
+        # MaxDiversekSet
+        algo = 'dfs'
+        br   = 'cloriginal'
+        if (d_maxdiv[b].has_key(arch) and d_maxdiv[b][arch].has_key(algo) and d_maxdiv[b][arch][algo].has_key(metric) and d_maxdiv[b][arch][algo][metric].has_key(agap) and d_maxdiv[b][arch][algo][metric][agap].has_key(br) and d_maxdiv[b][arch][algo][metric][agap][br][None].has_key(field)):
+            cdict = dict(**d_maxdiv[b][arch][algo][metric][agap][br][None][field])
+
+            # confidence interval
+            k = sorted(cdict.keys())
+            xy = [ (i, cdict[i]['stime'], 2*cdict[i]['stdev']/math.sqrt(cdict[i]['n'])) for i in  k]
+            if len(xy) > 0:
+                x,y,err = zip(*xy)
+                ax.errorbar(x, y, yerr=err, linestyle=':', color='k', label='MaxDiversekSet')
+        # Random Search
+        algo = 'dfs'
+        br   = 'clrandom'
+     
+        if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(None) and d_lns[b][arch][algo][metric][agap][br][None].has_key(field)):
+            cdict = dict(**d_lns[b][arch][algo][metric][agap][br][None][field])
+            k = sorted(cdict.keys())
+            xy = [ (i, cdict[i]['stime'], 2*cdict[i]['stdev']/math.sqrt(cdict[i]['n'])) for i in  k]
+            if len(xy) > 0:
+                x,y,err = zip(*xy)
+                ax.errorbar(x, y, yerr=err, linestyle='-.', color='k', label='Random Search')
+     
+        # LNS
+        algo = 'lns'
+        br   = 'clrandom'
+     
+        if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(rel) and d_lns[b][arch][algo][metric][agap][br][rel].has_key(field)):
+            cdict = dict(**d_lns[b][arch][algo][metric][agap][br][rel][field])
+            k = sorted(cdict.keys())
+            xy = [ (i, cdict[i]['stime'], 2*cdict[i]['stdev']/math.sqrt(cdict[i]['n'])) for i in k]
+            if len(xy) > 0:
+                x,y,err = zip(*xy)
+                ax.errorbar(x, y, yerr=err, linestyle='--', color='k', label='LNS')
+                
+    for i,b in enumerate(bs,1):
+        ax = plt.subplot(math.ceil(len(bs)/2.), 2, i)
+        plot_one(b, ax)
+        ax.set_yscale('log')
+        ax.legend(loc='lower right')
+        ax.set_ylim(bottom=1)
+        ax.set_xlabel("Number of variants (k)")
+        ax.set_ylabel(get_ind('stime'))
+        plt.title(b)
+
+    #ax.set_yscale('log')
+    #plt.legend(loc='center right')
+
+    #plt.title(bs)
+
+    plt.suptitle("Measurement for solving time with optimality gap %s%%, LNS with relax rate %f" %(agap,relax), fontsize='large')
+    plt.subplots_adjust(hspace=0.5)
+    plt.show()
+
+
+def plot_maxdiv_lns_dist_subplots(d_maxdiv, d_lns, bs, metric, field, agap, relax):
+    arch = 'mips'
+    rel = str(relax)
+    agap = str(agap)
+    l = dict()
+    fig = plt.figure()
+
+
+    def plot_one(b, ax):
+        # MaxDiversekSet
+        algo = 'dfs'
+        br   = 'cloriginal'
+        if (d_maxdiv[b].has_key(arch) and d_maxdiv[b][arch].has_key(algo) and d_maxdiv[b][arch][algo].has_key(metric) and d_maxdiv[b][arch][algo][metric].has_key(agap) and d_maxdiv[b][arch][algo][metric][agap].has_key(br) and d_maxdiv[b][arch][algo][metric][agap][br][None].has_key(field)):
+            cdict = dict(**d_maxdiv[b][arch][algo][metric][agap][br][None][field])
+
+            # confidence interval
+            k = sorted(cdict.keys())
+            xy = [ (i, cdict[i]['num'], 2*cdict[i]['stdev']/math.sqrt(cdict[i]['n'])) for i in  k]
+            if len(xy) > 0:
+                x,y,err = zip(*xy)
+                ax.errorbar(x, y, yerr=err, linestyle=':', color='k', label='MaxDiversekSet')
+        # Random Search
+        algo = 'dfs'
+        br   = 'clrandom'
+     
+        if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(None) and d_lns[b][arch][algo][metric][agap][br][None].has_key(field)):
+            cdict = dict(**d_lns[b][arch][algo][metric][agap][br][None][field])
+            k = sorted(cdict.keys())
+            xy = [ (i, cdict[i]['num'], 2*cdict[i]['stdev']/math.sqrt(cdict[i]['n'])) for i in  k]
+            if len(xy) > 0:
+                x,y,err = zip(*xy)
+                ax.errorbar(x, y, yerr=err, linestyle='-.', color='k', label='Random Search')
+     
+        # LNS
+        algo = 'lns'
+        br   = 'clrandom'
+     
+        if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(rel) and d_lns[b][arch][algo][metric][agap][br][rel].has_key(field)):
+            cdict = dict(**d_lns[b][arch][algo][metric][agap][br][rel][field])
+            k = sorted(cdict.keys())
+            xy = [ (i, cdict[i]['num'], 2*cdict[i]['stdev']/math.sqrt(cdict[i]['n'])) for i in k]
+            if len(xy) > 0:
+                x,y,err = zip(*xy)
+                ax.errorbar(x, y, yerr=err, linestyle='--', color='k', label='LNS')
+                
+    for i,b in enumerate(bs,1):
+        ax = plt.subplot(math.ceil(len(bs)/2.), 2, i)
+        plot_one(b, ax)
+        ax.legend(loc='lower right')
+        ax.set_ylim(bottom=1)
+        ax.set_ylabel("Dist")
+        ax.set_xlabel("Number of variants (k)")
+        plt.title(b)
+
+    plt.suptitle("Measurement for Hamming distance with optimality gap %s%%, LNS with relax rate %f" %(agap,relax), fontsize='large')
+    plt.subplots_adjust(hspace=0.5)
+    #ax.set_yscale('log')
+    #plt.legend(loc='center right')
+
+    #plt.title(bs)
+
+    plt.show()
+
+
+def plot_maxdiv_lns_dist_time_subplots(d_maxdiv, d_lns, bs, metric, field, agap, relax):
+    arch = 'mips'
+    rel = str(relax)
+    agap = str(agap)
+    l = dict()
+    fig = plt.figure()
+
+
+    def plot_one(b, fa, ax):
+        # MaxDiversekSet
+        algo = 'dfs'
+        br   = 'cloriginal'
+        if (d_maxdiv[b].has_key(arch) and d_maxdiv[b][arch].has_key(algo) and d_maxdiv[b][arch][algo].has_key(metric) and d_maxdiv[b][arch][algo][metric].has_key(agap) and d_maxdiv[b][arch][algo][metric][agap].has_key(br) and d_maxdiv[b][arch][algo][metric][agap][br][None].has_key(field)):
+            cdict = dict(**d_maxdiv[b][arch][algo][metric][agap][br][None][field])
+
+            # confidence interval
+            k = sorted(cdict.keys())
+            xy = [ (i, cdict[i][fa], 2*cdict[i]['stdev']/math.sqrt(cdict[i]['n'])) for i in  k]
+            if len(xy) > 0:
+                x,y,err = zip(*xy)
+                ax.errorbar(x, y, yerr=err, linestyle=':', color='k', label='MaxDiversekSet')
+        # Random Search
+        algo = 'dfs'
+        br   = 'clrandom'
+     
+        if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(None) and d_lns[b][arch][algo][metric][agap][br][None].has_key(field)):
+            cdict = dict(**d_lns[b][arch][algo][metric][agap][br][None][field])
+            k = sorted(cdict.keys())
+            xy = [ (i, cdict[i][fa], 2*cdict[i]['stdev']/math.sqrt(cdict[i]['n'])) for i in  k]
+            if len(xy) > 0:
+                x,y,err = zip(*xy)
+                ax.errorbar(x, y, yerr=err, linestyle='-.', color='k', label='Random Search')
+     
+        # LNS
+        algo = 'lns'
+        br   = 'clrandom'
+     
+        if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(rel) and d_lns[b][arch][algo][metric][agap][br][rel].has_key(field)):
+            cdict = dict(**d_lns[b][arch][algo][metric][agap][br][rel][field])
+            k = sorted(cdict.keys())
+            xy = [ (i, cdict[i][fa], 2*cdict[i]['stdev']/math.sqrt(cdict[i]['n'])) for i in k]
+            if len(xy) > 0:
+                x,y,err = zip(*xy)
+                ax.errorbar(x, y, yerr=err, linestyle='--', color='k', label='LNS')
+                
+    for i,b in enumerate(bs,1):
+        ax = plt.subplot(math.ceil(len(bs)/2.), 2, i)
+        plot_one(b, ax)
+        ax.legend(loc='lower right')
+        ax.set_ylim(bottom=1)
+        ax.set_ylabel("Dist")
+        ax.set_xlabel("Number of variants (k)")
+        plt.title(b)
+
+    plt.suptitle("Measurement for Hamming distance with optimality gap %s%%, LNS with relax rate %f" %(agap,relax), fontsize='large')
+    plt.subplots_adjust(hspace=0.5)
+    #ax.set_yscale('log')
+    #plt.legend(loc='center right')
+
+    #plt.title(bs)
+
+    plt.show()
 
 
