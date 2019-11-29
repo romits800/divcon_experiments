@@ -82,7 +82,7 @@ def reverse_order(c):
 #div_monolithic_lns_mips_gcc.xexit.xexit_10_100_br_hamming_0.8_10000_constant.pickle
 
 # 1000 is the number of measurements
-interval_list = filter(lambda x: x>1 and x<201,{int(1.1**i) for i in range(1000)})
+#interval_list = filter(lambda x: x>1 and x<201,{int(1.1**i) for i in range(1000)})
 for benchmark in listdir(pathname):
     print benchmark
     d[benchmark] = dict()
@@ -159,22 +159,27 @@ for benchmark in listdir(pathname):
             ## Hamming Distance
             d[benchmark][arch][method][metric][agap][branch][relax]['avg'] = dict()
 
-            for ii in interval_list:
-                intd = dict()
-                sumhd = 0
-                count = 0
+            intd = dict()
+	    f0 = fnames[0]
+	    f1 = fnames[1]
+	    
+            intd[(f0,f1)] = sum([ (1. if k!=l else 0.) for (k,l) in zip(cycles[f0],cycles[f1])] ) #zip(files[f1],files[f2])
+            sumhd = intd[(f0,f1)]
+            count = 1.
+            maxnum = len(cycles[fnames[i]])
+	    
+
+            for ii in range(3,len(frames_sorted)):
                 maxnum = 0
                 fnames = fnames_sorted[:ii]
 
                 stime = solver_times[fnames[-1]]
 
-                for i in range(len(fnames)):
-                    for j in range(i+1, len(fnames)):
-                       f1,f2 = fnames[i],fnames[j]
+                for i in range(len(fnames)-1):
+                       f1,f2 = fnames[i],fnames[-1]
                        intd[(f1,f2)] = sum([ (1. if k!=l else 0.) for (k,l) in zip(cycles[f1],cycles[f2])] ) #zip(files[f1],files[f2])
                        sumhd += intd[(f1,f2)]
                        count += 1.
-                    maxnum = len(cycles[fnames[i]])
 
                 if not count == 0:
                     d[benchmark][arch][method][metric][agap][branch][relax]['avg'][ii] = { 'num': round(sumhd/count,2), 'maxnum': maxnum, 'data': intd.values(), 'stime': stime }
@@ -182,73 +187,98 @@ for benchmark in listdir(pathname):
             ## Branch Hamming Distance
             d[benchmark][arch][method][metric][agap][branch][relax]['bravg'] = dict()
 
-            for ii in interval_list:
-                intd = dict()
-                sumhd = 0
-                count = 0
+            intd = dict()
+	    f0 = fnames[0]
+	    f1 = fnames[1]
+	    
+            intd[(f0,f1)] = sum([ (1. if k!=l else 0.) for (k,l) in zip(brcycles[f0],brcycles[f1])] ) #zip(files[f1],files[f2])
+            sumhd = intd[(f0,f1)]
+            count = 1.
+            maxnum = len(cycles[fnames[i]])
+	    
+
+            for ii in range(3,len(frames_sorted)):
                 maxnum = 0
                 fnames = fnames_sorted[:ii]
+
                 stime = solver_times[fnames[-1]]
-                for i in range(len(fnames)):
-                    for j in range(i+1, len(fnames)):
-                        f1,f2 = fnames[i],fnames[j]
-                        intd[(f1,f2)] = sum([ (1. if k!=l else 0.) for (k,l) in zip(brcycles[f1],brcycles[f2])] ) #zip(files[f1],files[f2])
-                        sumhd += intd[(f1,f2)]
-                        count += 1.
-                    maxnum = len(brcycles[fnames[i]])
+
+                for i in range(len(fnames)-1):
+                       f1,f2 = fnames[i],fnames[-1]
+                       intd[(f1,f2)] = sum([ (1. if k!=l else 0.) for (k,l) in zip(brcycles[f1],brcycles[f2])] ) #zip(files[f1],files[f2])
+                       sumhd += intd[(f1,f2)]
+                       count += 1.
 
                 if not count == 0:
-                    d[benchmark][arch][method][metric][agap][branch][relax]['bravg'][ii] = {'num': round(sumhd/count,4), 'maxnum': maxnum, 'data': intd.values(), 'stime': stime}
+                    d[benchmark][arch][method][metric][agap][branch][relax]['bravg'][ii] = { 'num': round(sumhd/count,2), 'maxnum': maxnum, 'data': intd.values(), 'stime': stime }
 
 
             ## Branch Diff Hamming Distance
-	    d[benchmark][arch][method][metric][agap][branch][relax]['brdiff'] = dict()
+            d[benchmark][arch][method][metric][agap][branch][relax]['brdiff'] = dict()
 
-            for ii in interval_list:
-                intd = dict()
-                sumhd = 0
-                count = 0
+            intd = dict()
+	    f0 = fnames[0]
+	    f1 = fnames[1]
+	    brcycles1 = [c-cc for jj,(iii,cc) in enumerate(prebrcycles[f0]) for c in cycles[f0][doublebrcycles[f0][jj]:iii-1] ] 
+            brcycles2 = [c-cc for jj,(iii,cc) in enumerate(prebrcycles[f1]) for c in cycles[f1][doublebrcycles[f1][jj]:iii-1] ] 
+     
+            intd[(f0,f1)] = sum([ (1. if k!=l else 0.) for (k,l) in zip(brcycles1,brcycles2)] ) #zip(files[f1],files[f2])
+            sumhd = intd[(f0,f1)]
+            count = 1.
+            maxnum = len(cycles[fnames[i]])
+	    
+
+            for ii in range(3,len(frames_sorted)):
                 maxnum = 0
                 fnames = fnames_sorted[:ii]
-                stime = solver_times[fnames[-1]]
-                for i in range(len(fnames)):
-                    for j in range(i+1, len(fnames)):
-                        f1,f2 = fnames[i],fnames[j]
 
-                        brcycles1 = [c-cc for jj,(iii,cc) in enumerate(prebrcycles[f1]) for c in cycles[f1][doublebrcycles[f1][jj]:iii-1] ] 
-                        brcycles2 = [c-cc for jj,(iii,cc) in enumerate(prebrcycles[f2]) for c in cycles[f2][doublebrcycles[f1][jj]:iii-1] ] 
+                stime = solver_times[fnames[-1]]
+
+                for i in range(len(fnames)-1):
+                       f1,f2 = fnames[i],fnames[-1]
+
+                       brcycles1 = [c-cc for jj,(iii,cc) in enumerate(prebrcycles[f1]) for c in cycles[f1][doublebrcycles[f1][jj]:iii-1] ] 
+                       brcycles2 = [c-cc for jj,(iii,cc) in enumerate(prebrcycles[f2]) for c in cycles[f2][doublebrcycles[f2][jj]:iii-1] ] 
+                       intd[(f1,f2)] = sum([ (1. if k!=l else 0.) for (k,l) in zip(brcycles1,brcycles2)] ) #zip(files[f1],files[f2])
                     #
 
-                        intd[(f1,f2)] = sum([ (1. if k!=l else 0.) for (k,l) in zip(brcycles1,brcycles2)] ) #zip(files[f1],files[f2])
-                        sumhd += intd[(f1,f2)]
-                        count += 1.
-                        maxnum = len(brcycles1)
-
+                       sumhd += intd[(f1,f2)]
+                       count += 1.
 
                 if not count == 0:
-                    d[benchmark][arch][method][metric][agap][branch][relax]['brdiff'][ii] = {'num': round(sumhd/count,2), 'maxnum': maxnum, 'data': intd.values(), 'stime': stime} 
+                    d[benchmark][arch][method][metric][agap][branch][relax]['brdiff'][ii] = { 'num': round(sumhd/count,2), 'maxnum': maxnum, 'data': intd.values(), 'stime': stime }
+
 
             ## Levenshtein Distance
             d[benchmark][arch][method][metric][agap][branch][relax]['levenshtein'] = dict()
-            for ii in interval_list:
-                intd = dict()
-                sumhd = 0
-                count = 0
+
+            intd = dict()
+	    f0 = fnames[0]
+	    f1 = fnames[1]
+     
+            intd[(f0,f1)] = levenshtein_distance(levcycles[f0], levcycles[f1])
+            sumhd = intd[(f0,f1)]
+            count = 1.
+            maxnum = len(cycles[fnames[i]])
+	    
+
+            for ii in range(3,len(frames_sorted)):
                 maxnum = 0
                 fnames = fnames_sorted[:ii]
+
                 stime = solver_times[fnames[-1]]
-                for i in range(len(fnames)):
-                    for j in range(i+1, len(fnames)):
-                        f1,f2 = fnames[i],fnames[j]
 
-                        intd[(f1,f2)] = levenshtein_distance(levcycles[f1], levcycles[f2])
-                        sumhd += intd[(f1,f2)]
-                        count += 1.
-                        maxnum = len(levcycles[fnames[i]])
+                for i in range(len(fnames)-1):
+                       f1,f2 = fnames[i],fnames[-1]
 
+            	       intd[(f1,f2)] = levenshtein_distance(levcycles[f1], levcycles[f2])
+                       sumhd += intd[(f1,f2)]
+                       count += 1.
 
                 if not count == 0:
-                    d[benchmark][arch][method][metric][agap][branch][relax]['levenshtein'][ii] = {'num': round(sumhd/count,2), 'maxnum': maxnum, 'data': intd.values(), 'stime': stime}
+                    d[benchmark][arch][method][metric][agap][branch][relax]['levenshtein'][ii] = { 'num': round(sumhd/count,2), 'maxnum': maxnum, 'data': intd.values(), 'stime': stime }
+
+
 
 
 newpath = pathname.strip("/")
