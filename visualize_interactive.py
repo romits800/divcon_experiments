@@ -33,6 +33,22 @@ def improvement(lns, dfs):
     else:
         return 0.0
 
+def get_name(field):
+    if field == 'avg':
+        return 'Hamming'
+    elif field == 'bravg':
+        return 'Branch Hamming'
+    elif field == 'brdiff':
+        return 'Relative Branch Hamming'
+    elif field == 'levenshtein':
+        return 'Levenshtein'
+    elif field == 'cost':
+        return ''
+    elif field == 'stime':
+        return 'ms'
+
+
+
 def get_ind(field):
     if field == 'avg':
         return 'hamm'
@@ -40,6 +56,8 @@ def get_ind(field):
         return 'brhamm'
     elif field == 'brdiff':
         return 'brdiffhamm'
+    elif field == 'levenshtein':
+        return 'levenshtein'
     elif field == 'cost':
         return 'cycles'
     elif field == 'stime':
@@ -882,7 +900,8 @@ def plot_maxdiv_lns_dist_subplots(d_maxdiv, d_lns, bs, metric, field, agap, rela
         ax.set_xlabel("Number of variants (k)")
         plt.title(b)
 
-    plt.suptitle("Measurement for Hamming distance with optimality gap %s%%, LNS with relax rate %f" %(agap,relax), fontsize='large')
+    dist = get_name(field)
+    plt.suptitle("Measurement for %s distance with optimality gap %s%%, LNS with relax rate %f" %(dist, agap,relax), fontsize='large')
     plt.subplots_adjust(hspace=0.5)
     #ax.set_yscale('log')
     #plt.legend(loc='center right')
