@@ -712,6 +712,7 @@ def plot_maxdiv_lns_time(d_maxdiv, d_lns, b, metric, field, agap, relax):
     fig = plt.figure()
     ax = fig.add_subplot(1,1,1)
 
+    active = False
     # MaxDiversekSet
     algo = 'dfs'
     br   = 'cloriginal'
@@ -722,10 +723,9 @@ def plot_maxdiv_lns_time(d_maxdiv, d_lns, b, metric, field, agap, relax):
         k = sorted(cdict.keys())
         xy = [ (i, cdict[i]['stime'], 2*cdict[i]['stdev']/cdict[i]['n']) for i in  k]
         if len(xy) > 0:
-            print xy[0]
             x,y,err = zip(*xy)
-            plt.errorbar(x, y, yerr=err, label='MaxDiversekSet')
-
+            plt.errorbar(x, y, yerr=err, color='b', label='MaxDiversekSet')
+            active = True
     # Random Search
     algo = 'dfs'
     br   = 'clrandom'
@@ -736,7 +736,8 @@ def plot_maxdiv_lns_time(d_maxdiv, d_lns, b, metric, field, agap, relax):
         xy = [ (i, cdict[i]['stime'], 2*cdict[i]['stdev']/cdict[i]['n']) for i in  k]
         if len(xy) > 0:
             x,y,err = zip(*xy)
-            plt.errorbar(x, y, yerr=err, label='Random Search')
+            plt.errorbar(x, y, yerr=err, color='r', label='Random Search')
+            active = True
  
     # LNS
     algo = 'lns'
@@ -748,16 +749,18 @@ def plot_maxdiv_lns_time(d_maxdiv, d_lns, b, metric, field, agap, relax):
         xy = [ (i, cdict[i]['stime'], 2*cdict[i]['stdev']/cdict[i]['n']) for i in k]
         if len(xy) > 0:
             x,y,err = zip(*xy)
-            plt.errorbar(x, y, yerr=err, label='LNS')
+            plt.errorbar(x, y, yerr=err,color='g', label='LNS')
+            active = True
                 
 
-    ax.set_yscale('log')
-    ax.set_ylim(bottom=1)
-    plt.legend(loc='center right')
+    if active:
+        ax.set_yscale('log')
+        ax.set_ylim(bottom=1)
+        plt.legend(loc='center right')
     
-    plt.title(b)
+        plt.title(b)
 
-    plt.show()
+        plt.show()
 
 
 
