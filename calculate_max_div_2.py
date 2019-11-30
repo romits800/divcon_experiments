@@ -82,7 +82,8 @@ def reverse_order(c):
 #div_monolithic_lns_mips_gcc.xexit.xexit_10_100_br_hamming_0.8_10000_constant.pickle
 
 # 1000 is the number of measurements
-interval_list = filter(lambda x: x>1 and x<201,{int(1.1**i) for i in range(1000)})
+interval_list = sorted(filter(lambda x: x>1 and x<201,{int(1.08**i) for i in range(1000)}))
+#for benchmark in listdir(pathname):
 for benchmark in listdir(pathname):
     print benchmark
     d[benchmark] = dict()
@@ -110,7 +111,6 @@ for benchmark in listdir(pathname):
                 except:
                     print "Exception: ", rest, branch, pfile
 
-            #arch = a.group(2)
             files = pickle.load(open(pathname + "/" +  benchmark + "/" + pfile))
             files = {h:files[h] for h in files if benchmark in h}
             # cycles = {h:files[h]['cycles'] for h in files if files[h].has_key('cycles')}
@@ -122,6 +122,7 @@ for benchmark in listdir(pathname):
             doublebrcycles = {h:{j:(prebrcycles[h][j-1][0] if j>0 else 0)  for  j,(i,c)  in enumerate(prebrcycles[h]) } for h in prebrcycles}
 
             brcycles = {h:[ c for  i,c  in prebrcycles[h]] for h in prebrcycles}
+
             #####################
             
             solver_times = {h:files[h]['solver_time'] for h in files if files[h].has_key('solver_time')}
@@ -159,18 +160,20 @@ for benchmark in listdir(pathname):
             ## Hamming Distance
             d[benchmark][arch][method][metric][agap][branch][relax]['avg'] = dict()
 
-            for ii in interval_list:
-                intd = dict()
-                sumhd = 0
-                count = 0
+            intd = dict()
+            sumhd = 0
+            count = 0
+            for curi,ii in enumerate(interval_list):
                 maxnum = 0
                 fnames = fnames_sorted[:ii]
-
                 stime = solver_times[fnames[-1]]
-
-                for i in range(len(fnames)):
-                    for j in range(i+1, len(fnames)):
+                for i in range(len(fnames)-1):
+                    previ = curi-1
+                    st = interval_list[previ] if curi>0 else 1
+                    for j in range(st, len(fnames)):
                        f1,f2 = fnames[i],fnames[j]
+                       if intd.has_key((f1,f2)):
+                            continue
                        intd[(f1,f2)] = sum([ (1. if k!=l else 0.) for (k,l) in zip(cycles[f1],cycles[f2])] ) #zip(files[f1],files[f2])
                        sumhd += intd[(f1,f2)]
                        count += 1.
@@ -178,20 +181,27 @@ for benchmark in listdir(pathname):
 
                 if not count == 0:
                     d[benchmark][arch][method][metric][agap][branch][relax]['avg'][ii] = { 'num': round(sumhd/count,2), 'maxnum': maxnum, 'data': intd.values(), 'stime': stime }
+                print intd
 
             ## Branch Hamming Distance
             d[benchmark][arch][method][metric][agap][branch][relax]['bravg'] = dict()
+            intd = dict()
+            
+            sumhd = 0 #intd[(f0,f1)]
+            count = 0.
 
-            for ii in interval_list:
-                intd = dict()
-                sumhd = 0
-                count = 0
+            for curi,ii in enumerate(interval_list):
                 maxnum = 0
                 fnames = fnames_sorted[:ii]
                 stime = solver_times[fnames[-1]]
-                for i in range(len(fnames)):
-                    for j in range(i+1, len(fnames)):
+                for i in range(len(fnames)-1):
+                    previ = curi-1 
+                    st = interval_list[previ] if curi>0 else 1
+ 
+                    for j in range(st, len(fnames)):
                         f1,f2 = fnames[i],fnames[j]
+                        if intd.has_key((f1,f2)):
+                            continue
                         intd[(f1,f2)] = sum([ (1. if k!=l else 0.) for (k,l) in zip(brcycles[f1],brcycles[f2])] ) #zip(files[f1],files[f2])
                         sumhd += intd[(f1,f2)]
                         count += 1.
@@ -204,21 +214,25 @@ for benchmark in listdir(pathname):
             ## Branch Diff Hamming Distance
 	    d[benchmark][arch][method][metric][agap][branch][relax]['brdiff'] = dict()
 
-            for ii in interval_list:
-                intd = dict()
-                sumhd = 0
-                count = 0
+            intd = dict()
+            sumhd = 0
+            count = 0
+            for curi,ii in enumerate(interval_list):
                 maxnum = 0
                 fnames = fnames_sorted[:ii]
                 stime = solver_times[fnames[-1]]
-                for i in range(len(fnames)):
-                    for j in range(i+1, len(fnames)):
+                for i in range(len(fnames)-1):
+                    previ = curi-1
+                    st = interval_list[previ] if curi>0 else 1
+ 
+                    for j in range(st, len(fnames)):
                         f1,f2 = fnames[i],fnames[j]
-
+                        if intd.has_key((f1,f2)):
+                            continue
+ 
                         brcycles1 = [c-cc for jj,(iii,cc) in enumerate(prebrcycles[f1]) for c in cycles[f1][doublebrcycles[f1][jj]:iii-1] ] 
                         brcycles2 = [c-cc for jj,(iii,cc) in enumerate(prebrcycles[f2]) for c in cycles[f2][doublebrcycles[f1][jj]:iii-1] ] 
                     #
-
                         intd[(f1,f2)] = sum([ (1. if k!=l else 0.) for (k,l) in zip(brcycles1,brcycles2)] ) #zip(files[f1],files[f2])
                         sumhd += intd[(f1,f2)]
                         count += 1.
@@ -230,17 +244,22 @@ for benchmark in listdir(pathname):
 
             ## Levenshtein Distance
             d[benchmark][arch][method][metric][agap][branch][relax]['levenshtein'] = dict()
-            for ii in interval_list:
-                intd = dict()
-                sumhd = 0
-                count = 0
+            intd = dict()
+            sumhd = 0
+            count = 0
+            for curi,ii in enumerate(interval_list):
                 maxnum = 0
                 fnames = fnames_sorted[:ii]
                 stime = solver_times[fnames[-1]]
-                for i in range(len(fnames)):
-                    for j in range(i+1, len(fnames)):
+                for i in range(len(fnames)-1):
+                    previ = curi-1
+                    st = interval_list[previ] if curi>0 else 1
+ 
+                    for j in range(st, len(fnames)):
                         f1,f2 = fnames[i],fnames[j]
-
+                        if intd.has_key((f1,f2)):
+                            continue
+ 
                         intd[(f1,f2)] = levenshtein_distance(levcycles[f1], levcycles[f2])
                         sumhd += intd[(f1,f2)]
                         count += 1.
