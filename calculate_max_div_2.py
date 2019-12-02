@@ -165,6 +165,8 @@ for benchmark in listdir(pathname):
             count = 0
             for curi,ii in enumerate(interval_list):
                 maxnum = 0
+                if len(fnames_sorted)<ii:
+                    break
                 fnames = fnames_sorted[:ii]
                 stime = solver_times[fnames[-1]]
                 for i in range(len(fnames)-1):
@@ -181,7 +183,6 @@ for benchmark in listdir(pathname):
 
                 if not count == 0:
                     d[benchmark][arch][method][metric][agap][branch][relax]['avg'][ii] = { 'num': round(sumhd/count,2), 'maxnum': maxnum, 'data': intd.values(), 'stime': stime }
-                print intd
 
             ## Branch Hamming Distance
             d[benchmark][arch][method][metric][agap][branch][relax]['bravg'] = dict()
@@ -192,6 +193,8 @@ for benchmark in listdir(pathname):
 
             for curi,ii in enumerate(interval_list):
                 maxnum = 0
+                if len(fnames_sorted)<ii:
+                    break
                 fnames = fnames_sorted[:ii]
                 stime = solver_times[fnames[-1]]
                 for i in range(len(fnames)-1):
@@ -219,6 +222,8 @@ for benchmark in listdir(pathname):
             count = 0
             for curi,ii in enumerate(interval_list):
                 maxnum = 0
+                if len(fnames_sorted)<ii:
+                    break
                 fnames = fnames_sorted[:ii]
                 stime = solver_times[fnames[-1]]
                 for i in range(len(fnames)-1):
@@ -249,6 +254,8 @@ for benchmark in listdir(pathname):
             count = 0
             for curi,ii in enumerate(interval_list):
                 maxnum = 0
+                if len(fnames_sorted)<ii:
+                    break
                 fnames = fnames_sorted[:ii]
                 stime = solver_times[fnames[-1]]
                 for i in range(len(fnames)-1):
