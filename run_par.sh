@@ -11,6 +11,7 @@ then
         cpu2=$((cpu1 << 6))
         m2=$((cpu1 | cpu2))
         taskset `printf '0x%x\n' $m2` nohup ./run_br.sh divs_${i} divs_dir_${i} divs_br_${i} &> out_br_${i} &
+        sleep 123 
     done
 elif [ "$1" == "levenshtein" ]
 then
@@ -22,6 +23,7 @@ then
         cpu2=$((cpu1 << 6))
         m2=$((cpu1 | cpu2))
         taskset `printf '0x%x\n' $m2` nohup ./run_lev.sh divs_${i} divs_dir_${i} divs_lev_${i} &> out_lev_${i} &
+        sleep 123 
     done
 else
     for i in {0..5}
@@ -32,6 +34,7 @@ else
         cpu2=$((cpu1 << 6)) # << 12:its sibling - hyperthread
         m2=$((cpu1 | cpu2))
         taskset `printf '0x%x\n' $m2` nohup ./run.sh divs_${i} divs_dir_${i} divs_hamm_rhamm_${i}  &> out_${i} &
+        sleep 123 
     done
 fi
 

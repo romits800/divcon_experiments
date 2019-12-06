@@ -100,7 +100,7 @@ do
 	    do
 	        for dist in "diff_br_hamming" "hamming" #"br_hamming"
 		do
-	            for branch in "original" "clrandom" "cloriginal" # "original"
+	            for branch in "clrandom" "cloriginal" # "original"
                     do
                         if [ ! -f $fnoextension.out.json ]; then
                             echo "File not found! Falling back to llvm basefile"
