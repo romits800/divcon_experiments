@@ -1074,7 +1074,6 @@ def plot_maxdiv_lns_all_dist(d_maxdiv, d_lns, metric, field, agap, relax, benchm
 
 def plot_maxdiv_lns_agregaded_dist(d_maxdiv, d_lns, metric, field, agap, relax, benchmarks, colors):
     arch = 'mips'
-    rel = str(relax)
     agap = str(agap)
     l = dict()
     fig = plt.figure()
@@ -1122,18 +1121,24 @@ def plot_maxdiv_lns_agregaded_dist(d_maxdiv, d_lns, metric, field, agap, relax, 
         algo = 'lns'
         br   = 'clrandom'
      
-        if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(rel) and d_lns[b][arch][algo][metric][agap][br][rel].has_key(field)):
-            cdict = dict(**d_lns[b][arch][algo][metric][agap][br][rel][field])
-            k = sorted(cdict.keys())
+	for rel in relax:
+
+    		rel = str(rel)
+		if not lns.has_key(rel):
+			lns[rel] = dict()
+
+		if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(rel) and d_lns[b][arch][algo][metric][agap][br][rel].has_key(field)):
+		    cdict = dict(**d_lns[b][arch][algo][metric][agap][br][rel][field])
+		    k = sorted(cdict.keys())
 
 
-            for i in k:
-                val = cdict[i]['num']/cdict[i]['maxnum']
+		    for i in k:
+			val = cdict[i]['num']/cdict[i]['maxnum']
 
-                if lns.has_key(i):
-                    lns[i].append(val)
-                else:
-                    lns[i] = [val]
+		        if lns[rel].has_key(i):
+			    lns[rel][i].append(val)
+                        else:
+                            lns[rel][i] = [val]
 
 
     x = sorted(maxdiv)
@@ -1141,7 +1146,7 @@ def plot_maxdiv_lns_agregaded_dist(d_maxdiv, d_lns, metric, field, agap, relax, 
     stdev = [ sum([(j-mi[ii])**2 for j in maxdiv[i]])/(len(maxdiv[i])-1) for ii,i in enumerate(x)]
     err  = [ 2*stdev[ii]/math.sqrt(len(maxdiv[i])) for ii, i in enumerate(x)]
     if len(x) > 0:
-        plt.errorbar(x, mi, yerr = err, linestyle='-.', color=colors[0], label='MaxDiversekSet')
+        plt.errorbar(x, mi, yerr = err, linestyle=':', color=colors[0], label='MaxDiversekSet')
 
     x = sorted(random)
     mi = [ sum(random[i])/len(random[i]) for i in x ]
@@ -1149,13 +1154,16 @@ def plot_maxdiv_lns_agregaded_dist(d_maxdiv, d_lns, metric, field, agap, relax, 
     err  = [ 2*stdev[ii]/math.sqrt(len(random[i])) for ii, i in enumerate(x)]
     if len(x) > 0:
         plt.errorbar(x, mi, yerr = err,  linestyle='-.', color=colors[1], label='Random Search')
-
-    x = sorted(lns)
-    mi = [ sum(lns[i])/len(lns[i]) for i in x ]
-    stdev = [ sum([(j-mi[ii])**2 for j in lns[i]])/(len(lns[i])-1) for ii,i in enumerate(x)]
-    err  = [ 2*stdev[ii]/math.sqrt(len(lns[i])) for ii, i in enumerate(x)]
-    if len(x) > 0:
-        plt.errorbar(x, mi, yerr = err,  linestyle='-.', color=colors[1], label='LNS')
+    
+    c = 2
+    for rel in sorted(lns):
+	    x = sorted(lns[rel])
+	    mi = [ sum(lns[rel][i])/len(lns[rel][i]) for i in x ]
+	    stdev = [ sum([(j-mi[ii])**2 for j in lns[rel][i]])/(len(lns[rel][i])-1) for ii,i in enumerate(x)]
+	    err  = [ 2*stdev[ii]/math.sqrt(len(lns[rel][i])) for ii, i in enumerate(x)]
+	    if len(x) > 0:
+		plt.errorbar(x, mi, yerr = err,  linestyle='--', color=colors[c], label='LNS, relax=' + rel)
+	    	c += 1
 
 
     ax.set_ylim(bottom=0)
