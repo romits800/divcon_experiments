@@ -714,7 +714,12 @@ def plot_maxdiv_lns_dist(d_maxdiv, d_lns, b, metric, field, agap, relax):
                 
 
     ax.set_ylim(bottom=0)
-    plt.legend(loc='center right')
+    ax.set_ylabel(get_ind(field))
+    ax.set_xlabel("Number of Variants (k)")
+    ax.legend(loc='lower right')
+    fig.set_size_inches(18.5/2, 10.5/2)
+    plt.savefig("dist_" + b + "_" + metric + ".pdf", dpi=300, format='pdf')
+    #plt.legend(loc='center right')
 
     plt.title(b)
 
@@ -774,10 +779,14 @@ def plot_maxdiv_lns_time(d_maxdiv, d_lns, b, metric, field, agap, relax):
     if active:
         ax.set_yscale('log')
         ax.set_ylim(bottom=1)
-        plt.legend(loc='center right')
+        plt.legend(loc='lower right')
+        ax.set_ylabel(get_ind('stime'))
+        ax.set_xlabel("Number of Variants (k)")
     
         plt.title(b)
 
+        fig.set_size_inches(18.5/2, 10.5/2)
+        plt.savefig("time_" + b + "_" + metric + ".pdf", dpi=300, format='pdf')
         plt.show()
 
 
@@ -896,7 +905,7 @@ def plot_maxdiv_lns_dist_subplots(d_maxdiv, d_lns, bs, metric, field, agap, rela
         plot_one(b, ax)
         ax.legend(loc='lower right')
         ax.set_ylim(bottom=1)
-        ax.set_ylabel("Dist")
+        ax.set_ylabel(get_ind(field))
         ax.set_xlabel("Number of variants (k)")
         plt.title(b)
 
@@ -911,38 +920,94 @@ def plot_maxdiv_lns_dist_subplots(d_maxdiv, d_lns, bs, metric, field, agap, rela
     plt.show()
 
 
-def plot_maxdiv_lns_dist_time_subplots(d_maxdiv, d_lns, bs, metric, field, agap, relax):
+def plot_coefficient_of_variation(d_maxdiv, d_lns, b, metric, field, agap, relax):
     arch = 'mips'
     rel = str(relax)
     agap = str(agap)
     l = dict()
     fig = plt.figure()
+    ax = fig.add_subplot(1,1,1)
+
+    # MaxDiversekSet
+    algo = 'dfs'
+    br   = 'cloriginal'
+ 
+    if (d_maxdiv[b].has_key(arch) and d_maxdiv[b][arch].has_key(algo) and d_maxdiv[b][arch][algo].has_key(metric) and d_maxdiv[b][arch][algo][metric].has_key(agap) and d_maxdiv[b][arch][algo][metric][agap].has_key(br) and d_maxdiv[b][arch][algo][metric][agap][br][None].has_key(field)):
+        cdict = dict(**d_maxdiv[b][arch][algo][metric][agap][br][None][field])
+        k = sorted(cdict.keys())
+        xy = [ (i, cdict[i]['stdev']/cdict[i]['num'] if cdict[i]['num']>0 else 0) for i in  k]
+        if len(xy) > 0:
+            x,y = zip(*xy)
+            plt.plot(x, y, linestyle=':', color='k', label='MaxDiversekSet')
+
+    # Random search
+    algo = 'dfs'
+    br   = 'clrandom'
+ 
+    if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(None) and d_lns[b][arch][algo][metric][agap][br][None].has_key(field)):
+        cdict = dict(**d_lns[b][arch][algo][metric][agap][br][None][field])
+        k = sorted(cdict.keys())
+        xy = [ (i, cdict[i]['stdev']/cdict[i]['num'] if cdict[i]['num']>0 else 0) for i in  k]
+        if len(xy) > 0:
+            x,y = zip(*xy)
+            plt.plot(x, y, linestyle='-.', color='k', label='Random Search')
+ 
+    # LNS
+    algo = 'lns'
+    br   = 'clrandom'
+ 
+    if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(rel) and d_lns[b][arch][algo][metric][agap][br][rel].has_key(field)):
+        cdict = dict(**d_lns[b][arch][algo][metric][agap][br][rel][field])
+        k = sorted(cdict.keys())
+        xy = [ (i, cdict[i]['stdev']/cdict[i]['num'] if cdict[i]['num']>0 else 0) for i in  k]
+        if len(xy) > 0:
+            x,y = zip(*xy)
+            plt.plot(x, y, linestyle='--', color='darkorange', label='LNS')
+                
+
+    ax.set_ylim(bottom=0)
+    ax.set_ylabel(r'$\frac{\sigma}{\mu}$')
+    ax.set_xlabel("Number of Variants (k)")
+    ax.legend(loc='lower right')
+    fig.set_size_inches(18.5/2, 10.5/2)
+    plt.savefig("dist_" + b + "_" + metric + ".pdf", dpi=300, format='pdf')
+    #plt.legend(loc='center right')
+
+    plt.title(b)
+
+    plt.show()
 
 
-    def plot_one(b, fa, stdev, ax):
+def plot_maxdiv_lns_all_dist(d_maxdiv, d_lns, metric, field, agap, relax, benchmarks, colors):
+    arch = 'mips'
+    rel = str(relax)
+    agap = str(agap)
+    l = dict()
+    fig = plt.figure()
+    ax = fig.add_subplot(1,1,1)
+
+    # colors = ['darkorange', 'darkred', 'darkgreen', 'royalblue', 'darkorchid', 'crimson', 'olive', 'yellowgreen']
+    for b, color in zip(benchmarks, colors):
+        print b, color
+
+
+        maxdist = 0
         # MaxDiversekSet
         algo = 'dfs'
         br   = 'cloriginal'
+ 
         if (d_maxdiv[b].has_key(arch) and d_maxdiv[b][arch].has_key(algo) and d_maxdiv[b][arch][algo].has_key(metric) and d_maxdiv[b][arch][algo][metric].has_key(agap) and d_maxdiv[b][arch][algo][metric][agap].has_key(br) and d_maxdiv[b][arch][algo][metric][agap][br][None].has_key(field)):
             cdict = dict(**d_maxdiv[b][arch][algo][metric][agap][br][None][field])
-
-            # confidence interval
             k = sorted(cdict.keys())
-            xy = [ (i, cdict[i][fa], 2*cdict[i][stdev]/math.sqrt(cdict[i]['n'])) for i in  k]
-            if len(xy) > 0:
-                x,y,err = zip(*xy)
-                ax.errorbar(x, y, yerr=err, linestyle=':', color='k', label='MaxDiversekSet')
-        # Random Search
+            maxdist = max([ cdict[i]['num'] for i in  k])
+        # Random search
         algo = 'dfs'
         br   = 'clrandom'
      
         if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(None) and d_lns[b][arch][algo][metric][agap][br][None].has_key(field)):
             cdict = dict(**d_lns[b][arch][algo][metric][agap][br][None][field])
             k = sorted(cdict.keys())
-            xy = [ (i, cdict[i][fa], 2*cdict[i][stdev]/math.sqrt(cdict[i]['n'])) for i in  k]
-            if len(xy) > 0:
-                x,y,err = zip(*xy)
-                ax.errorbar(x, y, yerr=err, linestyle='-.', color='k', label='Random Search')
+            maxdist = max(maxdist, max([ cdict[i]['num'] for i in  k]))
      
         # LNS
         algo = 'lns'
@@ -951,26 +1016,165 @@ def plot_maxdiv_lns_dist_time_subplots(d_maxdiv, d_lns, bs, metric, field, agap,
         if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(rel) and d_lns[b][arch][algo][metric][agap][br][rel].has_key(field)):
             cdict = dict(**d_lns[b][arch][algo][metric][agap][br][rel][field])
             k = sorted(cdict.keys())
-            xy = [ (i, cdict[i][fa], 2*cdict[i][stdev]/math.sqrt(cdict[i]['n'])) for i in k]
+            maxdist = max(maxdist, max([ cdict[i]['num'] for i in  k]))
+ 
+
+
+
+
+        # MaxDiversekSet
+        algo = 'dfs'
+        br   = 'cloriginal'
+     
+        if (d_maxdiv[b].has_key(arch) and d_maxdiv[b][arch].has_key(algo) and d_maxdiv[b][arch][algo].has_key(metric) and d_maxdiv[b][arch][algo][metric].has_key(agap) and d_maxdiv[b][arch][algo][metric][agap].has_key(br) and d_maxdiv[b][arch][algo][metric][agap][br][None].has_key(field)):
+            cdict = dict(**d_maxdiv[b][arch][algo][metric][agap][br][None][field])
+            k = sorted(cdict.keys())
+            xy = [ (i, cdict[i]['num']/maxdist, 2*cdict[i]['stdev']/math.sqrt(cdict[i]['n'])) for i in  k]
             if len(xy) > 0:
                 x,y,err = zip(*xy)
-                ax.errorbar(x, y, yerr=err, linestyle='--', color='k', label='LNS')
-                
-    for i,b in enumerate(bs,1):
-        ax = plt.subplot(math.ceil(len(bs)/2.), 2, i)
-        plot_one(b, ax)
-        ax.legend(loc='lower right')
-        ax.set_ylim(bottom=1)
-        ax.set_ylabel("Dist")
-        ax.set_xlabel("Number of variants (k)")
-        plt.title(b)
+                plt.errorbar(x, y, alpha=0.9, linestyle=':', color=color, label='MaxDiversekSet')
 
-    plt.suptitle("Measurement for Hamming distance with optimality gap %s%%, LNS with relax rate %f" %(agap,relax), fontsize='large')
-    plt.subplots_adjust(hspace=0.5)
-    #ax.set_yscale('log')
+        # Random search
+        algo = 'dfs'
+        br   = 'clrandom'
+     
+        if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(None) and d_lns[b][arch][algo][metric][agap][br][None].has_key(field)):
+            cdict = dict(**d_lns[b][arch][algo][metric][agap][br][None][field])
+            k = sorted(cdict.keys())
+            xy = [ (i, cdict[i]['num']/maxdist, 2*cdict[i]['stdev']/math.sqrt(cdict[i]['n'])) for i in  k]
+            if len(xy) > 0:
+                x,y,err = zip(*xy)
+                plt.errorbar(x, y,  alpha=0.9, linestyle='-.', color=color, label='Random Search')
+     
+        # LNS
+        algo = 'lns'
+        br   = 'clrandom'
+     
+        if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(rel) and d_lns[b][arch][algo][metric][agap][br][rel].has_key(field)):
+            cdict = dict(**d_lns[b][arch][algo][metric][agap][br][rel][field])
+            k = sorted(cdict.keys())
+            xy = [ (i, cdict[i]['num']/maxdist, 2*cdict[i]['stdev']/math.sqrt(cdict[i]['n'])) for i in k ]
+            if len(xy) > 0:
+                x,y,err = zip(*xy)
+                plt.errorbar(x, y,  alpha=0.9, linestyle='--', color=color, label='LNS')
+                    
+
+    ax.set_ylim(bottom=0)
+    ax.set_ylabel(get_ind(field))
+    ax.set_xlabel("Number of Variants (k)")
+    ax.legend(loc='lower right')
+    fig.set_size_inches(18.5/2, 10.5/2)
+    plt.savefig("dist_" + b + "_" + metric + ".pdf", dpi=300, format='pdf')
     #plt.legend(loc='center right')
 
-    #plt.title(bs)
+    plt.title(b)
+
+    plt.show()
+
+
+def plot_maxdiv_lns_agregaded_dist(d_maxdiv, d_lns, metric, field, agap, relax, benchmarks, colors):
+    arch = 'mips'
+    agap = str(agap)
+    l = dict()
+    fig = plt.figure()
+    ax = fig.add_subplot(1,1,1)
+
+    maxdiv = dict()
+    random = dict()
+    lns = dict()
+
+    # colors = ['darkorange', 'darkred', 'darkgreen', 'royalblue', 'darkorchid', 'crimson', 'olive', 'yellowgreen']
+    for b in benchmarks:
+
+        # MaxDiversekSet
+        algo = 'dfs'
+        br   = 'cloriginal'
+     
+        if (d_maxdiv[b].has_key(arch) and d_maxdiv[b][arch].has_key(algo) and d_maxdiv[b][arch][algo].has_key(metric) and d_maxdiv[b][arch][algo][metric].has_key(agap) and d_maxdiv[b][arch][algo][metric][agap].has_key(br) and d_maxdiv[b][arch][algo][metric][agap][br][None].has_key(field)):
+            cdict = dict(**d_maxdiv[b][arch][algo][metric][agap][br][None][field])
+            k = sorted(cdict.keys())
+            for i in k:
+                val = cdict[i]['num']/cdict[i]['maxnum']
+
+                if maxdiv.has_key(i):
+                    maxdiv[i].append(val)
+                else:
+                    maxdiv[i] = [val]
+
+        # Random search
+        algo = 'dfs'
+        br   = 'clrandom'
+     
+        if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(None) and d_lns[b][arch][algo][metric][agap][br][None].has_key(field)):
+            cdict = dict(**d_lns[b][arch][algo][metric][agap][br][None][field])
+            k = sorted(cdict.keys())
+
+            for i in k:
+                val = cdict[i]['num']/cdict[i]['maxnum']
+
+                if random.has_key(i):
+                    random[i].append(val)
+                else:
+                    random[i] = [val]
+
+        # LNS
+        algo = 'lns'
+        br   = 'clrandom'
+     
+	for rel in relax:
+
+    		rel = str(rel)
+		if not lns.has_key(rel):
+			lns[rel] = dict()
+
+		if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(rel) and d_lns[b][arch][algo][metric][agap][br][rel].has_key(field)):
+		    cdict = dict(**d_lns[b][arch][algo][metric][agap][br][rel][field])
+		    k = sorted(cdict.keys())
+
+
+		    for i in k:
+			val = cdict[i]['num']/cdict[i]['maxnum']
+
+		        if lns[rel].has_key(i):
+			    lns[rel][i].append(val)
+                        else:
+                            lns[rel][i] = [val]
+
+
+    x = sorted(maxdiv)
+    mi = [ sum(maxdiv[i])/len(maxdiv[i]) for i in x ]
+    stdev = [ sum([(j-mi[ii])**2 for j in maxdiv[i]])/(len(maxdiv[i])-1) for ii,i in enumerate(x)]
+    err  = [ 2*stdev[ii]/math.sqrt(len(maxdiv[i])) for ii, i in enumerate(x)]
+    if len(x) > 0:
+        plt.errorbar(x, mi, yerr = err, linestyle=':', color=colors[0], label='MaxDiversekSet')
+
+    x = sorted(random)
+    mi = [ sum(random[i])/len(random[i]) for i in x ]
+    stdev = [ sum([(j-mi[ii])**2 for j in random[i]])/(len(random[i])-1) for ii,i in enumerate(x)]
+    err  = [ 2*stdev[ii]/math.sqrt(len(random[i])) for ii, i in enumerate(x)]
+    if len(x) > 0:
+        plt.errorbar(x, mi, yerr = err,  linestyle='-.', color=colors[1], label='Random Search')
+    
+    c = 2
+    for rel in sorted(lns):
+	    x = sorted(lns[rel])
+	    mi = [ sum(lns[rel][i])/len(lns[rel][i]) for i in x ]
+	    stdev = [ sum([(j-mi[ii])**2 for j in lns[rel][i]])/(len(lns[rel][i])-1) for ii,i in enumerate(x)]
+	    err  = [ 2*stdev[ii]/math.sqrt(len(lns[rel][i])) for ii, i in enumerate(x)]
+	    if len(x) > 0:
+		plt.errorbar(x, mi, yerr = err,  linestyle='--', color=colors[c], label='LNS, relax=' + rel)
+	    	c += 1
+
+
+    ax.set_ylim(bottom=0)
+    ax.set_ylabel(get_ind(field))
+    ax.set_xlabel("Number of Variants (k)")
+    ax.legend(loc='lower right')
+    fig.set_size_inches(18.5/2, 10.5/2)
+    plt.savefig("dist_" + b + "_" + metric + ".pdf", dpi=300, format='pdf')
+    #plt.legend(loc='center right')
+
+    plt.title(b)
 
     plt.show()
 
