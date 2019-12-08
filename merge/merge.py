@@ -40,7 +40,7 @@ def avg(l):
 def stdev(l,av):
     sl = [(i-av)**2 for i in l]
     if len(sl)!=0:
-        return math.sqrt(sum(sl)/(len(sl)-1))
+        return math.sqrt(sum(sl)/len(sl))
     else: 
         return -1
 
@@ -92,7 +92,7 @@ for b in ds[0]:
                             if len(hamm)>0 and len(mhamm) > 0:
                                 av = avg(hamm)
                                 std = stdev(hamm, av)
-                                mn = avg(mhamm)
+                                mn = avg(hamm)
                                 n = len(hamm)
                                 d[b][arch][method][metric][agap][branch][relax]['avg'] = { 'num': av, 'stdev': std, 'n': n, 'maxnum': mn, 'data' : dhamm}
 

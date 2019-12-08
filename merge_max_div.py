@@ -40,7 +40,7 @@ def avg(l):
 def stdev(l,av):
     sl = [(i-av)**2 for i in l]
     if len(sl)!=0:
-        return math.sqrt(sum(sl)/len(sl))
+        return math.sqrt(sum(sl)/(len(sl)-1))
     else: 
         return -1
 

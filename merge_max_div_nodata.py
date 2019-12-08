@@ -39,10 +39,10 @@ def avg(l):
 
 def stdev(l,av):
     sl = [(i-av)**2 for i in l]
-    if len(sl)!=0:
-        return math.sqrt(sum(sl)/len(sl))
+    if len(sl)>1:
+        return math.sqrt(sum(sl)/(len(sl)-1))
     else: 
-        return -1
+        return 0
 
 def create_dicts(ds, b, arch, method, metric, agap, branch, relax, field):
   hamm = dict()
