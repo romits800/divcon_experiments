@@ -2,7 +2,9 @@
 
 
 flags="--disable-relax-y --disable-relax-y --disable-relax-r --disable-copy-dominance-constraints --disable-infinite-register-dominance-constraints --disable-operand-symmetry-breaking-constraints --disable-register-symmetry-breaking-constraints --disable-temporary-symmetry-breaking-constraints --disable-wcet-constraints"
+#missing_files="/home/romi/didaktoriko/unison/romi_unison/divCon/src/unison/test/fast/Hexagon/speed/mesa.api.glIndexd.mir /home/romi/didaktoriko/unison/romi_unison/divCon/src/unison/test/fast/Hexagon/speed/sphinx3.glist.glist_tail.mir /home/romi/didaktoriko/unison/romi_unison/divCon/src/unison/test/fast/Hexagon/speed/sphinx3.profile.ptmr_init.mir"
 
+#test_files="/home/romi/didaktoriko/unison/romi_unison/divCon/src/unison/test/fast/Mips/speed/gobmk.board.get_last_player.mir"
 # In kbytes: 10Gbytes
 ulimit -v 10485760
 
@@ -93,13 +95,13 @@ do
 
 	for agap in 10 #20 #2 5 10 20 50
 	do
-	    for ndivs in 100
+	    for ndivs in 1000
 	    do
 	        for dist in "diff_br_hamming" "hamming" "br_hamming" "levenshtein"
 		do
-	            for branch in  "clrandom" "cloriginal" # "original"
+	            for branch in "clrandom" "cloriginal" # "original"
                     do
-                       for relax in 0.4 0.6 0.8 0.9 
+                        for relax in 0.4 0.6 0.8 0.9 
                         do
                             for lp in 10000 #100000 
                             do
