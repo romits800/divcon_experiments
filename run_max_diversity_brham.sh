@@ -9,6 +9,13 @@ flags="--disable-copy-dominance-constraints --disable-infinite-register-dominanc
 # In kbytes: 10Gbytes
 ulimit -v 10485760
 
+if [ $# -lt 4 ]
+then
+    echo "Required parameters not provided."
+    echo "./run_max_diversity_brham.sh <divs_path> <divs_dir> <run_path> <seed>"
+fi
+
+
 RUN_DIR=.
 if [ $# -ge 3 ]
 then
@@ -39,6 +46,12 @@ DIVS_DIR=divs_dir
 if [ $# -ge 2 ]
 then
     DIVS_DIR=$2
+fi
+
+seed=11
+if [ $# -ge 4 ]
+then
+    seed=$4
 fi
 
 
@@ -104,9 +117,9 @@ do
                     do
                         if [ ! -f $fnoextension.out.json ]; then
                             echo "File not found! Falling back to llvm basefile"
-                            time timeout 30m gecode-diversify ${flags} --acceptable-gap $agap --div-method monolithic_dfs --distance ${dist} --number-divs $ndivs --divs-dir $DIVS_DIR  -o $fnoextension.out.json --branching ${branch} --verbose $fnoextension.ext.json
+                            time timeout 30m gecode-diversify ${flags} --acceptable-gap $agap --div-method monolithic_dfs --seed $seed --distance ${dist} --number-divs $ndivs --divs-dir $DIVS_DIR  -o $fnoextension.out.json --branching ${branch} --verbose $fnoextension.ext.json
                         else
-                            time timeout 30m gecode-diversify ${flags} --acceptable-gap $agap  --div-method monolithic_dfs --distance ${dist} --number-divs $ndivs --solver-file $fnoextension.out.json --use-optimal-for-diversification --divs-dir $DIVS_DIR -o $fnoextension.out.json --branching ${branch} --verbose $fnoextension.ext.json
+                            time timeout 30m gecode-diversify ${flags} --acceptable-gap $agap  --div-method monolithic_dfs --seed $seed --distance ${dist} --number-divs $ndivs --solver-file $fnoextension.out.json --use-optimal-for-diversification --divs-dir $DIVS_DIR -o $fnoextension.out.json --branching ${branch} --verbose $fnoextension.ext.json
                         fi
                         python stats.py div_monolithic_dfs_${arch}_${fnoextension}_${agap}_${ndivs}_${dist}_${branch} ${fnoextension}  ${DIVS_DIR} ${RESULT_PATH} 
                         echo "Deleting the diversified files."
