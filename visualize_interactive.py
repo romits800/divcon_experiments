@@ -686,8 +686,8 @@ def plot_maxdiv_lns_dist(d_maxdiv, d_lns, b, metric, field, agap, relax):
         xy = [ (i, cdict[i]['num'], 2*cdict[i]['stdev']/math.sqrt(cdict[i]['n'])) for i in  k]
         if len(xy) > 0:
             x,y,err = map(np.array,zip(*xy))
-            plt.plot(x, y, linestyle=':', color='r', label='MaxDiversekSet')
-            plt.fill_between(x, y-err, y+err, linestyle=':', color='r', alpha = 0.2)
+            plt.plot(x, y, linestyle='--', color='r', label='MaxDiversekSet')
+            plt.fill_between(x, y-err, y+err, linestyle='-.', color='r', alpha = 0.2)
             #plt.errorbar(x, y, yerr=err, linestyle=':', color='k', label='MaxDiversekSet')
 
     # Random search
@@ -700,7 +700,7 @@ def plot_maxdiv_lns_dist(d_maxdiv, d_lns, b, metric, field, agap, relax):
         xy = [ (i, cdict[i]['num'], 2*cdict[i]['stdev']/math.sqrt(cdict[i]['n'])) for i in  k]
         if len(xy) > 0:
             x,y,err = map(np.array, zip(*xy))
-            plt.plot(x, y, linestyle='-.', color='g', label='Random Search')
+            plt.plot(x, y, linestyle='--', color='g', label='Random Search')
             plt.fill_between(x, y-err, y+err, linestyle='-.', color='g', alpha = 0.2)
             #plt.errorbar(x, y, yerr=err, linestyle='-.', color='k', label='Random Search')
  
@@ -715,18 +715,18 @@ def plot_maxdiv_lns_dist(d_maxdiv, d_lns, b, metric, field, agap, relax):
         if len(xy) > 0:
             x,y,err = map(np.array, zip(*xy))
             plt.plot(x, y, linestyle='--', color='b', label='LNS')
-            plt.fill_between(x, y-err, y+err, linestyle='--', color='b', alpha = 0.2)
+            plt.fill_between(x, y-err, y+err, linestyle='-.', color='b', alpha = 0.2)
                 
 
     ax.set_ylim(bottom=0)
     ax.set_ylabel(get_ind(field))
     ax.set_xlabel("Number of Variants (k)")
     ax.legend(loc='lower right')
-    fig.set_size_inches(18.5/2, 10.5/2)
-    plt.savefig("dist_" + b + "_" + metric + ".pdf", dpi=300, format='pdf')
+    plt.title(b)
+    fig.set_size_inches(18.5/3, 12.5/3)
+    plt.savefig("dist_" + b + "_" + metric + ".pdf", dpi=400, format='pdf')
     #plt.legend(loc='center right')
 
-    plt.title(b)
 
     plt.show()
 
@@ -752,10 +752,10 @@ def plot_maxdiv_lns_time(d_maxdiv, d_lns, b, metric, field, agap, relax):
         xy = [ (i, cdict[i]['stime'], 2*cdict[i]['stime_stdev']/math.sqrt(cdict[i]['n'])) for i in  k]
         if len(xy) > 0:
             x,y,err = map(np.array, zip(*xy))
-            plt.plot(x, y, linestyle=':', color='r', label='MaxDiversekSet')
+            plt.plot(x, y, linestyle='--', color='r', label='MaxDiversekSet')
             ymerr = y-err
             np.clip(ymerr, 0, max(ymerr), out=ymerr)
-            plt.fill_between(x, ymerr, y+err, linestyle='--', color='r', alpha = 0.2)
+            plt.fill_between(x, ymerr, y+err, linestyle='-.', color='r', alpha = 0.2)
             active = True
     # Random Search
     algo = 'dfs'
@@ -767,10 +767,10 @@ def plot_maxdiv_lns_time(d_maxdiv, d_lns, b, metric, field, agap, relax):
         xy = [ (i, cdict[i]['stime'], 2*cdict[i]['stime_stdev']/math.sqrt(cdict[i]['n'])) for i in  k]
         if len(xy) > 0:
             x,y,err = map(np.array, zip(*xy))
-            plt.plot(x, y, linestyle=':', color='g', label='Random Search')
+            plt.plot(x, y, linestyle='--', color='g', label='Random Search')
             ymerr = y-err
             np.clip(ymerr, 0, max(ymerr), out=ymerr)
-            plt.fill_between(x, ymerr, y+err, linestyle='--', color='g', alpha = 0.2)
+            plt.fill_between(x, ymerr, y+err, linestyle='-.', color='g', alpha = 0.2)
             active = True
  
     # LNS
@@ -783,10 +783,10 @@ def plot_maxdiv_lns_time(d_maxdiv, d_lns, b, metric, field, agap, relax):
         xy = [ (i, cdict[i]['stime'], 2*cdict[i]['stime_stdev']/math.sqrt(cdict[i]['n'])) for i in k]
         if len(xy) > 0:
             x,y,err = map(np.array, zip(*xy))
-            plt.plot(x, y, linestyle=':', color='b', label='LNS')
+            plt.plot(x, y, linestyle='--', color='b', label='LNS')
             ymerr = y-err
             np.clip(ymerr, 0, max(ymerr), out=ymerr)
-            plt.fill_between(x, ymerr, y+err, linestyle='--', color='b', alpha = 0.2)
+            plt.fill_between(x, ymerr, y+err, linestyle='-.', color='b', alpha = 0.2)
             active = True
                 
 
@@ -799,8 +799,8 @@ def plot_maxdiv_lns_time(d_maxdiv, d_lns, b, metric, field, agap, relax):
     
         plt.title(b)
 
-        fig.set_size_inches(18.5/2, 10.5/2)
-        plt.savefig("time_" + b + "_" + metric + ".pdf", dpi=300, format='pdf')
+        fig.set_size_inches(18.5/3, 12.5/3)
+        plt.savefig("time_" + b + "_" + metric + ".pdf", dpi=400, format='pdf')
         plt.show()
 
 
@@ -962,7 +962,7 @@ def plot_coefficient_of_variation(d_maxdiv, d_lns, b, metric, field, agap, relax
 
     # Random search
     algo = 'dfs'
-    br   = 'random'
+    br   = 'clrandom'
  
     if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(None) and d_lns[b][arch][algo][metric][agap][br][None].has_key(field)):
         cdict = dict(**d_lns[b][arch][algo][metric][agap][br][None][field])
@@ -989,11 +989,11 @@ def plot_coefficient_of_variation(d_maxdiv, d_lns, b, metric, field, agap, relax
     ax.set_ylabel(r'$\frac{\sigma}{\mu}$')
     ax.set_xlabel("Number of Variants (k)")
     ax.legend(loc='lower right')
-    fig.set_size_inches(18.5/2, 10.5/2)
-    plt.savefig("cf_dist_" + b + "_" + metric + ".pdf", dpi=300, format='pdf')
+    plt.title(b)
+    fig.set_size_inches(18.5/3, 12.5/3)
+    plt.savefig("cf_dist_" + b + "_" + metric + ".pdf", dpi=400, format='pdf')
     #plt.legend(loc='center right')
 
-    plt.title(b)
 
     plt.show()
 
@@ -1059,8 +1059,8 @@ def plot_maxdiv_lns_all_dist(d_maxdiv, d_lns, metric, field, agap, relax, benchm
     ax.set_ylabel(get_ind(field))
     ax.set_xlabel("Number of Variants (k)")
     ax.legend(loc='lower right')
-    fig.set_size_inches(18.5/2, 10.5/2)
-    plt.savefig("dist_" + b + "_" + metric + ".pdf", dpi=300, format='pdf')
+    fig.set_size_inches(18.5/3, 12.5/3)
+    plt.savefig("dist_" + b + "_" + metric + ".pdf", dpi=400, format='pdf')
     #plt.legend(loc='center right')
 
     plt.title(b)
@@ -1166,11 +1166,11 @@ def plot_maxdiv_lns_aggregaded_dist(d_maxdiv, d_lns, metric, field, agap, relax,
     ax.set_ylabel(get_ind(field))
     ax.set_xlabel("Number of Variants (k)")
     ax.legend(loc='lower right')
-    fig.set_size_inches(18.5/2, 10.5/2)
-    plt.savefig("dist_" + b + "_" + metric + ".pdf", dpi=300, format='pdf')
+    plt.title(b)
+    fig.set_size_inches(18.5/3, 12.5/3)
+    plt.savefig("dist_" + metric + ".pdf", dpi=400, format='pdf')
     #plt.legend(loc='center right')
 
-    plt.title(b)
 
     plt.show()
 
