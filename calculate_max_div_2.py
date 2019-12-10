@@ -87,12 +87,12 @@ interval_list = sorted(filter(lambda x: x>1 and x<201,{int(1.08**i) for i in ran
 for benchmark in listdir(pathname):
     print benchmark
     d[benchmark] = dict()
-    pat = re.compile("div_monolithic_([^_]*)_([^_]*)_%s_([0-9]+)_([0-9]+)_([^0-9]*hamming|levenshtein)_([^_]+)(_.*|).pickle"  %benchmark)
+    pat = re.compile("div_monolithic_([^_]*)_([^_]*)_%s_([0-9]+)_([0-9]+)_([^0-9]*hamming|levenshtein)_([^_]+)_([0-9]+)(_.*|).pickle"  %benchmark)
     for pfile in listdir(pathname + "/" + benchmark + "/"):
         if pfile.endswith("pickle"):
             try:
                 a = re.match(pat,pfile)
-                method,arch,agap,divs,metric,branch,rest = a.groups()
+                method,arch,agap,divs,metric,branch,seed,rest = a.groups()
             except:
                 print "Exception: ", pfile
                 continue
