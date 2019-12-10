@@ -122,7 +122,7 @@ do
                     echo "Deleting the diversified files."
                     rm ${DIVS_DIR}/*.$fnoextension.out.json
                     #fi
-                    for relax in 0.4 0.6 0.8 1.0 
+                    for relax in 0.2 0.4 0.6 0.8 1.0 
                     do
                         for lp in 10000 #100000 
                         do
