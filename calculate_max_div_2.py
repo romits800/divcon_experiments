@@ -103,7 +103,7 @@ for benchmark in listdir(pathname):
             # restart = None
             if method == "lns":
                 try:
-                    pat2 = re.compile("_(0.[0-9]+)_([0-9]+)_(.*)")
+                    pat2 = re.compile("_([01].[0-9]+)_([0-9]+)_(.*)")
                     a = re.match(pat2,rest)
                     relax, constant, restart = a.groups() 
                     #if constant != s_constant:
