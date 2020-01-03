@@ -24,8 +24,10 @@ files = []
 
 for fil in dirs:
     if fil.endswith(".o"):
-        files.append(path + fil)
+        newfile = os.path.join(path, fil)
+        files.append(newfile)
 print len(files)
+print files
 
 pat2 = r".*Gadgets information\n=+\n(.*)Unique gadgets found: ([0-9]+).*"
 t = [ [ 0. for i in files ] for j in files ] 
@@ -37,6 +39,8 @@ for iinp, inp in enumerate(files):
     #print output.split("\n")
     out, numbergadgets = re.match(pat2, output, re.DOTALL).groups()
     numbergadgets = int(numbergadgets)
+
+    print inp, numbergadgets
 
     if numbergadgets == 0:
         #d[inp] = { inp2: 0. for inp2 in files }
