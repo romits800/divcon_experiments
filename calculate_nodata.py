@@ -110,7 +110,7 @@ for benchmark in listdir(pathname):
             #arch = a.group(2)
             files = pickle.load(open(pathname + "/" +  benchmark + "/" + pfile))
             files = {h:files[h] for h in files if benchmark in h}
-            # cycles = {h:files[h]['cycles'] for h in files if files[h].has_key('cycles')}
+
             #####################
             precycles = {h:[ (c,j) for  c,j  in zip(files[h]['global_cycles'],files[h]['type']) if j in [0,1,2,3,4,14]] for h in files if files[h].has_key('type') and files[h].has_key('global_cycles')}
             cycles = {h: [c for c,j in precycles[h]] for h in precycles}
@@ -120,8 +120,7 @@ for benchmark in listdir(pathname):
 
             brcycles = {h:[ c for  i,c  in prebrcycles[h]] for h in prebrcycles}
             #####################
-            
-            solver_times = {h:files[h]['solver_time'] for h in files if files[h].has_key('solver_time')}
+ 
             levcycles = {h:reverse_order(cycles[h]) for h in cycles }
             stime = max([ files[h]['solver_time'] for h in files if files[h].has_key('solver_time') ])/1000. # the maximum should be the last
             cost = [files[h]['cost'][0] for h in files if files[h].has_key('cost')]# the cost
@@ -129,7 +128,7 @@ for benchmark in listdir(pathname):
             avgcost = 0
             if len(cost) > 0:
                 avgcost = sum(cost)/(len(cost))
-            fnames_sorted = sorted([fi for fi in cycles.keys() if fi.split(".")[0].isdigit()], key=lambda x: int(x.split(".")[0]))
+            fnames = [ fi for fi in cycles.keys() if fi.split(".")[0].isdigit()]
 
 
 	    if not d[benchmark].has_key(arch):
@@ -145,103 +144,83 @@ for benchmark in listdir(pathname):
             if not d[benchmark][arch][method][metric][agap][branch].has_key(relax):
                 d[benchmark][arch][method][metric][agap][branch][relax] = dict()
  
-            d[benchmark][arch][method][metric][agap][branch][relax]['divs'] = len(fnames_sorted)
+            d[benchmark][arch][method][metric][agap][branch][relax]['divs'] = len(fnames)
             d[benchmark][arch][method][metric][agap][branch][relax]['cost'] = { 'num': avgcost, 'maxnum': 0}
             d[benchmark][arch][method][metric][agap][branch][relax]['stime'] = { 'num': stime, 'maxnum': 0}
 
 
             ## Hamming Distance
-            d[benchmark][arch][method][metric][agap][branch][relax]['avg'] = dict()
-            for ii in range(2,len(fnames_sorted)):
-                intd = dict()
-                sumhd = 0
-                count = 0
-                maxnum = 0
-                fnames = fnames_sorted[:ii]
+            intd = dict()
+            sumhd = 0
+            count = 0
+            maxnum = 0
 
-                stime = solver_times[fnames[-1]]
+            for i in range(len(fnames)):
+                for j in range(i+1, len(fnames)):
+                   f1,f2 = fnames[i],fnames[j]
+                   intd[(f1,f2)] = sum([ (1. if k!=l else 0.) for (k,l) in zip(cycles[f1],cycles[f2])] ) #zip(files[f1],files[f2])
+                   sumhd += intd[(f1,f2)]
+                   count += 1.
+                maxnum = len(cycles[fnames[i]])
 
-                for i in range(len(fnames)):
-                    for j in range(i+1, len(fnames)):
-                       f1,f2 = fnames[i],fnames[j]
-                       intd[(f1,f2)] = sum([ (1. if k!=l else 0.) for (k,l) in zip(cycles[f1],cycles[f2])] ) #zip(files[f1],files[f2])
-                       sumhd += intd[(f1,f2)]
-                       count += 1.
-                    maxnum = len(cycles[fnames[i]])
-
-                if not count == 0:
-                    d[benchmark][arch][method][metric][agap][branch][relax]['avg'][ii] = { 'num': round(sumhd/count,2), 'maxnum': maxnum, 'data': intd.values(), 'stime': stime }
+            if not count == 0:
+                d[benchmark][arch][method][metric][agap][branch][relax]['avg'] = { 'num':round(sumhd/count,2),'maxnum': maxnum}
 
             ## Branch Hamming Distance
-            d[benchmark][arch][method][metric][agap][branch][relax]['bravg'] = dict()
+            intd = dict()
+            sumhd = 0
+            count = 0
+            maxnum = 0
+            for i in range(len(fnames)):
+                for j in range(i+1, len(fnames)):
+                    f1,f2 = fnames[i],fnames[j]
+                    intd[(f1,f2)] = sum([ (1. if k!=l else 0.) for (k,l) in zip(brcycles[f1],brcycles[f2])] ) #zip(files[f1],files[f2])
+                    sumhd += intd[(f1,f2)]
+                    count += 1.
+                maxnum = len(brcycles[fnames[i]])
 
-            for ii in range(2,len(fnames_sorted)):
-                intd = dict()
-                sumhd = 0
-                count = 0
-                maxnum = 0
-                fnames = fnames_sorted[:ii]
-                stime = solver_times[fnames[-1]]
-                for i in range(len(fnames)):
-                    for j in range(i+1, len(fnames)):
-                        f1,f2 = fnames[i],fnames[j]
-                        intd[(f1,f2)] = sum([ (1. if k!=l else 0.) for (k,l) in zip(brcycles[f1],brcycles[f2])] ) #zip(files[f1],files[f2])
-                        sumhd += intd[(f1,f2)]
-                        count += 1.
-                    maxnum = len(brcycles[fnames[i]])
-
-                if not count == 0:
-                    d[benchmark][arch][method][metric][agap][branch][relax]['bravg'][ii] = {'num': round(sumhd/count,4), 'maxnum': maxnum, 'data': intd.values(), 'stime': stime}
+            if not count == 0:
+             	d[benchmark][arch][method][metric][agap][branch][relax]['bravg'] = {'num': round(sumhd/count,4), 'maxnum': maxnum}
 
 
             ## Branch Diff Hamming Distance
-	    d[benchmark][arch][method][metric][agap][branch][relax]['brdiff'] = dict()
+            intd = dict()
+            sumhd = 0
+            count = 0
+            maxnum = 0
+            for i in range(len(fnames)):
+                for j in range(i+1, len(fnames)):
+                    f1,f2 = fnames[i],fnames[j]
 
-            for ii in range(2,len(fnames_sorted)):
-                intd = dict()
-                sumhd = 0
-                count = 0
-                maxnum = 0
-                fnames = fnames_sorted[:ii]
-                stime = solver_times[fnames[-1]]
-                for i in range(len(fnames)):
-                    for j in range(i+1, len(fnames)):
-                        f1,f2 = fnames[i],fnames[j]
+                    brcycles1 = [c-cc for jj,(iii,cc) in enumerate(prebrcycles[f1]) for c in cycles[f1][doublebrcycles[f1][jj]:iii-1] ] 
+                    brcycles2 = [c-cc for jj,(iii,cc) in enumerate(prebrcycles[f2]) for c in cycles[f2][doublebrcycles[f1][jj]:iii-1] ] 
 
-                        brcycles1 = [c-cc for jj,(iii,cc) in enumerate(prebrcycles[f1]) for c in cycles[f1][doublebrcycles[f1][jj]:iii-1] ] 
-                        brcycles2 = [c-cc for jj,(iii,cc) in enumerate(prebrcycles[f2]) for c in cycles[f2][doublebrcycles[f1][jj]:iii-1] ] 
-                    #
-
-                        intd[(f1,f2)] = sum([ (1. if k!=l else 0.) for (k,l) in zip(brcycles1,brcycles2)] ) #zip(files[f1],files[f2])
-                        sumhd += intd[(f1,f2)]
-                        count += 1.
-                        maxnum = len(brcycles1)
+                    intd[(f1,f2)] = sum([ (1. if k!=l else 0.) for (k,l) in zip(brcycles1,brcycles2)] ) #zip(files[f1],files[f2])
+                    sumhd += intd[(f1,f2)]
+                    count += 1.
+                    maxnum = len(brcycles1)
 
 
-                if not count == 0:
-                    d[benchmark][arch][method][metric][agap][branch][relax]['brdiff'][ii] = {'num': round(sumhd/count,2), 'maxnum': maxnum, 'data': intd.values(), 'stime': stime} 
+            if not count == 0:
+		d[benchmark][arch][method][metric][agap][branch][relax]['brdiff'] = {'num': round(sumhd/count,2), 'maxnum': maxnum} 
 
             ## Levenshtein Distance
-            d[benchmark][arch][method][metric][agap][branch][relax]['levenshtein'] = dict()
-            for ii in range(2,len(fnames_sorted)):
-                intd = dict()
-                sumhd = 0
-                count = 0
-                maxnum = 0
-                fnames = fnames_sorted[:ii]
-                stime = solver_times[fnames[-1]]
-                for i in range(len(fnames)):
-                    for j in range(i+1, len(fnames)):
-                        f1,f2 = fnames[i],fnames[j]
+            intd = dict()
+            sumhd = 0
+            count = 0
+            maxnum = 0
+            for i in range(len(fnames)):
+                for j in range(i+1, len(fnames)):
+                    f1,f2 = fnames[i],fnames[j]
 
-                        intd[(f1,f2)] = levenshtein_distance(levcycles[f1], levcycles[f2])
-                        sumhd += intd[(f1,f2)]
-                        count += 1.
-                        maxnum = len(levcycles[fnames[i]])
+                    intd[(f1,f2)] = levenshtein_distance(levcycles[f1], levcycles[f2])
+                    sumhd += intd[(f1,f2)]
+                    count += 1.
+                    maxnum = len(levcycles[fnames[i]])
 
 
-                if not count == 0:
-                    d[benchmark][arch][method][metric][agap][branch][relax]['levenshtein'][ii] = {'num': round(sumhd/count,2), 'maxnum': maxnum, 'data': intd.values(), 'stime': stime}
+            if not count == 0:
+		d[benchmark][arch][method][metric][agap][branch][relax]['levenshtein'] = {'num': round(sumhd/count,2), 'maxnum': maxnum}
 
 
 newpath = pathname.strip("/")

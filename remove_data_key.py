@@ -7,5 +7,5 @@ def remove_data(d):
 def remove_all_data(d):
     remove_data(d)
     for k in d.keys():
-        if type(k) == type(dict()):
-            remove_all_data(k)
+        if type(d[k]) == type(dict()):
+            remove_all_data(d[k])
