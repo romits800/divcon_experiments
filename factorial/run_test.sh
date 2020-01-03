@@ -18,26 +18,26 @@ uni model --target=Mips $input.alt.uni -o $input.json --basefile=$input.llvm.mir
 # /usr/local/bin/gecode-presolver
 gecode-presolver -o $input.ext.json -dzn $input.dzn --verbose $input.json
 # /usr/local/bin/gecode-solver
-##gecode-solver  -o $input.out.json --verbose $input.ext.json
+gecode-solver  -o $input.out.json --verbose $input.ext.json
 
 #echo "/home/romi/didaktoriko/unison/romi_unison/unison/src/solvers/multi_backend/portfolio-solver -o $input.out.json --verbose $input.ext.json"
 #/home/romi/didaktoriko/unison/romi_unison/unison/src/solvers/multi_backend/portfolio-solver -o $input.out.json --verbose $input.ext.json
 
 flags="--disable-copy-dominance-constraints --disable-infinite-register-dominance-constraints --disable-operand-symmetry-breaking-constraints --disable-register-symmetry-breaking-constraints --disable-temporary-symmetry-breaking-constraints --disable-wcet-constraints"
 
-##gecode-diversify $flags --acceptable-gap 45 --relax 0.8 --seed 12 --number-divs 100 --restart constant --restart-base 10000 --distance levenshtein --div-method monolithic_lns -o $input.out.json --use-optimal-for-diversification --solver-file $input.out.json  --branching random --verbose $input.ext.json
+gecode-diversify $flags --acceptable-gap 45 --relax 0.8 --seed 12 --number-divs 100 --restart constant --restart-base 10000 --distance levenshtein --div-method monolithic_lns -o $input.out.json --use-optimal-for-diversification --solver-file $input.out.json  --branching random --verbose $input.ext.json
 
 
-##for i in *.${input}.out.json; 
-##do 
-    ##uni export --keepnops --target=Mips $input.alt.uni -o $i.unison.mir --basefile=${input}.llvm.mir --solfile=$i; 
-##done
+for i in *.${input}.out.json; 
+do 
+    uni export --keepnops --target=Mips $input.alt.uni -o $i.unison.mir --basefile=${input}.llvm.mir --solfile=$i; 
+done
 
 # /usr/local/bin/uni
 #uni export --target=Mips $input.alt.uni -o $input.unison.mir --basefile=$input.llvm.mir --solfile=$input.out.json
 
 
-. /home/romi/opt/mcb32tools/environment
+#. /home/romi/opt/mcb32tools/environment
 
 for i in *.${input}.out.json.unison.mir
 do
