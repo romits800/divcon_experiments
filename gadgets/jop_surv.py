@@ -1,16 +1,22 @@
 import re
 from capstone import *
 from subprocess import *
-import os
+import os, sys
 
 pat = r"(0x[0-9a-fA-F]+) : (.*)"
 
 def filter_nops(code): return filter(lambda x: x != 'nop', code)
 def strip(code): return map(lambda x: x.strip(), code)
 
+if (len(sys.argv) < 2):
+    print "Give as argument the path with the compiled binaries"
+    print "python jop_surv.pyp <path-to-dot-o-files>"
+    exit(0) 
+
+
+path = sys.argv[1]
 
 # Open a file
-path = "/home/romi/didaktoriko/teaching/is1200/labs/gadgets/"
 dirs = os.listdir( path )
 
 # This would print all the files and directories
