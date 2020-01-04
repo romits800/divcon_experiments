@@ -1,0 +1,378 @@
+--- |
+  ; ModuleID = '/home/romi/didaktoriko/unison/unison-experiments/experiments/mips/selected-functions/size-toplas/gcc.cpplib._cpp_init_internal_pragmas.ll'
+  target datalayout = "E-m:m-p:32:32-i8:8:32-i16:16:32-i64:64-n32-S64"
+  target triple = "mips--linux-gnu"
+  
+  %struct.cpp_reader.541 = type { %struct.cpp_buffer.542*, %struct.lexer_state.543, %struct.line_maps.544, %struct.line_map.545*, i32, i32, %struct._cpp_buff.546*, %struct._cpp_buff.546*, %struct._cpp_buff.546*, %struct.cpp_context.547, %struct.cpp_context.547*, %struct.directive.540*, %struct.cpp_hashnode.548*, %struct.cpp_hashnode.548*, i8, %struct.cpp_token.549*, %struct.tokenrun.550, %struct.tokenrun.550*, i32, i32, i32, i32, i32, i8*, i32, %struct.splay_tree_s.551*, i32, %struct.cpp_token.549, %struct.cpp_token.549, %struct.cpp_token.549, %struct.cpp_token.549, %struct.deps.552*, %struct.obstack.553, %struct.obstack.553, %struct.pragma_entry.554*, %struct.cpp_callbacks.555, %struct.ht.556*, %struct.cpp_options.557, %struct.spec_nodes.558, i8, i8 }
+  %struct.cpp_buffer.542 = type { i8*, i8*, i8*, i8*, %struct.cpp_buffer.542*, i8*, %struct.include_file.559*, %struct.if_stack.560*, i32, i8, i8*, i8, i8, i8, i8, %struct.search_path.561 }
+  %struct.include_file.559 = type opaque
+  %struct.if_stack.560 = type { %struct.if_stack.560*, i32, %struct.cpp_hashnode.548*, i8, i8, i32 }
+  %struct.search_path.561 = type { %struct.search_path.561*, i8*, i32, i32, i64, i32, %struct.file_name_map.562* }
+  %struct.file_name_map.562 = type opaque
+  %struct.lexer_state.543 = type { i8, i8, i8, i8, i8, i8, i8, i8, i8 }
+  %struct.line_maps.544 = type { %struct.line_map.545*, i32, i32, i32, i32, i8 }
+  %struct.line_map.545 = type { i8*, i32, i32, i32, i8, i8 }
+  %struct._cpp_buff.546 = type { %struct._cpp_buff.546*, i8*, i8*, i8* }
+  %struct.cpp_context.547 = type { %struct.cpp_context.547*, %struct.cpp_context.547*, %union.utoken.563, %union.utoken.563, %struct._cpp_buff.546*, %struct.cpp_hashnode.548*, i8 }
+  %union.utoken.563 = type { %struct.cpp_token.549* }
+  %struct.directive.540 = type { void (%struct.cpp_reader.541*)*, i8*, i16, i8, i8 }
+  %struct.cpp_hashnode.548 = type { %struct.ht_identifier.564, i16, i8, i8, i8, i8, %union.anon.565 }
+  %struct.ht_identifier.564 = type { i32, i8* }
+  %union.anon.565 = type { %struct.cpp_macro.566* }
+  %struct.cpp_macro.566 = type opaque
+  %struct.tokenrun.550 = type { %struct.tokenrun.550*, %struct.tokenrun.550*, %struct.cpp_token.549*, %struct.cpp_token.549* }
+  %struct.splay_tree_s.551 = type opaque
+  %struct.cpp_token.549 = type { i32, i16, i8, i8, %union.anon.0.567 }
+  %union.anon.0.567 = type { %struct.cpp_string.568 }
+  %struct.cpp_string.568 = type { i32, i8* }
+  %struct.deps.552 = type opaque
+  %struct.obstack.553 = type { i32, %struct._obstack_chunk.569*, i8*, i8*, i8*, i32, i32, %struct._obstack_chunk.569* (i8*, i32)*, void (i8*, %struct._obstack_chunk.569*)*, i8*, i8 }
+  %struct._obstack_chunk.569 = type { i8*, %struct._obstack_chunk.569*, [4 x i8] }
+  %struct.pragma_entry.554 = type { %struct.pragma_entry.554*, %struct.cpp_hashnode.548*, i32, %union.anon.1.570 }
+  %union.anon.1.570 = type { void (%struct.cpp_reader.541*)* }
+  %struct.cpp_callbacks.555 = type { void (%struct.cpp_reader.541*, %struct.cpp_token.549*, i32)*, void (%struct.cpp_reader.541*, %struct.line_map.545*)*, void (%struct.cpp_reader.541*, i32, i8*, %struct.cpp_token.549*)*, void (%struct.cpp_reader.541*, i32, %struct.cpp_hashnode.548*)*, void (%struct.cpp_reader.541*, i32, %struct.cpp_hashnode.548*)*, void (%struct.cpp_reader.541*, i32, %struct.cpp_string.568*)*, void (%struct.cpp_reader.541*, i32)* }
+  %struct.ht.556 = type { %struct.obstack.553, %struct.ht_identifier.564**, %struct.ht_identifier.564* (%struct.ht.556*)*, i32, i32, %struct.cpp_reader.541*, i32, i32 }
+  %struct.cpp_options.557 = type { i8*, i8*, i32, %struct.cpp_pending.571*, i8*, %struct.search_path.561*, %struct.search_path.561*, %struct.file_name_map_list.572*, i8*, i32, i8*, i32, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8 }
+  %struct.cpp_pending.571 = type opaque
+  %struct.file_name_map_list.572 = type opaque
+  %struct.spec_nodes.558 = type { %struct.cpp_hashnode.548*, %struct.cpp_hashnode.548*, %struct.cpp_hashnode.548*, %struct.cpp_hashnode.548*, %struct.cpp_hashnode.548* }
+  
+  @.str.5 = external hidden unnamed_addr constant [7 x i8], align 1
+  @.str.6 = external hidden unnamed_addr constant [5 x i8], align 1
+  @.str.7 = external hidden unnamed_addr constant [4 x i8], align 1
+  @.str.8 = external hidden unnamed_addr constant [14 x i8], align 1
+  @.str.9 = external hidden unnamed_addr constant [11 x i8], align 1
+  
+  ; Function Attrs: nounwind
+  declare void @cpp_register_pragma(%struct.cpp_reader.541*, i8*, i8*, void (%struct.cpp_reader.541*)*) #0
+  
+  ; Function Attrs: nounwind
+  define void @_cpp_init_internal_pragmas(%struct.cpp_reader.541* %pfile) #0 {
+    tail call void @cpp_register_pragma(%struct.cpp_reader.541* %pfile, i8* null, i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str.5, i32 0, i32 0), void (%struct.cpp_reader.541*)* nonnull @do_pragma_poison)
+    tail call void @cpp_register_pragma(%struct.cpp_reader.541* %pfile, i8* null, i8* getelementptr inbounds ([5 x i8], [5 x i8]* @.str.6, i32 0, i32 0), void (%struct.cpp_reader.541*)* nonnull @do_pragma_once)
+    tail call void @cpp_register_pragma(%struct.cpp_reader.541* %pfile, i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str.7, i32 0, i32 0), i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str.5, i32 0, i32 0), void (%struct.cpp_reader.541*)* nonnull @do_pragma_poison)
+    tail call void @cpp_register_pragma(%struct.cpp_reader.541* %pfile, i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str.7, i32 0, i32 0), i8* getelementptr inbounds ([14 x i8], [14 x i8]* @.str.8, i32 0, i32 0), void (%struct.cpp_reader.541*)* nonnull @do_pragma_system_header)
+    tail call void @cpp_register_pragma(%struct.cpp_reader.541* %pfile, i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str.7, i32 0, i32 0), i8* getelementptr inbounds ([11 x i8], [11 x i8]* @.str.9, i32 0, i32 0), void (%struct.cpp_reader.541*)* nonnull @do_pragma_dependency)
+    ret void
+  }
+  
+  ; Function Attrs: nounwind
+  declare hidden void @do_pragma_poison(%struct.cpp_reader.541*) #0
+  
+  ; Function Attrs: nounwind
+  declare hidden void @do_pragma_once(%struct.cpp_reader.541*) #0
+  
+  ; Function Attrs: nounwind
+  declare hidden void @do_pragma_system_header(%struct.cpp_reader.541*) #0
+  
+  ; Function Attrs: nounwind
+  declare hidden void @do_pragma_dependency(%struct.cpp_reader.541*) #0
+  
+  attributes #0 = { nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  
+  !llvm.ident = !{!0}
+  
+  !0 = !{!"clang version 3.8.0 (http://llvm.org/git/clang.git 2d49f0a0ae8366964a93e3b7b26e29679bee7160) (http://llvm.org/git/llvm.git 60bc66b44837125843b58ed3e0fd2e6bb948d839)"}
+
+...
+---
+name:            _cpp_init_internal_pragmas
+alignment:       2
+exposesReturnsTwice: false
+hasInlineAsm:    false
+isSSA:           true
+tracksRegLiveness: true
+tracksSubRegLiveness: false
+registers:       
+  - { id: 0, class: gpr32 }
+  - { id: 1, class: gpr32 }
+  - { id: 2, class: gpr32 }
+  - { id: 3, class: gpr32 }
+  - { id: 4, class: gpr32 }
+  - { id: 5, class: gpr32 }
+  - { id: 6, class: gpr32 }
+  - { id: 7, class: gpr32 }
+  - { id: 8, class: gpr32 }
+  - { id: 9, class: gpr32 }
+  - { id: 10, class: gpr32 }
+  - { id: 11, class: gpr32 }
+  - { id: 12, class: gpr32 }
+  - { id: 13, class: gpr32 }
+  - { id: 14, class: gpr32 }
+  - { id: 15, class: gpr32 }
+  - { id: 16, class: gpr32 }
+  - { id: 17, class: gpr32 }
+  - { id: 18, class: gpr32 }
+liveins:         
+  - { reg: '%a0', virtual-reg: '%0' }
+  - { reg: '%t9' }
+  - { reg: '%v0' }
+frameInfo:       
+  isFrameAddressTaken: false
+  isReturnAddressTaken: false
+  hasStackMap:     false
+  hasPatchPoint:   false
+  stackSize:       0
+  offsetAdjustment: 0
+  maxAlignment:    1
+  adjustsStack:    false
+  hasCalls:        true
+  maxCallFrameSize: 0
+  hasOpaqueSPAdjustment: false
+  hasVAStart:      false
+  hasMustTailInVarArgFunc: false
+body:             |
+  bb.0 (%ir-block.0, freq 8):
+    liveins: %a0, %t9, %v0
+    liveouts:
+  
+    %1 = ADDu %v0, %t9
+    %0 = COPY %a0
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %2 = LW %1, target-flags(<unknown>) @.str.5, <0x3e35210> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %3 = LW %1, target-flags(<unknown>) @do_pragma_poison, <0x3e3c230> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %4 = LW %1, target-flags(<unknown>) @cpp_register_pragma, <0x3e44bb0> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @cpp_register_pragma)
+    %5 = ADDiu %zero, 0
+    %a0 = COPY %0
+    %a1 = COPY %5
+    %a2 = COPY %2
+    %a3 = COPY %3
+    %gp = COPY %1
+    %t9 = COPY %4
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %a3, implicit %gp, implicit-def %sp
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %6 = LW %1, target-flags(<unknown>) @.str.6, <0x3e44cc0> = !{!"unison-memory-partition", i32 3} :: (load 4 from got)
+    %7 = LW %1, target-flags(<unknown>) @do_pragma_once, <0x3e44dd0> = !{!"unison-memory-partition", i32 4} :: (load 4 from got)
+    %8 = LW %1, target-flags(<unknown>) @cpp_register_pragma, <0x3e44ee0> = !{!"unison-memory-partition", i32 5} :: (load 4 from call-entry @cpp_register_pragma)
+    %a0 = COPY %0
+    %a1 = COPY %5
+    %a2 = COPY %6
+    %a3 = COPY %7
+    %t9 = COPY %8
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %a3, implicit-def %sp
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    %9 = LW %1, target-flags(<unknown>) @.str.7, <0x3e44ff0> = !{!"unison-memory-partition", i32 6} :: (load 4 from got)
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %10 = LW %1, target-flags(<unknown>) @cpp_register_pragma, <0x3e45100> = !{!"unison-memory-partition", i32 7} :: (load 4 from call-entry @cpp_register_pragma)
+    %a0 = COPY %0
+    %a1 = COPY %9
+    %a2 = COPY %2
+    %a3 = COPY %3
+    %t9 = COPY %10
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %a3, implicit-def %sp
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    %11 = LW %1, target-flags(<unknown>) @.str.8, <0x3e45210> = !{!"unison-memory-partition", i32 8} :: (load 4 from got)
+    %12 = LW %1, target-flags(<unknown>) @do_pragma_system_header, <0x3e45320> = !{!"unison-memory-partition", i32 9} :: (load 4 from got)
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %13 = LW %1, target-flags(<unknown>) @cpp_register_pragma, <0x3e45430> = !{!"unison-memory-partition", i32 10} :: (load 4 from call-entry @cpp_register_pragma)
+    %a0 = COPY %0
+    %a1 = COPY %9
+    %a2 = COPY %11
+    %a3 = COPY %12
+    %t9 = COPY %13
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %a3, implicit-def %sp
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    %14 = LW %1, target-flags(<unknown>) @.str.9, <0x3e45540> = !{!"unison-memory-partition", i32 11} :: (load 4 from got)
+    %15 = LW %1, target-flags(<unknown>) @do_pragma_dependency, <0x3e45650> = !{!"unison-memory-partition", i32 12} :: (load 4 from got)
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %16 = LW %1, target-flags(<unknown>) @cpp_register_pragma, <0x3e45760> = !{!"unison-memory-partition", i32 13} :: (load 4 from call-entry @cpp_register_pragma)
+    %a0 = COPY %0
+    %a1 = COPY %9
+    %a2 = COPY %14
+    %a3 = COPY %15
+    %t9 = COPY %16
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %a3, implicit-def %sp
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    RetRA
+
+...
+--- |
+  ; ModuleID = '/home/romi/didaktoriko/unison/unison-experiments/experiments/mips/selected-functions/size-toplas/gcc.cpplib._cpp_init_internal_pragmas.ll'
+  target datalayout = "E-m:m-p:32:32-i8:8:32-i16:16:32-i64:64-n32-S64"
+  target triple = "mips--linux-gnu"
+  
+  %struct.cpp_reader.541 = type { %struct.cpp_buffer.542*, %struct.lexer_state.543, %struct.line_maps.544, %struct.line_map.545*, i32, i32, %struct._cpp_buff.546*, %struct._cpp_buff.546*, %struct._cpp_buff.546*, %struct.cpp_context.547, %struct.cpp_context.547*, %struct.directive.540*, %struct.cpp_hashnode.548*, %struct.cpp_hashnode.548*, i8, %struct.cpp_token.549*, %struct.tokenrun.550, %struct.tokenrun.550*, i32, i32, i32, i32, i32, i8*, i32, %struct.splay_tree_s.551*, i32, %struct.cpp_token.549, %struct.cpp_token.549, %struct.cpp_token.549, %struct.cpp_token.549, %struct.deps.552*, %struct.obstack.553, %struct.obstack.553, %struct.pragma_entry.554*, %struct.cpp_callbacks.555, %struct.ht.556*, %struct.cpp_options.557, %struct.spec_nodes.558, i8, i8 }
+  %struct.cpp_buffer.542 = type { i8*, i8*, i8*, i8*, %struct.cpp_buffer.542*, i8*, %struct.include_file.559*, %struct.if_stack.560*, i32, i8, i8*, i8, i8, i8, i8, %struct.search_path.561 }
+  %struct.include_file.559 = type opaque
+  %struct.if_stack.560 = type { %struct.if_stack.560*, i32, %struct.cpp_hashnode.548*, i8, i8, i32 }
+  %struct.search_path.561 = type { %struct.search_path.561*, i8*, i32, i32, i64, i32, %struct.file_name_map.562* }
+  %struct.file_name_map.562 = type opaque
+  %struct.lexer_state.543 = type { i8, i8, i8, i8, i8, i8, i8, i8, i8 }
+  %struct.line_maps.544 = type { %struct.line_map.545*, i32, i32, i32, i32, i8 }
+  %struct.line_map.545 = type { i8*, i32, i32, i32, i8, i8 }
+  %struct._cpp_buff.546 = type { %struct._cpp_buff.546*, i8*, i8*, i8* }
+  %struct.cpp_context.547 = type { %struct.cpp_context.547*, %struct.cpp_context.547*, %union.utoken.563, %union.utoken.563, %struct._cpp_buff.546*, %struct.cpp_hashnode.548*, i8 }
+  %union.utoken.563 = type { %struct.cpp_token.549* }
+  %struct.directive.540 = type { void (%struct.cpp_reader.541*)*, i8*, i16, i8, i8 }
+  %struct.cpp_hashnode.548 = type { %struct.ht_identifier.564, i16, i8, i8, i8, i8, %union.anon.565 }
+  %struct.ht_identifier.564 = type { i32, i8* }
+  %union.anon.565 = type { %struct.cpp_macro.566* }
+  %struct.cpp_macro.566 = type opaque
+  %struct.tokenrun.550 = type { %struct.tokenrun.550*, %struct.tokenrun.550*, %struct.cpp_token.549*, %struct.cpp_token.549* }
+  %struct.splay_tree_s.551 = type opaque
+  %struct.cpp_token.549 = type { i32, i16, i8, i8, %union.anon.0.567 }
+  %union.anon.0.567 = type { %struct.cpp_string.568 }
+  %struct.cpp_string.568 = type { i32, i8* }
+  %struct.deps.552 = type opaque
+  %struct.obstack.553 = type { i32, %struct._obstack_chunk.569*, i8*, i8*, i8*, i32, i32, %struct._obstack_chunk.569* (i8*, i32)*, void (i8*, %struct._obstack_chunk.569*)*, i8*, i8 }
+  %struct._obstack_chunk.569 = type { i8*, %struct._obstack_chunk.569*, [4 x i8] }
+  %struct.pragma_entry.554 = type { %struct.pragma_entry.554*, %struct.cpp_hashnode.548*, i32, %union.anon.1.570 }
+  %union.anon.1.570 = type { void (%struct.cpp_reader.541*)* }
+  %struct.cpp_callbacks.555 = type { void (%struct.cpp_reader.541*, %struct.cpp_token.549*, i32)*, void (%struct.cpp_reader.541*, %struct.line_map.545*)*, void (%struct.cpp_reader.541*, i32, i8*, %struct.cpp_token.549*)*, void (%struct.cpp_reader.541*, i32, %struct.cpp_hashnode.548*)*, void (%struct.cpp_reader.541*, i32, %struct.cpp_hashnode.548*)*, void (%struct.cpp_reader.541*, i32, %struct.cpp_string.568*)*, void (%struct.cpp_reader.541*, i32)* }
+  %struct.ht.556 = type { %struct.obstack.553, %struct.ht_identifier.564**, %struct.ht_identifier.564* (%struct.ht.556*)*, i32, i32, %struct.cpp_reader.541*, i32, i32 }
+  %struct.cpp_options.557 = type { i8*, i8*, i32, %struct.cpp_pending.571*, i8*, %struct.search_path.561*, %struct.search_path.561*, %struct.file_name_map_list.572*, i8*, i32, i8*, i32, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8 }
+  %struct.cpp_pending.571 = type opaque
+  %struct.file_name_map_list.572 = type opaque
+  %struct.spec_nodes.558 = type { %struct.cpp_hashnode.548*, %struct.cpp_hashnode.548*, %struct.cpp_hashnode.548*, %struct.cpp_hashnode.548*, %struct.cpp_hashnode.548* }
+  
+  @.str.5 = external hidden unnamed_addr constant [7 x i8], align 1
+  @.str.6 = external hidden unnamed_addr constant [5 x i8], align 1
+  @.str.7 = external hidden unnamed_addr constant [4 x i8], align 1
+  @.str.8 = external hidden unnamed_addr constant [14 x i8], align 1
+  @.str.9 = external hidden unnamed_addr constant [11 x i8], align 1
+  
+  ; Function Attrs: nounwind
+  declare void @cpp_register_pragma(%struct.cpp_reader.541*, i8*, i8*, void (%struct.cpp_reader.541*)*) #0
+  
+  ; Function Attrs: nounwind
+  define void @_cpp_init_internal_pragmas(%struct.cpp_reader.541* %pfile) #0 {
+    tail call void @cpp_register_pragma(%struct.cpp_reader.541* %pfile, i8* null, i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str.5, i32 0, i32 0), void (%struct.cpp_reader.541*)* nonnull @do_pragma_poison)
+    tail call void @cpp_register_pragma(%struct.cpp_reader.541* %pfile, i8* null, i8* getelementptr inbounds ([5 x i8], [5 x i8]* @.str.6, i32 0, i32 0), void (%struct.cpp_reader.541*)* nonnull @do_pragma_once)
+    tail call void @cpp_register_pragma(%struct.cpp_reader.541* %pfile, i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str.7, i32 0, i32 0), i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str.5, i32 0, i32 0), void (%struct.cpp_reader.541*)* nonnull @do_pragma_poison)
+    tail call void @cpp_register_pragma(%struct.cpp_reader.541* %pfile, i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str.7, i32 0, i32 0), i8* getelementptr inbounds ([14 x i8], [14 x i8]* @.str.8, i32 0, i32 0), void (%struct.cpp_reader.541*)* nonnull @do_pragma_system_header)
+    tail call void @cpp_register_pragma(%struct.cpp_reader.541* %pfile, i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str.7, i32 0, i32 0), i8* getelementptr inbounds ([11 x i8], [11 x i8]* @.str.9, i32 0, i32 0), void (%struct.cpp_reader.541*)* nonnull @do_pragma_dependency)
+    ret void
+  }
+  
+  ; Function Attrs: nounwind
+  declare hidden void @do_pragma_poison(%struct.cpp_reader.541*) #0
+  
+  ; Function Attrs: nounwind
+  declare hidden void @do_pragma_once(%struct.cpp_reader.541*) #0
+  
+  ; Function Attrs: nounwind
+  declare hidden void @do_pragma_system_header(%struct.cpp_reader.541*) #0
+  
+  ; Function Attrs: nounwind
+  declare hidden void @do_pragma_dependency(%struct.cpp_reader.541*) #0
+  
+  attributes #0 = { nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  
+  !llvm.ident = !{!0}
+  
+  !0 = !{!"clang version 3.8.0 (http://llvm.org/git/clang.git 2d49f0a0ae8366964a93e3b7b26e29679bee7160) (http://llvm.org/git/llvm.git 60bc66b44837125843b58ed3e0fd2e6bb948d839)"}
+
+...
+---
+name:            _cpp_init_internal_pragmas
+alignment:       2
+exposesReturnsTwice: false
+hasInlineAsm:    false
+isSSA:           true
+tracksRegLiveness: true
+tracksSubRegLiveness: false
+registers:       
+  - { id: 0, class: gpr32 }
+  - { id: 1, class: gpr32 }
+  - { id: 2, class: gpr32 }
+  - { id: 3, class: gpr32 }
+  - { id: 4, class: gpr32 }
+  - { id: 5, class: gpr32 }
+  - { id: 6, class: gpr32 }
+  - { id: 7, class: gpr32 }
+  - { id: 8, class: gpr32 }
+  - { id: 9, class: gpr32 }
+  - { id: 10, class: gpr32 }
+  - { id: 11, class: gpr32 }
+  - { id: 12, class: gpr32 }
+  - { id: 13, class: gpr32 }
+  - { id: 14, class: gpr32 }
+  - { id: 15, class: gpr32 }
+  - { id: 16, class: gpr32 }
+  - { id: 17, class: gpr32 }
+  - { id: 18, class: gpr32 }
+liveins:         
+  - { reg: '%a0', virtual-reg: '%0' }
+  - { reg: '%t9' }
+  - { reg: '%v0' }
+frameInfo:       
+  isFrameAddressTaken: false
+  isReturnAddressTaken: false
+  hasStackMap:     false
+  hasPatchPoint:   false
+  stackSize:       0
+  offsetAdjustment: 0
+  maxAlignment:    1
+  adjustsStack:    false
+  hasCalls:        true
+  maxCallFrameSize: 0
+  hasOpaqueSPAdjustment: false
+  hasVAStart:      false
+  hasMustTailInVarArgFunc: false
+body:             |
+  bb.0 (%ir-block.0, freq 8):
+    liveins: %a0, %t9, %v0
+    liveouts:
+  
+    %1 = ADDu %v0, %t9
+    %0 = COPY %a0
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %2 = LW %1, target-flags(<unknown>) @.str.5, <0x3e35210> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %3 = LW %1, target-flags(<unknown>) @do_pragma_poison, <0x3e3c230> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %4 = LW %1, target-flags(<unknown>) @cpp_register_pragma, <0x3e44bb0> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @cpp_register_pragma)
+    %5 = ADDiu %zero, 0
+    %a0 = COPY %0
+    %a1 = COPY %5
+    %a2 = COPY %2
+    %a3 = COPY %3
+    %gp = COPY %1
+    %t9 = COPY %4
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %a3, implicit %gp, implicit-def %sp
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %6 = LW %1, target-flags(<unknown>) @.str.6, <0x3e44cc0> = !{!"unison-memory-partition", i32 3} :: (load 4 from got)
+    %7 = LW %1, target-flags(<unknown>) @do_pragma_once, <0x3e44dd0> = !{!"unison-memory-partition", i32 4} :: (load 4 from got)
+    %8 = LW %1, target-flags(<unknown>) @cpp_register_pragma, <0x3e44ee0> = !{!"unison-memory-partition", i32 5} :: (load 4 from call-entry @cpp_register_pragma)
+    %a0 = COPY %0
+    %a1 = COPY %5
+    %a2 = COPY %6
+    %a3 = COPY %7
+    %t9 = COPY %8
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %a3, implicit-def %sp
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    %9 = LW %1, target-flags(<unknown>) @.str.7, <0x3e44ff0> = !{!"unison-memory-partition", i32 6} :: (load 4 from got)
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %10 = LW %1, target-flags(<unknown>) @cpp_register_pragma, <0x3e45100> = !{!"unison-memory-partition", i32 7} :: (load 4 from call-entry @cpp_register_pragma)
+    %a0 = COPY %0
+    %a1 = COPY %9
+    %a2 = COPY %2
+    %a3 = COPY %3
+    %t9 = COPY %10
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %a3, implicit-def %sp
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    %11 = LW %1, target-flags(<unknown>) @.str.8, <0x3e45210> = !{!"unison-memory-partition", i32 8} :: (load 4 from got)
+    %12 = LW %1, target-flags(<unknown>) @do_pragma_system_header, <0x3e45320> = !{!"unison-memory-partition", i32 9} :: (load 4 from got)
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %13 = LW %1, target-flags(<unknown>) @cpp_register_pragma, <0x3e45430> = !{!"unison-memory-partition", i32 10} :: (load 4 from call-entry @cpp_register_pragma)
+    %a0 = COPY %0
+    %a1 = COPY %9
+    %a2 = COPY %11
+    %a3 = COPY %12
+    %t9 = COPY %13
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %a3, implicit-def %sp
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    %14 = LW %1, target-flags(<unknown>) @.str.9, <0x3e45540> = !{!"unison-memory-partition", i32 11} :: (load 4 from got)
+    %15 = LW %1, target-flags(<unknown>) @do_pragma_dependency, <0x3e45650> = !{!"unison-memory-partition", i32 12} :: (load 4 from got)
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %16 = LW %1, target-flags(<unknown>) @cpp_register_pragma, <0x3e45760> = !{!"unison-memory-partition", i32 13} :: (load 4 from call-entry @cpp_register_pragma)
+    %a0 = COPY %0
+    %a1 = COPY %9
+    %a2 = COPY %14
+    %a3 = COPY %15
+    %t9 = COPY %16
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %a3, implicit-def %sp
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    RetRA
+
+...

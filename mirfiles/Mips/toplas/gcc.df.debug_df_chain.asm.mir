@@ -1,0 +1,204 @@
+--- |
+  ; ModuleID = '/home/romi/didaktoriko/unison/unison-experiments/experiments/mips/selected-functions/size-toplas/gcc.df.debug_df_chain.ll'
+  target datalayout = "E-m:m-p:32:32-i8:8:32-i16:16:32-i64:64-n32-S64"
+  target triple = "mips--linux-gnu"
+  
+  %struct._IO_FILE.1489 = type { i32, i8*, i8*, i8*, i8*, i8*, i8*, i8*, i8*, i8*, i8*, i8*, %struct._IO_marker.1490*, %struct._IO_FILE.1489*, i32, i32, i32, i16, i8, [1 x i8], i8*, i64, i8*, i8*, i8*, i8*, i32, i32, [40 x i8] }
+  %struct._IO_marker.1490 = type { %struct._IO_marker.1490*, %struct._IO_FILE.1489*, i32 }
+  %struct.df_link.1483 = type { %struct.df_link.1483*, %struct.ref.1477* }
+  %struct.ref.1477 = type { %struct.rtx_def.1482*, %struct.rtx_def.1482*, %struct.rtx_def.1482**, %struct.df_link.1483*, i32, i32, i32 }
+  %struct.rtx_def.1482 = type { i32, [1 x %union.rtunion_def.1484] }
+  %union.rtunion_def.1484 = type { i32 }
+  
+  @stderr = external global %struct._IO_FILE.1489*, align 4
+  @.str.28 = external hidden unnamed_addr constant [3 x i8], align 1
+  @.str.29 = external hidden unnamed_addr constant [6 x i8], align 1
+  
+  ; Function Attrs: nounwind
+  declare i32 @fprintf(%struct._IO_FILE.1489* nocapture, i8* nocapture readonly, ...) #0
+  
+  ; Function Attrs: nounwind
+  define void @debug_df_chain(%struct.df_link.1483* readonly %link) #0 {
+    %1 = load %struct._IO_FILE.1489*, %struct._IO_FILE.1489** @stderr, align 4
+    %2 = tail call i32 @fwrite(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @.str.28, i32 0, i32 0), i32 2, i32 1, %struct._IO_FILE.1489* %1) #2
+    %3 = icmp eq %struct.df_link.1483* %link, null
+    br i1 %3, label %df_chain_dump.exit, label %.lr.ph.i
+  
+  .lr.ph.i:                                         ; preds = %0, %.lr.ph.i
+    %.01.i = phi %struct.df_link.1483* [ %14, %.lr.ph.i ], [ %link, %0 ]
+    %4 = getelementptr inbounds %struct.df_link.1483, %struct.df_link.1483* %.01.i, i32 0, i32 1
+    %5 = load %struct.ref.1477*, %struct.ref.1477** %4, align 4
+    %6 = getelementptr inbounds %struct.ref.1477, %struct.ref.1477* %5, i32 0, i32 4
+    %7 = load i32, i32* %6, align 4
+    %8 = icmp eq i32 %7, 0
+    %9 = select i1 %8, i32 100, i32 117
+    %10 = getelementptr inbounds %struct.ref.1477, %struct.ref.1477* %5, i32 0, i32 5
+    %11 = load i32, i32* %10, align 4
+    %12 = tail call i32 (%struct._IO_FILE.1489*, i8*, ...) @fprintf(%struct._IO_FILE.1489* %1, i8* nonnull getelementptr inbounds ([6 x i8], [6 x i8]* @.str.29, i32 0, i32 0), i32 signext %9, i32 signext %11) #2
+    %13 = bitcast %struct.df_link.1483* %.01.i to %struct.df_link.1483**
+    %14 = load %struct.df_link.1483*, %struct.df_link.1483** %13, align 4
+    %15 = icmp eq %struct.df_link.1483* %14, null
+    br i1 %15, label %df_chain_dump.exit, label %.lr.ph.i
+  
+  df_chain_dump.exit:                               ; preds = %.lr.ph.i, %0
+    %fputc.i = tail call i32 @fputc(i32 125, %struct._IO_FILE.1489* %1) #2
+    %16 = load %struct._IO_FILE.1489*, %struct._IO_FILE.1489** @stderr, align 4
+    %17 = tail call i32 @fputc(i32 signext 10, %struct._IO_FILE.1489* %16) #3
+    ret void
+  }
+  
+  ; Function Attrs: nounwind
+  declare i32 @fputc(i32 signext, %struct._IO_FILE.1489* nocapture) #0
+  
+  ; Function Attrs: nounwind
+  declare i32 @fwrite(i8* nocapture, i32, i32, %struct._IO_FILE.1489* nocapture) #1
+  
+  attributes #0 = { nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #1 = { nounwind "target-cpu"="mips32" }
+  attributes #2 = { cold nounwind }
+  attributes #3 = { cold }
+  
+  !llvm.ident = !{!0}
+  
+  !0 = !{!"clang version 3.8.0 (http://llvm.org/git/clang.git 2d49f0a0ae8366964a93e3b7b26e29679bee7160) (http://llvm.org/git/llvm.git 60bc66b44837125843b58ed3e0fd2e6bb948d839)"}
+
+...
+---
+name:            debug_df_chain
+alignment:       2
+exposesReturnsTwice: false
+hasInlineAsm:    false
+isSSA:           false
+tracksRegLiveness: false
+tracksSubRegLiveness: false
+liveins:         
+  - { reg: '%a0' }
+  - { reg: '%t9' }
+  - { reg: '%v0' }
+calleeSavedRegisters: [ '%fp', '%ra', '%d10', '%d11', '%d12', '%d13', '%d14', 
+                        '%d15', '%f20', '%f21', '%f22', '%f23', '%f24', 
+                        '%f25', '%f26', '%f27', '%f28', '%f29', '%f30', 
+                        '%f31', '%s0', '%s1', '%s2', '%s3', '%s4', '%s5', 
+                        '%s6', '%s7' ]
+frameInfo:       
+  isFrameAddressTaken: false
+  isReturnAddressTaken: false
+  hasStackMap:     false
+  hasPatchPoint:   false
+  stackSize:       48
+  offsetAdjustment: 0
+  maxAlignment:    4
+  adjustsStack:    true
+  hasCalls:        true
+  maxCallFrameSize: 16
+  hasOpaqueSPAdjustment: false
+  hasVAStart:      false
+  hasMustTailInVarArgFunc: false
+stack:           
+  - { id: 0, type: spill-slot, offset: -4, size: 4, alignment: 4, callee-saved-register: '%ra' }
+  - { id: 1, type: spill-slot, offset: -8, size: 4, alignment: 4, callee-saved-register: '%s5' }
+  - { id: 2, type: spill-slot, offset: -12, size: 4, alignment: 4, callee-saved-register: '%s4' }
+  - { id: 3, type: spill-slot, offset: -16, size: 4, alignment: 4, callee-saved-register: '%s3' }
+  - { id: 4, type: spill-slot, offset: -20, size: 4, alignment: 4, callee-saved-register: '%s2' }
+  - { id: 5, type: spill-slot, offset: -24, size: 4, alignment: 4, callee-saved-register: '%s1' }
+  - { id: 6, type: spill-slot, offset: -28, size: 4, alignment: 4, callee-saved-register: '%s0' }
+body:             |
+  bb.0 (%ir-block.0, freq 135):
+    successors: %bb.1.df_chain_dump.exit(94), %bb.2(5)
+    liveins: %a0, %t9, %ra, %s5, %s4, %s3, %s2, %s1, %s0
+  
+    %v0 = LUi target-flags(<unknown>) $_gp_disp
+    %v0 = ADDiu %v0, target-flags(<unknown>) $_gp_disp
+    %sp = ADDiu %sp, -48
+    CFI_INSTRUCTION .cfi_def_cfa_offset 48
+    SW killed %ra, %sp, 44 :: (store 4 into stack)
+    SW killed %s5, %sp, 40 :: (store 4 into stack)
+    SW killed %s4, %sp, 36 :: (store 4 into stack)
+    SW killed %s3, %sp, 32 :: (store 4 into stack)
+    SW killed %s2, %sp, 28 :: (store 4 into stack)
+    SW killed %s1, %sp, 24 :: (store 4 into stack)
+    SW killed %s0, %sp, 20 :: (store 4 into stack)
+    CFI_INSTRUCTION .cfi_offset %ra_64, -4
+    CFI_INSTRUCTION .cfi_offset %s5_64, -8
+    CFI_INSTRUCTION .cfi_offset %s4_64, -12
+    CFI_INSTRUCTION .cfi_offset %s3_64, -16
+    CFI_INSTRUCTION .cfi_offset %s2_64, -20
+    CFI_INSTRUCTION .cfi_offset %s1_64, -24
+    CFI_INSTRUCTION .cfi_offset %s0_64, -28
+    %s0 = ADDu %v0, %t9
+    %s2 = OR %a0, %zero
+    %s4 = LW %s0, target-flags(<unknown>) @stderr :: (load 4 from got)
+    %s1 = LW %s4, 0 :: (load 4 from @stderr)
+    %a0 = LW %s0, target-flags(<unknown>) @.str.28 :: (load 4 from got)
+    %t9 = LW %s0, target-flags(<unknown>) @fwrite :: (load 4 from call-entry @fwrite)
+    %a1 = ADDiu %zero, 2
+    %a2 = ADDiu %zero, 1
+    %a3 = OR %s1, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %a3, implicit killed %gp, implicit-def %sp, implicit-def dead %v0 {
+      %gp = OR %s0, %zero
+    }
+    BNE %s2, %zero, %bb.2, implicit-def %at {
+      NOP
+    }
+  
+  bb.1.df_chain_dump.exit (freq 135):
+    liveins: %s0, %s1, %s4
+    liveouts:
+  
+    %t9 = LW %s0, target-flags(<unknown>) @fputc :: (load 4 from call-entry @fputc)
+    %a0 = ADDiu %zero, 125
+    %a1 = OR killed %s1, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit killed %gp, implicit-def %sp, implicit-def dead %v0 {
+      %gp = OR %s0, %zero
+    }
+    %a1 = LW killed %s4, 0 :: (load 4 from @stderr)
+    %t9 = LW killed %s0, target-flags(<unknown>) @fputc :: (load 4 from call-entry @fputc)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit-def %sp, implicit-def dead %v0 {
+      %a0 = ADDiu %zero, 10
+    }
+    %s0 = LW %sp, 20 :: (load 4 from stack)
+    %s1 = LW %sp, 24 :: (load 4 from stack)
+    %s2 = LW %sp, 28 :: (load 4 from stack)
+    %s3 = LW %sp, 32 :: (load 4 from stack)
+    %s4 = LW %sp, 36 :: (load 4 from stack)
+    %s5 = LW %sp, 40 :: (load 4 from stack)
+    %ra = LW %sp, 44 :: (load 4 from stack)
+    PseudoReturn %ra {
+      %sp = ADDiu %sp, 48
+    }
+  
+  bb.2 (freq 8):
+    successors: %bb.3..lr.ph.i(100)
+    liveins: %s0, %s1, %s2, %s4
+  
+    %s5 = ADDiu %zero, 100
+    %s3 = LW %s0, target-flags(<unknown>) @.str.29 :: (load 4 from got)
+  
+  bb.3..lr.ph.i (freq 15):
+    successors: %bb.4..lr.ph.i(50), %bb.3..lr.ph.i(50)
+    liveins: %s0, %s1, %s2, %s3, %s4, %s5
+  
+    %at = LW %s2, 4 :: (load 4 from %ir.4)
+    %v0 = LW %at, 16 :: (load 4 from %ir.6)
+    %a2 = ADDiu %zero, 117
+    %a2 = MOVZ_I_I %s5, killed %v0, killed %a2
+    %a3 = LW killed %at, 20 :: (load 4 from %ir.10)
+    %t9 = LW %s0, target-flags(<unknown>) @fprintf :: (load 4 from call-entry @fprintf)
+    %a0 = OR %s1, %zero
+    %a1 = OR %s3, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %a3, implicit killed %gp, implicit-def %sp, implicit-def dead %v0 {
+      %gp = OR %s0, %zero
+    }
+    %s2 = LW killed %s2, 0 :: (load 4 from %ir.13)
+    BNE %s2, %zero, %bb.3..lr.ph.i, implicit-def %at {
+      NOP
+    }
+  
+  bb.4..lr.ph.i (freq 8):
+    successors: %bb.1.df_chain_dump.exit(100)
+  
+    B %bb.1.df_chain_dump.exit, implicit-def %at {
+      NOP
+    }
+
+...

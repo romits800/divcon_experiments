@@ -1,0 +1,514 @@
+--- |
+  ; ModuleID = '/home/romi/didaktoriko/unison/unison-experiments/experiments/mips/selected-functions/size-toplas/gcc.cfgrtl.insert_insn_on_edge.ll'
+  target datalayout = "E-m:m-p:32:32-i8:8:32-i16:16:32-i64:64-n32-S64"
+  target triple = "mips--linux-gnu"
+  
+  %struct.rtx_def.1822 = type { i32, [1 x %union.rtunion_def.1834] }
+  %union.rtunion_def.1834 = type { i32 }
+  %struct.edge_def.1841 = type { %struct.edge_def.1841*, %struct.edge_def.1841*, %struct.basic_block_def.1840*, %struct.basic_block_def.1840*, %struct.rtx_def.1822*, i8*, i32, i32, i32 }
+  %struct.basic_block_def.1840 = type { %struct.rtx_def.1822*, %struct.rtx_def.1822*, %union.tree_node.1821*, %union.tree_node.1821*, %struct.edge_def.1841*, %struct.edge_def.1841*, %struct.bitmap_head_def.1842*, %struct.bitmap_head_def.1842*, %struct.bitmap_head_def.1842*, %struct.bitmap_head_def.1842*, i8*, i32, i32, i32, i32, i32 }
+  %union.tree_node.1821 = type { %struct.tree_type.1830, [24 x i8] }
+  %struct.tree_type.1830 = type { %struct.tree_common.1831, %union.tree_node.1821*, %union.tree_node.1821*, %union.tree_node.1821*, %union.tree_node.1821*, i32, i32, i32, %union.tree_node.1821*, %union.tree_node.1821*, %union.anon.2.1832, %union.tree_node.1821*, %union.tree_node.1821*, %union.tree_node.1821*, %union.tree_node.1821*, %union.tree_node.1821*, %union.tree_node.1821*, %union.tree_node.1821*, i32, %struct.lang_type.1833* }
+  %struct.tree_common.1831 = type { %union.tree_node.1821*, %union.tree_node.1821*, i32 }
+  %union.anon.2.1832 = type { i32 }
+  %struct.lang_type.1833 = type opaque
+  %struct.bitmap_head_def.1842 = type { %struct.bitmap_element_def.1843*, %struct.bitmap_element_def.1843*, i32 }
+  %struct.bitmap_element_def.1843 = type { %struct.bitmap_element_def.1843*, %struct.bitmap_element_def.1843*, i32, [2 x i32] }
+  
+  @.str = external hidden unnamed_addr constant [9 x i8], align 1
+  @__FUNCTION__.insert_insn_on_edge = external hidden unnamed_addr constant [20 x i8], align 1
+  
+  ; Function Attrs: noreturn
+  declare void @fancy_abort(i8*, i32 signext, i8*) #0
+  
+  ; Function Attrs: nounwind
+  define void @insert_insn_on_edge(%struct.rtx_def.1822* %pattern, %struct.edge_def.1841* nocapture %e) #1 {
+    %1 = getelementptr inbounds %struct.edge_def.1841, %struct.edge_def.1841* %e, i32 0, i32 6
+    %2 = load i32, i32* %1, align 4
+    %3 = and i32 %2, 2
+    %4 = icmp eq i32 %3, 0
+    br i1 %4, label %22, label %5
+  
+  ; <label>:5                                       ; preds = %0
+    %6 = getelementptr inbounds %struct.edge_def.1841, %struct.edge_def.1841* %e, i32 0, i32 2
+    %7 = load %struct.basic_block_def.1840*, %struct.basic_block_def.1840** %6, align 4
+    %8 = getelementptr inbounds %struct.basic_block_def.1840, %struct.basic_block_def.1840* %7, i32 0, i32 5
+    %9 = load %struct.edge_def.1841*, %struct.edge_def.1841** %8, align 4
+    %10 = getelementptr inbounds %struct.edge_def.1841, %struct.edge_def.1841* %9, i32 0, i32 1
+    %11 = load %struct.edge_def.1841*, %struct.edge_def.1841** %10, align 4
+    %12 = icmp eq %struct.edge_def.1841* %11, null
+    br i1 %12, label %22, label %13
+  
+  ; <label>:13                                      ; preds = %5
+    %14 = getelementptr inbounds %struct.edge_def.1841, %struct.edge_def.1841* %e, i32 0, i32 3
+    %15 = load %struct.basic_block_def.1840*, %struct.basic_block_def.1840** %14, align 4
+    %16 = getelementptr inbounds %struct.basic_block_def.1840, %struct.basic_block_def.1840* %15, i32 0, i32 4
+    %17 = load %struct.edge_def.1841*, %struct.edge_def.1841** %16, align 4
+    %18 = bitcast %struct.edge_def.1841* %17 to %struct.edge_def.1841**
+    %19 = load %struct.edge_def.1841*, %struct.edge_def.1841** %18, align 4
+    %20 = icmp eq %struct.edge_def.1841* %19, null
+    br i1 %20, label %22, label %21
+  
+  ; <label>:21                                      ; preds = %13
+    tail call void @fancy_abort(i8* nonnull getelementptr inbounds ([9 x i8], [9 x i8]* @.str, i32 0, i32 0), i32 signext 1280, i8* nonnull getelementptr inbounds ([20 x i8], [20 x i8]* @__FUNCTION__.insert_insn_on_edge, i32 0, i32 0)) #3
+    unreachable
+  
+  ; <label>:22                                      ; preds = %13, %5, %0
+    %23 = getelementptr inbounds %struct.edge_def.1841, %struct.edge_def.1841* %e, i32 0, i32 4
+    %24 = load %struct.rtx_def.1822*, %struct.rtx_def.1822** %23, align 4
+    %25 = icmp eq %struct.rtx_def.1822* %24, null
+    br i1 %25, label %26, label %27
+  
+  ; <label>:26                                      ; preds = %22
+    tail call void @start_sequence() #4
+    br label %28
+  
+  ; <label>:27                                      ; preds = %22
+    tail call void @push_to_sequence(%struct.rtx_def.1822* nonnull %24) #4
+    br label %28
+  
+  ; <label>:28                                      ; preds = %27, %26
+    %29 = tail call %struct.rtx_def.1822* @emit_insn(%struct.rtx_def.1822* %pattern) #4
+    %30 = tail call %struct.rtx_def.1822* @get_insns() #4
+    %sunkaddr = ptrtoint %struct.edge_def.1841* %e to i32
+    %sunkaddr1 = add i32 %sunkaddr, 16
+    %sunkaddr2 = inttoptr i32 %sunkaddr1 to %struct.rtx_def.1822**
+    store %struct.rtx_def.1822* %30, %struct.rtx_def.1822** %sunkaddr2, align 4
+    tail call void @end_sequence() #4
+    ret void
+  }
+  
+  declare void @start_sequence() #2
+  
+  declare void @push_to_sequence(%struct.rtx_def.1822*) #2
+  
+  declare %struct.rtx_def.1822* @emit_insn(%struct.rtx_def.1822*) #2
+  
+  declare %struct.rtx_def.1822* @get_insns() #2
+  
+  declare void @end_sequence() #2
+  
+  attributes #0 = { noreturn "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #1 = { nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #2 = { "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #3 = { noreturn nounwind }
+  attributes #4 = { nounwind }
+  
+  !llvm.ident = !{!0}
+  
+  !0 = !{!"clang version 3.8.0 (http://llvm.org/git/clang.git 2d49f0a0ae8366964a93e3b7b26e29679bee7160) (http://llvm.org/git/llvm.git 60bc66b44837125843b58ed3e0fd2e6bb948d839)"}
+
+...
+---
+name:            insert_insn_on_edge
+alignment:       2
+exposesReturnsTwice: false
+hasInlineAsm:    false
+isSSA:           true
+tracksRegLiveness: true
+tracksSubRegLiveness: false
+registers:       
+  - { id: 0, class: gpr32 }
+  - { id: 1, class: gpr32 }
+  - { id: 2, class: gpr32 }
+  - { id: 3, class: gpr32 }
+  - { id: 4, class: gpr32 }
+  - { id: 5, class: gpr32 }
+  - { id: 6, class: gpr32 }
+  - { id: 7, class: gpr32 }
+  - { id: 8, class: gpr32 }
+  - { id: 9, class: gpr32 }
+  - { id: 10, class: gpr32 }
+  - { id: 11, class: gpr32 }
+  - { id: 12, class: gpr32 }
+  - { id: 13, class: gpr32 }
+  - { id: 14, class: gpr32 }
+  - { id: 15, class: gpr32 }
+  - { id: 16, class: gpr32 }
+  - { id: 17, class: gpr32 }
+  - { id: 18, class: gpr32 }
+  - { id: 19, class: gpr32 }
+  - { id: 20, class: gpr32 }
+  - { id: 21, class: gpr32 }
+  - { id: 22, class: gpr32 }
+  - { id: 23, class: gpr32 }
+  - { id: 24, class: gpr32 }
+liveins:         
+  - { reg: '%a0', virtual-reg: '%1' }
+  - { reg: '%a1', virtual-reg: '%2' }
+  - { reg: '%t9' }
+  - { reg: '%v0' }
+frameInfo:       
+  isFrameAddressTaken: false
+  isReturnAddressTaken: false
+  hasStackMap:     false
+  hasPatchPoint:   false
+  stackSize:       0
+  offsetAdjustment: 0
+  maxAlignment:    1
+  adjustsStack:    false
+  hasCalls:        true
+  maxCallFrameSize: 0
+  hasOpaqueSPAdjustment: false
+  hasVAStart:      false
+  hasMustTailInVarArgFunc: false
+body:             |
+  bb.0 (%ir-block.0, freq 26843545):
+    successors: %bb.4(50), %bb.1(50)
+    liveins: %a0, %a1, %t9, %v0
+  
+    %11 = ADDu %v0, %t9
+    %2 = COPY %a1
+    %1 = COPY %a0
+    %3 = LBu %2, 27, <0x4a03000> = !{!"unison-memory-partition", i32 0} :: (load 1 from %ir.1 + 3)
+    %4 = ANDi killed %3, 2
+    BEQ killed %4, %zero, %bb.4, implicit-def dead %at
+    B %bb.1, implicit-def dead %at
+  
+  bb.1 (%ir-block.5, freq 13421772):
+    successors: %bb.4(37), %bb.2(62)
+  
+    %5 = LW %2, 8, <0x4a03000> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.6)
+    %6 = LW killed %5, 20, <0x4a035f0> = !{!"unison-memory-partition", i32 1} :: (load 4 from %ir.8)
+    %7 = LW killed %6, 4, <0x4a036c0> = !{!"unison-memory-partition", i32 2} :: (load 4 from %ir.10)
+    BEQ killed %7, %zero, %bb.4, implicit-def dead %at
+    B %bb.2, implicit-def dead %at
+  
+  bb.2 (%ir-block.13, freq 8388608):
+    successors: %bb.4(99), %bb.3(0)
+  
+    %8 = LW %2, 12, <0x4a03000> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.14)
+    %9 = LW killed %8, 16, <0x4a035f0> = !{!"unison-memory-partition", i32 1} :: (load 4 from %ir.16)
+    %10 = LW killed %9, 0, <0x4a036c0> = !{!"unison-memory-partition", i32 2} :: (load 4 from %ir.18)
+    BEQ killed %10, %zero, %bb.4, implicit-def dead %at
+    B %bb.3, implicit-def dead %at
+  
+  bb.3 (%ir-block.21, freq 8):
+    exit
+  
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %12 = LW %11, target-flags(<unknown>) @.str, <0x4a03000> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %13 = LW %11, target-flags(<unknown>) @__FUNCTION__.insert_insn_on_edge, <0x4a035f0> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %14 = LW %11, target-flags(<unknown>) @fancy_abort, <0x4a036c0> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @fancy_abort)
+    %15 = ADDiu %zero, 1280
+    %a0 = COPY %12
+    %a1 = COPY %15
+    %a2 = COPY %13
+    %gp = COPY %11
+    %t9 = COPY %14
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %gp, implicit-def %sp
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+  
+  bb.4 (%ir-block.22, freq 26843537):
+    successors: %bb.5(37), %bb.6(62)
+  
+    %0 = LW %2, 16, <0x4a03000> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.23)
+    BNE %0, %zero, %bb.6, implicit-def dead %at
+    B %bb.5, implicit-def dead %at
+  
+  bb.5 (%ir-block.26, freq 10066326):
+    successors: %bb.7(100)
+  
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %17 = LW %11, target-flags(<unknown>) @start_sequence, <0x4a03000> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @start_sequence)
+    %gp = COPY %11
+    %t9 = COPY %17
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %gp, implicit-def %sp
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    B %bb.7, implicit-def dead %at
+  
+  bb.6 (%ir-block.27, freq 16777211):
+    successors: %bb.7(100)
+  
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %16 = LW %11, target-flags(<unknown>) @push_to_sequence, <0x4a03000> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @push_to_sequence)
+    %a0 = COPY %0
+    %gp = COPY %11
+    %t9 = COPY %16
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %gp, implicit-def %sp
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+  
+  bb.7 (%ir-block.28, freq 26843537):
+    liveouts:
+  
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %18 = LW %11, target-flags(<unknown>) @emit_insn, <0x4a03000> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @emit_insn)
+    %a0 = COPY %1
+    %gp = COPY %11
+    %t9 = COPY %18
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %gp, implicit-def %sp, implicit-def %v0
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %20 = LW %11, target-flags(<unknown>) @get_insns, <0x4a03000> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @get_insns)
+    %gp = COPY %11
+    %t9 = COPY %20
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %gp, implicit-def %sp, implicit-def %v0
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    %21 = COPY %v0
+    SW %21, %2, 16, <0x4a03000> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.sunkaddr2)
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %22 = LW %11, target-flags(<unknown>) @end_sequence, <0x4a03000> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @end_sequence)
+    %gp = COPY %11
+    %t9 = COPY %22
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %gp, implicit-def %sp
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    RetRA
+
+...
+--- |
+  ; ModuleID = '/home/romi/didaktoriko/unison/unison-experiments/experiments/mips/selected-functions/size-toplas/gcc.cfgrtl.insert_insn_on_edge.ll'
+  target datalayout = "E-m:m-p:32:32-i8:8:32-i16:16:32-i64:64-n32-S64"
+  target triple = "mips--linux-gnu"
+  
+  %struct.rtx_def.1822 = type { i32, [1 x %union.rtunion_def.1834] }
+  %union.rtunion_def.1834 = type { i32 }
+  %struct.edge_def.1841 = type { %struct.edge_def.1841*, %struct.edge_def.1841*, %struct.basic_block_def.1840*, %struct.basic_block_def.1840*, %struct.rtx_def.1822*, i8*, i32, i32, i32 }
+  %struct.basic_block_def.1840 = type { %struct.rtx_def.1822*, %struct.rtx_def.1822*, %union.tree_node.1821*, %union.tree_node.1821*, %struct.edge_def.1841*, %struct.edge_def.1841*, %struct.bitmap_head_def.1842*, %struct.bitmap_head_def.1842*, %struct.bitmap_head_def.1842*, %struct.bitmap_head_def.1842*, i8*, i32, i32, i32, i32, i32 }
+  %union.tree_node.1821 = type { %struct.tree_type.1830, [24 x i8] }
+  %struct.tree_type.1830 = type { %struct.tree_common.1831, %union.tree_node.1821*, %union.tree_node.1821*, %union.tree_node.1821*, %union.tree_node.1821*, i32, i32, i32, %union.tree_node.1821*, %union.tree_node.1821*, %union.anon.2.1832, %union.tree_node.1821*, %union.tree_node.1821*, %union.tree_node.1821*, %union.tree_node.1821*, %union.tree_node.1821*, %union.tree_node.1821*, %union.tree_node.1821*, i32, %struct.lang_type.1833* }
+  %struct.tree_common.1831 = type { %union.tree_node.1821*, %union.tree_node.1821*, i32 }
+  %union.anon.2.1832 = type { i32 }
+  %struct.lang_type.1833 = type opaque
+  %struct.bitmap_head_def.1842 = type { %struct.bitmap_element_def.1843*, %struct.bitmap_element_def.1843*, i32 }
+  %struct.bitmap_element_def.1843 = type { %struct.bitmap_element_def.1843*, %struct.bitmap_element_def.1843*, i32, [2 x i32] }
+  
+  @.str = external hidden unnamed_addr constant [9 x i8], align 1
+  @__FUNCTION__.insert_insn_on_edge = external hidden unnamed_addr constant [20 x i8], align 1
+  
+  ; Function Attrs: noreturn
+  declare void @fancy_abort(i8*, i32 signext, i8*) #0
+  
+  ; Function Attrs: nounwind
+  define void @insert_insn_on_edge(%struct.rtx_def.1822* %pattern, %struct.edge_def.1841* nocapture %e) #1 {
+    %1 = getelementptr inbounds %struct.edge_def.1841, %struct.edge_def.1841* %e, i32 0, i32 6
+    %2 = load i32, i32* %1, align 4
+    %3 = and i32 %2, 2
+    %4 = icmp eq i32 %3, 0
+    br i1 %4, label %22, label %5
+  
+  ; <label>:5                                       ; preds = %0
+    %6 = getelementptr inbounds %struct.edge_def.1841, %struct.edge_def.1841* %e, i32 0, i32 2
+    %7 = load %struct.basic_block_def.1840*, %struct.basic_block_def.1840** %6, align 4
+    %8 = getelementptr inbounds %struct.basic_block_def.1840, %struct.basic_block_def.1840* %7, i32 0, i32 5
+    %9 = load %struct.edge_def.1841*, %struct.edge_def.1841** %8, align 4
+    %10 = getelementptr inbounds %struct.edge_def.1841, %struct.edge_def.1841* %9, i32 0, i32 1
+    %11 = load %struct.edge_def.1841*, %struct.edge_def.1841** %10, align 4
+    %12 = icmp eq %struct.edge_def.1841* %11, null
+    br i1 %12, label %22, label %13
+  
+  ; <label>:13                                      ; preds = %5
+    %14 = getelementptr inbounds %struct.edge_def.1841, %struct.edge_def.1841* %e, i32 0, i32 3
+    %15 = load %struct.basic_block_def.1840*, %struct.basic_block_def.1840** %14, align 4
+    %16 = getelementptr inbounds %struct.basic_block_def.1840, %struct.basic_block_def.1840* %15, i32 0, i32 4
+    %17 = load %struct.edge_def.1841*, %struct.edge_def.1841** %16, align 4
+    %18 = bitcast %struct.edge_def.1841* %17 to %struct.edge_def.1841**
+    %19 = load %struct.edge_def.1841*, %struct.edge_def.1841** %18, align 4
+    %20 = icmp eq %struct.edge_def.1841* %19, null
+    br i1 %20, label %22, label %21
+  
+  ; <label>:21                                      ; preds = %13
+    tail call void @fancy_abort(i8* nonnull getelementptr inbounds ([9 x i8], [9 x i8]* @.str, i32 0, i32 0), i32 signext 1280, i8* nonnull getelementptr inbounds ([20 x i8], [20 x i8]* @__FUNCTION__.insert_insn_on_edge, i32 0, i32 0)) #3
+    unreachable
+  
+  ; <label>:22                                      ; preds = %13, %5, %0
+    %23 = getelementptr inbounds %struct.edge_def.1841, %struct.edge_def.1841* %e, i32 0, i32 4
+    %24 = load %struct.rtx_def.1822*, %struct.rtx_def.1822** %23, align 4
+    %25 = icmp eq %struct.rtx_def.1822* %24, null
+    br i1 %25, label %26, label %27
+  
+  ; <label>:26                                      ; preds = %22
+    tail call void @start_sequence() #4
+    br label %28
+  
+  ; <label>:27                                      ; preds = %22
+    tail call void @push_to_sequence(%struct.rtx_def.1822* nonnull %24) #4
+    br label %28
+  
+  ; <label>:28                                      ; preds = %27, %26
+    %29 = tail call %struct.rtx_def.1822* @emit_insn(%struct.rtx_def.1822* %pattern) #4
+    %30 = tail call %struct.rtx_def.1822* @get_insns() #4
+    %sunkaddr = ptrtoint %struct.edge_def.1841* %e to i32
+    %sunkaddr1 = add i32 %sunkaddr, 16
+    %sunkaddr2 = inttoptr i32 %sunkaddr1 to %struct.rtx_def.1822**
+    store %struct.rtx_def.1822* %30, %struct.rtx_def.1822** %sunkaddr2, align 4
+    tail call void @end_sequence() #4
+    ret void
+  }
+  
+  declare void @start_sequence() #2
+  
+  declare void @push_to_sequence(%struct.rtx_def.1822*) #2
+  
+  declare %struct.rtx_def.1822* @emit_insn(%struct.rtx_def.1822*) #2
+  
+  declare %struct.rtx_def.1822* @get_insns() #2
+  
+  declare void @end_sequence() #2
+  
+  attributes #0 = { noreturn "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #1 = { nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #2 = { "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #3 = { noreturn nounwind }
+  attributes #4 = { nounwind }
+  
+  !llvm.ident = !{!0}
+  
+  !0 = !{!"clang version 3.8.0 (http://llvm.org/git/clang.git 2d49f0a0ae8366964a93e3b7b26e29679bee7160) (http://llvm.org/git/llvm.git 60bc66b44837125843b58ed3e0fd2e6bb948d839)"}
+
+...
+---
+name:            insert_insn_on_edge
+alignment:       2
+exposesReturnsTwice: false
+hasInlineAsm:    false
+isSSA:           true
+tracksRegLiveness: true
+tracksSubRegLiveness: false
+registers:       
+  - { id: 0, class: gpr32 }
+  - { id: 1, class: gpr32 }
+  - { id: 2, class: gpr32 }
+  - { id: 3, class: gpr32 }
+  - { id: 4, class: gpr32 }
+  - { id: 5, class: gpr32 }
+  - { id: 6, class: gpr32 }
+  - { id: 7, class: gpr32 }
+  - { id: 8, class: gpr32 }
+  - { id: 9, class: gpr32 }
+  - { id: 10, class: gpr32 }
+  - { id: 11, class: gpr32 }
+  - { id: 12, class: gpr32 }
+  - { id: 13, class: gpr32 }
+  - { id: 14, class: gpr32 }
+  - { id: 15, class: gpr32 }
+  - { id: 16, class: gpr32 }
+  - { id: 17, class: gpr32 }
+  - { id: 18, class: gpr32 }
+  - { id: 19, class: gpr32 }
+  - { id: 20, class: gpr32 }
+  - { id: 21, class: gpr32 }
+  - { id: 22, class: gpr32 }
+  - { id: 23, class: gpr32 }
+  - { id: 24, class: gpr32 }
+liveins:         
+  - { reg: '%a0', virtual-reg: '%1' }
+  - { reg: '%a1', virtual-reg: '%2' }
+  - { reg: '%t9' }
+  - { reg: '%v0' }
+frameInfo:       
+  isFrameAddressTaken: false
+  isReturnAddressTaken: false
+  hasStackMap:     false
+  hasPatchPoint:   false
+  stackSize:       0
+  offsetAdjustment: 0
+  maxAlignment:    1
+  adjustsStack:    false
+  hasCalls:        true
+  maxCallFrameSize: 0
+  hasOpaqueSPAdjustment: false
+  hasVAStart:      false
+  hasMustTailInVarArgFunc: false
+body:             |
+  bb.0 (%ir-block.0, freq 26843545):
+    successors: %bb.4(50), %bb.1(50)
+    liveins: %a0, %a1, %t9, %v0
+  
+    %11 = ADDu %v0, %t9
+    %2 = COPY %a1
+    %1 = COPY %a0
+    %3 = LBu %2, 27, <0x4a03000> = !{!"unison-memory-partition", i32 0} :: (load 1 from %ir.1 + 3)
+    %4 = ANDi killed %3, 2
+    BEQ killed %4, %zero, %bb.4, implicit-def dead %at
+    B %bb.1, implicit-def dead %at
+  
+  bb.1 (%ir-block.5, freq 13421772):
+    successors: %bb.4(37), %bb.2(62)
+  
+    %5 = LW %2, 8, <0x4a03000> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.6)
+    %6 = LW killed %5, 20, <0x4a035f0> = !{!"unison-memory-partition", i32 1} :: (load 4 from %ir.8)
+    %7 = LW killed %6, 4, <0x4a036c0> = !{!"unison-memory-partition", i32 2} :: (load 4 from %ir.10)
+    BEQ killed %7, %zero, %bb.4, implicit-def dead %at
+    B %bb.2, implicit-def dead %at
+  
+  bb.2 (%ir-block.13, freq 8388608):
+    successors: %bb.4(99), %bb.3(0)
+  
+    %8 = LW %2, 12, <0x4a03000> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.14)
+    %9 = LW killed %8, 16, <0x4a035f0> = !{!"unison-memory-partition", i32 1} :: (load 4 from %ir.16)
+    %10 = LW killed %9, 0, <0x4a036c0> = !{!"unison-memory-partition", i32 2} :: (load 4 from %ir.18)
+    BEQ killed %10, %zero, %bb.4, implicit-def dead %at
+    B %bb.3, implicit-def dead %at
+  
+  bb.3 (%ir-block.21, freq 8):
+    exit
+  
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %12 = LW %11, target-flags(<unknown>) @.str, <0x4a03000> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %13 = LW %11, target-flags(<unknown>) @__FUNCTION__.insert_insn_on_edge, <0x4a035f0> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %14 = LW %11, target-flags(<unknown>) @fancy_abort, <0x4a036c0> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @fancy_abort)
+    %15 = ADDiu %zero, 1280
+    %a0 = COPY %12
+    %a1 = COPY %15
+    %a2 = COPY %13
+    %gp = COPY %11
+    %t9 = COPY %14
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %gp, implicit-def %sp
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+  
+  bb.4 (%ir-block.22, freq 26843537):
+    successors: %bb.5(37), %bb.6(62)
+  
+    %0 = LW %2, 16, <0x4a03000> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.23)
+    BNE %0, %zero, %bb.6, implicit-def dead %at
+    B %bb.5, implicit-def dead %at
+  
+  bb.5 (%ir-block.26, freq 10066326):
+    successors: %bb.7(100)
+  
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %17 = LW %11, target-flags(<unknown>) @start_sequence, <0x4a03000> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @start_sequence)
+    %gp = COPY %11
+    %t9 = COPY %17
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %gp, implicit-def %sp
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    B %bb.7, implicit-def dead %at
+  
+  bb.6 (%ir-block.27, freq 16777211):
+    successors: %bb.7(100)
+  
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %16 = LW %11, target-flags(<unknown>) @push_to_sequence, <0x4a03000> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @push_to_sequence)
+    %a0 = COPY %0
+    %gp = COPY %11
+    %t9 = COPY %16
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %gp, implicit-def %sp
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+  
+  bb.7 (%ir-block.28, freq 26843537):
+    liveouts:
+  
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %18 = LW %11, target-flags(<unknown>) @emit_insn, <0x4a03000> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @emit_insn)
+    %a0 = COPY %1
+    %gp = COPY %11
+    %t9 = COPY %18
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %gp, implicit-def %sp, implicit-def %v0
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %20 = LW %11, target-flags(<unknown>) @get_insns, <0x4a03000> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @get_insns)
+    %gp = COPY %11
+    %t9 = COPY %20
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %gp, implicit-def %sp, implicit-def %v0
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    %21 = COPY %v0
+    SW %21, %2, 16, <0x4a03000> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.sunkaddr2)
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %22 = LW %11, target-flags(<unknown>) @end_sequence, <0x4a03000> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @end_sequence)
+    %gp = COPY %11
+    %t9 = COPY %22
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %gp, implicit-def %sp
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    RetRA
+
+...

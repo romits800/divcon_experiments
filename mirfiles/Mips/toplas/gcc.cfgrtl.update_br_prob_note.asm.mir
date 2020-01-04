@@ -1,0 +1,240 @@
+--- |
+  ; ModuleID = '/home/romi/didaktoriko/unison/unison-experiments/experiments/mips/selected-functions/size-toplas/gcc.cfgrtl.update_br_prob_note.ll'
+  target datalayout = "E-m:m-p:32:32-i8:8:32-i16:16:32-i64:64-n32-S64"
+  target triple = "mips--linux-gnu"
+  
+  %struct.rtx_def.2383 = type { i32, [1 x %union.rtunion_def.2395] }
+  %union.rtunion_def.2395 = type { i32 }
+  %struct.basic_block_def.2401 = type { %struct.rtx_def.2383*, %struct.rtx_def.2383*, %union.tree_node.2382*, %union.tree_node.2382*, %struct.edge_def.2402*, %struct.edge_def.2402*, %struct.bitmap_head_def.2403*, %struct.bitmap_head_def.2403*, %struct.bitmap_head_def.2403*, %struct.bitmap_head_def.2403*, i8*, i32, i32, i32, i32, i32 }
+  %union.tree_node.2382 = type { %struct.tree_type.2391, [24 x i8] }
+  %struct.tree_type.2391 = type { %struct.tree_common.2392, %union.tree_node.2382*, %union.tree_node.2382*, %union.tree_node.2382*, %union.tree_node.2382*, i32, i32, i32, %union.tree_node.2382*, %union.tree_node.2382*, %union.anon.2.2393, %union.tree_node.2382*, %union.tree_node.2382*, %union.tree_node.2382*, %union.tree_node.2382*, %union.tree_node.2382*, %union.tree_node.2382*, %union.tree_node.2382*, i32, %struct.lang_type.2394* }
+  %struct.tree_common.2392 = type { %union.tree_node.2382*, %union.tree_node.2382*, i32 }
+  %union.anon.2.2393 = type { i32 }
+  %struct.lang_type.2394 = type opaque
+  %struct.edge_def.2402 = type { %struct.edge_def.2402*, %struct.edge_def.2402*, %struct.basic_block_def.2401*, %struct.basic_block_def.2401*, %struct.rtx_def.2383*, i8*, i32, i32, i32 }
+  %struct.bitmap_head_def.2403 = type { %struct.bitmap_element_def.2404*, %struct.bitmap_element_def.2404*, i32 }
+  %struct.bitmap_element_def.2404 = type { %struct.bitmap_element_def.2404*, %struct.bitmap_element_def.2404*, i32, [2 x i32] }
+  
+  declare %struct.rtx_def.2383* @find_reg_note(%struct.rtx_def.2383*, i32 signext, %struct.rtx_def.2383*) #0
+  
+  ; Function Attrs: nounwind
+  define void @update_br_prob_note(%struct.basic_block_def.2401* nocapture readonly %bb) #1 {
+    %1 = getelementptr inbounds %struct.basic_block_def.2401, %struct.basic_block_def.2401* %bb, i32 0, i32 1
+    %2 = load %struct.rtx_def.2383*, %struct.rtx_def.2383** %1, align 4
+    %3 = bitcast %struct.rtx_def.2383* %2 to i32*
+    %4 = load i32, i32* %3, align 4
+    %.mask = and i32 %4, -65536
+    %5 = icmp eq i32 %.mask, 2162688
+    br i1 %5, label %6, label %39
+  
+  ; <label>:6                                       ; preds = %0
+    %7 = tail call %struct.rtx_def.2383* @find_reg_note(%struct.rtx_def.2383* %2, i32 signext 16, %struct.rtx_def.2383* null) #2
+    %8 = icmp eq %struct.rtx_def.2383* %7, null
+    br i1 %8, label %39, label %9
+  
+  ; <label>:9                                       ; preds = %6
+    %10 = getelementptr inbounds %struct.rtx_def.2383, %struct.rtx_def.2383* %7, i32 0, i32 1, i32 0
+    %11 = bitcast %union.rtunion_def.2395* %10 to %struct.rtx_def.2383**
+    %12 = load %struct.rtx_def.2383*, %struct.rtx_def.2383** %11, align 4
+    %13 = getelementptr inbounds %struct.rtx_def.2383, %struct.rtx_def.2383* %12, i32 0, i32 1, i32 0, i32 0
+    %14 = load i32, i32* %13, align 4
+    %15 = getelementptr inbounds %struct.basic_block_def.2401, %struct.basic_block_def.2401* %bb, i32 0, i32 5
+    %16 = load %struct.edge_def.2402*, %struct.edge_def.2402** %15, align 4
+    %17 = getelementptr inbounds %struct.edge_def.2402, %struct.edge_def.2402* %16, i32 0, i32 6
+    %18 = load i32, i32* %17, align 4
+    %19 = and i32 %18, 1
+    %20 = icmp eq i32 %19, 0
+    br i1 %20, label %24, label %21
+  
+  ; <label>:21                                      ; preds = %9
+    %22 = getelementptr inbounds %struct.edge_def.2402, %struct.edge_def.2402* %16, i32 0, i32 1
+    %23 = load %struct.edge_def.2402*, %struct.edge_def.2402** %22, align 4
+    br label %24
+  
+  ; <label>:24                                      ; preds = %21, %9
+    %25 = phi %struct.edge_def.2402* [ %23, %21 ], [ %16, %9 ]
+    %26 = getelementptr inbounds %struct.edge_def.2402, %struct.edge_def.2402* %25, i32 0, i32 7
+    %27 = load i32, i32* %26, align 4
+    %28 = icmp eq i32 %14, %27
+    br i1 %28, label %39, label %29
+  
+  ; <label>:29                                      ; preds = %24
+    %30 = icmp eq i32 %19, 0
+    br i1 %30, label %34, label %31
+  
+  ; <label>:31                                      ; preds = %29
+    %32 = getelementptr inbounds %struct.edge_def.2402, %struct.edge_def.2402* %16, i32 0, i32 1
+    %33 = load %struct.edge_def.2402*, %struct.edge_def.2402** %32, align 4
+    br label %34
+  
+  ; <label>:34                                      ; preds = %31, %29
+    %35 = phi %struct.edge_def.2402* [ %33, %31 ], [ %16, %29 ]
+    %36 = getelementptr inbounds %struct.edge_def.2402, %struct.edge_def.2402* %35, i32 0, i32 7
+    %37 = load i32, i32* %36, align 4
+    %38 = tail call %struct.rtx_def.2383* @gen_rtx_CONST_INT(i32 signext 0, i32 signext %37) #2
+    %sunkaddr = ptrtoint %struct.rtx_def.2383* %7 to i32
+    %sunkaddr1 = add i32 %sunkaddr, 4
+    %sunkaddr2 = inttoptr i32 %sunkaddr1 to %struct.rtx_def.2383**
+    store %struct.rtx_def.2383* %38, %struct.rtx_def.2383** %sunkaddr2, align 4
+    br label %39
+  
+  ; <label>:39                                      ; preds = %34, %24, %6, %0
+    ret void
+  }
+  
+  declare %struct.rtx_def.2383* @gen_rtx_CONST_INT(i32 signext, i32 signext) #0
+  
+  attributes #0 = { "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #1 = { nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #2 = { nounwind }
+  
+  !llvm.ident = !{!0}
+  
+  !0 = !{!"clang version 3.8.0 (http://llvm.org/git/clang.git 2d49f0a0ae8366964a93e3b7b26e29679bee7160) (http://llvm.org/git/llvm.git 60bc66b44837125843b58ed3e0fd2e6bb948d839)"}
+
+...
+---
+name:            update_br_prob_note
+alignment:       2
+exposesReturnsTwice: false
+hasInlineAsm:    false
+isSSA:           false
+tracksRegLiveness: false
+tracksSubRegLiveness: false
+liveins:         
+  - { reg: '%a0' }
+  - { reg: '%t9' }
+  - { reg: '%v0' }
+calleeSavedRegisters: [ '%fp', '%ra', '%d10', '%d11', '%d12', '%d13', '%d14', 
+                        '%d15', '%f20', '%f21', '%f22', '%f23', '%f24', 
+                        '%f25', '%f26', '%f27', '%f28', '%f29', '%f30', 
+                        '%f31', '%s0', '%s1', '%s2', '%s3', '%s4', '%s5', 
+                        '%s6', '%s7' ]
+frameInfo:       
+  isFrameAddressTaken: false
+  isReturnAddressTaken: false
+  hasStackMap:     false
+  hasPatchPoint:   false
+  stackSize:       32
+  offsetAdjustment: 0
+  maxAlignment:    4
+  adjustsStack:    true
+  hasCalls:        true
+  maxCallFrameSize: 16
+  hasOpaqueSPAdjustment: false
+  hasVAStart:      false
+  hasMustTailInVarArgFunc: false
+stack:           
+  - { id: 0, type: spill-slot, offset: -4, size: 4, alignment: 4, callee-saved-register: '%ra' }
+  - { id: 1, type: spill-slot, offset: -8, size: 4, alignment: 4, callee-saved-register: '%s2' }
+  - { id: 2, type: spill-slot, offset: -12, size: 4, alignment: 4, callee-saved-register: '%s1' }
+  - { id: 3, type: spill-slot, offset: -16, size: 4, alignment: 4, callee-saved-register: '%s0' }
+body:             |
+  bb.0 (%ir-block.0, freq 102):
+    successors: %bb.1(50), %bb.8(50)
+    liveins: %a0, %t9, %ra, %s2, %s1, %s0
+  
+    %v0 = LUi target-flags(<unknown>) $_gp_disp
+    %v0 = ADDiu %v0, target-flags(<unknown>) $_gp_disp
+    %sp = ADDiu %sp, -32
+    CFI_INSTRUCTION .cfi_def_cfa_offset 32
+    SW killed %ra, %sp, 28 :: (store 4 into stack)
+    SW killed %s2, %sp, 24 :: (store 4 into stack)
+    SW killed %s1, %sp, 20 :: (store 4 into stack)
+    SW killed %s0, %sp, 16 :: (store 4 into stack)
+    CFI_INSTRUCTION .cfi_offset %ra_64, -4
+    CFI_INSTRUCTION .cfi_offset %s2_64, -8
+    CFI_INSTRUCTION .cfi_offset %s1_64, -12
+    CFI_INSTRUCTION .cfi_offset %s0_64, -16
+    %s0 = ADDu %v0, %t9
+    %s2 = OR %a0, %zero
+    %a0 = LW %s2, 4 :: (load 4 from %ir.1)
+    %at = LW %a0, 0 :: (load 4 from %ir.3)
+    %v0 = LUi 65535
+    %at = AND killed %at, killed %v0
+    %v0 = LUi 33
+    BNE %at, %v0, %bb.8, implicit-def %at {
+      NOP
+    }
+  
+  bb.1 (%ir-block.6, freq 51):
+    successors: %bb.8(37), %bb.2(62)
+    liveins: %a0, %s0, %s2
+  
+    %t9 = LW %s0, target-flags(<unknown>) @find_reg_note :: (load 4 from call-entry @find_reg_note)
+    %a1 = ADDiu %zero, 16
+    %a2 = ADDiu %zero, 0
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit killed %a2, implicit killed %gp, implicit-def %sp, implicit-def %v0 {
+      %gp = OR %s0, %zero
+    }
+    %s1 = OR %v0, %zero
+    BEQ %s1, %zero, %bb.8, implicit-def %at {
+      NOP
+    }
+  
+  bb.2 (%ir-block.9, freq 32):
+    successors: %bb.4(50), %bb.3(50)
+    liveins: %s0, %s1, %s2
+  
+    %at = LW %s1, 4 :: (load 4 from %ir.11)
+    %v1 = LW killed %at, 4 :: (load 4 from %ir.13)
+    %v0 = LW killed %s2, 20 :: (load 4 from %ir.15)
+    %at = LW %v0, 24 :: (load 4 from %ir.17)
+    %a0 = ANDi killed %at, 1
+    BEQ %a0, %zero, %bb.4, implicit-def %at {
+      %a1 = OR %v0, %zero
+    }
+  
+  bb.3 (%ir-block.21, freq 16):
+    successors: %bb.4(100)
+    liveins: %a0, %s0, %s1, %v0, %v1
+  
+    %a1 = LW %v0, 4 :: (load 4 from %ir.22)
+  
+  bb.4 (%ir-block.24, freq 32):
+    successors: %bb.8(50), %bb.5(50)
+    liveins: %a0, %a1, %s0, %s1, %v0, %v1
+  
+    %at = LW killed %a1, 28 :: (load 4 from %ir.26)
+    BEQ %v1, %at, %bb.8, implicit-def %at {
+      NOP
+    }
+  
+  bb.5 (%ir-block.29, freq 16):
+    successors: %bb.7(50), %bb.6(50)
+    liveins: %a0, %s0, %s1, %v0
+  
+    BEQ %a0, %zero, %bb.7, implicit-def %at {
+      NOP
+    }
+  
+  bb.6 (%ir-block.31, freq 8):
+    successors: %bb.7(100)
+    liveins: %s0, %s1, %v0
+  
+    %v0 = LW killed %v0, 4 :: (load 4 from %ir.32)
+  
+  bb.7 (%ir-block.34, freq 16):
+    successors: %bb.8(100)
+    liveins: %s0, %s1, %v0
+  
+    %a1 = LW killed %v0, 28 :: (load 4 from %ir.36)
+    %t9 = LW %s0, target-flags(<unknown>) @gen_rtx_CONST_INT :: (load 4 from call-entry @gen_rtx_CONST_INT)
+    %a0 = ADDiu %zero, 0
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit killed %gp, implicit-def %sp, implicit-def %v0 {
+      %gp = OR killed %s0, %zero
+    }
+    SW killed %v0, killed %s1, 4 :: (store 4 into %ir.sunkaddr2)
+  
+  bb.8 (%ir-block.39, freq 102):
+    liveouts:
+  
+    %s0 = LW %sp, 16 :: (load 4 from stack)
+    %s1 = LW %sp, 20 :: (load 4 from stack)
+    %s2 = LW %sp, 24 :: (load 4 from stack)
+    %ra = LW %sp, 28 :: (load 4 from stack)
+    PseudoReturn %ra {
+      %sp = ADDiu %sp, 32
+    }
+
+...

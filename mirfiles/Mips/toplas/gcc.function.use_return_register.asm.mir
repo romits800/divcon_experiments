@@ -1,0 +1,316 @@
+--- |
+  ; ModuleID = '/home/romi/didaktoriko/unison/unison-experiments/experiments/mips/selected-functions/size-toplas/gcc.function.use_return_register.ll'
+  target datalayout = "E-m:m-p:32:32-i8:8:32-i16:16:32-i64:64-n32-S64"
+  target triple = "mips--linux-gnu"
+  
+  %struct.function.8213 = type { %struct.eh_status.8214*, %struct.stmt_status.8215*, %struct.expr_status.8216*, %struct.emit_status.8217*, %struct.varasm_status.8218*, i8*, %union.tree_node.8219*, %struct.function.8213*, i32, i32, i32, i32, %struct.rtx_def.8220*, %struct.ix86_args.8221, %struct.rtx_def.8220*, %struct.rtx_def.8220*, i8*, %struct.initial_value_struct.8222*, i32, %union.tree_node.8219*, %struct.rtx_def.8220*, %struct.rtx_def.8220*, %struct.rtx_def.8220*, %struct.rtx_def.8220*, %struct.rtx_def.8220*, %struct.rtx_def.8220*, %struct.rtx_def.8220*, %union.tree_node.8219*, %struct.rtx_def.8220*, %struct.rtx_def.8220*, %struct.rtx_def.8220*, %struct.rtx_def.8220*, i32, %union.tree_node.8219*, %union.tree_node.8219*, %struct.rtx_def.8220*, %struct.rtx_def.8220*, i32, %struct.rtx_def.8220**, %struct.temp_slot.8223*, i32, i32, i32, %struct.var_refs_queue.8224*, i32, i32, i8*, %union.tree_node.8219*, %struct.rtx_def.8220*, i32, i32, %struct.machine_function.8225*, i32, i32, %struct.language_function.8226*, %struct.rtx_def.8220*, i24 }
+  %struct.eh_status.8214 = type opaque
+  %struct.stmt_status.8215 = type opaque
+  %struct.expr_status.8216 = type { i32, i32, i32, %struct.rtx_def.8220*, %struct.rtx_def.8220*, %struct.rtx_def.8220*, %struct.rtx_def.8220* }
+  %struct.emit_status.8217 = type { i32, i32, %struct.rtx_def.8220*, %struct.rtx_def.8220*, %union.tree_node.8219*, %struct.sequence_stack.8227*, i32, i32, i8*, i32, i8*, %union.tree_node.8219**, %struct.rtx_def.8220** }
+  %struct.sequence_stack.8227 = type { %struct.rtx_def.8220*, %struct.rtx_def.8220*, %union.tree_node.8219*, %struct.sequence_stack.8227* }
+  %struct.varasm_status.8218 = type opaque
+  %struct.ix86_args.8221 = type { i32, i32, i32, i32, i32, i32, i32 }
+  %struct.initial_value_struct.8222 = type opaque
+  %struct.temp_slot.8223 = type { %struct.temp_slot.8223*, %struct.rtx_def.8220*, %struct.rtx_def.8220*, i32, i32, %union.tree_node.8219*, %union.tree_node.8219*, i8, i8, i32, i32, i32, i32 }
+  %struct.var_refs_queue.8224 = type { %struct.rtx_def.8220*, i32, i32, %struct.var_refs_queue.8224* }
+  %union.tree_node.8219 = type { %struct.tree_type.8228, [24 x i8] }
+  %struct.tree_type.8228 = type { %struct.tree_common.8229, %union.tree_node.8219*, %union.tree_node.8219*, %union.tree_node.8219*, %union.tree_node.8219*, i32, i32, i32, %union.tree_node.8219*, %union.tree_node.8219*, %union.anon.2.8230, %union.tree_node.8219*, %union.tree_node.8219*, %union.tree_node.8219*, %union.tree_node.8219*, %union.tree_node.8219*, %union.tree_node.8219*, %union.tree_node.8219*, i32, %struct.lang_type.8231* }
+  %struct.tree_common.8229 = type { %union.tree_node.8219*, %union.tree_node.8219*, i32 }
+  %union.anon.2.8230 = type { i32 }
+  %struct.lang_type.8231 = type opaque
+  %struct.machine_function.8225 = type opaque
+  %struct.language_function.8226 = type opaque
+  %struct.rtx_def.8220 = type { i32, [1 x %union.rtunion_def.8232] }
+  %union.rtunion_def.8232 = type { i32 }
+  %struct.rtvec_def.8247 = type { i32, [1 x %struct.rtx_def.8220*] }
+  
+  @cfun = external global %struct.function.8213*, align 4
+  
+  declare %struct.rtx_def.8220* @emit_insn(%struct.rtx_def.8220*) #0
+  
+  ; Function Attrs: nounwind
+  define void @use_return_register() #1 {
+    %1 = load %struct.function.8213*, %struct.function.8213** @cfun, align 4
+    %2 = getelementptr inbounds %struct.function.8213, %struct.function.8213* %1, i32 0, i32 14
+    %3 = load %struct.rtx_def.8220*, %struct.rtx_def.8220** %2, align 4
+    %4 = icmp eq %struct.rtx_def.8220* %3, null
+    br i1 %4, label %diddle_return_value.exit, label %5
+  
+  ; <label>:5                                       ; preds = %0
+    %6 = bitcast %struct.rtx_def.8220* %3 to i32*
+    %7 = load i32, i32* %6, align 4
+    %8 = lshr i32 %7, 16
+    switch i32 %8, label %diddle_return_value.exit [
+      i32 61, label %15
+      i32 39, label %.preheader.i
+    ]
+  
+  .preheader.i:                                     ; preds = %5
+    %9 = getelementptr inbounds %struct.rtx_def.8220, %struct.rtx_def.8220* %3, i32 0, i32 1, i32 0
+    %10 = bitcast %union.rtunion_def.8232* %9 to %struct.rtvec_def.8247**
+    %11 = load %struct.rtvec_def.8247*, %struct.rtvec_def.8247** %10, align 4
+    %12 = bitcast %struct.rtvec_def.8247* %11 to i32*
+    %13 = load i32, i32* %12, align 4
+    %14 = icmp sgt i32 %13, 0
+    br i1 %14, label %.lr.ph.i, label %diddle_return_value.exit
+  
+  ; <label>:15                                      ; preds = %5
+    %16 = tail call %struct.rtx_def.8220* @gen_rtx_fmt_e(i32 signext 48, i32 signext 0, %struct.rtx_def.8220* nonnull %3) #2
+    %17 = tail call %struct.rtx_def.8220* @emit_insn(%struct.rtx_def.8220* %16) #2
+    br label %diddle_return_value.exit
+  
+  .lr.ph.i:                                         ; preds = %.preheader.i, %34
+    %lsr.iv = phi i32 [ %lsr.iv.next, %34 ], [ 4, %.preheader.i ]
+    %18 = phi %struct.rtvec_def.8247* [ %35, %34 ], [ %11, %.preheader.i ]
+    %i.01.i = phi i32 [ %36, %34 ], [ 0, %.preheader.i ]
+    %19 = bitcast %struct.rtvec_def.8247* %18 to i8*
+    %uglygep = getelementptr i8, i8* %19, i32 %lsr.iv
+    %uglygep1 = bitcast i8* %uglygep to %struct.rtx_def.8220**
+    %20 = load %struct.rtx_def.8220*, %struct.rtx_def.8220** %uglygep1, align 4
+    %21 = getelementptr inbounds %struct.rtx_def.8220, %struct.rtx_def.8220* %20, i32 0, i32 1, i32 0
+    %22 = bitcast %union.rtunion_def.8232* %21 to %struct.rtx_def.8220**
+    %23 = load %struct.rtx_def.8220*, %struct.rtx_def.8220** %22, align 4
+    %24 = bitcast %struct.rtx_def.8220* %23 to i32*
+    %25 = load i32, i32* %24, align 4
+    %.mask.i = and i32 %25, -65536
+    %26 = icmp eq i32 %.mask.i, 3997696
+    br i1 %26, label %27, label %34
+  
+  ; <label>:27                                      ; preds = %.lr.ph.i
+    %28 = getelementptr inbounds %struct.rtx_def.8220, %struct.rtx_def.8220* %23, i32 0, i32 1, i32 0, i32 0
+    %29 = load i32, i32* %28, align 4
+    %30 = icmp ult i32 %29, 53
+    br i1 %30, label %31, label %34
+  
+  ; <label>:31                                      ; preds = %27
+    %32 = tail call %struct.rtx_def.8220* @gen_rtx_fmt_e(i32 signext 48, i32 signext 0, %struct.rtx_def.8220* nonnull %23) #2
+    %33 = tail call %struct.rtx_def.8220* @emit_insn(%struct.rtx_def.8220* %32) #2
+    %sunkaddr = ptrtoint %struct.rtx_def.8220* %3 to i32
+    %sunkaddr2 = add i32 %sunkaddr, 4
+    %sunkaddr3 = inttoptr i32 %sunkaddr2 to %struct.rtvec_def.8247**
+    %.pre.i = load %struct.rtvec_def.8247*, %struct.rtvec_def.8247** %sunkaddr3, align 4
+    br label %34
+  
+  ; <label>:34                                      ; preds = %31, %27, %.lr.ph.i
+    %35 = phi %struct.rtvec_def.8247* [ %.pre.i, %31 ], [ %18, %27 ], [ %18, %.lr.ph.i ]
+    %36 = add nuw nsw i32 %i.01.i, 1
+    %37 = bitcast %struct.rtvec_def.8247* %35 to i32*
+    %38 = load i32, i32* %37, align 4
+    %lsr.iv.next = add i32 %lsr.iv, 4
+    %39 = icmp slt i32 %36, %38
+    br i1 %39, label %.lr.ph.i, label %diddle_return_value.exit
+  
+  diddle_return_value.exit:                         ; preds = %34, %15, %.preheader.i, %5, %0
+    ret void
+  }
+  
+  declare %struct.rtx_def.8220* @gen_rtx_fmt_e(i32 signext, i32 signext, %struct.rtx_def.8220*) #0
+  
+  attributes #0 = { "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #1 = { nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #2 = { nounwind }
+  
+  !llvm.ident = !{!0}
+  
+  !0 = !{!"clang version 3.8.0 (http://llvm.org/git/clang.git 2d49f0a0ae8366964a93e3b7b26e29679bee7160) (http://llvm.org/git/llvm.git 60bc66b44837125843b58ed3e0fd2e6bb948d839)"}
+
+...
+---
+name:            use_return_register
+alignment:       2
+exposesReturnsTwice: false
+hasInlineAsm:    false
+isSSA:           false
+tracksRegLiveness: false
+tracksSubRegLiveness: false
+liveins:         
+  - { reg: '%t9' }
+  - { reg: '%v0' }
+calleeSavedRegisters: [ '%fp', '%ra', '%d10', '%d11', '%d12', '%d13', '%d14', 
+                        '%d15', '%f20', '%f21', '%f22', '%f23', '%f24', 
+                        '%f25', '%f26', '%f27', '%f28', '%f29', '%f30', 
+                        '%f31', '%s0', '%s1', '%s2', '%s3', '%s4', '%s5', 
+                        '%s6', '%s7' ]
+frameInfo:       
+  isFrameAddressTaken: false
+  isReturnAddressTaken: false
+  hasStackMap:     false
+  hasPatchPoint:   false
+  stackSize:       48
+  offsetAdjustment: 0
+  maxAlignment:    4
+  adjustsStack:    true
+  hasCalls:        true
+  maxCallFrameSize: 16
+  hasOpaqueSPAdjustment: false
+  hasVAStart:      false
+  hasMustTailInVarArgFunc: false
+stack:           
+  - { id: 0, type: spill-slot, offset: -4, size: 4, alignment: 4, callee-saved-register: '%ra' }
+  - { id: 1, type: spill-slot, offset: -8, size: 4, alignment: 4, callee-saved-register: '%s5' }
+  - { id: 2, type: spill-slot, offset: -12, size: 4, alignment: 4, callee-saved-register: '%s4' }
+  - { id: 3, type: spill-slot, offset: -16, size: 4, alignment: 4, callee-saved-register: '%s3' }
+  - { id: 4, type: spill-slot, offset: -20, size: 4, alignment: 4, callee-saved-register: '%s2' }
+  - { id: 5, type: spill-slot, offset: -24, size: 4, alignment: 4, callee-saved-register: '%s1' }
+  - { id: 6, type: spill-slot, offset: -28, size: 4, alignment: 4, callee-saved-register: '%s0' }
+body:             |
+  bb.0 (%ir-block.0, freq 122):
+    successors: %bb.11.diddle_return_value.exit(37), %bb.1(62)
+    liveins: %t9, %ra, %s5, %s4, %s3, %s2, %s1, %s0
+  
+    %v0 = LUi target-flags(<unknown>) $_gp_disp
+    %v0 = ADDiu %v0, target-flags(<unknown>) $_gp_disp
+    %sp = ADDiu %sp, -48
+    CFI_INSTRUCTION .cfi_def_cfa_offset 48
+    SW killed %ra, %sp, 44 :: (store 4 into stack)
+    SW killed %s5, %sp, 40 :: (store 4 into stack)
+    SW killed %s4, %sp, 36 :: (store 4 into stack)
+    SW killed %s3, %sp, 32 :: (store 4 into stack)
+    SW killed %s2, %sp, 28 :: (store 4 into stack)
+    SW killed %s1, %sp, 24 :: (store 4 into stack)
+    SW killed %s0, %sp, 20 :: (store 4 into stack)
+    CFI_INSTRUCTION .cfi_offset %ra_64, -4
+    CFI_INSTRUCTION .cfi_offset %s5_64, -8
+    CFI_INSTRUCTION .cfi_offset %s4_64, -12
+    CFI_INSTRUCTION .cfi_offset %s3_64, -16
+    CFI_INSTRUCTION .cfi_offset %s2_64, -20
+    CFI_INSTRUCTION .cfi_offset %s1_64, -24
+    CFI_INSTRUCTION .cfi_offset %s0_64, -28
+    %s0 = ADDu %v0, %t9
+    %at = LW %s0, target-flags(<unknown>) @cfun :: (load 4 from got)
+    %at = LW killed %at, 0 :: (load 4 from @cfun)
+    %s1 = LW killed %at, 80 :: (load 4 from %ir.2)
+    BEQ %s1, %zero, %bb.11.diddle_return_value.exit, implicit-def %at {
+      NOP
+    }
+  
+  bb.1 (%ir-block.5, freq 76):
+    successors: %bb.10(33), %bb.2(66)
+    liveins: %s0, %s1
+  
+    %at = LW %s1, 0 :: (load 4 from %ir.6)
+    %v0 = SRL killed %at, 16
+    %at = ADDiu %zero, 61
+    BEQ %v0, %at, %bb.10, implicit-def %at {
+      NOP
+    }
+  
+  bb.2 (%ir-block.5, freq 51):
+    successors: %bb.3..preheader.i(50), %bb.11.diddle_return_value.exit(49)
+    liveins: %s0, %s1, %v0
+  
+    %at = ADDiu %zero, 39
+    BNE %v0, %at, %bb.11.diddle_return_value.exit, implicit-def %at {
+      NOP
+    }
+  
+  bb.3..preheader.i (freq 25):
+    successors: %bb.4(62), %bb.11.diddle_return_value.exit(37)
+    liveins: %s0, %s1
+  
+    %v0 = LW %s1, 4 :: (load 4 from %ir.10)
+    %at = LW %v0, 0 :: (load 4 from %ir.12)
+    BLEZ killed %at, %bb.11.diddle_return_value.exit, implicit-def dead %at {
+      NOP
+    }
+  
+  bb.4 (freq 16):
+    successors: %bb.5..lr.ph.i(100)
+    liveins: %s0, %s1, %v0
+  
+    %s2 = ADDiu %zero, 0
+    %s3 = ADDiu %zero, 4
+    %s4 = LUi 61
+    %s5 = LUi 65535
+  
+  bb.5..lr.ph.i (freq 32):
+    successors: %bb.6(50), %bb.8(50)
+    liveins: %s0, %s1, %s2, %s3, %s4, %s5, %v0
+  
+    %at = ADDu %v0, %s3
+    %at = LW killed %at, 0 :: (load 4 from %ir.uglygep1)
+    %a2 = LW killed %at, 4 :: (load 4 from %ir.22)
+    %at = LW %a2, 0 :: (load 4 from %ir.24)
+    %at = AND killed %at, %s5
+    BNE %at, %s4, %bb.8, implicit-def %at {
+      NOP
+    }
+  
+  bb.6 (%ir-block.27, freq 16):
+    successors: %bb.7(50), %bb.8(50)
+    liveins: %a2, %s0, %s1, %s2, %s3, %s4, %s5, %v0
+  
+    %at = LW %a2, 4 :: (load 4 from %ir.28)
+    %at = SLTiu killed %at, 53
+    BEQ %at, %zero, %bb.8, implicit-def %at {
+      NOP
+    }
+  
+  bb.7 (%ir-block.31, freq 8):
+    successors: %bb.8(100)
+    liveins: %a2, %s0, %s1, %s2, %s3, %s4, %s5
+  
+    %t9 = LW %s0, target-flags(<unknown>) @gen_rtx_fmt_e :: (load 4 from call-entry @gen_rtx_fmt_e)
+    %a0 = ADDiu %zero, 48
+    %a1 = ADDiu %zero, 0
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit killed %a0, implicit killed %a1, implicit %a2, implicit killed %gp, implicit-def %sp, implicit-def %v0 {
+      %gp = OR %s0, %zero
+    }
+    %t9 = LW %s0, target-flags(<unknown>) @emit_insn :: (load 4 from call-entry @emit_insn)
+    %a0 = OR killed %v0, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit killed %a0, implicit killed %gp, implicit-def %sp, implicit-def dead %v0 {
+      %gp = OR %s0, %zero
+    }
+    %v0 = LW %s1, 4 :: (load 4 from %ir.sunkaddr3)
+  
+  bb.8 (%ir-block.34, freq 32):
+    successors: %bb.9(50), %bb.5..lr.ph.i(50)
+    liveins: %s0, %s1, %s2, %s3, %s4, %s5, %v0
+  
+    %at = LW %v0, 0 :: (load 4 from %ir.37)
+    %s2 = ADDiu killed %s2, 1
+    %at = SLT %s2, killed %at
+    BNE %at, %zero, %bb.5..lr.ph.i, implicit-def %at {
+      %s3 = ADDiu killed %s3, 4
+    }
+  
+  bb.9 (%ir-block.34, freq 16):
+    successors: %bb.11.diddle_return_value.exit(100)
+  
+    B %bb.11.diddle_return_value.exit, implicit-def %at {
+      NOP
+    }
+  
+  bb.10 (%ir-block.15, freq 25):
+    successors: %bb.11.diddle_return_value.exit(100)
+    liveins: %s0, %s1
+  
+    %t9 = LW %s0, target-flags(<unknown>) @gen_rtx_fmt_e :: (load 4 from call-entry @gen_rtx_fmt_e)
+    %a0 = ADDiu %zero, 48
+    %a1 = ADDiu %zero, 0
+    %a2 = OR killed %s1, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit killed %a0, implicit killed %a1, implicit %a2, implicit killed %gp, implicit-def %sp, implicit-def %v0 {
+      %gp = OR %s0, %zero
+    }
+    %t9 = LW %s0, target-flags(<unknown>) @emit_insn :: (load 4 from call-entry @emit_insn)
+    %a0 = OR killed %v0, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit killed %a0, implicit killed %gp, implicit-def %sp, implicit-def dead %v0 {
+      %gp = OR killed %s0, %zero
+    }
+  
+  bb.11.diddle_return_value.exit (freq 122):
+    liveouts:
+  
+    %s0 = LW %sp, 20 :: (load 4 from stack)
+    %s1 = LW %sp, 24 :: (load 4 from stack)
+    %s2 = LW %sp, 28 :: (load 4 from stack)
+    %s3 = LW %sp, 32 :: (load 4 from stack)
+    %s4 = LW %sp, 36 :: (load 4 from stack)
+    %s5 = LW %sp, 40 :: (load 4 from stack)
+    %ra = LW %sp, 44 :: (load 4 from stack)
+    PseudoReturn %ra {
+      %sp = ADDiu %sp, 48
+    }
+
+...

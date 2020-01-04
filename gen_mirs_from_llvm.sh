@@ -5,11 +5,12 @@
 #   exit 1
 #fi
 #=$1
-dname=mirfiles/Mips
+dname=mirfiles/Mips/toplas/
 
 opt=-O2
 
-for llfile in ../unison/src/unison/test/fast/Mips/speed/*.ll
+for llfile in /home/romi/didaktoriko/unison/unison-experiments/experiments/mips/selected-functions/size-toplas/*.ll
+#for llfile in ../unison/src/unison/test/fast/Mips/speed/*.ll
     do
         rm /tmp/unison-*
         fname1=${llfile##*/}

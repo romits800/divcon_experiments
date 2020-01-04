@@ -1,0 +1,1120 @@
+--- |
+  ; ModuleID = '/home/romi/didaktoriko/unison/unison-experiments/experiments/mips/selected-functions/size-toplas/gcc.i386.ix86_expand_move.ll'
+  target datalayout = "E-m:m-p:32:32-i8:8:32-i16:16:32-i64:64-n32-S64"
+  target triple = "mips--linux-gnu"
+  
+  %struct.rtx_def.11418 = type { i32, [1 x %union.rtunion_def.11419] }
+  %union.rtunion_def.11419 = type { i32 }
+  %struct.rtvec_def.11455 = type { i32, [1 x %struct.rtx_def.11418*] }
+  
+  @target_flags = external global i32, align 4
+  @flag_pic = external global i32, align 4
+  @optimize = external global i32, align 4
+  @mode_size = external constant [59 x i8], align 1
+  @mode_class = external constant [59 x i32], align 4
+  @global_rtl = external global [11 x %struct.rtx_def.11418*], align 4
+  @reload_completed = external global i32, align 4
+  @reload_in_progress = external global i32, align 4
+  
+  declare %struct.rtx_def.11418* @gen_reg_rtx(i32 signext) #0
+  
+  declare %struct.rtx_def.11418* @emit_insn(%struct.rtx_def.11418*) #0
+  
+  declare %struct.rtx_def.11418* @gen_rtx_fmt_ee(i32 signext, i32 signext, %struct.rtx_def.11418*, %struct.rtx_def.11418*) #0
+  
+  declare i32 @general_operand(%struct.rtx_def.11418*, i32 signext) #0
+  
+  ; Function Attrs: nounwind
+  declare i32 @x86_64_zero_extended_value(%struct.rtx_def.11418* nocapture readonly) #1
+  
+  declare i32 @register_operand(%struct.rtx_def.11418*, i32 signext) #0
+  
+  declare i32 @immediate_operand(%struct.rtx_def.11418*, i32 signext) #0
+  
+  ; Function Attrs: nounwind
+  declare %struct.rtx_def.11418* @legitimize_pic_address(%struct.rtx_def.11418*, %struct.rtx_def.11418*) #1
+  
+  declare %struct.rtx_def.11418* @force_reg(i32 signext, %struct.rtx_def.11418*) #0
+  
+  ; Function Attrs: nounwind
+  define void @ix86_expand_move(i32 signext %mode, %struct.rtx_def.11418** nocapture %operands) #1 {
+    %1 = load i32, i32* @reload_in_progress, align 4
+    %2 = load i32, i32* @reload_completed, align 4
+    %3 = or i32 %2, %1
+    %4 = load i32, i32* @flag_pic, align 4
+    %5 = icmp eq i32 %4, 0
+    br i1 %5, label %symbolic_operand.exit.thread, label %6
+  
+  ; <label>:6                                       ; preds = %0
+    %7 = load i32, i32* @target_flags, align 4
+    %8 = lshr i32 %7, 25
+    %9 = and i32 %8, 1
+    %10 = or i32 %9, 4
+    %11 = icmp eq i32 %10, %mode
+    br i1 %11, label %12, label %symbolic_operand.exit.thread
+  
+  ; <label>:12                                      ; preds = %6
+    %13 = getelementptr inbounds %struct.rtx_def.11418*, %struct.rtx_def.11418** %operands, i32 1
+    %14 = load %struct.rtx_def.11418*, %struct.rtx_def.11418** %13, align 4
+    %15 = bitcast %struct.rtx_def.11418* %14 to i32*
+    %16 = load i32, i32* %15, align 4
+    %17 = lshr i32 %16, 16
+    switch i32 %17, label %symbolic_operand.exit.thread [
+      i32 68, label %symbolic_operand.exit.thread18
+      i32 67, label %symbolic_operand.exit.thread18
+      i32 58, label %18
+    ]
+  
+  ; <label>:18                                      ; preds = %12
+    %19 = getelementptr inbounds %struct.rtx_def.11418, %struct.rtx_def.11418* %14, i32 0, i32 1, i32 0
+    %20 = bitcast %union.rtunion_def.11419* %19 to %struct.rtx_def.11418**
+    %21 = load %struct.rtx_def.11418*, %struct.rtx_def.11418** %20, align 4
+    %22 = bitcast %struct.rtx_def.11418* %21 to i32*
+    %23 = load i32, i32* %22, align 4
+    %24 = lshr i32 %23, 16
+    switch i32 %24, label %28 [
+      i32 68, label %symbolic_operand.exit.thread18
+      i32 67, label %symbolic_operand.exit.thread18
+      i32 42, label %25
+    ]
+  
+  ; <label>:25                                      ; preds = %18
+    %26 = getelementptr inbounds %struct.rtx_def.11418, %struct.rtx_def.11418* %21, i32 0, i32 1, i32 1, i32 0
+    %27 = load i32, i32* %26, align 4
+    switch i32 %27, label %28 [
+      i32 6, label %symbolic_operand.exit.thread18
+      i32 7, label %symbolic_operand.exit.thread18
+      i32 15, label %symbolic_operand.exit.thread18
+    ]
+  
+  ; <label>:28                                      ; preds = %25, %18
+    %.mask.i = and i32 %23, -65536
+    %29 = icmp eq i32 %.mask.i, 4915200
+    br i1 %29, label %30, label %symbolic_operand.exit.thread
+  
+  ; <label>:30                                      ; preds = %28
+    %31 = getelementptr inbounds %struct.rtx_def.11418, %struct.rtx_def.11418* %21, i32 0, i32 1, i32 1
+    %32 = bitcast %union.rtunion_def.11419* %31 to i32**
+    %33 = load i32*, i32** %32, align 4
+    %34 = load i32, i32* %33, align 4
+    %.mask1.i = and i32 %34, -65536
+    %35 = icmp eq i32 %.mask1.i, 3538944
+    br i1 %35, label %36, label %symbolic_operand.exit.thread
+  
+  ; <label>:36                                      ; preds = %30
+    %37 = getelementptr inbounds %struct.rtx_def.11418, %struct.rtx_def.11418* %21, i32 0, i32 1, i32 0
+    %38 = bitcast %union.rtunion_def.11419* %37 to %struct.rtx_def.11418**
+    %39 = load %struct.rtx_def.11418*, %struct.rtx_def.11418** %38, align 4
+    %40 = bitcast %struct.rtx_def.11418* %39 to i32*
+    %41 = load i32, i32* %40, align 4
+    %42 = lshr i32 %41, 16
+    switch i32 %42, label %symbolic_operand.exit.thread [
+      i32 68, label %symbolic_operand.exit.thread18
+      i32 67, label %symbolic_operand.exit.thread18
+      i32 42, label %43
+    ]
+  
+  ; <label>:43                                      ; preds = %36
+    %44 = getelementptr inbounds %struct.rtx_def.11418, %struct.rtx_def.11418* %39, i32 0, i32 1, i32 1, i32 0
+    %45 = load i32, i32* %44, align 4
+    %46 = icmp eq i32 %45, 7
+    br i1 %46, label %symbolic_operand.exit, label %symbolic_operand.exit.thread
+  
+  symbolic_operand.exit:                            ; preds = %43
+    %47 = getelementptr inbounds %struct.rtx_def.11418, %struct.rtx_def.11418* %39, i32 0, i32 1, i32 0
+    %48 = bitcast %union.rtunion_def.11419* %47 to %struct.rtvec_def.11455**
+    %49 = load %struct.rtvec_def.11455*, %struct.rtvec_def.11455** %48, align 4
+    %50 = getelementptr inbounds %struct.rtvec_def.11455, %struct.rtvec_def.11455* %49, i32 0, i32 1, i32 0
+    %51 = bitcast %struct.rtx_def.11418** %50 to i32**
+    %52 = load i32*, i32** %51, align 4
+    %53 = load i32, i32* %52, align 4
+    %54 = lshr i32 %53, 16
+    %.off.i = add nsw i32 %54, -67
+    %switch.i = icmp ult i32 %.off.i, 2
+    br i1 %switch.i, label %symbolic_operand.exit.thread18, label %symbolic_operand.exit.thread
+  
+  symbolic_operand.exit.thread18:                   ; preds = %symbolic_operand.exit, %36, %36, %25, %25, %25, %18, %18, %12, %12
+    %55 = load %struct.rtx_def.11418*, %struct.rtx_def.11418** %operands, align 4
+    %56 = bitcast %struct.rtx_def.11418* %55 to i32*
+    %57 = load i32, i32* %56, align 4
+    %58 = lshr i32 %57, 16
+    switch i32 %58, label %61 [
+      i32 66, label %59
+      i32 61, label %63
+    ]
+  
+  ; <label>:59                                      ; preds = %symbolic_operand.exit.thread18
+    %60 = tail call %struct.rtx_def.11418* @force_reg(i32 signext %mode, %struct.rtx_def.11418* %14) #2
+    %sunkaddr = ptrtoint %struct.rtx_def.11418** %operands to i32
+    %sunkaddr1 = add i32 %sunkaddr, 4
+    %sunkaddr2 = inttoptr i32 %sunkaddr1 to %struct.rtx_def.11418**
+    store %struct.rtx_def.11418* %60, %struct.rtx_def.11418** %sunkaddr2, align 4
+    br label %182
+  
+  ; <label>:61                                      ; preds = %symbolic_operand.exit.thread18
+    %62 = tail call %struct.rtx_def.11418* @gen_reg_rtx(i32 signext %mode) #2
+    %sunkaddr3 = ptrtoint %struct.rtx_def.11418** %operands to i32
+    %sunkaddr4 = add i32 %sunkaddr3, 4
+    %sunkaddr5 = inttoptr i32 %sunkaddr4 to %struct.rtx_def.11418**
+    %.pre = load %struct.rtx_def.11418*, %struct.rtx_def.11418** %sunkaddr5, align 4
+    br label %63
+  
+  ; <label>:63                                      ; preds = %61, %symbolic_operand.exit.thread18
+    %64 = phi %struct.rtx_def.11418* [ %.pre, %61 ], [ %14, %symbolic_operand.exit.thread18 ]
+    %temp.0 = phi %struct.rtx_def.11418* [ %62, %61 ], [ %55, %symbolic_operand.exit.thread18 ]
+    %65 = tail call %struct.rtx_def.11418* @legitimize_pic_address(%struct.rtx_def.11418* %64, %struct.rtx_def.11418* %temp.0)
+    %66 = load %struct.rtx_def.11418*, %struct.rtx_def.11418** %operands, align 4
+    %67 = icmp eq %struct.rtx_def.11418* %65, %66
+    br i1 %67, label %188, label %.critedge
+  
+  .critedge:                                        ; preds = %63
+    %sunkaddr6 = ptrtoint %struct.rtx_def.11418** %operands to i32
+    %sunkaddr7 = add i32 %sunkaddr6, 4
+    %sunkaddr8 = inttoptr i32 %sunkaddr7 to %struct.rtx_def.11418**
+    store %struct.rtx_def.11418* %65, %struct.rtx_def.11418** %sunkaddr8, align 4
+    br label %182
+  
+  symbolic_operand.exit.thread:                     ; preds = %symbolic_operand.exit, %43, %36, %30, %28, %12, %6, %0
+    %68 = load %struct.rtx_def.11418*, %struct.rtx_def.11418** %operands, align 4
+    %69 = bitcast %struct.rtx_def.11418* %68 to i32*
+    %70 = load i32, i32* %69, align 4
+    %.mask = and i32 %70, -65536
+    %71 = icmp eq i32 %.mask, 4325376
+    br i1 %71, label %72, label %96
+  
+  ; <label>:72                                      ; preds = %symbolic_operand.exit.thread
+    %73 = load i32, i32* @target_flags, align 4
+    %74 = and i32 %73, 33554432
+    %75 = icmp ne i32 %74, 0
+    %76 = getelementptr inbounds [59 x i8], [59 x i8]* @mode_size, i32 0, i32 %mode
+    %77 = load i8, i8* %76, align 1
+    %78 = zext i8 %77 to i32
+    %79 = add nuw nsw i32 %78, 7
+    %80 = and i32 %79, 504
+    %81 = add nuw nsw i32 %78, 1
+    %82 = and i32 %81, 510
+    %83 = select i1 %75, i32 %80, i32 %82
+    %84 = icmp eq i32 %83, %78
+    br i1 %84, label %85, label %88
+  
+  ; <label>:85                                      ; preds = %72
+    %86 = tail call i32 @push_operand(%struct.rtx_def.11418* %68, i32 signext %mode) #2
+    %87 = icmp eq i32 %86, 0
+    br i1 %87, label %88, label %96
+  
+  ; <label>:88                                      ; preds = %85, %72
+    %89 = getelementptr inbounds %struct.rtx_def.11418*, %struct.rtx_def.11418** %operands, i32 1
+    %90 = load %struct.rtx_def.11418*, %struct.rtx_def.11418** %89, align 4
+    %91 = bitcast %struct.rtx_def.11418* %90 to i32*
+    %92 = load i32, i32* %91, align 4
+    %.mask12 = and i32 %92, -65536
+    %93 = icmp eq i32 %.mask12, 4325376
+    br i1 %93, label %94, label %96
+  
+  ; <label>:94                                      ; preds = %88
+    %95 = tail call %struct.rtx_def.11418* @force_reg(i32 signext %mode, %struct.rtx_def.11418* %90) #2
+    %sunkaddr9 = ptrtoint %struct.rtx_def.11418** %operands to i32
+    %sunkaddr10 = add i32 %sunkaddr9, 4
+    %sunkaddr11 = inttoptr i32 %sunkaddr10 to %struct.rtx_def.11418**
+    store %struct.rtx_def.11418* %95, %struct.rtx_def.11418** %sunkaddr11, align 4
+    br label %96
+  
+  ; <label>:96                                      ; preds = %94, %88, %85, %symbolic_operand.exit.thread
+    %97 = load %struct.rtx_def.11418*, %struct.rtx_def.11418** %operands, align 4
+    %98 = tail call i32 @push_operand(%struct.rtx_def.11418* %97, i32 signext %mode) #2
+    %99 = icmp eq i32 %98, 0
+    br i1 %99, label %133, label %100
+  
+  ; <label>:100                                     ; preds = %96
+    %101 = getelementptr inbounds %struct.rtx_def.11418*, %struct.rtx_def.11418** %operands, i32 1
+    %102 = load %struct.rtx_def.11418*, %struct.rtx_def.11418** %101, align 4
+    %103 = bitcast %struct.rtx_def.11418* %102 to i32*
+    %104 = load i32, i32* %103, align 4
+    %.mask.i13 = and i32 %104, -65536
+    %105 = icmp eq i32 %.mask.i13, 4128768
+    br i1 %105, label %106, label %110
+  
+  ; <label>:106                                     ; preds = %100
+    %107 = getelementptr inbounds %struct.rtx_def.11418, %struct.rtx_def.11418* %102, i32 0, i32 1, i32 0
+    %108 = bitcast %union.rtunion_def.11419* %107 to %struct.rtx_def.11418**
+    %109 = load %struct.rtx_def.11418*, %struct.rtx_def.11418** %108, align 4
+    br label %110
+  
+  ; <label>:110                                     ; preds = %106, %100
+    %t.0.i = phi %struct.rtx_def.11418* [ %109, %106 ], [ %102, %100 ]
+    %111 = load %struct.rtx_def.11418*, %struct.rtx_def.11418** getelementptr inbounds ([11 x %struct.rtx_def.11418*], [11 x %struct.rtx_def.11418*]* @global_rtl, i32 0, i32 5), align 4
+    %112 = icmp eq %struct.rtx_def.11418* %t.0.i, %111
+    %113 = load %struct.rtx_def.11418*, %struct.rtx_def.11418** getelementptr inbounds ([11 x %struct.rtx_def.11418*], [11 x %struct.rtx_def.11418*]* @global_rtl, i32 0, i32 3), align 4
+    %114 = icmp eq %struct.rtx_def.11418* %t.0.i, %113
+    %or.cond.i = or i1 %112, %114
+    %115 = load %struct.rtx_def.11418*, %struct.rtx_def.11418** getelementptr inbounds ([11 x %struct.rtx_def.11418*], [11 x %struct.rtx_def.11418*]* @global_rtl, i32 0, i32 6), align 4
+    %116 = icmp eq %struct.rtx_def.11418* %t.0.i, %115
+    %or.cond4.i = or i1 %or.cond.i, %116
+    %117 = load %struct.rtx_def.11418*, %struct.rtx_def.11418** getelementptr inbounds ([11 x %struct.rtx_def.11418*], [11 x %struct.rtx_def.11418*]* @global_rtl, i32 0, i32 7), align 4
+    %118 = icmp eq %struct.rtx_def.11418* %t.0.i, %117
+    %or.cond6.i = or i1 %or.cond4.i, %118
+    %119 = load %struct.rtx_def.11418*, %struct.rtx_def.11418** getelementptr inbounds ([11 x %struct.rtx_def.11418*], [11 x %struct.rtx_def.11418*]* @global_rtl, i32 0, i32 8), align 4
+    %120 = icmp eq %struct.rtx_def.11418* %t.0.i, %119
+    %or.cond8.i = or i1 %or.cond6.i, %120
+    br i1 %or.cond8.i, label %general_no_elim_operand.exit.thread, label %121
+  
+  ; <label>:121                                     ; preds = %110
+    %122 = bitcast %struct.rtx_def.11418* %t.0.i to i32*
+    %123 = load i32, i32* %122, align 4
+    %.mask1.i14 = and i32 %123, -65536
+    %124 = icmp eq i32 %.mask1.i14, 3997696
+    br i1 %124, label %125, label %general_no_elim_operand.exit
+  
+  ; <label>:125                                     ; preds = %121
+    %126 = getelementptr inbounds %struct.rtx_def.11418, %struct.rtx_def.11418* %t.0.i, i32 0, i32 1, i32 0, i32 0
+    %127 = load i32, i32* %126, align 4
+    %.off.i15 = add i32 %127, -53
+    %128 = icmp ult i32 %.off.i15, 5
+    br i1 %128, label %general_no_elim_operand.exit.thread, label %general_no_elim_operand.exit
+  
+  general_no_elim_operand.exit:                     ; preds = %125, %121
+    %129 = tail call i32 @general_operand(%struct.rtx_def.11418* nonnull %102, i32 signext %mode) #2
+    %130 = icmp eq i32 %129, 0
+    br i1 %130, label %general_no_elim_operand.exit.general_no_elim_operand.exit.thread_crit_edge, label %133
+  
+  general_no_elim_operand.exit.general_no_elim_operand.exit.thread_crit_edge: ; preds = %general_no_elim_operand.exit
+    %sunkaddr12 = ptrtoint %struct.rtx_def.11418** %operands to i32
+    %sunkaddr13 = add i32 %sunkaddr12, 4
+    %sunkaddr14 = inttoptr i32 %sunkaddr13 to %struct.rtx_def.11418**
+    %.pre19 = load %struct.rtx_def.11418*, %struct.rtx_def.11418** %sunkaddr14, align 4
+    br label %general_no_elim_operand.exit.thread
+  
+  general_no_elim_operand.exit.thread:              ; preds = %general_no_elim_operand.exit.general_no_elim_operand.exit.thread_crit_edge, %125, %110
+    %131 = phi %struct.rtx_def.11418* [ %.pre19, %general_no_elim_operand.exit.general_no_elim_operand.exit.thread_crit_edge ], [ %102, %125 ], [ %102, %110 ]
+    %132 = tail call %struct.rtx_def.11418* @copy_to_mode_reg(i32 signext %mode, %struct.rtx_def.11418* %131) #2
+    %sunkaddr15 = ptrtoint %struct.rtx_def.11418** %operands to i32
+    %sunkaddr16 = add i32 %sunkaddr15, 4
+    %sunkaddr17 = inttoptr i32 %sunkaddr16 to %struct.rtx_def.11418**
+    store %struct.rtx_def.11418* %132, %struct.rtx_def.11418** %sunkaddr17, align 4
+    br label %133
+  
+  ; <label>:133                                     ; preds = %general_no_elim_operand.exit.thread, %general_no_elim_operand.exit, %96
+    %134 = load i32, i32* @target_flags, align 4
+    %135 = and i32 %134, 33554432
+    %136 = icmp ne i32 %135, 0
+    %137 = icmp eq i32 %mode, 5
+    %or.cond = and i1 %137, %136
+    br i1 %or.cond, label %138, label %160
+  
+  ; <label>:138                                     ; preds = %133
+    %139 = getelementptr inbounds %struct.rtx_def.11418*, %struct.rtx_def.11418** %operands, i32 1
+    %140 = load %struct.rtx_def.11418*, %struct.rtx_def.11418** %139, align 4
+    %141 = tail call i32 @immediate_operand(%struct.rtx_def.11418* %140, i32 signext 5) #2
+    %142 = icmp eq i32 %141, 0
+    br i1 %142, label %160, label %143
+  
+  ; <label>:143                                     ; preds = %138
+    %sunkaddr18 = ptrtoint %struct.rtx_def.11418** %operands to i32
+    %sunkaddr19 = add i32 %sunkaddr18, 4
+    %sunkaddr20 = inttoptr i32 %sunkaddr19 to %struct.rtx_def.11418**
+    %144 = load %struct.rtx_def.11418*, %struct.rtx_def.11418** %sunkaddr20, align 4
+    %145 = tail call i32 @x86_64_zero_extended_value(%struct.rtx_def.11418* %144)
+    %146 = icmp eq i32 %145, 0
+    br i1 %146, label %147, label %160
+  
+  ; <label>:147                                     ; preds = %143
+    %148 = load %struct.rtx_def.11418*, %struct.rtx_def.11418** %operands, align 4
+    %149 = tail call i32 @register_operand(%struct.rtx_def.11418* %148, i32 signext 5) #2
+    %150 = load i32, i32* @optimize, align 4
+    %notrhs = icmp eq i32 %150, 0
+    %151 = load i32, i32* @reload_completed, align 4
+    %152 = or i32 %151, %149
+    %153 = load i32, i32* @reload_in_progress, align 4
+    %154 = or i32 %152, %153
+    %155 = icmp ne i32 %154, 0
+    %156 = or i1 %notrhs, %155
+    br i1 %156, label %160, label %157
+  
+  ; <label>:157                                     ; preds = %147
+    %sunkaddr21 = ptrtoint %struct.rtx_def.11418** %operands to i32
+    %sunkaddr22 = add i32 %sunkaddr21, 4
+    %sunkaddr23 = inttoptr i32 %sunkaddr22 to %struct.rtx_def.11418**
+    %158 = load %struct.rtx_def.11418*, %struct.rtx_def.11418** %sunkaddr23, align 4
+    %159 = tail call %struct.rtx_def.11418* @copy_to_mode_reg(i32 signext 5, %struct.rtx_def.11418* %158) #2
+    store %struct.rtx_def.11418* %159, %struct.rtx_def.11418** %sunkaddr23, align 4
+    br label %160
+  
+  ; <label>:160                                     ; preds = %157, %147, %143, %138, %133
+    %161 = getelementptr inbounds [59 x i32], [59 x i32]* @mode_class, i32 0, i32 %mode
+    %162 = load i32, i32* %161, align 4
+    switch i32 %162, label %163 [
+      i32 2, label %166
+      i32 6, label %166
+    ]
+  
+  ; <label>:163                                     ; preds = %160
+    %164 = icmp ne i32 %3, 0
+    %165 = icmp ne i32 %162, 8
+    %or.cond10 = or i1 %164, %165
+    br i1 %or.cond10, label %182, label %168
+  
+  ; <label>:166                                     ; preds = %160, %160
+    %167 = icmp ne i32 %3, 0
+    br i1 %167, label %182, label %168
+  
+  ; <label>:168                                     ; preds = %166, %163
+    %169 = getelementptr inbounds %struct.rtx_def.11418*, %struct.rtx_def.11418** %operands, i32 1
+    %170 = bitcast %struct.rtx_def.11418** %169 to i32**
+    %171 = load i32*, i32** %170, align 4
+    %172 = load i32, i32* %171, align 4
+    %.mask11 = and i32 %172, -65536
+    %173 = icmp eq i32 %.mask11, 3604480
+    br i1 %173, label %174, label %182
+  
+  ; <label>:174                                     ; preds = %168
+    %175 = load %struct.rtx_def.11418*, %struct.rtx_def.11418** %operands, align 4
+    %176 = tail call i32 @register_operand(%struct.rtx_def.11418* %175, i32 signext %mode) #2
+    %177 = icmp eq i32 %176, 0
+    br i1 %177, label %182, label %178
+  
+  ; <label>:178                                     ; preds = %174
+    %sunkaddr24 = ptrtoint %struct.rtx_def.11418** %operands to i32
+    %sunkaddr25 = add i32 %sunkaddr24, 4
+    %sunkaddr26 = inttoptr i32 %sunkaddr25 to %struct.rtx_def.11418**
+    %179 = load %struct.rtx_def.11418*, %struct.rtx_def.11418** %sunkaddr26, align 4
+    %180 = tail call %struct.rtx_def.11418* @force_const_mem(i32 signext %mode, %struct.rtx_def.11418* %179) #2
+    %181 = tail call %struct.rtx_def.11418* @validize_mem(%struct.rtx_def.11418* %180) #2
+    store %struct.rtx_def.11418* %181, %struct.rtx_def.11418** %sunkaddr26, align 4
+    br label %182
+  
+  ; <label>:182                                     ; preds = %178, %174, %168, %166, %163, %.critedge, %59
+    %183 = load %struct.rtx_def.11418*, %struct.rtx_def.11418** %operands, align 4
+    %184 = getelementptr inbounds %struct.rtx_def.11418*, %struct.rtx_def.11418** %operands, i32 1
+    %185 = load %struct.rtx_def.11418*, %struct.rtx_def.11418** %184, align 4
+    %186 = tail call %struct.rtx_def.11418* @gen_rtx_fmt_ee(i32 signext 47, i32 signext 0, %struct.rtx_def.11418* %183, %struct.rtx_def.11418* %185) #2
+    %187 = tail call %struct.rtx_def.11418* @emit_insn(%struct.rtx_def.11418* %186) #2
+    br label %188
+  
+  ; <label>:188                                     ; preds = %182, %63
+    ret void
+  }
+  
+  declare i32 @push_operand(%struct.rtx_def.11418*, i32 signext) #0
+  
+  declare %struct.rtx_def.11418* @copy_to_mode_reg(i32 signext, %struct.rtx_def.11418*) #0
+  
+  declare %struct.rtx_def.11418* @validize_mem(%struct.rtx_def.11418*) #0
+  
+  declare %struct.rtx_def.11418* @force_const_mem(i32 signext, %struct.rtx_def.11418*) #0
+  
+  attributes #0 = { "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #1 = { nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #2 = { nounwind }
+  
+  !llvm.ident = !{!0}
+  
+  !0 = !{!"clang version 3.8.0 (http://llvm.org/git/clang.git 2d49f0a0ae8366964a93e3b7b26e29679bee7160) (http://llvm.org/git/llvm.git 60bc66b44837125843b58ed3e0fd2e6bb948d839)"}
+
+...
+---
+name:            ix86_expand_move
+alignment:       2
+exposesReturnsTwice: false
+hasInlineAsm:    false
+isSSA:           false
+tracksRegLiveness: false
+tracksSubRegLiveness: false
+liveins:         
+  - { reg: '%a0' }
+  - { reg: '%a1' }
+  - { reg: '%t9' }
+  - { reg: '%v0' }
+calleeSavedRegisters: [ '%fp', '%ra', '%d10', '%d11', '%d12', '%d13', '%d14', 
+                        '%d15', '%f20', '%f21', '%f22', '%f23', '%f24', 
+                        '%f25', '%f26', '%f27', '%f28', '%f29', '%f30', 
+                        '%f31', '%s0', '%s1', '%s2', '%s3', '%s4', '%s5', 
+                        '%s6', '%s7' ]
+frameInfo:       
+  isFrameAddressTaken: false
+  isReturnAddressTaken: false
+  hasStackMap:     false
+  hasPatchPoint:   false
+  stackSize:       48
+  offsetAdjustment: 0
+  maxAlignment:    4
+  adjustsStack:    true
+  hasCalls:        true
+  maxCallFrameSize: 16
+  hasOpaqueSPAdjustment: false
+  hasVAStart:      false
+  hasMustTailInVarArgFunc: false
+stack:           
+  - { id: 0, type: spill-slot, offset: -4, size: 4, alignment: 4, callee-saved-register: '%ra' }
+  - { id: 1, type: spill-slot, offset: -8, size: 4, alignment: 4, callee-saved-register: '%s6' }
+  - { id: 2, type: spill-slot, offset: -12, size: 4, alignment: 4, callee-saved-register: '%s5' }
+  - { id: 3, type: spill-slot, offset: -16, size: 4, alignment: 4, callee-saved-register: '%s4' }
+  - { id: 4, type: spill-slot, offset: -20, size: 4, alignment: 4, callee-saved-register: '%s3' }
+  - { id: 5, type: spill-slot, offset: -24, size: 4, alignment: 4, callee-saved-register: '%s2' }
+  - { id: 6, type: spill-slot, offset: -28, size: 4, alignment: 4, callee-saved-register: '%s1' }
+  - { id: 7, type: spill-slot, offset: -32, size: 4, alignment: 4, callee-saved-register: '%s0' }
+body:             |
+  bb.0 (%ir-block.0, freq 10485):
+    successors: %bb.17.symbolic_operand.exit.thread(37), %bb.1(62)
+    liveins: %a0, %a1, %t9, %ra, %s6, %s5, %s4, %s3, %s2, %s1, %s0
+  
+    %v0 = LUi target-flags(<unknown>) $_gp_disp
+    %v0 = ADDiu %v0, target-flags(<unknown>) $_gp_disp
+    %sp = ADDiu %sp, -48
+    CFI_INSTRUCTION .cfi_def_cfa_offset 48
+    SW killed %ra, %sp, 44 :: (store 4 into stack)
+    SW killed %s6, %sp, 40 :: (store 4 into stack)
+    SW killed %s5, %sp, 36 :: (store 4 into stack)
+    SW killed %s4, %sp, 32 :: (store 4 into stack)
+    SW killed %s3, %sp, 28 :: (store 4 into stack)
+    SW killed %s2, %sp, 24 :: (store 4 into stack)
+    SW killed %s1, %sp, 20 :: (store 4 into stack)
+    SW killed %s0, %sp, 16 :: (store 4 into stack)
+    CFI_INSTRUCTION .cfi_offset %ra_64, -4
+    CFI_INSTRUCTION .cfi_offset %s6_64, -8
+    CFI_INSTRUCTION .cfi_offset %s5_64, -12
+    CFI_INSTRUCTION .cfi_offset %s4_64, -16
+    CFI_INSTRUCTION .cfi_offset %s3_64, -20
+    CFI_INSTRUCTION .cfi_offset %s2_64, -24
+    CFI_INSTRUCTION .cfi_offset %s1_64, -28
+    CFI_INSTRUCTION .cfi_offset %s0_64, -32
+    %s0 = ADDu %v0, %t9
+    %s1 = OR %a1, %zero
+    %s2 = OR %a0, %zero
+    %s5 = LW %s0, target-flags(<unknown>) @reload_in_progress :: (load 4 from got)
+    %s3 = LW %s5, 0 :: (load 4 from @reload_in_progress)
+    %s6 = LW %s0, target-flags(<unknown>) @reload_completed :: (load 4 from got)
+    %at = LW %s0, target-flags(<unknown>) @flag_pic :: (load 4 from got)
+    %at = LW killed %at, 0 :: (load 4 from @flag_pic)
+    BEQ %at, %zero, %bb.17.symbolic_operand.exit.thread, implicit-def %at {
+      %s4 = LW %s6, 0 :: (load 4 from @reload_completed)
+    }
+  
+  bb.1 (%ir-block.6, freq 6553):
+    successors: %bb.2(50), %bb.17.symbolic_operand.exit.thread(50)
+    liveins: %s0, %s1, %s2, %s3, %s4, %s5, %s6
+  
+    %at = LW %s0, target-flags(<unknown>) @target_flags :: (load 4 from got)
+    %at = LW killed %at, 0 :: (load 4 from @target_flags)
+    %at = EXT killed %at, 25, 1
+    %at = ORi killed %at, 4
+    BNE %at, %s2, %bb.17.symbolic_operand.exit.thread, implicit-def %at {
+      NOP
+    }
+  
+  bb.2 (%ir-block.12, freq 3276):
+    successors: %bb.14.symbolic_operand.exit.thread18(50), %bb.3(50)
+    liveins: %s0, %s1, %s2, %s3, %s4, %s5, %s6
+  
+    %v0 = LW %s1, 4 :: (load 4 from %ir.13)
+    %at = LW %v0, 0 :: (load 4 from %ir.15)
+    %v1 = SRL killed %at, 16
+    %at = ADDiu %v1, -67
+    %at = SLTiu killed %at, 2
+    BNE %at, %zero, %bb.14.symbolic_operand.exit.thread18, implicit-def %at {
+      NOP
+    }
+  
+  bb.3 (%ir-block.12, freq 1638):
+    successors: %bb.4(50), %bb.17.symbolic_operand.exit.thread(50)
+    liveins: %s0, %s1, %s2, %s3, %s4, %s5, %s6, %v0, %v1
+  
+    %at = ADDiu %zero, 58
+    BNE %v1, %at, %bb.17.symbolic_operand.exit.thread, implicit-def %at {
+      NOP
+    }
+  
+  bb.4 (%ir-block.18, freq 819):
+    successors: %bb.14.symbolic_operand.exit.thread18(50), %bb.5(50)
+    liveins: %s0, %s1, %s2, %s3, %s4, %s5, %s6, %v0
+  
+    %v1 = LW %v0, 4 :: (load 4 from %ir.20)
+    %a0 = LW %v1, 0 :: (load 4 from %ir.22)
+    %a1 = SRL %a0, 16
+    %at = ADDiu %a1, -67
+    %at = SLTiu killed %at, 2
+    BNE %at, %zero, %bb.14.symbolic_operand.exit.thread18, implicit-def %at {
+      NOP
+    }
+  
+  bb.5 (%ir-block.18, freq 409):
+    successors: %bb.6(50), %bb.8(50)
+    liveins: %a0, %a1, %s0, %s1, %s2, %s3, %s4, %s5, %s6, %v0, %v1
+  
+    %at = ADDiu %zero, 42
+    BNE %a1, %at, %bb.8, implicit-def %at {
+      NOP
+    }
+  
+  bb.6 (%ir-block.25, freq 204):
+    successors: %bb.8(12), %bb.7(87)
+    liveins: %a0, %s0, %s1, %s2, %s3, %s4, %s5, %s6, %v0, %v1
+  
+    %a1 = LW %v1, 8 :: (load 4 from %ir.26)
+    %at = SLTiu %a1, 16
+    BEQ killed %at, %zero, %bb.8, implicit-def dead %at {
+      NOP
+    }
+  
+  bb.7 (%ir-block.25, freq 179):
+    successors: %bb.14.symbolic_operand.exit.thread18(85), %bb.8(14)
+    liveins: %a0, %a1, %s0, %s1, %s2, %s3, %s4, %s5, %s6, %v0, %v1
+  
+    %at = ADDiu %zero, 1
+    %at = SLLV killed %at, killed %a1
+    %at = ANDi killed %at, 32960
+    BNE killed %at, %zero, %bb.14.symbolic_operand.exit.thread18, implicit-def dead %at {
+      NOP
+    }
+  
+  bb.8 (%ir-block.28, freq 256):
+    successors: %bb.9(50), %bb.17.symbolic_operand.exit.thread(50)
+    liveins: %a0, %s0, %s1, %s2, %s3, %s4, %s5, %s6, %v0, %v1
+  
+    %a1 = LUi 65535
+    %at = AND killed %a0, %a1
+    %a0 = LUi 75
+    BNE %at, %a0, %bb.17.symbolic_operand.exit.thread, implicit-def %at {
+      NOP
+    }
+  
+  bb.9 (%ir-block.30, freq 128):
+    successors: %bb.10(50), %bb.17.symbolic_operand.exit.thread(50)
+    liveins: %a1, %s0, %s1, %s2, %s3, %s4, %s5, %s6, %v0, %v1
+  
+    %at = LW %v1, 8 :: (load 4 from %ir.32)
+    %at = LW killed %at, 0 :: (load 4 from %ir.33)
+    %at = AND killed %at, killed %a1
+    %a0 = LUi 54
+    BNE %at, %a0, %bb.17.symbolic_operand.exit.thread, implicit-def %at {
+      NOP
+    }
+  
+  bb.10 (%ir-block.36, freq 64):
+    successors: %bb.14.symbolic_operand.exit.thread18(50), %bb.11(50)
+    liveins: %s0, %s1, %s2, %s3, %s4, %s5, %s6, %v0, %v1
+  
+    %v1 = LW killed %v1, 4 :: (load 4 from %ir.38)
+    %at = LW %v1, 0 :: (load 4 from %ir.40)
+    %a0 = SRL killed %at, 16
+    %at = ADDiu %a0, -67
+    %at = SLTiu killed %at, 2
+    BNE %at, %zero, %bb.14.symbolic_operand.exit.thread18, implicit-def %at {
+      NOP
+    }
+  
+  bb.11 (%ir-block.36, freq 32):
+    successors: %bb.12(50), %bb.17.symbolic_operand.exit.thread(50)
+    liveins: %a0, %s0, %s1, %s2, %s3, %s4, %s5, %s6, %v0, %v1
+  
+    %at = ADDiu %zero, 42
+    BNE %a0, %at, %bb.17.symbolic_operand.exit.thread, implicit-def %at {
+      NOP
+    }
+  
+  bb.12 (%ir-block.43, freq 16):
+    successors: %bb.13.symbolic_operand.exit(50), %bb.17.symbolic_operand.exit.thread(50)
+    liveins: %s0, %s1, %s2, %s3, %s4, %s5, %s6, %v0, %v1
+  
+    %at = LW %v1, 8 :: (load 4 from %ir.44)
+    %a0 = ADDiu %zero, 7
+    BNE %at, %a0, %bb.17.symbolic_operand.exit.thread, implicit-def %at {
+      NOP
+    }
+  
+  bb.13.symbolic_operand.exit (freq 8):
+    successors: %bb.14.symbolic_operand.exit.thread18(50), %bb.17.symbolic_operand.exit.thread(50)
+    liveins: %s0, %s1, %s2, %s3, %s4, %s5, %s6, %v0, %v1
+  
+    %at = LW killed %v1, 4 :: (load 4 from %ir.48)
+    %at = LW killed %at, 4 :: (load 4 from %ir.51)
+    %at = LHu killed %at, 0 :: (load 2 from %ir.52, align 4)
+    %at = ADDiu killed %at, -67
+    %at = SLTiu killed %at, 2
+    BEQ %at, %zero, %bb.17.symbolic_operand.exit.thread, implicit-def %at {
+      NOP
+    }
+  
+  bb.14.symbolic_operand.exit.thread18 (freq 2237):
+    successors: %bb.51(33), %bb.15.symbolic_operand.exit.thread18(66)
+    liveins: %s0, %s1, %s2, %v0
+  
+    %a1 = LW %s1, 0 :: (load 4 from %ir.operands)
+    %at = LW %a1, 0 :: (load 4 from %ir.56)
+    %v1 = SRL killed %at, 16
+    %at = ADDiu %zero, 61
+    BEQ %v1, %at, %bb.51, implicit-def %at {
+      NOP
+    }
+  
+  bb.15.symbolic_operand.exit.thread18 (freq 1491):
+    successors: %bb.16(50), %bb.50(49)
+    liveins: %s0, %s1, %s2, %v0, %v1
+  
+    %at = ADDiu %zero, 66
+    BNE %v1, %at, %bb.50, implicit-def %at {
+      NOP
+    }
+  
+  bb.16 (%ir-block.59, freq 745):
+    successors: %bb.53(100)
+    liveins: %s0, %s1, %s2, %v0
+  
+    %t9 = LW %s0, target-flags(<unknown>) @force_reg :: (load 4 from call-entry @force_reg)
+    %a0 = OR killed %s2, %zero
+    %a1 = OR killed %v0, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit killed %gp, implicit-def %sp, implicit-def %v0 {
+      %gp = OR %s0, %zero
+    }
+    B %bb.53, implicit-def dead %at {
+      SW killed %v0, %s1, 4 :: (store 4 into %ir.sunkaddr2)
+    }
+  
+  bb.17.symbolic_operand.exit.thread (freq 8248):
+    successors: %bb.18(50), %bb.22(50)
+    liveins: %s0, %s1, %s2, %s3, %s4, %s5, %s6
+  
+    %a0 = LW %s1, 0 :: (load 4 from %ir.operands)
+    %at = LW %a0, 0 :: (load 4 from %ir.69)
+    %v0 = LUi 65535
+    %at = AND killed %at, killed %v0
+    %v0 = LUi 66
+    BNE %at, %v0, %bb.22, implicit-def %at {
+      NOP
+    }
+  
+  bb.18 (%ir-block.72, freq 4124):
+    successors: %bb.19(50), %bb.20(50)
+    liveins: %a0, %s0, %s1, %s2, %s3, %s4, %s5, %s6
+  
+    %at = LW %s0, target-flags(<unknown>) @mode_size :: (load 4 from got)
+    %at = ADDu killed %at, %s2
+    %at = LBu killed %at, 0 :: (load 1 from %ir.76)
+    %v0 = LW %s0, target-flags(<unknown>) @target_flags :: (load 4 from got)
+    %v1 = ADDiu %at, 1
+    %v1 = ANDi killed %v1, 510
+    %a1 = ADDiu %at, 7
+    %a1 = ANDi killed %a1, 504
+    %v0 = LBu killed %v0, 0 :: (load 1 from @target_flags, align 4)
+    %v0 = ANDi killed %v0, 2
+    %v0 = SRL killed %v0, 1
+    %v1 = MOVN_I_I killed %a1, killed %v0, killed %v1
+    BNE %v1, %at, %bb.20, implicit-def %at {
+      NOP
+    }
+  
+  bb.19 (%ir-block.85, freq 2062):
+    successors: %bb.20(37), %bb.22(62)
+    liveins: %a0, %s0, %s1, %s2, %s3, %s4, %s5, %s6
+  
+    %t9 = LW %s0, target-flags(<unknown>) @push_operand :: (load 4 from call-entry @push_operand)
+    %a1 = OR %s2, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit killed %gp, implicit-def %sp, implicit-def %v0 {
+      %gp = OR %s0, %zero
+    }
+    BNE %v0, %zero, %bb.22, implicit-def %at {
+      NOP
+    }
+  
+  bb.20 (%ir-block.88, freq 2835):
+    successors: %bb.21(50), %bb.22(50)
+    liveins: %s0, %s1, %s2, %s3, %s4, %s5, %s6
+  
+    %a1 = LW %s1, 4 :: (load 4 from %ir.89)
+    %at = LW %a1, 0 :: (load 4 from %ir.91)
+    %v0 = LUi 65535
+    %at = AND killed %at, killed %v0
+    %v0 = LUi 66
+    BNE %at, %v0, %bb.22, implicit-def %at {
+      NOP
+    }
+  
+  bb.21 (%ir-block.94, freq 1417):
+    successors: %bb.22(100)
+    liveins: %a1, %s0, %s1, %s2, %s3, %s4, %s5, %s6
+  
+    %t9 = LW %s0, target-flags(<unknown>) @force_reg :: (load 4 from call-entry @force_reg)
+    %a0 = OR %s2, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit killed %gp, implicit-def %sp, implicit-def %v0 {
+      %gp = OR %s0, %zero
+    }
+    SW killed %v0, %s1, 4 :: (store 4 into %ir.sunkaddr11)
+  
+  bb.22 (%ir-block.96, freq 8248):
+    successors: %bb.35(37), %bb.23(62)
+    liveins: %s0, %s1, %s2, %s3, %s4, %s5, %s6
+  
+    %a0 = LW %s1, 0 :: (load 4 from %ir.operands)
+    %t9 = LW %s0, target-flags(<unknown>) @push_operand :: (load 4 from call-entry @push_operand)
+    %a1 = OR %s2, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit killed %gp, implicit-def %sp, implicit-def %v0 {
+      %gp = OR %s0, %zero
+    }
+    BEQ %v0, %zero, %bb.35, implicit-def %at {
+      NOP
+    }
+  
+  bb.23 (%ir-block.100, freq 5155):
+    successors: %bb.24(50), %bb.25(50)
+    liveins: %s0, %s1, %s2, %s3, %s4, %s5, %s6
+  
+    %a1 = LW %s1, 4 :: (load 4 from %ir.101)
+    %at = LW %a1, 0 :: (load 4 from %ir.103)
+    %v0 = LUi 65535
+    %at = AND killed %at, killed %v0
+    %v1 = LUi 63
+    BNE %at, %v1, %bb.25, implicit-def %at {
+      %v0 = OR %a1, %zero
+    }
+  
+  bb.24 (%ir-block.106, freq 2577):
+    successors: %bb.25(100)
+    liveins: %a1, %s0, %s1, %s2, %s3, %s4, %s5, %s6
+  
+    %v0 = LW %a1, 4 :: (load 4 from %ir.108)
+  
+  bb.25 (%ir-block.110, freq 5155):
+    successors: %bb.34.general_no_elim_operand.exit.thread(3), %bb.26(96)
+    liveins: %a1, %s0, %s1, %s2, %s3, %s4, %s5, %s6, %v0
+  
+    %v1 = LW %s0, target-flags(<unknown>) @global_rtl :: (load 4 from got)
+    %at = LW %v1, 20 :: (load 4 from `%struct.rtx_def.11418** getelementptr inbounds ([11 x %struct.rtx_def.11418*], [11 x %struct.rtx_def.11418*]* @global_rtl, i32 0, i32 5)`)
+    BEQ %v0, %at, %bb.34.general_no_elim_operand.exit.thread, implicit-def %at {
+      NOP
+    }
+  
+  bb.26 (%ir-block.110, freq 4994):
+    successors: %bb.34.general_no_elim_operand.exit.thread(3), %bb.27(96)
+    liveins: %a1, %s0, %s1, %s2, %s3, %s4, %s5, %s6, %v0, %v1
+  
+    %at = LW %v1, 12 :: (load 4 from `%struct.rtx_def.11418** getelementptr inbounds ([11 x %struct.rtx_def.11418*], [11 x %struct.rtx_def.11418*]* @global_rtl, i32 0, i32 3)`)
+    BEQ %v0, %at, %bb.34.general_no_elim_operand.exit.thread, implicit-def %at {
+      NOP
+    }
+  
+  bb.27 (%ir-block.110, freq 4832):
+    successors: %bb.34.general_no_elim_operand.exit.thread(6), %bb.28(93)
+    liveins: %a1, %s0, %s1, %s2, %s3, %s4, %s5, %s6, %v0, %v1
+  
+    %at = LW %v1, 24 :: (load 4 from `%struct.rtx_def.11418** getelementptr inbounds ([11 x %struct.rtx_def.11418*], [11 x %struct.rtx_def.11418*]* @global_rtl, i32 0, i32 6)`)
+    BEQ %v0, %at, %bb.34.general_no_elim_operand.exit.thread, implicit-def %at {
+      NOP
+    }
+  
+  bb.28 (%ir-block.110, freq 4510):
+    successors: %bb.34.general_no_elim_operand.exit.thread(14), %bb.29(85)
+    liveins: %a1, %s0, %s1, %s2, %s3, %s4, %s5, %s6, %v0, %v1
+  
+    %at = LW %v1, 28 :: (load 4 from `%struct.rtx_def.11418** getelementptr inbounds ([11 x %struct.rtx_def.11418*], [11 x %struct.rtx_def.11418*]* @global_rtl, i32 0, i32 7)`)
+    BEQ %v0, %at, %bb.34.general_no_elim_operand.exit.thread, implicit-def %at {
+      NOP
+    }
+  
+  bb.29 (%ir-block.110, freq 3866):
+    successors: %bb.34.general_no_elim_operand.exit.thread(33), %bb.30(66)
+    liveins: %a1, %s0, %s1, %s2, %s3, %s4, %s5, %s6, %v0, %v1
+  
+    %at = LW killed %v1, 32 :: (load 4 from `%struct.rtx_def.11418** getelementptr inbounds ([11 x %struct.rtx_def.11418*], [11 x %struct.rtx_def.11418*]* @global_rtl, i32 0, i32 8)`)
+    BEQ %v0, %at, %bb.34.general_no_elim_operand.exit.thread, implicit-def %at {
+      NOP
+    }
+  
+  bb.30 (%ir-block.121, freq 2577):
+    successors: %bb.31(50), %bb.32.general_no_elim_operand.exit(50)
+    liveins: %a1, %s0, %s1, %s2, %s3, %s4, %s5, %s6, %v0
+  
+    %at = LW %v0, 0 :: (load 4 from %ir.122)
+    %v1 = LUi 65535
+    %at = AND killed %at, killed %v1
+    %v1 = LUi 61
+    BNE %at, %v1, %bb.32.general_no_elim_operand.exit, implicit-def %at {
+      NOP
+    }
+  
+  bb.31 (%ir-block.125, freq 1288):
+    successors: %bb.34.general_no_elim_operand.exit.thread(50), %bb.32.general_no_elim_operand.exit(50)
+    liveins: %a1, %s0, %s1, %s2, %s3, %s4, %s5, %s6, %v0
+  
+    %at = LW killed %v0, 4 :: (load 4 from %ir.126)
+    %at = ADDiu killed %at, -53
+    %at = SLTiu killed %at, 5
+    BNE %at, %zero, %bb.34.general_no_elim_operand.exit.thread, implicit-def %at {
+      NOP
+    }
+  
+  bb.32.general_no_elim_operand.exit (freq 1933):
+    successors: %bb.33.general_no_elim_operand.exit.general_no_elim_operand.exit.thread_crit_edge(37), %bb.35(62)
+    liveins: %a1, %s0, %s1, %s2, %s3, %s4, %s5, %s6
+  
+    %t9 = LW %s0, target-flags(<unknown>) @general_operand :: (load 4 from call-entry @general_operand)
+    %a0 = OR killed %a1, %zero
+    %a1 = OR %s2, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit killed %gp, implicit-def %sp, implicit-def %v0 {
+      %gp = OR %s0, %zero
+    }
+    BNE %v0, %zero, %bb.35, implicit-def %at {
+      NOP
+    }
+  
+  bb.33.general_no_elim_operand.exit.general_no_elim_operand.exit.thread_crit_edge (freq 724):
+    successors: %bb.34.general_no_elim_operand.exit.thread(100)
+    liveins: %s0, %s1, %s2, %s3, %s4, %s5, %s6
+  
+    %a1 = LW %s1, 4 :: (load 4 from %ir.sunkaddr14)
+  
+  bb.34.general_no_elim_operand.exit.thread (freq 3946):
+    successors: %bb.35(100)
+    liveins: %a1, %s0, %s1, %s2, %s3, %s4, %s5, %s6
+  
+    %t9 = LW %s0, target-flags(<unknown>) @copy_to_mode_reg :: (load 4 from call-entry @copy_to_mode_reg)
+    %a0 = OR %s2, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit killed %gp, implicit-def %sp, implicit-def %v0 {
+      %gp = OR %s0, %zero
+    }
+    SW killed %v0, %s1, 4 :: (store 4 into %ir.sunkaddr17)
+  
+  bb.35 (%ir-block.133, freq 8248):
+    successors: %bb.36(75), %bb.42(25)
+    liveins: %s0, %s1, %s2, %s3, %s4, %s5, %s6
+  
+    %at = ADDiu %zero, 5
+    BNE %s2, %at, %bb.42, implicit-def %at {
+      NOP
+    }
+  
+  bb.36 (%ir-block.133, freq 6186):
+    successors: %bb.37(66), %bb.42(33)
+    liveins: %s0, %s1, %s2, %s3, %s4, %s5, %s6
+  
+    %at = LW %s0, target-flags(<unknown>) @target_flags :: (load 4 from got)
+    %at = LW killed %at, 0 :: (load 4 from @target_flags)
+    %v0 = LUi 512
+    %at = AND killed %at, killed %v0
+    BEQ %at, %zero, %bb.42, implicit-def %at {
+      NOP
+    }
+  
+  bb.37 (%ir-block.138, freq 4124):
+    successors: %bb.42(37), %bb.38(62)
+    liveins: %s0, %s1, %s2, %s3, %s4, %s5, %s6
+  
+    %a0 = LW %s1, 4 :: (load 4 from %ir.139)
+    %t9 = LW %s0, target-flags(<unknown>) @immediate_operand :: (load 4 from call-entry @immediate_operand)
+    %a1 = ADDiu %zero, 5
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit killed %gp, implicit-def %sp, implicit-def %v0 {
+      %gp = OR %s0, %zero
+    }
+    BEQ %v0, %zero, %bb.42, implicit-def %at {
+      NOP
+    }
+  
+  bb.38 (%ir-block.143, freq 2577):
+    successors: %bb.39(37), %bb.42(62)
+    liveins: %s0, %s1, %s2, %s3, %s4, %s5, %s6
+  
+    %a0 = LW %s1, 4 :: (load 4 from %ir.sunkaddr20)
+    %t9 = LW %s0, target-flags(<unknown>) @x86_64_zero_extended_value :: (load 4 from call-entry @x86_64_zero_extended_value)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit killed %gp, implicit-def %sp, implicit-def %v0 {
+      %gp = OR %s0, %zero
+    }
+    BNE %v0, %zero, %bb.42, implicit-def %at {
+      NOP
+    }
+  
+  bb.39 (%ir-block.147, freq 966):
+    successors: %bb.42(25), %bb.40(75)
+    liveins: %s0, %s1, %s2, %s3, %s4, %s5, %s6
+  
+    %a0 = LW %s1, 0 :: (load 4 from %ir.operands)
+    %t9 = LW %s0, target-flags(<unknown>) @register_operand :: (load 4 from call-entry @register_operand)
+    %a1 = ADDiu %zero, 5
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit killed %gp, implicit-def %sp, implicit-def %v0 {
+      %gp = OR %s0, %zero
+    }
+    %at = LW %s0, target-flags(<unknown>) @optimize :: (load 4 from got)
+    %at = LW killed %at, 0 :: (load 4 from @optimize)
+    BEQ %at, %zero, %bb.42, implicit-def %at {
+      NOP
+    }
+  
+  bb.40 (%ir-block.147, freq 724):
+    successors: %bb.42(33), %bb.41(66)
+    liveins: %s0, %s1, %s2, %s3, %s4, %s5, %s6, %v0
+  
+    %at = LW killed %s6, 0 :: (load 4 from @reload_completed)
+    %at = OR killed %at, killed %v0
+    %v0 = LW killed %s5, 0 :: (load 4 from @reload_in_progress)
+    %at = OR killed %at, killed %v0
+    BNE %at, %zero, %bb.42, implicit-def %at {
+      NOP
+    }
+  
+  bb.41 (%ir-block.157, freq 483):
+    successors: %bb.42(100)
+    liveins: %s0, %s1, %s2, %s3, %s4
+  
+    %a1 = LW %s1, 4 :: (load 4 from %ir.sunkaddr23)
+    %t9 = LW %s0, target-flags(<unknown>) @copy_to_mode_reg :: (load 4 from call-entry @copy_to_mode_reg)
+    %a0 = ADDiu %zero, 5
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit killed %gp, implicit-def %sp, implicit-def %v0 {
+      %gp = OR %s0, %zero
+    }
+    SW killed %v0, %s1, 4 :: (store 4 into %ir.sunkaddr23)
+  
+  bb.42 (%ir-block.160, freq 8248):
+    successors: %bb.43(66), %bb.45(33)
+    liveins: %s0, %s1, %s2, %s3, %s4
+  
+    %at = SLL %s2, 2
+    %v1 = LW %s0, target-flags(<unknown>) @mode_class :: (load 4 from got)
+    %at = ADDu killed %v1, killed %at
+    %v1 = LW killed %at, 0 :: (load 4 from %ir.161)
+    %at = ADDiu %zero, 6
+    %a0 = ORi %v1, 4
+    BNE %a0, %at, %bb.45, implicit-def %at {
+      %v0 = OR killed %s4, killed %s3
+    }
+  
+  bb.43 (%ir-block.166, freq 5498):
+    successors: %bb.44(50), %bb.53(50)
+    liveins: %s0, %s1, %s2, %v0
+  
+    BNE %v0, %zero, %bb.53, implicit-def %at {
+      NOP
+    }
+  
+  bb.44 (%ir-block.166, freq 2749):
+    successors: %bb.47(100)
+  
+    B %bb.47, implicit-def %at {
+      NOP
+    }
+  
+  bb.45 (%ir-block.163, freq 2749):
+    successors: %bb.53(25), %bb.46(75)
+    liveins: %s0, %s1, %s2, %v0, %v1
+  
+    BNE %v0, %zero, %bb.53, implicit-def %at {
+      NOP
+    }
+  
+  bb.46 (%ir-block.163, freq 2062):
+    successors: %bb.53(33), %bb.47(66)
+    liveins: %s0, %s1, %s2, %v1
+  
+    %at = ADDiu %zero, 8
+    BNE %v1, %at, %bb.53, implicit-def %at {
+      NOP
+    }
+  
+  bb.47 (%ir-block.168, freq 4124):
+    successors: %bb.48(50), %bb.53(50)
+    liveins: %s0, %s1, %s2
+  
+    %at = LW %s1, 4 :: (load 4 from %ir.170)
+    %at = LW killed %at, 0 :: (load 4 from %ir.171)
+    %v0 = LUi 65535
+    %at = AND killed %at, killed %v0
+    %v0 = LUi 55
+    BNE %at, %v0, %bb.53, implicit-def %at {
+      NOP
+    }
+  
+  bb.48 (%ir-block.174, freq 2062):
+    successors: %bb.53(37), %bb.49(62)
+    liveins: %s0, %s1, %s2
+  
+    %a0 = LW %s1, 0 :: (load 4 from %ir.operands)
+    %t9 = LW %s0, target-flags(<unknown>) @register_operand :: (load 4 from call-entry @register_operand)
+    %a1 = OR %s2, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit killed %gp, implicit-def %sp, implicit-def %v0 {
+      %gp = OR %s0, %zero
+    }
+    BEQ %v0, %zero, %bb.53, implicit-def %at {
+      NOP
+    }
+  
+  bb.49 (%ir-block.178, freq 1288):
+    successors: %bb.53(100)
+    liveins: %s0, %s1, %s2
+  
+    %a1 = LW %s1, 4 :: (load 4 from %ir.sunkaddr26)
+    %t9 = LW %s0, target-flags(<unknown>) @force_const_mem :: (load 4 from call-entry @force_const_mem)
+    %a0 = OR killed %s2, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit killed %gp, implicit-def %sp, implicit-def %v0 {
+      %gp = OR %s0, %zero
+    }
+    %t9 = LW %s0, target-flags(<unknown>) @validize_mem :: (load 4 from call-entry @validize_mem)
+    %a0 = OR killed %v0, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit killed %gp, implicit-def %sp, implicit-def %v0 {
+      %gp = OR %s0, %zero
+    }
+    B %bb.53, implicit-def %at {
+      SW killed %v0, %s1, 4 :: (store 4 into %ir.sunkaddr26)
+    }
+  
+  bb.50 (%ir-block.61, freq 745):
+    successors: %bb.51(100)
+    liveins: %s0, %s1, %s2
+  
+    %t9 = LW %s0, target-flags(<unknown>) @gen_reg_rtx :: (load 4 from call-entry @gen_reg_rtx)
+    %a0 = OR killed %s2, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit killed %gp, implicit-def %sp, implicit-def %v0 {
+      %gp = OR %s0, %zero
+    }
+    %a1 = OR %v0, %zero
+    %v0 = LW %s1, 4 :: (load 4 from %ir.sunkaddr5)
+  
+  bb.51 (%ir-block.63, freq 1491):
+    successors: %bb.54(37), %bb.52..critedge(62)
+    liveins: %a1, %s0, %s1, %v0
+  
+    %t9 = LW %s0, target-flags(<unknown>) @legitimize_pic_address :: (load 4 from call-entry @legitimize_pic_address)
+    %a0 = OR killed %v0, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit killed %gp, implicit-def %sp, implicit-def %v0 {
+      %gp = OR %s0, %zero
+    }
+    %at = LW %s1, 0 :: (load 4 from %ir.operands)
+    BEQ %v0, %at, %bb.54, implicit-def %at {
+      NOP
+    }
+  
+  bb.52..critedge (freq 932):
+    successors: %bb.53(100)
+    liveins: %s0, %s1, %v0
+  
+    SW killed %v0, %s1, 4 :: (store 4 into %ir.sunkaddr8)
+  
+  bb.53 (%ir-block.182, freq 9926):
+    successors: %bb.54(100)
+    liveins: %s0, %s1
+  
+    %a3 = LW %s1, 4 :: (load 4 from %ir.184)
+    %a2 = LW killed %s1, 0 :: (load 4 from %ir.operands)
+    %t9 = LW %s0, target-flags(<unknown>) @gen_rtx_fmt_ee :: (load 4 from call-entry @gen_rtx_fmt_ee)
+    %a0 = ADDiu %zero, 47
+    %a1 = ADDiu %zero, 0
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %a3, implicit killed %gp, implicit-def %sp, implicit-def %v0 {
+      %gp = OR %s0, %zero
+    }
+    %t9 = LW %s0, target-flags(<unknown>) @emit_insn :: (load 4 from call-entry @emit_insn)
+    %a0 = OR killed %v0, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit killed %gp, implicit-def %sp, implicit-def dead %v0 {
+      %gp = OR killed %s0, %zero
+    }
+  
+  bb.54 (%ir-block.188, freq 10485):
+    liveouts:
+  
+    %s0 = LW %sp, 16 :: (load 4 from stack)
+    %s1 = LW %sp, 20 :: (load 4 from stack)
+    %s2 = LW %sp, 24 :: (load 4 from stack)
+    %s3 = LW %sp, 28 :: (load 4 from stack)
+    %s4 = LW %sp, 32 :: (load 4 from stack)
+    %s5 = LW %sp, 36 :: (load 4 from stack)
+    %s6 = LW %sp, 40 :: (load 4 from stack)
+    %ra = LW %sp, 44 :: (load 4 from stack)
+    PseudoReturn %ra {
+      %sp = ADDiu %sp, 48
+    }
+
+...

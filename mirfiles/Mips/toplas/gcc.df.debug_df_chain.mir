@@ -1,0 +1,398 @@
+--- |
+  ; ModuleID = '/home/romi/didaktoriko/unison/unison-experiments/experiments/mips/selected-functions/size-toplas/gcc.df.debug_df_chain.ll'
+  target datalayout = "E-m:m-p:32:32-i8:8:32-i16:16:32-i64:64-n32-S64"
+  target triple = "mips--linux-gnu"
+  
+  %struct._IO_FILE.1489 = type { i32, i8*, i8*, i8*, i8*, i8*, i8*, i8*, i8*, i8*, i8*, i8*, %struct._IO_marker.1490*, %struct._IO_FILE.1489*, i32, i32, i32, i16, i8, [1 x i8], i8*, i64, i8*, i8*, i8*, i8*, i32, i32, [40 x i8] }
+  %struct._IO_marker.1490 = type { %struct._IO_marker.1490*, %struct._IO_FILE.1489*, i32 }
+  %struct.df_link.1483 = type { %struct.df_link.1483*, %struct.ref.1477* }
+  %struct.ref.1477 = type { %struct.rtx_def.1482*, %struct.rtx_def.1482*, %struct.rtx_def.1482**, %struct.df_link.1483*, i32, i32, i32 }
+  %struct.rtx_def.1482 = type { i32, [1 x %union.rtunion_def.1484] }
+  %union.rtunion_def.1484 = type { i32 }
+  
+  @stderr = external global %struct._IO_FILE.1489*, align 4
+  @.str.28 = external hidden unnamed_addr constant [3 x i8], align 1
+  @.str.29 = external hidden unnamed_addr constant [6 x i8], align 1
+  
+  ; Function Attrs: nounwind
+  declare i32 @fprintf(%struct._IO_FILE.1489* nocapture, i8* nocapture readonly, ...) #0
+  
+  ; Function Attrs: nounwind
+  define void @debug_df_chain(%struct.df_link.1483* readonly %link) #0 {
+    %1 = load %struct._IO_FILE.1489*, %struct._IO_FILE.1489** @stderr, align 4
+    %2 = tail call i32 @fwrite(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @.str.28, i32 0, i32 0), i32 2, i32 1, %struct._IO_FILE.1489* %1) #2
+    %3 = icmp eq %struct.df_link.1483* %link, null
+    br i1 %3, label %df_chain_dump.exit, label %.lr.ph.i
+  
+  .lr.ph.i:                                         ; preds = %0, %.lr.ph.i
+    %.01.i = phi %struct.df_link.1483* [ %14, %.lr.ph.i ], [ %link, %0 ]
+    %4 = getelementptr inbounds %struct.df_link.1483, %struct.df_link.1483* %.01.i, i32 0, i32 1
+    %5 = load %struct.ref.1477*, %struct.ref.1477** %4, align 4
+    %6 = getelementptr inbounds %struct.ref.1477, %struct.ref.1477* %5, i32 0, i32 4
+    %7 = load i32, i32* %6, align 4
+    %8 = icmp eq i32 %7, 0
+    %9 = select i1 %8, i32 100, i32 117
+    %10 = getelementptr inbounds %struct.ref.1477, %struct.ref.1477* %5, i32 0, i32 5
+    %11 = load i32, i32* %10, align 4
+    %12 = tail call i32 (%struct._IO_FILE.1489*, i8*, ...) @fprintf(%struct._IO_FILE.1489* %1, i8* nonnull getelementptr inbounds ([6 x i8], [6 x i8]* @.str.29, i32 0, i32 0), i32 signext %9, i32 signext %11) #2
+    %13 = bitcast %struct.df_link.1483* %.01.i to %struct.df_link.1483**
+    %14 = load %struct.df_link.1483*, %struct.df_link.1483** %13, align 4
+    %15 = icmp eq %struct.df_link.1483* %14, null
+    br i1 %15, label %df_chain_dump.exit, label %.lr.ph.i
+  
+  df_chain_dump.exit:                               ; preds = %.lr.ph.i, %0
+    %fputc.i = tail call i32 @fputc(i32 125, %struct._IO_FILE.1489* %1) #2
+    %16 = load %struct._IO_FILE.1489*, %struct._IO_FILE.1489** @stderr, align 4
+    %17 = tail call i32 @fputc(i32 signext 10, %struct._IO_FILE.1489* %16) #3
+    ret void
+  }
+  
+  ; Function Attrs: nounwind
+  declare i32 @fputc(i32 signext, %struct._IO_FILE.1489* nocapture) #0
+  
+  ; Function Attrs: nounwind
+  declare i32 @fwrite(i8* nocapture, i32, i32, %struct._IO_FILE.1489* nocapture) #1
+  
+  attributes #0 = { nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #1 = { nounwind "target-cpu"="mips32" }
+  attributes #2 = { cold nounwind }
+  attributes #3 = { cold }
+  
+  !llvm.ident = !{!0}
+  
+  !0 = !{!"clang version 3.8.0 (http://llvm.org/git/clang.git 2d49f0a0ae8366964a93e3b7b26e29679bee7160) (http://llvm.org/git/llvm.git 60bc66b44837125843b58ed3e0fd2e6bb948d839)"}
+
+...
+---
+name:            debug_df_chain
+alignment:       2
+exposesReturnsTwice: false
+hasInlineAsm:    false
+isSSA:           true
+tracksRegLiveness: true
+tracksSubRegLiveness: false
+registers:       
+  - { id: 0, class: gpr32 }
+  - { id: 1, class: gpr32 }
+  - { id: 2, class: gpr32 }
+  - { id: 3, class: gpr32 }
+  - { id: 4, class: gpr32 }
+  - { id: 5, class: gpr32 }
+  - { id: 6, class: gpr32 }
+  - { id: 7, class: gpr32 }
+  - { id: 8, class: gpr32 }
+  - { id: 9, class: gpr32 }
+  - { id: 10, class: gpr32 }
+  - { id: 11, class: gpr32 }
+  - { id: 12, class: gpr32 }
+  - { id: 13, class: gpr32 }
+  - { id: 14, class: gpr32 }
+  - { id: 15, class: gpr32 }
+  - { id: 16, class: gpr32 }
+  - { id: 17, class: gpr32 }
+  - { id: 18, class: gpr32 }
+  - { id: 19, class: gpr32 }
+  - { id: 20, class: gpr32 }
+  - { id: 21, class: gpr32 }
+  - { id: 22, class: gpr32 }
+  - { id: 23, class: gpr32 }
+  - { id: 24, class: gpr32 }
+  - { id: 25, class: gpr32 }
+  - { id: 26, class: gpr32 }
+  - { id: 27, class: gpr32 }
+  - { id: 28, class: gpr32 }
+  - { id: 29, class: gpr32 }
+liveins:         
+  - { reg: '%a0', virtual-reg: '%3' }
+  - { reg: '%t9' }
+  - { reg: '%v0' }
+frameInfo:       
+  isFrameAddressTaken: false
+  isReturnAddressTaken: false
+  hasStackMap:     false
+  hasPatchPoint:   false
+  stackSize:       0
+  offsetAdjustment: 0
+  maxAlignment:    1
+  adjustsStack:    false
+  hasCalls:        true
+  maxCallFrameSize: 0
+  hasOpaqueSPAdjustment: false
+  hasVAStart:      false
+  hasMustTailInVarArgFunc: false
+body:             |
+  bb.0 (%ir-block.0, freq 135):
+    successors: %bb.2.df_chain_dump.exit(94), %bb.3(5)
+    liveins: %a0, %t9, %v0
+  
+    %4 = ADDu %v0, %t9
+    %3 = COPY %a0
+    %5 = LW %4, target-flags(<unknown>) @stderr, <0x4cc64a0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %0 = LW %5, 0, <0x4cc9070> = !{!"unison-memory-partition", i32 1} :: (load 4 from @stderr)
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %6 = LW %4, target-flags(<unknown>) @.str.28, <0x4cd23a0> = !{!"unison-memory-partition", i32 2} :: (load 4 from got)
+    %7 = LW %4, target-flags(<unknown>) @fwrite, <0x4cd7b50> = !{!"unison-memory-partition", i32 3} :: (load 4 from call-entry @fwrite)
+    %8 = ADDiu %zero, 2
+    %9 = ADDiu %zero, 1
+    %a0 = COPY %6
+    %a1 = COPY %8
+    %a2 = COPY %9
+    %a3 = COPY %0
+    %gp = COPY %4
+    %t9 = COPY %7
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %a3, implicit %gp, implicit-def %sp, implicit-def %v0
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    BEQ %3, %zero, %bb.2.df_chain_dump.exit, implicit-def %at
+  
+  bb.3 (freq 8):
+    successors: %bb.1..lr.ph.i(100)
+  
+    %13 = ADDiu %zero, 117
+    %14 = ADDiu %zero, 100
+    %17 = LW %4, target-flags(<unknown>) @.str.29, <0x4cc64a0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+  
+  bb.1..lr.ph.i (freq 255):
+    successors: %bb.2.df_chain_dump.exit(3), %bb.1..lr.ph.i(96)
+  
+    %1 = PHI %3, %bb.3, %2, %bb.1..lr.ph.i
+    %11 = LW %1, 4, <0x4cc9070> = !{!"unison-memory-partition", i32 1} :: (load 4 from %ir.4)
+    %12 = LW %11, 16, <0x4cd23a0> = !{!"unison-memory-partition", i32 2} :: (load 4 from %ir.6)
+    %15 = MOVZ_I_I %14, killed %12, %13
+    %16 = LW %11, 20, <0x4cd7b50> = !{!"unison-memory-partition", i32 3} :: (load 4 from %ir.10)
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %18 = LW %4, target-flags(<unknown>) @fprintf, <0x4cd7e20> = !{!"unison-memory-partition", i32 4} :: (load 4 from call-entry @fprintf)
+    %a0 = COPY %0
+    %a1 = COPY %17
+    %a2 = COPY %15
+    %a3 = COPY %16
+    %gp = COPY %4
+    %t9 = COPY %18
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %a3, implicit %gp, implicit-def %sp, implicit-def %v0
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    %2 = LW %1, 0, <0x4cc64a0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.13)
+    BNE %2, %zero, %bb.1..lr.ph.i, implicit-def dead %at
+    B %bb.2.df_chain_dump.exit, implicit-def dead %at
+  
+  bb.2.df_chain_dump.exit (freq 135):
+    liveouts:
+  
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %20 = LW %4, target-flags(<unknown>) @fputc, <0x4cc64a0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @fputc)
+    %21 = ADDiu %zero, 125
+    %a0 = COPY %21
+    %a1 = COPY %0
+    %gp = COPY %4
+    %t9 = COPY %20
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %gp, implicit-def %sp, implicit-def %v0
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    %24 = LW %5, 0, <0x4cc9070> = !{!"unison-memory-partition", i32 1} :: (load 4 from @stderr)
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %25 = ADDiu %zero, 10
+    %26 = LW %4, target-flags(<unknown>) @fputc, <0x4cd23a0> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @fputc)
+    %a0 = COPY %25
+    %a1 = COPY %24
+    %t9 = COPY %26
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit-def %sp, implicit-def %v0
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    RetRA
+
+...
+--- |
+  ; ModuleID = '/home/romi/didaktoriko/unison/unison-experiments/experiments/mips/selected-functions/size-toplas/gcc.df.debug_df_chain.ll'
+  target datalayout = "E-m:m-p:32:32-i8:8:32-i16:16:32-i64:64-n32-S64"
+  target triple = "mips--linux-gnu"
+  
+  %struct._IO_FILE.1489 = type { i32, i8*, i8*, i8*, i8*, i8*, i8*, i8*, i8*, i8*, i8*, i8*, %struct._IO_marker.1490*, %struct._IO_FILE.1489*, i32, i32, i32, i16, i8, [1 x i8], i8*, i64, i8*, i8*, i8*, i8*, i32, i32, [40 x i8] }
+  %struct._IO_marker.1490 = type { %struct._IO_marker.1490*, %struct._IO_FILE.1489*, i32 }
+  %struct.df_link.1483 = type { %struct.df_link.1483*, %struct.ref.1477* }
+  %struct.ref.1477 = type { %struct.rtx_def.1482*, %struct.rtx_def.1482*, %struct.rtx_def.1482**, %struct.df_link.1483*, i32, i32, i32 }
+  %struct.rtx_def.1482 = type { i32, [1 x %union.rtunion_def.1484] }
+  %union.rtunion_def.1484 = type { i32 }
+  
+  @stderr = external global %struct._IO_FILE.1489*, align 4
+  @.str.28 = external hidden unnamed_addr constant [3 x i8], align 1
+  @.str.29 = external hidden unnamed_addr constant [6 x i8], align 1
+  
+  ; Function Attrs: nounwind
+  declare i32 @fprintf(%struct._IO_FILE.1489* nocapture, i8* nocapture readonly, ...) #0
+  
+  ; Function Attrs: nounwind
+  define void @debug_df_chain(%struct.df_link.1483* readonly %link) #0 {
+    %1 = load %struct._IO_FILE.1489*, %struct._IO_FILE.1489** @stderr, align 4
+    %2 = tail call i32 @fwrite(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @.str.28, i32 0, i32 0), i32 2, i32 1, %struct._IO_FILE.1489* %1) #2
+    %3 = icmp eq %struct.df_link.1483* %link, null
+    br i1 %3, label %df_chain_dump.exit, label %.lr.ph.i
+  
+  .lr.ph.i:                                         ; preds = %0, %.lr.ph.i
+    %.01.i = phi %struct.df_link.1483* [ %14, %.lr.ph.i ], [ %link, %0 ]
+    %4 = getelementptr inbounds %struct.df_link.1483, %struct.df_link.1483* %.01.i, i32 0, i32 1
+    %5 = load %struct.ref.1477*, %struct.ref.1477** %4, align 4
+    %6 = getelementptr inbounds %struct.ref.1477, %struct.ref.1477* %5, i32 0, i32 4
+    %7 = load i32, i32* %6, align 4
+    %8 = icmp eq i32 %7, 0
+    %9 = select i1 %8, i32 100, i32 117
+    %10 = getelementptr inbounds %struct.ref.1477, %struct.ref.1477* %5, i32 0, i32 5
+    %11 = load i32, i32* %10, align 4
+    %12 = tail call i32 (%struct._IO_FILE.1489*, i8*, ...) @fprintf(%struct._IO_FILE.1489* %1, i8* nonnull getelementptr inbounds ([6 x i8], [6 x i8]* @.str.29, i32 0, i32 0), i32 signext %9, i32 signext %11) #2
+    %13 = bitcast %struct.df_link.1483* %.01.i to %struct.df_link.1483**
+    %14 = load %struct.df_link.1483*, %struct.df_link.1483** %13, align 4
+    %15 = icmp eq %struct.df_link.1483* %14, null
+    br i1 %15, label %df_chain_dump.exit, label %.lr.ph.i
+  
+  df_chain_dump.exit:                               ; preds = %.lr.ph.i, %0
+    %fputc.i = tail call i32 @fputc(i32 125, %struct._IO_FILE.1489* %1) #2
+    %16 = load %struct._IO_FILE.1489*, %struct._IO_FILE.1489** @stderr, align 4
+    %17 = tail call i32 @fputc(i32 signext 10, %struct._IO_FILE.1489* %16) #3
+    ret void
+  }
+  
+  ; Function Attrs: nounwind
+  declare i32 @fputc(i32 signext, %struct._IO_FILE.1489* nocapture) #0
+  
+  ; Function Attrs: nounwind
+  declare i32 @fwrite(i8* nocapture, i32, i32, %struct._IO_FILE.1489* nocapture) #1
+  
+  attributes #0 = { nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #1 = { nounwind "target-cpu"="mips32" }
+  attributes #2 = { cold nounwind }
+  attributes #3 = { cold }
+  
+  !llvm.ident = !{!0}
+  
+  !0 = !{!"clang version 3.8.0 (http://llvm.org/git/clang.git 2d49f0a0ae8366964a93e3b7b26e29679bee7160) (http://llvm.org/git/llvm.git 60bc66b44837125843b58ed3e0fd2e6bb948d839)"}
+
+...
+---
+name:            debug_df_chain
+alignment:       2
+exposesReturnsTwice: false
+hasInlineAsm:    false
+isSSA:           true
+tracksRegLiveness: true
+tracksSubRegLiveness: false
+registers:       
+  - { id: 0, class: gpr32 }
+  - { id: 1, class: gpr32 }
+  - { id: 2, class: gpr32 }
+  - { id: 3, class: gpr32 }
+  - { id: 4, class: gpr32 }
+  - { id: 5, class: gpr32 }
+  - { id: 6, class: gpr32 }
+  - { id: 7, class: gpr32 }
+  - { id: 8, class: gpr32 }
+  - { id: 9, class: gpr32 }
+  - { id: 10, class: gpr32 }
+  - { id: 11, class: gpr32 }
+  - { id: 12, class: gpr32 }
+  - { id: 13, class: gpr32 }
+  - { id: 14, class: gpr32 }
+  - { id: 15, class: gpr32 }
+  - { id: 16, class: gpr32 }
+  - { id: 17, class: gpr32 }
+  - { id: 18, class: gpr32 }
+  - { id: 19, class: gpr32 }
+  - { id: 20, class: gpr32 }
+  - { id: 21, class: gpr32 }
+  - { id: 22, class: gpr32 }
+  - { id: 23, class: gpr32 }
+  - { id: 24, class: gpr32 }
+  - { id: 25, class: gpr32 }
+  - { id: 26, class: gpr32 }
+  - { id: 27, class: gpr32 }
+  - { id: 28, class: gpr32 }
+  - { id: 29, class: gpr32 }
+liveins:         
+  - { reg: '%a0', virtual-reg: '%3' }
+  - { reg: '%t9' }
+  - { reg: '%v0' }
+frameInfo:       
+  isFrameAddressTaken: false
+  isReturnAddressTaken: false
+  hasStackMap:     false
+  hasPatchPoint:   false
+  stackSize:       0
+  offsetAdjustment: 0
+  maxAlignment:    1
+  adjustsStack:    false
+  hasCalls:        true
+  maxCallFrameSize: 0
+  hasOpaqueSPAdjustment: false
+  hasVAStart:      false
+  hasMustTailInVarArgFunc: false
+body:             |
+  bb.0 (%ir-block.0, freq 135):
+    successors: %bb.2.df_chain_dump.exit(94), %bb.3(5)
+    liveins: %a0, %t9, %v0
+  
+    %4 = ADDu %v0, %t9
+    %3 = COPY %a0
+    %5 = LW %4, target-flags(<unknown>) @stderr, <0x4cc64a0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %0 = LW %5, 0, <0x4cc9070> = !{!"unison-memory-partition", i32 1} :: (load 4 from @stderr)
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %6 = LW %4, target-flags(<unknown>) @.str.28, <0x4cd23a0> = !{!"unison-memory-partition", i32 2} :: (load 4 from got)
+    %7 = LW %4, target-flags(<unknown>) @fwrite, <0x4cd7b50> = !{!"unison-memory-partition", i32 3} :: (load 4 from call-entry @fwrite)
+    %8 = ADDiu %zero, 2
+    %9 = ADDiu %zero, 1
+    %a0 = COPY %6
+    %a1 = COPY %8
+    %a2 = COPY %9
+    %a3 = COPY %0
+    %gp = COPY %4
+    %t9 = COPY %7
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %a3, implicit %gp, implicit-def %sp, implicit-def %v0
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    BEQ %3, %zero, %bb.2.df_chain_dump.exit, implicit-def %at
+  
+  bb.3 (freq 8):
+    successors: %bb.1..lr.ph.i(100)
+  
+    %13 = ADDiu %zero, 117
+    %14 = ADDiu %zero, 100
+    %17 = LW %4, target-flags(<unknown>) @.str.29, <0x4cc64a0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+  
+  bb.1..lr.ph.i (freq 255):
+    successors: %bb.2.df_chain_dump.exit(3), %bb.1..lr.ph.i(96)
+  
+    %1 = PHI %3, %bb.3, %2, %bb.1..lr.ph.i
+    %11 = LW %1, 4, <0x4cc9070> = !{!"unison-memory-partition", i32 1} :: (load 4 from %ir.4)
+    %12 = LW %11, 16, <0x4cd23a0> = !{!"unison-memory-partition", i32 2} :: (load 4 from %ir.6)
+    %15 = MOVZ_I_I %14, killed %12, %13
+    %16 = LW %11, 20, <0x4cd7b50> = !{!"unison-memory-partition", i32 3} :: (load 4 from %ir.10)
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %18 = LW %4, target-flags(<unknown>) @fprintf, <0x4cd7e20> = !{!"unison-memory-partition", i32 4} :: (load 4 from call-entry @fprintf)
+    %a0 = COPY %0
+    %a1 = COPY %17
+    %a2 = COPY %15
+    %a3 = COPY %16
+    %gp = COPY %4
+    %t9 = COPY %18
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %a3, implicit %gp, implicit-def %sp, implicit-def %v0
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    %2 = LW %1, 0, <0x4cc64a0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.13)
+    BNE %2, %zero, %bb.1..lr.ph.i, implicit-def dead %at
+    B %bb.2.df_chain_dump.exit, implicit-def dead %at
+  
+  bb.2.df_chain_dump.exit (freq 135):
+    liveouts:
+  
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %20 = LW %4, target-flags(<unknown>) @fputc, <0x4cc64a0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @fputc)
+    %21 = ADDiu %zero, 125
+    %a0 = COPY %21
+    %a1 = COPY %0
+    %gp = COPY %4
+    %t9 = COPY %20
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %gp, implicit-def %sp, implicit-def %v0
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    %24 = LW %5, 0, <0x4cc9070> = !{!"unison-memory-partition", i32 1} :: (load 4 from @stderr)
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %25 = ADDiu %zero, 10
+    %26 = LW %4, target-flags(<unknown>) @fputc, <0x4cd23a0> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @fputc)
+    %a0 = COPY %25
+    %a1 = COPY %24
+    %t9 = COPY %26
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit-def %sp, implicit-def %v0
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    RetRA
+
+...

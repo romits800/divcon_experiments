@@ -1,0 +1,382 @@
+--- |
+  ; ModuleID = '/home/romi/didaktoriko/unison/unison-experiments/experiments/mips/selected-functions/size-toplas/gcc.emit-rtl.emit_note.ll'
+  target datalayout = "E-m:m-p:32:32-i8:8:32-i16:16:32-i64:64-n32-S64"
+  target triple = "mips--linux-gnu"
+  
+  %struct.function.7424 = type { %struct.eh_status.7425*, %struct.stmt_status.7426*, %struct.expr_status.7427*, %struct.emit_status.7428*, %struct.varasm_status.7429*, i8*, %union.tree_node.7430*, %struct.function.7424*, i32, i32, i32, i32, %struct.rtx_def.7421*, %struct.ix86_args.7431, %struct.rtx_def.7421*, %struct.rtx_def.7421*, i8*, %struct.initial_value_struct.7432*, i32, %union.tree_node.7430*, %struct.rtx_def.7421*, %struct.rtx_def.7421*, %struct.rtx_def.7421*, %struct.rtx_def.7421*, %struct.rtx_def.7421*, %struct.rtx_def.7421*, %struct.rtx_def.7421*, %union.tree_node.7430*, %struct.rtx_def.7421*, %struct.rtx_def.7421*, %struct.rtx_def.7421*, %struct.rtx_def.7421*, i32, %union.tree_node.7430*, %union.tree_node.7430*, %struct.rtx_def.7421*, %struct.rtx_def.7421*, i32, %struct.rtx_def.7421**, %struct.temp_slot.7433*, i32, i32, i32, %struct.var_refs_queue.7434*, i32, i32, i8*, %union.tree_node.7430*, %struct.rtx_def.7421*, i32, i32, %struct.machine_function.7435*, i32, i32, %struct.language_function.7436*, %struct.rtx_def.7421*, i24 }
+  %struct.eh_status.7425 = type opaque
+  %struct.stmt_status.7426 = type opaque
+  %struct.expr_status.7427 = type { i32, i32, i32, %struct.rtx_def.7421*, %struct.rtx_def.7421*, %struct.rtx_def.7421*, %struct.rtx_def.7421* }
+  %struct.emit_status.7428 = type { i32, i32, %struct.rtx_def.7421*, %struct.rtx_def.7421*, %union.tree_node.7430*, %struct.sequence_stack.7437*, i32, i32, i8*, i32, i8*, %union.tree_node.7430**, %struct.rtx_def.7421** }
+  %struct.sequence_stack.7437 = type { %struct.rtx_def.7421*, %struct.rtx_def.7421*, %union.tree_node.7430*, %struct.sequence_stack.7437* }
+  %struct.varasm_status.7429 = type opaque
+  %struct.ix86_args.7431 = type { i32, i32, i32, i32, i32, i32, i32 }
+  %struct.initial_value_struct.7432 = type opaque
+  %struct.temp_slot.7433 = type opaque
+  %struct.var_refs_queue.7434 = type { %struct.rtx_def.7421*, i32, i32, %struct.var_refs_queue.7434* }
+  %union.tree_node.7430 = type { %struct.tree_type.7438, [24 x i8] }
+  %struct.tree_type.7438 = type { %struct.tree_common.7439, %union.tree_node.7430*, %union.tree_node.7430*, %union.tree_node.7430*, %union.tree_node.7430*, i32, i32, i32, %union.tree_node.7430*, %union.tree_node.7430*, %union.anon.2.7440, %union.tree_node.7430*, %union.tree_node.7430*, %union.tree_node.7430*, %union.tree_node.7430*, %union.tree_node.7430*, %union.tree_node.7430*, %union.tree_node.7430*, i32, %struct.lang_type.7441* }
+  %struct.tree_common.7439 = type { %union.tree_node.7430*, %union.tree_node.7430*, i32 }
+  %union.anon.2.7440 = type { i32 }
+  %struct.lang_type.7441 = type opaque
+  %struct.machine_function.7435 = type opaque
+  %struct.language_function.7436 = type opaque
+  %struct.rtx_def.7421 = type { i32, [1 x %union.rtunion_def.7422] }
+  %union.rtunion_def.7422 = type { i32 }
+  
+  @cfun = external global %struct.function.7424*, align 4
+  @no_line_numbers = external hidden unnamed_addr global i32, align 4
+  
+  declare %struct.rtx_def.7421* @rtx_alloc(i32 signext) #0
+  
+  ; Function Attrs: nounwind
+  define %struct.rtx_def.7421* @emit_note(i8* %file, i32 signext %line) #1 {
+    %1 = icmp sgt i32 %line, 0
+    br i1 %1, label %2, label %.thread
+  
+  ; <label>:2                                       ; preds = %0
+    %3 = icmp eq i8* %file, null
+    %.pre = load %struct.function.7424*, %struct.function.7424** @cfun, align 4
+    %.phi.trans.insert = getelementptr inbounds %struct.function.7424, %struct.function.7424* %.pre, i32 0, i32 3
+    %.pre3 = load %struct.emit_status.7428*, %struct.emit_status.7428** %.phi.trans.insert, align 4
+    br i1 %3, label %._crit_edge, label %4
+  
+  ; <label>:4                                       ; preds = %2
+    %sunkaddr = ptrtoint %struct.emit_status.7428* %.pre3 to i32
+    %sunkaddr1 = add i32 %sunkaddr, 32
+    %sunkaddr2 = inttoptr i32 %sunkaddr1 to i8**
+    %5 = load i8*, i8** %sunkaddr2, align 4
+    %6 = icmp eq i8* %5, null
+    br i1 %6, label %._crit_edge, label %7
+  
+  ; <label>:7                                       ; preds = %4
+    %8 = tail call i32 @strcmp(i8* nonnull %file, i8* nonnull %5) #3
+    %9 = icmp eq i32 %8, 0
+    br i1 %9, label %10, label %._crit_edge
+  
+  ; <label>:10                                      ; preds = %7
+    %11 = getelementptr inbounds %struct.emit_status.7428, %struct.emit_status.7428* %.pre3, i32 0, i32 7
+    %12 = load i32, i32* %11, align 4
+    %13 = icmp eq i32 %12, %line
+    br i1 %13, label %64, label %._crit_edge
+  
+  ._crit_edge:                                      ; preds = %10, %7, %4, %2
+    %sunkaddr3 = ptrtoint %struct.emit_status.7428* %.pre3 to i32
+    %sunkaddr4 = add i32 %sunkaddr3, 32
+    %sunkaddr5 = inttoptr i32 %sunkaddr4 to i8**
+    store i8* %file, i8** %sunkaddr5, align 4
+    %14 = load %struct.function.7424*, %struct.function.7424** @cfun, align 4
+    %15 = getelementptr inbounds %struct.function.7424, %struct.function.7424* %14, i32 0, i32 3
+    %16 = load %struct.emit_status.7428*, %struct.emit_status.7428** %15, align 4
+    %17 = getelementptr inbounds %struct.emit_status.7428, %struct.emit_status.7428* %16, i32 0, i32 7
+    store i32 %line, i32* %17, align 4
+    %18 = load i32, i32* @no_line_numbers, align 4
+    %19 = icmp eq i32 %18, 0
+    br i1 %19, label %.thread, label %20
+  
+  ; <label>:20                                      ; preds = %._crit_edge
+    %21 = load %struct.function.7424*, %struct.function.7424** @cfun, align 4
+    %22 = getelementptr inbounds %struct.function.7424, %struct.function.7424* %21, i32 0, i32 3
+    %23 = load %struct.emit_status.7428*, %struct.emit_status.7428** %22, align 4
+    %24 = getelementptr inbounds %struct.emit_status.7428, %struct.emit_status.7428* %23, i32 0, i32 6
+    %25 = load i32, i32* %24, align 4
+    %26 = add nsw i32 %25, 1
+    store i32 %26, i32* %24, align 4
+    br label %64
+  
+  .thread:                                          ; preds = %._crit_edge, %0
+    %27 = tail call %struct.rtx_def.7421* @rtx_alloc(i32 signext 37) #3
+    %28 = load %struct.function.7424*, %struct.function.7424** @cfun, align 4
+    %29 = getelementptr inbounds %struct.function.7424, %struct.function.7424* %28, i32 0, i32 3
+    %30 = load %struct.emit_status.7428*, %struct.emit_status.7428** %29, align 4
+    %31 = getelementptr inbounds %struct.emit_status.7428, %struct.emit_status.7428* %30, i32 0, i32 6
+    %32 = load i32, i32* %31, align 4
+    %33 = add nsw i32 %32, 1
+    store i32 %33, i32* %31, align 4
+    %34 = getelementptr inbounds %struct.rtx_def.7421, %struct.rtx_def.7421* %27, i32 0, i32 1, i32 0, i32 0
+    store i32 %32, i32* %34, align 4
+    %35 = getelementptr inbounds %struct.rtx_def.7421, %struct.rtx_def.7421* %27, i32 0, i32 1, i32 3
+    %36 = bitcast %union.rtunion_def.7422* %35 to i8**
+    store i8* %file, i8** %36, align 4
+    %37 = getelementptr inbounds %struct.rtx_def.7421, %struct.rtx_def.7421* %27, i32 0, i32 1, i32 4, i32 0
+    store i32 %line, i32* %37, align 4
+    %38 = load %struct.function.7424*, %struct.function.7424** @cfun, align 4
+    %39 = getelementptr inbounds %struct.function.7424, %struct.function.7424* %38, i32 0, i32 3
+    %40 = load %struct.emit_status.7428*, %struct.emit_status.7428** %39, align 4
+    %41 = getelementptr inbounds %struct.emit_status.7428, %struct.emit_status.7428* %40, i32 0, i32 3
+    %42 = bitcast %struct.rtx_def.7421** %41 to i32*
+    %43 = load i32, i32* %42, align 4
+    %44 = getelementptr inbounds %struct.rtx_def.7421, %struct.rtx_def.7421* %27, i32 0, i32 1, i32 1, i32 0
+    store i32 %43, i32* %44, align 4
+    %45 = getelementptr inbounds %struct.rtx_def.7421, %struct.rtx_def.7421* %27, i32 0, i32 1, i32 2
+    %46 = bitcast %union.rtunion_def.7422* %45 to %struct.rtx_def.7421**
+    store %struct.rtx_def.7421* null, %struct.rtx_def.7421** %46, align 4
+    %47 = load %struct.function.7424*, %struct.function.7424** @cfun, align 4
+    %48 = getelementptr inbounds %struct.function.7424, %struct.function.7424* %47, i32 0, i32 3
+    %49 = load %struct.emit_status.7428*, %struct.emit_status.7428** %48, align 4
+    %50 = getelementptr inbounds %struct.emit_status.7428, %struct.emit_status.7428* %49, i32 0, i32 3
+    %51 = load %struct.rtx_def.7421*, %struct.rtx_def.7421** %50, align 4
+    %52 = icmp eq %struct.rtx_def.7421* %51, null
+    br i1 %52, label %56, label %53
+  
+  ; <label>:53                                      ; preds = %.thread
+    %54 = getelementptr inbounds %struct.rtx_def.7421, %struct.rtx_def.7421* %51, i32 0, i32 1, i32 2
+    %55 = bitcast %union.rtunion_def.7422* %54 to %struct.rtx_def.7421**
+    store %struct.rtx_def.7421* %27, %struct.rtx_def.7421** %55, align 4
+    %.pre.i = load %struct.function.7424*, %struct.function.7424** @cfun, align 4
+    %.phi.trans.insert.i = getelementptr inbounds %struct.function.7424, %struct.function.7424* %.pre.i, i32 0, i32 3
+    %.pre1.i = load %struct.emit_status.7428*, %struct.emit_status.7428** %.phi.trans.insert.i, align 4
+    br label %56
+  
+  ; <label>:56                                      ; preds = %53, %.thread
+    %57 = phi %struct.emit_status.7428* [ %49, %.thread ], [ %.pre1.i, %53 ]
+    %58 = getelementptr inbounds %struct.emit_status.7428, %struct.emit_status.7428* %57, i32 0, i32 2
+    %59 = load %struct.rtx_def.7421*, %struct.rtx_def.7421** %58, align 4
+    %60 = icmp eq %struct.rtx_def.7421* %59, null
+    br i1 %60, label %61, label %add_insn.exit
+  
+  ; <label>:61                                      ; preds = %56
+    %sunkaddr6 = ptrtoint %struct.emit_status.7428* %57 to i32
+    %sunkaddr7 = add i32 %sunkaddr6, 8
+    %sunkaddr8 = inttoptr i32 %sunkaddr7 to %struct.rtx_def.7421**
+    store %struct.rtx_def.7421* %27, %struct.rtx_def.7421** %sunkaddr8, align 4
+    %.pre2.i = load %struct.function.7424*, %struct.function.7424** @cfun, align 4
+    %.phi.trans.insert3.i = getelementptr inbounds %struct.function.7424, %struct.function.7424* %.pre2.i, i32 0, i32 3
+    %.pre4.i = load %struct.emit_status.7428*, %struct.emit_status.7428** %.phi.trans.insert3.i, align 4
+    br label %add_insn.exit
+  
+  add_insn.exit:                                    ; preds = %61, %56
+    %62 = phi %struct.emit_status.7428* [ %.pre4.i, %61 ], [ %57, %56 ]
+    %63 = getelementptr inbounds %struct.emit_status.7428, %struct.emit_status.7428* %62, i32 0, i32 3
+    store %struct.rtx_def.7421* %27, %struct.rtx_def.7421** %63, align 4
+    br label %64
+  
+  ; <label>:64                                      ; preds = %add_insn.exit, %20, %10
+    %.0 = phi %struct.rtx_def.7421* [ null, %20 ], [ %27, %add_insn.exit ], [ null, %10 ]
+    ret %struct.rtx_def.7421* %.0
+  }
+  
+  ; Function Attrs: nounwind readonly
+  declare i32 @strcmp(i8* nocapture, i8* nocapture) #2
+  
+  attributes #0 = { "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #1 = { nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #2 = { nounwind readonly "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #3 = { nounwind }
+  
+  !llvm.ident = !{!0}
+  
+  !0 = !{!"clang version 3.8.0 (http://llvm.org/git/clang.git 2d49f0a0ae8366964a93e3b7b26e29679bee7160) (http://llvm.org/git/llvm.git 60bc66b44837125843b58ed3e0fd2e6bb948d839)"}
+
+...
+---
+name:            emit_note
+alignment:       2
+exposesReturnsTwice: false
+hasInlineAsm:    false
+isSSA:           false
+tracksRegLiveness: false
+tracksSubRegLiveness: false
+liveins:         
+  - { reg: '%a0' }
+  - { reg: '%a1' }
+  - { reg: '%t9' }
+  - { reg: '%v0' }
+calleeSavedRegisters: [ '%fp', '%ra', '%d10', '%d11', '%d12', '%d13', '%d14', 
+                        '%d15', '%f20', '%f21', '%f22', '%f23', '%f24', 
+                        '%f25', '%f26', '%f27', '%f28', '%f29', '%f30', 
+                        '%f31', '%s0', '%s1', '%s2', '%s3', '%s4', '%s5', 
+                        '%s6', '%s7' ]
+frameInfo:       
+  isFrameAddressTaken: false
+  isReturnAddressTaken: false
+  hasStackMap:     false
+  hasPatchPoint:   false
+  stackSize:       40
+  offsetAdjustment: 0
+  maxAlignment:    4
+  adjustsStack:    true
+  hasCalls:        true
+  maxCallFrameSize: 16
+  hasOpaqueSPAdjustment: false
+  hasVAStart:      false
+  hasMustTailInVarArgFunc: false
+stack:           
+  - { id: 0, type: spill-slot, offset: -4, size: 4, alignment: 4, callee-saved-register: '%ra' }
+  - { id: 1, type: spill-slot, offset: -8, size: 4, alignment: 4, callee-saved-register: '%s4' }
+  - { id: 2, type: spill-slot, offset: -12, size: 4, alignment: 4, callee-saved-register: '%s3' }
+  - { id: 3, type: spill-slot, offset: -16, size: 4, alignment: 4, callee-saved-register: '%s2' }
+  - { id: 4, type: spill-slot, offset: -20, size: 4, alignment: 4, callee-saved-register: '%s1' }
+  - { id: 5, type: spill-slot, offset: -24, size: 4, alignment: 4, callee-saved-register: '%s0' }
+body:             |
+  bb.0 (%ir-block.0, freq 87):
+    successors: %bb.1(62), %bb.7..thread(37)
+    liveins: %a0, %a1, %t9, %ra, %s4, %s3, %s2, %s1, %s0
+  
+    %v0 = LUi target-flags(<unknown>) $_gp_disp
+    %v0 = ADDiu %v0, target-flags(<unknown>) $_gp_disp
+    %sp = ADDiu %sp, -40
+    CFI_INSTRUCTION .cfi_def_cfa_offset 40
+    SW killed %ra, %sp, 36 :: (store 4 into stack)
+    SW killed %s4, %sp, 32 :: (store 4 into stack)
+    SW killed %s3, %sp, 28 :: (store 4 into stack)
+    SW killed %s2, %sp, 24 :: (store 4 into stack)
+    SW killed %s1, %sp, 20 :: (store 4 into stack)
+    SW killed %s0, %sp, 16 :: (store 4 into stack)
+    CFI_INSTRUCTION .cfi_offset %ra_64, -4
+    CFI_INSTRUCTION .cfi_offset %s4_64, -8
+    CFI_INSTRUCTION .cfi_offset %s3_64, -12
+    CFI_INSTRUCTION .cfi_offset %s2_64, -16
+    CFI_INSTRUCTION .cfi_offset %s1_64, -20
+    CFI_INSTRUCTION .cfi_offset %s0_64, -24
+    %s2 = ADDu %v0, %t9
+    %s0 = OR %a1, %zero
+    BLEZ %s0, %bb.7..thread, implicit-def %at {
+      %s1 = OR %a0, %zero
+    }
+  
+  bb.1 (%ir-block.2, freq 54):
+    successors: %bb.5.._crit_edge(37), %bb.2(62)
+    liveins: %s0, %s1, %s2
+  
+    %s3 = LW %s2, target-flags(<unknown>) @cfun :: (load 4 from got)
+    %at = LW %s3, 0 :: (load 4 from @cfun)
+    %s4 = LW killed %at, 12 :: (load 4 from %ir..phi.trans.insert)
+    BEQ %s1, %zero, %bb.5.._crit_edge, implicit-def %at {
+      NOP
+    }
+  
+  bb.2 (%ir-block.4, freq 34):
+    successors: %bb.5.._crit_edge(37), %bb.3(62)
+    liveins: %s0, %s1, %s2, %s3, %s4
+  
+    %a1 = LW %s4, 32 :: (load 4 from %ir.sunkaddr2)
+    BEQ %a1, %zero, %bb.5.._crit_edge, implicit-def %at {
+      NOP
+    }
+  
+  bb.3 (%ir-block.7, freq 21):
+    successors: %bb.4(37), %bb.5.._crit_edge(62)
+    liveins: %a1, %s0, %s1, %s2, %s3, %s4
+  
+    %t9 = LW %s2, target-flags(<unknown>) @strcmp :: (load 4 from call-entry @strcmp)
+    %a0 = OR %s1, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit killed %gp, implicit-def %sp, implicit-def %v0 {
+      %gp = OR %s2, %zero
+    }
+    BNE %v0, %zero, %bb.5.._crit_edge, implicit-def %at {
+      NOP
+    }
+  
+  bb.4 (%ir-block.10, freq 8):
+    successors: %bb.12(50), %bb.5.._crit_edge(50)
+    liveins: %s0, %s1, %s2, %s3, %s4
+  
+    %at = LW %s4, 28 :: (load 4 from %ir.11)
+    BEQ %at, %s0, %bb.12, implicit-def %at {
+      %v0 = ADDiu %zero, 0
+    }
+  
+  bb.5.._crit_edge (freq 50):
+    successors: %bb.7..thread(37), %bb.6(62)
+    liveins: %s0, %s1, %s2, %s3, %s4
+  
+    SW %s1, killed %s4, 32 :: (store 4 into %ir.sunkaddr5)
+    %at = LW %s3, 0 :: (load 4 from @cfun)
+    %at = LW killed %at, 12 :: (load 4 from %ir.15)
+    %v0 = LW %s2, target-flags(<unknown>) @no_line_numbers :: (load 4 from got)
+    SW %s0, killed %at, 28 :: (store 4 into %ir.17)
+    %at = LW killed %v0, 0 :: (load 4 from @no_line_numbers)
+    BEQ %at, %zero, %bb.7..thread, implicit-def %at {
+      NOP
+    }
+  
+  bb.6 (%ir-block.20, freq 31):
+    successors: %bb.12(100)
+    liveins: %s3
+  
+    %at = LW killed %s3, 0 :: (load 4 from @cfun)
+    %at = LW killed %at, 12 :: (load 4 from %ir.22)
+    %v0 = ADDiu %zero, 0
+    %v1 = LW %at, 24 :: (load 4 from %ir.24)
+    %v1 = ADDiu killed %v1, 1
+    B %bb.12, implicit-def dead %at {
+      SW killed %v1, killed %at, 24 :: (store 4 into %ir.24)
+    }
+  
+  bb.7..thread (freq 51):
+    successors: %bb.9(37), %bb.8(62)
+    liveins: %s0, %s1, %s2
+  
+    %t9 = LW %s2, target-flags(<unknown>) @rtx_alloc :: (load 4 from call-entry @rtx_alloc)
+    %a0 = ADDiu %zero, 37
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit killed %gp, implicit-def %sp, implicit-def %v0 {
+      %gp = OR %s2, %zero
+    }
+    %v1 = LW killed %s2, target-flags(<unknown>) @cfun :: (load 4 from got)
+    %at = LW %v1, 0 :: (load 4 from @cfun)
+    %at = LW killed %at, 12 :: (load 4 from %ir.29)
+    %a0 = LW %at, 24 :: (load 4 from %ir.31)
+    %a1 = ADDiu %a0, 1
+    SW killed %a1, killed %at, 24 :: (store 4 into %ir.31)
+    SW killed %a0, %v0, 4 :: (store 4 into %ir.34)
+    SW killed %s1, %v0, 16 :: (store 4 into %ir.36)
+    SW killed %s0, %v0, 20 :: (store 4 into %ir.37)
+    %at = LW %v1, 0 :: (load 4 from @cfun)
+    %at = LW killed %at, 12 :: (load 4 from %ir.39)
+    %at = LW killed %at, 12 :: (load 4 from %ir.42)
+    SW killed %at, %v0, 8 :: (store 4 into %ir.44)
+    SW %zero, %v0, 12 :: (store 4 into %ir.46)
+    %at = LW %v1, 0 :: (load 4 from @cfun)
+    %a0 = LW killed %at, 12 :: (load 4 from %ir.48)
+    %a1 = LW %a0, 12 :: (load 4 from %ir.50)
+    BEQ %a1, %zero, %bb.9, implicit-def %at {
+      NOP
+    }
+  
+  bb.8 (%ir-block.53, freq 32):
+    successors: %bb.9(100)
+    liveins: %a1, %v0, %v1
+  
+    SW %v0, killed %a1, 12 :: (store 4 into %ir.55)
+    %at = LW %v1, 0 :: (load 4 from @cfun)
+    %a0 = LW killed %at, 12 :: (load 4 from %ir..phi.trans.insert.i)
+  
+  bb.9 (%ir-block.56, freq 51):
+    successors: %bb.10(37), %bb.11.add_insn.exit(62)
+    liveins: %a0, %v0, %v1
+  
+    %at = LW %a0, 8 :: (load 4 from %ir.58)
+    BNE %at, %zero, %bb.11.add_insn.exit, implicit-def %at {
+      NOP
+    }
+  
+  bb.10 (%ir-block.61, freq 19):
+    successors: %bb.11.add_insn.exit(100)
+    liveins: %a0, %v0, %v1
+  
+    SW %v0, killed %a0, 8 :: (store 4 into %ir.sunkaddr8)
+    %at = LW killed %v1, 0 :: (load 4 from @cfun)
+    %a0 = LW killed %at, 12 :: (load 4 from %ir..phi.trans.insert3.i)
+  
+  bb.11.add_insn.exit (freq 51):
+    successors: %bb.12(100)
+    liveins: %a0, %v0
+  
+    SW %v0, killed %a0, 12 :: (store 4 into %ir.63)
+  
+  bb.12 (%ir-block.64, freq 87):
+    liveins: %v0
+    liveouts:
+  
+    %s0 = LW %sp, 16 :: (load 4 from stack)
+    %s1 = LW %sp, 20 :: (load 4 from stack)
+    %s2 = LW %sp, 24 :: (load 4 from stack)
+    %s3 = LW %sp, 28 :: (load 4 from stack)
+    %s4 = LW %sp, 32 :: (load 4 from stack)
+    %ra = LW %sp, 36 :: (load 4 from stack)
+    PseudoReturn %ra {
+      %sp = ADDiu %sp, 40
+    }
+
+...

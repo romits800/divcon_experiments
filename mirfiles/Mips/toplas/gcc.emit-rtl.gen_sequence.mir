@@ -1,0 +1,622 @@
+--- |
+  ; ModuleID = '/home/romi/didaktoriko/unison/unison-experiments/experiments/mips/selected-functions/size-toplas/gcc.emit-rtl.gen_sequence.ll'
+  target datalayout = "E-m:m-p:32:32-i8:8:32-i16:16:32-i64:64-n32-S64"
+  target triple = "mips--linux-gnu"
+  
+  %struct.function.8203 = type { %struct.eh_status.8204*, %struct.stmt_status.8205*, %struct.expr_status.8206*, %struct.emit_status.8207*, %struct.varasm_status.8208*, i8*, %union.tree_node.8209*, %struct.function.8203*, i32, i32, i32, i32, %struct.rtx_def.8200*, %struct.ix86_args.8210, %struct.rtx_def.8200*, %struct.rtx_def.8200*, i8*, %struct.initial_value_struct.8211*, i32, %union.tree_node.8209*, %struct.rtx_def.8200*, %struct.rtx_def.8200*, %struct.rtx_def.8200*, %struct.rtx_def.8200*, %struct.rtx_def.8200*, %struct.rtx_def.8200*, %struct.rtx_def.8200*, %union.tree_node.8209*, %struct.rtx_def.8200*, %struct.rtx_def.8200*, %struct.rtx_def.8200*, %struct.rtx_def.8200*, i32, %union.tree_node.8209*, %union.tree_node.8209*, %struct.rtx_def.8200*, %struct.rtx_def.8200*, i32, %struct.rtx_def.8200**, %struct.temp_slot.8212*, i32, i32, i32, %struct.var_refs_queue.8213*, i32, i32, i8*, %union.tree_node.8209*, %struct.rtx_def.8200*, i32, i32, %struct.machine_function.8214*, i32, i32, %struct.language_function.8215*, %struct.rtx_def.8200*, i24 }
+  %struct.eh_status.8204 = type opaque
+  %struct.stmt_status.8205 = type opaque
+  %struct.expr_status.8206 = type { i32, i32, i32, %struct.rtx_def.8200*, %struct.rtx_def.8200*, %struct.rtx_def.8200*, %struct.rtx_def.8200* }
+  %struct.emit_status.8207 = type { i32, i32, %struct.rtx_def.8200*, %struct.rtx_def.8200*, %union.tree_node.8209*, %struct.sequence_stack.8216*, i32, i32, i8*, i32, i8*, %union.tree_node.8209**, %struct.rtx_def.8200** }
+  %struct.sequence_stack.8216 = type { %struct.rtx_def.8200*, %struct.rtx_def.8200*, %union.tree_node.8209*, %struct.sequence_stack.8216* }
+  %struct.varasm_status.8208 = type opaque
+  %struct.ix86_args.8210 = type { i32, i32, i32, i32, i32, i32, i32 }
+  %struct.initial_value_struct.8211 = type opaque
+  %struct.temp_slot.8212 = type opaque
+  %struct.var_refs_queue.8213 = type { %struct.rtx_def.8200*, i32, i32, %struct.var_refs_queue.8213* }
+  %union.tree_node.8209 = type { %struct.tree_type.8217, [24 x i8] }
+  %struct.tree_type.8217 = type { %struct.tree_common.8218, %union.tree_node.8209*, %union.tree_node.8209*, %union.tree_node.8209*, %union.tree_node.8209*, i32, i32, i32, %union.tree_node.8209*, %union.tree_node.8209*, %union.anon.2.8219, %union.tree_node.8209*, %union.tree_node.8209*, %union.tree_node.8209*, %union.tree_node.8209*, %union.tree_node.8209*, %union.tree_node.8209*, %union.tree_node.8209*, i32, %struct.lang_type.8220* }
+  %struct.tree_common.8218 = type { %union.tree_node.8209*, %union.tree_node.8209*, i32 }
+  %union.anon.2.8219 = type { i32 }
+  %struct.lang_type.8220 = type opaque
+  %struct.machine_function.8214 = type opaque
+  %struct.language_function.8215 = type opaque
+  %struct.rtx_def.8200 = type { i32, [1 x %union.rtunion_def.8201] }
+  %union.rtunion_def.8201 = type { i32 }
+  %struct.rtvec_def.8230 = type { i32, [1 x %struct.rtx_def.8200*] }
+  
+  @cfun = external global %struct.function.8203*, align 4
+  
+  declare %struct.rtvec_def.8230* @rtvec_alloc(i32 signext) #0
+  
+  ; Function Attrs: nounwind
+  define %struct.rtx_def.8200* @gen_sequence() #1 {
+    %1 = load %struct.function.8203*, %struct.function.8203** @cfun, align 4
+    %2 = getelementptr inbounds %struct.function.8203, %struct.function.8203* %1, i32 0, i32 3
+    %3 = load %struct.emit_status.8207*, %struct.emit_status.8207** %2, align 4
+    %4 = getelementptr inbounds %struct.emit_status.8207, %struct.emit_status.8207* %3, i32 0, i32 2
+    %tem.05 = load %struct.rtx_def.8200*, %struct.rtx_def.8200** %4, align 4
+    %5 = icmp eq %struct.rtx_def.8200* %tem.05, null
+    br i1 %5, label %._crit_edge.thread, label %.lr.ph8
+  
+  .lr.ph8:                                          ; preds = %0, %.lr.ph8
+    %lsr.iv2 = phi i32 [ %lsr.iv.next3, %.lr.ph8 ], [ -1, %0 ]
+    %tem.07 = phi %struct.rtx_def.8200* [ %tem.0, %.lr.ph8 ], [ %tem.05, %0 ]
+    %6 = getelementptr inbounds %struct.rtx_def.8200, %struct.rtx_def.8200* %tem.07, i32 0, i32 1, i32 2
+    %7 = bitcast %union.rtunion_def.8201* %6 to %struct.rtx_def.8200**
+    %tem.0 = load %struct.rtx_def.8200*, %struct.rtx_def.8200** %7, align 4
+    %8 = icmp eq %struct.rtx_def.8200* %tem.0, null
+    %lsr.iv.next3 = add nsw i32 %lsr.iv2, 1
+    %9 = add i32 %lsr.iv.next3, 1
+    br i1 %8, label %._crit_edge, label %.lr.ph8
+  
+  ._crit_edge:                                      ; preds = %.lr.ph8
+    %10 = icmp eq i32 %lsr.iv.next3, 0
+    br i1 %10, label %11, label %._crit_edge.thread
+  
+  ; <label>:11                                      ; preds = %._crit_edge
+    %12 = bitcast %struct.rtx_def.8200* %tem.05 to i32*
+    %13 = load i32, i32* %12, align 4
+    %14 = and i32 %13, -65535
+    %15 = icmp eq i32 %14, 2097152
+    br i1 %15, label %16, label %._crit_edge.thread
+  
+  ; <label>:16                                      ; preds = %11
+    %17 = getelementptr inbounds %struct.rtx_def.8200, %struct.rtx_def.8200* %tem.05, i32 0, i32 1, i32 6
+    %18 = bitcast %union.rtunion_def.8201* %17 to %struct.rtx_def.8200**
+    %19 = load %struct.rtx_def.8200*, %struct.rtx_def.8200** %18, align 4
+    %20 = icmp eq %struct.rtx_def.8200* %19, null
+    br i1 %20, label %21, label %._crit_edge.thread
+  
+  ; <label>:21                                      ; preds = %16
+    %22 = getelementptr inbounds %struct.rtx_def.8200, %struct.rtx_def.8200* %tem.05, i32 0, i32 1, i32 3
+    %23 = bitcast %union.rtunion_def.8201* %22 to %struct.rtx_def.8200**
+    %24 = load %struct.rtx_def.8200*, %struct.rtx_def.8200** %23, align 4
+    br label %.loopexit
+  
+  ._crit_edge.thread:                               ; preds = %16, %11, %._crit_edge, %0
+    %len.0.lcssa9 = phi i32 [ 1, %11 ], [ 1, %16 ], [ %9, %._crit_edge ], [ 0, %0 ]
+    %25 = tail call %struct.rtvec_def.8230* @rtvec_alloc(i32 signext %len.0.lcssa9) #2
+    %26 = tail call %struct.rtx_def.8200* @gen_rtx_fmt_E(i32 signext 24, i32 signext 0, %struct.rtvec_def.8230* %25) #2
+    %27 = load %struct.function.8203*, %struct.function.8203** @cfun, align 4
+    %28 = getelementptr inbounds %struct.function.8203, %struct.function.8203* %27, i32 0, i32 3
+    %29 = load %struct.emit_status.8207*, %struct.emit_status.8207** %28, align 4
+    %30 = getelementptr inbounds %struct.emit_status.8207, %struct.emit_status.8207* %29, i32 0, i32 2
+    %tem.12 = load %struct.rtx_def.8200*, %struct.rtx_def.8200** %30, align 4
+    %31 = icmp eq %struct.rtx_def.8200* %tem.12, null
+    br i1 %31, label %.loopexit, label %.lr.ph
+  
+  .lr.ph:                                           ; preds = %._crit_edge.thread
+    br label %32
+  
+  ; <label>:32                                      ; preds = %32, %.lr.ph
+    %lsr.iv = phi i32 [ %lsr.iv.next, %32 ], [ 4, %.lr.ph ]
+    %tem.14 = phi %struct.rtx_def.8200* [ %tem.12, %.lr.ph ], [ %tem.1, %32 ]
+    %sunkaddr = ptrtoint %struct.rtx_def.8200* %26 to i32
+    %sunkaddr4 = add i32 %sunkaddr, 4
+    %sunkaddr5 = inttoptr i32 %sunkaddr4 to %struct.rtvec_def.8230**
+    %33 = load %struct.rtvec_def.8230*, %struct.rtvec_def.8230** %sunkaddr5, align 4
+    %34 = bitcast %struct.rtvec_def.8230* %33 to i8*
+    %uglygep = getelementptr i8, i8* %34, i32 %lsr.iv
+    %uglygep1 = bitcast i8* %uglygep to %struct.rtx_def.8200**
+    store %struct.rtx_def.8200* %tem.14, %struct.rtx_def.8200** %uglygep1, align 4
+    %35 = getelementptr inbounds %struct.rtx_def.8200, %struct.rtx_def.8200* %tem.14, i32 0, i32 1, i32 2
+    %36 = bitcast %union.rtunion_def.8201* %35 to %struct.rtx_def.8200**
+    %tem.1 = load %struct.rtx_def.8200*, %struct.rtx_def.8200** %36, align 4
+    %37 = icmp eq %struct.rtx_def.8200* %tem.1, null
+    %lsr.iv.next = add i32 %lsr.iv, 4
+    br i1 %37, label %.loopexit, label %32
+  
+  .loopexit:                                        ; preds = %32, %._crit_edge.thread, %21
+    %.0 = phi %struct.rtx_def.8200* [ %24, %21 ], [ %26, %._crit_edge.thread ], [ %26, %32 ]
+    ret %struct.rtx_def.8200* %.0
+  }
+  
+  declare %struct.rtx_def.8200* @gen_rtx_fmt_E(i32 signext, i32 signext, %struct.rtvec_def.8230*) #0
+  
+  attributes #0 = { "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #1 = { nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #2 = { nounwind }
+  
+  !llvm.ident = !{!0}
+  
+  !0 = !{!"clang version 3.8.0 (http://llvm.org/git/clang.git 2d49f0a0ae8366964a93e3b7b26e29679bee7160) (http://llvm.org/git/llvm.git 60bc66b44837125843b58ed3e0fd2e6bb948d839)"}
+
+...
+---
+name:            gen_sequence
+alignment:       2
+exposesReturnsTwice: false
+hasInlineAsm:    false
+isSSA:           true
+tracksRegLiveness: true
+tracksSubRegLiveness: false
+registers:       
+  - { id: 0, class: gpr32 }
+  - { id: 1, class: gpr32 }
+  - { id: 2, class: gpr32 }
+  - { id: 3, class: gpr32 }
+  - { id: 4, class: gpr32 }
+  - { id: 5, class: gpr32 }
+  - { id: 6, class: gpr32 }
+  - { id: 7, class: gpr32 }
+  - { id: 8, class: gpr32 }
+  - { id: 9, class: gpr32 }
+  - { id: 10, class: gpr32 }
+  - { id: 11, class: gpr32 }
+  - { id: 12, class: gpr32 }
+  - { id: 13, class: gpr32 }
+  - { id: 14, class: gpr32 }
+  - { id: 15, class: gpr32 }
+  - { id: 16, class: gpr32 }
+  - { id: 17, class: gpr32 }
+  - { id: 18, class: gpr32 }
+  - { id: 19, class: gpr32 }
+  - { id: 20, class: gpr32 }
+  - { id: 21, class: gpr32 }
+  - { id: 22, class: gpr32 }
+  - { id: 23, class: gpr32 }
+  - { id: 24, class: gpr32 }
+  - { id: 25, class: gpr32 }
+  - { id: 26, class: gpr32 }
+  - { id: 27, class: gpr32 }
+  - { id: 28, class: gpr32 }
+  - { id: 29, class: gpr32 }
+  - { id: 30, class: gpr32 }
+  - { id: 31, class: gpr32 }
+  - { id: 32, class: gpr32 }
+  - { id: 33, class: gpr32 }
+  - { id: 34, class: gpr32 }
+  - { id: 35, class: gpr32 }
+  - { id: 36, class: gpr32 }
+  - { id: 37, class: gpr32 }
+  - { id: 38, class: gpr32 }
+  - { id: 39, class: gpr32 }
+  - { id: 40, class: gpr32 }
+  - { id: 41, class: gpr32 }
+  - { id: 42, class: gpr32 }
+liveins:         
+  - { reg: '%t9' }
+  - { reg: '%v0' }
+frameInfo:       
+  isFrameAddressTaken: false
+  isReturnAddressTaken: false
+  hasStackMap:     false
+  hasPatchPoint:   false
+  stackSize:       0
+  offsetAdjustment: 0
+  maxAlignment:    1
+  adjustsStack:    false
+  hasCalls:        true
+  maxCallFrameSize: 0
+  hasOpaqueSPAdjustment: false
+  hasVAStart:      false
+  hasMustTailInVarArgFunc: false
+body:             |
+  bb.0 (%ir-block.0, freq 182):
+    successors: %bb.6.._crit_edge.thread(37), %bb.10(62)
+    liveins: %t9, %v0
+  
+    %17 = ADDu %v0, %t9
+    %18 = LW %17, target-flags(<unknown>) @cfun, <0x35e80c0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %19 = LW %18, 0, <0x360d9c0> = !{!"unison-memory-partition", i32 1} :: (load 4 from @cfun)
+    %20 = LW killed %19, 12, <0x3618630> = !{!"unison-memory-partition", i32 2} :: (load 4 from %ir.2)
+    %15 = ADDiu %zero, 0
+    %0 = LW killed %20, 8, <0x3618660> = !{!"unison-memory-partition", i32 3} :: (load 4 from %ir.4)
+    BEQ %0, %zero, %bb.6.._crit_edge.thread, implicit-def %at
+  
+  bb.10 (freq 113):
+    successors: %bb.1..lr.ph8(100)
+  
+    %16 = ADDiu %zero, -1
+  
+  bb.1..lr.ph8 (freq 3640):
+    successors: %bb.2.._crit_edge(3), %bb.1..lr.ph8(96)
+  
+    %1 = PHI %16, %bb.10, %4, %bb.1..lr.ph8
+    %2 = PHI %0, %bb.10, %3, %bb.1..lr.ph8
+    %3 = LW %2, 12, <0x35e80c0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.7)
+    %4 = ADDiu %1, 1
+    BNE %3, %zero, %bb.1..lr.ph8, implicit-def dead %at
+    B %bb.2.._crit_edge, implicit-def dead %at
+  
+  bb.2.._crit_edge (freq 113):
+    successors: %bb.3(37), %bb.6.._crit_edge.thread(62)
+  
+    %5 = ADDiu %1, 2
+    BNE %4, %zero, %bb.6.._crit_edge.thread, implicit-def dead %at
+    B %bb.3, implicit-def dead %at
+  
+  bb.3 (%ir-block.11, freq 42):
+    successors: %bb.4(50), %bb.6.._crit_edge.thread(50)
+  
+    %22 = LW %0, 0, <0x35e80c0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.12)
+    %23 = LUi 65535
+    %24 = ORi killed %23, 1
+    %25 = AND killed %22, killed %24
+    %21 = ADDiu %zero, 1
+    %26 = LUi 32
+    BNE killed %25, killed %26, %bb.6.._crit_edge.thread, implicit-def dead %at
+    B %bb.4, implicit-def dead %at
+  
+  bb.4 (%ir-block.16, freq 21):
+    successors: %bb.5(37), %bb.6.._crit_edge.thread(62)
+  
+    %28 = LW %0, 28, <0x35e80c0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.18)
+    BNE killed %28, %zero, %bb.6.._crit_edge.thread, implicit-def dead %at
+    B %bb.5, implicit-def dead %at
+  
+  bb.5 (%ir-block.21, freq 7):
+    successors: %bb.9..loopexit(100)
+  
+    %6 = LW %0, 16, <0x35e80c0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.23)
+    B %bb.9..loopexit, implicit-def dead %at
+  
+  bb.6.._crit_edge.thread (freq 174):
+    successors: %bb.9..loopexit(37), %bb.7..lr.ph(62)
+  
+    %7 = PHI %15, %bb.0, %5, %bb.2.._crit_edge, %21, %bb.3, %21, %bb.4
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %29 = LW %17, target-flags(<unknown>) @rtvec_alloc, <0x35e80c0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @rtvec_alloc)
+    %a0 = COPY %7
+    %gp = COPY %17
+    %t9 = COPY %29
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %gp, implicit-def %sp, implicit-def %v0
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    %30 = COPY %v0
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %31 = LW %17, target-flags(<unknown>) @gen_rtx_fmt_E, <0x360d9c0> = !{!"unison-memory-partition", i32 1} :: (load 4 from call-entry @gen_rtx_fmt_E)
+    %32 = ADDiu %zero, 24
+    %33 = ADDiu %zero, 0
+    %a0 = COPY %32
+    %a1 = COPY %33
+    %a2 = COPY %30
+    %gp = COPY %17
+    %t9 = COPY %31
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %gp, implicit-def %sp, implicit-def %v0
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    %34 = COPY %v0
+    %36 = LW %18, 0, <0x3618630> = !{!"unison-memory-partition", i32 2} :: (load 4 from @cfun)
+    %37 = LW killed %36, 12, <0x3618660> = !{!"unison-memory-partition", i32 3} :: (load 4 from %ir.28)
+    %9 = LW killed %37, 8, <0x3618a60> = !{!"unison-memory-partition", i32 4} :: (load 4 from %ir.30)
+    %8 = COPY %34
+    BEQ %9, %zero, %bb.9..loopexit, implicit-def dead %at
+    B %bb.7..lr.ph, implicit-def dead %at
+  
+  bb.7..lr.ph (freq 108):
+    successors: %bb.8(100)
+  
+    %38 = ADDiu %zero, 4
+  
+  bb.8 (%ir-block.32, freq 3480):
+    successors: %bb.9..loopexit(3), %bb.8(96)
+  
+    %10 = PHI %38, %bb.7..lr.ph, %13, %bb.8
+    %11 = PHI %9, %bb.7..lr.ph, %12, %bb.8
+    %39 = LW %8, 4, <0x35e80c0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.sunkaddr5)
+    %40 = ADDu killed %39, %10
+    SW %11, killed %40, 0, <0x35e80c0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.uglygep1)
+    %12 = LW %11, 12, <0x35e80c0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.36)
+    %13 = ADDiu %10, 4
+    BNE %12, %zero, %bb.8, implicit-def dead %at
+    B %bb.9..loopexit, implicit-def dead %at
+  
+  bb.9..loopexit (freq 182):
+    liveouts: %v0
+  
+    %14 = PHI %6, %bb.5, %8, %bb.6.._crit_edge.thread, %8, %bb.8
+    %v0 = COPY %14
+    RetRA implicit %v0
+
+...
+--- |
+  ; ModuleID = '/home/romi/didaktoriko/unison/unison-experiments/experiments/mips/selected-functions/size-toplas/gcc.emit-rtl.gen_sequence.ll'
+  target datalayout = "E-m:m-p:32:32-i8:8:32-i16:16:32-i64:64-n32-S64"
+  target triple = "mips--linux-gnu"
+  
+  %struct.function.8203 = type { %struct.eh_status.8204*, %struct.stmt_status.8205*, %struct.expr_status.8206*, %struct.emit_status.8207*, %struct.varasm_status.8208*, i8*, %union.tree_node.8209*, %struct.function.8203*, i32, i32, i32, i32, %struct.rtx_def.8200*, %struct.ix86_args.8210, %struct.rtx_def.8200*, %struct.rtx_def.8200*, i8*, %struct.initial_value_struct.8211*, i32, %union.tree_node.8209*, %struct.rtx_def.8200*, %struct.rtx_def.8200*, %struct.rtx_def.8200*, %struct.rtx_def.8200*, %struct.rtx_def.8200*, %struct.rtx_def.8200*, %struct.rtx_def.8200*, %union.tree_node.8209*, %struct.rtx_def.8200*, %struct.rtx_def.8200*, %struct.rtx_def.8200*, %struct.rtx_def.8200*, i32, %union.tree_node.8209*, %union.tree_node.8209*, %struct.rtx_def.8200*, %struct.rtx_def.8200*, i32, %struct.rtx_def.8200**, %struct.temp_slot.8212*, i32, i32, i32, %struct.var_refs_queue.8213*, i32, i32, i8*, %union.tree_node.8209*, %struct.rtx_def.8200*, i32, i32, %struct.machine_function.8214*, i32, i32, %struct.language_function.8215*, %struct.rtx_def.8200*, i24 }
+  %struct.eh_status.8204 = type opaque
+  %struct.stmt_status.8205 = type opaque
+  %struct.expr_status.8206 = type { i32, i32, i32, %struct.rtx_def.8200*, %struct.rtx_def.8200*, %struct.rtx_def.8200*, %struct.rtx_def.8200* }
+  %struct.emit_status.8207 = type { i32, i32, %struct.rtx_def.8200*, %struct.rtx_def.8200*, %union.tree_node.8209*, %struct.sequence_stack.8216*, i32, i32, i8*, i32, i8*, %union.tree_node.8209**, %struct.rtx_def.8200** }
+  %struct.sequence_stack.8216 = type { %struct.rtx_def.8200*, %struct.rtx_def.8200*, %union.tree_node.8209*, %struct.sequence_stack.8216* }
+  %struct.varasm_status.8208 = type opaque
+  %struct.ix86_args.8210 = type { i32, i32, i32, i32, i32, i32, i32 }
+  %struct.initial_value_struct.8211 = type opaque
+  %struct.temp_slot.8212 = type opaque
+  %struct.var_refs_queue.8213 = type { %struct.rtx_def.8200*, i32, i32, %struct.var_refs_queue.8213* }
+  %union.tree_node.8209 = type { %struct.tree_type.8217, [24 x i8] }
+  %struct.tree_type.8217 = type { %struct.tree_common.8218, %union.tree_node.8209*, %union.tree_node.8209*, %union.tree_node.8209*, %union.tree_node.8209*, i32, i32, i32, %union.tree_node.8209*, %union.tree_node.8209*, %union.anon.2.8219, %union.tree_node.8209*, %union.tree_node.8209*, %union.tree_node.8209*, %union.tree_node.8209*, %union.tree_node.8209*, %union.tree_node.8209*, %union.tree_node.8209*, i32, %struct.lang_type.8220* }
+  %struct.tree_common.8218 = type { %union.tree_node.8209*, %union.tree_node.8209*, i32 }
+  %union.anon.2.8219 = type { i32 }
+  %struct.lang_type.8220 = type opaque
+  %struct.machine_function.8214 = type opaque
+  %struct.language_function.8215 = type opaque
+  %struct.rtx_def.8200 = type { i32, [1 x %union.rtunion_def.8201] }
+  %union.rtunion_def.8201 = type { i32 }
+  %struct.rtvec_def.8230 = type { i32, [1 x %struct.rtx_def.8200*] }
+  
+  @cfun = external global %struct.function.8203*, align 4
+  
+  declare %struct.rtvec_def.8230* @rtvec_alloc(i32 signext) #0
+  
+  ; Function Attrs: nounwind
+  define %struct.rtx_def.8200* @gen_sequence() #1 {
+    %1 = load %struct.function.8203*, %struct.function.8203** @cfun, align 4
+    %2 = getelementptr inbounds %struct.function.8203, %struct.function.8203* %1, i32 0, i32 3
+    %3 = load %struct.emit_status.8207*, %struct.emit_status.8207** %2, align 4
+    %4 = getelementptr inbounds %struct.emit_status.8207, %struct.emit_status.8207* %3, i32 0, i32 2
+    %tem.05 = load %struct.rtx_def.8200*, %struct.rtx_def.8200** %4, align 4
+    %5 = icmp eq %struct.rtx_def.8200* %tem.05, null
+    br i1 %5, label %._crit_edge.thread, label %.lr.ph8
+  
+  .lr.ph8:                                          ; preds = %0, %.lr.ph8
+    %lsr.iv2 = phi i32 [ %lsr.iv.next3, %.lr.ph8 ], [ -1, %0 ]
+    %tem.07 = phi %struct.rtx_def.8200* [ %tem.0, %.lr.ph8 ], [ %tem.05, %0 ]
+    %6 = getelementptr inbounds %struct.rtx_def.8200, %struct.rtx_def.8200* %tem.07, i32 0, i32 1, i32 2
+    %7 = bitcast %union.rtunion_def.8201* %6 to %struct.rtx_def.8200**
+    %tem.0 = load %struct.rtx_def.8200*, %struct.rtx_def.8200** %7, align 4
+    %8 = icmp eq %struct.rtx_def.8200* %tem.0, null
+    %lsr.iv.next3 = add nsw i32 %lsr.iv2, 1
+    %9 = add i32 %lsr.iv.next3, 1
+    br i1 %8, label %._crit_edge, label %.lr.ph8
+  
+  ._crit_edge:                                      ; preds = %.lr.ph8
+    %10 = icmp eq i32 %lsr.iv.next3, 0
+    br i1 %10, label %11, label %._crit_edge.thread
+  
+  ; <label>:11                                      ; preds = %._crit_edge
+    %12 = bitcast %struct.rtx_def.8200* %tem.05 to i32*
+    %13 = load i32, i32* %12, align 4
+    %14 = and i32 %13, -65535
+    %15 = icmp eq i32 %14, 2097152
+    br i1 %15, label %16, label %._crit_edge.thread
+  
+  ; <label>:16                                      ; preds = %11
+    %17 = getelementptr inbounds %struct.rtx_def.8200, %struct.rtx_def.8200* %tem.05, i32 0, i32 1, i32 6
+    %18 = bitcast %union.rtunion_def.8201* %17 to %struct.rtx_def.8200**
+    %19 = load %struct.rtx_def.8200*, %struct.rtx_def.8200** %18, align 4
+    %20 = icmp eq %struct.rtx_def.8200* %19, null
+    br i1 %20, label %21, label %._crit_edge.thread
+  
+  ; <label>:21                                      ; preds = %16
+    %22 = getelementptr inbounds %struct.rtx_def.8200, %struct.rtx_def.8200* %tem.05, i32 0, i32 1, i32 3
+    %23 = bitcast %union.rtunion_def.8201* %22 to %struct.rtx_def.8200**
+    %24 = load %struct.rtx_def.8200*, %struct.rtx_def.8200** %23, align 4
+    br label %.loopexit
+  
+  ._crit_edge.thread:                               ; preds = %16, %11, %._crit_edge, %0
+    %len.0.lcssa9 = phi i32 [ 1, %11 ], [ 1, %16 ], [ %9, %._crit_edge ], [ 0, %0 ]
+    %25 = tail call %struct.rtvec_def.8230* @rtvec_alloc(i32 signext %len.0.lcssa9) #2
+    %26 = tail call %struct.rtx_def.8200* @gen_rtx_fmt_E(i32 signext 24, i32 signext 0, %struct.rtvec_def.8230* %25) #2
+    %27 = load %struct.function.8203*, %struct.function.8203** @cfun, align 4
+    %28 = getelementptr inbounds %struct.function.8203, %struct.function.8203* %27, i32 0, i32 3
+    %29 = load %struct.emit_status.8207*, %struct.emit_status.8207** %28, align 4
+    %30 = getelementptr inbounds %struct.emit_status.8207, %struct.emit_status.8207* %29, i32 0, i32 2
+    %tem.12 = load %struct.rtx_def.8200*, %struct.rtx_def.8200** %30, align 4
+    %31 = icmp eq %struct.rtx_def.8200* %tem.12, null
+    br i1 %31, label %.loopexit, label %.lr.ph
+  
+  .lr.ph:                                           ; preds = %._crit_edge.thread
+    br label %32
+  
+  ; <label>:32                                      ; preds = %32, %.lr.ph
+    %lsr.iv = phi i32 [ %lsr.iv.next, %32 ], [ 4, %.lr.ph ]
+    %tem.14 = phi %struct.rtx_def.8200* [ %tem.12, %.lr.ph ], [ %tem.1, %32 ]
+    %sunkaddr = ptrtoint %struct.rtx_def.8200* %26 to i32
+    %sunkaddr4 = add i32 %sunkaddr, 4
+    %sunkaddr5 = inttoptr i32 %sunkaddr4 to %struct.rtvec_def.8230**
+    %33 = load %struct.rtvec_def.8230*, %struct.rtvec_def.8230** %sunkaddr5, align 4
+    %34 = bitcast %struct.rtvec_def.8230* %33 to i8*
+    %uglygep = getelementptr i8, i8* %34, i32 %lsr.iv
+    %uglygep1 = bitcast i8* %uglygep to %struct.rtx_def.8200**
+    store %struct.rtx_def.8200* %tem.14, %struct.rtx_def.8200** %uglygep1, align 4
+    %35 = getelementptr inbounds %struct.rtx_def.8200, %struct.rtx_def.8200* %tem.14, i32 0, i32 1, i32 2
+    %36 = bitcast %union.rtunion_def.8201* %35 to %struct.rtx_def.8200**
+    %tem.1 = load %struct.rtx_def.8200*, %struct.rtx_def.8200** %36, align 4
+    %37 = icmp eq %struct.rtx_def.8200* %tem.1, null
+    %lsr.iv.next = add i32 %lsr.iv, 4
+    br i1 %37, label %.loopexit, label %32
+  
+  .loopexit:                                        ; preds = %32, %._crit_edge.thread, %21
+    %.0 = phi %struct.rtx_def.8200* [ %24, %21 ], [ %26, %._crit_edge.thread ], [ %26, %32 ]
+    ret %struct.rtx_def.8200* %.0
+  }
+  
+  declare %struct.rtx_def.8200* @gen_rtx_fmt_E(i32 signext, i32 signext, %struct.rtvec_def.8230*) #0
+  
+  attributes #0 = { "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #1 = { nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #2 = { nounwind }
+  
+  !llvm.ident = !{!0}
+  
+  !0 = !{!"clang version 3.8.0 (http://llvm.org/git/clang.git 2d49f0a0ae8366964a93e3b7b26e29679bee7160) (http://llvm.org/git/llvm.git 60bc66b44837125843b58ed3e0fd2e6bb948d839)"}
+
+...
+---
+name:            gen_sequence
+alignment:       2
+exposesReturnsTwice: false
+hasInlineAsm:    false
+isSSA:           true
+tracksRegLiveness: true
+tracksSubRegLiveness: false
+registers:       
+  - { id: 0, class: gpr32 }
+  - { id: 1, class: gpr32 }
+  - { id: 2, class: gpr32 }
+  - { id: 3, class: gpr32 }
+  - { id: 4, class: gpr32 }
+  - { id: 5, class: gpr32 }
+  - { id: 6, class: gpr32 }
+  - { id: 7, class: gpr32 }
+  - { id: 8, class: gpr32 }
+  - { id: 9, class: gpr32 }
+  - { id: 10, class: gpr32 }
+  - { id: 11, class: gpr32 }
+  - { id: 12, class: gpr32 }
+  - { id: 13, class: gpr32 }
+  - { id: 14, class: gpr32 }
+  - { id: 15, class: gpr32 }
+  - { id: 16, class: gpr32 }
+  - { id: 17, class: gpr32 }
+  - { id: 18, class: gpr32 }
+  - { id: 19, class: gpr32 }
+  - { id: 20, class: gpr32 }
+  - { id: 21, class: gpr32 }
+  - { id: 22, class: gpr32 }
+  - { id: 23, class: gpr32 }
+  - { id: 24, class: gpr32 }
+  - { id: 25, class: gpr32 }
+  - { id: 26, class: gpr32 }
+  - { id: 27, class: gpr32 }
+  - { id: 28, class: gpr32 }
+  - { id: 29, class: gpr32 }
+  - { id: 30, class: gpr32 }
+  - { id: 31, class: gpr32 }
+  - { id: 32, class: gpr32 }
+  - { id: 33, class: gpr32 }
+  - { id: 34, class: gpr32 }
+  - { id: 35, class: gpr32 }
+  - { id: 36, class: gpr32 }
+  - { id: 37, class: gpr32 }
+  - { id: 38, class: gpr32 }
+  - { id: 39, class: gpr32 }
+  - { id: 40, class: gpr32 }
+  - { id: 41, class: gpr32 }
+  - { id: 42, class: gpr32 }
+liveins:         
+  - { reg: '%t9' }
+  - { reg: '%v0' }
+frameInfo:       
+  isFrameAddressTaken: false
+  isReturnAddressTaken: false
+  hasStackMap:     false
+  hasPatchPoint:   false
+  stackSize:       0
+  offsetAdjustment: 0
+  maxAlignment:    1
+  adjustsStack:    false
+  hasCalls:        true
+  maxCallFrameSize: 0
+  hasOpaqueSPAdjustment: false
+  hasVAStart:      false
+  hasMustTailInVarArgFunc: false
+body:             |
+  bb.0 (%ir-block.0, freq 182):
+    successors: %bb.6.._crit_edge.thread(37), %bb.10(62)
+    liveins: %t9, %v0
+  
+    %17 = ADDu %v0, %t9
+    %18 = LW %17, target-flags(<unknown>) @cfun, <0x35e80c0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %19 = LW %18, 0, <0x360d9c0> = !{!"unison-memory-partition", i32 1} :: (load 4 from @cfun)
+    %20 = LW killed %19, 12, <0x3618630> = !{!"unison-memory-partition", i32 2} :: (load 4 from %ir.2)
+    %15 = ADDiu %zero, 0
+    %0 = LW killed %20, 8, <0x3618660> = !{!"unison-memory-partition", i32 3} :: (load 4 from %ir.4)
+    BEQ %0, %zero, %bb.6.._crit_edge.thread, implicit-def %at
+  
+  bb.10 (freq 113):
+    successors: %bb.1..lr.ph8(100)
+  
+    %16 = ADDiu %zero, -1
+  
+  bb.1..lr.ph8 (freq 3640):
+    successors: %bb.2.._crit_edge(3), %bb.1..lr.ph8(96)
+  
+    %1 = PHI %16, %bb.10, %4, %bb.1..lr.ph8
+    %2 = PHI %0, %bb.10, %3, %bb.1..lr.ph8
+    %3 = LW %2, 12, <0x35e80c0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.7)
+    %4 = ADDiu %1, 1
+    BNE %3, %zero, %bb.1..lr.ph8, implicit-def dead %at
+    B %bb.2.._crit_edge, implicit-def dead %at
+  
+  bb.2.._crit_edge (freq 113):
+    successors: %bb.3(37), %bb.6.._crit_edge.thread(62)
+  
+    %5 = ADDiu %1, 2
+    BNE %4, %zero, %bb.6.._crit_edge.thread, implicit-def dead %at
+    B %bb.3, implicit-def dead %at
+  
+  bb.3 (%ir-block.11, freq 42):
+    successors: %bb.4(50), %bb.6.._crit_edge.thread(50)
+  
+    %22 = LW %0, 0, <0x35e80c0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.12)
+    %23 = LUi 65535
+    %24 = ORi killed %23, 1
+    %25 = AND killed %22, killed %24
+    %21 = ADDiu %zero, 1
+    %26 = LUi 32
+    BNE killed %25, killed %26, %bb.6.._crit_edge.thread, implicit-def dead %at
+    B %bb.4, implicit-def dead %at
+  
+  bb.4 (%ir-block.16, freq 21):
+    successors: %bb.5(37), %bb.6.._crit_edge.thread(62)
+  
+    %28 = LW %0, 28, <0x35e80c0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.18)
+    BNE killed %28, %zero, %bb.6.._crit_edge.thread, implicit-def dead %at
+    B %bb.5, implicit-def dead %at
+  
+  bb.5 (%ir-block.21, freq 7):
+    successors: %bb.9..loopexit(100)
+  
+    %6 = LW %0, 16, <0x35e80c0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.23)
+    B %bb.9..loopexit, implicit-def dead %at
+  
+  bb.6.._crit_edge.thread (freq 174):
+    successors: %bb.9..loopexit(37), %bb.7..lr.ph(62)
+  
+    %7 = PHI %15, %bb.0, %5, %bb.2.._crit_edge, %21, %bb.3, %21, %bb.4
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %29 = LW %17, target-flags(<unknown>) @rtvec_alloc, <0x35e80c0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @rtvec_alloc)
+    %a0 = COPY %7
+    %gp = COPY %17
+    %t9 = COPY %29
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %gp, implicit-def %sp, implicit-def %v0
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    %30 = COPY %v0
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %31 = LW %17, target-flags(<unknown>) @gen_rtx_fmt_E, <0x360d9c0> = !{!"unison-memory-partition", i32 1} :: (load 4 from call-entry @gen_rtx_fmt_E)
+    %32 = ADDiu %zero, 24
+    %33 = ADDiu %zero, 0
+    %a0 = COPY %32
+    %a1 = COPY %33
+    %a2 = COPY %30
+    %gp = COPY %17
+    %t9 = COPY %31
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %gp, implicit-def %sp, implicit-def %v0
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    %34 = COPY %v0
+    %36 = LW %18, 0, <0x3618630> = !{!"unison-memory-partition", i32 2} :: (load 4 from @cfun)
+    %37 = LW killed %36, 12, <0x3618660> = !{!"unison-memory-partition", i32 3} :: (load 4 from %ir.28)
+    %9 = LW killed %37, 8, <0x3618a60> = !{!"unison-memory-partition", i32 4} :: (load 4 from %ir.30)
+    %8 = COPY %34
+    BEQ %9, %zero, %bb.9..loopexit, implicit-def dead %at
+    B %bb.7..lr.ph, implicit-def dead %at
+  
+  bb.7..lr.ph (freq 108):
+    successors: %bb.8(100)
+  
+    %38 = ADDiu %zero, 4
+  
+  bb.8 (%ir-block.32, freq 3480):
+    successors: %bb.9..loopexit(3), %bb.8(96)
+  
+    %10 = PHI %38, %bb.7..lr.ph, %13, %bb.8
+    %11 = PHI %9, %bb.7..lr.ph, %12, %bb.8
+    %39 = LW %8, 4, <0x35e80c0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.sunkaddr5)
+    %40 = ADDu killed %39, %10
+    SW %11, killed %40, 0, <0x35e80c0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.uglygep1)
+    %12 = LW %11, 12, <0x35e80c0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.36)
+    %13 = ADDiu %10, 4
+    BNE %12, %zero, %bb.8, implicit-def dead %at
+    B %bb.9..loopexit, implicit-def dead %at
+  
+  bb.9..loopexit (freq 182):
+    liveouts: %v0
+  
+    %14 = PHI %6, %bb.5, %8, %bb.6.._crit_edge.thread, %8, %bb.8
+    %v0 = COPY %14
+    RetRA implicit %v0
+
+...

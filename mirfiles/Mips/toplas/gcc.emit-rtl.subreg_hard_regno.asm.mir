@@ -1,0 +1,287 @@
+--- |
+  ; ModuleID = '/home/romi/didaktoriko/unison/unison-experiments/experiments/mips/selected-functions/size-toplas/gcc.emit-rtl.subreg_hard_regno.ll'
+  target datalayout = "E-m:m-p:32:32-i8:8:32-i16:16:32-i64:64-n32-S64"
+  target triple = "mips--linux-gnu"
+  
+  %struct.rtx_def.1435 = type { i32, [1 x %union.rtunion_def.1436] }
+  %union.rtunion_def.1436 = type { i32 }
+  
+  @mode_size = external constant [59 x i8], align 1
+  @.str = external hidden unnamed_addr constant [11 x i8], align 1
+  @__FUNCTION__.subreg_hard_regno = external hidden unnamed_addr constant [18 x i8], align 1
+  
+  ; Function Attrs: noreturn
+  declare void @fancy_abort(i8*, i32 signext, i8*) #0
+  
+  ; Function Attrs: nounwind
+  define i32 @subreg_hard_regno(%struct.rtx_def.1435* %x, i32 signext %check_mode) #1 {
+    %1 = bitcast %struct.rtx_def.1435* %x to i32*
+    %2 = load i32, i32* %1, align 4
+    %3 = lshr i32 %2, 8
+    %4 = and i32 %3, 255
+    %5 = getelementptr inbounds %struct.rtx_def.1435, %struct.rtx_def.1435* %x, i32 0, i32 1
+    %6 = bitcast [1 x %union.rtunion_def.1436]* %5 to %struct.rtx_def.1435**
+    %7 = load %struct.rtx_def.1435*, %struct.rtx_def.1435** %6, align 4
+    %.mask = and i32 %2, -65536
+    %8 = icmp eq i32 %.mask, 4128768
+    br i1 %8, label %9, label %13
+  
+  ; <label>:9                                       ; preds = %0
+    %10 = bitcast %struct.rtx_def.1435* %7 to i32*
+    %11 = load i32, i32* %10, align 4
+    %.mask1 = and i32 %11, -65536
+    %12 = icmp eq i32 %.mask1, 3997696
+    br i1 %12, label %14, label %13
+  
+  ; <label>:13                                      ; preds = %9, %0
+    tail call void @fancy_abort(i8* nonnull getelementptr inbounds ([11 x i8], [11 x i8]* @.str, i32 0, i32 0), i32 signext 796, i8* nonnull getelementptr inbounds ([18 x i8], [18 x i8]* @__FUNCTION__.subreg_hard_regno, i32 0, i32 0)) #3
+    unreachable
+  
+  ; <label>:14                                      ; preds = %9
+    %15 = getelementptr inbounds %struct.rtx_def.1435, %struct.rtx_def.1435* %7, i32 0, i32 1, i32 0, i32 0
+    %16 = load i32, i32* %15, align 4
+    %17 = icmp ugt i32 %16, 52
+    br i1 %17, label %18, label %19
+  
+  ; <label>:18                                      ; preds = %14
+    tail call void @fancy_abort(i8* nonnull getelementptr inbounds ([11 x i8], [11 x i8]* @.str, i32 0, i32 0), i32 signext 799, i8* nonnull getelementptr inbounds ([18 x i8], [18 x i8]* @__FUNCTION__.subreg_hard_regno, i32 0, i32 0)) #3
+    unreachable
+  
+  ; <label>:19                                      ; preds = %14
+    %20 = icmp eq i32 %check_mode, 0
+    br i1 %20, label %27, label %21
+  
+  ; <label>:21                                      ; preds = %19
+    %22 = lshr i32 %11, 8
+    %23 = and i32 %22, 255
+    %24 = tail call i32 @ix86_hard_regno_mode_ok(i32 signext %16, i32 signext %23) #4
+    %25 = icmp eq i32 %24, 0
+    br i1 %25, label %26, label %27
+  
+  ; <label>:26                                      ; preds = %21
+    tail call void @fancy_abort(i8* nonnull getelementptr inbounds ([11 x i8], [11 x i8]* @.str, i32 0, i32 0), i32 signext 801, i8* nonnull getelementptr inbounds ([18 x i8], [18 x i8]* @__FUNCTION__.subreg_hard_regno, i32 0, i32 0)) #3
+    unreachable
+  
+  ; <label>:27                                      ; preds = %21, %19
+    %28 = getelementptr inbounds %struct.rtx_def.1435, %struct.rtx_def.1435* %x, i32 0, i32 1, i32 1, i32 0
+    %29 = load i32, i32* %28, align 4
+    %30 = getelementptr inbounds [59 x i8], [59 x i8]* @mode_size, i32 0, i32 %4
+    %31 = load i8, i8* %30, align 1
+    %32 = zext i8 %31 to i32
+    %33 = urem i32 %29, %32
+    %34 = icmp eq i32 %33, 0
+    br i1 %34, label %36, label %35
+  
+  ; <label>:35                                      ; preds = %27
+    tail call void @fancy_abort(i8* nonnull getelementptr inbounds ([11 x i8], [11 x i8]* @.str, i32 0, i32 0), i32 signext 806, i8* nonnull getelementptr inbounds ([18 x i8], [18 x i8]* @__FUNCTION__.subreg_hard_regno, i32 0, i32 0)) #3
+    unreachable
+  
+  ; <label>:36                                      ; preds = %27
+    %37 = tail call i32 @subreg_regno(%struct.rtx_def.1435* nonnull %x) #4
+    ret i32 %37
+  }
+  
+  declare i32 @ix86_hard_regno_mode_ok(i32 signext, i32 signext) #2
+  
+  declare i32 @subreg_regno(%struct.rtx_def.1435*) #2
+  
+  attributes #0 = { noreturn "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #1 = { nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #2 = { "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #3 = { noreturn nounwind }
+  attributes #4 = { nounwind }
+  
+  !llvm.ident = !{!0}
+  
+  !0 = !{!"clang version 3.8.0 (http://llvm.org/git/clang.git 2d49f0a0ae8366964a93e3b7b26e29679bee7160) (http://llvm.org/git/llvm.git 60bc66b44837125843b58ed3e0fd2e6bb948d839)"}
+
+...
+---
+name:            subreg_hard_regno
+alignment:       2
+exposesReturnsTwice: false
+hasInlineAsm:    false
+isSSA:           false
+tracksRegLiveness: false
+tracksSubRegLiveness: false
+liveins:         
+  - { reg: '%a0' }
+  - { reg: '%a1' }
+  - { reg: '%t9' }
+  - { reg: '%v0' }
+calleeSavedRegisters: [ '%fp', '%ra', '%d10', '%d11', '%d12', '%d13', '%d14', 
+                        '%d15', '%f20', '%f21', '%f22', '%f23', '%f24', 
+                        '%f25', '%f26', '%f27', '%f28', '%f29', '%f30', 
+                        '%f31', '%s0', '%s1', '%s2', '%s3', '%s4', '%s5', 
+                        '%s6', '%s7' ]
+frameInfo:       
+  isFrameAddressTaken: false
+  isReturnAddressTaken: false
+  hasStackMap:     false
+  hasPatchPoint:   false
+  stackSize:       32
+  offsetAdjustment: 0
+  maxAlignment:    4
+  adjustsStack:    true
+  hasCalls:        true
+  maxCallFrameSize: 16
+  hasOpaqueSPAdjustment: false
+  hasVAStart:      false
+  hasMustTailInVarArgFunc: false
+stack:           
+  - { id: 0, type: spill-slot, offset: -4, size: 4, alignment: 4, callee-saved-register: '%ra' }
+  - { id: 1, type: spill-slot, offset: -8, size: 4, alignment: 4, callee-saved-register: '%s2' }
+  - { id: 2, type: spill-slot, offset: -12, size: 4, alignment: 4, callee-saved-register: '%s1' }
+  - { id: 3, type: spill-slot, offset: -16, size: 4, alignment: 4, callee-saved-register: '%s0' }
+body:             |
+  bb.0 (%ir-block.0, freq 13421811):
+    successors: %bb.1(99), %bb.7(0)
+    liveins: %a0, %a1, %t9, %ra, %s2, %s1, %s0
+  
+    %v0 = LUi target-flags(<unknown>) $_gp_disp
+    %v0 = ADDiu %v0, target-flags(<unknown>) $_gp_disp
+    %sp = ADDiu %sp, -32
+    CFI_INSTRUCTION .cfi_def_cfa_offset 32
+    SW killed %ra, %sp, 28 :: (store 4 into stack)
+    SW killed %s2, %sp, 24 :: (store 4 into stack)
+    SW killed %s1, %sp, 20 :: (store 4 into stack)
+    SW killed %s0, %sp, 16 :: (store 4 into stack)
+    CFI_INSTRUCTION .cfi_offset %ra_64, -4
+    CFI_INSTRUCTION .cfi_offset %s2_64, -8
+    CFI_INSTRUCTION .cfi_offset %s1_64, -12
+    CFI_INSTRUCTION .cfi_offset %s0_64, -16
+    %s0 = ADDu %v0, %t9
+    %s1 = OR %a0, %zero
+    %s2 = LW %s1, 0 :: (load 4 from %ir.1)
+    %v1 = LUi 65535
+    %at = AND %s2, %v1
+    %v0 = LUi 63
+    BNE %at, %v0, %bb.7, implicit-def %at {
+      NOP
+    }
+  
+  bb.1 (%ir-block.9, freq 13421798):
+    successors: %bb.2(99), %bb.7(0)
+    liveins: %a1, %s0, %s1, %s2, %v1
+  
+    %a0 = LW %s1, 4 :: (load 4 from %ir.6)
+    %v0 = LW %a0, 0 :: (load 4 from %ir.10)
+    %at = AND %v0, killed %v1
+    %v1 = LUi 61
+    BNE %at, %v1, %bb.7, implicit-def %at {
+      NOP
+    }
+  
+  bb.2 (%ir-block.14, freq 13421785):
+    successors: %bb.8(0), %bb.3(99)
+    liveins: %a0, %a1, %s0, %s1, %s2, %v0
+  
+    %a0 = LW killed %a0, 4 :: (load 4 from %ir.15)
+    %at = SLTiu %a0, 53
+    BEQ %at, %zero, %bb.8, implicit-def %at {
+      NOP
+    }
+  
+  bb.3 (%ir-block.19, freq 13421772):
+    successors: %bb.5(37), %bb.4(62)
+    liveins: %a0, %a1, %s0, %s1, %s2, %v0
+  
+    BEQ %a1, %zero, %bb.5, implicit-def %at {
+      NOP
+    }
+  
+  bb.4 (%ir-block.21, freq 8388607):
+    successors: %bb.10(0), %bb.5(99)
+    liveins: %a0, %s0, %s1, %s2, %v0
+  
+    %a1 = EXT killed %v0, 8, 8
+    %t9 = LW %s0, target-flags(<unknown>) @ix86_hard_regno_mode_ok :: (load 4 from call-entry @ix86_hard_regno_mode_ok)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit killed %gp, implicit-def %sp, implicit-def %v0 {
+      %gp = OR %s0, %zero
+    }
+    BEQ %v0, %zero, %bb.10, implicit-def %at {
+      NOP
+    }
+  
+  bb.5 (%ir-block.27, freq 13421764):
+    successors: %bb.6(99), %bb.9(0)
+    liveins: %s0, %s1, %s2
+  
+    %at = EXT killed %s2, 8, 8
+    %v0 = LW %s0, target-flags(<unknown>) @mode_size :: (load 4 from got)
+    %at = ADDu killed %v0, killed %at
+    %at = LBu killed %at, 0 :: (load 1 from %ir.30)
+    %v0 = LW %s1, 8 :: (load 4 from %ir.28)
+    %ac0 = PseudoUDIV killed %v0, %at
+    TEQ killed %at, %zero, 7
+    %at = MFHI implicit %ac0
+    BNE %at, %zero, %bb.9, implicit-def %at {
+      NOP
+    }
+  
+  bb.6 (%ir-block.36, freq 13421752):
+    liveins: %s0, %s1
+    liveouts:
+  
+    %t9 = LW %s0, target-flags(<unknown>) @subreg_regno :: (load 4 from call-entry @subreg_regno)
+    %a0 = OR killed %s1, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit killed %gp, implicit-def %sp, implicit-def %v0 {
+      %gp = OR killed %s0, %zero
+    }
+    %s0 = LW %sp, 16 :: (load 4 from stack)
+    %s1 = LW %sp, 20 :: (load 4 from stack)
+    %s2 = LW %sp, 24 :: (load 4 from stack)
+    %ra = LW %sp, 28 :: (load 4 from stack)
+    PseudoReturn %ra {
+      %sp = ADDiu %sp, 32
+    }
+  
+  bb.7 (%ir-block.13, freq 25):
+    liveins: %s0
+    exit
+  
+    %a0 = LW %s0, target-flags(<unknown>) @.str :: (load 4 from got)
+    %a2 = LW %s0, target-flags(<unknown>) @__FUNCTION__.subreg_hard_regno :: (load 4 from got)
+    %t9 = LW %s0, target-flags(<unknown>) @fancy_abort :: (load 4 from call-entry @fancy_abort)
+    %a1 = ADDiu %zero, 796
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit killed %gp, implicit-def %sp {
+      %gp = OR killed %s0, %zero
+    }
+  
+  bb.8 (%ir-block.18, freq 12):
+    liveins: %s0
+    exit
+  
+    %a0 = LW %s0, target-flags(<unknown>) @.str :: (load 4 from got)
+    %a2 = LW %s0, target-flags(<unknown>) @__FUNCTION__.subreg_hard_regno :: (load 4 from got)
+    %t9 = LW %s0, target-flags(<unknown>) @fancy_abort :: (load 4 from call-entry @fancy_abort)
+    %a1 = ADDiu %zero, 799
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit killed %gp, implicit-def %sp {
+      %gp = OR killed %s0, %zero
+    }
+  
+  bb.9 (%ir-block.35, freq 12):
+    liveins: %s0
+    exit
+  
+    %a0 = LW %s0, target-flags(<unknown>) @.str :: (load 4 from got)
+    %a2 = LW %s0, target-flags(<unknown>) @__FUNCTION__.subreg_hard_regno :: (load 4 from got)
+    %t9 = LW %s0, target-flags(<unknown>) @fancy_abort :: (load 4 from call-entry @fancy_abort)
+    %a1 = ADDiu %zero, 806
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit killed %gp, implicit-def %sp {
+      %gp = OR killed %s0, %zero
+    }
+  
+  bb.10 (%ir-block.26, freq 8):
+    liveins: %s0
+    exit
+  
+    %a0 = LW %s0, target-flags(<unknown>) @.str :: (load 4 from got)
+    %a2 = LW %s0, target-flags(<unknown>) @__FUNCTION__.subreg_hard_regno :: (load 4 from got)
+    %t9 = LW %s0, target-flags(<unknown>) @fancy_abort :: (load 4 from call-entry @fancy_abort)
+    %a1 = ADDiu %zero, 801
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit killed %gp, implicit-def %sp {
+      %gp = OR killed %s0, %zero
+    }
+
+...

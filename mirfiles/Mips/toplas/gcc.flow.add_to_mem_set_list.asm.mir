@@ -1,0 +1,289 @@
+--- |
+  ; ModuleID = '/home/romi/didaktoriko/unison/unison-experiments/experiments/mips/selected-functions/size-toplas/gcc.flow.add_to_mem_set_list.ll'
+  target datalayout = "E-m:m-p:32:32-i8:8:32-i16:16:32-i64:64-n32-S64"
+  target triple = "mips--linux-gnu"
+  
+  %struct.propagate_block_info.2193 = type { %struct.basic_block_def.2180*, %struct.bitmap_head_def.2182*, %struct.bitmap_head_def.2182*, %struct.rtx_def.2167**, %struct.rtx_def.2167*, %struct.bitmap_head_def.2182*, %struct.bitmap_head_def.2182*, i32, i32, i32 }
+  %struct.basic_block_def.2180 = type { %struct.rtx_def.2167*, %struct.rtx_def.2167*, %union.tree_node.2166*, %union.tree_node.2166*, %struct.edge_def.2181*, %struct.edge_def.2181*, %struct.bitmap_head_def.2182*, %struct.bitmap_head_def.2182*, %struct.bitmap_head_def.2182*, %struct.bitmap_head_def.2182*, i8*, i32, i32, i32, i32, i32 }
+  %union.tree_node.2166 = type { %struct.tree_type.2175, [24 x i8] }
+  %struct.tree_type.2175 = type { %struct.tree_common.2176, %union.tree_node.2166*, %union.tree_node.2166*, %union.tree_node.2166*, %union.tree_node.2166*, i32, i32, i32, %union.tree_node.2166*, %union.tree_node.2166*, %union.anon.2.2177, %union.tree_node.2166*, %union.tree_node.2166*, %union.tree_node.2166*, %union.tree_node.2166*, %union.tree_node.2166*, %union.tree_node.2166*, %union.tree_node.2166*, i32, %struct.lang_type.2178* }
+  %struct.tree_common.2176 = type { %union.tree_node.2166*, %union.tree_node.2166*, i32 }
+  %union.anon.2.2177 = type { i32 }
+  %struct.lang_type.2178 = type opaque
+  %struct.edge_def.2181 = type { %struct.edge_def.2181*, %struct.edge_def.2181*, %struct.basic_block_def.2180*, %struct.basic_block_def.2180*, %struct.rtx_def.2167*, i8*, i32, i32, i32 }
+  %struct.bitmap_head_def.2182 = type { %struct.bitmap_element_def.2183*, %struct.bitmap_element_def.2183*, i32 }
+  %struct.bitmap_element_def.2183 = type { %struct.bitmap_element_def.2183*, %struct.bitmap_element_def.2183*, i32, [2 x i32] }
+  %struct.rtx_def.2167 = type { i32, [1 x %union.rtunion_def.2179] }
+  %union.rtunion_def.2179 = type { i32 }
+  
+  @mode_size = external constant [59 x i8], align 1
+  
+  ; Function Attrs: nounwind
+  define hidden fastcc void @add_to_mem_set_list(%struct.propagate_block_info.2193* nocapture %pbi, %struct.rtx_def.2167* %mem) unnamed_addr #0 {
+    %1 = bitcast %struct.rtx_def.2167* %mem to i32*
+    %2 = load i32, i32* %1, align 4
+    %3 = and i32 %2, 65280
+    %4 = icmp eq i32 %3, 13056
+    br i1 %4, label %.critedge2, label %5
+  
+  ; <label>:5                                       ; preds = %0
+    %6 = getelementptr inbounds %struct.propagate_block_info.2193, %struct.propagate_block_info.2193* %pbi, i32 0, i32 4
+    %i.04 = load %struct.rtx_def.2167*, %struct.rtx_def.2167** %6, align 4
+    %7 = icmp eq %struct.rtx_def.2167* %i.04, null
+    br i1 %7, label %._crit_edge, label %.lr.ph
+  
+  .lr.ph:                                           ; preds = %5
+    br label %8
+  
+  ; <label>:8                                       ; preds = %32, %.lr.ph
+    %i.05 = phi %struct.rtx_def.2167* [ %i.04, %.lr.ph ], [ %i.0, %32 ]
+    %9 = getelementptr inbounds %struct.rtx_def.2167, %struct.rtx_def.2167* %i.05, i32 0, i32 1
+    %10 = bitcast [1 x %union.rtunion_def.2179]* %9 to %struct.rtx_def.2167**
+    %11 = load %struct.rtx_def.2167*, %struct.rtx_def.2167** %10, align 4
+    %sunkaddr = ptrtoint %struct.rtx_def.2167* %mem to i32
+    %sunkaddr1 = add i32 %sunkaddr, 4
+    %sunkaddr2 = inttoptr i32 %sunkaddr1 to %struct.rtx_def.2167**
+    %12 = load %struct.rtx_def.2167*, %struct.rtx_def.2167** %sunkaddr2, align 4
+    %13 = getelementptr inbounds %struct.rtx_def.2167, %struct.rtx_def.2167* %11, i32 0, i32 1, i32 0
+    %14 = bitcast %union.rtunion_def.2179* %13 to %struct.rtx_def.2167**
+    %15 = load %struct.rtx_def.2167*, %struct.rtx_def.2167** %14, align 4
+    %16 = tail call i32 @rtx_equal_p(%struct.rtx_def.2167* %12, %struct.rtx_def.2167* %15) #2
+    %17 = icmp eq i32 %16, 0
+    br i1 %17, label %32, label %18
+  
+  ; <label>:18                                      ; preds = %8
+    %19 = bitcast %struct.rtx_def.2167* %mem to i32*
+    %20 = load i32, i32* %19, align 4
+    %21 = lshr i32 %20, 8
+    %22 = and i32 %21, 255
+    %23 = getelementptr inbounds [59 x i8], [59 x i8]* @mode_size, i32 0, i32 %22
+    %24 = load i8, i8* %23, align 1
+    %25 = bitcast %struct.rtx_def.2167* %11 to i32*
+    %26 = load i32, i32* %25, align 4
+    %27 = lshr i32 %26, 8
+    %28 = and i32 %27, 255
+    %29 = getelementptr inbounds [59 x i8], [59 x i8]* @mode_size, i32 0, i32 %28
+    %30 = load i8, i8* %29, align 1
+    %31 = icmp ugt i8 %24, %30
+    br i1 %31, label %.critedge, label %.critedge2
+  
+  .critedge:                                        ; preds = %18
+    %sunkaddr3 = ptrtoint %struct.rtx_def.2167* %i.05 to i32
+    %sunkaddr4 = add i32 %sunkaddr3, 4
+    %sunkaddr5 = inttoptr i32 %sunkaddr4 to %struct.rtx_def.2167**
+    store %struct.rtx_def.2167* %mem, %struct.rtx_def.2167** %sunkaddr5, align 4
+    br label %.critedge2
+  
+  ; <label>:32                                      ; preds = %8
+    %33 = getelementptr inbounds %struct.rtx_def.2167, %struct.rtx_def.2167* %i.05, i32 0, i32 1, i32 1
+    %34 = bitcast %union.rtunion_def.2179* %33 to %struct.rtx_def.2167**
+    %i.0 = load %struct.rtx_def.2167*, %struct.rtx_def.2167** %34, align 4
+    %35 = icmp eq %struct.rtx_def.2167* %i.0, null
+    br i1 %35, label %._crit_edge, label %8
+  
+  ._crit_edge:                                      ; preds = %32, %5
+    %36 = getelementptr inbounds %struct.propagate_block_info.2193, %struct.propagate_block_info.2193* %pbi, i32 0, i32 7
+    %37 = load i32, i32* %36, align 4
+    %38 = icmp slt i32 %37, 100
+    br i1 %38, label %39, label %.critedge2
+  
+  ; <label>:39                                      ; preds = %._crit_edge
+    %sunkaddr6 = ptrtoint %struct.propagate_block_info.2193* %pbi to i32
+    %sunkaddr7 = add i32 %sunkaddr6, 16
+    %sunkaddr8 = inttoptr i32 %sunkaddr7 to %struct.rtx_def.2167**
+    %40 = load %struct.rtx_def.2167*, %struct.rtx_def.2167** %sunkaddr8, align 4
+    %41 = tail call %struct.rtx_def.2167* @alloc_EXPR_LIST(i32 signext 0, %struct.rtx_def.2167* nonnull %mem, %struct.rtx_def.2167* %40) #2
+    store %struct.rtx_def.2167* %41, %struct.rtx_def.2167** %sunkaddr8, align 4
+    %sunkaddr9 = ptrtoint %struct.propagate_block_info.2193* %pbi to i32
+    %sunkaddr10 = add i32 %sunkaddr9, 28
+    %sunkaddr11 = inttoptr i32 %sunkaddr10 to i32*
+    %42 = load i32, i32* %sunkaddr11, align 4
+    %43 = add nsw i32 %42, 1
+    store i32 %43, i32* %sunkaddr11, align 4
+    br label %.critedge2
+  
+  .critedge2:                                       ; preds = %39, %._crit_edge, %.critedge, %18, %0
+    ret void
+  }
+  
+  declare i32 @rtx_equal_p(%struct.rtx_def.2167*, %struct.rtx_def.2167*) #1
+  
+  declare %struct.rtx_def.2167* @alloc_EXPR_LIST(i32 signext, %struct.rtx_def.2167*, %struct.rtx_def.2167*) #1
+  
+  attributes #0 = { nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #1 = { "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #2 = { nounwind }
+  
+  !llvm.ident = !{!0}
+  
+  !0 = !{!"clang version 3.8.0 (http://llvm.org/git/clang.git 2d49f0a0ae8366964a93e3b7b26e29679bee7160) (http://llvm.org/git/llvm.git 60bc66b44837125843b58ed3e0fd2e6bb948d839)"}
+
+...
+---
+name:            add_to_mem_set_list
+alignment:       2
+exposesReturnsTwice: false
+hasInlineAsm:    false
+isSSA:           false
+tracksRegLiveness: false
+tracksSubRegLiveness: false
+liveins:         
+  - { reg: '%a0' }
+  - { reg: '%a1' }
+  - { reg: '%t9' }
+  - { reg: '%v0' }
+calleeSavedRegisters: [ '%fp', '%ra', '%d10', '%d11', '%d12', '%d13', '%d14', 
+                        '%d15', '%f20', '%f21', '%f22', '%f23', '%f24', 
+                        '%f25', '%f26', '%f27', '%f28', '%f29', '%f30', 
+                        '%f31', '%s0', '%s1', '%s2', '%s3', '%s4', '%s5', 
+                        '%s6', '%s7' ]
+frameInfo:       
+  isFrameAddressTaken: false
+  isReturnAddressTaken: false
+  hasStackMap:     false
+  hasPatchPoint:   false
+  stackSize:       40
+  offsetAdjustment: 0
+  maxAlignment:    4
+  adjustsStack:    true
+  hasCalls:        true
+  maxCallFrameSize: 16
+  hasOpaqueSPAdjustment: false
+  hasVAStart:      false
+  hasMustTailInVarArgFunc: false
+stack:           
+  - { id: 0, type: spill-slot, offset: -4, size: 4, alignment: 4, callee-saved-register: '%ra' }
+  - { id: 1, type: spill-slot, offset: -8, size: 4, alignment: 4, callee-saved-register: '%s4' }
+  - { id: 2, type: spill-slot, offset: -12, size: 4, alignment: 4, callee-saved-register: '%s3' }
+  - { id: 3, type: spill-slot, offset: -16, size: 4, alignment: 4, callee-saved-register: '%s2' }
+  - { id: 4, type: spill-slot, offset: -20, size: 4, alignment: 4, callee-saved-register: '%s1' }
+  - { id: 5, type: spill-slot, offset: -24, size: 4, alignment: 4, callee-saved-register: '%s0' }
+body:             |
+  bb.0 (%ir-block.0, freq 100):
+    successors: %bb.8..critedge2(50), %bb.1(50)
+    liveins: %a0, %a1, %t9, %ra, %s4, %s3, %s2, %s1, %s0
+  
+    %v0 = LUi target-flags(<unknown>) $_gp_disp
+    %v0 = ADDiu %v0, target-flags(<unknown>) $_gp_disp
+    %sp = ADDiu %sp, -40
+    CFI_INSTRUCTION .cfi_def_cfa_offset 40
+    SW killed %ra, %sp, 36 :: (store 4 into stack)
+    SW killed %s4, %sp, 32 :: (store 4 into stack)
+    SW killed %s3, %sp, 28 :: (store 4 into stack)
+    SW killed %s2, %sp, 24 :: (store 4 into stack)
+    SW killed %s1, %sp, 20 :: (store 4 into stack)
+    SW killed %s0, %sp, 16 :: (store 4 into stack)
+    CFI_INSTRUCTION .cfi_offset %ra_64, -4
+    CFI_INSTRUCTION .cfi_offset %s4_64, -8
+    CFI_INSTRUCTION .cfi_offset %s3_64, -12
+    CFI_INSTRUCTION .cfi_offset %s2_64, -16
+    CFI_INSTRUCTION .cfi_offset %s1_64, -20
+    CFI_INSTRUCTION .cfi_offset %s0_64, -24
+    %s2 = ADDu %v0, %t9
+    %s0 = OR %a1, %zero
+    %at = LW %s0, 0 :: (load 4 from %ir.1)
+    %at = ANDi killed %at, 65280
+    %v0 = ADDiu %zero, 13056
+    BEQ %at, %v0, %bb.8..critedge2, implicit-def %at {
+      %s1 = OR %a0, %zero
+    }
+  
+  bb.1 (%ir-block.5, freq 50):
+    successors: %bb.4.._crit_edge(37), %bb.2(62)
+    liveins: %s0, %s1, %s2
+  
+    %s3 = LW %s1, 16 :: (load 4 from %ir.6)
+    BEQ %s3, %zero, %bb.4.._crit_edge, implicit-def %at {
+      NOP
+    }
+  
+  bb.2 (%ir-block.8, freq 512):
+    successors: %bb.3(96), %bb.6(3)
+    liveins: %s0, %s1, %s2, %s3
+  
+    %a0 = LW %s0, 4 :: (load 4 from %ir.sunkaddr2)
+    %s4 = LW %s3, 4 :: (load 4 from %ir.10)
+    %a1 = LW %s4, 4 :: (load 4 from %ir.14)
+    %t9 = LW %s2, target-flags(<unknown>) @rtx_equal_p :: (load 4 from call-entry @rtx_equal_p)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit killed %gp, implicit-def %sp, implicit-def %v0 {
+      %gp = OR %s2, %zero
+    }
+    BNE %v0, %zero, %bb.6, implicit-def %at {
+      NOP
+    }
+  
+  bb.3 (%ir-block.32, freq 496):
+    successors: %bb.4.._crit_edge(3), %bb.2(96)
+    liveins: %s0, %s1, %s2, %s3
+  
+    %s3 = LW killed %s3, 8 :: (load 4 from %ir.34)
+    BNE %s3, %zero, %bb.2, implicit-def %at {
+      NOP
+    }
+  
+  bb.4.._crit_edge (freq 34):
+    successors: %bb.5(50), %bb.8..critedge2(50)
+    liveins: %s0, %s1, %s2
+  
+    %at = LW %s1, 28 :: (load 4 from %ir.36)
+    %at = SLTi killed %at, 100
+    BEQ %at, %zero, %bb.8..critedge2, implicit-def %at {
+      NOP
+    }
+  
+  bb.5 (%ir-block.39, freq 17):
+    successors: %bb.8..critedge2(100)
+    liveins: %s0, %s1, %s2
+  
+    %a2 = LW %s1, 16 :: (load 4 from %ir.sunkaddr8)
+    %t9 = LW %s2, target-flags(<unknown>) @alloc_EXPR_LIST :: (load 4 from call-entry @alloc_EXPR_LIST)
+    %a0 = ADDiu %zero, 0
+    %a1 = OR killed %s0, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit killed %gp, implicit-def %sp, implicit-def %v0 {
+      %gp = OR killed %s2, %zero
+    }
+    SW killed %v0, %s1, 16 :: (store 4 into %ir.sunkaddr8)
+    %at = LW %s1, 28 :: (load 4 from %ir.sunkaddr11)
+    %at = ADDiu killed %at, 1
+    B %bb.8..critedge2, implicit-def %at {
+      SW killed %at, killed %s1, 28 :: (store 4 into %ir.sunkaddr11)
+    }
+  
+  bb.6 (%ir-block.18, freq 16):
+    successors: %bb.7..critedge(50), %bb.8..critedge2(50)
+    liveins: %s0, %s2, %s3, %s4
+  
+    %at = LW %s0, 0 :: (load 4 from %ir.19)
+    %at = EXT killed %at, 8, 8
+    %v0 = LW killed %s2, target-flags(<unknown>) @mode_size :: (load 4 from got)
+    %at = ADDu %v0, killed %at
+    %at = LBu killed %at, 0 :: (load 1 from %ir.23)
+    %v1 = LW killed %s4, 0 :: (load 4 from %ir.25)
+    %v1 = EXT killed %v1, 8, 8
+    %v0 = ADDu killed %v0, killed %v1
+    %v0 = LBu killed %v0, 0 :: (load 1 from %ir.29)
+    %at = SLTu killed %v0, killed %at
+    BEQ %at, %zero, %bb.8..critedge2, implicit-def %at {
+      NOP
+    }
+  
+  bb.7..critedge (freq 8):
+    successors: %bb.8..critedge2(100)
+    liveins: %s0, %s3
+  
+    SW killed %s0, killed %s3, 4 :: (store 4 into %ir.sunkaddr5)
+  
+  bb.8..critedge2 (freq 100):
+    liveouts:
+  
+    %s0 = LW %sp, 16 :: (load 4 from stack)
+    %s1 = LW %sp, 20 :: (load 4 from stack)
+    %s2 = LW %sp, 24 :: (load 4 from stack)
+    %s3 = LW %sp, 28 :: (load 4 from stack)
+    %s4 = LW %sp, 32 :: (load 4 from stack)
+    %ra = LW %sp, 36 :: (load 4 from stack)
+    PseudoReturn %ra {
+      %sp = ADDiu %sp, 40
+    }
+
+...

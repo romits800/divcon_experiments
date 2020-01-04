@@ -1,0 +1,158 @@
+--- |
+  ; ModuleID = '/home/romi/didaktoriko/unison/unison-experiments/experiments/mips/selected-functions/size-toplas/gcc.attribs.handle_noinline_attribute.ll'
+  target datalayout = "E-m:m-p:32:32-i8:8:32-i16:16:32-i64:64-n32-S64"
+  target triple = "mips--linux-gnu"
+  
+  %union.tree_node.442 = type { %struct.tree_type.443, [24 x i8] }
+  %struct.tree_type.443 = type { %struct.tree_common.444, %union.tree_node.442*, %union.tree_node.442*, %union.tree_node.442*, %union.tree_node.442*, i32, i32, i32, %union.tree_node.442*, %union.tree_node.442*, %union.anon.2.445, %union.tree_node.442*, %union.tree_node.442*, %union.tree_node.442*, %union.tree_node.442*, %union.tree_node.442*, %union.tree_node.442*, %union.tree_node.442*, i32, %struct.lang_type.446* }
+  %struct.tree_common.444 = type { %union.tree_node.442*, %union.tree_node.442*, i32 }
+  %union.anon.2.445 = type { i32 }
+  %struct.lang_type.446 = type opaque
+  
+  @.str.4 = external hidden unnamed_addr constant [23 x i8], align 1
+  
+  declare void @warning(i8*, ...) #0
+  
+  ; Function Attrs: nounwind
+  define hidden noalias %union.tree_node.442* @handle_noinline_attribute(%union.tree_node.442** nocapture readonly %node, %union.tree_node.442* nocapture readonly %name, %union.tree_node.442* nocapture readnone %args, i32 signext %flags, i8* nocapture %no_add_attrs) #1 {
+    %1 = load %union.tree_node.442*, %union.tree_node.442** %node, align 4
+    %2 = getelementptr inbounds %union.tree_node.442, %union.tree_node.442* %1, i32 0, i32 0, i32 0, i32 2
+    %3 = load i32, i32* %2, align 4
+    %.mask = and i32 %3, -16777216
+    %4 = icmp eq i32 %.mask, 503316480
+    br i1 %4, label %5, label %10
+  
+  ; <label>:5                                       ; preds = %0
+    %6 = getelementptr inbounds %union.tree_node.442, %union.tree_node.442* %1, i32 0, i32 0, i32 5
+    %7 = bitcast i32* %6 to i64*
+    %8 = load i64, i64* %7, align 4
+    %9 = or i64 %8, 134217728
+    store i64 %9, i64* %7, align 4
+    br label %15
+  
+  ; <label>:10                                      ; preds = %0
+    %11 = getelementptr inbounds %union.tree_node.442, %union.tree_node.442* %name, i32 0, i32 0, i32 1
+    %12 = getelementptr inbounds %union.tree_node.442*, %union.tree_node.442** %11, i32 1
+    %13 = bitcast %union.tree_node.442** %12 to i8**
+    %14 = load i8*, i8** %13, align 4
+    tail call void (i8*, ...) @warning(i8* nonnull getelementptr inbounds ([23 x i8], [23 x i8]* @.str.4, i32 0, i32 0), i8* %14) #2
+    store i8 1, i8* %no_add_attrs, align 1
+    br label %15
+  
+  ; <label>:15                                      ; preds = %10, %5
+    ret %union.tree_node.442* null
+  }
+  
+  attributes #0 = { "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #1 = { nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #2 = { nounwind }
+  
+  !llvm.ident = !{!0}
+  
+  !0 = !{!"clang version 3.8.0 (http://llvm.org/git/clang.git 2d49f0a0ae8366964a93e3b7b26e29679bee7160) (http://llvm.org/git/llvm.git 60bc66b44837125843b58ed3e0fd2e6bb948d839)"}
+
+...
+---
+name:            handle_noinline_attribute
+alignment:       2
+exposesReturnsTwice: false
+hasInlineAsm:    false
+isSSA:           true
+tracksRegLiveness: true
+tracksSubRegLiveness: false
+registers:       
+  - { id: 0, class: gpr32 }
+  - { id: 1, class: gpr32 }
+  - { id: 2, class: gpr32 }
+  - { id: 3, class: gpr32 }
+  - { id: 4, class: gpr32 }
+  - { id: 5, class: gpr32 }
+  - { id: 6, class: gpr32 }
+  - { id: 7, class: gpr32 }
+  - { id: 8, class: gpr32 }
+  - { id: 9, class: gpr32 }
+  - { id: 10, class: gpr32 }
+  - { id: 11, class: gpr32 }
+  - { id: 12, class: gpr32 }
+  - { id: 13, class: gpr32 }
+  - { id: 14, class: gpr32 }
+  - { id: 15, class: gpr32 }
+  - { id: 16, class: gpr32 }
+  - { id: 17, class: gpr32 }
+  - { id: 18, class: gpr32 }
+  - { id: 19, class: gpr32 }
+  - { id: 20, class: gpr32 }
+  - { id: 21, class: gpr32 }
+liveins:         
+  - { reg: '%a0', virtual-reg: '%1' }
+  - { reg: '%a1', virtual-reg: '%2' }
+  - { reg: '%t9' }
+  - { reg: '%v0' }
+frameInfo:       
+  isFrameAddressTaken: false
+  isReturnAddressTaken: false
+  hasStackMap:     false
+  hasPatchPoint:   false
+  stackSize:       0
+  offsetAdjustment: 0
+  maxAlignment:    4
+  adjustsStack:    false
+  hasCalls:        true
+  maxCallFrameSize: 0
+  hasOpaqueSPAdjustment: false
+  hasVAStart:      false
+  hasMustTailInVarArgFunc: false
+fixedStack:      
+  - { id: 0, offset: 16, size: 4, alignment: 8, isImmutable: true, isAliased: false }
+body:             |
+  bb.0 (%ir-block.0, freq 16):
+    successors: %bb.1(50), %bb.2(50)
+    liveins: %a0, %a1, %t9, %v0
+  
+    %10 = ADDu %v0, %t9
+    %2 = COPY %a1
+    %1 = COPY %a0
+    %0 = LW %1, 0, <0x427b980> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.node)
+    %6 = LW %0, 8, <0x427d600> = !{!"unison-memory-partition", i32 1} :: (load 4 from %ir.2)
+    %7 = LUi 7680
+    %8 = LUi 65280
+    %9 = AND killed %6, killed %8
+    BNE killed %9, killed %7, %bb.2, implicit-def dead %at
+    B %bb.1, implicit-def dead %at
+  
+  bb.1 (%ir-block.5, freq 8):
+    successors: %bb.3(100)
+  
+    %15 = LW %0, 32, <0x427b980> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.7 + 4)
+    %16 = LW %0, 28, <0x427b980> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.7)
+    SW killed %16, %0, 28, <0x427b980> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.7)
+    %17 = LUi 2048
+    %18 = OR killed %15, killed %17
+    SW killed %18, %0, 32, <0x427b980> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.7 + 4)
+    B %bb.3, implicit-def dead %at
+  
+  bb.2 (%ir-block.10, freq 8):
+    successors: %bb.3(100)
+  
+    %5 = LW %fixed-stack.0, 0, <0x427b980> = !{!"unison-memory-partition", i32 0} :: (load 4 from stack, align 8)
+    %11 = LW %2, 16, <0x427b980> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.13)
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %12 = LW %10, target-flags(<unknown>) @.str.4, <0x427b980> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %13 = LW %10, target-flags(<unknown>) @warning, <0x427b980> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @warning)
+    %a0 = COPY %12
+    %a1 = COPY %11
+    %gp = COPY %10
+    %t9 = COPY %13
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %gp, implicit-def %sp
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    %14 = ADDiu %zero, 1
+    SB killed %14, %5, 0, <0x427b980> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.no_add_attrs)
+  
+  bb.3 (%ir-block.15, freq 16):
+    liveouts: %v0
+  
+    %19 = ADDiu %zero, 0
+    %v0 = COPY %19
+    RetRA implicit %v0
+
+...

@@ -1,0 +1,152 @@
+--- |
+  ; ModuleID = '/home/romi/didaktoriko/unison/unison-experiments/experiments/mips/selected-functions/size-toplas/gcc.attribs.handle_noinline_attribute.ll'
+  target datalayout = "E-m:m-p:32:32-i8:8:32-i16:16:32-i64:64-n32-S64"
+  target triple = "mips--linux-gnu"
+  
+  %union.tree_node.442 = type { %struct.tree_type.443, [24 x i8] }
+  %struct.tree_type.443 = type { %struct.tree_common.444, %union.tree_node.442*, %union.tree_node.442*, %union.tree_node.442*, %union.tree_node.442*, i32, i32, i32, %union.tree_node.442*, %union.tree_node.442*, %union.anon.2.445, %union.tree_node.442*, %union.tree_node.442*, %union.tree_node.442*, %union.tree_node.442*, %union.tree_node.442*, %union.tree_node.442*, %union.tree_node.442*, i32, %struct.lang_type.446* }
+  %struct.tree_common.444 = type { %union.tree_node.442*, %union.tree_node.442*, i32 }
+  %union.anon.2.445 = type { i32 }
+  %struct.lang_type.446 = type opaque
+  
+  @.str.4 = external hidden unnamed_addr constant [23 x i8], align 1
+  
+  declare void @warning(i8*, ...) #0
+  
+  ; Function Attrs: nounwind
+  define hidden noalias %union.tree_node.442* @handle_noinline_attribute(%union.tree_node.442** nocapture readonly %node, %union.tree_node.442* nocapture readonly %name, %union.tree_node.442* nocapture readnone %args, i32 signext %flags, i8* nocapture %no_add_attrs) #1 {
+    %1 = load %union.tree_node.442*, %union.tree_node.442** %node, align 4
+    %2 = getelementptr inbounds %union.tree_node.442, %union.tree_node.442* %1, i32 0, i32 0, i32 0, i32 2
+    %3 = load i32, i32* %2, align 4
+    %.mask = and i32 %3, -16777216
+    %4 = icmp eq i32 %.mask, 503316480
+    br i1 %4, label %5, label %10
+  
+  ; <label>:5                                       ; preds = %0
+    %6 = getelementptr inbounds %union.tree_node.442, %union.tree_node.442* %1, i32 0, i32 0, i32 5
+    %7 = bitcast i32* %6 to i64*
+    %8 = load i64, i64* %7, align 4
+    %9 = or i64 %8, 134217728
+    store i64 %9, i64* %7, align 4
+    br label %15
+  
+  ; <label>:10                                      ; preds = %0
+    %11 = getelementptr inbounds %union.tree_node.442, %union.tree_node.442* %name, i32 0, i32 0, i32 1
+    %12 = getelementptr inbounds %union.tree_node.442*, %union.tree_node.442** %11, i32 1
+    %13 = bitcast %union.tree_node.442** %12 to i8**
+    %14 = load i8*, i8** %13, align 4
+    tail call void (i8*, ...) @warning(i8* nonnull getelementptr inbounds ([23 x i8], [23 x i8]* @.str.4, i32 0, i32 0), i8* %14) #2
+    store i8 1, i8* %no_add_attrs, align 1
+    br label %15
+  
+  ; <label>:15                                      ; preds = %10, %5
+    ret %union.tree_node.442* null
+  }
+  
+  attributes #0 = { "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #1 = { nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #2 = { nounwind }
+  
+  !llvm.ident = !{!0}
+  
+  !0 = !{!"clang version 3.8.0 (http://llvm.org/git/clang.git 2d49f0a0ae8366964a93e3b7b26e29679bee7160) (http://llvm.org/git/llvm.git 60bc66b44837125843b58ed3e0fd2e6bb948d839)"}
+
+...
+---
+name:            handle_noinline_attribute
+alignment:       2
+exposesReturnsTwice: false
+hasInlineAsm:    false
+isSSA:           false
+tracksRegLiveness: false
+tracksSubRegLiveness: false
+liveins:         
+  - { reg: '%a0' }
+  - { reg: '%a1' }
+  - { reg: '%t9' }
+  - { reg: '%v0' }
+calleeSavedRegisters: [ '%fp', '%ra', '%d10', '%d11', '%d12', '%d13', '%d14', 
+                        '%d15', '%f20', '%f21', '%f22', '%f23', '%f24', 
+                        '%f25', '%f26', '%f27', '%f28', '%f29', '%f30', 
+                        '%f31', '%s0', '%s1', '%s2', '%s3', '%s4', '%s5', 
+                        '%s6', '%s7' ]
+frameInfo:       
+  isFrameAddressTaken: false
+  isReturnAddressTaken: false
+  hasStackMap:     false
+  hasPatchPoint:   false
+  stackSize:       24
+  offsetAdjustment: 0
+  maxAlignment:    4
+  adjustsStack:    true
+  hasCalls:        true
+  maxCallFrameSize: 16
+  hasOpaqueSPAdjustment: false
+  hasVAStart:      false
+  hasMustTailInVarArgFunc: false
+fixedStack:      
+  - { id: 0, offset: 16, size: 4, alignment: 8, isImmutable: true, isAliased: false }
+stack:           
+  - { id: 0, type: spill-slot, offset: -4, size: 4, alignment: 4, callee-saved-register: '%ra' }
+  - { id: 1, type: spill-slot, offset: -8, size: 4, alignment: 4, callee-saved-register: '%s0' }
+body:             |
+  bb.0 (%ir-block.0, freq 16):
+    successors: %bb.1(50), %bb.2(50)
+    liveins: %a0, %a1, %t9, %ra, %s0
+  
+    %v0 = LUi target-flags(<unknown>) $_gp_disp
+    %v0 = ADDiu %v0, target-flags(<unknown>) $_gp_disp
+    %sp = ADDiu %sp, -24
+    CFI_INSTRUCTION .cfi_def_cfa_offset 24
+    SW killed %ra, %sp, 20 :: (store 4 into stack)
+    SW killed %s0, %sp, 16 :: (store 4 into stack)
+    CFI_INSTRUCTION .cfi_offset %ra_64, -4
+    CFI_INSTRUCTION .cfi_offset %s0_64, -8
+    %gp = ADDu %v0, %t9
+    %v0 = LW killed %a0, 0 :: (load 4 from %ir.node)
+    %at = LW %v0, 8 :: (load 4 from %ir.2)
+    %v1 = LUi 7680
+    %a0 = LUi 65280
+    %at = AND killed %at, killed %a0
+    BNE %at, %v1, %bb.2, implicit-def %at {
+      NOP
+    }
+  
+  bb.1 (%ir-block.5, freq 8):
+    successors: %bb.3(100)
+    liveins: %v0
+  
+    %at = LW %v0, 32 :: (load 4 from %ir.7 + 4)
+    %v1 = LW %v0, 28 :: (load 4 from %ir.7)
+    SW killed %v1, %v0, 28 :: (store 4 into %ir.7)
+    %v1 = LUi 2048
+    %at = OR killed %at, killed %v1
+    B %bb.3, implicit-def dead %at {
+      SW killed %at, killed %v0, 32 :: (store 4 into %ir.7 + 4)
+    }
+  
+  bb.2 (%ir-block.10, freq 8):
+    successors: %bb.3(100)
+    liveins: %gp, %a1
+  
+    %s0 = LW %sp, 40 :: (load 4 from stack, align 8)
+    %a1 = LW killed %a1, 16 :: (load 4 from %ir.13)
+    %a0 = LW %gp, target-flags(<unknown>) @.str.4 :: (load 4 from got)
+    %t9 = LW %gp, target-flags(<unknown>) @warning :: (load 4 from call-entry @warning)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %gp, implicit-def %sp {
+      NOP
+    }
+    %at = ADDiu %zero, 1
+    SB killed %at, killed %s0, 0 :: (store 1 into %ir.no_add_attrs)
+  
+  bb.3 (%ir-block.15, freq 16):
+    liveouts:
+  
+    %v0 = ADDiu %zero, 0
+    %s0 = LW %sp, 16 :: (load 4 from stack)
+    %ra = LW %sp, 20 :: (load 4 from stack)
+    PseudoReturn %ra {
+      %sp = ADDiu %sp, 24
+    }
+
+...

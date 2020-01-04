@@ -1,0 +1,308 @@
+--- |
+  ; ModuleID = '/home/romi/didaktoriko/unison/unison-experiments/experiments/mips/selected-functions/size-toplas/gcc.cpplib.lex_macro_node.ll'
+  target datalayout = "E-m:m-p:32:32-i8:8:32-i16:16:32-i64:64-n32-S64"
+  target triple = "mips--linux-gnu"
+  
+  %struct.cpp_token.2349 = type { i32, i16, i8, i8, %union.anon.0.2367 }
+  %union.anon.0.2367 = type { %struct.cpp_string.2368 }
+  %struct.cpp_string.2368 = type { i32, i8* }
+  %struct.cpp_reader.2341 = type { %struct.cpp_buffer.2342*, %struct.lexer_state.2343, %struct.line_maps.2344, %struct.line_map.2345*, i32, i32, %struct._cpp_buff.2346*, %struct._cpp_buff.2346*, %struct._cpp_buff.2346*, %struct.cpp_context.2347, %struct.cpp_context.2347*, %struct.directive.2340*, %struct.cpp_hashnode.2348*, %struct.cpp_hashnode.2348*, i8, %struct.cpp_token.2349*, %struct.tokenrun.2350, %struct.tokenrun.2350*, i32, i32, i32, i32, i32, i8*, i32, %struct.splay_tree_s.2351*, i32, %struct.cpp_token.2349, %struct.cpp_token.2349, %struct.cpp_token.2349, %struct.cpp_token.2349, %struct.deps.2352*, %struct.obstack.2353, %struct.obstack.2353, %struct.pragma_entry.2354*, %struct.cpp_callbacks.2355, %struct.ht.2356*, %struct.cpp_options.2357, %struct.spec_nodes.2358, i8, i8 }
+  %struct.cpp_buffer.2342 = type { i8*, i8*, i8*, i8*, %struct.cpp_buffer.2342*, i8*, %struct.include_file.2359*, %struct.if_stack.2360*, i32, i8, i8*, i8, i8, i8, i8, %struct.search_path.2361 }
+  %struct.include_file.2359 = type opaque
+  %struct.if_stack.2360 = type { %struct.if_stack.2360*, i32, %struct.cpp_hashnode.2348*, i8, i8, i32 }
+  %struct.search_path.2361 = type { %struct.search_path.2361*, i8*, i32, i32, i64, i32, %struct.file_name_map.2362* }
+  %struct.file_name_map.2362 = type opaque
+  %struct.lexer_state.2343 = type { i8, i8, i8, i8, i8, i8, i8, i8, i8 }
+  %struct.line_maps.2344 = type { %struct.line_map.2345*, i32, i32, i32, i32, i8 }
+  %struct.line_map.2345 = type { i8*, i32, i32, i32, i8, i8 }
+  %struct._cpp_buff.2346 = type { %struct._cpp_buff.2346*, i8*, i8*, i8* }
+  %struct.cpp_context.2347 = type { %struct.cpp_context.2347*, %struct.cpp_context.2347*, %union.utoken.2363, %union.utoken.2363, %struct._cpp_buff.2346*, %struct.cpp_hashnode.2348*, i8 }
+  %union.utoken.2363 = type { %struct.cpp_token.2349* }
+  %struct.directive.2340 = type { void (%struct.cpp_reader.2341*)*, i8*, i16, i8, i8 }
+  %struct.cpp_hashnode.2348 = type { %struct.ht_identifier.2364, i16, i8, i8, i8, i8, %union.anon.2365 }
+  %struct.ht_identifier.2364 = type { i32, i8* }
+  %union.anon.2365 = type { %struct.cpp_macro.2366* }
+  %struct.cpp_macro.2366 = type opaque
+  %struct.tokenrun.2350 = type { %struct.tokenrun.2350*, %struct.tokenrun.2350*, %struct.cpp_token.2349*, %struct.cpp_token.2349* }
+  %struct.splay_tree_s.2351 = type opaque
+  %struct.deps.2352 = type opaque
+  %struct.obstack.2353 = type { i32, %struct._obstack_chunk.2369*, i8*, i8*, i8*, i32, i32, %struct._obstack_chunk.2369* (i8*, i32)*, void (i8*, %struct._obstack_chunk.2369*)*, i8*, i8 }
+  %struct._obstack_chunk.2369 = type { i8*, %struct._obstack_chunk.2369*, [4 x i8] }
+  %struct.pragma_entry.2354 = type { %struct.pragma_entry.2354*, %struct.cpp_hashnode.2348*, i32, %union.anon.1.2370 }
+  %union.anon.1.2370 = type { void (%struct.cpp_reader.2341*)* }
+  %struct.cpp_callbacks.2355 = type { void (%struct.cpp_reader.2341*, %struct.cpp_token.2349*, i32)*, void (%struct.cpp_reader.2341*, %struct.line_map.2345*)*, void (%struct.cpp_reader.2341*, i32, i8*, %struct.cpp_token.2349*)*, void (%struct.cpp_reader.2341*, i32, %struct.cpp_hashnode.2348*)*, void (%struct.cpp_reader.2341*, i32, %struct.cpp_hashnode.2348*)*, void (%struct.cpp_reader.2341*, i32, %struct.cpp_string.2368*)*, void (%struct.cpp_reader.2341*, i32)* }
+  %struct.ht.2356 = type { %struct.obstack.2353, %struct.ht_identifier.2364**, %struct.ht_identifier.2364* (%struct.ht.2356*)*, i32, i32, %struct.cpp_reader.2341*, i32, i32 }
+  %struct.cpp_options.2357 = type { i8*, i8*, i32, %struct.cpp_pending.2371*, i8*, %struct.search_path.2361*, %struct.search_path.2361*, %struct.file_name_map_list.2372*, i8*, i32, i8*, i32, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8 }
+  %struct.cpp_pending.2371 = type opaque
+  %struct.file_name_map_list.2372 = type opaque
+  %struct.spec_nodes.2358 = type { %struct.cpp_hashnode.2348*, %struct.cpp_hashnode.2348*, %struct.cpp_hashnode.2348*, %struct.cpp_hashnode.2348*, %struct.cpp_hashnode.2348* }
+  
+  @.str.31 = external hidden unnamed_addr constant [37 x i8], align 1
+  @.str.32 = external hidden unnamed_addr constant [64 x i8], align 1
+  @.str.33 = external hidden unnamed_addr constant [32 x i8], align 1
+  @.str.34 = external hidden unnamed_addr constant [36 x i8], align 1
+  
+  declare %struct.cpp_token.2349* @_cpp_lex_token(%struct.cpp_reader.2341*) #0
+  
+  declare void @cpp_error(%struct.cpp_reader.2341*, i8*, ...) #0
+  
+  ; Function Attrs: nounwind
+  define hidden fastcc %struct.cpp_hashnode.2348* @lex_macro_node(%struct.cpp_reader.2341* %pfile) unnamed_addr #1 {
+    %1 = tail call %struct.cpp_token.2349* @_cpp_lex_token(%struct.cpp_reader.2341* %pfile) #2
+    %2 = getelementptr inbounds %struct.cpp_token.2349, %struct.cpp_token.2349* %1, i32 0, i32 2
+    %3 = bitcast i8* %2 to i16*
+    %4 = load i16, i16* %3, align 2
+    %5 = lshr i16 %4, 8
+    %6 = trunc i16 %5 to i8
+    %7 = zext i8 %6 to i32
+    switch i32 %7, label %13 [
+      i32 56, label %23
+      i32 67, label %8
+    ]
+  
+  ; <label>:8                                       ; preds = %0
+    %9 = getelementptr inbounds %struct.cpp_reader.2341, %struct.cpp_reader.2341* %pfile, i32 0, i32 11
+    %10 = load %struct.directive.2340*, %struct.directive.2340** %9, align 4
+    %11 = getelementptr inbounds %struct.directive.2340, %struct.directive.2340* %10, i32 0, i32 1
+    %12 = load i8*, i8** %11, align 4
+    tail call void (%struct.cpp_reader.2341*, i8*, ...) @cpp_error(%struct.cpp_reader.2341* %pfile, i8* nonnull getelementptr inbounds ([37 x i8], [37 x i8]* @.str.31, i32 0, i32 0), i8* %12) #2
+    br label %38
+  
+  ; <label>:13                                      ; preds = %0
+    %14 = and i16 %4, 16
+    %15 = icmp eq i16 %14, 0
+    br i1 %15, label %22, label %16
+  
+  ; <label>:16                                      ; preds = %13
+    %17 = getelementptr inbounds %struct.cpp_token.2349, %struct.cpp_token.2349* %1, i32 0, i32 4
+    %18 = bitcast %union.anon.0.2367* %17 to %struct.cpp_hashnode.2348**
+    %19 = load %struct.cpp_hashnode.2348*, %struct.cpp_hashnode.2348** %18, align 4
+    %20 = getelementptr inbounds %struct.cpp_hashnode.2348, %struct.cpp_hashnode.2348* %19, i32 0, i32 0, i32 1
+    %21 = load i8*, i8** %20, align 4
+    tail call void (%struct.cpp_reader.2341*, i8*, ...) @cpp_error(%struct.cpp_reader.2341* %pfile, i8* nonnull getelementptr inbounds ([64 x i8], [64 x i8]* @.str.32, i32 0, i32 0), i8* %21) #2
+    br label %38
+  
+  ; <label>:22                                      ; preds = %13
+    tail call void (%struct.cpp_reader.2341*, i8*, ...) @cpp_error(%struct.cpp_reader.2341* %pfile, i8* nonnull getelementptr inbounds ([32 x i8], [32 x i8]* @.str.33, i32 0, i32 0)) #2
+    br label %38
+  
+  ; <label>:23                                      ; preds = %0
+    %24 = getelementptr inbounds %struct.cpp_token.2349, %struct.cpp_token.2349* %1, i32 0, i32 4
+    %25 = bitcast %union.anon.0.2367* %24 to %struct.cpp_hashnode.2348**
+    %26 = load %struct.cpp_hashnode.2348*, %struct.cpp_hashnode.2348** %25, align 4
+    %27 = getelementptr inbounds %struct.cpp_hashnode.2348, %struct.cpp_hashnode.2348* %26, i32 0, i32 5
+    %28 = load i8, i8* %27, align 1
+    %29 = and i8 %28, 2
+    %30 = icmp eq i8 %29, 0
+    br i1 %30, label %31, label %38
+  
+  ; <label>:31                                      ; preds = %23
+    %32 = getelementptr inbounds %struct.cpp_reader.2341, %struct.cpp_reader.2341* %pfile, i32 0, i32 38, i32 0
+    %33 = load %struct.cpp_hashnode.2348*, %struct.cpp_hashnode.2348** %32, align 4
+    %34 = icmp eq %struct.cpp_hashnode.2348* %26, %33
+    br i1 %34, label %35, label %38
+  
+  ; <label>:35                                      ; preds = %31
+    %36 = getelementptr inbounds %struct.cpp_hashnode.2348, %struct.cpp_hashnode.2348* %26, i32 0, i32 0, i32 1
+    %37 = load i8*, i8** %36, align 4
+    tail call void (%struct.cpp_reader.2341*, i8*, ...) @cpp_error(%struct.cpp_reader.2341* nonnull %pfile, i8* nonnull getelementptr inbounds ([36 x i8], [36 x i8]* @.str.34, i32 0, i32 0), i8* %37) #2
+    br label %38
+  
+  ; <label>:38                                      ; preds = %35, %31, %23, %22, %16, %8
+    %.0 = phi %struct.cpp_hashnode.2348* [ null, %35 ], [ null, %16 ], [ null, %22 ], [ null, %8 ], [ null, %23 ], [ %26, %31 ]
+    ret %struct.cpp_hashnode.2348* %.0
+  }
+  
+  attributes #0 = { "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #1 = { nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #2 = { nounwind }
+  
+  !llvm.ident = !{!0}
+  
+  !0 = !{!"clang version 3.8.0 (http://llvm.org/git/clang.git 2d49f0a0ae8366964a93e3b7b26e29679bee7160) (http://llvm.org/git/llvm.git 60bc66b44837125843b58ed3e0fd2e6bb948d839)"}
+
+...
+---
+name:            lex_macro_node
+alignment:       2
+exposesReturnsTwice: false
+hasInlineAsm:    false
+isSSA:           false
+tracksRegLiveness: false
+tracksSubRegLiveness: false
+liveins:         
+  - { reg: '%a0' }
+  - { reg: '%t9' }
+  - { reg: '%v0' }
+calleeSavedRegisters: [ '%fp', '%ra', '%d10', '%d11', '%d12', '%d13', '%d14', 
+                        '%d15', '%f20', '%f21', '%f22', '%f23', '%f24', 
+                        '%f25', '%f26', '%f27', '%f28', '%f29', '%f30', 
+                        '%f31', '%s0', '%s1', '%s2', '%s3', '%s4', '%s5', 
+                        '%s6', '%s7' ]
+frameInfo:       
+  isFrameAddressTaken: false
+  isReturnAddressTaken: false
+  hasStackMap:     false
+  hasPatchPoint:   false
+  stackSize:       32
+  offsetAdjustment: 0
+  maxAlignment:    4
+  adjustsStack:    true
+  hasCalls:        true
+  maxCallFrameSize: 16
+  hasOpaqueSPAdjustment: false
+  hasVAStart:      false
+  hasMustTailInVarArgFunc: false
+stack:           
+  - { id: 0, type: spill-slot, offset: -4, size: 4, alignment: 4, callee-saved-register: '%ra' }
+  - { id: 1, type: spill-slot, offset: -8, size: 4, alignment: 4, callee-saved-register: '%s2' }
+  - { id: 2, type: spill-slot, offset: -12, size: 4, alignment: 4, callee-saved-register: '%s1' }
+  - { id: 3, type: spill-slot, offset: -16, size: 4, alignment: 4, callee-saved-register: '%s0' }
+body:             |
+  bb.0 (%ir-block.0, freq 127):
+    successors: %bb.3(33), %bb.1(66)
+    liveins: %a0, %t9, %ra, %s2, %s1, %s0
+  
+    %v0 = LUi target-flags(<unknown>) $_gp_disp
+    %v0 = ADDiu %v0, target-flags(<unknown>) $_gp_disp
+    %sp = ADDiu %sp, -32
+    CFI_INSTRUCTION .cfi_def_cfa_offset 32
+    SW killed %ra, %sp, 28 :: (store 4 into stack)
+    SW killed %s2, %sp, 24 :: (store 4 into stack)
+    SW killed %s1, %sp, 20 :: (store 4 into stack)
+    SW killed %s0, %sp, 16 :: (store 4 into stack)
+    CFI_INSTRUCTION .cfi_offset %ra_64, -4
+    CFI_INSTRUCTION .cfi_offset %s2_64, -8
+    CFI_INSTRUCTION .cfi_offset %s1_64, -12
+    CFI_INSTRUCTION .cfi_offset %s0_64, -16
+    %s0 = ADDu %v0, %t9
+    %s1 = OR %a0, %zero
+    %t9 = LW %s0, target-flags(<unknown>) @_cpp_lex_token :: (load 4 from call-entry @_cpp_lex_token)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit killed %gp, implicit-def %sp, implicit-def %v0 {
+      %gp = OR %s0, %zero
+    }
+    %v1 = LHu %v0, 6 :: (load 2 from %ir.3)
+    %at = ADDiu %zero, 56
+    %a0 = SRL %v1, 8
+    BEQ %a0, %at, %bb.3, implicit-def %at {
+      NOP
+    }
+  
+  bb.1 (%ir-block.0, freq 85):
+    successors: %bb.2(50), %bb.6(49)
+    liveins: %a0, %s0, %s1, %v0, %v1
+  
+    %at = ADDiu %zero, 67
+    BNE %a0, %at, %bb.6, implicit-def %at {
+      NOP
+    }
+  
+  bb.2 (%ir-block.8, freq 42):
+    successors: %bb.10(100)
+    liveins: %s0, %s1
+  
+    %at = LW %s1, 96 :: (load 4 from %ir.9)
+    %a2 = LW killed %at, 4 :: (load 4 from %ir.11)
+    %a1 = LW %s0, target-flags(<unknown>) @.str.31 :: (load 4 from got)
+    %t9 = LW %s0, target-flags(<unknown>) @cpp_error :: (load 4 from call-entry @cpp_error)
+    %a0 = OR killed %s1, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit killed %gp, implicit-def %sp {
+      %gp = OR killed %s0, %zero
+    }
+    B %bb.10, implicit-def dead %at {
+      %s2 = ADDiu %zero, 0
+    }
+  
+  bb.3 (%ir-block.23, freq 42):
+    successors: %bb.4(50), %bb.10(50)
+    liveins: %s0, %s1, %v0
+  
+    %v0 = LW killed %v0, 8 :: (load 4 from %ir.25)
+    %at = LBu %v0, 13 :: (load 1 from %ir.27)
+    %at = ANDi killed %at, 2
+    BNE %at, %zero, %bb.10, implicit-def %at {
+      %s2 = ADDiu %zero, 0
+    }
+  
+  bb.4 (%ir-block.31, freq 21):
+    successors: %bb.9(37), %bb.5(62)
+    liveins: %s0, %s1, %s2, %v0
+  
+    %at = LW %s1, 452 :: (load 4 from %ir.32)
+    BEQ %v0, killed %at, %bb.9, implicit-def %at {
+      NOP
+    }
+  
+  bb.5 (freq 13):
+    successors: %bb.10(100)
+    liveins: %v0
+  
+    B %bb.10, implicit-def %at {
+      %s2 = OR killed %v0, %zero
+    }
+  
+  bb.6 (%ir-block.13, freq 42):
+    successors: %bb.7(50), %bb.8(50)
+    liveins: %s0, %s1, %v0, %v1
+  
+    %at = ANDi killed %v1, 16
+    BNE %at, %zero, %bb.8, implicit-def %at {
+      NOP
+    }
+  
+  bb.7 (%ir-block.22, freq 21):
+    successors: %bb.10(100)
+    liveins: %s0, %s1
+  
+    %a1 = LW %s0, target-flags(<unknown>) @.str.33 :: (load 4 from got)
+    %t9 = LW %s0, target-flags(<unknown>) @cpp_error :: (load 4 from call-entry @cpp_error)
+    %a0 = OR killed %s1, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit killed %gp, implicit-def %sp {
+      %gp = OR killed %s0, %zero
+    }
+    B %bb.10, implicit-def dead %at {
+      %s2 = ADDiu %zero, 0
+    }
+  
+  bb.8 (%ir-block.16, freq 21):
+    successors: %bb.10(100)
+    liveins: %s0, %s1, %v0
+  
+    %at = LW killed %v0, 8 :: (load 4 from %ir.18)
+    %a2 = LW killed %at, 4 :: (load 4 from %ir.20)
+    %a1 = LW %s0, target-flags(<unknown>) @.str.32 :: (load 4 from got)
+    %t9 = LW %s0, target-flags(<unknown>) @cpp_error :: (load 4 from call-entry @cpp_error)
+    %a0 = OR killed %s1, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit killed %gp, implicit-def %sp {
+      %gp = OR killed %s0, %zero
+    }
+    B %bb.10, implicit-def dead %at {
+      %s2 = ADDiu %zero, 0
+    }
+  
+  bb.9 (%ir-block.35, freq 8):
+    successors: %bb.10(100)
+    liveins: %s0, %s1, %s2, %v0
+  
+    %a2 = LW killed %v0, 4 :: (load 4 from %ir.36)
+    %a1 = LW %s0, target-flags(<unknown>) @.str.34 :: (load 4 from got)
+    %t9 = LW %s0, target-flags(<unknown>) @cpp_error :: (load 4 from call-entry @cpp_error)
+    %a0 = OR killed %s1, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit killed %gp, implicit-def %sp {
+      %gp = OR killed %s0, %zero
+    }
+  
+  bb.10 (%ir-block.38, freq 127):
+    liveins: %s2
+    liveouts:
+  
+    %v0 = OR killed %s2, %zero
+    %s0 = LW %sp, 16 :: (load 4 from stack)
+    %s1 = LW %sp, 20 :: (load 4 from stack)
+    %s2 = LW %sp, 24 :: (load 4 from stack)
+    %ra = LW %sp, 28 :: (load 4 from stack)
+    PseudoReturn %ra {
+      %sp = ADDiu %sp, 32
+    }
+
+...
