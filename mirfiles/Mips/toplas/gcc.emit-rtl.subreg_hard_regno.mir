@@ -1,5 +1,5 @@
 --- |
-  ; ModuleID = '/home/romi/didaktoriko/unison/unison-experiments/experiments/mips/selected-functions/size-toplas/gcc.emit-rtl.subreg_hard_regno.ll'
+  ; ModuleID = '/home/romi/unison/unison-experiments/experiments/mips/selected-functions/size-toplas/gcc.emit-rtl.subreg_hard_regno.ll'
   target datalayout = "E-m:m-p:32:32-i8:8:32-i16:16:32-i64:64-n32-S64"
   target triple = "mips--linux-gnu"
   
@@ -176,7 +176,7 @@ body:             |
     %13 = ADDu %v0, %t9
     %5 = COPY %a1
     %4 = COPY %a0
-    %6 = LW %4, 0, <0x49a05f0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.1)
+    %6 = LW %4, 0, <0x558df48406b0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.1)
     %7 = LUi 65535
     %8 = AND %6, %7
     %9 = LUi 63
@@ -186,8 +186,8 @@ body:             |
   bb.1 (%ir-block.9, freq 13421798):
     successors: %bb.3(99), %bb.2(0)
   
-    %1 = LW %4, 4, <0x49a05f0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.6)
-    %2 = LW %1, 0, <0x49a6750> = !{!"unison-memory-partition", i32 1} :: (load 4 from %ir.10)
+    %1 = LW %4, 4, <0x558df48406b0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.6)
+    %2 = LW %1, 0, <0x558df484cf50> = !{!"unison-memory-partition", i32 1} :: (load 4 from %ir.10)
     %11 = AND %2, %7
     %12 = LUi 61
     BEQ killed %11, killed %12, %bb.3, implicit-def dead %at
@@ -197,9 +197,9 @@ body:             |
     exit
   
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %14 = LW %13, target-flags(<unknown>) @.str, <0x49a05f0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
-    %15 = LW %13, target-flags(<unknown>) @__FUNCTION__.subreg_hard_regno, <0x49a6750> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
-    %16 = LW %13, target-flags(<unknown>) @fancy_abort, <0x49ac650> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @fancy_abort)
+    %14 = LW %13, target-flags(<unknown>) @.str, <0x558df48406b0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %15 = LW %13, target-flags(<unknown>) @__FUNCTION__.subreg_hard_regno, <0x558df484cf50> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %16 = LW %13, target-flags(<unknown>) @fancy_abort, <0x558df484cfc0> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @fancy_abort)
     %17 = ADDiu %zero, 796
     %a0 = COPY %14
     %a1 = COPY %17
@@ -212,7 +212,7 @@ body:             |
   bb.3 (%ir-block.14, freq 13421785):
     successors: %bb.4(0), %bb.5(99)
   
-    %3 = LW %1, 4, <0x49a05f0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.15)
+    %3 = LW %1, 4, <0x558df48406b0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.15)
     %18 = SLTiu %3, 53
     BNE killed %18, %zero, %bb.5, implicit-def dead %at
     B %bb.4, implicit-def dead %at
@@ -221,9 +221,9 @@ body:             |
     exit
   
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %38 = LW %13, target-flags(<unknown>) @.str, <0x49a05f0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
-    %39 = LW %13, target-flags(<unknown>) @__FUNCTION__.subreg_hard_regno, <0x49a6750> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
-    %40 = LW %13, target-flags(<unknown>) @fancy_abort, <0x49ac650> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @fancy_abort)
+    %38 = LW %13, target-flags(<unknown>) @.str, <0x558df48406b0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %39 = LW %13, target-flags(<unknown>) @__FUNCTION__.subreg_hard_regno, <0x558df484cf50> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %40 = LW %13, target-flags(<unknown>) @fancy_abort, <0x558df484cfc0> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @fancy_abort)
     %41 = ADDiu %zero, 799
     %a0 = COPY %38
     %a1 = COPY %41
@@ -244,7 +244,7 @@ body:             |
   
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
     %19 = EXT %2, 8, 8
-    %20 = LW %13, target-flags(<unknown>) @ix86_hard_regno_mode_ok, <0x49a05f0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @ix86_hard_regno_mode_ok)
+    %20 = LW %13, target-flags(<unknown>) @ix86_hard_regno_mode_ok, <0x558df48406b0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @ix86_hard_regno_mode_ok)
     %a0 = COPY %3
     %a1 = COPY %19
     %gp = COPY %13
@@ -259,9 +259,9 @@ body:             |
     exit
   
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %22 = LW %13, target-flags(<unknown>) @.str, <0x49a05f0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
-    %23 = LW %13, target-flags(<unknown>) @__FUNCTION__.subreg_hard_regno, <0x49a6750> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
-    %24 = LW %13, target-flags(<unknown>) @fancy_abort, <0x49ac650> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @fancy_abort)
+    %22 = LW %13, target-flags(<unknown>) @.str, <0x558df48406b0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %23 = LW %13, target-flags(<unknown>) @__FUNCTION__.subreg_hard_regno, <0x558df484cf50> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %24 = LW %13, target-flags(<unknown>) @fancy_abort, <0x558df484cfc0> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @fancy_abort)
     %25 = ADDiu %zero, 801
     %a0 = COPY %22
     %a1 = COPY %25
@@ -275,10 +275,10 @@ body:             |
     successors: %bb.10(99), %bb.9(0)
   
     %0 = EXT %6, 8, 8
-    %26 = LW %13, target-flags(<unknown>) @mode_size, <0x49a05f0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %26 = LW %13, target-flags(<unknown>) @mode_size, <0x558df48406b0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
     %27 = ADDu killed %26, %0
-    %28 = LBu killed %27, 0, <0x49a6750> = !{!"unison-memory-partition", i32 1} :: (load 1 from %ir.30)
-    %29 = LW %4, 8, <0x49ac650> = !{!"unison-memory-partition", i32 2} :: (load 4 from %ir.28)
+    %28 = LBu killed %27, 0, <0x558df484cf50> = !{!"unison-memory-partition", i32 1} :: (load 1 from %ir.30)
+    %29 = LW %4, 8, <0x558df484cfc0> = !{!"unison-memory-partition", i32 2} :: (load 4 from %ir.28)
     %30 = PseudoUDIV killed %29, %28
     TEQ killed %28, %zero, 7
     %31 = PseudoMFHI killed %30
@@ -289,9 +289,9 @@ body:             |
     exit
   
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %32 = LW %13, target-flags(<unknown>) @.str, <0x49a05f0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
-    %33 = LW %13, target-flags(<unknown>) @__FUNCTION__.subreg_hard_regno, <0x49a6750> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
-    %34 = LW %13, target-flags(<unknown>) @fancy_abort, <0x49ac650> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @fancy_abort)
+    %32 = LW %13, target-flags(<unknown>) @.str, <0x558df48406b0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %33 = LW %13, target-flags(<unknown>) @__FUNCTION__.subreg_hard_regno, <0x558df484cf50> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %34 = LW %13, target-flags(<unknown>) @fancy_abort, <0x558df484cfc0> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @fancy_abort)
     %35 = ADDiu %zero, 806
     %a0 = COPY %32
     %a1 = COPY %35
@@ -305,7 +305,7 @@ body:             |
     liveouts: %v0
   
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %36 = LW %13, target-flags(<unknown>) @subreg_regno, <0x49a05f0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @subreg_regno)
+    %36 = LW %13, target-flags(<unknown>) @subreg_regno, <0x558df48406b0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @subreg_regno)
     %a0 = COPY %4
     %gp = COPY %13
     %t9 = COPY %36

@@ -9,13 +9,17 @@ dname=mirfiles/Mips/toplas/
 
 opt=-O2
 
-for llfile in /home/romi/didaktoriko/unison/unison-experiments/experiments/mips/selected-functions/size-toplas/*.ll
+for llfile in /home/romi/unison/unison-experiments/experiments/mips/selected-functions/size-toplas/*.ll
 #for llfile in ../unison/src/unison/test/fast/Mips/speed/*.ll
     do
         rm /tmp/unison-*
         fname1=${llfile##*/}
         fname=${fname1%.*}
-        llc $llfile $opt -march=mips -mcpu=mips32 -unison -unison-no-clean
+        if [ -f $dname/$fname.asm.mir ]
+        then
+            continue
+        fi
+        timeout 10m llc $llfile $opt -march=mips -mcpu=mips32 -unison -unison-no-clean
         cp /tmp/unison-*.asm.mir $dname/$fname.asm.mir
         cp /tmp/unison-*[!mn].mir $dname/$fname.mir
     done

@@ -1,5 +1,5 @@
 --- |
-  ; ModuleID = '/home/romi/didaktoriko/unison/unison-experiments/experiments/mips/selected-functions/size-toplas/gcc.attribs.handle_noinline_attribute.ll'
+  ; ModuleID = '/home/romi/unison/unison-experiments/experiments/mips/selected-functions/size-toplas/gcc.attribs.handle_noinline_attribute.ll'
   target datalayout = "E-m:m-p:32:32-i8:8:32-i16:16:32-i64:64-n32-S64"
   target triple = "mips--linux-gnu"
   
@@ -112,8 +112,8 @@ body:             |
     %10 = ADDu %v0, %t9
     %2 = COPY %a1
     %1 = COPY %a0
-    %0 = LW %1, 0, <0x427b980> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.node)
-    %6 = LW %0, 8, <0x427d600> = !{!"unison-memory-partition", i32 1} :: (load 4 from %ir.2)
+    %0 = LW %1, 0, <0x5568d11cec30> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.node)
+    %6 = LW %0, 8, <0x5568d11d3e00> = !{!"unison-memory-partition", i32 1} :: (load 4 from %ir.2)
     %7 = LUi 7680
     %8 = LUi 65280
     %9 = AND killed %6, killed %8
@@ -123,22 +123,22 @@ body:             |
   bb.1 (%ir-block.5, freq 8):
     successors: %bb.3(100)
   
-    %15 = LW %0, 32, <0x427b980> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.7 + 4)
-    %16 = LW %0, 28, <0x427b980> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.7)
-    SW killed %16, %0, 28, <0x427b980> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.7)
+    %15 = LW %0, 32, <0x5568d11cec30> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.7 + 4)
+    %16 = LW %0, 28, <0x5568d11cec30> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.7)
+    SW killed %16, %0, 28, <0x5568d11cec30> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.7)
     %17 = LUi 2048
     %18 = OR killed %15, killed %17
-    SW killed %18, %0, 32, <0x427b980> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.7 + 4)
+    SW killed %18, %0, 32, <0x5568d11cec30> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.7 + 4)
     B %bb.3, implicit-def dead %at
   
   bb.2 (%ir-block.10, freq 8):
     successors: %bb.3(100)
   
-    %5 = LW %fixed-stack.0, 0, <0x427b980> = !{!"unison-memory-partition", i32 0} :: (load 4 from stack, align 8)
-    %11 = LW %2, 16, <0x427b980> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.13)
+    %5 = LW %fixed-stack.0, 0, <0x5568d11cec30> = !{!"unison-memory-partition", i32 0} :: (load 4 from stack, align 8)
+    %11 = LW %2, 16, <0x5568d11cec30> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.13)
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %12 = LW %10, target-flags(<unknown>) @.str.4, <0x427b980> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
-    %13 = LW %10, target-flags(<unknown>) @warning, <0x427b980> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @warning)
+    %12 = LW %10, target-flags(<unknown>) @.str.4, <0x5568d11cec30> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %13 = LW %10, target-flags(<unknown>) @warning, <0x5568d11cec30> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @warning)
     %a0 = COPY %12
     %a1 = COPY %11
     %gp = COPY %10
@@ -146,7 +146,7 @@ body:             |
     JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %gp, implicit-def %sp
     ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
     %14 = ADDiu %zero, 1
-    SB killed %14, %5, 0, <0x427b980> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.no_add_attrs)
+    SB killed %14, %5, 0, <0x5568d11cec30> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.no_add_attrs)
   
   bb.3 (%ir-block.15, freq 16):
     liveouts: %v0

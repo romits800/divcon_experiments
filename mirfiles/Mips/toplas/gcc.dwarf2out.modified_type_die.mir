@@ -1,5 +1,5 @@
 --- |
-  ; ModuleID = '/home/romi/didaktoriko/unison/unison-experiments/experiments/mips/selected-functions/size-toplas/gcc.dwarf2out.modified_type_die.ll'
+  ; ModuleID = '/home/romi/unison/unison-experiments/experiments/mips/selected-functions/size-toplas/gcc.dwarf2out.modified_type_die.ll'
   target datalayout = "E-m:m-p:32:32-i8:8:32-i16:16:32-i64:64-n32-S64"
   target triple = "mips--linux-gnu"
   
@@ -1235,7 +1235,7 @@ body:             |
     %73 = COPY %a2
     %72 = COPY %a1
     %71 = COPY %a0
-    %77 = LW %71, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.1)
+    %77 = LW %71, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.1)
     %0 = SRL killed %77, 24
     %76 = ADDiu %zero, 0
     %75 = COPY %76
@@ -1250,7 +1250,7 @@ body:             |
     %81 = SLTu %zero, %72
     %82 = OR killed %80, killed %81
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %83 = LW %78, target-flags(<unknown>) @get_qualified_type, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @get_qualified_type)
+    %83 = LW %78, target-flags(<unknown>) @get_qualified_type, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @get_qualified_type)
     %a0 = COPY %71
     %a1 = COPY %82
     %gp = COPY %78
@@ -1265,21 +1265,21 @@ body:             |
   bb.2 (%ir-block.13, freq 2935558345):
     successors: %bb.3(37), %bb.93.base_type_die.exit(62)
   
-    %2 = LW %1, 48, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.15)
+    %2 = LW %1, 48, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.15)
     BNE %2, %zero, %bb.93.base_type_die.exit, implicit-def dead %at
     B %bb.3, implicit-def dead %at
   
   bb.3 (%ir-block.18, freq 1100834379):
     successors: %bb.12..thread(37), %bb.4(62)
   
-    %3 = LW %1, 52, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.19)
+    %3 = LW %1, 52, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.19)
     BEQ %3, %zero, %bb.12..thread, implicit-def dead %at
     B %bb.4, implicit-def dead %at
   
   bb.4 (%ir-block.22, freq 688021487):
     successors: %bb.5(50), %bb.12..thread(50)
   
-    %85 = LW %3, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.23)
+    %85 = LW %3, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.23)
     %86 = LUi 65280
     %87 = AND killed %85, killed %86
     %88 = LUi 8448
@@ -1289,14 +1289,14 @@ body:             |
   bb.5 (%ir-block.26, freq 344010743):
     successors: %bb.12..thread(37), %bb.6(62)
   
-    %4 = LW %3, 56, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.27)
+    %4 = LW %3, 56, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.27)
     BEQ %4, %zero, %bb.12..thread, implicit-def dead %at
     B %bb.6, implicit-def dead %at
   
   bb.6 (%ir-block.30, freq 215006714):
     successors: %bb.7(37), %bb.8(62)
   
-    %5 = LW %3, 4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.31)
+    %5 = LW %3, 4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.31)
     BNE %1, %5, %bb.8, implicit-def dead %at
     B %bb.7, implicit-def dead %at
   
@@ -1304,20 +1304,20 @@ body:             |
     successors: %bb.11(100)
   
     ADJCALLSTACKDOWN 0, implicit-def dead %sp, implicit %sp
-    %95 = LW %78, target-flags(<unknown>) @gen_type_die, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @gen_type_die)
+    %95 = LW %78, target-flags(<unknown>) @gen_type_die, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @gen_type_die)
     %a0 = COPY %1
     %a1 = COPY %74
     %gp = COPY %78
     %t9 = COPY %95
     JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %gp, implicit-def %sp
     ADJCALLSTACKUP 0, 0, implicit-def dead %sp, implicit %sp
-    %6 = LW %1, 48, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from %ir.sunkaddr2)
+    %6 = LW %1, 48, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from %ir.sunkaddr2)
     B %bb.11, implicit-def dead %at
   
   bb.8 (%ir-block.36, freq 134379196):
     successors: %bb.10(50), %bb.9(50)
   
-    %7 = LW %5, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.37)
+    %7 = LW %5, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.37)
     %89 = EXT %7, 19, 1
     %90 = SLT %72, killed %89
     BNE killed %90, %zero, %bb.10, implicit-def dead %at
@@ -1335,7 +1335,7 @@ body:             |
     successors: %bb.11(100)
   
     ADJCALLSTACKDOWN 0, implicit-def dead %sp, implicit %sp
-    %93 = LW %78, target-flags(<unknown>) @modified_type_die, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @modified_type_die)
+    %93 = LW %78, target-flags(<unknown>) @modified_type_die, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @modified_type_die)
     %a0 = COPY %4
     %a1 = COPY %72
     %a2 = COPY %73
@@ -1365,10 +1365,10 @@ body:             |
   bb.13 (%ir-block.51, freq 1717991837):
     successors: %bb.18(37), %bb.14(62)
   
-    %301 = LW %78, target-flags(<unknown>) @comp_unit_die, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
-    %10 = LW killed %301, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from @comp_unit_die)
+    %301 = LW %78, target-flags(<unknown>) @comp_unit_die, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %10 = LW killed %301, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from @comp_unit_die)
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %302 = LW %78, target-flags(<unknown>) @xcalloc, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from call-entry @xcalloc)
+    %302 = LW %78, target-flags(<unknown>) @xcalloc, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from call-entry @xcalloc)
     %303 = ADDiu %zero, 1
     %304 = ADDiu %zero, 36
     %a0 = COPY %303
@@ -1379,7 +1379,7 @@ body:             |
     ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
     %305 = COPY %v0
     %306 = ADDiu %zero, 38
-    SW killed %306, %305, 0, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (store 4 into %ir.54)
+    SW killed %306, %305, 0, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (store 4 into %ir.54)
     %11 = COPY %305
     BEQ %10, %zero, %bb.18, implicit-def dead %at
     B %bb.14, implicit-def dead %at
@@ -1400,9 +1400,9 @@ body:             |
     exit
   
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %308 = LW %78, target-flags(<unknown>) @.str.4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
-    %309 = LW %78, target-flags(<unknown>) @__FUNCTION__.add_child_die, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
-    %310 = LW %78, target-flags(<unknown>) @fancy_abort, <0x3422b90> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @fancy_abort)
+    %308 = LW %78, target-flags(<unknown>) @.str.4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %309 = LW %78, target-flags(<unknown>) @__FUNCTION__.add_child_die, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %310 = LW %78, target-flags(<unknown>) @fancy_abort, <0x55c9bed95540> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @fancy_abort)
     %311 = ADDiu %zero, 5026
     %a0 = COPY %308
     %a1 = COPY %311
@@ -1415,17 +1415,17 @@ body:             |
   bb.17 (%ir-block.62, freq 671089921):
     successors: %bb.19.new_die.exit(100)
   
-    SW %10, %11, 12, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.64)
-    %307 = LW %10, 16, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.66)
-    SW killed %307, %11, 20, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.69)
-    SW %11, %10, 16, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.70)
+    SW %10, %11, 12, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.64)
+    %307 = LW %10, 16, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.66)
+    SW killed %307, %11, 20, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.69)
+    SW %11, %10, 16, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.70)
     B %bb.19.new_die.exit, implicit-def dead %at
   
   bb.18 (%ir-block.71, freq 644246939):
     successors: %bb.19.new_die.exit(100)
   
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %312 = LW %78, target-flags(<unknown>) @xmalloc, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @xmalloc)
+    %312 = LW %78, target-flags(<unknown>) @xmalloc, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @xmalloc)
     %313 = ADDiu %zero, 12
     %a0 = COPY %313
     %gp = COPY %78
@@ -1433,18 +1433,18 @@ body:             |
     JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %gp, implicit-def %sp, implicit-def %v0
     ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
     %314 = COPY %v0
-    SW %11, %314, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.73)
-    SW %71, %314, 4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.75)
-    %315 = LW %78, target-flags(<unknown>) @limbo_die_list, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
-    %316 = LW %315, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from `i32* bitcast (%struct.limbo_die_struct.4338** @limbo_die_list to i32*)`)
-    SW killed %316, %314, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.78)
-    SW %314, %315, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into `i8** bitcast (%struct.limbo_die_struct.4338** @limbo_die_list to i8**)`)
+    SW %11, %314, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.73)
+    SW %71, %314, 4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.75)
+    %315 = LW %78, target-flags(<unknown>) @limbo_die_list, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %316 = LW %315, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from `i32* bitcast (%struct.limbo_die_struct.4338** @limbo_die_list to i32*)`)
+    SW killed %316, %314, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.78)
+    SW %314, %315, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into `i8** bitcast (%struct.limbo_die_struct.4338** @limbo_die_list to i8**)`)
   
   bb.19.new_die.exit (freq 1717991197):
     successors: %bb.86(100)
   
     ADJCALLSTACKDOWN 0, implicit-def dead %sp, implicit %sp
-    %318 = LW %78, target-flags(<unknown>) @modified_type_die, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @modified_type_die)
+    %318 = LW %78, target-flags(<unknown>) @modified_type_die, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @modified_type_die)
     %317 = ADDiu %zero, 0
     %a0 = COPY %71
     %a1 = COPY %317
@@ -1468,10 +1468,10 @@ body:             |
   bb.21 (%ir-block.83, freq 644246939):
     successors: %bb.26(37), %bb.22(62)
   
-    %282 = LW %78, target-flags(<unknown>) @comp_unit_die, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
-    %14 = LW killed %282, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from @comp_unit_die)
+    %282 = LW %78, target-flags(<unknown>) @comp_unit_die, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %14 = LW killed %282, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from @comp_unit_die)
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %283 = LW %78, target-flags(<unknown>) @xcalloc, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from call-entry @xcalloc)
+    %283 = LW %78, target-flags(<unknown>) @xcalloc, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from call-entry @xcalloc)
     %284 = ADDiu %zero, 1
     %285 = ADDiu %zero, 36
     %a0 = COPY %284
@@ -1482,7 +1482,7 @@ body:             |
     ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
     %286 = COPY %v0
     %287 = ADDiu %zero, 53
-    SW killed %287, %286, 0, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (store 4 into %ir.86)
+    SW killed %287, %286, 0, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (store 4 into %ir.86)
     %15 = COPY %286
     BEQ %14, %zero, %bb.26, implicit-def dead %at
     B %bb.22, implicit-def dead %at
@@ -1503,9 +1503,9 @@ body:             |
     exit
   
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %289 = LW %78, target-flags(<unknown>) @.str.4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
-    %290 = LW %78, target-flags(<unknown>) @__FUNCTION__.add_child_die, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
-    %291 = LW %78, target-flags(<unknown>) @fancy_abort, <0x3422b90> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @fancy_abort)
+    %289 = LW %78, target-flags(<unknown>) @.str.4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %290 = LW %78, target-flags(<unknown>) @__FUNCTION__.add_child_die, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %291 = LW %78, target-flags(<unknown>) @fancy_abort, <0x55c9bed95540> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @fancy_abort)
     %292 = ADDiu %zero, 5026
     %a0 = COPY %289
     %a1 = COPY %292
@@ -1518,17 +1518,17 @@ body:             |
   bb.25 (%ir-block.94, freq 251658720):
     successors: %bb.27.new_die.exit4(100)
   
-    SW %14, %15, 12, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.96)
-    %288 = LW %14, 16, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.98)
-    SW killed %288, %15, 20, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.101)
-    SW %15, %14, 16, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.102)
+    SW %14, %15, 12, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.96)
+    %288 = LW %14, 16, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.98)
+    SW killed %288, %15, 20, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.101)
+    SW %15, %14, 16, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.102)
     B %bb.27.new_die.exit4, implicit-def dead %at
   
   bb.26 (%ir-block.103, freq 241592602):
     successors: %bb.27.new_die.exit4(100)
   
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %293 = LW %78, target-flags(<unknown>) @xmalloc, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @xmalloc)
+    %293 = LW %78, target-flags(<unknown>) @xmalloc, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @xmalloc)
     %294 = ADDiu %zero, 12
     %a0 = COPY %294
     %gp = COPY %78
@@ -1536,18 +1536,18 @@ body:             |
     JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %gp, implicit-def %sp, implicit-def %v0
     ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
     %295 = COPY %v0
-    SW %15, %295, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.105)
-    SW %71, %295, 4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.107)
-    %296 = LW %78, target-flags(<unknown>) @limbo_die_list, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
-    %297 = LW %296, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from `i32* bitcast (%struct.limbo_die_struct.4338** @limbo_die_list to i32*)`)
-    SW killed %297, %295, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.110)
-    SW %295, %296, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into `i8** bitcast (%struct.limbo_die_struct.4338** @limbo_die_list to i8**)`)
+    SW %15, %295, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.105)
+    SW %71, %295, 4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.107)
+    %296 = LW %78, target-flags(<unknown>) @limbo_die_list, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %297 = LW %296, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from `i32* bitcast (%struct.limbo_die_struct.4338** @limbo_die_list to i32*)`)
+    SW killed %297, %295, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.110)
+    SW %295, %296, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into `i8** bitcast (%struct.limbo_die_struct.4338** @limbo_die_list to i8**)`)
   
   bb.27.new_die.exit4 (freq 644246699):
     successors: %bb.86(100)
   
     ADJCALLSTACKDOWN 0, implicit-def dead %sp, implicit %sp
-    %299 = LW %78, target-flags(<unknown>) @modified_type_die, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @modified_type_die)
+    %299 = LW %78, target-flags(<unknown>) @modified_type_die, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @modified_type_die)
     %298 = ADDiu %zero, 0
     %a0 = COPY %71
     %a1 = COPY %298
@@ -1579,10 +1579,10 @@ body:             |
   bb.29 (%ir-block.114, freq 128849387):
     successors: %bb.34(37), %bb.30(62)
   
-    %129 = LW %78, target-flags(<unknown>) @comp_unit_die, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
-    %18 = LW killed %129, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from @comp_unit_die)
+    %129 = LW %78, target-flags(<unknown>) @comp_unit_die, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %18 = LW killed %129, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from @comp_unit_die)
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %130 = LW %78, target-flags(<unknown>) @xcalloc, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from call-entry @xcalloc)
+    %130 = LW %78, target-flags(<unknown>) @xcalloc, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from call-entry @xcalloc)
     %131 = ADDiu %zero, 1
     %132 = ADDiu %zero, 36
     %a0 = COPY %131
@@ -1593,7 +1593,7 @@ body:             |
     ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
     %133 = COPY %v0
     %134 = ADDiu %zero, 15
-    SW killed %134, %133, 0, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (store 4 into %ir.117)
+    SW killed %134, %133, 0, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (store 4 into %ir.117)
     %19 = COPY %133
     BEQ %18, %zero, %bb.34, implicit-def dead %at
     B %bb.30, implicit-def dead %at
@@ -1614,9 +1614,9 @@ body:             |
     exit
   
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %136 = LW %78, target-flags(<unknown>) @.str.4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
-    %137 = LW %78, target-flags(<unknown>) @__FUNCTION__.add_child_die, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
-    %138 = LW %78, target-flags(<unknown>) @fancy_abort, <0x3422b90> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @fancy_abort)
+    %136 = LW %78, target-flags(<unknown>) @.str.4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %137 = LW %78, target-flags(<unknown>) @__FUNCTION__.add_child_die, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %138 = LW %78, target-flags(<unknown>) @fancy_abort, <0x55c9bed95540> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @fancy_abort)
     %139 = ADDiu %zero, 5026
     %a0 = COPY %136
     %a1 = COPY %139
@@ -1629,17 +1629,17 @@ body:             |
   bb.33 (%ir-block.125, freq 50331744):
     successors: %bb.35.new_die.exit5(100)
   
-    SW %18, %19, 12, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.127)
-    %135 = LW %18, 16, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.129)
-    SW killed %135, %19, 20, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.132)
-    SW %19, %18, 16, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.133)
+    SW %18, %19, 12, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.127)
+    %135 = LW %18, 16, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.129)
+    SW killed %135, %19, 20, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.132)
+    SW %19, %18, 16, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.133)
     B %bb.35.new_die.exit5, implicit-def dead %at
   
   bb.34 (%ir-block.134, freq 48318520):
     successors: %bb.35.new_die.exit5(100)
   
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %140 = LW %78, target-flags(<unknown>) @xmalloc, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @xmalloc)
+    %140 = LW %78, target-flags(<unknown>) @xmalloc, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @xmalloc)
     %141 = ADDiu %zero, 12
     %a0 = COPY %141
     %gp = COPY %78
@@ -1647,20 +1647,20 @@ body:             |
     JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %gp, implicit-def %sp, implicit-def %v0
     ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
     %142 = COPY %v0
-    SW %19, %142, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.136)
-    SW %71, %142, 4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.138)
-    %143 = LW %78, target-flags(<unknown>) @limbo_die_list, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
-    %144 = LW %143, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from `i32* bitcast (%struct.limbo_die_struct.4338** @limbo_die_list to i32*)`)
-    SW killed %144, %142, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.141)
-    SW %142, %143, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into `i8** bitcast (%struct.limbo_die_struct.4338** @limbo_die_list to i8**)`)
+    SW %19, %142, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.136)
+    SW %71, %142, 4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.138)
+    %143 = LW %78, target-flags(<unknown>) @limbo_die_list, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %144 = LW %143, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from `i32* bitcast (%struct.limbo_die_struct.4338** @limbo_die_list to i32*)`)
+    SW killed %144, %142, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.141)
+    SW %142, %143, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into `i8** bitcast (%struct.limbo_die_struct.4338** @limbo_die_list to i8**)`)
   
   bb.35.new_die.exit5 (freq 128849339):
     successors: %bb.96.new_die.exit5(75), %bb.37.add_AT_unsigned.exit(25)
   
-    %145 = LW %78, target-flags(<unknown>) @target_flags, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
-    %146 = LW killed %145, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from @target_flags)
+    %145 = LW %78, target-flags(<unknown>) @target_flags, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %146 = LW killed %145, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from @target_flags)
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %147 = LW %78, target-flags(<unknown>) @xmalloc, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from call-entry @xmalloc)
+    %147 = LW %78, target-flags(<unknown>) @xmalloc, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from call-entry @xmalloc)
     %148 = ADDiu %zero, 20
     %a0 = COPY %148
     %gp = COPY %78
@@ -1670,14 +1670,14 @@ body:             |
     %149 = COPY %v0
     %150 = ADDiu %zero, 6
     %151 = ADDiu %zero, 11
-    SW %zero, %149, 4, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (store 4 into %ir.149)
-    SW killed %151, %149, 0, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (store 4 into %ir.150)
-    SW killed %150, %149, 8, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (store 4 into %ir.152)
+    SW %zero, %149, 4, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (store 4 into %ir.149)
+    SW killed %151, %149, 0, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (store 4 into %ir.150)
+    SW killed %150, %149, 8, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (store 4 into %ir.152)
     %152 = SRL killed %146, 20
     %153 = ANDi killed %152, 32
     %154 = ADDiu killed %153, 32
     %155 = SRL killed %154, 3
-    SW killed %155, %149, 12, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (store 4 into %ir.154)
+    SW killed %155, %149, 12, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (store 4 into %ir.154)
     BEQ %19, %zero, %bb.37.add_AT_unsigned.exit, implicit-def dead %at
     B %bb.96.new_die.exit5, implicit-def dead %at
   
@@ -1691,14 +1691,14 @@ body:             |
   bb.36 (%ir-block.157, freq 64424669):
     successors: %bb.37.add_AT_unsigned.exit(100)
   
-    %156 = LW %19, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.159)
-    SW killed %156, %20, 4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.sunkaddr5)
-    SW %20, %19, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.161)
+    %156 = LW %19, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.159)
+    SW killed %156, %20, 4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.sunkaddr5)
+    SW %20, %19, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.161)
   
   bb.37.add_AT_unsigned.exit (freq 128849339):
     successors: %bb.86(100)
   
-    %22 = LW %71, 4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.163)
+    %22 = LW %71, 4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.163)
     %21 = COPY %19
     %157 = ADDiu %zero, 0
     B %bb.86, implicit-def dead %at
@@ -1706,10 +1706,10 @@ body:             |
   bb.38 (%ir-block.165, freq 128849387):
     successors: %bb.43(37), %bb.39(62)
   
-    %100 = LW %78, target-flags(<unknown>) @comp_unit_die, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
-    %23 = LW killed %100, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from @comp_unit_die)
+    %100 = LW %78, target-flags(<unknown>) @comp_unit_die, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %23 = LW killed %100, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from @comp_unit_die)
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %101 = LW %78, target-flags(<unknown>) @xcalloc, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from call-entry @xcalloc)
+    %101 = LW %78, target-flags(<unknown>) @xcalloc, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from call-entry @xcalloc)
     %102 = ADDiu %zero, 1
     %103 = ADDiu %zero, 36
     %a0 = COPY %102
@@ -1720,7 +1720,7 @@ body:             |
     ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
     %104 = COPY %v0
     %105 = ADDiu %zero, 16
-    SW killed %105, %104, 0, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (store 4 into %ir.168)
+    SW killed %105, %104, 0, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (store 4 into %ir.168)
     %24 = COPY %104
     BEQ %23, %zero, %bb.43, implicit-def dead %at
     B %bb.39, implicit-def dead %at
@@ -1741,9 +1741,9 @@ body:             |
     exit
   
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %107 = LW %78, target-flags(<unknown>) @.str.4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
-    %108 = LW %78, target-flags(<unknown>) @__FUNCTION__.add_child_die, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
-    %109 = LW %78, target-flags(<unknown>) @fancy_abort, <0x3422b90> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @fancy_abort)
+    %107 = LW %78, target-flags(<unknown>) @.str.4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %108 = LW %78, target-flags(<unknown>) @__FUNCTION__.add_child_die, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %109 = LW %78, target-flags(<unknown>) @fancy_abort, <0x55c9bed95540> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @fancy_abort)
     %110 = ADDiu %zero, 5026
     %a0 = COPY %107
     %a1 = COPY %110
@@ -1756,17 +1756,17 @@ body:             |
   bb.42 (%ir-block.176, freq 50331744):
     successors: %bb.44.new_die.exit6(100)
   
-    SW %23, %24, 12, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.178)
-    %106 = LW %23, 16, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.180)
-    SW killed %106, %24, 20, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.183)
-    SW %24, %23, 16, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.184)
+    SW %23, %24, 12, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.178)
+    %106 = LW %23, 16, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.180)
+    SW killed %106, %24, 20, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.183)
+    SW %24, %23, 16, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.184)
     B %bb.44.new_die.exit6, implicit-def dead %at
   
   bb.43 (%ir-block.185, freq 48318520):
     successors: %bb.44.new_die.exit6(100)
   
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %111 = LW %78, target-flags(<unknown>) @xmalloc, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @xmalloc)
+    %111 = LW %78, target-flags(<unknown>) @xmalloc, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @xmalloc)
     %112 = ADDiu %zero, 12
     %a0 = COPY %112
     %gp = COPY %78
@@ -1774,20 +1774,20 @@ body:             |
     JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %gp, implicit-def %sp, implicit-def %v0
     ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
     %113 = COPY %v0
-    SW %24, %113, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.187)
-    SW %71, %113, 4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.189)
-    %114 = LW %78, target-flags(<unknown>) @limbo_die_list, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
-    %115 = LW %114, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from `i32* bitcast (%struct.limbo_die_struct.4338** @limbo_die_list to i32*)`)
-    SW killed %115, %113, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.192)
-    SW %113, %114, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into `i8** bitcast (%struct.limbo_die_struct.4338** @limbo_die_list to i8**)`)
+    SW %24, %113, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.187)
+    SW %71, %113, 4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.189)
+    %114 = LW %78, target-flags(<unknown>) @limbo_die_list, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %115 = LW %114, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from `i32* bitcast (%struct.limbo_die_struct.4338** @limbo_die_list to i32*)`)
+    SW killed %115, %113, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.192)
+    SW %113, %114, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into `i8** bitcast (%struct.limbo_die_struct.4338** @limbo_die_list to i8**)`)
   
   bb.44.new_die.exit6 (freq 128849339):
     successors: %bb.95.new_die.exit6(75), %bb.46.add_AT_unsigned.exit8(25)
   
-    %116 = LW %78, target-flags(<unknown>) @target_flags, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
-    %117 = LW killed %116, 0, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from @target_flags)
+    %116 = LW %78, target-flags(<unknown>) @target_flags, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %117 = LW killed %116, 0, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from @target_flags)
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %118 = LW %78, target-flags(<unknown>) @xmalloc, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @xmalloc)
+    %118 = LW %78, target-flags(<unknown>) @xmalloc, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @xmalloc)
     %119 = ADDiu %zero, 20
     %a0 = COPY %119
     %gp = COPY %78
@@ -1797,14 +1797,14 @@ body:             |
     %120 = COPY %v0
     %121 = ADDiu %zero, 6
     %122 = ADDiu %zero, 11
-    SW %zero, %120, 4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.200)
-    SW killed %122, %120, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.201)
-    SW killed %121, %120, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.203)
+    SW %zero, %120, 4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.200)
+    SW killed %122, %120, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.201)
+    SW killed %121, %120, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.203)
     %123 = SRL killed %117, 20
     %124 = ANDi killed %123, 32
     %125 = ADDiu killed %124, 32
     %126 = SRL killed %125, 3
-    SW killed %126, %120, 12, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.205)
+    SW killed %126, %120, 12, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.205)
     BEQ %24, %zero, %bb.46.add_AT_unsigned.exit8, implicit-def dead %at
     B %bb.95.new_die.exit6, implicit-def dead %at
   
@@ -1818,14 +1818,14 @@ body:             |
   bb.45 (%ir-block.208, freq 64424669):
     successors: %bb.46.add_AT_unsigned.exit8(100)
   
-    %127 = LW %24, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.210)
-    SW killed %127, %25, 4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.sunkaddr8)
-    SW %25, %24, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.212)
+    %127 = LW %24, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.210)
+    SW killed %127, %25, 4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.sunkaddr8)
+    SW %25, %24, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.212)
   
   bb.46.add_AT_unsigned.exit8 (freq 128849339):
     successors: %bb.86(100)
   
-    %27 = LW %71, 4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.214)
+    %27 = LW %71, 4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.214)
     %26 = COPY %24
     %128 = ADDiu %zero, 0
     B %bb.86, implicit-def dead %at
@@ -1833,7 +1833,7 @@ body:             |
   bb.47 (%ir-block.216, freq 128849387):
     successors: %bb.49.switch.hole_check.i(99), %bb.48(0)
   
-    %28 = LW %71, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.sunkaddr11)
+    %28 = LW %71, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.sunkaddr11)
     %158 = LUi 6400
     %159 = SLTu %28, killed %158
     BNE killed %159, %zero, %bb.49.switch.hole_check.i, implicit-def dead %at
@@ -1843,9 +1843,9 @@ body:             |
     exit
   
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %278 = LW %78, target-flags(<unknown>) @.str.4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
-    %279 = LW %78, target-flags(<unknown>) @__FUNCTION__.is_base_type, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
-    %280 = LW %78, target-flags(<unknown>) @fancy_abort, <0x3422b90> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @fancy_abort)
+    %278 = LW %78, target-flags(<unknown>) @.str.4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %279 = LW %78, target-flags(<unknown>) @__FUNCTION__.is_base_type, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %280 = LW %78, target-flags(<unknown>) @fancy_abort, <0x55c9bed95540> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @fancy_abort)
     %281 = ADDiu %zero, 7461
     %a0 = COPY %278
     %a1 = COPY %281
@@ -1893,19 +1893,19 @@ body:             |
   bb.52 (%ir-block.228, freq 21474856):
     successors: %bb.104(37), %bb.53(62)
   
-    %30 = LW %71, 52, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.226)
+    %30 = LW %71, 52, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.226)
     BNE %30, %zero, %bb.53, implicit-def %at
   
   bb.104 (freq 8053071):
     successors: %bb.56(100)
   
-    %182 = LW %78, target-flags(<unknown>) @.str.388, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %182 = LW %78, target-flags(<unknown>) @.str.388, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
     B %bb.56, implicit-def %at
   
   bb.53 (%ir-block.230, freq 13421785):
     successors: %bb.54(50), %bb.55(50)
   
-    %183 = LW %30, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.231)
+    %183 = LW %30, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.231)
     %184 = LUi 65280
     %185 = AND killed %183, killed %184
     %186 = LUi 8448
@@ -1915,13 +1915,13 @@ body:             |
   bb.54 (%ir-block.234, freq 6710892):
     successors: %bb.55(100)
   
-    %31 = LW %30, 44, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.235)
+    %31 = LW %30, 44, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.235)
   
   bb.55 (%ir-block.237, freq 13421785):
     successors: %bb.56(100)
   
     %32 = PHI %30, %bb.53, %31, %bb.54
-    %33 = LW %32, 16, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.240)
+    %33 = LW %32, 16, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.240)
   
   bb.56 (%ir-block.242, freq 21474856):
     successors: %bb.65(0), %bb.98(99)
@@ -1936,16 +1936,16 @@ body:             |
   
     %187 = ADDiu %zero, 4
     %190 = SLL %188, 2
-    %191 = LW %78, target-flags(<unknown>) %jump-table.0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %191 = LW %78, target-flags(<unknown>) %jump-table.0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
     %192 = ADDu killed %190, killed %191
-    %193 = LW killed %192, target-flags(<unknown>) %jump-table.0, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from jump-table)
+    %193 = LW killed %192, target-flags(<unknown>) %jump-table.0, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from jump-table)
     %194 = ADDu killed %193, %78
     PseudoIndirectBranch killed %194
   
   bb.57 (%ir-block.243, freq 4294967):
     successors: %bb.58(50), %bb.61(50)
   
-    %204 = LW %71, 32, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.244)
+    %204 = LW %71, 32, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.244)
     %205 = LUi 65408
     %206 = AND killed %204, killed %205
     %207 = LUi 1024
@@ -1955,8 +1955,8 @@ body:             |
   bb.58 (%ir-block.247, freq 2147483):
     successors: %bb.62(37), %bb.59(62)
   
-    %208 = LW %78, target-flags(<unknown>) @integer_types, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
-    %209 = LW killed %208, 0, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from `%union.tree_node.4288** getelementptr inbounds ([11 x %union.tree_node.4288*], [11 x %union.tree_node.4288*]* @integer_types, i32 0, i32 0)`)
+    %208 = LW %78, target-flags(<unknown>) @integer_types, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %209 = LW killed %208, 0, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from `%union.tree_node.4288** getelementptr inbounds ([11 x %union.tree_node.4288*], [11 x %union.tree_node.4288*]* @integer_types, i32 0, i32 0)`)
     BEQ killed %209, %71, %bb.62, implicit-def dead %at
     B %bb.59, implicit-def dead %at
   
@@ -1964,8 +1964,8 @@ body:             |
     successors: %bb.62(37), %bb.60(62)
   
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %210 = LW %78, target-flags(<unknown>) @.str.389, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
-    %211 = LW %78, target-flags(<unknown>) @strcmp, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @strcmp)
+    %210 = LW %78, target-flags(<unknown>) @.str.389, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %211 = LW %78, target-flags(<unknown>) @strcmp, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @strcmp)
     %a0 = COPY %34
     %a1 = COPY %210
     %gp = COPY %78
@@ -1980,8 +1980,8 @@ body:             |
     successors: %bb.62(37), %bb.61(62)
   
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %213 = LW %78, target-flags(<unknown>) @.str.390, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
-    %214 = LW %78, target-flags(<unknown>) @strcmp, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from call-entry @strcmp)
+    %213 = LW %78, target-flags(<unknown>) @.str.390, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %214 = LW %78, target-flags(<unknown>) @strcmp, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from call-entry @strcmp)
     %a0 = COPY %34
     %a1 = COPY %213
     %t9 = COPY %214
@@ -2010,8 +2010,8 @@ body:             |
   bb.63 (%ir-block.264, freq 4294967):
     successors: %bb.66(100)
   
-    %196 = LW %71, 4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.266)
-    %197 = LW killed %196, 8, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from %ir.268)
+    %196 = LW %71, 4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.266)
+    %197 = LW killed %196, 8, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from %ir.268)
     %198 = LUi 65280
     %199 = AND killed %197, killed %198
     %200 = ADDiu %zero, 128
@@ -2031,9 +2031,9 @@ body:             |
     exit
   
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %274 = LW %78, target-flags(<unknown>) @.str.4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
-    %275 = LW %78, target-flags(<unknown>) @__FUNCTION__.base_type_die, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
-    %276 = LW %78, target-flags(<unknown>) @fancy_abort, <0x3422b90> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @fancy_abort)
+    %274 = LW %78, target-flags(<unknown>) @.str.4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %275 = LW %78, target-flags(<unknown>) @__FUNCTION__.base_type_die, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %276 = LW %78, target-flags(<unknown>) @fancy_abort, <0x55c9bed95540> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @fancy_abort)
     %277 = ADDiu %zero, 7381
     %a0 = COPY %274
     %a1 = COPY %277
@@ -2047,10 +2047,10 @@ body:             |
     successors: %bb.71(37), %bb.67(62)
   
     %38 = PHI %187, %bb.98, %195, %bb.64, %37, %bb.63, %35, %bb.61, %36, %bb.62
-    %220 = LW %78, target-flags(<unknown>) @comp_unit_die, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
-    %39 = LW killed %220, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from @comp_unit_die)
+    %220 = LW %78, target-flags(<unknown>) @comp_unit_die, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %39 = LW killed %220, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from @comp_unit_die)
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %221 = LW %78, target-flags(<unknown>) @xcalloc, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from call-entry @xcalloc)
+    %221 = LW %78, target-flags(<unknown>) @xcalloc, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from call-entry @xcalloc)
     %222 = ADDiu %zero, 1
     %223 = ADDiu %zero, 36
     %a0 = COPY %222
@@ -2060,7 +2060,7 @@ body:             |
     JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %gp, implicit-def %sp, implicit-def %v0
     ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
     %224 = COPY %v0
-    SW %223, %224, 0, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (store 4 into %ir.276)
+    SW %223, %224, 0, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (store 4 into %ir.276)
     %40 = COPY %224
     BEQ %39, %zero, %bb.71, implicit-def dead %at
     B %bb.67, implicit-def dead %at
@@ -2081,9 +2081,9 @@ body:             |
     exit
   
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %226 = LW %78, target-flags(<unknown>) @.str.4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
-    %227 = LW %78, target-flags(<unknown>) @__FUNCTION__.add_child_die, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
-    %228 = LW %78, target-flags(<unknown>) @fancy_abort, <0x3422b90> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @fancy_abort)
+    %226 = LW %78, target-flags(<unknown>) @.str.4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %227 = LW %78, target-flags(<unknown>) @__FUNCTION__.add_child_die, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %228 = LW %78, target-flags(<unknown>) @fancy_abort, <0x55c9bed95540> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @fancy_abort)
     %229 = ADDiu %zero, 5026
     %a0 = COPY %226
     %a1 = COPY %229
@@ -2096,17 +2096,17 @@ body:             |
   bb.70 (%ir-block.284, freq 8388599):
     successors: %bb.72.new_die.exit.i(100)
   
-    SW %39, %40, 12, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.286)
-    %225 = LW %39, 16, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.288)
-    SW killed %225, %40, 20, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.291)
-    SW %40, %39, 16, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.292)
+    SW %39, %40, 12, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.286)
+    %225 = LW %39, 16, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.288)
+    SW killed %225, %40, 20, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.291)
+    SW %40, %39, 16, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.292)
     B %bb.72.new_die.exit.i, implicit-def dead %at
   
   bb.71 (%ir-block.293, freq 8053063):
     successors: %bb.72.new_die.exit.i(100)
   
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %230 = LW %78, target-flags(<unknown>) @xmalloc, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @xmalloc)
+    %230 = LW %78, target-flags(<unknown>) @xmalloc, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @xmalloc)
     %231 = ADDiu %zero, 12
     %a0 = COPY %231
     %gp = COPY %78
@@ -2114,18 +2114,18 @@ body:             |
     JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %gp, implicit-def %sp, implicit-def %v0
     ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
     %232 = COPY %v0
-    SW %40, %232, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.295)
-    SW %71, %232, 4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.297)
-    %233 = LW %78, target-flags(<unknown>) @limbo_die_list, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
-    %234 = LW %233, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from `i32* bitcast (%struct.limbo_die_struct.4338** @limbo_die_list to i32*)`)
-    SW killed %234, %232, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.300)
-    SW %232, %233, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into `i8** bitcast (%struct.limbo_die_struct.4338** @limbo_die_list to i8**)`)
+    SW %40, %232, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.295)
+    SW %71, %232, 4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.297)
+    %233 = LW %78, target-flags(<unknown>) @limbo_die_list, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %234 = LW %233, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from `i32* bitcast (%struct.limbo_die_struct.4338** @limbo_die_list to i32*)`)
+    SW killed %234, %232, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.300)
+    SW %232, %233, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into `i8** bitcast (%struct.limbo_die_struct.4338** @limbo_die_list to i8**)`)
   
   bb.72.new_die.exit.i (freq 21474828):
     successors: %bb.74(37), %bb.73(62)
   
-    %235 = LW %78, target-flags(<unknown>) @demangle_name_func, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
-    %41 = LW killed %235, 0, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from @demangle_name_func)
+    %235 = LW %78, target-flags(<unknown>) @demangle_name_func, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %41 = LW killed %235, 0, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from @demangle_name_func)
     BEQ %41, %zero, %bb.74, implicit-def dead %at
     B %bb.73, implicit-def dead %at
   
@@ -2145,7 +2145,7 @@ body:             |
   
     %43 = PHI %34, %bb.72.new_die.exit.i, %42, %bb.73
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %237 = LW %78, target-flags(<unknown>) @xmalloc, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @xmalloc)
+    %237 = LW %78, target-flags(<unknown>) @xmalloc, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @xmalloc)
     %238 = ADDiu %zero, 20
     %a0 = COPY %238
     %gp = COPY %78
@@ -2153,8 +2153,8 @@ body:             |
     JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %gp, implicit-def %sp, implicit-def %v0
     ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
     %239 = COPY %v0
-    %240 = LW %78, target-flags(<unknown>) @debug_str_hash, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
-    %45 = LW %240, 0, <0x3422b90> = !{!"unison-memory-partition", i32 2} :: (load 4 from @debug_str_hash)
+    %240 = LW %78, target-flags(<unknown>) @debug_str_hash, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %45 = LW %240, 0, <0x55c9bed95540> = !{!"unison-memory-partition", i32 2} :: (load 4 from @debug_str_hash)
     %44 = COPY %239
     BNE %45, %zero, %bb.76, implicit-def dead %at
     B %bb.75, implicit-def dead %at
@@ -2163,7 +2163,7 @@ body:             |
     successors: %bb.76(100)
   
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %241 = LW %78, target-flags(<unknown>) @ht_create, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @ht_create)
+    %241 = LW %78, target-flags(<unknown>) @ht_create, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @ht_create)
     %242 = ADDiu %zero, 10
     %a0 = COPY %242
     %gp = COPY %78
@@ -2171,17 +2171,17 @@ body:             |
     JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %gp, implicit-def %sp, implicit-def %v0
     ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
     %243 = COPY %v0
-    SW %243, %240, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into @debug_str_hash)
-    %245 = LW %78, target-flags(<unknown>) @indirect_string_alloc, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
-    SW killed %245, %243, 48, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.311)
-    %46 = LW %240, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from @debug_str_hash)
+    SW %243, %240, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into @debug_str_hash)
+    %245 = LW %78, target-flags(<unknown>) @indirect_string_alloc, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    SW killed %245, %243, 48, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.311)
+    %46 = LW %240, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from @debug_str_hash)
   
   bb.76 (%ir-block.312, freq 21474828):
     successors: %bb.99(75), %bb.78.add_AT_string.exit.i(25)
   
     %47 = PHI %45, %bb.74, %46, %bb.75
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %246 = LW %78, target-flags(<unknown>) @strlen, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @strlen)
+    %246 = LW %78, target-flags(<unknown>) @strlen, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @strlen)
     %a0 = COPY %43
     %gp = COPY %78
     %t9 = COPY %246
@@ -2189,7 +2189,7 @@ body:             |
     ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
     %247 = COPY %v0
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %248 = LW %78, target-flags(<unknown>) @ht_lookup, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @ht_lookup)
+    %248 = LW %78, target-flags(<unknown>) @ht_lookup, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @ht_lookup)
     %249 = ADDiu %zero, 1
     %a0 = COPY %47
     %a1 = COPY %43
@@ -2202,13 +2202,13 @@ body:             |
     %250 = COPY %v0
     %251 = ADDiu %zero, 14
     %252 = ADDiu %zero, 3
-    %253 = LW %250, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.316)
+    %253 = LW %250, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.316)
     %254 = ADDiu killed %253, 1
-    SW killed %254, %250, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.316)
-    SW %zero, %44, 4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.320)
-    SW killed %252, %44, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.321)
-    SW killed %251, %44, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.323)
-    SW %250, %44, 12, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.325)
+    SW killed %254, %250, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.316)
+    SW %zero, %44, 4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.320)
+    SW killed %252, %44, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.321)
+    SW killed %251, %44, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.323)
+    SW %250, %44, 12, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.325)
     BEQ %40, %zero, %bb.78.add_AT_string.exit.i, implicit-def dead %at
     B %bb.99, implicit-def dead %at
   
@@ -2221,15 +2221,15 @@ body:             |
   bb.77 (%ir-block.328, freq 10737414):
     successors: %bb.78.add_AT_string.exit.i(100)
   
-    %255 = LW %40, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.330)
-    SW killed %255, %44, 4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.sunkaddr14)
-    SW %44, %40, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.332)
+    %255 = LW %40, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.330)
+    SW killed %255, %44, 4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.sunkaddr14)
+    SW %44, %40, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.332)
   
   bb.78.add_AT_string.exit.i (freq 21474828):
     successors: %bb.100.add_AT_string.exit.i(75), %bb.80.add_AT_unsigned.exit.i(25)
   
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %256 = LW %78, target-flags(<unknown>) @int_size_in_bytes, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @int_size_in_bytes)
+    %256 = LW %78, target-flags(<unknown>) @int_size_in_bytes, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @int_size_in_bytes)
     %a0 = COPY %71
     %gp = COPY %78
     %t9 = COPY %256
@@ -2237,7 +2237,7 @@ body:             |
     ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
     %257 = COPY %v0
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %258 = LW %78, target-flags(<unknown>) @xmalloc, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @xmalloc)
+    %258 = LW %78, target-flags(<unknown>) @xmalloc, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @xmalloc)
     %259 = ADDiu %zero, 20
     %a0 = COPY %259
     %t9 = COPY %258
@@ -2246,10 +2246,10 @@ body:             |
     %260 = COPY %v0
     %261 = ADDiu %zero, 6
     %262 = ADDiu %zero, 11
-    SW %zero, %260, 4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.337)
-    SW killed %262, %260, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.338)
-    SW %261, %260, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.340)
-    SW %257, %260, 12, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.342)
+    SW %zero, %260, 4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.337)
+    SW killed %262, %260, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.338)
+    SW %261, %260, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.340)
+    SW %257, %260, 12, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.342)
     BEQ %40, %zero, %bb.80.add_AT_unsigned.exit.i, implicit-def dead %at
     B %bb.100.add_AT_string.exit.i, implicit-def dead %at
   
@@ -2263,29 +2263,29 @@ body:             |
   bb.79 (%ir-block.344, freq 10737414):
     successors: %bb.80.add_AT_unsigned.exit.i(100)
   
-    %263 = LW %40, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.346)
-    SW killed %263, %48, 4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.sunkaddr17)
-    SW %48, %40, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.348)
+    %263 = LW %40, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.346)
+    SW killed %263, %48, 4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.sunkaddr17)
+    SW %48, %40, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.348)
   
   bb.80.add_AT_unsigned.exit.i (freq 21474828):
     successors: %bb.101.add_AT_unsigned.exit.i(75), %bb.86(25)
   
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %266 = LW %78, target-flags(<unknown>) @xmalloc, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @xmalloc)
+    %266 = LW %78, target-flags(<unknown>) @xmalloc, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @xmalloc)
     %267 = ADDiu %zero, 20
     %a0 = COPY %267
     %t9 = COPY %266
     JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit-def %sp, implicit-def %v0
     ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
     %268 = COPY %v0
-    SW %zero, %268, 4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.353)
+    SW %zero, %268, 4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.353)
     %269 = ADDiu %zero, 62
-    SW killed %269, %268, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.354)
+    SW killed %269, %268, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.354)
     %265 = ADDiu %zero, 0
     %49 = COPY %40
     %264 = COPY %265
-    SW %261, %268, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.356)
-    SW %38, %268, 12, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.358)
+    SW %261, %268, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.356)
+    SW %38, %268, 12, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.358)
     BEQ %40, %zero, %bb.86, implicit-def dead %at
     B %bb.101.add_AT_unsigned.exit.i, implicit-def dead %at
   
@@ -2299,9 +2299,9 @@ body:             |
   bb.81 (%ir-block.360, freq 10737414):
     successors: %bb.86(100)
   
-    %273 = LW %40, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.363)
-    SW killed %273, %50, 4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.sunkaddr20)
-    SW %50, %40, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.365)
+    %273 = LW %40, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.363)
+    SW killed %273, %50, 4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.sunkaddr20)
+    SW %50, %40, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.365)
     %51 = COPY %40
     %272 = ADDiu %zero, 0
     %271 = COPY %272
@@ -2311,17 +2311,17 @@ body:             |
     successors: %bb.103(50), %bb.84.type_main_variant.exit(50)
   
     ADJCALLSTACKDOWN 0, implicit-def dead %sp, implicit %sp
-    %168 = LW %78, target-flags(<unknown>) @gen_type_die, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @gen_type_die)
+    %168 = LW %78, target-flags(<unknown>) @gen_type_die, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @gen_type_die)
     %a0 = COPY %71
     %a1 = COPY %74
     %gp = COPY %78
     %t9 = COPY %168
     JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %gp, implicit-def %sp
     ADJCALLSTACKUP 0, 0, implicit-def dead %sp, implicit %sp
-    %52 = LW %71, 68, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from %ir.367)
+    %52 = LW %71, 68, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from %ir.367)
     %169 = LUi 4608
     %170 = LUi 65280
-    %171 = LW %52, 8, <0x3422b90> = !{!"unison-memory-partition", i32 2} :: (load 4 from %ir.369)
+    %171 = LW %52, 8, <0x55c9bed95540> = !{!"unison-memory-partition", i32 2} :: (load 4 from %ir.369)
     %172 = AND killed %171, killed %170
     BNE %172, %169, %bb.84.type_main_variant.exit, implicit-def %at
   
@@ -2333,7 +2333,7 @@ body:             |
     successors: %bb.84.type_main_variant.exit(3), %bb.83..preheader.i(96)
   
     %53 = PHI %52, %bb.103, %54, %bb.83..preheader.i
-    %54 = LW %53, 68, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.372)
+    %54 = LW %53, 68, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.372)
     BNE %53, %54, %bb.83..preheader.i, implicit-def dead %at
     B %bb.84.type_main_variant.exit, implicit-def dead %at
   
@@ -2341,7 +2341,7 @@ body:             |
     successors: %bb.85(0), %bb.86(99)
   
     %55 = PHI %52, %bb.82, %53, %bb.83..preheader.i
-    %56 = LW %55, 48, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.376)
+    %56 = LW %55, 48, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.376)
     %174 = ADDiu %zero, 0
     %173 = COPY %174
     BNE %56, %zero, %bb.86, implicit-def dead %at
@@ -2351,9 +2351,9 @@ body:             |
     exit
   
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %175 = LW %78, target-flags(<unknown>) @.str.4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
-    %176 = LW %78, target-flags(<unknown>) @__FUNCTION__.modified_type_die, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
-    %177 = LW %78, target-flags(<unknown>) @fancy_abort, <0x3422b90> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @fancy_abort)
+    %175 = LW %78, target-flags(<unknown>) @.str.4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %176 = LW %78, target-flags(<unknown>) @__FUNCTION__.modified_type_die, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %177 = LW %78, target-flags(<unknown>) @fancy_abort, <0x55c9bed95540> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @fancy_abort)
     %178 = ADDiu %zero, 7573
     %a0 = COPY %175
     %a1 = COPY %178
@@ -2379,7 +2379,7 @@ body:             |
     %61 = PHI %75, %bb.0, %9, %bb.11, %59, %bb.86
     %62 = PHI %76, %bb.0, %96, %bb.11, %58, %bb.86
     %63 = PHI %75, %bb.0, %97, %bb.11, %57, %bb.86
-    SW %61, %60, 48, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.383)
+    SW %61, %60, 48, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.383)
   
   bb.88 (%ir-block.384, freq 5680304087):
     successors: %bb.90(37), %bb.89(62)
@@ -2393,11 +2393,11 @@ body:             |
   bb.89 (%ir-block.386, freq 3550190054):
     successors: %bb.90(100)
   
-    %320 = LW %65, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.387)
+    %320 = LW %65, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.387)
     ADJCALLSTACKDOWN 0, implicit-def dead %sp, implicit %sp
     %321 = EXT %320, 19, 1
     %322 = EXT %320, 20, 1
-    %323 = LW %78, target-flags(<unknown>) @modified_type_die, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from call-entry @modified_type_die)
+    %323 = LW %78, target-flags(<unknown>) @modified_type_die, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from call-entry @modified_type_die)
     %a0 = COPY %65
     %a1 = COPY %321
     %a2 = COPY %322
@@ -2420,7 +2420,7 @@ body:             |
     successors: %bb.102(75), %bb.93.base_type_die.exit(25)
   
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %325 = LW %78, target-flags(<unknown>) @xmalloc, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @xmalloc)
+    %325 = LW %78, target-flags(<unknown>) @xmalloc, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @xmalloc)
     %326 = ADDiu %zero, 20
     %a0 = COPY %326
     %gp = COPY %78
@@ -2428,13 +2428,13 @@ body:             |
     JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %gp, implicit-def %sp, implicit-def %v0
     ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
     %327 = COPY %v0
-    SW %zero, %327, 4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.399)
+    SW %zero, %327, 4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.399)
     %328 = ADDiu %zero, 73
-    SW killed %328, %327, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.400)
+    SW killed %328, %327, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.400)
     %329 = ADDiu %zero, 10
-    SW killed %329, %327, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.402)
-    SW %68, %327, 12, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.404)
-    SW %zero, %327, 16, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.406)
+    SW killed %329, %327, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.402)
+    SW %68, %327, 12, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.404)
+    SW %zero, %327, 16, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.406)
     BEQ %64, %zero, %bb.93.base_type_die.exit, implicit-def dead %at
     B %bb.102, implicit-def dead %at
   
@@ -2448,9 +2448,9 @@ body:             |
   bb.92 (%ir-block.409, freq 1775095026):
     successors: %bb.93.base_type_die.exit(100)
   
-    %330 = LW %64, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.411)
-    SW killed %330, %69, 4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.sunkaddr23)
-    SW %69, %64, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.413)
+    %330 = LW %64, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.411)
+    SW killed %330, %69, 4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.sunkaddr23)
+    SW %69, %64, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.413)
   
   bb.93.base_type_die.exit (freq 7515028053):
     liveouts: %v0
@@ -2461,7 +2461,7 @@ body:             |
 
 ...
 --- |
-  ; ModuleID = '/home/romi/didaktoriko/unison/unison-experiments/experiments/mips/selected-functions/size-toplas/gcc.dwarf2out.modified_type_die.ll'
+  ; ModuleID = '/home/romi/unison/unison-experiments/experiments/mips/selected-functions/size-toplas/gcc.dwarf2out.modified_type_die.ll'
   target datalayout = "E-m:m-p:32:32-i8:8:32-i16:16:32-i64:64-n32-S64"
   target triple = "mips--linux-gnu"
   
@@ -3697,7 +3697,7 @@ body:             |
     %73 = COPY %a2
     %72 = COPY %a1
     %71 = COPY %a0
-    %77 = LW %71, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.1)
+    %77 = LW %71, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.1)
     %0 = SRL killed %77, 24
     %76 = ADDiu %zero, 0
     %75 = COPY %76
@@ -3712,7 +3712,7 @@ body:             |
     %81 = SLTu %zero, %72
     %82 = OR killed %80, killed %81
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %83 = LW %78, target-flags(<unknown>) @get_qualified_type, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @get_qualified_type)
+    %83 = LW %78, target-flags(<unknown>) @get_qualified_type, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @get_qualified_type)
     %a0 = COPY %71
     %a1 = COPY %82
     %gp = COPY %78
@@ -3727,21 +3727,21 @@ body:             |
   bb.2 (%ir-block.13, freq 2935558345):
     successors: %bb.3(37), %bb.93.base_type_die.exit(62)
   
-    %2 = LW %1, 48, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.15)
+    %2 = LW %1, 48, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.15)
     BNE %2, %zero, %bb.93.base_type_die.exit, implicit-def dead %at
     B %bb.3, implicit-def dead %at
   
   bb.3 (%ir-block.18, freq 1100834379):
     successors: %bb.12..thread(37), %bb.4(62)
   
-    %3 = LW %1, 52, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.19)
+    %3 = LW %1, 52, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.19)
     BEQ %3, %zero, %bb.12..thread, implicit-def dead %at
     B %bb.4, implicit-def dead %at
   
   bb.4 (%ir-block.22, freq 688021487):
     successors: %bb.5(50), %bb.12..thread(50)
   
-    %85 = LW %3, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.23)
+    %85 = LW %3, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.23)
     %86 = LUi 65280
     %87 = AND killed %85, killed %86
     %88 = LUi 8448
@@ -3751,14 +3751,14 @@ body:             |
   bb.5 (%ir-block.26, freq 344010743):
     successors: %bb.12..thread(37), %bb.6(62)
   
-    %4 = LW %3, 56, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.27)
+    %4 = LW %3, 56, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.27)
     BEQ %4, %zero, %bb.12..thread, implicit-def dead %at
     B %bb.6, implicit-def dead %at
   
   bb.6 (%ir-block.30, freq 215006714):
     successors: %bb.7(37), %bb.8(62)
   
-    %5 = LW %3, 4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.31)
+    %5 = LW %3, 4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.31)
     BNE %1, %5, %bb.8, implicit-def dead %at
     B %bb.7, implicit-def dead %at
   
@@ -3766,20 +3766,20 @@ body:             |
     successors: %bb.11(100)
   
     ADJCALLSTACKDOWN 0, implicit-def dead %sp, implicit %sp
-    %95 = LW %78, target-flags(<unknown>) @gen_type_die, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @gen_type_die)
+    %95 = LW %78, target-flags(<unknown>) @gen_type_die, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @gen_type_die)
     %a0 = COPY %1
     %a1 = COPY %74
     %gp = COPY %78
     %t9 = COPY %95
     JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %gp, implicit-def %sp
     ADJCALLSTACKUP 0, 0, implicit-def dead %sp, implicit %sp
-    %6 = LW %1, 48, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from %ir.sunkaddr2)
+    %6 = LW %1, 48, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from %ir.sunkaddr2)
     B %bb.11, implicit-def dead %at
   
   bb.8 (%ir-block.36, freq 134379196):
     successors: %bb.10(50), %bb.9(50)
   
-    %7 = LW %5, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.37)
+    %7 = LW %5, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.37)
     %89 = EXT %7, 19, 1
     %90 = SLT %72, killed %89
     BNE killed %90, %zero, %bb.10, implicit-def dead %at
@@ -3797,7 +3797,7 @@ body:             |
     successors: %bb.11(100)
   
     ADJCALLSTACKDOWN 0, implicit-def dead %sp, implicit %sp
-    %93 = LW %78, target-flags(<unknown>) @modified_type_die, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @modified_type_die)
+    %93 = LW %78, target-flags(<unknown>) @modified_type_die, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @modified_type_die)
     %a0 = COPY %4
     %a1 = COPY %72
     %a2 = COPY %73
@@ -3827,10 +3827,10 @@ body:             |
   bb.13 (%ir-block.51, freq 1717991837):
     successors: %bb.18(37), %bb.14(62)
   
-    %301 = LW %78, target-flags(<unknown>) @comp_unit_die, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
-    %10 = LW killed %301, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from @comp_unit_die)
+    %301 = LW %78, target-flags(<unknown>) @comp_unit_die, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %10 = LW killed %301, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from @comp_unit_die)
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %302 = LW %78, target-flags(<unknown>) @xcalloc, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from call-entry @xcalloc)
+    %302 = LW %78, target-flags(<unknown>) @xcalloc, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from call-entry @xcalloc)
     %303 = ADDiu %zero, 1
     %304 = ADDiu %zero, 36
     %a0 = COPY %303
@@ -3841,7 +3841,7 @@ body:             |
     ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
     %305 = COPY %v0
     %306 = ADDiu %zero, 38
-    SW killed %306, %305, 0, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (store 4 into %ir.54)
+    SW killed %306, %305, 0, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (store 4 into %ir.54)
     %11 = COPY %305
     BEQ %10, %zero, %bb.18, implicit-def dead %at
     B %bb.14, implicit-def dead %at
@@ -3862,9 +3862,9 @@ body:             |
     exit
   
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %308 = LW %78, target-flags(<unknown>) @.str.4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
-    %309 = LW %78, target-flags(<unknown>) @__FUNCTION__.add_child_die, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
-    %310 = LW %78, target-flags(<unknown>) @fancy_abort, <0x3422b90> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @fancy_abort)
+    %308 = LW %78, target-flags(<unknown>) @.str.4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %309 = LW %78, target-flags(<unknown>) @__FUNCTION__.add_child_die, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %310 = LW %78, target-flags(<unknown>) @fancy_abort, <0x55c9bed95540> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @fancy_abort)
     %311 = ADDiu %zero, 5026
     %a0 = COPY %308
     %a1 = COPY %311
@@ -3877,17 +3877,17 @@ body:             |
   bb.17 (%ir-block.62, freq 671089921):
     successors: %bb.19.new_die.exit(100)
   
-    SW %10, %11, 12, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.64)
-    %307 = LW %10, 16, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.66)
-    SW killed %307, %11, 20, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.69)
-    SW %11, %10, 16, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.70)
+    SW %10, %11, 12, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.64)
+    %307 = LW %10, 16, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.66)
+    SW killed %307, %11, 20, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.69)
+    SW %11, %10, 16, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.70)
     B %bb.19.new_die.exit, implicit-def dead %at
   
   bb.18 (%ir-block.71, freq 644246939):
     successors: %bb.19.new_die.exit(100)
   
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %312 = LW %78, target-flags(<unknown>) @xmalloc, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @xmalloc)
+    %312 = LW %78, target-flags(<unknown>) @xmalloc, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @xmalloc)
     %313 = ADDiu %zero, 12
     %a0 = COPY %313
     %gp = COPY %78
@@ -3895,18 +3895,18 @@ body:             |
     JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %gp, implicit-def %sp, implicit-def %v0
     ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
     %314 = COPY %v0
-    SW %11, %314, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.73)
-    SW %71, %314, 4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.75)
-    %315 = LW %78, target-flags(<unknown>) @limbo_die_list, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
-    %316 = LW %315, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from `i32* bitcast (%struct.limbo_die_struct.4338** @limbo_die_list to i32*)`)
-    SW killed %316, %314, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.78)
-    SW %314, %315, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into `i8** bitcast (%struct.limbo_die_struct.4338** @limbo_die_list to i8**)`)
+    SW %11, %314, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.73)
+    SW %71, %314, 4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.75)
+    %315 = LW %78, target-flags(<unknown>) @limbo_die_list, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %316 = LW %315, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from `i32* bitcast (%struct.limbo_die_struct.4338** @limbo_die_list to i32*)`)
+    SW killed %316, %314, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.78)
+    SW %314, %315, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into `i8** bitcast (%struct.limbo_die_struct.4338** @limbo_die_list to i8**)`)
   
   bb.19.new_die.exit (freq 1717991197):
     successors: %bb.86(100)
   
     ADJCALLSTACKDOWN 0, implicit-def dead %sp, implicit %sp
-    %318 = LW %78, target-flags(<unknown>) @modified_type_die, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @modified_type_die)
+    %318 = LW %78, target-flags(<unknown>) @modified_type_die, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @modified_type_die)
     %317 = ADDiu %zero, 0
     %a0 = COPY %71
     %a1 = COPY %317
@@ -3930,10 +3930,10 @@ body:             |
   bb.21 (%ir-block.83, freq 644246939):
     successors: %bb.26(37), %bb.22(62)
   
-    %282 = LW %78, target-flags(<unknown>) @comp_unit_die, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
-    %14 = LW killed %282, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from @comp_unit_die)
+    %282 = LW %78, target-flags(<unknown>) @comp_unit_die, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %14 = LW killed %282, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from @comp_unit_die)
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %283 = LW %78, target-flags(<unknown>) @xcalloc, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from call-entry @xcalloc)
+    %283 = LW %78, target-flags(<unknown>) @xcalloc, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from call-entry @xcalloc)
     %284 = ADDiu %zero, 1
     %285 = ADDiu %zero, 36
     %a0 = COPY %284
@@ -3944,7 +3944,7 @@ body:             |
     ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
     %286 = COPY %v0
     %287 = ADDiu %zero, 53
-    SW killed %287, %286, 0, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (store 4 into %ir.86)
+    SW killed %287, %286, 0, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (store 4 into %ir.86)
     %15 = COPY %286
     BEQ %14, %zero, %bb.26, implicit-def dead %at
     B %bb.22, implicit-def dead %at
@@ -3965,9 +3965,9 @@ body:             |
     exit
   
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %289 = LW %78, target-flags(<unknown>) @.str.4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
-    %290 = LW %78, target-flags(<unknown>) @__FUNCTION__.add_child_die, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
-    %291 = LW %78, target-flags(<unknown>) @fancy_abort, <0x3422b90> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @fancy_abort)
+    %289 = LW %78, target-flags(<unknown>) @.str.4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %290 = LW %78, target-flags(<unknown>) @__FUNCTION__.add_child_die, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %291 = LW %78, target-flags(<unknown>) @fancy_abort, <0x55c9bed95540> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @fancy_abort)
     %292 = ADDiu %zero, 5026
     %a0 = COPY %289
     %a1 = COPY %292
@@ -3980,17 +3980,17 @@ body:             |
   bb.25 (%ir-block.94, freq 251658720):
     successors: %bb.27.new_die.exit4(100)
   
-    SW %14, %15, 12, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.96)
-    %288 = LW %14, 16, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.98)
-    SW killed %288, %15, 20, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.101)
-    SW %15, %14, 16, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.102)
+    SW %14, %15, 12, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.96)
+    %288 = LW %14, 16, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.98)
+    SW killed %288, %15, 20, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.101)
+    SW %15, %14, 16, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.102)
     B %bb.27.new_die.exit4, implicit-def dead %at
   
   bb.26 (%ir-block.103, freq 241592602):
     successors: %bb.27.new_die.exit4(100)
   
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %293 = LW %78, target-flags(<unknown>) @xmalloc, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @xmalloc)
+    %293 = LW %78, target-flags(<unknown>) @xmalloc, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @xmalloc)
     %294 = ADDiu %zero, 12
     %a0 = COPY %294
     %gp = COPY %78
@@ -3998,18 +3998,18 @@ body:             |
     JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %gp, implicit-def %sp, implicit-def %v0
     ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
     %295 = COPY %v0
-    SW %15, %295, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.105)
-    SW %71, %295, 4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.107)
-    %296 = LW %78, target-flags(<unknown>) @limbo_die_list, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
-    %297 = LW %296, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from `i32* bitcast (%struct.limbo_die_struct.4338** @limbo_die_list to i32*)`)
-    SW killed %297, %295, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.110)
-    SW %295, %296, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into `i8** bitcast (%struct.limbo_die_struct.4338** @limbo_die_list to i8**)`)
+    SW %15, %295, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.105)
+    SW %71, %295, 4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.107)
+    %296 = LW %78, target-flags(<unknown>) @limbo_die_list, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %297 = LW %296, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from `i32* bitcast (%struct.limbo_die_struct.4338** @limbo_die_list to i32*)`)
+    SW killed %297, %295, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.110)
+    SW %295, %296, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into `i8** bitcast (%struct.limbo_die_struct.4338** @limbo_die_list to i8**)`)
   
   bb.27.new_die.exit4 (freq 644246699):
     successors: %bb.86(100)
   
     ADJCALLSTACKDOWN 0, implicit-def dead %sp, implicit %sp
-    %299 = LW %78, target-flags(<unknown>) @modified_type_die, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @modified_type_die)
+    %299 = LW %78, target-flags(<unknown>) @modified_type_die, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @modified_type_die)
     %298 = ADDiu %zero, 0
     %a0 = COPY %71
     %a1 = COPY %298
@@ -4041,10 +4041,10 @@ body:             |
   bb.29 (%ir-block.114, freq 128849387):
     successors: %bb.34(37), %bb.30(62)
   
-    %129 = LW %78, target-flags(<unknown>) @comp_unit_die, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
-    %18 = LW killed %129, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from @comp_unit_die)
+    %129 = LW %78, target-flags(<unknown>) @comp_unit_die, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %18 = LW killed %129, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from @comp_unit_die)
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %130 = LW %78, target-flags(<unknown>) @xcalloc, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from call-entry @xcalloc)
+    %130 = LW %78, target-flags(<unknown>) @xcalloc, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from call-entry @xcalloc)
     %131 = ADDiu %zero, 1
     %132 = ADDiu %zero, 36
     %a0 = COPY %131
@@ -4055,7 +4055,7 @@ body:             |
     ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
     %133 = COPY %v0
     %134 = ADDiu %zero, 15
-    SW killed %134, %133, 0, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (store 4 into %ir.117)
+    SW killed %134, %133, 0, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (store 4 into %ir.117)
     %19 = COPY %133
     BEQ %18, %zero, %bb.34, implicit-def dead %at
     B %bb.30, implicit-def dead %at
@@ -4076,9 +4076,9 @@ body:             |
     exit
   
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %136 = LW %78, target-flags(<unknown>) @.str.4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
-    %137 = LW %78, target-flags(<unknown>) @__FUNCTION__.add_child_die, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
-    %138 = LW %78, target-flags(<unknown>) @fancy_abort, <0x3422b90> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @fancy_abort)
+    %136 = LW %78, target-flags(<unknown>) @.str.4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %137 = LW %78, target-flags(<unknown>) @__FUNCTION__.add_child_die, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %138 = LW %78, target-flags(<unknown>) @fancy_abort, <0x55c9bed95540> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @fancy_abort)
     %139 = ADDiu %zero, 5026
     %a0 = COPY %136
     %a1 = COPY %139
@@ -4091,17 +4091,17 @@ body:             |
   bb.33 (%ir-block.125, freq 50331744):
     successors: %bb.35.new_die.exit5(100)
   
-    SW %18, %19, 12, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.127)
-    %135 = LW %18, 16, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.129)
-    SW killed %135, %19, 20, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.132)
-    SW %19, %18, 16, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.133)
+    SW %18, %19, 12, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.127)
+    %135 = LW %18, 16, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.129)
+    SW killed %135, %19, 20, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.132)
+    SW %19, %18, 16, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.133)
     B %bb.35.new_die.exit5, implicit-def dead %at
   
   bb.34 (%ir-block.134, freq 48318520):
     successors: %bb.35.new_die.exit5(100)
   
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %140 = LW %78, target-flags(<unknown>) @xmalloc, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @xmalloc)
+    %140 = LW %78, target-flags(<unknown>) @xmalloc, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @xmalloc)
     %141 = ADDiu %zero, 12
     %a0 = COPY %141
     %gp = COPY %78
@@ -4109,20 +4109,20 @@ body:             |
     JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %gp, implicit-def %sp, implicit-def %v0
     ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
     %142 = COPY %v0
-    SW %19, %142, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.136)
-    SW %71, %142, 4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.138)
-    %143 = LW %78, target-flags(<unknown>) @limbo_die_list, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
-    %144 = LW %143, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from `i32* bitcast (%struct.limbo_die_struct.4338** @limbo_die_list to i32*)`)
-    SW killed %144, %142, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.141)
-    SW %142, %143, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into `i8** bitcast (%struct.limbo_die_struct.4338** @limbo_die_list to i8**)`)
+    SW %19, %142, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.136)
+    SW %71, %142, 4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.138)
+    %143 = LW %78, target-flags(<unknown>) @limbo_die_list, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %144 = LW %143, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from `i32* bitcast (%struct.limbo_die_struct.4338** @limbo_die_list to i32*)`)
+    SW killed %144, %142, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.141)
+    SW %142, %143, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into `i8** bitcast (%struct.limbo_die_struct.4338** @limbo_die_list to i8**)`)
   
   bb.35.new_die.exit5 (freq 128849339):
     successors: %bb.96.new_die.exit5(75), %bb.37.add_AT_unsigned.exit(25)
   
-    %145 = LW %78, target-flags(<unknown>) @target_flags, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
-    %146 = LW killed %145, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from @target_flags)
+    %145 = LW %78, target-flags(<unknown>) @target_flags, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %146 = LW killed %145, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from @target_flags)
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %147 = LW %78, target-flags(<unknown>) @xmalloc, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from call-entry @xmalloc)
+    %147 = LW %78, target-flags(<unknown>) @xmalloc, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from call-entry @xmalloc)
     %148 = ADDiu %zero, 20
     %a0 = COPY %148
     %gp = COPY %78
@@ -4132,14 +4132,14 @@ body:             |
     %149 = COPY %v0
     %150 = ADDiu %zero, 6
     %151 = ADDiu %zero, 11
-    SW %zero, %149, 4, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (store 4 into %ir.149)
-    SW killed %151, %149, 0, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (store 4 into %ir.150)
-    SW killed %150, %149, 8, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (store 4 into %ir.152)
+    SW %zero, %149, 4, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (store 4 into %ir.149)
+    SW killed %151, %149, 0, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (store 4 into %ir.150)
+    SW killed %150, %149, 8, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (store 4 into %ir.152)
     %152 = SRL killed %146, 20
     %153 = ANDi killed %152, 32
     %154 = ADDiu killed %153, 32
     %155 = SRL killed %154, 3
-    SW killed %155, %149, 12, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (store 4 into %ir.154)
+    SW killed %155, %149, 12, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (store 4 into %ir.154)
     BEQ %19, %zero, %bb.37.add_AT_unsigned.exit, implicit-def dead %at
     B %bb.96.new_die.exit5, implicit-def dead %at
   
@@ -4153,14 +4153,14 @@ body:             |
   bb.36 (%ir-block.157, freq 64424669):
     successors: %bb.37.add_AT_unsigned.exit(100)
   
-    %156 = LW %19, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.159)
-    SW killed %156, %20, 4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.sunkaddr5)
-    SW %20, %19, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.161)
+    %156 = LW %19, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.159)
+    SW killed %156, %20, 4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.sunkaddr5)
+    SW %20, %19, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.161)
   
   bb.37.add_AT_unsigned.exit (freq 128849339):
     successors: %bb.86(100)
   
-    %22 = LW %71, 4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.163)
+    %22 = LW %71, 4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.163)
     %21 = COPY %19
     %157 = ADDiu %zero, 0
     B %bb.86, implicit-def dead %at
@@ -4168,10 +4168,10 @@ body:             |
   bb.38 (%ir-block.165, freq 128849387):
     successors: %bb.43(37), %bb.39(62)
   
-    %100 = LW %78, target-flags(<unknown>) @comp_unit_die, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
-    %23 = LW killed %100, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from @comp_unit_die)
+    %100 = LW %78, target-flags(<unknown>) @comp_unit_die, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %23 = LW killed %100, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from @comp_unit_die)
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %101 = LW %78, target-flags(<unknown>) @xcalloc, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from call-entry @xcalloc)
+    %101 = LW %78, target-flags(<unknown>) @xcalloc, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from call-entry @xcalloc)
     %102 = ADDiu %zero, 1
     %103 = ADDiu %zero, 36
     %a0 = COPY %102
@@ -4182,7 +4182,7 @@ body:             |
     ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
     %104 = COPY %v0
     %105 = ADDiu %zero, 16
-    SW killed %105, %104, 0, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (store 4 into %ir.168)
+    SW killed %105, %104, 0, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (store 4 into %ir.168)
     %24 = COPY %104
     BEQ %23, %zero, %bb.43, implicit-def dead %at
     B %bb.39, implicit-def dead %at
@@ -4203,9 +4203,9 @@ body:             |
     exit
   
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %107 = LW %78, target-flags(<unknown>) @.str.4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
-    %108 = LW %78, target-flags(<unknown>) @__FUNCTION__.add_child_die, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
-    %109 = LW %78, target-flags(<unknown>) @fancy_abort, <0x3422b90> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @fancy_abort)
+    %107 = LW %78, target-flags(<unknown>) @.str.4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %108 = LW %78, target-flags(<unknown>) @__FUNCTION__.add_child_die, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %109 = LW %78, target-flags(<unknown>) @fancy_abort, <0x55c9bed95540> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @fancy_abort)
     %110 = ADDiu %zero, 5026
     %a0 = COPY %107
     %a1 = COPY %110
@@ -4218,17 +4218,17 @@ body:             |
   bb.42 (%ir-block.176, freq 50331744):
     successors: %bb.44.new_die.exit6(100)
   
-    SW %23, %24, 12, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.178)
-    %106 = LW %23, 16, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.180)
-    SW killed %106, %24, 20, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.183)
-    SW %24, %23, 16, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.184)
+    SW %23, %24, 12, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.178)
+    %106 = LW %23, 16, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.180)
+    SW killed %106, %24, 20, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.183)
+    SW %24, %23, 16, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.184)
     B %bb.44.new_die.exit6, implicit-def dead %at
   
   bb.43 (%ir-block.185, freq 48318520):
     successors: %bb.44.new_die.exit6(100)
   
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %111 = LW %78, target-flags(<unknown>) @xmalloc, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @xmalloc)
+    %111 = LW %78, target-flags(<unknown>) @xmalloc, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @xmalloc)
     %112 = ADDiu %zero, 12
     %a0 = COPY %112
     %gp = COPY %78
@@ -4236,20 +4236,20 @@ body:             |
     JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %gp, implicit-def %sp, implicit-def %v0
     ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
     %113 = COPY %v0
-    SW %24, %113, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.187)
-    SW %71, %113, 4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.189)
-    %114 = LW %78, target-flags(<unknown>) @limbo_die_list, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
-    %115 = LW %114, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from `i32* bitcast (%struct.limbo_die_struct.4338** @limbo_die_list to i32*)`)
-    SW killed %115, %113, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.192)
-    SW %113, %114, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into `i8** bitcast (%struct.limbo_die_struct.4338** @limbo_die_list to i8**)`)
+    SW %24, %113, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.187)
+    SW %71, %113, 4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.189)
+    %114 = LW %78, target-flags(<unknown>) @limbo_die_list, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %115 = LW %114, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from `i32* bitcast (%struct.limbo_die_struct.4338** @limbo_die_list to i32*)`)
+    SW killed %115, %113, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.192)
+    SW %113, %114, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into `i8** bitcast (%struct.limbo_die_struct.4338** @limbo_die_list to i8**)`)
   
   bb.44.new_die.exit6 (freq 128849339):
     successors: %bb.95.new_die.exit6(75), %bb.46.add_AT_unsigned.exit8(25)
   
-    %116 = LW %78, target-flags(<unknown>) @target_flags, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
-    %117 = LW killed %116, 0, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from @target_flags)
+    %116 = LW %78, target-flags(<unknown>) @target_flags, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %117 = LW killed %116, 0, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from @target_flags)
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %118 = LW %78, target-flags(<unknown>) @xmalloc, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @xmalloc)
+    %118 = LW %78, target-flags(<unknown>) @xmalloc, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @xmalloc)
     %119 = ADDiu %zero, 20
     %a0 = COPY %119
     %gp = COPY %78
@@ -4259,14 +4259,14 @@ body:             |
     %120 = COPY %v0
     %121 = ADDiu %zero, 6
     %122 = ADDiu %zero, 11
-    SW %zero, %120, 4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.200)
-    SW killed %122, %120, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.201)
-    SW killed %121, %120, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.203)
+    SW %zero, %120, 4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.200)
+    SW killed %122, %120, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.201)
+    SW killed %121, %120, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.203)
     %123 = SRL killed %117, 20
     %124 = ANDi killed %123, 32
     %125 = ADDiu killed %124, 32
     %126 = SRL killed %125, 3
-    SW killed %126, %120, 12, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.205)
+    SW killed %126, %120, 12, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.205)
     BEQ %24, %zero, %bb.46.add_AT_unsigned.exit8, implicit-def dead %at
     B %bb.95.new_die.exit6, implicit-def dead %at
   
@@ -4280,14 +4280,14 @@ body:             |
   bb.45 (%ir-block.208, freq 64424669):
     successors: %bb.46.add_AT_unsigned.exit8(100)
   
-    %127 = LW %24, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.210)
-    SW killed %127, %25, 4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.sunkaddr8)
-    SW %25, %24, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.212)
+    %127 = LW %24, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.210)
+    SW killed %127, %25, 4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.sunkaddr8)
+    SW %25, %24, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.212)
   
   bb.46.add_AT_unsigned.exit8 (freq 128849339):
     successors: %bb.86(100)
   
-    %27 = LW %71, 4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.214)
+    %27 = LW %71, 4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.214)
     %26 = COPY %24
     %128 = ADDiu %zero, 0
     B %bb.86, implicit-def dead %at
@@ -4295,7 +4295,7 @@ body:             |
   bb.47 (%ir-block.216, freq 128849387):
     successors: %bb.49.switch.hole_check.i(99), %bb.48(0)
   
-    %28 = LW %71, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.sunkaddr11)
+    %28 = LW %71, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.sunkaddr11)
     %158 = LUi 6400
     %159 = SLTu %28, killed %158
     BNE killed %159, %zero, %bb.49.switch.hole_check.i, implicit-def dead %at
@@ -4305,9 +4305,9 @@ body:             |
     exit
   
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %278 = LW %78, target-flags(<unknown>) @.str.4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
-    %279 = LW %78, target-flags(<unknown>) @__FUNCTION__.is_base_type, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
-    %280 = LW %78, target-flags(<unknown>) @fancy_abort, <0x3422b90> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @fancy_abort)
+    %278 = LW %78, target-flags(<unknown>) @.str.4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %279 = LW %78, target-flags(<unknown>) @__FUNCTION__.is_base_type, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %280 = LW %78, target-flags(<unknown>) @fancy_abort, <0x55c9bed95540> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @fancy_abort)
     %281 = ADDiu %zero, 7461
     %a0 = COPY %278
     %a1 = COPY %281
@@ -4355,19 +4355,19 @@ body:             |
   bb.52 (%ir-block.228, freq 21474856):
     successors: %bb.104(37), %bb.53(62)
   
-    %30 = LW %71, 52, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.226)
+    %30 = LW %71, 52, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.226)
     BNE %30, %zero, %bb.53, implicit-def %at
   
   bb.104 (freq 8053071):
     successors: %bb.56(100)
   
-    %182 = LW %78, target-flags(<unknown>) @.str.388, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %182 = LW %78, target-flags(<unknown>) @.str.388, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
     B %bb.56, implicit-def %at
   
   bb.53 (%ir-block.230, freq 13421785):
     successors: %bb.54(50), %bb.55(50)
   
-    %183 = LW %30, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.231)
+    %183 = LW %30, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.231)
     %184 = LUi 65280
     %185 = AND killed %183, killed %184
     %186 = LUi 8448
@@ -4377,13 +4377,13 @@ body:             |
   bb.54 (%ir-block.234, freq 6710892):
     successors: %bb.55(100)
   
-    %31 = LW %30, 44, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.235)
+    %31 = LW %30, 44, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.235)
   
   bb.55 (%ir-block.237, freq 13421785):
     successors: %bb.56(100)
   
     %32 = PHI %30, %bb.53, %31, %bb.54
-    %33 = LW %32, 16, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.240)
+    %33 = LW %32, 16, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.240)
   
   bb.56 (%ir-block.242, freq 21474856):
     successors: %bb.65(0), %bb.98(99)
@@ -4398,16 +4398,16 @@ body:             |
   
     %187 = ADDiu %zero, 4
     %190 = SLL %188, 2
-    %191 = LW %78, target-flags(<unknown>) %jump-table.0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %191 = LW %78, target-flags(<unknown>) %jump-table.0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
     %192 = ADDu killed %190, killed %191
-    %193 = LW killed %192, target-flags(<unknown>) %jump-table.0, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from jump-table)
+    %193 = LW killed %192, target-flags(<unknown>) %jump-table.0, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from jump-table)
     %194 = ADDu killed %193, %78
     PseudoIndirectBranch killed %194
   
   bb.57 (%ir-block.243, freq 4294967):
     successors: %bb.58(50), %bb.61(50)
   
-    %204 = LW %71, 32, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.244)
+    %204 = LW %71, 32, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.244)
     %205 = LUi 65408
     %206 = AND killed %204, killed %205
     %207 = LUi 1024
@@ -4417,8 +4417,8 @@ body:             |
   bb.58 (%ir-block.247, freq 2147483):
     successors: %bb.62(37), %bb.59(62)
   
-    %208 = LW %78, target-flags(<unknown>) @integer_types, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
-    %209 = LW killed %208, 0, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from `%union.tree_node.4288** getelementptr inbounds ([11 x %union.tree_node.4288*], [11 x %union.tree_node.4288*]* @integer_types, i32 0, i32 0)`)
+    %208 = LW %78, target-flags(<unknown>) @integer_types, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %209 = LW killed %208, 0, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from `%union.tree_node.4288** getelementptr inbounds ([11 x %union.tree_node.4288*], [11 x %union.tree_node.4288*]* @integer_types, i32 0, i32 0)`)
     BEQ killed %209, %71, %bb.62, implicit-def dead %at
     B %bb.59, implicit-def dead %at
   
@@ -4426,8 +4426,8 @@ body:             |
     successors: %bb.62(37), %bb.60(62)
   
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %210 = LW %78, target-flags(<unknown>) @.str.389, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
-    %211 = LW %78, target-flags(<unknown>) @strcmp, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @strcmp)
+    %210 = LW %78, target-flags(<unknown>) @.str.389, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %211 = LW %78, target-flags(<unknown>) @strcmp, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @strcmp)
     %a0 = COPY %34
     %a1 = COPY %210
     %gp = COPY %78
@@ -4442,8 +4442,8 @@ body:             |
     successors: %bb.62(37), %bb.61(62)
   
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %213 = LW %78, target-flags(<unknown>) @.str.390, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
-    %214 = LW %78, target-flags(<unknown>) @strcmp, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from call-entry @strcmp)
+    %213 = LW %78, target-flags(<unknown>) @.str.390, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %214 = LW %78, target-flags(<unknown>) @strcmp, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from call-entry @strcmp)
     %a0 = COPY %34
     %a1 = COPY %213
     %t9 = COPY %214
@@ -4472,8 +4472,8 @@ body:             |
   bb.63 (%ir-block.264, freq 4294967):
     successors: %bb.66(100)
   
-    %196 = LW %71, 4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.266)
-    %197 = LW killed %196, 8, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from %ir.268)
+    %196 = LW %71, 4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.266)
+    %197 = LW killed %196, 8, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from %ir.268)
     %198 = LUi 65280
     %199 = AND killed %197, killed %198
     %200 = ADDiu %zero, 128
@@ -4493,9 +4493,9 @@ body:             |
     exit
   
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %274 = LW %78, target-flags(<unknown>) @.str.4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
-    %275 = LW %78, target-flags(<unknown>) @__FUNCTION__.base_type_die, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
-    %276 = LW %78, target-flags(<unknown>) @fancy_abort, <0x3422b90> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @fancy_abort)
+    %274 = LW %78, target-flags(<unknown>) @.str.4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %275 = LW %78, target-flags(<unknown>) @__FUNCTION__.base_type_die, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %276 = LW %78, target-flags(<unknown>) @fancy_abort, <0x55c9bed95540> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @fancy_abort)
     %277 = ADDiu %zero, 7381
     %a0 = COPY %274
     %a1 = COPY %277
@@ -4509,10 +4509,10 @@ body:             |
     successors: %bb.71(37), %bb.67(62)
   
     %38 = PHI %187, %bb.98, %195, %bb.64, %37, %bb.63, %35, %bb.61, %36, %bb.62
-    %220 = LW %78, target-flags(<unknown>) @comp_unit_die, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
-    %39 = LW killed %220, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from @comp_unit_die)
+    %220 = LW %78, target-flags(<unknown>) @comp_unit_die, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %39 = LW killed %220, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from @comp_unit_die)
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %221 = LW %78, target-flags(<unknown>) @xcalloc, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from call-entry @xcalloc)
+    %221 = LW %78, target-flags(<unknown>) @xcalloc, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from call-entry @xcalloc)
     %222 = ADDiu %zero, 1
     %223 = ADDiu %zero, 36
     %a0 = COPY %222
@@ -4522,7 +4522,7 @@ body:             |
     JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %gp, implicit-def %sp, implicit-def %v0
     ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
     %224 = COPY %v0
-    SW %223, %224, 0, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (store 4 into %ir.276)
+    SW %223, %224, 0, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (store 4 into %ir.276)
     %40 = COPY %224
     BEQ %39, %zero, %bb.71, implicit-def dead %at
     B %bb.67, implicit-def dead %at
@@ -4543,9 +4543,9 @@ body:             |
     exit
   
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %226 = LW %78, target-flags(<unknown>) @.str.4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
-    %227 = LW %78, target-flags(<unknown>) @__FUNCTION__.add_child_die, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
-    %228 = LW %78, target-flags(<unknown>) @fancy_abort, <0x3422b90> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @fancy_abort)
+    %226 = LW %78, target-flags(<unknown>) @.str.4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %227 = LW %78, target-flags(<unknown>) @__FUNCTION__.add_child_die, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %228 = LW %78, target-flags(<unknown>) @fancy_abort, <0x55c9bed95540> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @fancy_abort)
     %229 = ADDiu %zero, 5026
     %a0 = COPY %226
     %a1 = COPY %229
@@ -4558,17 +4558,17 @@ body:             |
   bb.70 (%ir-block.284, freq 8388599):
     successors: %bb.72.new_die.exit.i(100)
   
-    SW %39, %40, 12, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.286)
-    %225 = LW %39, 16, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.288)
-    SW killed %225, %40, 20, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.291)
-    SW %40, %39, 16, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.292)
+    SW %39, %40, 12, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.286)
+    %225 = LW %39, 16, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.288)
+    SW killed %225, %40, 20, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.291)
+    SW %40, %39, 16, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.292)
     B %bb.72.new_die.exit.i, implicit-def dead %at
   
   bb.71 (%ir-block.293, freq 8053063):
     successors: %bb.72.new_die.exit.i(100)
   
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %230 = LW %78, target-flags(<unknown>) @xmalloc, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @xmalloc)
+    %230 = LW %78, target-flags(<unknown>) @xmalloc, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @xmalloc)
     %231 = ADDiu %zero, 12
     %a0 = COPY %231
     %gp = COPY %78
@@ -4576,18 +4576,18 @@ body:             |
     JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %gp, implicit-def %sp, implicit-def %v0
     ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
     %232 = COPY %v0
-    SW %40, %232, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.295)
-    SW %71, %232, 4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.297)
-    %233 = LW %78, target-flags(<unknown>) @limbo_die_list, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
-    %234 = LW %233, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from `i32* bitcast (%struct.limbo_die_struct.4338** @limbo_die_list to i32*)`)
-    SW killed %234, %232, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.300)
-    SW %232, %233, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into `i8** bitcast (%struct.limbo_die_struct.4338** @limbo_die_list to i8**)`)
+    SW %40, %232, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.295)
+    SW %71, %232, 4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.297)
+    %233 = LW %78, target-flags(<unknown>) @limbo_die_list, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %234 = LW %233, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from `i32* bitcast (%struct.limbo_die_struct.4338** @limbo_die_list to i32*)`)
+    SW killed %234, %232, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.300)
+    SW %232, %233, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into `i8** bitcast (%struct.limbo_die_struct.4338** @limbo_die_list to i8**)`)
   
   bb.72.new_die.exit.i (freq 21474828):
     successors: %bb.74(37), %bb.73(62)
   
-    %235 = LW %78, target-flags(<unknown>) @demangle_name_func, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
-    %41 = LW killed %235, 0, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from @demangle_name_func)
+    %235 = LW %78, target-flags(<unknown>) @demangle_name_func, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %41 = LW killed %235, 0, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from @demangle_name_func)
     BEQ %41, %zero, %bb.74, implicit-def dead %at
     B %bb.73, implicit-def dead %at
   
@@ -4607,7 +4607,7 @@ body:             |
   
     %43 = PHI %34, %bb.72.new_die.exit.i, %42, %bb.73
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %237 = LW %78, target-flags(<unknown>) @xmalloc, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @xmalloc)
+    %237 = LW %78, target-flags(<unknown>) @xmalloc, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @xmalloc)
     %238 = ADDiu %zero, 20
     %a0 = COPY %238
     %gp = COPY %78
@@ -4615,8 +4615,8 @@ body:             |
     JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %gp, implicit-def %sp, implicit-def %v0
     ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
     %239 = COPY %v0
-    %240 = LW %78, target-flags(<unknown>) @debug_str_hash, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
-    %45 = LW %240, 0, <0x3422b90> = !{!"unison-memory-partition", i32 2} :: (load 4 from @debug_str_hash)
+    %240 = LW %78, target-flags(<unknown>) @debug_str_hash, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %45 = LW %240, 0, <0x55c9bed95540> = !{!"unison-memory-partition", i32 2} :: (load 4 from @debug_str_hash)
     %44 = COPY %239
     BNE %45, %zero, %bb.76, implicit-def dead %at
     B %bb.75, implicit-def dead %at
@@ -4625,7 +4625,7 @@ body:             |
     successors: %bb.76(100)
   
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %241 = LW %78, target-flags(<unknown>) @ht_create, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @ht_create)
+    %241 = LW %78, target-flags(<unknown>) @ht_create, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @ht_create)
     %242 = ADDiu %zero, 10
     %a0 = COPY %242
     %gp = COPY %78
@@ -4633,17 +4633,17 @@ body:             |
     JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %gp, implicit-def %sp, implicit-def %v0
     ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
     %243 = COPY %v0
-    SW %243, %240, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into @debug_str_hash)
-    %245 = LW %78, target-flags(<unknown>) @indirect_string_alloc, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
-    SW killed %245, %243, 48, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.311)
-    %46 = LW %240, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from @debug_str_hash)
+    SW %243, %240, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into @debug_str_hash)
+    %245 = LW %78, target-flags(<unknown>) @indirect_string_alloc, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    SW killed %245, %243, 48, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.311)
+    %46 = LW %240, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from @debug_str_hash)
   
   bb.76 (%ir-block.312, freq 21474828):
     successors: %bb.99(75), %bb.78.add_AT_string.exit.i(25)
   
     %47 = PHI %45, %bb.74, %46, %bb.75
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %246 = LW %78, target-flags(<unknown>) @strlen, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @strlen)
+    %246 = LW %78, target-flags(<unknown>) @strlen, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @strlen)
     %a0 = COPY %43
     %gp = COPY %78
     %t9 = COPY %246
@@ -4651,7 +4651,7 @@ body:             |
     ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
     %247 = COPY %v0
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %248 = LW %78, target-flags(<unknown>) @ht_lookup, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @ht_lookup)
+    %248 = LW %78, target-flags(<unknown>) @ht_lookup, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @ht_lookup)
     %249 = ADDiu %zero, 1
     %a0 = COPY %47
     %a1 = COPY %43
@@ -4664,13 +4664,13 @@ body:             |
     %250 = COPY %v0
     %251 = ADDiu %zero, 14
     %252 = ADDiu %zero, 3
-    %253 = LW %250, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.316)
+    %253 = LW %250, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.316)
     %254 = ADDiu killed %253, 1
-    SW killed %254, %250, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.316)
-    SW %zero, %44, 4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.320)
-    SW killed %252, %44, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.321)
-    SW killed %251, %44, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.323)
-    SW %250, %44, 12, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.325)
+    SW killed %254, %250, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.316)
+    SW %zero, %44, 4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.320)
+    SW killed %252, %44, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.321)
+    SW killed %251, %44, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.323)
+    SW %250, %44, 12, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.325)
     BEQ %40, %zero, %bb.78.add_AT_string.exit.i, implicit-def dead %at
     B %bb.99, implicit-def dead %at
   
@@ -4683,15 +4683,15 @@ body:             |
   bb.77 (%ir-block.328, freq 10737414):
     successors: %bb.78.add_AT_string.exit.i(100)
   
-    %255 = LW %40, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.330)
-    SW killed %255, %44, 4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.sunkaddr14)
-    SW %44, %40, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.332)
+    %255 = LW %40, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.330)
+    SW killed %255, %44, 4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.sunkaddr14)
+    SW %44, %40, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.332)
   
   bb.78.add_AT_string.exit.i (freq 21474828):
     successors: %bb.100.add_AT_string.exit.i(75), %bb.80.add_AT_unsigned.exit.i(25)
   
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %256 = LW %78, target-flags(<unknown>) @int_size_in_bytes, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @int_size_in_bytes)
+    %256 = LW %78, target-flags(<unknown>) @int_size_in_bytes, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @int_size_in_bytes)
     %a0 = COPY %71
     %gp = COPY %78
     %t9 = COPY %256
@@ -4699,7 +4699,7 @@ body:             |
     ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
     %257 = COPY %v0
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %258 = LW %78, target-flags(<unknown>) @xmalloc, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @xmalloc)
+    %258 = LW %78, target-flags(<unknown>) @xmalloc, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @xmalloc)
     %259 = ADDiu %zero, 20
     %a0 = COPY %259
     %t9 = COPY %258
@@ -4708,10 +4708,10 @@ body:             |
     %260 = COPY %v0
     %261 = ADDiu %zero, 6
     %262 = ADDiu %zero, 11
-    SW %zero, %260, 4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.337)
-    SW killed %262, %260, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.338)
-    SW %261, %260, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.340)
-    SW %257, %260, 12, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.342)
+    SW %zero, %260, 4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.337)
+    SW killed %262, %260, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.338)
+    SW %261, %260, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.340)
+    SW %257, %260, 12, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.342)
     BEQ %40, %zero, %bb.80.add_AT_unsigned.exit.i, implicit-def dead %at
     B %bb.100.add_AT_string.exit.i, implicit-def dead %at
   
@@ -4725,29 +4725,29 @@ body:             |
   bb.79 (%ir-block.344, freq 10737414):
     successors: %bb.80.add_AT_unsigned.exit.i(100)
   
-    %263 = LW %40, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.346)
-    SW killed %263, %48, 4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.sunkaddr17)
-    SW %48, %40, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.348)
+    %263 = LW %40, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.346)
+    SW killed %263, %48, 4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.sunkaddr17)
+    SW %48, %40, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.348)
   
   bb.80.add_AT_unsigned.exit.i (freq 21474828):
     successors: %bb.101.add_AT_unsigned.exit.i(75), %bb.86(25)
   
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %266 = LW %78, target-flags(<unknown>) @xmalloc, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @xmalloc)
+    %266 = LW %78, target-flags(<unknown>) @xmalloc, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @xmalloc)
     %267 = ADDiu %zero, 20
     %a0 = COPY %267
     %t9 = COPY %266
     JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit-def %sp, implicit-def %v0
     ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
     %268 = COPY %v0
-    SW %zero, %268, 4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.353)
+    SW %zero, %268, 4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.353)
     %269 = ADDiu %zero, 62
-    SW killed %269, %268, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.354)
+    SW killed %269, %268, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.354)
     %265 = ADDiu %zero, 0
     %49 = COPY %40
     %264 = COPY %265
-    SW %261, %268, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.356)
-    SW %38, %268, 12, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.358)
+    SW %261, %268, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.356)
+    SW %38, %268, 12, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.358)
     BEQ %40, %zero, %bb.86, implicit-def dead %at
     B %bb.101.add_AT_unsigned.exit.i, implicit-def dead %at
   
@@ -4761,9 +4761,9 @@ body:             |
   bb.81 (%ir-block.360, freq 10737414):
     successors: %bb.86(100)
   
-    %273 = LW %40, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.363)
-    SW killed %273, %50, 4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.sunkaddr20)
-    SW %50, %40, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.365)
+    %273 = LW %40, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.363)
+    SW killed %273, %50, 4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.sunkaddr20)
+    SW %50, %40, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.365)
     %51 = COPY %40
     %272 = ADDiu %zero, 0
     %271 = COPY %272
@@ -4773,17 +4773,17 @@ body:             |
     successors: %bb.103(50), %bb.84.type_main_variant.exit(50)
   
     ADJCALLSTACKDOWN 0, implicit-def dead %sp, implicit %sp
-    %168 = LW %78, target-flags(<unknown>) @gen_type_die, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @gen_type_die)
+    %168 = LW %78, target-flags(<unknown>) @gen_type_die, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @gen_type_die)
     %a0 = COPY %71
     %a1 = COPY %74
     %gp = COPY %78
     %t9 = COPY %168
     JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %gp, implicit-def %sp
     ADJCALLSTACKUP 0, 0, implicit-def dead %sp, implicit %sp
-    %52 = LW %71, 68, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from %ir.367)
+    %52 = LW %71, 68, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from %ir.367)
     %169 = LUi 4608
     %170 = LUi 65280
-    %171 = LW %52, 8, <0x3422b90> = !{!"unison-memory-partition", i32 2} :: (load 4 from %ir.369)
+    %171 = LW %52, 8, <0x55c9bed95540> = !{!"unison-memory-partition", i32 2} :: (load 4 from %ir.369)
     %172 = AND killed %171, killed %170
     BNE %172, %169, %bb.84.type_main_variant.exit, implicit-def %at
   
@@ -4795,7 +4795,7 @@ body:             |
     successors: %bb.84.type_main_variant.exit(3), %bb.83..preheader.i(96)
   
     %53 = PHI %52, %bb.103, %54, %bb.83..preheader.i
-    %54 = LW %53, 68, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.372)
+    %54 = LW %53, 68, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.372)
     BNE %53, %54, %bb.83..preheader.i, implicit-def dead %at
     B %bb.84.type_main_variant.exit, implicit-def dead %at
   
@@ -4803,7 +4803,7 @@ body:             |
     successors: %bb.85(0), %bb.86(99)
   
     %55 = PHI %52, %bb.82, %53, %bb.83..preheader.i
-    %56 = LW %55, 48, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.376)
+    %56 = LW %55, 48, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.376)
     %174 = ADDiu %zero, 0
     %173 = COPY %174
     BNE %56, %zero, %bb.86, implicit-def dead %at
@@ -4813,9 +4813,9 @@ body:             |
     exit
   
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %175 = LW %78, target-flags(<unknown>) @.str.4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
-    %176 = LW %78, target-flags(<unknown>) @__FUNCTION__.modified_type_die, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
-    %177 = LW %78, target-flags(<unknown>) @fancy_abort, <0x3422b90> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @fancy_abort)
+    %175 = LW %78, target-flags(<unknown>) @.str.4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %176 = LW %78, target-flags(<unknown>) @__FUNCTION__.modified_type_die, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %177 = LW %78, target-flags(<unknown>) @fancy_abort, <0x55c9bed95540> = !{!"unison-memory-partition", i32 2} :: (load 4 from call-entry @fancy_abort)
     %178 = ADDiu %zero, 7573
     %a0 = COPY %175
     %a1 = COPY %178
@@ -4841,7 +4841,7 @@ body:             |
     %61 = PHI %75, %bb.0, %9, %bb.11, %59, %bb.86
     %62 = PHI %76, %bb.0, %96, %bb.11, %58, %bb.86
     %63 = PHI %75, %bb.0, %97, %bb.11, %57, %bb.86
-    SW %61, %60, 48, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.383)
+    SW %61, %60, 48, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.383)
   
   bb.88 (%ir-block.384, freq 5680304087):
     successors: %bb.90(37), %bb.89(62)
@@ -4855,11 +4855,11 @@ body:             |
   bb.89 (%ir-block.386, freq 3550190054):
     successors: %bb.90(100)
   
-    %320 = LW %65, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.387)
+    %320 = LW %65, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.387)
     ADJCALLSTACKDOWN 0, implicit-def dead %sp, implicit %sp
     %321 = EXT %320, 19, 1
     %322 = EXT %320, 20, 1
-    %323 = LW %78, target-flags(<unknown>) @modified_type_die, <0x33eff30> = !{!"unison-memory-partition", i32 1} :: (load 4 from call-entry @modified_type_die)
+    %323 = LW %78, target-flags(<unknown>) @modified_type_die, <0x55c9bed82030> = !{!"unison-memory-partition", i32 1} :: (load 4 from call-entry @modified_type_die)
     %a0 = COPY %65
     %a1 = COPY %321
     %a2 = COPY %322
@@ -4882,7 +4882,7 @@ body:             |
     successors: %bb.102(75), %bb.93.base_type_die.exit(25)
   
     ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
-    %325 = LW %78, target-flags(<unknown>) @xmalloc, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @xmalloc)
+    %325 = LW %78, target-flags(<unknown>) @xmalloc, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @xmalloc)
     %326 = ADDiu %zero, 20
     %a0 = COPY %326
     %gp = COPY %78
@@ -4890,13 +4890,13 @@ body:             |
     JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %gp, implicit-def %sp, implicit-def %v0
     ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
     %327 = COPY %v0
-    SW %zero, %327, 4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.399)
+    SW %zero, %327, 4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.399)
     %328 = ADDiu %zero, 73
-    SW killed %328, %327, 0, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.400)
+    SW killed %328, %327, 0, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.400)
     %329 = ADDiu %zero, 10
-    SW killed %329, %327, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.402)
-    SW %68, %327, 12, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.404)
-    SW %zero, %327, 16, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.406)
+    SW killed %329, %327, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.402)
+    SW %68, %327, 12, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.404)
+    SW %zero, %327, 16, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.406)
     BEQ %64, %zero, %bb.93.base_type_die.exit, implicit-def dead %at
     B %bb.102, implicit-def dead %at
   
@@ -4910,9 +4910,9 @@ body:             |
   bb.92 (%ir-block.409, freq 1775095026):
     successors: %bb.93.base_type_die.exit(100)
   
-    %330 = LW %64, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.411)
-    SW killed %330, %69, 4, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.sunkaddr23)
-    SW %69, %64, 8, <0x34212d0> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.413)
+    %330 = LW %64, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.411)
+    SW killed %330, %69, 4, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.sunkaddr23)
+    SW %69, %64, 8, <0x55c9bed80840> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.413)
   
   bb.93.base_type_die.exit (freq 7515028053):
     liveouts: %v0

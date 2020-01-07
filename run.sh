@@ -15,6 +15,7 @@ then
     echo "./run.sh <divs_path> <divs_dir> <run_path> <seed>"
 fi
 
+CURRENT_DIR=`pwd`
 
 RUN_DIR=.
 if [ $# -ge 3 ]
@@ -66,9 +67,9 @@ fi
 for arch in mips #hexagon #mips #arm
 do
     Arch="$(tr '[:lower:]' '[:upper:]' <<< ${arch:0:1})${arch:1}"
-    for i in $DIVCON_PATH/src/unison/test/fast/${Arch}/speed/*[!m].mir
-    #for i in /home/romi/didaktoriko/unison/unison-experiments/experiments/${arch}/selected-functions/size-toplas/*[!m].mir
-	
+    for i in ${CURRENT_DIR}/mirfiles/Mips/fast/*[!m].mir
+    # for i in $DIVCON_PATH/src/unison/test/fast/${Arch}/speed/*[!m].mir
+    # for i in /home/romi/didaktoriko/unison/unison-experiments/experiments/${arch}/selected-functions/size-toplas/*[!m].mir
     do
 	fullname=$i 		# filepath: file with path and extension
 	fullnamenoext="${fullname%.*}" 		# filepath: file with path and extension
