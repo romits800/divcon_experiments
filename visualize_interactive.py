@@ -1147,8 +1147,12 @@ def plot_maxdiv_lns_aggregaded( d_lns, metric, field, agap, relax, benchmarks, c
                         lnsdict = dict(**d_lns[b][arch][algo][metric][agap][br][rel][field][i])
                         #k = sorted(cdict.keys())
 
+                        val2 = lnsdict[mean]
+                        if val>val2:
+                            lnsval = (1.0*val2)/val
+                        else:
+                            lnsval = -(1.0*val)/val2
 
-                        lnsval = (1.0*lnsdict[mean])/val
 
                         if lns[rel].has_key(i):
                             lns[rel][i].append(lnsval)
