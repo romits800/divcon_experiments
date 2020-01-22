@@ -68,7 +68,7 @@ fi
 for arch in mips #hexagon #mips #arm
 do
     Arch="$(tr '[:lower:]' '[:upper:]' <<< ${arch:0:1})${arch:1}"
-    for i in $DIVCON_PATH/src/unison/test/fast/${Arch}/speed/*[!m].mir
+    for i in ${CURRENT_DIR}/mirfiles/Mips/fast/*[!m].mir
     #for i in /home/romi/didaktoriko/unison/unison-experiments/experiments/${arch}/selected-functions/size-toplas/*[!m].mir
 	
     do
@@ -111,7 +111,7 @@ do
 	do
 	    for ndivs in 1000
 	    do
-	        for dist in "diff_br_hamming"
+	        for dist in "hamming" "br_hamming" "diff_br_hamming" "levenshtein"
 		do
 	            for branch in "cloriginal" #"random" "original" "clrandom" "cloriginal" # "original"
                     do
