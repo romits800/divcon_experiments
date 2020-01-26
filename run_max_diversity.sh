@@ -15,6 +15,8 @@ then
     echo "./run_max_diversity_brham.sh <divs_path> <divs_dir> <run_path> <seed>"
 fi
 
+CURRENT_DIR=`pwd`
+
 
 RUN_DIR=.
 if [ $# -ge 3 ]
