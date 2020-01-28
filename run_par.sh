@@ -13,6 +13,7 @@ do
     m2=$((cpu1 | cpu2))
     time taskset `printf '0x%x\n' $m2` nohup ./run.sh divs_${i} divs_dir_${i} divs_random_lns_${seed}_${i} $seed &> out_${i} &
 done
+exit 0
 
 sleep 13h
 

@@ -24,7 +24,7 @@ max_num = 500
 files = []
 mncount = 0
 for fil in dirs:
-    if fil.endswith(".o"):
+    if fil.endswith(".o") and (fil.startswith("0.") or fil.startswith("1.")):
         newfile = os.path.join(path, fil)
         files.append(newfile)
         mncount += 1
@@ -36,7 +36,7 @@ print "Number divs", len(files)
 pat2 = r".*Gadgets information\n=+\n(.*)Unique gadgets found: ([0-9]+).*"
 t = [ [ 0. for i in files ] for j in files ] 
 for iinp, inp in enumerate(files): 
-    command = "ROPgadget.py --binary %s --rawArch mips --rawMode 32 --rawEndian little" %inp
+    command = "ROPgadget.py --binary %s --rawArch mips --rawMode 32 --rawEndian little --nosys" %inp
     p1 = Popen(command.split(), stdout=PIPE)
     output,err = p1.communicate()
 
@@ -61,7 +61,7 @@ for iinp, inp in enumerate(files):
     addresses, code = zip(*c)
     maxgad = 20*4
     ## Not working need to take care of headers etc
-    for iinp2, inp2 in enumerate(files):
+    for iinp2, inp2 in enumerate(files[iinp+1:], iinp+1):
         #if inp == inp2: break
 
         fil = open(inp2, "rb").read()
