@@ -44,7 +44,7 @@ for iinp, inp in enumerate(files):
     out, numbergadgets = re.match(pat2, output, re.DOTALL).groups()
     numbergadgets = int(numbergadgets)
 
-    print inp, numbergadgets
+    print "Number Gadgets", inp, numbergadgets
 
     if numbergadgets == 0:
         #d[inp] = { inp2: 0. for inp2 in files }
