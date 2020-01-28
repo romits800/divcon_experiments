@@ -19,15 +19,19 @@ path = sys.argv[1]
 # Open a file
 dirs = os.listdir( path )
 
-# This would print all the files and directories
-files = []
+max_num = 500
 
+files = []
+mncount = 0
 for fil in dirs:
     if fil.endswith(".o"):
         newfile = os.path.join(path, fil)
         files.append(newfile)
-print len(files)
-print files
+        mncount += 1
+        if (mncount >= max_num): break
+
+print "Number divs", len(files)
+# print files
 
 pat2 = r".*Gadgets information\n=+\n(.*)Unique gadgets found: ([0-9]+).*"
 t = [ [ 0. for i in files ] for j in files ] 
@@ -85,7 +89,7 @@ for i in range(len(t)):
     for j in range(i+1,len(t)):
         summa += max(t[i][j],t[j][i])
         count += 1.
-print summa
-print count
-print summa/count
+print "Summa", summa
+print "Count", count
+print "Average", summa/count
 
