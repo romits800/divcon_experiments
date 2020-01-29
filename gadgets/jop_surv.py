@@ -19,12 +19,12 @@ path = sys.argv[1]
 # Open a file
 dirs = os.listdir( path )
 
-max_num = 500
+max_num = 100
 
 files = []
 mncount = 0
 for fil in dirs:
-    if fil.endswith(".o") and (fil.startswith("0.") or fil.startswith("1.")):
+    if fil.endswith(".o"):
         newfile = os.path.join(path, fil)
         files.append(newfile)
         mncount += 1
