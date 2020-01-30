@@ -19,7 +19,7 @@ path = sys.argv[1]
 # Open a file
 dirs = os.listdir( path )
 
-max_num = 100
+max_num = 500
 
 files = []
 mncount = 0
@@ -35,6 +35,7 @@ print "Number divs", len(files)
 
 pat2 = r".*Gadgets information\n=+\n(.*)Unique gadgets found: ([0-9]+).*"
 t = [ [ 0. for i in files ] for j in files ] 
+res = []
 for iinp, inp in enumerate(files): 
     command = "ROPgadget.py --binary %s --rawArch mips --rawMode 32 --rawEndian little --nosys" %inp
     p1 = Popen(command.split(), stdout=PIPE)
@@ -61,7 +62,8 @@ for iinp, inp in enumerate(files):
     addresses, code = zip(*c)
     maxgad = 20*4
     ## Not working need to take care of headers etc
-    for iinp2, inp2 in enumerate(files[iinp+1:], iinp+1):
+    for iinp2, inp2 in enumerate(files):
+        if iinp2 == iinp: continue
         #if inp == inp2: break
 
         fil = open(inp2, "rb").read()
@@ -79,6 +81,7 @@ for iinp, inp in enumerate(files):
             else:
                 count += 1.0
         t[iinp][iinp2] = count/(1.0*numbergadgets)
+        res.append((count, numbergadgets))
 
 #for inp in d:
 
@@ -89,6 +92,10 @@ for i in range(len(t)):
     for j in range(i+1,len(t)):
         summa += max(t[i][j],t[j][i])
         count += 1.
+c,ng = zip(*res)
+print "All Count", sum(c)
+print "All Gadgets", sum(ng) 
+
 print "Summa", summa
 print "Count", count
 print "Average", summa/count
