@@ -72,7 +72,9 @@ for bench in d:
         if r not in d[bench]:
             continue
         #print print_metric(m),  
-        print "\t".join([bench, r ,"\t".join([ (str(round(float(d[bench][r][m]["gadgets"])*100,2)) if d[bench][r][m]["gadgets"]!= "Average" else "-") + "%"  + " (" + d[bench][r][m]["divs"] + ")" for m in metrics if m in d[bench][r]])])
+
+        print "\t".join([bench, r ,"\t".join([  "-" if m not in d[bench][r] or d[bench][r][m]["gadgets"]== "Average" else (str(round(float(d[bench][r][m]["gadgets"])*100,2)) + "%"  + " (" + d[bench][r][m]["divs"] + ")" ) for m in metrics ])])
+        #print "\t".join([bench, r ,"\t".join([ (str(round(float(d[bench][r][m]["gadgets"])*100,2)) if d[bench][r][m]["gadgets"]!= "Average" else "-") + "%"  + " (" + d[bench][r][m]["divs"] + ")" for m in metrics if m in d[bench][r]])])
         
         
     
