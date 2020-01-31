@@ -123,7 +123,7 @@ do
                         else
                             time timeout 30m gecode-diversify ${flags} --acceptable-gap $agap  --div-method monolithic_dfs --seed $seed --distance ${dist} --number-divs $ndivs --solver-file $fnoextension.out.json --use-optimal-for-diversification --divs-dir $DIVS_DIR -o $fnoextension.out.json --branching ${branch} --verbose $fnoextension.ext.json
                         fi
-                        python stats.py div_monolithic_dfs_${arch}_${fnoextension}_${agap}_${ndivs}_${dist}_${branch} ${fnoextension}  ${DIVS_DIR} ${RESULT_PATH} 
+                        python stats.py div_monolithic_dfs_${arch}_${fnoextension}_${agap}_${ndivs}_${dist}_${branch}_${seed} ${fnoextension}  ${DIVS_DIR} ${RESULT_PATH} 
                         echo "Deleting the diversified files."
                         rm ${DIVS_DIR}/*.$fnoextension.out.json
                         #fi

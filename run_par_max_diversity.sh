@@ -13,13 +13,12 @@ do
     m2=$((cpu1 | cpu2))
     time taskset `printf '0x%x\n' $m2` nohup ./run_max_diversity.sh divs_${i} divs_dir_${i} divs_md_${seed}_${i} $seed &> out_all_${seed}_${i} &
 done
-# sleep 13h
+sleep 30h
 # 
-# while pgrep -f gecode-diversify; 
-# do
-#     sleep 1h
-# done
+while pgrep -f gecode-diversify; 
+do
+    sleep 1h
+done
 
 
-exit 0
 done
