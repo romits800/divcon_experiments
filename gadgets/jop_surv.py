@@ -84,6 +84,10 @@ for iinp, inp in enumerate(files):
         res.append((count, numbergadgets))
 
 #for inp in d:
+c,ng = zip(*res)
+print "All Count", sum(c)
+print "All Gadgets", sum(ng) 
+
 
 summa = 0.
 count = 0.
@@ -92,11 +96,21 @@ for i in range(len(t)):
     for j in range(i+1,len(t)):
         summa += max(t[i][j],t[j][i])
         count += 1.
-c,ng = zip(*res)
-print "All Count", sum(c)
-print "All Gadgets", sum(ng) 
 
-print "Summa", summa
-print "Count", count
-print "Average", summa/count
+print "MaxSumma", summa
+print "MaxCount", count
+print "MaxAverage", summa/count
+
+summa = 0.
+count = 0.
+
+for i in range(len(t)):
+    for j in range(len(t)):
+        if j==i: continue
+        summa += t[i][j]
+        count += 1.
+
+print "BothSumma", summa
+print "BothCount", count
+print "BothAverage", summa/count
 
