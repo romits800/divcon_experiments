@@ -4,7 +4,7 @@
 import re
 import sys
 
-pat = re.compile("div_monolithic_([^_]*)_([^_]*)_([a-zA-Z_0-9]*\.[a-zA-Z_0-9]*\.[a-zA-Z_0-9]*)_([0-9]+)_([0-9]+)_([^0-9]+)_(random|clrandom|original|cloriginal)(_.*|).pickle")
+pat = re.compile("div_monolithic_([^_]*)_([^_]*)_([a-zA-Z_0-9]*\.[a-zA-Z_0-9]*\.[a-zA-Z_0-9]*)_([0-9]+)_([0-9]+)_([^0-9]+)_(random|clrandom|original|cloriginal)_([0-9]+)(_.*|).pickle")
 # div_monolithic_lns_mips_gcc.alias.get_frame_alias_set_10_1000_br_hamming_clrandom_105_0.4_10000_constant.pickle
 pat2 = re.compile("_([01]\.[0-9]+)_([0-9]+)_([a-z]+)")
 
@@ -15,7 +15,6 @@ def print_metric(metric):
     elif metric == "levenshtein": return "lev"
     else: return "None"
     
- 
 filename = "out"
 if (len(sys.argv) > 1):
     filename = sys.argv[1]
@@ -33,7 +32,7 @@ for i,j,k in m:
     a = re.match(pat,i)
     islns = True
     try:
-        method, arch, bench, gap, nodivs, metric, branching, rest = a.groups()
+        method, arch, bench, gap, nodivs, metric, branching, seed, rest = a.groups()
 
         if not d.has_key(bench):
             d[bench] = dict()
@@ -43,7 +42,7 @@ for i,j,k in m:
             try:
                 relax, base, lnsmeth = b.groups()
             except:
-                print "Exception 1", rest, b
+                print "Exception", rest, b
         else:
             relax = '-'
 
@@ -53,8 +52,11 @@ for i,j,k in m:
         d[bench][relax][metric]["divs"] = j
         d[bench][relax][metric]["gadgets"] = k
     except:
-        print "Exception 2", i
-## 
+        print "Exception", i
+# 
+#     if (len(sys.argv) > 1):
+#         arg1 = sys.argv[1]
+# 
 #         if (print_metric(metric) == arg1):
 #             print "\t\t".join([bench, print_metric(metric), method, "-" if method != "lns" else relax,  j, k])
 #     else:
@@ -62,7 +64,7 @@ for i,j,k in m:
 # 
 
 metrics = ["br_hamming", "levenshtein", "hamming", "diff_br_hamming"]
-rrates = ["-"]
+rrates = ["-", "0.4", "0.6", "0.8", "0.9"]
 print "\t\t".join(["Benchmark", "Relax"] + metrics )
 for bench in d:
     #print bench, 
@@ -70,29 +72,28 @@ for bench in d:
         if r not in d[bench]:
             continue
         #print print_metric(m),  
+
         print "\t".join([bench, r ,"\t".join([  "-" if m not in d[bench][r] or d[bench][r][m]["gadgets"]== "Average" else (str(round(float(d[bench][r][m]["gadgets"])*100,2)) + "%"  + " (" + d[bench][r][m]["divs"] + ")" ) for m in metrics ])])
+        #print "\t".join([bench, r ,"\t".join([ (str(round(float(d[bench][r][m]["gadgets"])*100,2)) if d[bench][r][m]["gadgets"]!= "Average" else "-") + "%"  + " (" + d[bench][r][m]["divs"] + ")" for m in metrics if m in d[bench][r]])])
         
         
-#     
-print "###############################################"
+    
 l = dict()
 for r in rrates:
     if not l.has_key(r): l[r] = dict()
     for m in metrics:
         if not l[r].has_key(m): l[r][m] = dict()
         k = [ float(d[b][r][m]["gadgets"])  for b in d if d[b].has_key(r) and d[b][r].has_key(m) and d[b][r][m]["gadgets"] != "Average"]
-#         if len(k)>0:
         l[r][m] = sum(k)/len(k)
-#        print r, m, sum(k)/len(k)
-#print l
-# 
-# 
+        print r, m, sum(k)/len(k)
+
+
 print "\t\t".join(["Relax"] + metrics )
 for r in rrates:
     if r not in l:
-         continue
-#     #print print_metric(m),  
+        continue
+    #print print_metric(m),  
     print "\t".join([r ,"\t".join([ (str(round(float(l[r][m])*100,2)) if l[r][m]!= "Average" else "-") + "%"  for m in metrics if m in l[r]])])
-#         
+        
         
 
