@@ -15,7 +15,7 @@ do
     cpu1=$((hex << i))
     cpu2=$((cpu1 << 5)) # << 12:its sibling - hyperthread
     m2=$((cpu1 | cpu2))
-    time taskset `printf '0x%x\n' $m2` nohup ./run.sh divs_${i} divs_dir_${i} divs_md_${s}_${i} $s &> out_all_${s}_${i} &
+    time taskset `printf '0x%x\n' $m2` nohup ./run.sh divs_${i} divs_dir_${i} divs_${s}_${i} $s &> out_lns_${s}_${i} &
 done
 sleep 13h
 
