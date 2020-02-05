@@ -4,7 +4,7 @@
 import re
 import sys
 
-pat = re.compile("div_monolithic_([^_]*)_([^_]*)_([a-zA-Z_0-9]*\.[a-zA-Z_0-9]*\.[a-zA-Z_0-9]*)_([0-9]+)_([0-9]+)_([^0-9]+)_(random|clrandom|original|cloriginal)(_.*|).pickle")
+pat = re.compile("div_monolithic_([^_]*)_([^_]*)_([a-zA-Z_0-9]*\.[a-zA-Z_0-9]*\.[a-zA-Z_0-9]*)_([0-9]+)_([0-9]+)_([^0-9]+)_(random|clrandom|original|cloriginal)_([0-9]+)(_.*|).pickle")
 # div_monolithic_lns_mips_gcc.alias.get_frame_alias_set_10_1000_br_hamming_clrandom_105_0.4_10000_constant.pickle
 pat2 = re.compile("_([01]\.[0-9]+)_([0-9]+)_([a-z]+)")
 
@@ -33,7 +33,7 @@ for i,j,k in m:
     a = re.match(pat,i)
     islns = True
     try:
-        method, arch, bench, gap, nodivs, metric, branching, rest = a.groups()
+        method, arch, bench, gap, nodivs, metric, branching, seed, rest = a.groups()
 
         if not d.has_key(bench):
             d[bench] = dict()
