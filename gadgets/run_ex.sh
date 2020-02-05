@@ -1,6 +1,7 @@
 #!/bin/bash
+path=$1
 
-for i in divs_0/*.*; 
+for i in $path/divs_?/*.*; 
 do 
-    bench="${i##*/}"; ./create_o.sh $bench 
+    bench="${i##*/}"; ./create_o.sh $bench $path
 done
