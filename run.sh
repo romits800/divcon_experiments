@@ -106,11 +106,11 @@ do
 
 	mkdir $RESULT_PATH
 
-	for agap in 10 #20 #2 5 10 20 50
+	for agap in 20 #20 #2 5 10 20 50
 	do
 	    for ndivs in 1000
 	    do
-	        for dist in "diff_br_hamming" "hamming" "br_hamming" "levenshtein"
+	        for dist in "diff_br_hamming" "hamming" "br_hamming" "levenshtein" "reghamming" "hamm_reg_gadget"
 		do
                     branch="clrandom"
                     if [ ! -f $fnoextension.out.json ]; then

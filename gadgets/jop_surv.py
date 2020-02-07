@@ -2,19 +2,22 @@ import re
 from capstone import *
 from subprocess import *
 import os, sys
+import cPickle as pickle
+import math
 
 pat = r"(0x[0-9a-fA-F]+) : (.*)"
 
 def filter_nops(code): return filter(lambda x: x != 'nop', code)
 def strip(code): return map(lambda x: x.strip(), code)
 
-if (len(sys.argv) < 2):
+if (len(sys.argv) < 3):
     print "Give as argument the path with the compiled binaries"
-    print "python jop_surv.pyp <path-to-dot-o-files>"
+    print "python jop_surv.pyp <path-to-dot-o-files> <filename>"
     exit(0) 
 
 
 path = sys.argv[1]
+filename = ".".join(sys.argv[2].split(".")[:-1])
 
 # Open a file
 dirs = os.listdir( path )
@@ -30,7 +33,9 @@ for fil in dirs:
         mncount += 1
         if (mncount >= max_num): break
 
+d = dict()
 print "Number divs", len(files)
+d['numdivs'] = len(files)
 # print files
 
 pat2 = r".*Gadgets information\n=+\n(.*)Unique gadgets found: ([0-9]+).*"
@@ -83,34 +88,46 @@ for iinp, inp in enumerate(files):
         t[iinp][iinp2] = count/(1.0*numbergadgets)
         res.append((count, numbergadgets))
 
+
+
 #for inp in d:
 c,ng = zip(*res)
 print "All Count", sum(c)
+d["All Count"] = sum(c)
 print "All Gadgets", sum(ng) 
+d["All Gadgets"] = sum(ng)
 
 
-summa = 0.
-count = 0.
+def calc_stats(summa, d):
+    s = sum(summa)
+    c = len(summa)
+    avg = s/c
+    std = [(i-avg)**2 for i in summa]
+    std = math.sqrt(sum(std)/(len(std)-1)) 
+    conf = 2.* std/math.sqrt(len(summa))
+    d["summa"] = s
+    d["count"] = c
+    d["avg"] = avg
+    d["std"] = std
+    d["conf"] = conf
 
+
+summa = []
 for i in range(len(t)):
     for j in range(i+1,len(t)):
-        summa += max(t[i][j],t[j][i])
-        count += 1.
+        summa.append(max(t[i][j],t[j][i]))
 
-print "MaxSumma", summa
-print "MaxCount", count
-print "MaxAverage", summa/count
+d["max"] = dict()
+calc_stats(summa, d["max"])
 
-summa = 0.
-count = 0.
-
+summa = []
 for i in range(len(t)):
     for j in range(len(t)):
         if j==i: continue
-        summa += t[i][j]
-        count += 1.
+        summa.append(t[i][j])
 
-print "BothSumma", summa
-print "BothCount", count
-print "BothAverage", summa/count
+d["both"] = dict()
+calc_stats(summa, d["both"])
+
+pickle.dump(d, open(os.path.join(path , filename + "_result.pickle"), "w"))
 
