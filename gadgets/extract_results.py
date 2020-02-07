@@ -4,6 +4,9 @@
 import re
 import sys
 from uncertainties import ufloat
+from uncertainties import unumpy  # Array manipulation
+import uncertainties
+import math
 import cPickle as pickle
 import os
 
@@ -25,11 +28,15 @@ if (len(sys.argv) < 3):
     exit (0)
 
 path = sys.argv[1]
-metric = sys.argv[2]
+gmetric = sys.argv[2]
 
 # Open a file
 for meas in os.listdir(path):
-    if meas.startswith("divs"):
+   if meas.startswith("divs"):
+        print "###############################################"
+        print "###########      %s      ###########"%meas
+        print "###############################################"
+ 
         measfolder = os.path.join(path, meas)
         final_num = meas.split("_")[-1]
         
@@ -46,17 +53,18 @@ for meas in os.listdir(path):
         for fil in files:
             inp = pickle.load(open(fil))
 
-            try:
-                maxavg = "Average" if inp[metric]['avg'] == "Average" else ufloat(inp[metric]['avg'], inp[metric]['conf'])
-            except:
-                print "Exception ", fil
-                continue
-            numdivs = inp['numdivs']
-            name = fil.split("/")[-1]
-            m.append((name, numdivs, maxavg))
+            if inp[gmetric].has_key('conf'):
+                maxavg = "Average" if inp[gmetric]['avg'] == "Average" else ufloat(inp[gmetric]['avg'], inp[gmetric]['conf'])
+                avg =  "Average" if inp[gmetric]['avg'] == "Average" else inp[gmetric]['avg']
+                std = inp[gmetric]['std']
+                numdivs = inp['numdivs']
+                name = fil.split("/")[-1]
+                m.append((name, numdivs, avg, std))
+            else:
+                print "Error", inp[gmetric]
 
         d = dict()
-        for i,j,k in m:
+        for i,j,k1,k2 in m:
             a = re.match(pat,i)
             islns = True
             try:
@@ -78,32 +86,51 @@ for meas in os.listdir(path):
                     d[bench][relax] = dict()
                 d[bench][relax][metric] = dict()
                 d[bench][relax][metric]["divs"] = j
-                d[bench][relax][metric]["gadgets"] = k
+                d[bench][relax][metric]["avg"] = k1
+                d[bench][relax][metric]["std"] = k2
             except:
                 print "Exception 2", i
 
         metrics = ["br_hamming", "levenshtein", "hamming", "diff_br_hamming"]
-        rrates =  ["-", "0.4", "0.6", "0.8", "0.9"] 
+        rrates =  ["-", "0.4", "0.6", "0.8", "0.9"]
         print "\t\t".join(["Benchmark", "Relax"] + metrics )
         for bench in d:
             for r in rrates:
                 if r not in d[bench]:
                     continue
-                print "\t".join([bench, r ,"\t".join([  "-" if m not in d[bench][r] or d[bench][r][m]["gadgets"]== "Average" else (str(d[bench][r][m]["gadgets"]*100) + "%"  + " (" + str(d[bench][r][m]["divs"]) + ")" ) for m in metrics ])])
+                print "\t".join([bench, r ,"\t".join([  "-" if m not in d[bench][r] or d[bench][r][m]["avg"]== "Average" else (str(d[bench][r][m]["avg"]*100) + "%"  + " (" + str(d[bench][r][m]["divs"]) + ")" ) for m in metrics ])])
                 
                 
-        print "###############################################"
+        print "-----------------------------------------------"
         l = dict()
         for r in rrates:
             if not l.has_key(r): l[r] = dict()
-            for m in metrics:
+            for metric in metrics:
                 #if not l[r].has_key(m): l[r][m] = dict()
-                k = [ d[b][r][m]["gadgets"]  for b in d if d[b].has_key(r) and d[b][r].has_key(m) and d[b][r][m]["gadgets"] != "Average"]
+                k = [ (d[b][r][metric]["avg"],d[b][r][metric]["std"],d[b][r][metric]['divs'])  for b in d if d[b].has_key(r) and d[b][r].has_key(metric) and d[b][r][metric]["avg"] != "Average"]
                 if (len(k) >0):
-                    l[r][m] = sum(k)/len(k)
+                    # For each replicate j you must have number of samples Nj, mean Mj, and variance Vj=SDj^2. 
+                    # The mean across the three replicates is M=(N1*M1+N2*M2*N3*M3)/(N1+N2+N3).
+                    # For each replicate, calculate the mean square Qj=Mj^2+Vj*(Nj-1)/Nj. 
+                    # Note that the adjustment coefficient (Nj-1)/Nj is needed only if you computed Vj using (Nj-1) as the number of statistical freedom degrees (to obtain unbiased estimate). 
+                    # The mean square across the three replicates is Q=(N1*Q1+N2*Q2*N3*Q3)/(N1+N2+N3). 
+                    # Finally, the variance across those replicates is V=Q-M^2, and SD=sqrt(V). If the numbers of samples is small, you may want to adjust the above formula for V to one less statistical freedom degree by multiplying it by (N1+N2+N3)/(N1+N2+N3-1).
+                    mean = sum([m*n for m,s,n in k])/sum([n for m,s,n in k])
+                    qs = [ m**2+s**2*(n-1)/n for m,s,n in k]
+                    q = sum([ q*n for (m,s,n), q in zip(k,qs)])/ sum([n for m,s,n in k])
+                    std = math.sqrt(q-mean**2)
+
+                    avg = sum([m for m,s,n in k])/len(k)
+                    # avg = sum(k)/len(k)
+                    std2 = math.sqrt(sum([ (avg-m)**2 for m,s,n in k])/(len(k) -1 ))
+                    # std = unumpy.sqrt(std)
+                    l[r][metric] = ufloat(mean,std)
+                    # print metric, r, mean, l[r][metric], ufloat(avg, std2)
 
         print "\t\t".join(["Relax"] + metrics )
         for r in rrates:
             if r not in l:
                  continue
-            print "\t".join([r ,"\t".join([ (str(l[r][m]*100) if l[r][m]!= "Average" else "-") + "%"  for m in metrics if m in l[r]])])
+            results = [ ('-' if m not in l[r]  or l[r][m]== "Average" else (l[r][m]*100).format("3.5")) + "%"  for m in metrics ]
+            print "\t".join([r ,"\t".join(results)])
+
