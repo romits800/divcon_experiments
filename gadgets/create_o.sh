@@ -34,5 +34,5 @@ do
         inoext4="${inoext3%.*}"   # filename without extension 
         llc $i -filetype=obj -march=mipsel -mcpu=mips32 -disable-post-ra -disable-tail-duplicate -disable-branch-fold -disable-block-placement -start-after livedebugvars -o $inoext4.o
     done
-    python jop_surv.py `pwd`
+    python jop_surv.py `pwd` $pic
 done
