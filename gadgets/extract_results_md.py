@@ -91,14 +91,14 @@ for meas in os.listdir(path):
             except:
                 print "Exception 2", i
 
-        metrics = ["br_hamming", "levenshtein", "hamming", "diff_br_hamming"]
-        rrates = ["-"]
-        print "\t\t".join(["Benchmark", "Relax"] + metrics )
+        metrics = ["br_hamming", "levenshtein", "hamming", "diff_br_hamming", "reghamming", "hamm_reg_gadget"]
+        rrates = rrates =  ["-"]
+        print "".join(map(lambda x: x.ljust(20), ["Benchmark".ljust(50), "Relax"] + metrics) )
         for bench in d:
             for r in rrates:
                 if r not in d[bench]:
                     continue
-                print "\t".join([bench, r ,"\t".join([  "-" if m not in d[bench][r] or d[bench][r][m]["avg"]== "Average" else (str(d[bench][r][m]["avg"]*100) + "%"  + " (" + str(d[bench][r][m]["divs"]) + ")" ) for m in metrics ])])
+                print "".join([bench.ljust(50)] + map(lambda x: x.ljust(20), [r ] +[  "-" if m not in d[bench][r] or d[bench][r][m]["avg"]== "Average" else (str(ufloat(d[bench][r][m]["avg"], d[bench][r][m]['std'])*100) + "%"  + " (" + str(d[bench][r][m]["divs"]) + ")" ) for m in metrics ]))
                 
                 
         print "-----------------------------------------------"
@@ -127,10 +127,10 @@ for meas in os.listdir(path):
                     l[r][metric] = ufloat(mean,std)
                     # print metric, r, mean, l[r][metric], ufloat(avg, std2)
 
-        print "\t\t".join(["Relax"] + metrics )
+        print "".join(map(lambda x: x.ljust(20), ["Relax"] + metrics) )
         for r in rrates:
             if r not in l:
                  continue
             results = [ ('-' if m not in l[r]  or l[r][m]== "Average" else (l[r][m]*100).format("3.5")) + "%"  for m in metrics ]
-            print "\t".join([r ,"\t".join(results)])
+            print "".join( map(lambda x: x.ljust(20), [r ] + results))
 
