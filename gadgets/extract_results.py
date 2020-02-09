@@ -19,6 +19,8 @@ def print_metric(metric):
     elif metric == "br_hamming": return "br"
     elif metric == "hamming": return "hamm"
     elif metric == "levenshtein": return "lev"
+    elif metric == "reg_hamming": return "reg"
+    elif metric == "hamm_reg_gadget": return "hrg"
     else: return "None"
     
  
@@ -91,7 +93,7 @@ for meas in os.listdir(path):
             except:
                 print "Exception 2", i
 
-        metrics = ["br_hamming", "levenshtein", "hamming", "diff_br_hamming", "reghamming", "hamm_reg_gadget"]
+        metrics = ["br_hamming", "levenshtein", "hamming", "diff_br_hamming", "reg_hamming", "hamm_reg_gadget"]
         rrates = rrates =  ["-", "0.4", "0.6", "0.8", "0.9"]
         print "".join(map(lambda x: x.ljust(20), ["Benchmark".ljust(50), "Relax"] + metrics) )
         for bench in d:
