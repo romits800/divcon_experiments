@@ -33,6 +33,7 @@ path = sys.argv[1]
 gmetric = sys.argv[2]
 
 # Open a file
+l = dict()
 for meas in os.listdir(path):
    if meas.startswith("divs"):
         print "###############################################"
@@ -104,11 +105,9 @@ for meas in os.listdir(path):
                 
                 
         print "-----------------------------------------------"
-        l = dict()
         for r in rrates:
             if not l.has_key(r): l[r] = dict()
             for metric in metrics:
-                #if not l[r].has_key(m): l[r][m] = dict()
                 k = [ (d[b][r][metric]["avg"],d[b][r][metric]["std"],d[b][r][metric]['divs'])  for b in d if d[b].has_key(r) and d[b][r].has_key(metric) and d[b][r][metric]["avg"] != "Average"]
                 if (len(k) >0):
                     # For each replicate j you must have number of samples Nj, mean Mj, and variance Vj=SDj^2. 
@@ -117,22 +116,48 @@ for meas in os.listdir(path):
                     # Note that the adjustment coefficient (Nj-1)/Nj is needed only if you computed Vj using (Nj-1) as the number of statistical freedom degrees (to obtain unbiased estimate). 
                     # The mean square across the three replicates is Q=(N1*Q1+N2*Q2*N3*Q3)/(N1+N2+N3). 
                     # Finally, the variance across those replicates is V=Q-M^2, and SD=sqrt(V). If the numbers of samples is small, you may want to adjust the above formula for V to one less statistical freedom degree by multiplying it by (N1+N2+N3)/(N1+N2+N3-1).
-                    mean = sum([m*n for m,s,n in k])/sum([n for m,s,n in k])
+                    if not l[r].has_key(metric): l[r][metric] = dict()
+                    num = sum([n for m,s,n in k])
+                    mean = sum([m*n for m,s,n in k])/num #sum([n for m,s,n in k])
                     qs = [ m**2+s**2*(n-1)/n for m,s,n in k]
-                    q = sum([ q*n for (m,s,n), q in zip(k,qs)])/ sum([n for m,s,n in k])
+                    q = sum([ q*n for (m,s,n), q in zip(k,qs)])/num # sum([n for m,s,n in k])
                     std = math.sqrt(q-mean**2)
 
                     avg = sum([m for m,s,n in k])/len(k)
                     # avg = sum(k)/len(k)
                     std2 = math.sqrt(sum([ (avg-m)**2 for m,s,n in k])/(len(k) -1 ))
                     # std = unumpy.sqrt(std)
-                    l[r][metric] = ufloat(mean,std)
+                    l[r][metric][meas] = {'res': ufloat(mean,std), 'mean': mean, 'std': std, 'num': num }
                     # print metric, r, mean, l[r][metric], ufloat(avg, std2)
 
         print "".join(map(lambda x: x.ljust(20), ["Relax"] + metrics) )
         for r in rrates:
             if r not in l:
                  continue
-            results = [ ('-' if m not in l[r]  or l[r][m]== "Average" else (l[r][m]*100).format("3.5")) + "%"  for m in metrics ]
+            results = [ ('-' if m not in l[r]  or meas not in l[r][m] or l[r][m]== "Average" else (l[r][m][meas]['res']*100).format("3.5")) + "%"  for m in metrics ]
             print "".join( map(lambda x: x.ljust(20), [r ] + results))
+
+print
+print "###############################################"
+print "#########      TOTAL (all seeds)      #########"
+print "###############################################"
+
+# For all seeds
+for r in l:
+    for metric in l[r]:
+        k = [(l[r][metric][meas]['mean'],l[r][metric][meas]['std'],l[r][metric][meas]['num']) for meas in l[r][metric] if l.has_key(r) and l[r].has_key(metric)]
+        num = sum([n for m,s,n in k])
+        mean = sum([m*n for m,s,n in k])/num #sum([n for m,s,n in k])
+        qs = [ m**2+s**2*(n-1)/n for m,s,n in k]
+        q = sum([ q*n for (m,s,n), q in zip(k,qs)])/num # sum([n for m,s,n in k])
+        std = math.sqrt(q-mean**2)
+        l[r][metric]['res'] = ufloat(mean,std)
+
+print "".join(map(lambda x: x.ljust(20), ["Relax"] + metrics) )
+for r in rrates:
+    if r not in l:
+         continue
+    results = [ ('-' if m not in l[r]  or 'res' not in l[r][m] or l[r][m]== "Average" else (l[r][m]['res']*100).format("3.5")) + "%"  for m in metrics ]
+    print "".join( map(lambda x: x.ljust(20), [r ] + results))
+
 
