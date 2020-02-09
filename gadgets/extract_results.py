@@ -96,12 +96,12 @@ for meas in os.listdir(path):
 
         metrics = ["br_hamming", "levenshtein", "hamming", "diff_br_hamming", "reg_hamming", "hamm_reg_gadget"]
         rrates = rrates =  ["-", "0.4", "0.6", "0.8", "0.9"]
-        print "".join(map(lambda x: x.ljust(20), ["Benchmark".ljust(50), "Relax"] + metrics) )
+        print "".join(map(lambda x: x.ljust(17), ["Benchmark".ljust(50), "Relax"] + metrics) )
         for bench in d:
             for r in rrates:
                 if r not in d[bench]:
                     continue
-                print "".join([bench.ljust(50)] + map(lambda x: x.ljust(20), [r ] +[  "-" if m not in d[bench][r] or d[bench][r][m]["avg"]== "Average" else (str(ufloat(d[bench][r][m]["avg"], d[bench][r][m]['std'])*100) + "%"  + " (" + str(d[bench][r][m]["divs"]) + ")" ) for m in metrics ]))
+                print "".join([bench.ljust(50)] + map(lambda x: x.ljust(17), [r ] +[  "-" if m not in d[bench][r] or d[bench][r][m]["avg"]== "Average" else (str(ufloat(d[bench][r][m]["avg"], d[bench][r][m]['std'])*100) + "%"  + " (" + str(d[bench][r][m]["divs"]) + ")" ) for m in metrics ]))
                 
                 
         print "-----------------------------------------------"
