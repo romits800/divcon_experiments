@@ -14,6 +14,10 @@ pat = re.compile("div_monolithic_([^_]*)_([^_]*)_([a-zA-Z_0-9]*\.[a-zA-Z_0-9]*\.
 # div_monolithic_lns_mips_gcc.alias.get_frame_alias_set_10_1000_br_hamming_clrandom_105_0.4_10000_constant.pickle
 pat2 = re.compile("_([01]\.[0-9]+)_([0-9]+)_([a-z]+)")
 
+
+metrics = ["br_hamming", "levenshtein", "hamming", "diff_br_hamming", "reg_hamming", "hamm_reg_gadget"]
+rrates = rrates =  ["-", "0.4", "0.6", "0.8", "0.9"]
+
 def print_metric(metric):
     if metric == "diff_br_hamming": return "diff"
     elif metric == "br_hamming": return "br"
@@ -35,6 +39,7 @@ agap = sys.argv[3]
 
 # Open a file
 l = dict()
+d = dict()
 for meas in os.listdir(path):
    if meas.startswith("divs"):
         print "###############################################"
@@ -67,14 +72,12 @@ for meas in os.listdir(path):
             else:
                 print "Error", inp[gmetric]
 
-        d = dict()
         for i,j,k1,k2 in m:
             a = re.match(pat,i)
             islns = True
             try:
                 method, arch, bench, gap, nodivs, metric, branching, seed, rest = a.groups()
-                if gap!=agap:
-                    continue
+                if gap!=agap: continue
 
                 if not d.has_key(bench):
                     d[bench] = dict()
@@ -90,28 +93,25 @@ for meas in os.listdir(path):
 
                 if not d[bench].has_key(relax):
                     d[bench][relax] = dict()
-                d[bench][relax][metric] = dict()
-                d[bench][relax][metric]["divs"] = j
-                d[bench][relax][metric]["avg"] = k1
-                d[bench][relax][metric]["std"] = k2
+                if not d[bench][relax].has_key(metric):
+                    d[bench][relax][metric] = dict()
+                d[bench][relax][metric][meas] = {'num': j, 'mean': k1, 'std': k2 }
             except:
                 print "Exception 2", i
 
-        metrics = ["br_hamming", "levenshtein", "hamming", "diff_br_hamming", "reg_hamming", "hamm_reg_gadget"]
-        rrates = rrates =  ["-", "0.4", "0.6", "0.8", "0.9"]
         print "".join(map(lambda x: x.ljust(17), ["Benchmark".ljust(50), "Relax"] + metrics) )
         for bench in d:
             for r in rrates:
                 if r not in d[bench]:
                     continue
-                print "".join([bench.ljust(50)] + map(lambda x: x.ljust(17), [r ] +[  "-" if m not in d[bench][r] or d[bench][r][m]["avg"]== "Average" else (str(ufloat(d[bench][r][m]["avg"], d[bench][r][m]['std'])*100) + "%"  + " (" + str(d[bench][r][m]["divs"]) + ")" ) for m in metrics ]))
+                print "".join([bench.ljust(50)] + map(lambda x: x.ljust(17), [r ] +[  "-" if m not in d[bench][r] or not d[bench][r][m].has_key(meas) or d[bench][r][m][meas]["mean"]== "Average" else (str(ufloat(d[bench][r][m][meas]["mean"], d[bench][r][m][meas]['std'])*100) + "%"  + " (" + str(d[bench][r][m][meas]["num"]) + ")" ) for m in metrics ]))
                 
                 
         print "-----------------------------------------------"
         for r in rrates:
             if not l.has_key(r): l[r] = dict()
             for metric in metrics:
-                k = [ (d[b][r][metric]["avg"],d[b][r][metric]["std"],d[b][r][metric]['divs'])  for b in d if d[b].has_key(r) and d[b][r].has_key(metric) and d[b][r][metric]["avg"] != "Average"]
+                k = [ (d[b][r][metric][meas]["mean"],d[b][r][metric][meas]["std"],d[b][r][metric][meas]['num'])  for b in d if d[b].has_key(r) and d[b][r].has_key(metric) and d[b][r][metric].has_key(meas) and d[b][r][metric][meas]["mean"] != "Average"]
                 if (len(k) >0):
                     # For each replicate j you must have number of samples Nj, mean Mj, and variance Vj=SDj^2. 
                     # The mean across the three replicates is M=(N1*M1+N2*M2*N3*M3)/(N1+N2+N3).
@@ -126,9 +126,9 @@ for meas in os.listdir(path):
                     q = sum([ q*n for (m,s,n), q in zip(k,qs)])/num # sum([n for m,s,n in k])
                     std = math.sqrt(q-mean**2)
 
-                    avg = sum([m for m,s,n in k])/len(k)
+                    # avg = sum([m for m,s,n in k])/len(k)
                     # avg = sum(k)/len(k)
-                    std2 = math.sqrt(sum([ (avg-m)**2 for m,s,n in k])/(len(k) -1 ))
+                    # std2 = math.sqrt(sum([ (avg-m)**2 for m,s,n in k])/(len(k) -1 ))
                     # std = unumpy.sqrt(std)
                     l[r][metric][meas] = {'res': ufloat(mean,std), 'mean': mean, 'std': std, 'num': num }
                     # print metric, r, mean, l[r][metric], ufloat(avg, std2)
@@ -163,4 +163,33 @@ for r in rrates:
     results = [ ('-' if m not in l[r]  or 'res' not in l[r][m] or l[r][m]== "Average" else (l[r][m]['res']*100).format("3.5")) + "%"  for m in metrics ]
     print "".join( map(lambda x: x.ljust(20), [r ] + results))
 
+
+print
+print "###############################################"
+print "#########      TOTAL (benchmarks)     #########"
+print "###############################################"
+
+for r in rrates:
+    print "-------------------------------------------------------------------------------"
+    print "-------------------------------------------------------------------------------"
+    print "".join(map(lambda x: x.ljust(17), ["Benchmark".ljust(50), "Relax"] + metrics) )
+    print "-------------------------------------------------------------------------------"
+    for bench in d:
+        if r not in d[bench]:
+            continue
+        for metric in metrics:
+            if metric not in d[bench][r]:
+                continue
+            k = [(d[bench][r][metric][meas]['mean'],d[bench][r][metric][meas]['std'],d[bench][r][metric][meas]['num']) for meas in d[bench][r][metric] if d.has_key(bench) and d[bench].has_key(r) and d[bench][r].has_key(metric)]
+            num = sum([n for m,s,n in k])
+            mean = sum([m*n for m,s,n in k])/num #sum([n for m,s,n in k])
+            qs = [ m**2+s**2*(n-1)/n for m,s,n in k]
+            q = sum([ q*n for (m,s,n), q in zip(k,qs)])/num # sum([n for m,s,n in k])
+            std = math.sqrt(q-mean**2)
+            d[bench][r][metric]['res'] = ufloat(mean,std)
+            #print metric, bench, ufloat(mean,std)
+
+
+        print "".join([bench.ljust(50)] + map(lambda x: x.ljust(17), [r] +[ "-" if m not in d[bench][r] else (str((d[bench][r][m]['res']*100).format("2.2")) + "%" ) for m in metrics ]))
+        
 
