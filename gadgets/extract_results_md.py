@@ -24,13 +24,14 @@ def print_metric(metric):
     else: return "None"
     
  
-if (len(sys.argv) < 3):
+if (len(sys.argv) < 4):
     print "Give as argument folder to the bench folders and the metric"
-    print "python extract_results.py <divs_? folder> <max|both>"
+    print "python extract_results.py <divs_? folder> <max|both> <agap=10|20>"
     exit (0)
 
 path = sys.argv[1]
 gmetric = sys.argv[2]
+agap = sys.argv[3]
 
 # Open a file
 l = dict()
@@ -72,6 +73,8 @@ for meas in os.listdir(path):
             islns = True
             try:
                 method, arch, bench, gap, nodivs, metric, branching, seed, rest = a.groups()
+                if gap!=agap:
+                    continue
 
                 if not d.has_key(bench):
                     d[bench] = dict()
