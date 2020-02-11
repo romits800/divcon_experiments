@@ -16,7 +16,7 @@ pat2 = re.compile("_([01]\.[0-9]+)_([0-9]+)_([a-z]+)")
 
 
 metrics = ["br_hamming", "levenshtein", "hamming", "diff_br_hamming", "reg_hamming", "hamm_reg_gadget"]
-rrates = rrates =  ["-"]
+rrates = rrates =  ["-", "0.4", "0.6", "0.8", "0.9"]
 
 def print_metric(metric):
     if metric == "diff_br_hamming": return "diff"
@@ -192,4 +192,54 @@ for r in rrates:
 
         print "".join([bench.ljust(50)] + map(lambda x: x.ljust(17), [r] +[ "-" if m not in d[bench][r] else (str((d[bench][r][m]['res']*100).format("2.2")) + "%" ) for m in metrics ]))
         
+# Write outputs.
+    
+def formatout(v, bold=False):
+    vf = '{:.2f}'.format(v*100) + "%"
+    #vf = str(vf) + "%"
+    if bold:
+        return "\\textbf{" + vf + "}"
+    else: 
+        return vf
+ 
+cmetrics = map(lambda x: x.replace("_", ""), metrics)
+benchmarks = sorted([   "h264ref.sei.UpdateRandomAccess", 
+                        "hmmer.tophits.AllocFancyAli",
+                        "gobmk.board.get_last_player",
+                        "gcc.expmed.ceil_log2",
+                        "h264ref.vlc.symbol2uvlc",
+                        "gobmk.patterns.autohelperpat1088",
+                        "gobmk.owl_attackpat.autohelperowl_attackpat68",
+                        "gobmk.owl_defendpat.autohelperowl_defendpat421",
+                        "gcc.xexit.xexit",                 
+                        "gcc.rtlanal.parms_set",          
+                        "gcc.alias.get_frame_alias_set",
+                        "mesa.api.glVertex2i",             
+                        "gcc.jump.unsigned_condition",    
+                        "sphinx3.glist.glist_tail",       
+                        "sphinx3.profile.ptmr_init",      
+                        "mesa.api.glIndexd",               
+                        "gobmk.owl_vital_apat.autohelperowl_vital_apat34"])
+
+
+for r in rrates:
+    with open("output" + r + agap + ".csv", "w") as f:
+        f.write(",".join(["Benchmark"] + cmetrics))
+        f.write("\n")
+        for bi,bench in enumerate(benchmarks, 1):
+            if bench not in d: continue
+            minds = []
+            if r not in d[bench]: continue
+            # find minimum values to mark
+            data = [ (d[bench][r][m]['res'],m) for m in metrics if m in d[bench][r] ]
+            mind = min(data, key=lambda (res,m): res)
+            minds = filter(lambda (x,m): abs(x- mind[0]) < 0.0001, data)
+            _, minms = zip(*minds)
+            data = ["b" + str(bi)] + [ "-" if m not in d[bench][r] else formatout(d[bench][r][m]['res'], m in minms) for m in metrics ]
+            cdata = map (lambda x: x.replace("_", "\\_"), data)
+            cdata = map (lambda x: x.replace("%", "\\%"), cdata)
+            cdata = map (lambda x: x.replace("+/-", "$\\pm$"), cdata)
+            f.write(",".join(cdata))
+            f.write("\n")
+    
 
