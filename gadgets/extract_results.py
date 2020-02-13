@@ -228,12 +228,11 @@ for r in rrates:
         f.write("\n")
         for bi,bench in enumerate(benchmarks, 1):
             if bench not in d: continue
-            minds = []
             if r not in d[bench]: continue
             # find minimum values to mark
             data = [ (d[bench][r][m]['res'],m) for m in metrics if m in d[bench][r] ]
             mind = min(data, key=lambda (res,m): res)
-            minds = filter(lambda (x,m): abs(x- mind[0]) < 0.0001, data)
+            minds = filter(lambda (x,m): abs(x- mind[0]) < 0.005, data)
             _, minms = zip(*minds)
             data = ["b" + str(bi)] + [ "-" if m not in d[bench][r] else formatout(d[bench][r][m]['res'], m in minms) for m in metrics ]
             cdata = map (lambda x: x.replace("_", "\\_"), data)
@@ -242,4 +241,35 @@ for r in rrates:
             f.write(",".join(cdata))
             f.write("\n")
     
-
+for m in metrics:
+    with open("output" + m + agap + ".csv", "w") as f:
+        f.write(",".join(["Benchmark"] + rrates))
+        f.write("\n")
+        for bi,bench in enumerate(benchmarks, 1):
+            if bench not in d: continue
+            if r not in d[bench]: continue
+            if m not in d[bench][r]: continue
+            # find minimum values to mark
+            data = [ (d[bench][r][m]['res'],r) for r in rrates if r in d[bench] and m in d[bench][r] ]
+            mind = min(data, key=lambda (res,r): res)
+            minds = filter(lambda (x,r): abs(x- mind[0]) < 0.005, data)
+            _, minms = zip(*minds)
+            data = ["b" + str(bi)] + [ "-" if r not in d[bench] or m not in d[bench][r] else formatout(d[bench][r][m]['res'], r in minms) for r in rrates ]
+            cdata = map (lambda x: x.replace("_", "\\_"), data)
+            cdata = map (lambda x: x.replace("%", "\\%"), cdata)
+            cdata = map (lambda x: x.replace("+/-", "$\\pm$"), cdata)
+            f.write(",".join(cdata))
+            f.write("\n")
+ 
+with open("benchmarks.csv", "w") as f:
+    f.write(",".join(["Bid", "Benchmark"]))
+    f.write("\n")
+    for bi,b in enumerate(benchmarks,1):
+        b = b.replace("_", "\\_")
+        b = b.replace("%", "\\%")
+        b = b.replace("+/-", "$\\pm$")
+ 
+        f.write(",".join(["b" + str(bi), b])) 
+        f.write("\n")
+    
+    
