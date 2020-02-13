@@ -12,7 +12,7 @@ def strip(code): return map(lambda x: x.strip(), code)
 
 if (len(sys.argv) < 3):
     print "Give as argument the path with the compiled binaries"
-    print "python jop_surv.pyp <path-to-dot-o-files> <filename>"
+    print "python jop_surv.py <path-to-dot-o-files> <filename>"
     exit(0) 
 
 
@@ -105,6 +105,16 @@ def calc_stats(summa, d):
     std = [(i-avg)**2 for i in summa]
     std = math.sqrt(sum(std)/(len(std)-1)) 
     conf = 2.* std/math.sqrt(len(summa))
+
+    #data
+    fd = dict()
+    for i in summa:
+        if df.has_key(i):
+            df[i] += 1
+        else:
+            df[i] = 1
+
+    d["data"] = df
     d["summa"] = s
     d["count"] = c
     d["avg"] = avg
@@ -130,4 +140,6 @@ d["both"] = dict()
 calc_stats(summa, d["both"])
 
 pickle.dump(d, open(os.path.join(path , filename + "_result.pickle"), "w"))
+
+# pickle.dump(t, open(filename + "_test.pickle", "w"))
 
