@@ -107,7 +107,7 @@ def calc_stats(summa, d):
     conf = 2.* std/math.sqrt(len(summa))
 
     #data
-    fd = dict()
+    df = dict()
     for i in summa:
         if df.has_key(i):
             df[i] += 1
