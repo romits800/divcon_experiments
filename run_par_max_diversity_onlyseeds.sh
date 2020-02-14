@@ -17,6 +17,8 @@ do
     m2=$((cpu1 | cpu2))
     time taskset `printf '0x%x\n' $m2` nohup ./run_max_diversity.sh divs_${i} divs_dir_${i} divs_md_${s}_${i} $s &> out_all_${s}_${i} &
 done
+exit 0
+
 sleep 30h
 
 while pgrep -f gecode-diversify; 

@@ -6,7 +6,6 @@ for seed in $seeds
 do
 #seedi=(${seed//,/ })
 IFS=','; arrs=($seed); unset IFS;
-echo "arrs," $arrs
 for i in {0..4}
 do
     s=${arrs[$i]}

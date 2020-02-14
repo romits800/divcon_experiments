@@ -106,11 +106,11 @@ do
 
 	mkdir $RESULT_PATH
 
-	for agap in 20 #20 #2 5 10 20 50
+	for agap in 5 10 20 #2 5 10 20 50
 	do
-	    for ndivs in 1000
+	    for ndivs in 200
 	    do
-	        for dist in "diff_br_hamming" "hamming" "br_hamming" "levenshtein" "reghamming" "hamm_reg_gadget"
+	        for dist in "reg_hamming" "hamm_reg_gadget" "diff_br_hamming" "hamming" "br_hamming" "levenshtein" 
 		do
                     branch="clrandom"
                     if [ ! -f $fnoextension.out.json ]; then
@@ -123,7 +123,7 @@ do
                     echo "Deleting the diversified files."
                     rm ${DIVS_DIR}/*.$fnoextension.out.json
                     #fi
-                    for relax in 0.4 0.6 0.8 0.9
+                    for relax in 0.1 0.2 0.4 0.6 0.8 0.9
                     do
                         for lp in 10000 #100000 
                         do

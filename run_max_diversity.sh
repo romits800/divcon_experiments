@@ -113,7 +113,7 @@ do
 	do
 	    for ndivs in 1000
 	    do
-	        for dist in "reghamming" "hamm_reg_gadget" #"diff_br_hamming" "hamming" "br_hamming" "levenshtein"
+	        for dist in "reg_hamming" "hamm_reg_gadget" #"diff_br_hamming" "hamming" "br_hamming" "levenshtein"
 		do
 	            for branch in "cloriginal" #"random" "original" "clrandom" "cloriginal" # "original"
                     do

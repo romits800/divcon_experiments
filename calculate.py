@@ -112,9 +112,10 @@ for benchmark in listdir(pathname):
             files = {h:files[h] for h in files if benchmark in h}
 
             #####################
+            registers = {h:[ r for r  in files[h]['registers']] for h in files if files[h].has_key('registers')}
             precycles = {h:[ (c,j) for  c,j  in zip(files[h]['global_cycles'],files[h]['type']) if j in [0,1,2,3,4,14]] for h in files if files[h].has_key('type') and files[h].has_key('global_cycles')}
             cycles = {h: [c for c,j in precycles[h]] for h in precycles}
-            prebrcycles = {h:[ (i,c) for  i,(c,j)  in enumerate(precycles[h]) if j in [1,2,3]] for h in precycles}
+            prebrcycles = {h:[ (i,c) for  i,(c,t)  in enumerate(precycles[h]) if t in [1,2,3]] for h in precycles}
 
             doublebrcycles = {h:{j:(prebrcycles[h][j-1][0] if j>0 else 0)  for  j,(i,c)  in enumerate(prebrcycles[h]) } for h in prebrcycles}
 
@@ -221,6 +222,24 @@ for benchmark in listdir(pathname):
 
             if not count == 0:
 		d[benchmark][arch][method][metric][agap][branch][relax]['levenshtein'] = {'num': round(sumhd/count,2), 'maxnum': maxnum, 'data': intd.values()}
+
+            ## Register Hamming Distance
+            intd = dict()
+            sumhd = 0
+            count = 0
+            maxnum = 0
+
+            for i in range(len(fnames)):
+                for j in range(i+1, len(fnames)):
+                   f1,f2 = fnames[i],fnames[j]
+                   intd[(f1,f2)] = sum([ (1. if k!=l else 0.) for (k,l) in zip(registers[f1],registers[f2])] ) #zip(files[f1],files[f2])
+                   sumhd += intd[(f1,f2)]
+                   count += 1.
+                maxnum = len(registers[fnames[i]])
+
+            if not count == 0:
+                d[benchmark][arch][method][metric][agap][branch][relax]['reghamm'] = { 'num':round(sumhd/count,2), 'maxnum': maxnum, 'data': intd.values()}
+
 
 
 newpath = pathname.strip("/")
