@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 from os import listdir
-
+from os import path
 import json
 
 import sys
@@ -83,8 +83,8 @@ def reverse_order(c):
 for benchmark in listdir(pathname):
     print benchmark
     d[benchmark] = dict()
-    pat = re.compile("div_monolithic_([^_]*)_([^_]*)_%s_([0-9]+)_([0-9]+)_([^0-9]*hamming|levenshtein)_([^_]+)_([0-9]+)(_.*|).pickle"  %benchmark)
-    for pfile in listdir(pathname + "/" + benchmark + "/"):
+    pat = re.compile("div_monolithic_([^_]*)_([^_]*)_%s_([0-9]+)_([0-9]+)_([^0-9]*hamming|levenshtein|hamm_reg_gadget)_([^_]+)_([0-9]+)(_.*|).pickle"  %benchmark)
+    for pfile in listdir(path.join(pathname,benchmark)):
         if pfile.endswith("pickle"):
             try:
                 a = re.match(pat,pfile)
@@ -111,6 +111,7 @@ for benchmark in listdir(pathname):
             files = pickle.load(open(pathname + "/" +  benchmark + "/" + pfile))
             files = {h:files[h] for h in files if benchmark in h}
 
+
             #####################
             registers = {h:[ r for r  in files[h]['registers']] for h in files if files[h].has_key('registers')}
             precycles = {h:[ (c,j) for  c,j  in zip(files[h]['global_cycles'],files[h]['type']) if j in [0,1,2,3,4,14]] for h in files if files[h].has_key('type') and files[h].has_key('global_cycles')}
@@ -123,7 +124,11 @@ for benchmark in listdir(pathname):
             #####################
  
             levcycles = {h:reverse_order(cycles[h]) for h in cycles }
-            stime = max([ files[h]['solver_time'] for h in files if files[h].has_key('solver_time') ])/1000. # the maximum should be the last
+            stimes = [ files[h]['solver_time'] for h in files if files[h].has_key('solver_time') ]
+            if len(stimes) > 0:
+                stime = max(stimes)/1000. # the maximum should be the last
+            else:
+                continue
             cost = [files[h]['cost'][0] for h in files if files[h].has_key('cost')]# the cost
             
             avgcost = 0
@@ -242,9 +247,8 @@ for benchmark in listdir(pathname):
 
 
 
-newpath = pathname.strip("/")
-print newpath
-initial = "/" if pathname.startswith("/") else ""
-pickle.dump(d, open(initial + newpath + ".pickle","w"))
+removeslash = pathname.strip("/") 
+newpath = removeslash.replace("/", "_")
+pickle.dump(d, open( newpath + ".pickle","w"))
 
 
