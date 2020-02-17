@@ -64,6 +64,7 @@ def plot_metric(d, bench):
 
 def plot_agap(d, relax, metric):
      agaps = sorted(d.keys(), key=lambda x:int(x))
+     xticks = set()
      for bi,bench in enumerate(benchmarks,1):
 	     ls = []
 	     for agap in agaps:
@@ -72,8 +73,10 @@ def plot_agap(d, relax, metric):
 		ls.append(l)
 	     if len(ls) == 0: continue
 	     x,y = zip(*ls)
+	     xticks.update(x)
 	     plt.plot(x,y,'ko')
 	     plt.plot(x,y,'--',label="b" + str(bi))
+     plt.xticks(list(xticks))
      plt.title("rel=%s, metric: %s" %(relax, metric))
      plt.legend()
      plt.show()
