@@ -244,9 +244,8 @@ for benchmark in listdir(pathname):
                     d[benchmark][arch][method][metric][agap][branch][relax]['levenshtein'][ii] = {'num': round(sumhd/count,2), 'maxnum': maxnum, 'data': intd.values(), 'stime': stime}
 
 
-newpath = pathname.strip("/")
-print newpath
-initial = "/" if pathname.startswith("/") else ""
-pickle.dump(d, open(initial + newpath + ".pickle","w"))
+removeslash = pathname.strip("/") 
+newpath = removeslash.replace("/", "_")
+pickle.dump(d, open( newpath + ".pickle","w"))
 
 
