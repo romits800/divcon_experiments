@@ -1,5 +1,22 @@
 #! env python
 
+benchmarks = sorted([   "h264ref.sei.UpdateRandomAccess",
+                        "hmmer.tophits.AllocFancyAli",
+                        "gobmk.board.get_last_player",
+                        "gcc.expmed.ceil_log2",
+                        "h264ref.vlc.symbol2uvlc",
+                        "gobmk.patterns.autohelperpat1088",
+                        "gobmk.owl_attackpat.autohelperowl_attackpat68",
+                        "gobmk.owl_defendpat.autohelperowl_defendpat421",
+                        "gcc.xexit.xexit",
+                        "gcc.rtlanal.parms_set",
+                        "gcc.alias.get_frame_alias_set",
+                        "mesa.api.glVertex2i",
+                        "gcc.jump.unsigned_condition",
+                        "sphinx3.glist.glist_tail",
+                        "sphinx3.profile.ptmr_init",
+                        "mesa.api.glIndexd",
+                        "gobmk.owl_vital_apat.autohelperowl_vital_apat34"])
 
 def get_relax(d, bench, metric):
      rrates = [ "0.1", "0.2", "0.4", "0.6", "0.8", "0.9"]
@@ -11,7 +28,8 @@ def get_relax(d, bench, metric):
      return ls
 
 def plot_bench(d, metric):
-     for bi,b in enumerate(sorted(d.keys()),1):
+     for bi,b in enumerate(benchmarks,1):
+          if not d.has_key(b): continue
           yx = get_relax(d, b, metric)
           if len(yx) == 0: continue    
           y,x = zip(*yx)
