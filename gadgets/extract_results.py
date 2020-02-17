@@ -14,9 +14,11 @@ pat = re.compile("div_monolithic_([^_]*)_([^_]*)_([a-zA-Z_0-9]*\.[a-zA-Z_0-9]*\.
 # div_monolithic_lns_mips_gcc.alias.get_frame_alias_set_10_1000_br_hamming_clrandom_105_0.4_10000_constant.pickle
 pat2 = re.compile("_([01]\.[0-9]+)_([0-9]+)_([a-z]+)")
 
+filepat = re.compile("divs_[0-9]+_[0-9]$")
+
 
 metrics = ["br_hamming", "levenshtein", "hamming", "diff_br_hamming", "reg_hamming", "hamm_reg_gadget"]
-rrates = rrates =  ["-", "0.4", "0.6", "0.8", "0.9"]
+rrates = rrates =  ["-", "0.1", "0.2", "0.4", "0.6", "0.8", "0.9"]
 
 def print_metric(metric):
     if metric == "diff_br_hamming": return "diff"
@@ -37,11 +39,18 @@ path = sys.argv[1]
 gmetric = sys.argv[2]
 agap = sys.argv[3]
 
+
+def print_dat(d):
+        return "|".join(['%d%%:%d%%'%(int(k*100), int(d[k]*100)) for k in sorted(d.keys())])
+
 # Open a file
 l = dict()
 d = dict()
 for meas in os.listdir(path):
-   if meas.startswith("divs"):
+
+   fil = re.match(filepat,meas)
+   if fil!= None:
+   # if meas.startswith("divs"):
         print "###############################################"
         print "###########      %s      ###########"%meas
         print "###############################################"
@@ -67,12 +76,13 @@ for meas in os.listdir(path):
                 avg =  "Average" if inp[gmetric]['avg'] == "Average" else inp[gmetric]['avg']
                 std = inp[gmetric]['std']
                 numdivs = inp['numdivs']
+                data = inp[gmetric]['data']
                 name = fil.split("/")[-1]
-                m.append((name, numdivs, avg, std))
+                m.append((data, name, numdivs, avg, std))
             else:
                 print "Error", inp[gmetric]
 
-        for i,j,k1,k2 in m:
+        for dat,i,j,k1,k2 in m:
             a = re.match(pat,i)
             islns = True
             try:
@@ -95,7 +105,7 @@ for meas in os.listdir(path):
                     d[bench][relax] = dict()
                 if not d[bench][relax].has_key(metric):
                     d[bench][relax][metric] = dict()
-                d[bench][relax][metric][meas] = {'num': j, 'mean': k1, 'std': k2 }
+                d[bench][relax][metric][meas] = {'num': j, 'mean': k1, 'std': k2, 'data': dat}
             except:
                 print "Exception 2", i
 
@@ -105,6 +115,31 @@ for meas in os.listdir(path):
                 if r not in d[bench]:
                     continue
                 print "".join([bench.ljust(50)] + map(lambda x: x.ljust(17), [r ] +[  "-" if m not in d[bench][r] or not d[bench][r][m].has_key(meas) or d[bench][r][m][meas]["mean"]== "Average" else (str(ufloat(d[bench][r][m][meas]["mean"], d[bench][r][m][meas]['std'])*100) + "%"  + " (" + str(d[bench][r][m][meas]["num"]) + ")" ) for m in metrics ]))
+                dat = dict()
+                tdat = dict()
+                vals = [0.0, 0.05, 0.1, 0.2, 0.4, 0.5, 0.7, 1.0]
+                for m in metrics:
+                    temp = dict() if m not in d[bench][r] or not d[bench][r][m].has_key(meas) or d[bench][r][m][meas]["mean"]== "Average"  else d[bench][r][m][meas]["data"]
+
+                    allsum = float(sum(temp.values()))
+                    if len(temp) > 0: 
+                        dat[m] = dict()
+                        tdat[m] = dict()
+                    for i in temp:
+                        for v in vals:
+                            if i <= v:
+                                if tdat[m].has_key(v):
+                                    tdat[m][v] += temp[i]
+                                else: 
+                                    tdat[m][v] = temp[i]
+                                break
+                    if tdat.has_key(m):
+                        for v in tdat[m]:
+                            val = round(tdat[m][v]/allsum,2)
+                            if val > 0.0 :
+                                dat[m][v] = val
+
+                #print "".join([bench.ljust(50)] + map(lambda x: x.ljust(17), [r ] +[ "-" if not dat.has_key(m) else print_dat(dat[m]) for m in metrics ]))
                 
                 
         print "-----------------------------------------------"
@@ -187,10 +222,11 @@ for r in rrates:
             q = sum([ q*n for (m,s,n), q in zip(k,qs)])/num # sum([n for m,s,n in k])
             std = math.sqrt(q-mean**2)
             d[bench][r][metric]['res'] = ufloat(mean,std)
+            d[bench][r][metric]['avgnum'] = num/len(k)
             #print metric, bench, ufloat(mean,std)
 
 
-        print "".join([bench.ljust(50)] + map(lambda x: x.ljust(17), [r] +[ "-" if m not in d[bench][r] else (str((d[bench][r][m]['res']*100).format("2.2")) + "%" ) for m in metrics ]))
+        print "".join([bench.ljust(50)] + map(lambda x: x.ljust(17), [r] +[ "-" if m not in d[bench][r] else (str((d[bench][r][m]['res']*100).format("2.2")) + "% " + "(" + str(d[bench][r][m]['avgnum']) +  ")") for m in metrics ]))
         
 # Write outputs.
     
@@ -273,3 +309,4 @@ with open("benchmarks.csv", "w") as f:
         f.write("\n")
     
     
+pickle.dump(d, open("divs_gadgets_%s"%agap + ".pickle", "w"))
