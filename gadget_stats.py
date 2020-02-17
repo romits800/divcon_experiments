@@ -1,5 +1,8 @@
 #! env python
 
+import matplotlib.pyplot as plt
+from uncertainties import ufloat
+
 benchmarks = sorted([   "h264ref.sei.UpdateRandomAccess",
                         "hmmer.tophits.AllocFancyAli",
                         "gobmk.board.get_last_player",
@@ -17,6 +20,12 @@ benchmarks = sorted([   "h264ref.sei.UpdateRandomAccess",
                         "sphinx3.profile.ptmr_init",
                         "mesa.api.glIndexd",
                         "gobmk.owl_vital_apat.autohelperowl_vital_apat34"])
+
+def get_num(r):                       
+     if r == '-':
+         return 0    
+     else:                                                                                                                                      
+         return float(r) 
 
 def get_relax(d, bench, metric):
      rrates = [ "0.1", "0.2", "0.4", "0.6", "0.8", "0.9"]
@@ -50,6 +59,22 @@ def plot_metric(d, bench):
           plt.plot(x,y,'ko')
           plt.plot(x,y,'--',label=m)
      plt.title(bench)
+     plt.legend()
+     plt.show()
+
+def plot_agap(d, relax, metric):
+     agaps = sorted(d.keys(), key=lambda x:int(x))
+     for bi,bench in enumerate(benchmarks,1):
+	     ls = []
+	     for agap in agaps:
+		if not d[agap].has_key(bench) or not d[agap][bench].has_key(relax) or not d[agap][bench][relax].has_key(metric): continue
+		l = int(agap),d[agap][bench][relax][metric]['res'].nominal_value
+		ls.append(l)
+	     if len(ls) == 0: continue
+	     x,y = zip(*ls)
+	     plt.plot(x,y,'ko')
+	     plt.plot(x,y,'--',label="b" + str(bi))
+     plt.title("rel=%s, metric: %s" %(relax, metric))
      plt.legend()
      plt.show()
 
