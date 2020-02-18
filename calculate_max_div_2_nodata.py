@@ -305,7 +305,7 @@ for benchmark in listdir(pathname):
                        intd[(f1,f2)] = sum([ (1. if k!=l else 0.) for (k,l) in zip(registers[f1],registers[f2])] ) #zip(files[f1],files[f2])
                        sumhd += intd[(f1,f2)]
                        count += 1.
-                    maxnum = len(registerss[fnames[i]])
+                    maxnum = len(registers[fnames[i]])
 
                 if not count == 0:
                     d[benchmark][arch][method][metric][agap][branch][relax]['reghamm'][ii] = { 'num': round(sumhd/count,2), 'maxnum': maxnum,  'stime': stime }
