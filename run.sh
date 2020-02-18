@@ -106,7 +106,7 @@ do
 
 	mkdir $RESULT_PATH
 
-	for agap in 5 10 20 #2 5 10 20 50
+	for agap in 0 5 10 20 #2 5 10 20 50
 	do
 	    for ndivs in 200
 	    do
@@ -123,7 +123,7 @@ do
                     echo "Deleting the diversified files."
                     rm ${DIVS_DIR}/*.$fnoextension.out.json
                     #fi
-                    for relax in 0.1 0.2 0.4 0.6 0.8 0.9
+                    for relax in 0.0 0.1 0.2 0.4 0.6 0.8 0.9
                     do
                         for lp in 10000 #100000 
                         do
