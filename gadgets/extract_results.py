@@ -5,7 +5,7 @@ import re
 import sys
 from uncertainties import ufloat
 from uncertainties import unumpy  # Array manipulation
-import uncertainties
+#import uncertainties
 import math
 import cPickle as pickle
 import os
@@ -221,12 +221,12 @@ for r in rrates:
             qs = [ m**2+s**2*(n-1)/n for m,s,n in k]
             q = sum([ q*n for (m,s,n), q in zip(k,qs)])/num # sum([n for m,s,n in k])
             std = math.sqrt(q-mean**2)
-            d[bench][r][metric]['res'] = ufloat(mean,std)
+            d[bench][r][metric]['res'] = (mean,std) #ufloat(mean,std)
             d[bench][r][metric]['avgnum'] = num/len(k)
             #print metric, bench, ufloat(mean,std)
 
 
-        print "".join([bench.ljust(50)] + map(lambda x: x.ljust(17), [r] +[ "-" if m not in d[bench][r] else (str((d[bench][r][m]['res']*100).format("2.2")) + "% " + "(" + str(d[bench][r][m]['avgnum']) +  ")") for m in metrics ]))
+        print "".join([bench.ljust(50)] + map(lambda x: x.ljust(17), [r] +[ "-" if m not in d[bench][r] else (str((ufloat(*d[bench][r][m]['res'])*100).format("2.2")) + "% " + "(" + str(d[bench][r][m]['avgnum']) +  ")") for m in metrics ]))
         
 # Write outputs.
     
@@ -266,11 +266,11 @@ for r in rrates:
             if bench not in d: continue
             if r not in d[bench]: continue
             # find minimum values to mark
-            data = [ (d[bench][r][m]['res'],m) for m in metrics if m in d[bench][r] ]
+            data = [ (ufloat(*d[bench][r][m]['res']),m) for m in metrics if m in d[bench][r] ]
             mind = min(data, key=lambda (res,m): res)
             minds = filter(lambda (x,m): abs(x- mind[0]) < 0.005, data)
             _, minms = zip(*minds)
-            data = ["b" + str(bi)] + [ "-" if m not in d[bench][r] else formatout(d[bench][r][m]['res'], m in minms) for m in metrics ]
+            data = ["b" + str(bi)] + [ "-" if m not in d[bench][r] else formatout(ufloat(*d[bench][r][m]['res']), m in minms) for m in metrics ]
             cdata = map (lambda x: x.replace("_", "\\_"), data)
             cdata = map (lambda x: x.replace("%", "\\%"), cdata)
             cdata = map (lambda x: x.replace("+/-", "$\\pm$"), cdata)
@@ -286,11 +286,11 @@ for m in metrics:
             if r not in d[bench]: continue
             if m not in d[bench][r]: continue
             # find minimum values to mark
-            data = [ (d[bench][r][m]['res'],r) for r in rrates if r in d[bench] and m in d[bench][r] ]
+            data = [ (ufloat(*d[bench][r][m]['res']),r) for r in rrates if r in d[bench] and m in d[bench][r] ]
             mind = min(data, key=lambda (res,r): res)
             minds = filter(lambda (x,r): abs(x- mind[0]) < 0.005, data)
             _, minms = zip(*minds)
-            data = ["b" + str(bi)] + [ "-" if r not in d[bench] or m not in d[bench][r] else formatout(d[bench][r][m]['res'], r in minms) for r in rrates ]
+            data = ["b" + str(bi)] + [ "-" if r not in d[bench] or m not in d[bench][r] else formatout(ufloat(*d[bench][r][m]['res']), r in minms) for r in rrates ]
             cdata = map (lambda x: x.replace("_", "\\_"), data)
             cdata = map (lambda x: x.replace("%", "\\%"), cdata)
             cdata = map (lambda x: x.replace("+/-", "$\\pm$"), cdata)
