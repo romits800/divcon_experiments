@@ -290,10 +290,10 @@ for ag in d:
         f.write(",".join(["Benchmark"] + rrates))
         f.write("\n")
         for bi,bench in enumerate(benchmarks, 1):
-            if ag not in d: continue
-            if bench not in d[ag]: continue
-            if r not in d[ag][bench]: continue
-            if m not in d[ag][bench][r]: continue
+            if not d.has_key(ag): continue
+            if not d[ag].has_key(bench): continue
+            if not d[ag][bench].has_key(r): continue
+            if not d[ag][bench][r].has_key(m): continue
             # find minimum values to mark
             data = [ (ufloat(*d[ag][bench][r][m]['res']),r) for r in rrates if r in d[ag][bench] and m in d[ag][bench][r] ]
             mind = min(data, key=lambda (res,r): res)
@@ -305,6 +305,27 @@ for ag in d:
             cdata = map (lambda x: x.replace("+/-", "$\\pm$"), cdata)
             f.write(",".join(cdata))
             f.write("\n")
+
+agaps = sorted(d.keys(), key=lambda x: int(x))
+for m in metrics:
+  for r in rrates:
+    with open("gaps_output" + m + r + ".csv", "w") as f:
+        f.write(",".join(["Benchmark"] + agaps ))
+        f.write("\n")
+        for bi,bench in enumerate(benchmarks, 1):
+            # find minimum values to mark
+            data = [ (ufloat(*d[ag][bench][r][m]['res']),ag) for ag in agaps if d[ag].has_key(bench) and d[ag][bench].has_key(r) and d[ag][bench][r].has_key(m) ]
+            if data == []: continue
+            mind = min(data, key=lambda (res,ag): res)
+            minds = filter(lambda (x,ag): abs(x- mind[0]) < 0.005, data)
+            _, minms = zip(*minds)
+            data = ["b" + str(bi)] + [ "-" if not d[ag].has_key(bench) or not d[ag][bench].has_key(r) or not  d[ag][bench][r].has_key(m)  else formatout(ufloat(*d[ag][bench][r][m]['res']), ag in minms) for ag in agaps ]
+            cdata = map (lambda x: x.replace("_", "\\_"), data)
+            cdata = map (lambda x: x.replace("%", "\\%"), cdata)
+            cdata = map (lambda x: x.replace("+/-", "$\\pm$"), cdata)
+            f.write(",".join(cdata))
+            f.write("\n")
+ 
  
 with open("benchmarks.csv", "w") as f:
     f.write(",".join(["Bid", "Benchmark"]))
