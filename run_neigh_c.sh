@@ -109,9 +109,9 @@ do
                                 do
                                     if [ ! -f $fnoextension.out.json ]; then
                                         echo "File not found! Falling back to llvm basefile"
-                                        time timeout 5m gecode-diversify  ${flags} --acceptable-gap $agap --relax $relax --seed 12 --distance ${dist} --restart $rest --restart-base $lp --number-divs $ndivs --div-method monolithic_lns --divs-dir $DIVS_DIR -o $fnoextension.out.json --branching ${branch} --verbose $fnoextension.ext.json
+                                        time timeout 5m gecode-diversify  ${flags} --acceptable-gap $agap --relax $relax --seed 12 --distance ${dist} --restart $rest --restart-scale $lp --number-divs $ndivs --div-method monolithic_lns --divs-dir $DIVS_DIR -o $fnoextension.out.json --branching ${branch} --verbose $fnoextension.ext.json
                                     else
-                                        time timeout 5m gecode-diversify  ${flags} --acceptable-gap $agap --relax $relax --seed 12 --distance ${dist} --restart $rest --restart-base $lp --number-divs $ndivs --solver-file $fnoextension.out.json --use-optimal-for-diversification --div-method monolithic_lns --divs-dir $DIVS_DIR -o $fnoextension.out.json --branching ${branch}  --verbose $fnoextension.ext.json
+                                        time timeout 5m gecode-diversify  ${flags} --acceptable-gap $agap --relax $relax --seed 12 --distance ${dist} --restart $rest --restart-scale $lp --number-divs $ndivs --solver-file $fnoextension.out.json --use-optimal-for-diversification --div-method monolithic_lns --divs-dir $DIVS_DIR -o $fnoextension.out.json --branching ${branch}  --verbose $fnoextension.ext.json
                                     fi
                                     python stats.py div_monolithic_lns_${arch}_${fnoextension}_${agap}_${ndivs}_${dist}_${branch}_${relax}_${lp}_${rest} ${fnoextension} ${DIVS_DIR} ${RESULT_PATH} 
                                     echo "Deleting the diversified files."
