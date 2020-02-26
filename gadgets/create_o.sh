@@ -7,8 +7,12 @@ export PATH=${PATH}:/home/romi/didaktoriko/unison/romi_unison/divCon/src/solvers
 # /usr/local/bin/uni
 
 
-for pic in ${path}/divs_?/${bench}/*.pickle
+for pic in ${path}/divs_?/${bench}/*.pickle #_?(constant|[0-9][0-9][0-9]).pickle
 do
+    if [[ "$pic" == *_result.pickle ]]
+    then
+        continue
+    fi  
     echo $pic
     rm *.out.json
     rm *.out.json.unison.mir
@@ -34,5 +38,5 @@ do
         inoext4="${inoext3%.*}"   # filename without extension 
         llc $i -filetype=obj -march=mipsel -mcpu=mips32 -disable-post-ra -disable-tail-duplicate -disable-branch-fold -disable-block-placement -start-after livedebugvars -o $inoext4.o
     done
-    python jop_surv.py `pwd` $pic
+    python jop_dist.py `pwd` $pic
 done
