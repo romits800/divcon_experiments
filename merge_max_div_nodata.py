@@ -21,7 +21,7 @@ ds = dict()
 
 i = 0
 for f in listdir("."):
-    if f.endswith(".pickle") and f.startswith("divs_"):
+    if f.endswith(".pickle") and f.startswith("max_div_divs_"):
         ds[i] = pickle.load(open(f))
         i+=1 
 
@@ -186,6 +186,18 @@ for b in ds[0]:
 
 
                             d[b][arch][method][metric][agap][branch][relax]['num'] = num # number of iterations
+
+                            (reghamm, mreghamm, dreghamm, stime) = create_dicts(ds, b, arch, method, metric, agap, branch, relax, 'reghamm')
+
+                            if len(reghamm)>0 and len(mreghamm) > 0:
+                                av = {i: avg(reghamm[i]) for i in reghamm}
+                                std = {i: stdev(reghamm[i], av[i]) for i in reghamm}
+                                mn = {i: avg(mreghamm[i]) for i in mreghamm}
+                                n = {i: len(reghamm[i]) for i in reghamm}
+                                st = {i: avg(stime[i]) for i in stime}
+                                ststd = {i: stdev(stime[i],st[i]) for i in stime}
+                                d[b][arch][method][metric][agap][branch][relax]['reghamm'] = {i: { 'num': av[i], 'stdev': std[i], 'n': n[i], 'maxnum': mn[i],  'stime': st[i], 'stime_stdev': ststd[i]} for i in reghamm}
+
 
 
 pickle.dump(d, open("divs.pickle", "w"))
