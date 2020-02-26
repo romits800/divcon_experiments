@@ -42,7 +42,7 @@ pat2 = r".*Gadgets information\n=+\n(.*)Unique gadgets found: ([0-9]+).*"
 t = [ [ 0. for i in files ] for j in files ] 
 res = []
 for iinp, inp in enumerate(files): 
-    command = "ROPgadget.py --binary %s --rawArch mips --rawMode 32 --rawEndian little --nosys" %inp
+    command = "ROPgadget --binary %s --rawArch mips --rawMode 32 --rawEndian little --nosys" %inp
     p1 = Popen(command.split(), stdout=PIPE)
     output,err = p1.communicate()
 
