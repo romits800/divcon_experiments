@@ -223,6 +223,7 @@ for benchmark in listdir(pathname):
 
             ## Branch Diff Hamming Distance
 	    d[benchmark][arch][method][metric][agap][branch][relax]['brdiff'] = dict()
+            d[benchmark][arch][method][metric][agap][branch][relax]['gadget'] = dict()
 
             intd = dict()
             sumhd = 0
@@ -253,6 +254,7 @@ for benchmark in listdir(pathname):
 
                 if not count == 0:
                     d[benchmark][arch][method][metric][agap][branch][relax]['brdiff'][ii] = {'num': round(sumhd/count,2), 'maxnum': maxnum,  'stime': stime} 
+                    d[benchmark][arch][method][metric][agap][branch][relax]['gadget'][ii] = {'num': round(sumhd/count,2), 'maxnum': maxnum,  'stime': stime} 
 
             ## Levenshtein Distance
             d[benchmark][arch][method][metric][agap][branch][relax]['levenshtein'] = dict()
@@ -309,6 +311,9 @@ for benchmark in listdir(pathname):
 
                 if not count == 0:
                     d[benchmark][arch][method][metric][agap][branch][relax]['reghamm'][ii] = { 'num': round(sumhd/count,2), 'maxnum': maxnum,  'stime': stime }
+                    d[benchmark][arch][method][metric][agap][branch][relax]['gadget'][ii]['num'] += round(sumhd/count,2)
+                    d[benchmark][arch][method][metric][agap][branch][relax]['gadget'][ii]['maxnum'] += maxnum
+                    d[benchmark][arch][method][metric][agap][branch][relax]['gadget'][ii]['stime'] += stime
 
 
 
