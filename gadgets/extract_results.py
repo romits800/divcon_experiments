@@ -20,6 +20,30 @@ filepat = re.compile("divs_[0-9]+_[0-9]$")
 metrics = ["br_hamming", "levenshtein", "hamming", "diff_br_hamming", "reg_hamming", "hamm_reg_gadget"]
 rrates = rrates =  ["-", "0.1", "0.2", "0.4", "0.6", "0.8", "0.9"]
 
+benchmarks = sorted([   "h264ref.sei.UpdateRandomAccess", 
+                        "hmmer.tophits.AllocFancyAli",
+                        "gobmk.board.get_last_player",
+                        "gcc.expmed.ceil_log2",
+                        "h264ref.vlc.symbol2uvlc",
+                        "gobmk.patterns.autohelperpat1088",
+                        "gobmk.owl_attackpat.autohelperowl_attackpat68",
+                        "gobmk.owl_defendpat.autohelperowl_defendpat421",
+                        "gcc.xexit.xexit",                 
+                        "gcc.rtlanal.parms_set",          
+                        "gcc.alias.get_frame_alias_set",
+                        "mesa.api.glVertex2i",             
+                        "gcc.jump.unsigned_condition",    
+                        "sphinx3.glist.glist_tail",       
+                        "sphinx3.profile.ptmr_init",      
+                        "mesa.api.glIndexd",               
+                        "gobmk.owl_vital_apat.autohelperowl_vital_apat34"])
+
+
+# Values for histogram (<=) for every field
+# [0,0], (0,5%], (5%,10%], (10%,20%], (20%,40%], (40%,60%], (60%,80%], (80%,100%]
+#vals = [0.0, 0.1, 0.3, 0.6, 1.0]
+vals = [0.0, 0.1, 0.4, 1.0]
+
 def print_metric(metric):
     if metric == "diff_br_hamming": return "diff"
     elif metric == "br_hamming": return "br"
@@ -30,22 +54,54 @@ def print_metric(metric):
     else: return "None"
     
  
-if (len(sys.argv) < 3):
+if (len(sys.argv) < 4):
     print "Give as argument folder to the bench folders and the metric"
-    print "python extract_results.py <divs_? folder> <max|both>"
+    print "python extract_results.py <divs_? folder> <max|both> <perc=true|false>" 
     exit (0)
 
 path = sys.argv[1]
 gmetric = sys.argv[2]
+perc = sys.argv[3] == "true"
 #agap = sys.argv[3]
 
 
-def print_dat(d):
-        return "|".join(['%d%%:%d%%'%(int(k*100), int(d[k]*100)) for k in sorted(d.keys())])
+def print_dat(d, vals):
+        res = [ "%d%%"%(d[k]*100) if d.has_key(k) else "-" for k in vals ]
+        return "|".join(res)
+
+def compress_data(data):
+    tmp = dict()
+    ndat = dict()
+    #temp = d[ag][bench][r][m][meas]["data"]
+    allsum = sum(data.values())
+    for i in data:
+        for v in vals:
+            if i <= v:
+                if tmp.has_key(v):
+                    tmp[v] += data[i]
+                else: 
+                    tmp[v] = data[i]
+                break
+    for v in tmp:
+        val = round(tmp[v]/float(allsum),2)
+        if val > 0.0 :
+            ndat[v] = val
+    return ndat
+
 
 # Open a file
 l = dict()
 d = dict()
+dist_vs_gadgets = {'hamm': dict(), 'brhamm': dict(), 'brdiff': dict(), 'reghamm': dict(), 'lev': dict()}
+dist_vs_gadgets_points = dict()
+
+def update_dict(d, d1):
+    for key in d1:
+        if d.has_key(key):
+            d[key] += d1[key]
+        else:
+            d[key] = d1[key]
+
 for meas in os.listdir(path):
 
    fil = re.match(filepat,meas)
@@ -79,6 +135,13 @@ for meas in os.listdir(path):
                 data = inp[gmetric]['data']
                 name = fil.split("/")[-1]
                 m.append((data, name, numdivs, avg, std))
+                if inp.has_key("dist_vs_gadgets"):
+                    if type(inp['dist_vs_gadgets']) == type(dict()):
+                      for fiel in inp['dist_vs_gadgets']:
+                        update_dict(dist_vs_gadgets[fiel], inp['dist_vs_gadgets'][fiel])
+                        #dist_vs_gadgets[fiel].update(inp['dist_vs_gadgets'][fiel])
+                if inp.has_key("dist_vs_gadgets_points"):
+                    update_dict(dist_vs_gadgets_points, inp['dist_vs_gadgets_points'])
             else:
                 print "Error", inp[gmetric]
 
@@ -111,41 +174,49 @@ for meas in os.listdir(path):
             except:
                 print "Exception 2", i
 
-        print "".join(map(lambda x: x.ljust(17), ["Benchmark".ljust(50), "Relax"] + metrics) )
+        if not perc:
+            print "".join(map(lambda x: x.ljust(17), ["Benchmark".ljust(50), "Relax"] + metrics) )
+        else: 
+            print "".join(["Benchmark".ljust(10), "Relax".ljust(10)] + map(lambda x: x.ljust(30), metrics) )
         for ag in d:
           print "-----------------------------------------------"
           print "-%s-"%ag
           print "-----------------------------------------------"
-          for bench in d[ag]:
+          for bi,bench in enumerate(benchmarks,1):
+            if not d[ag].has_key(bench): continue
             for r in rrates:
                 if r not in d[ag][bench]:
                     continue
-                print "".join([bench.ljust(50)] + map(lambda x: x.ljust(17), [r ] +[  "-" if m not in d[ag][bench][r] or not d[ag][bench][r][m].has_key(meas) or d[ag][bench][r][m][meas]["mean"]== "Average" else (str(ufloat(d[ag][bench][r][m][meas]["mean"], d[ag][bench][r][m][meas]['std'])*100) + "%"  + " (" + str(d[ag][bench][r][m][meas]["num"]) + ")" ) for m in metrics ]))
-                dat = dict()
-                tdat = dict()
-                vals = [0.0, 0.05, 0.1, 0.2, 0.4, 0.5, 0.7, 1.0]
-                for m in metrics:
+                if not perc:
+                  print "".join([bench.ljust(50)] + map(lambda x: x.ljust(17), [r ] +[  "-" if m not in d[ag][bench][r] or not d[ag][bench][r][m].has_key(meas) or d[ag][bench][r][m][meas]["mean"]== "Average" else (str(ufloat(d[ag][bench][r][m][meas]["mean"], d[ag][bench][r][m][meas]['std'])*100) + "%"  + " (" + str(d[ag][bench][r][m][meas]["num"]) + ")" ) for m in metrics ]))
+                else: 
+                  dat = dict()
+                  #tdat = dict()
+                  for m in metrics:
                     temp = dict() if m not in d[ag][bench][r] or not d[ag][bench][r][m].has_key(meas) or d[ag][bench][r][m][meas]["mean"]== "Average"  else d[ag][bench][r][m][meas]["data"]
+                    dat[m] = compress_data(temp)
+# 
+#                     allsum = float(sum(temp.values()))
+#                     dat = 
+#                     if len(temp) > 0: 
+#                         dat[m] = dict()
+#                         tdat[m] = dict()
+#                     for i in temp:
+#                         for v in vals:
+#                             if i <= v:
+#                                 if tdat[m].has_key(v):
+#                                     tdat[m][v] += temp[i]
+#                                 else: 
+#                                     tdat[m][v] = temp[i]
+#                                 break
+#                     if tdat.has_key(m):
+#                         for v in tdat[m]:
+#                             val = round(tdat[m][v]/allsum,2)
+#                             if val > 0.0 :
+#                                 dat[m][v] = val
 
-                    allsum = float(sum(temp.values()))
-                    if len(temp) > 0: 
-                        dat[m] = dict()
-                        tdat[m] = dict()
-                    for i in temp:
-                        for v in vals:
-                            if i <= v:
-                                if tdat[m].has_key(v):
-                                    tdat[m][v] += temp[i]
-                                else: 
-                                    tdat[m][v] = temp[i]
-                                break
-                    if tdat.has_key(m):
-                        for v in tdat[m]:
-                            val = round(tdat[m][v]/allsum,2)
-                            if val > 0.0 :
-                                dat[m][v] = val
+                  print "".join([("b" + str(bi)).ljust(10), r.ljust(10)] + map(lambda x: x.ljust(30),[ "-" if not dat.has_key(m) or not d[ag][bench][r].has_key(m) or not d[ag][bench][r][m].has_key(meas) else "%s(%d)"%(print_dat(dat[m], vals),d[ag][bench][r][m][meas]['num']) for m in metrics ]))
 
-                #print "".join([bench.ljust(50)] + map(lambda x: x.ljust(17), [r ] +[ "-" if not dat.has_key(m) else print_dat(dat[m]) for m in metrics ]))
                 
                 
         print "-----------------------------------------------"
@@ -229,7 +300,7 @@ for ag in d:
         for metric in metrics:
             if metric not in d[ag][bench][r]:
                 continue
-            k = [(d[ag][bench][r][metric][meas]['mean'],d[ag][bench][r][metric][meas]['std'],d[ag][bench][r][metric][meas]['num']) for meas in d[ag][bench][r][metric] if d.has_key(ag) and d[ag].has_key(bench) and d[ag][bench].has_key(r) and d[ag][bench][r].has_key(metric)]
+            k = [(d[ag][bench][r][metric][meas]['mean'],d[ag][bench][r][metric][meas]['std'],d[ag][bench][r][metric][meas]['num']) for meas in d[ag][bench][r][metric]]
             num = sum([n for m,s,n in k])
             mean = sum([m*n for m,s,n in k])/num #sum([n for m,s,n in k])
             qs = [ m**2+s**2*(n-1)/n for m,s,n in k]
@@ -242,10 +313,42 @@ for ag in d:
 
         print "".join([bench.ljust(50)] + map(lambda x: x.ljust(17), [r] +[ "-" if m not in d[ag][bench][r] else (str((ufloat(*d[ag][bench][r][m]['res'])*100).format("2.2")) + "% " + "(" + str(d[ag][bench][r][m]['avgnum']) +  ")") for m in metrics ]))
         
+
+for ag in d:
+  for r in rrates:
+    print "-------------------------------------------------------------------------------"
+    print "".join(map(lambda x: x.ljust(17), ["Benchmark".ljust(50), "Relax"] + metrics) )
+    print "-------------------------------------------------------------------------------"
+    for bench in d[ag]:
+        if r not in d[ag][bench]:
+            continue
+        for metric in metrics:
+            if metric not in d[ag][bench][r]:
+                continue
+            k = [(d[ag][bench][r][metric][meas]['data'],d[ag][bench][r][metric][meas]['num']) for meas in d[ag][bench][r][metric] if meas.startswith("divs")]
+            if len(k) == 0: continue
+            ds, nums = zip(*k)
+            
+            data = dict()
+            for di in ds:
+                for v in di:
+                    if data.has_key(v):
+                        data[v] += di[v]
+                    else:
+                        data[v] = di[v]
+            d[ag][bench][r][metric]['data'] = data
+            d[ag][bench][r][metric]['avgnum'] = sum(nums)/len(nums)
+            #print metric, bench, ufloat(mean,std)
+
+# {0.25: 1602, 0.0: 194588, 0.6: 107, 0.2: 9770, 0.4: 210, 0.1: 37773, 0.15: 11554, 0.3: 1138, 0.05: 20939, 0.45: 120, 0.7: 6, 0.35: 317, 0.55: 42, 0.65: 7, 0.5: 427}
+# {0.25: 1833, 0.0: 221637, 0.6: 117, 0.2: 11492, 0.4: 236, 0.1: 43676, 0.15: 13872, 0.3: 1289, 0.05: 23182, 0.45: 130, 0.7: 6, 0.35: 378, 0.55: 54, 0.65: 9, 0.5: 489}
+
 # Write outputs.
     
 def formatout(v, bold=False):
-    vf = '{:.2f}'.format(v*100) + "%"
+    res = ufloat(*v['res'])
+    num = str(v['avgnum'])
+    vf = '{:.2f}'.format(res*100) + "%" + "(" + num +  ")"
     #vf = str(vf) + "%"
     if bold:
         return "\\textbf{" + vf + "}"
@@ -253,24 +356,6 @@ def formatout(v, bold=False):
         return vf
  
 cmetrics = map(lambda x: x.replace("_", ""), metrics)
-benchmarks = sorted([   "h264ref.sei.UpdateRandomAccess", 
-                        "hmmer.tophits.AllocFancyAli",
-                        "gobmk.board.get_last_player",
-                        "gcc.expmed.ceil_log2",
-                        "h264ref.vlc.symbol2uvlc",
-                        "gobmk.patterns.autohelperpat1088",
-                        "gobmk.owl_attackpat.autohelperowl_attackpat68",
-                        "gobmk.owl_defendpat.autohelperowl_defendpat421",
-                        "gcc.xexit.xexit",                 
-                        "gcc.rtlanal.parms_set",          
-                        "gcc.alias.get_frame_alias_set",
-                        "mesa.api.glVertex2i",             
-                        "gcc.jump.unsigned_condition",    
-                        "sphinx3.glist.glist_tail",       
-                        "sphinx3.profile.ptmr_init",      
-                        "mesa.api.glIndexd",               
-                        "gobmk.owl_vital_apat.autohelperowl_vital_apat34"])
-
 
 for ag in d:
   for r in rrates:
@@ -282,16 +367,53 @@ for ag in d:
             if bench not in d[ag]: continue
             if r not in d[ag][bench]: continue
             # find minimum values to mark
-            data = [ (ufloat(*d[ag][bench][r][m]['res']),m) for m in metrics if m in d[ag][bench][r] ]
+            data = [ (ufloat(*d[ag][bench][r][m]['res']),m) for m in metrics if d[ag][bench][r].has_key(m) ]
             mind = min(data, key=lambda (res,m): res)
             minds = filter(lambda (x,m): abs(x- mind[0]) < 0.005, data)
             _, minms = zip(*minds)
-            data = ["b" + str(bi)] + [ "-" if m not in d[ag][bench][r] else formatout(ufloat(*d[ag][bench][r][m]['res']), m in minms) for m in metrics ]
+            data = ["b" + str(bi)] + [ "-" if m not in d[ag][bench][r] else formatout(d[ag][bench][r][m], m in minms) for m in metrics ]
             cdata = map (lambda x: x.replace("_", "\\_"), data)
             cdata = map (lambda x: x.replace("%", "\\%"), cdata)
             cdata = map (lambda x: x.replace("+/-", "$\\pm$"), cdata)
             f.write(",".join(cdata))
             f.write("\n")
+
+# HIST
+def formatdataout(v):
+    #res = v['data']ufloat(*v['res'])
+    dat = compress_data(v['data'])
+    num = str(v['avgnum'])
+    it = dat.items()
+    mi,m = max(it, key=lambda (gs,v):v)
+    fm = filter(lambda (xi,x): abs(x-m) <= 0.05, it)
+    mis,ms = zip(*fm)
+    res = {di:"%d"%(dat[di]*100) if dat.has_key(di) else "-" for di in vals }
+    for mi in mis:
+        res[mi] = "\\textbf{" + res[mi] + "}"
+    vf = ",".join([ res[i] for i in vals]) + "," + num
+    return vf
+    #vf = str(vf) + "%"
+ 
+for ag in d:
+  for r in rrates:
+    with open("hist_output" + r + ag + ".csv", "w") as f:
+        #f.write(",".join(["Benchmark"] + cmetrics))
+        #f.write("\n")
+        f.write(",".join([""] + [ ",".join([("$\\le$" if v>0 else "$=$") + str(int(v*100))   for v in vals]) + ",num" for _ in cmetrics]))
+        #f.write(",".join(["Benchmark"] + cmetrics))
+        f.write("\n")
+        for bi,bench in enumerate(benchmarks, 1):
+            #if bench not in d[ag]: continue
+            #if r not in d[ag][bench]: continue
+            # find minimum values to mark
+            data = ["b" + str(bi)] + [ ",".join([ "-" for _ in range(len(vals)+1)])  if  not d[ag].has_key(bench) or not d[ag][bench].has_key(r) or not d[ag][bench][r].has_key(m) else formatdataout(d[ag][bench][r][m]) for m in metrics ]
+            cdata = map (lambda x: x.replace("_", "\\_"), data)
+            cdata = map (lambda x: x.replace("%", "\\%"), cdata)
+            cdata = map (lambda x: x.replace("+/-", "$\\pm$"), cdata)
+            cdata = map (lambda x: x.replace("|", "$|$"), cdata)
+            f.write(",".join(cdata))
+            f.write("\n")
+ 
     
 for ag in d:
   for m in metrics:
@@ -308,7 +430,7 @@ for ag in d:
             mind = min(data, key=lambda (res,r): res)
             minds = filter(lambda (x,r): abs(x- mind[0]) < 0.005, data)
             _, minms = zip(*minds)
-            data = ["b" + str(bi)] + [ "-" if r not in d[ag][bench] or m not in d[ag][bench][r] else formatout(ufloat(*d[ag][bench][r][m]['res']), r in minms) for r in rrates ]
+            data = ["b" + str(bi)] + [ "-" if r not in d[ag][bench] or m not in d[ag][bench][r] else formatout(d[ag][bench][r][m], r in minms) for r in rrates ]
             cdata = map (lambda x: x.replace("_", "\\_"), data)
             cdata = map (lambda x: x.replace("%", "\\%"), cdata)
             cdata = map (lambda x: x.replace("+/-", "$\\pm$"), cdata)
@@ -328,14 +450,33 @@ for m in metrics:
             mind = min(data, key=lambda (res,ag): res)
             minds = filter(lambda (x,ag): abs(x- mind[0]) < 0.005, data)
             _, minms = zip(*minds)
-            data = ["b" + str(bi)] + [ "-" if not d[ag].has_key(bench) or not d[ag][bench].has_key(r) or not  d[ag][bench][r].has_key(m)  else formatout(ufloat(*d[ag][bench][r][m]['res']), ag in minms) for ag in agaps ]
+            data = ["b" + str(bi)] + [ "-" if not d[ag].has_key(bench) or not d[ag][bench].has_key(r) or not  d[ag][bench][r].has_key(m)  else formatout(d[ag][bench][r][m], ag in minms) for ag in agaps ]
             cdata = map (lambda x: x.replace("_", "\\_"), data)
             cdata = map (lambda x: x.replace("%", "\\%"), cdata)
             cdata = map (lambda x: x.replace("+/-", "$\\pm$"), cdata)
             f.write(",".join(cdata))
             f.write("\n")
  
- 
+  
+#for ag in d:
+for m in metrics:
+  for r in rrates:
+    with open("hist_gaps_output" + r + m + ".csv", "w") as f:
+        #f.write(",".join(["Benchmark"] + cmetrics))
+        #f.write("\n")
+        f.write(",".join([""] + [ ",".join([("$\\le$" if v>0 else "$=$") + str(int(v*100)) for v in vals]) + ",num" for _ in agaps]))
+        #f.write(",".join(["Benchmark"] + cmetrics))
+        f.write("\n")
+        for bi,bench in enumerate(benchmarks, 1):
+            # find minimum values to mark
+            data = ["b" + str(bi)] + [ ",".join([ "-" for _ in range(len(vals)+1)]) if  not d.has_key(ag) or not d[ag].has_key(bench) or not d[ag][bench].has_key(r) or not d[ag][bench][r].has_key(m) else formatdataout(d[ag][bench][r][m]) for ag in agaps ]
+            cdata = map (lambda x: x.replace("_", "\\_"), data)
+            cdata = map (lambda x: x.replace("%", "\\%"), cdata)
+            cdata = map (lambda x: x.replace("+/-", "$\\pm$"), cdata)
+            cdata = map (lambda x: x.replace("|", "$|$"), cdata)
+            f.write(",".join(cdata))
+            f.write("\n")
+
 with open("benchmarks.csv", "w") as f:
     f.write(",".join(["Bid", "Benchmark"]))
     f.write("\n")
@@ -349,3 +490,6 @@ with open("benchmarks.csv", "w") as f:
     
     
 pickle.dump(d, open("divs_gadgets.pickle", "w"))
+
+pickle.dump(dist_vs_gadgets, open("dist_vs_gadgets.pickle", "w"))
+pickle.dump(dist_vs_gadgets_points, open("dist_vs_gadgets_points.pickle", "w"))
