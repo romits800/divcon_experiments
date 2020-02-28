@@ -10,7 +10,7 @@ import math
 import cPickle as pickle
 import os
 
-pat = re.compile("div_monolithic_([^_]*)_([^_]*)_([a-zA-Z_0-9]*\.[a-zA-Z_0-9]*\.[a-zA-Z_0-9]*)_([0-9]+)_([0-9]+)_([^0-9]+)_(random|clrandom|original|cloriginal)_([0-9]+)_([0-9]+)(_.*|)_result.pickle")
+pat = re.compile("(agap|metr|k)div_monolithic_([^_]*)_([^_]*)_([a-zA-Z_0-9]*\.[a-zA-Z_0-9]*\.[a-zA-Z_0-9]*)_([0-9]+)_([0-9]+)_([^0-9]+)_(random|clrandom|original|cloriginal)_([0-9]+)_([0-9]+)(_.*|)_result.pickle")
 # div_monolithic_lns_mips_gcc.alias.get_frame_alias_set_10_1000_br_hamming_clrandom_105_0.4_10000_constant.pickle
 pat2 = re.compile("_([01]\.[0-9]+)_([0-9]+)_([a-z]+)")
 
@@ -149,7 +149,7 @@ for meas in os.listdir(path):
             a = re.match(pat,i)
             islns = True
             try:
-                method, arch, bench, gap, nodivs, metric, branching, seed, mindist, rest = a.groups()
+                experiment,method, arch, bench, gap, nodivs, metric, branching, seed, mindist, rest = a.groups()
                 # if gap!=agap: continue
 
                 if not d.has_key(gap):
