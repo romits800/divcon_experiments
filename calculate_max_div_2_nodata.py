@@ -83,17 +83,19 @@ def reverse_order(c):
 #div_monolithic_lns_mips_gcc.xexit.xexit_10_100_br_hamming_0.8_10000_constant.pickle
 
 # 1000 is the number of measurements
-interval_list = sorted(filter(lambda x: x>1 and x<201,{int(1.08**i) for i in range(1000)}))
+interval_list = filter(lambda x: x>1 and x<201,{int(1.08**i) for i in range(1000)})
+interval_list.update([2,5,10,15] + range(20,201,10)])
+interval_list = sorted(interval_list)
 #for benchmark in listdir(pathname):
 for benchmark in listdir(pathname):
     print benchmark
     d[benchmark] = dict()
-    pat = re.compile("div_monolithic_([^_]*)_([^_]*)_%s_([0-9]+)_([0-9]+)_([^0-9]*hamming|levenshtein|hamm_reg_gadget)_([^_]+)_([0-9]+)(_.*|).pickle"  %benchmark)
+    pat = re.compile("(lns|max)div_monolithic_([^_]*)_([^_]*)_%s_([0-9]+)_([0-9]+)_([^0-9]*hamming|levenshtein|hamm_reg_gadget)_([^_]+)_([0-9]+)(_([0-9]+)(_.*|).pickle"  %benchmark)
     for pfile in listdir(path.join(pathname,benchmark)):
         if pfile.endswith("pickle"):
             try:
                 a = re.match(pat,pfile)
-                method,arch,agap,divs,metric,branch,seed,rest = a.groups()
+                experiment,method,arch,agap,divs,metric,branch,seed,mindist,rest = a.groups()
             except:
                 print "Exception: ", pfile
                 continue
