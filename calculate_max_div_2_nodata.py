@@ -84,13 +84,13 @@ def reverse_order(c):
 
 # 1000 is the number of measurements
 interval_list = filter(lambda x: x>1 and x<201,{int(1.08**i) for i in range(1000)})
-interval_list.update([2,5,10,15] + range(20,201,10)])
-interval_list = sorted(interval_list)
+interval_list.extend([2,5,10,15] + range(20,201,10))
+interval_list = sorted(set(interval_list))
 #for benchmark in listdir(pathname):
 for benchmark in listdir(pathname):
     print benchmark
     d[benchmark] = dict()
-    pat = re.compile("(lns|max)div_monolithic_([^_]*)_([^_]*)_%s_([0-9]+)_([0-9]+)_([^0-9]*hamming|levenshtein|hamm_reg_gadget)_([^_]+)_([0-9]+)(_([0-9]+)(_.*|).pickle"  %benchmark)
+    pat = re.compile("(lns|max)div_monolithic_([^_]*)_([^_]*)_%s_([0-9]+)_([0-9]+)_([^0-9]*hamming|levenshtein|hamm_reg_gadget)_([^_]+)_([0-9]+)_([0-9]+)(_.*|).pickle"  %benchmark)
     for pfile in listdir(path.join(pathname,benchmark)):
         if pfile.endswith("pickle"):
             try:
@@ -157,17 +157,19 @@ for benchmark in listdir(pathname):
                 d[benchmark][arch][method][metric][agap][branch] = dict()
             if not d[benchmark][arch][method][metric][agap][branch].has_key(relax):
                 d[benchmark][arch][method][metric][agap][branch][relax] = dict()
+            if not d[benchmark][arch][method][metric][agap][branch][relax].has_key(mindist):
+                d[benchmark][arch][method][metric][agap][branch][relax][mindist] = dict()
  
-            d[benchmark][arch][method][metric][agap][branch][relax]['divs'] = len(fnames_sorted)
-            d[benchmark][arch][method][metric][agap][branch][relax]['cost'] = { 'num': avgcost, 'maxnum': 0}
-            d[benchmark][arch][method][metric][agap][branch][relax]['stime'] = { 'num': stime, 'maxnum': 0}
+            d[benchmark][arch][method][metric][agap][branch][relax][mindist]['divs'] = len(fnames_sorted)
+            d[benchmark][arch][method][metric][agap][branch][relax][mindist]['cost'] = { 'num': avgcost, 'maxnum': 0}
+            d[benchmark][arch][method][metric][agap][branch][relax][mindist]['stime'] = { 'num': stime, 'maxnum': 0}
 
 
 
 
 
             ## Hamming Distance
-            d[benchmark][arch][method][metric][agap][branch][relax]['avg'] = dict()
+            d[benchmark][arch][method][metric][agap][branch][relax][mindist]['avg'] = dict()
 
             intd = dict()
             sumhd = 0
@@ -191,10 +193,10 @@ for benchmark in listdir(pathname):
                     maxnum = len(cycles[fnames[i]])
 
                 if not count == 0:
-                    d[benchmark][arch][method][metric][agap][branch][relax]['avg'][ii] = { 'num': round(sumhd/count,2), 'maxnum': maxnum,  'stime': stime }
+                    d[benchmark][arch][method][metric][agap][branch][relax][mindist]['avg'][ii] = { 'num': round(sumhd/count,2), 'maxnum': maxnum,  'stime': stime }
 
             ## Branch Hamming Distance
-            d[benchmark][arch][method][metric][agap][branch][relax]['bravg'] = dict()
+            d[benchmark][arch][method][metric][agap][branch][relax][mindist]['bravg'] = dict()
             intd = dict()
             
             sumhd = 0 #intd[(f0,f1)]
@@ -220,12 +222,12 @@ for benchmark in listdir(pathname):
                     maxnum = len(brcycles[fnames[i]])
 
                 if not count == 0:
-                    d[benchmark][arch][method][metric][agap][branch][relax]['bravg'][ii] = {'num': round(sumhd/count,4), 'maxnum': maxnum,  'stime': stime}
+                    d[benchmark][arch][method][metric][agap][branch][relax][mindist]['bravg'][ii] = {'num': round(sumhd/count,4), 'maxnum': maxnum,  'stime': stime}
 
 
             ## Branch Diff Hamming Distance
-	    d[benchmark][arch][method][metric][agap][branch][relax]['brdiff'] = dict()
-            d[benchmark][arch][method][metric][agap][branch][relax]['gadget'] = dict()
+	    d[benchmark][arch][method][metric][agap][branch][relax][mindist]['brdiff'] = dict()
+            d[benchmark][arch][method][metric][agap][branch][relax][mindist]['gadget'] = dict()
 
             intd = dict()
             sumhd = 0
@@ -255,11 +257,11 @@ for benchmark in listdir(pathname):
 
 
                 if not count == 0:
-                    d[benchmark][arch][method][metric][agap][branch][relax]['brdiff'][ii] = {'num': round(sumhd/count,2), 'maxnum': maxnum,  'stime': stime} 
-                    d[benchmark][arch][method][metric][agap][branch][relax]['gadget'][ii] = {'num': round(sumhd/count,2), 'maxnum': maxnum,  'stime': stime} 
+                    d[benchmark][arch][method][metric][agap][branch][relax][mindist]['brdiff'][ii] = {'num': round(sumhd/count,2), 'maxnum': maxnum,  'stime': stime} 
+                    d[benchmark][arch][method][metric][agap][branch][relax][mindist]['gadget'][ii] = {'num': round(sumhd/count,2), 'maxnum': maxnum,  'stime': stime} 
 
             ## Levenshtein Distance
-            d[benchmark][arch][method][metric][agap][branch][relax]['levenshtein'] = dict()
+            d[benchmark][arch][method][metric][agap][branch][relax][mindist]['levenshtein'] = dict()
             intd = dict()
             sumhd = 0
             count = 0
@@ -285,10 +287,10 @@ for benchmark in listdir(pathname):
 
 
                 if not count == 0:
-                    d[benchmark][arch][method][metric][agap][branch][relax]['levenshtein'][ii] = {'num': round(sumhd/count,2), 'maxnum': maxnum,  'stime': stime}
+                    d[benchmark][arch][method][metric][agap][branch][relax][mindist]['levenshtein'][ii] = {'num': round(sumhd/count,2), 'maxnum': maxnum,  'stime': stime}
 
             ## Register Hamming Distance
-            d[benchmark][arch][method][metric][agap][branch][relax]['reghamm'] = dict()
+            d[benchmark][arch][method][metric][agap][branch][relax][mindist]['reghamm'] = dict()
 
             intd = dict()
             sumhd = 0
@@ -312,10 +314,10 @@ for benchmark in listdir(pathname):
                     maxnum = len(registers[fnames[i]])
 
                 if not count == 0:
-                    d[benchmark][arch][method][metric][agap][branch][relax]['reghamm'][ii] = { 'num': round(sumhd/count,2), 'maxnum': maxnum,  'stime': stime }
-                    d[benchmark][arch][method][metric][agap][branch][relax]['gadget'][ii]['num'] += round(sumhd/count,2)
-                    d[benchmark][arch][method][metric][agap][branch][relax]['gadget'][ii]['maxnum'] += maxnum
-                    d[benchmark][arch][method][metric][agap][branch][relax]['gadget'][ii]['stime'] += stime
+                    d[benchmark][arch][method][metric][agap][branch][relax][mindist]['reghamm'][ii] = { 'num': round(sumhd/count,2), 'maxnum': maxnum,  'stime': stime }
+                    d[benchmark][arch][method][metric][agap][branch][relax][mindist]['gadget'][ii]['num'] += round(sumhd/count,2)
+                    d[benchmark][arch][method][metric][agap][branch][relax][mindist]['gadget'][ii]['maxnum'] += maxnum
+                    d[benchmark][arch][method][metric][agap][branch][relax][mindist]['gadget'][ii]['stime'] += stime
 
 
 

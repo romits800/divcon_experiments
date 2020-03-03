@@ -170,7 +170,9 @@ for meas in os.listdir(path):
                     d[gap][bench][relax] = dict()
                 if not d[gap][bench][relax].has_key(metric):
                     d[gap][bench][relax][metric] = dict()
-                d[gap][bench][relax][metric][meas] = {'num': j, 'mean': k1, 'std': k2, 'data': dat}
+                if not d[gap][bench][relax][metric].has_key(mindist):
+                    d[gap][bench][relax][metric][mindist] = dict()
+                d[gap][bench][relax][metric][mindist][meas] = {'num': j, 'mean': k1, 'std': k2, 'data': dat}
             except:
                 print "Exception 2", i
 
@@ -182,18 +184,19 @@ for meas in os.listdir(path):
           print "-----------------------------------------------"
           print "-%s-"%ag
           print "-----------------------------------------------"
+          mindist = 1
           for bi,bench in enumerate(benchmarks,1):
             if not d[ag].has_key(bench): continue
             for r in rrates:
                 if r not in d[ag][bench]:
                     continue
                 if not perc:
-                  print "".join([bench.ljust(50)] + map(lambda x: x.ljust(17), [r ] +[  "-" if m not in d[ag][bench][r] or not d[ag][bench][r][m].has_key(meas) or d[ag][bench][r][m][meas]["mean"]== "Average" else (str(ufloat(d[ag][bench][r][m][meas]["mean"], d[ag][bench][r][m][meas]['std'])*100) + "%"  + " (" + str(d[ag][bench][r][m][meas]["num"]) + ")" ) for m in metrics ]))
+                  print "".join([bench.ljust(50)] + map(lambda x: x.ljust(17), [r ] +[  "-" if not d[ag][bench][r].has_key(m)  or not d[ag][bench][r][m].has_key(mindist) or not d[ag][bench][r][m][mindist].has_key(meas) or d[ag][bench][r][m][mindist][meas]["mean"]== "Average" else (str(ufloat(d[ag][bench][r][m][mindist][meas]["mean"], d[ag][bench][r][m][mindist][meas]['std'])*100) + "%"  + " (" + str(d[ag][bench][r][m][mindist][meas]["num"]) + ")" ) for m in metrics ]))
                 else: 
                   dat = dict()
                   #tdat = dict()
                   for m in metrics:
-                    temp = dict() if m not in d[ag][bench][r] or not d[ag][bench][r][m].has_key(meas) or d[ag][bench][r][m][meas]["mean"]== "Average"  else d[ag][bench][r][m][meas]["data"]
+                    temp = dict() if not d[ag][bench][r].has_key(m) or not d[ag][bench][r][m].has_key(mindist) or not d[ag][bench][r][m][mindist].has_key(meas) or d[ag][bench][r][m][mindist][meas]["mean"]== "Average"  else d[ag][bench][r][m][mindist][meas]["data"]
                     dat[m] = compress_data(temp)
 # 
 #                     allsum = float(sum(temp.values()))
@@ -215,7 +218,7 @@ for meas in os.listdir(path):
 #                             if val > 0.0 :
 #                                 dat[m][v] = val
 
-                  print "".join([("b" + str(bi)).ljust(10), r.ljust(10)] + map(lambda x: x.ljust(30),[ "-" if not dat.has_key(m) or not d[ag][bench][r].has_key(m) or not d[ag][bench][r][m].has_key(meas) else "%s(%d)"%(print_dat(dat[m], vals),d[ag][bench][r][m][meas]['num']) for m in metrics ]))
+                  print "".join([("b" + str(bi)).ljust(10), r.ljust(10)] + map(lambda x: x.ljust(30),[ "-" if not dat.has_key(m) or not d[ag][bench][r].has_key(m) or not d[ag][bench][r][m].has_key(mindist) or not d[ag][bench][r][m][mindist].has_key(meas) else "%s(%d)"%(print_dat(dat[m], vals),d[ag][bench][r][m][mindist][meas]['num']) for m in metrics ]))
 
                 
                 
@@ -224,10 +227,11 @@ for meas in os.listdir(path):
           print "-----------------------------------------------"
           print "-%s-"%ag
           print "-----------------------------------------------"
+          mindist = 1
           for r in rrates:
             if not l.has_key(r): l[r] = dict()
             for metric in metrics:
-                k = [ (d[ag][b][r][metric][meas]["mean"],d[ag][b][r][metric][meas]["std"],d[ag][b][r][metric][meas]['num'])  for b in d[ag] if d[ag][b].has_key(r) and d[ag][b][r].has_key(metric) and d[ag][b][r][metric].has_key(meas) and d[ag][b][r][metric][meas]["mean"] != "Average"]
+                k = [ (d[ag][b][r][metric][mindist][meas]["mean"],d[ag][b][r][metric][mindist][meas]["std"],d[ag][b][r][metric][mindist][meas]['num'])  for b in d[ag] if d[ag][b].has_key(r) and d[ag][b][r].has_key(metric) and d[ag][b][r][metric].has_key(mindist) and d[ag][b][r][metric][mindist].has_key(meas) and d[ag][b][r][metric][mindist][meas]["mean"] != "Average"]
                 if (len(k) >0):
                     # For each replicate j you must have number of samples Nj, mean Mj, and variance Vj=SDj^2. 
                     # The mean across the three replicates is M=(N1*M1+N2*M2*N3*M3)/(N1+N2+N3).
@@ -285,6 +289,7 @@ print "###############################################"
 print "#########      TOTAL (benchmarks)     #########"
 print "###############################################"
 
+mindist = 1
 for ag in d:
   print "-------------------------------------------------------------------------------"
   print "-------------------------------%s-------------------------------------------" %ag
@@ -298,20 +303,20 @@ for ag in d:
         if r not in d[ag][bench]:
             continue
         for metric in metrics:
-            if metric not in d[ag][bench][r]:
-                continue
-            k = [(d[ag][bench][r][metric][meas]['mean'],d[ag][bench][r][metric][meas]['std'],d[ag][bench][r][metric][meas]['num']) for meas in d[ag][bench][r][metric]]
+            if metric not in d[ag][bench][r]: continue
+            if mindist not in d[ag][bench][r][metric]: continue
+            k = [(d[ag][bench][r][metric][mindist][meas]['mean'],d[ag][bench][r][metric][mindist][meas]['std'],d[ag][bench][r][metric][mindist][meas]['num']) for meas in d[ag][bench][r][metric][mindist]]
             num = sum([n for m,s,n in k])
             mean = sum([m*n for m,s,n in k])/num #sum([n for m,s,n in k])
             qs = [ m**2+s**2*(n-1)/n for m,s,n in k]
             q = sum([ q*n for (m,s,n), q in zip(k,qs)])/num # sum([n for m,s,n in k])
             std = math.sqrt(q-mean**2)
-            d[ag][bench][r][metric]['res'] = (mean,std) #ufloat(mean,std)
-            d[ag][bench][r][metric]['avgnum'] = num/len(k)
+            d[ag][bench][r][metric][mindist]['res'] = (mean,std) #ufloat(mean,std)
+            d[ag][bench][r][metric][mindist]['avgnum'] = num/len(k)
             #print metric, bench, ufloat(mean,std)
 
 
-        print "".join([bench.ljust(50)] + map(lambda x: x.ljust(17), [r] +[ "-" if m not in d[ag][bench][r] else (str((ufloat(*d[ag][bench][r][m]['res'])*100).format("2.2")) + "% " + "(" + str(d[ag][bench][r][m]['avgnum']) +  ")") for m in metrics ]))
+        print "".join([bench.ljust(50)] + map(lambda x: x.ljust(17), [r] +[ "-" if m not in d[ag][bench][r] or d[ag][bench][r][m].has_key(mindist) else (str((ufloat(*d[ag][bench][r][m][mindist]['res'])*100).format("2.2")) + "% " + "(" + str(d[ag][bench][r][m][mindist]['avgnum']) +  ")") for m in metrics ]))
         
 
 for ag in d:
@@ -323,9 +328,9 @@ for ag in d:
         if r not in d[ag][bench]:
             continue
         for metric in metrics:
-            if metric not in d[ag][bench][r]:
-                continue
-            k = [(d[ag][bench][r][metric][meas]['data'],d[ag][bench][r][metric][meas]['num']) for meas in d[ag][bench][r][metric] if meas.startswith("divs")]
+            if not d[ag][bench][r].has_key(metric): continue
+            if not d[ag][bench][r][metric].has_key(mindist): continue
+            k = [(d[ag][bench][r][metric][mindist][meas]['data'],d[ag][bench][r][metric][mindist][meas]['num']) for meas in d[ag][bench][r][metric][mindist] if meas.startswith("divs")]
             if len(k) == 0: continue
             ds, nums = zip(*k)
             
@@ -336,8 +341,8 @@ for ag in d:
                         data[v] += di[v]
                     else:
                         data[v] = di[v]
-            d[ag][bench][r][metric]['data'] = data
-            d[ag][bench][r][metric]['avgnum'] = sum(nums)/len(nums)
+            d[ag][bench][r][metric][mindist]['data'] = data
+            d[ag][bench][r][metric][mindist]['avgnum'] = sum(nums)/len(nums)
             #print metric, bench, ufloat(mean,std)
 
 # {0.25: 1602, 0.0: 194588, 0.6: 107, 0.2: 9770, 0.4: 210, 0.1: 37773, 0.15: 11554, 0.3: 1138, 0.05: 20939, 0.45: 120, 0.7: 6, 0.35: 317, 0.55: 42, 0.65: 7, 0.5: 427}
@@ -367,11 +372,11 @@ for ag in d:
             if bench not in d[ag]: continue
             if r not in d[ag][bench]: continue
             # find minimum values to mark
-            data = [ (ufloat(*d[ag][bench][r][m]['res']),m) for m in metrics if d[ag][bench][r].has_key(m) ]
+            data = [ (ufloat(*d[ag][bench][r][m][mindist]['res']),m) for m in metrics if d[ag][bench][r].has_key(m) and d[ag][bench][r][m].has_key(mindist)]
             mind = min(data, key=lambda (res,m): res)
             minds = filter(lambda (x,m): abs(x- mind[0]) < 0.005, data)
             _, minms = zip(*minds)
-            data = ["b" + str(bi)] + [ "-" if m not in d[ag][bench][r] else formatout(d[ag][bench][r][m], m in minms) for m in metrics ]
+            data = ["b" + str(bi)] + [ "-" if not d[ag][bench][r].has_key(m) or not d[ag][bench][r][m].has_key(mindist) else formatout(d[ag][bench][r][m][mindist], m in minms) for m in metrics ]
             cdata = map (lambda x: x.replace("_", "\\_"), data)
             cdata = map (lambda x: x.replace("%", "\\%"), cdata)
             cdata = map (lambda x: x.replace("+/-", "$\\pm$"), cdata)
@@ -406,7 +411,7 @@ for ag in d:
             #if bench not in d[ag]: continue
             #if r not in d[ag][bench]: continue
             # find minimum values to mark
-            data = ["b" + str(bi)] + [ ",".join([ "-" for _ in range(len(vals)+1)])  if  not d[ag].has_key(bench) or not d[ag][bench].has_key(r) or not d[ag][bench][r].has_key(m) else formatdataout(d[ag][bench][r][m]) for m in metrics ]
+            data = ["b" + str(bi)] + [ ",".join([ "-" for _ in range(len(vals)+1)])  if  not d[ag].has_key(bench) or not d[ag][bench].has_key(r) or not d[ag][bench][r].has_key(m) or not d[ag][bench][r][m].has_key(mindist) else formatdataout(d[ag][bench][r][m][mindist]) for m in metrics ]
             cdata = map (lambda x: x.replace("_", "\\_"), data)
             cdata = map (lambda x: x.replace("%", "\\%"), cdata)
             cdata = map (lambda x: x.replace("+/-", "$\\pm$"), cdata)
@@ -423,14 +428,15 @@ for ag in d:
         for bi,bench in enumerate(benchmarks, 1):
             if not d.has_key(ag): continue
             if not d[ag].has_key(bench): continue
-            if not d[ag][bench].has_key(r): continue
-            if not d[ag][bench][r].has_key(m): continue
+            #if not d[ag][bench].has_key(r): continue
+            #if not d[ag][bench][r].has_key(m): continue
+            #if not d[ag][bench][r][m].has_key(mindist): continue
             # find minimum values to mark
-            data = [ (ufloat(*d[ag][bench][r][m]['res']),r) for r in rrates if r in d[ag][bench] and m in d[ag][bench][r] ]
+            data = [ (ufloat(*d[ag][bench][r][m][mindist]['res']),r) for r in rrates if d[ag][bench].has_key(r) and d[ag][bench][r].has_key(m) and d[ag][benc][r][m].has_key(mindist) ]
             mind = min(data, key=lambda (res,r): res)
             minds = filter(lambda (x,r): abs(x- mind[0]) < 0.005, data)
             _, minms = zip(*minds)
-            data = ["b" + str(bi)] + [ "-" if r not in d[ag][bench] or m not in d[ag][bench][r] else formatout(d[ag][bench][r][m], r in minms) for r in rrates ]
+            data = ["b" + str(bi)] + [ "-" if not d[ag][bench].has_key(r) or not d[ag][bench][r].has_key(m) or not d[ag][bench][r][m].has_key(mindist)  else formatout(d[ag][bench][r][m][mindist], r in minms) for r in rrates ]
             cdata = map (lambda x: x.replace("_", "\\_"), data)
             cdata = map (lambda x: x.replace("%", "\\%"), cdata)
             cdata = map (lambda x: x.replace("+/-", "$\\pm$"), cdata)
@@ -445,12 +451,12 @@ for m in metrics:
         f.write("\n")
         for bi,bench in enumerate(benchmarks, 1):
             # find minimum values to mark
-            data = [ (ufloat(*d[ag][bench][r][m]['res']),ag) for ag in agaps if d[ag].has_key(bench) and d[ag][bench].has_key(r) and d[ag][bench][r].has_key(m) ]
+            data = [ (ufloat(*d[ag][bench][r][m][mindist]['res']),ag) for ag in agaps if d[ag].has_key(bench) and d[ag][bench].has_key(r)  and d[ag][bench][r].has_key(m) and d[ag][bench][r][m].has_key(mindist)]
             if data == []: continue
             mind = min(data, key=lambda (res,ag): res)
             minds = filter(lambda (x,ag): abs(x- mind[0]) < 0.005, data)
             _, minms = zip(*minds)
-            data = ["b" + str(bi)] + [ "-" if not d[ag].has_key(bench) or not d[ag][bench].has_key(r) or not  d[ag][bench][r].has_key(m)  else formatout(d[ag][bench][r][m], ag in minms) for ag in agaps ]
+            data = ["b" + str(bi)] + [ "-" if not d[ag].has_key(bench) or not d[ag][bench].has_key(r) or not d[ag][bench][r].has_key(m)  or not d[ag][bench][r][m].has_key(mindist) else formatout(d[ag][bench][r][m][mindist], ag in minms) for ag in agaps ]
             cdata = map (lambda x: x.replace("_", "\\_"), data)
             cdata = map (lambda x: x.replace("%", "\\%"), cdata)
             cdata = map (lambda x: x.replace("+/-", "$\\pm$"), cdata)
@@ -469,7 +475,7 @@ for m in metrics:
         f.write("\n")
         for bi,bench in enumerate(benchmarks, 1):
             # find minimum values to mark
-            data = ["b" + str(bi)] + [ ",".join([ "-" for _ in range(len(vals)+1)]) if  not d.has_key(ag) or not d[ag].has_key(bench) or not d[ag][bench].has_key(r) or not d[ag][bench][r].has_key(m) else formatdataout(d[ag][bench][r][m]) for ag in agaps ]
+            data = ["b" + str(bi)] + [ ",".join([ "-" for _ in range(len(vals)+1)]) if  not d.has_key(ag) or not d[ag].has_key(bench) or not d[ag][bench].has_key(r) or not d[ag][bench][r].has_key(m) or not d[ag][bench][r][m].has_key(mindist) else formatdataout(d[ag][bench][r][m][mindist]) for ag in agaps ]
             cdata = map (lambda x: x.replace("_", "\\_"), data)
             cdata = map (lambda x: x.replace("%", "\\%"), cdata)
             cdata = map (lambda x: x.replace("+/-", "$\\pm$"), cdata)
