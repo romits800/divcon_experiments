@@ -83,9 +83,10 @@ def reverse_order(c):
 #div_monolithic_lns_mips_gcc.xexit.xexit_10_100_br_hamming_0.8_10000_constant.pickle
 
 # 1000 is the number of measurements
-interval_list = filter(lambda x: x>1 and x<201,{int(1.08**i) for i in range(1000)})
-interval_list.extend([2,5,10,15] + range(20,201,10))
-interval_list = sorted(set(interval_list))
+# interval_list = filter(lambda x: x>1 and x<201,{int(1.08**i) for i in range(1000)})
+# interval_list.extend([2,5,10,15] + range(20,201,10))
+# interval_list = sorted(set(interval_list))
+interval_list = range(2,201)
 #for benchmark in listdir(pathname):
 for benchmark in listdir(pathname):
     print benchmark
