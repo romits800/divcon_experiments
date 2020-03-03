@@ -1150,22 +1150,25 @@ def plot_maxdiv_lns_new(d, b, metric, field, agap, relax, mindist, num, dist=Tru
 
     if dist:
         ax.set_ylim(bottom=0)
-        ax.set_ylabel(get_ind(field))
+        ax.set_ylabel(get_ind(field), fontsize=14)
  
     else:      
         ax.set_yscale('log')
         ax.set_ylim(bottom=1)
-        ax.set_ylabel(get_ind('stime'))
+        ax.set_ylabel(get_ind('stime'), fontsize=14)
  
-    ax.set_xlabel("Number of Variants (k)")
-    ax.legend(loc='lower right')
-    plt.title(b)
-    fig.set_size_inches(18.5/3, 12.5/3)
+    ax.set_xlabel("Number of Variants (k)", fontsize=14)
+    ax.legend(loc='lower right', fontsize=14)
+    plt.title(b, fontsize=20)
+    ax.tick_params(axis = 'both', which = 'major', labelsize = 14)
+    ax.tick_params(axis = 'both', which = 'minor', labelsize = 14)
+    fig.set_size_inches(18.5/3, 15/3.)
     plt.savefig("%s_" %("dist" if dist else "time") + b + "_" + metric + ".pdf", dpi=400, format='pdf')
     #plt.legend(loc='center right')
 
 
     plt.show()
+
 
 
 
@@ -1678,29 +1681,38 @@ def plot_rs_vs_lns( d_lns, metric, field, agap, colors, num, mindist, loc='upper
 
 
     #ax.set_ylim(bottom=0,top=1.1)
-    x = [float(i) for i in rrates[1:]]
+    x = [0.1, 0.2, 0.4, 0.6, 0.8, 0.9]
+    
     ax.set_xticks(x)
     if dist:
         ax.set_yticks([-2, -1, 0, 1, 2, 5, 10])
     else:
-        ax.set_yticks([-10, -5, -2, -1, 0, 1, 2, 5, 10, 50, 100, 1000])
+        ax.set_yticks([-10, -5, -1, 1, 5, 10, 50] )
         ax.set_ylim([-20,50])
         #ax.set_yscale('log')
 
-    ax.set_xlim([0,1.05])
+    ax.set_xlim([0,1.07])
+
     plt.fill_between(x, [-1. for _ in x], [1. for _ in x], linestyle='-.', color='gray', alpha=0.8, hatch='/')
     if dist:
 	label = r'$\frac{\delta_{HD}(S_{LNS})}{\delta_{HD}(S_{RA})}$'
-        ax.set_ylabel(label, rotation=0, fontsize=16, labelpad=20)
+        ax.set_ylabel(label, rotation=0, fontsize=22, labelpad=5)
+	ax.yaxis.set_label_coords(-0.07,0.95)
     else:
 	label = r'$\frac{t_{LNS}}{t_{RA}}$'
-        ax.set_ylabel(label, rotation=0, fontsize=16, labelpad=20)
+        ax.set_ylabel(label, rotation=0, fontsize=22, labelpad=5)
 
-    ax.set_xlabel("relax rate")
-    ax.legend(loc=loc)
-    plt.title('Effect of the relax rate on the %s' %(get_name(field) + " distance" if dist else "Solving time"), fontsize=15)
+    ax.set_xlabel("relax rate", fontsize=20)
+
+    ax.legend(loc=loc, fontsize=12)
+
+    ax.tick_params(axis = 'both', which = 'major', labelsize = 20)
+    ax.tick_params(axis = 'both', which = 'minor', labelsize = 14)
+
+
+    plt.title('LNS over RS', fontsize=24)
     #fig.set_size_inches(18.5/3, 12.5/3)
-    fig.set_size_inches(9, 5)
+    fig.set_size_inches(8.5, 6.0)
     plt.savefig("lns_vs_rs_" + ("dist" if dist else "time") + "_" + metric + ".pdf", dpi=400, format='pdf')
     #plt.legend(loc='center right')
     plt.show()
