@@ -13,6 +13,15 @@ do
     then
         continue
     fi  
+    if [[ "$pic" == *maxdiv*.pickle ]]
+    then
+        continue
+    fi
+    if [[ "$pic" == *lnsdiv*.pickle ]]
+    then
+        continue
+    fi
+
     echo $pic
     rm *.out.json
     rm *.out.json.unison.mir
