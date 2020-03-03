@@ -40,7 +40,8 @@ benchmarks = sorted([   "h264ref.sei.UpdateRandomAccess",
                         "mesa.api.glIndexd",
                         "gobmk.owl_vital_apat.autohelperowl_vital_apat34"])
 
-rrates = [ "-", "0.1", "0.2", "0.4", "0.6", "0.8", "0.9"]
+rrates = [ "-", "0.0",  "0.05", "0.1", "0.15", "0.2", "0.25", "0.3", "0.4", "0.5", "0.6", "0.7", "0.8", "0.9"]
+#rrates = [ "-", "0.1", "0.2", "0.4", "0.6", "0.8", "0.9"]
 
 
 def improvement(lns, dfs):
@@ -244,7 +245,7 @@ def create_tex(d, metric, field, relax, agap, branch, texname='outfile'):
     p = subprocess.Popen(["evince", texname + ".pdf"], stdout=subprocess.PIPE)
     p.communicate()
 
-def tmp(d, metric, field, agap, branch, num, texname='outfile', dist=True):
+def tmp(d, metric, field, agap, branch, num, mindist, texname='outfile', dist=True):
     '''
 	d: the dictionary with the measurements
 		e.g. d = pickle.load(open("divs.pickle"))
@@ -274,10 +275,10 @@ def tmp(d, metric, field, agap, branch, num, texname='outfile', dist=True):
         print >> f, "\\hline" 
 
         for bi,benchmark in enumerate(benchmarks,1):
-            mipsrs = d[benchmark].has_key("mips") and d[benchmark]["mips"].has_key("dfs") and d[benchmark]["mips"]["dfs"].has_key(metric) and d[benchmark]["mips"]["dfs"][metric].has_key(agap) and d[benchmark]["mips"]["dfs"][metric][agap].has_key(branch) and d[benchmark]["mips"]["dfs"][metric][agap][branch][None].has_key(field) and d[benchmark]["mips"]["dfs"][metric][agap][branch][None][field].has_key(num)
+            mipsrs = d[benchmark].has_key("mips") and d[benchmark]["mips"].has_key("dfs") and d[benchmark]["mips"]["dfs"].has_key(metric) and d[benchmark]["mips"]["dfs"][metric].has_key(agap) and d[benchmark]["mips"]["dfs"][metric][agap].has_key(branch) and d[benchmark]["mips"]["dfs"][metric][agap][branch][None].has_key(mindist) and d[benchmark]["mips"]["dfs"][metric][agap][branch][None][mindist].has_key(field) and d[benchmark]["mips"]["dfs"][metric][agap][branch][None][mindist][field].has_key(num)
             def mipslns(relax):
                 print relax
-                return d[benchmark].has_key("mips") and d[benchmark]["mips"].has_key("lns") and d[benchmark]["mips"]["lns"].has_key(metric) and d[benchmark]["mips"]["lns"][metric].has_key(agap) and d[benchmark]["mips"]["lns"][metric][agap].has_key(branch) and d[benchmark]["mips"]["lns"][metric][agap][branch].has_key(relax) and d[benchmark]["mips"]["lns"][metric][agap][branch][relax].has_key(field) and d[benchmark]["mips"]["lns"][metric][agap][branch][relax][field].has_key(num) 
+                return d[benchmark].has_key("mips") and d[benchmark]["mips"].has_key("lns") and d[benchmark]["mips"]["lns"].has_key(metric) and d[benchmark]["mips"]["lns"][metric].has_key(agap) and d[benchmark]["mips"]["lns"][metric][agap].has_key(branch) and d[benchmark]["mips"]["lns"][metric][agap][branch].has_key(relax) and d[benchmark]["mips"]["lns"][metric][agap][branch][relax].has_key(mindist) and d[benchmark]["mips"]["lns"][metric][agap][branch][relax][mindist].has_key(field) and d[benchmark]["mips"]["lns"][metric][agap][branch][relax][mindist][field].has_key(num) 
 
 
             arg = {r: "-" for r in rrates }
@@ -286,18 +287,18 @@ def tmp(d, metric, field, agap, branch, num, texname='outfile', dist=True):
                 if r == "-":
                     if mipsrs:
                         nrelax = None
-                        rsnum = d[benchmark]["mips"]["dfs"][metric][agap][branch][nrelax][field][num][avg]
+                        rsnum = d[benchmark]["mips"]["dfs"][metric][agap][branch][nrelax][mindist][field][num][avg]
                         rsnum = rsnum if dist else rsnum/1000.
-                        rsstd = d[benchmark]["mips"]["dfs"][metric][agap][branch][nrelax][field][num][stdev]
+                        rsstd = d[benchmark]["mips"]["dfs"][metric][agap][branch][nrelax][mindist][field][num][stdev]
                         rsstd = rsstd if dist else rsstd/1000.
                         arg[r] = "%.2f$\\pm$%.2f" %(rsnum, rsstd)
                         val[r] = rsnum
 
                 else:
                     if mipslns(r):
-                        lnsnum = d[benchmark]["mips"]["lns"][metric][agap][branch][r][field][num][avg]
+                        lnsnum = d[benchmark]["mips"]["lns"][metric][agap][branch][r][mindist][field][num][avg]
                         lnsnum = lnsnum if dist else lnsnum/1000.
-                        lnsstd = d[benchmark]["mips"]["lns"][metric][agap][branch][r][field][num][stdev]
+                        lnsstd = d[benchmark]["mips"]["lns"][metric][agap][branch][r][mindist][field][num][stdev]
                         lnsstd = lnsstd if dist else lnsstd/1000.
                         arg[r] = "%.2f$\\pm$%.2f" %(lnsnum, lnsstd)
                         val[r] = lnsnum
@@ -950,6 +951,68 @@ def plot_maxdiv_lns_dist(d_maxdiv, d_lns, b, metric, field, agap, relax):
 
     plt.show()
 
+def plot_maxdiv_lns_dist_new(d, b, metric, field, agap, relax, mindist, num):
+    arch = 'mips'
+    rel = str(relax)
+    agap = str(agap)
+    l = dict()
+    fig = plt.figure()
+    ax = fig.add_subplot(1,1,1)
+
+    # MaxDiversekSet
+    algo = 'dfs'
+    br   = 'cloriginal'
+ 
+    if (d[b].has_key(arch) and d[b][arch].has_key(algo) and d[b][arch][algo].has_key(metric) and d[b][arch][algo][metric].has_key(agap) and d[b][arch][algo][metric][agap].has_key(br) and d[b][arch][algo][metric][agap][br][None].has_key(mindist) and d[b][arch][algo][metric][agap][br][None][mindist].has_key(field)):
+        cdict = dict(**d[b][arch][algo][metric][agap][br][None][mindist][field])
+        k = sorted(cdict.keys())
+        xy = [ (i, cdict[i]['num'], 2*cdict[i]['stdev']/math.sqrt(cdict[i]['n'])) for i in  k]
+        if len(xy) > 0:
+            x,y,err = map(np.array,zip(*xy))
+            plt.plot(x, y, linestyle='--', color='r', label='MaxDiversekSet')
+            plt.fill_between(x, y-err, y+err, linestyle='-.', color='r', alpha = 0.2)
+            #plt.errorbar(x, y, yerr=err, linestyle=':', color='k', label='MaxDiversekSet')
+
+    # Random search
+    algo = 'dfs'
+    br   = 'clrandom'
+ 
+    if (d[b].has_key(arch) and d[b][arch].has_key(algo) and d[b][arch][algo].has_key(metric) and d[b][arch][algo][metric].has_key(agap) and d[b][arch][algo][metric][agap].has_key(br) and d[b][arch][algo][metric][agap][br].has_key(None) and d[b][arch][algo][metric][agap][br][None].has_key(mindist) and d[b][arch][algo][metric][agap][br][None][mindist].has_key(field)):
+        cdict = dict(**d[b][arch][algo][metric][agap][br][None][mindist][field])
+        k = sorted(cdict.keys())
+        xy = [ (i, cdict[i]['num'], 2*cdict[i]['stdev']/math.sqrt(cdict[i]['n'])) for i in  k]
+        if len(xy) > 0:
+            x,y,err = map(np.array, zip(*xy))
+            plt.plot(x, y, linestyle='--', color='g', label='Random Search')
+            plt.fill_between(x, y-err, y+err, linestyle='-.', color='g', alpha = 0.2)
+            #plt.errorbar(x, y, yerr=err, linestyle='-.', color='k', label='Random Search')
+ 
+    # LNS
+    algo = 'lns'
+    br   = 'clrandom'
+ 
+    if (d[b].has_key(arch) and d[b][arch].has_key(algo) and d[b][arch][algo].has_key(metric) and d[b][arch][algo][metric].has_key(agap) and d[b][arch][algo][metric][agap].has_key(br) and d[b][arch][algo][metric][agap][br].has_key(rel) and d[b][arch][algo][metric][agap][br][None].has_key(mindist) and d[b][arch][algo][metric][agap][br][rel][mindist].has_key(field)):
+        cdict = dict(**d[b][arch][algo][metric][agap][br][rel][mindist][field])
+        k = sorted(cdict.keys())
+        xy = [ (i, cdict[i]['num'], 2*cdict[i]['stdev']/math.sqrt(cdict[i]['n'])) for i in k ]
+        if len(xy) > 0:
+            x,y,err = map(np.array, zip(*xy))
+            plt.plot(x, y, linestyle='--', color='b', label='LNS')
+            plt.fill_between(x, y-err, y+err, linestyle='-.', color='b', alpha = 0.2)
+                
+
+    ax.set_ylim(bottom=0)
+    ax.set_ylabel(get_ind(field))
+    ax.set_xlabel("Number of Variants (k)")
+    ax.legend(loc='lower right')
+    plt.title(b)
+    fig.set_size_inches(18.5/3, 12.5/3)
+    plt.savefig("dist_" + b + "_" + metric + ".pdf", dpi=400, format='pdf')
+    #plt.legend(loc='center right')
+
+
+    plt.show()
+
 
 
 def plot_maxdiv_lns_time(d_maxdiv, d_lns, b, metric, field, agap, relax):
@@ -1390,7 +1453,7 @@ def plot_maxdiv_lns_aggregaded( d_lns, metric, field, agap, relax, benchmarks, c
 
 
 
-def plot_rs_vs_lns( d_lns, metric, field, agap, colors, num, loc='upper right', dist=True):
+def plot_rs_vs_lns( d_lns, metric, field, agap, colors, num, mindist, loc='upper right', dist=True):
     arch = 'mips'
     agap = str(agap)
     l = dict()
@@ -1415,8 +1478,8 @@ def plot_rs_vs_lns( d_lns, metric, field, agap, colors, num, loc='upper right', 
         algo = 'dfs'
         br   = 'clrandom'
      
-        if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(None) and d_lns[b][arch][algo][metric][agap][br][None].has_key(field) and d_lns[b][arch][algo][metric][agap][br][None][field].has_key(num)):
-            cdict = dict(**d_lns[b][arch][algo][metric][agap][br][None][field])
+        if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(None) and d_lns[b][arch][algo][metric][agap][br][None].has_key(mindist) and d_lns[b][arch][algo][metric][agap][br][None][mindist].has_key(field) and d_lns[b][arch][algo][metric][agap][br][None][mindist][field].has_key(num)):
+            cdict = dict(**d_lns[b][arch][algo][metric][agap][br][None][mindist][field])
             k = sorted(cdict.keys())
             
 
@@ -1435,8 +1498,8 @@ def plot_rs_vs_lns( d_lns, metric, field, agap, colors, num, loc='upper right', 
                 #if not lns.has_key(rel):
                  #       lns[rel] = dict()
 
-                if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(rel) and d_lns[b][arch][algo][metric][agap][br][rel].has_key(field) and d_lns[b][arch][algo][metric][agap][br][rel][field].has_key(num)):
-                    lnsdict = dict(**d_lns[b][arch][algo][metric][agap][br][rel][field][num])
+                if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(rel) and d_lns[b][arch][algo][metric][agap][br][rel].has_key(mindist) and d_lns[b][arch][algo][metric][agap][br][rel][mindist].has_key(field) and d_lns[b][arch][algo][metric][agap][br][rel][mindist][field].has_key(num)):
+                    lnsdict = dict(**d_lns[b][arch][algo][metric][agap][br][rel][mindist][field][num])
                     #k = sorted(cdict.keys())
 
                     val2 = ufloat(lnsdict[mean], lnsdict[stdev])
