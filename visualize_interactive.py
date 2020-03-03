@@ -245,6 +245,152 @@ def create_tex(d, metric, field, relax, agap, branch, texname='outfile'):
     p = subprocess.Popen(["evince", texname + ".pdf"], stdout=subprocess.PIPE)
     p.communicate()
 
+def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile', debug=False, show=True):
+    '''
+	d: the dictionary with the measurements
+		e.g. d = pickle.load(open("divs.pickle"))
+	metric: the metric of the measurement (from divcon - unison)
+	field: 'avg', 'bravg', 'brdiff' output metric
+	agap: 10, 20 allowed gap from the optimal solution
+	branch: original, random, cloriginal, clrandom
+        texname: name of the output .tex file - default = 'outfile'
+    ''' 
+    agap = str(agap)
+
+    ind = get_ind(field)
+
+    title = "%s for measurements of (%s, %s%%)" %(ind.capitalize(), metric, str(agap))
+
+
+    def get_fields(benchmark, arch, heuristic, metric, agap, branch, relax, mindist, field, num, avg, stdev):
+	mnum = d[benchmark][arch][heuristic][metric][agap][branch][relax][mindist][field][num][avg]
+	#mnum = mnum if dist else maxnum/1000.
+	mstd = d[benchmark][arch][heuristic][metric][agap][branch][relax][mindist][field][num][stdev]
+	#maxstd = maxstd if dist else maxstd/1000.
+	mseeds = d[benchmark][arch][heuristic][metric][agap][branch][relax][mindist][field][num]["n"]
+	return (mnum, mstd, mseeds)
+
+    names = sorted(d.keys())
+    with open(texname + '.tex', 'w') as f:
+	if show:
+		print >> f, "\\documentclass{standalone}"
+		print >> f, "\\usepackage{multirow}"
+		print >> f, "\\begin{document}"
+        print >> f, "\\begin{tabular}{|l|%s}"%("c|"*2*(len(relax)+2)) 
+        print >> f, "\\hline" 
+        print >> f, "&\\multicolumn{2}{c|}{\\multirow{2}{*}{\\textsc{MaxDiverse$k$Set}}}&\\multicolumn{2}{c|}{\\multirow{2}{*}{RS}}&\\multicolumn{%d}{c|}{LNS}\\\\" %2*len(relax) 
+        print >> f, "\\cline{6-%d}"%(5+len(relax)*2)
+        print >> f, "&%s&%s\\\\" %( "&".join(["\\multicolumn{2}{c|}{}", "\\multicolumn{2}{c|}{}"]), "&".join(map(lambda x: "\\multicolumn{2}{c|}{%s}"%x, relax)))
+        print >> f, "\\hline" 
+        print >> f, "&%s\\\\" %( "&".join(["dist", "time"]*(len(relax)+2)))
+    # MaxDiversekSet
+       # print >> f, "&\\footnotesize dfs (%s\\textbackslash maxd (N))&\\footnotesize  lns (%s\\textbackslash maxd (N))&\\footnotesize  improv. \\%%  \\\\" %( ind, ind) 
+        print >> f, "\\hline" 
+
+        for bi,benchmark in enumerate(benchmarks,1):
+	    branch = "cloriginal"
+	    mipsm = d[benchmark].has_key("mips") and d[benchmark]["mips"].has_key("dfs") and d[benchmark]["mips"]["dfs"].has_key(metric) and d[benchmark]["mips"]["dfs"][metric].has_key(agap) and d[benchmark]["mips"]["dfs"][metric][agap].has_key(branch) and d[benchmark]["mips"]["dfs"][metric][agap][branch][None].has_key(mindist) and d[benchmark]["mips"]["dfs"][metric][agap][branch][None][mindist].has_key(field)
+	    def mipsmax(num):
+		branch = "cloriginal"
+		return  mipsm and d[benchmark]["mips"]["dfs"][metric][agap][branch][None][mindist][field].has_key(num)
+	    branch = "clrandom"
+            mipsrs = d[benchmark].has_key("mips") and d[benchmark]["mips"].has_key("dfs") and d[benchmark]["mips"]["dfs"].has_key(metric) and d[benchmark]["mips"]["dfs"][metric].has_key(agap) and d[benchmark]["mips"]["dfs"][metric][agap].has_key(branch) and d[benchmark]["mips"]["dfs"][metric][agap][branch][None].has_key(mindist) and d[benchmark]["mips"]["dfs"][metric][agap][branch][None][mindist].has_key(field) and d[benchmark]["mips"]["dfs"][metric][agap][branch][None][mindist][field].has_key(num)
+            def mipslns(relax):
+                #print relax
+		branch = "clrandom"
+                return d[benchmark].has_key("mips") and d[benchmark]["mips"].has_key("lns") and d[benchmark]["mips"]["lns"].has_key(metric) and d[benchmark]["mips"]["lns"][metric].has_key(agap) and d[benchmark]["mips"]["lns"][metric][agap].has_key(branch) and d[benchmark]["mips"]["lns"][metric][agap][branch].has_key(relax) and d[benchmark]["mips"]["lns"][metric][agap][branch][relax].has_key(mindist) and d[benchmark]["mips"]["lns"][metric][agap][branch][relax][mindist].has_key(field) and d[benchmark]["mips"]["lns"][metric][agap][branch][relax][mindist][field].has_key(num) 
+
+
+            arg = {r: "-" for r in relax + ["-", "max"]}
+            argtime = {r: "-" for r in relax + ["-", "max"]}
+            val = {r: 0 for r in relax + ["-", "max"] }
+            valtime = {r: 0 for r in relax + ["-", "max"] }
+	    branch = "cloriginal"
+            if mipsmax(num):
+		r = 'max'
+                (maxnum,maxstd,maxnseeds) =  get_fields(benchmark, "mips", "dfs", metric, agap, "cloriginal", None, mindist, field, num, "num", "stdev") 
+                (tmaxnum,tmaxstd,tmaxnseeds) =  get_fields(benchmark, "mips", "dfs", metric, agap, "cloriginal", None, mindist, field, num, "stime", "stime_stdev") 
+		if debug:
+			arg[r] = "%.2f$\\pm$%.2f (%d,%d)" %(maxnum, maxstd, num, maxnseeds)
+			argtime[r] = "%.2f$\\pm$%.2f (%d,%d)" %(tmaxnum/1000., tmaxstd/1000., num, tmaxnseeds)
+		else:
+			arg[r] = "%.2f$\\pm$%.2f" %(maxnum, maxstd)
+			argtime[r] = "%.2f$\\pm$%.2f" %(tmaxnum/1000., tmaxstd/1000.)
+		val[r] = maxnum
+		valtime[r] = tmaxnum
+	    elif mipsm:
+		maxn = max(d[benchmark]["mips"]["dfs"][metric][agap][branch][None][mindist][field].keys())
+		r = 'max'
+                (maxnum,maxstd,maxnseeds) =  get_fields(benchmark, "mips", "dfs", metric, agap, "cloriginal", None, mindist, field, maxn, "num", "stdev") 
+                (tmaxnum,tmaxstd,tmaxnseeds) =  get_fields(benchmark, "mips", "dfs", metric, agap, "cloriginal", None, mindist, field, maxn, "stime", "stime_stdev") 
+		if debug:
+			arg[r] = "\\textit{%.2f$\\pm$%.2f (%d,%d)}" %(maxnum, maxstd, maxn, maxnseeds)
+			argtime[r] = "%.2f$\\pm$%.2f (%d,%d)" %(tmaxnum/1000., tmaxstd/1000., num, tmaxnseeds)
+		else:
+			arg[r] = "\\textit{%.2f$\\pm$%.2f}" %(maxnum, maxstd)
+			argtime[r] = "%.2f$\\pm$%.2f" %(tmaxnum/1000., tmaxstd/1000.)
+		val[r] = maxnum
+		valtime[r] = tmaxnum
+
+
+	    branch = "clrandom"
+            if mipsrs:
+		r = '-'
+		nrelax = None
+                (rsnum,rsstd,rsnseeds) =  get_fields(benchmark, "mips", "dfs", metric, agap, branch, None, mindist, field, num, "num", "stdev") 
+                (trsnum,trsstd,trsnseeds) =  get_fields(benchmark, "mips", "dfs", metric, agap, branch, None, mindist, field, num, "stime", "stime_stdev") 
+	
+		if debug:
+			arg[r] = "%.2f$\\pm$%.2f (%d)" %(rsnum, rsstd, rsnseeds)
+			argtime[r] = "%.2f$\\pm$%.2f (%d)" %(trsnum/1000., trsstd/1000., trsnseeds)
+		else:
+			arg[r] = "%.2f$\\pm$%.2f" %(rsnum, rsstd)
+			argtime[r] = "%.2f$\\pm$%.2f" %(trsnum/1000., trsstd/1000.)
+
+		val[r] = rsnum
+		valtime[r] = trsnum
+
+            for r in relax:
+                    if mipslns(r):
+			(lnsnum,lnsstd,lnsnseeds) =  get_fields(benchmark, "mips", "lns", metric, agap, branch, r, mindist, field, num, "num", "stdev") 
+			(tlnsnum,tlnsstd,tlnsnseeds) =  get_fields(benchmark, "mips", "lns", metric, agap, branch, r, mindist, field, num, "stime", "stime_stdev") 
+	
+			if debug:
+				arg[r] = "%.2f$\\pm$%.2f (%d)" %(lnsnum, lnsstd, lnsnseeds)
+				argtime[r] = "%.2f$\\pm$%.2f (%d)" %(tlnsnum/1000., tlnsstd/1000., tlnsnseeds)
+			else:
+				arg[r] = "%.2f$\\pm$%.2f" %(lnsnum, lnsstd)
+				argtime[r] = "%.2f$\\pm$%.2f" %(tlnsnum/1000., tlnsstd/1000.)
+                        val[r] = lnsnum
+                        valtime[r] = tlnsnum
+
+            vitems = val.items()
+            if sum(zip(*vitems)[1]) > 0:
+                mr, m = max(vitems, key=lambda (x,y): y)
+                mrs,_ = zip(*filter(lambda (x,y): abs(y - m) < 1, vitems))
+                for r in mrs:
+                    arg[r] = "\\textbf{%s}" %arg[r]
+
+
+            print >> f, "&".join(["b" + str(bi)] + [ "%s & %s" %(arg[r],argtime[r])  for r in ["max", "-"] + relax ]) #"%s&%s&%s&%s\\\\"%("b" + str(bi), arg1, arg2, impr1)
+            print >> f, "\\\\"
+
+
+        #impr1 = improvement(arg2, arg1)
+        print >> f, "\\hline" 
+        print >> f, "\\end{tabular}" 
+	if show:
+		print >> f, "\\end{document}" 
+
+    if show:
+	    p = subprocess.Popen(["pdflatex", texname + ".tex"], stdout=subprocess.PIPE)
+	    p.communicate()
+	    p = subprocess.Popen(["evince", texname + ".pdf"], stdout=subprocess.PIPE)
+	    p.communicate()
+
+
+
+
 def tmp(d, metric, field, agap, branch, num, mindist, texname='outfile', dist=True):
     '''
 	d: the dictionary with the measurements
@@ -951,13 +1097,15 @@ def plot_maxdiv_lns_dist(d_maxdiv, d_lns, b, metric, field, agap, relax):
 
     plt.show()
 
-def plot_maxdiv_lns_dist_new(d, b, metric, field, agap, relax, mindist, num):
+def plot_maxdiv_lns_new(d, b, metric, field, agap, relax, mindist, num, dist=True):
     arch = 'mips'
     rel = str(relax)
     agap = str(agap)
     l = dict()
     fig = plt.figure()
     ax = fig.add_subplot(1,1,1)
+    avg = 'num' if dist else 'stime'
+    stdev = 'stdev' if dist else 'stime_stdev'
 
     # MaxDiversekSet
     algo = 'dfs'
@@ -966,7 +1114,7 @@ def plot_maxdiv_lns_dist_new(d, b, metric, field, agap, relax, mindist, num):
     if (d[b].has_key(arch) and d[b][arch].has_key(algo) and d[b][arch][algo].has_key(metric) and d[b][arch][algo][metric].has_key(agap) and d[b][arch][algo][metric][agap].has_key(br) and d[b][arch][algo][metric][agap][br][None].has_key(mindist) and d[b][arch][algo][metric][agap][br][None][mindist].has_key(field)):
         cdict = dict(**d[b][arch][algo][metric][agap][br][None][mindist][field])
         k = sorted(cdict.keys())
-        xy = [ (i, cdict[i]['num'], 2*cdict[i]['stdev']/math.sqrt(cdict[i]['n'])) for i in  k]
+        xy = [ (i, cdict[i][avg], 2*cdict[i][stdev]/math.sqrt(cdict[i]['n'])) for i in  k]
         if len(xy) > 0:
             x,y,err = map(np.array,zip(*xy))
             plt.plot(x, y, linestyle='--', color='r', label='MaxDiversekSet')
@@ -980,7 +1128,7 @@ def plot_maxdiv_lns_dist_new(d, b, metric, field, agap, relax, mindist, num):
     if (d[b].has_key(arch) and d[b][arch].has_key(algo) and d[b][arch][algo].has_key(metric) and d[b][arch][algo][metric].has_key(agap) and d[b][arch][algo][metric][agap].has_key(br) and d[b][arch][algo][metric][agap][br].has_key(None) and d[b][arch][algo][metric][agap][br][None].has_key(mindist) and d[b][arch][algo][metric][agap][br][None][mindist].has_key(field)):
         cdict = dict(**d[b][arch][algo][metric][agap][br][None][mindist][field])
         k = sorted(cdict.keys())
-        xy = [ (i, cdict[i]['num'], 2*cdict[i]['stdev']/math.sqrt(cdict[i]['n'])) for i in  k]
+        xy = [ (i, cdict[i][avg], 2*cdict[i][stdev]/math.sqrt(cdict[i]['n'])) for i in  k]
         if len(xy) > 0:
             x,y,err = map(np.array, zip(*xy))
             plt.plot(x, y, linestyle='--', color='g', label='Random Search')
@@ -994,20 +1142,26 @@ def plot_maxdiv_lns_dist_new(d, b, metric, field, agap, relax, mindist, num):
     if (d[b].has_key(arch) and d[b][arch].has_key(algo) and d[b][arch][algo].has_key(metric) and d[b][arch][algo][metric].has_key(agap) and d[b][arch][algo][metric][agap].has_key(br) and d[b][arch][algo][metric][agap][br].has_key(rel) and d[b][arch][algo][metric][agap][br][None].has_key(mindist) and d[b][arch][algo][metric][agap][br][rel][mindist].has_key(field)):
         cdict = dict(**d[b][arch][algo][metric][agap][br][rel][mindist][field])
         k = sorted(cdict.keys())
-        xy = [ (i, cdict[i]['num'], 2*cdict[i]['stdev']/math.sqrt(cdict[i]['n'])) for i in k ]
+        xy = [ (i, cdict[i][avg], 2*cdict[i][stdev]/math.sqrt(cdict[i]['n'])) for i in k ]
         if len(xy) > 0:
             x,y,err = map(np.array, zip(*xy))
             plt.plot(x, y, linestyle='--', color='b', label='LNS')
             plt.fill_between(x, y-err, y+err, linestyle='-.', color='b', alpha = 0.2)
-                
 
-    ax.set_ylim(bottom=0)
-    ax.set_ylabel(get_ind(field))
+    if dist:
+        ax.set_ylim(bottom=0)
+        ax.set_ylabel(get_ind(field))
+ 
+    else:      
+        ax.set_yscale('log')
+        ax.set_ylim(bottom=1)
+        ax.set_ylabel(get_ind('stime'))
+ 
     ax.set_xlabel("Number of Variants (k)")
     ax.legend(loc='lower right')
     plt.title(b)
     fig.set_size_inches(18.5/3, 12.5/3)
-    plt.savefig("dist_" + b + "_" + metric + ".pdf", dpi=400, format='pdf')
+    plt.savefig("%s_" %("dist" if dist else "time") + b + "_" + metric + ".pdf", dpi=400, format='pdf')
     #plt.legend(loc='center right')
 
 
@@ -1533,18 +1687,21 @@ def plot_rs_vs_lns( d_lns, metric, field, agap, colors, num, mindist, loc='upper
         ax.set_ylim([-20,50])
         #ax.set_yscale('log')
 
+    ax.set_xlim([0,1.05])
     plt.fill_between(x, [-1. for _ in x], [1. for _ in x], linestyle='-.', color='gray', alpha=0.8, hatch='/')
     if dist:
-        ax.set_ylabel(r'$\frac{\delta_{LNS}}{\delta_{RA}}$')
+	label = r'$\frac{\delta_{HD}(S_{LNS})}{\delta_{HD}(S_{RA})}$'
+        ax.set_ylabel(label, rotation=0, fontsize=16, labelpad=20)
     else:
-        ax.set_ylabel(r'$\frac{tt_{LNS}}{t_{RA}}$')
+	label = r'$\frac{t_{LNS}}{t_{RA}}$'
+        ax.set_ylabel(label, rotation=0, fontsize=16, labelpad=20)
 
     ax.set_xlabel("relax rate")
     ax.legend(loc=loc)
-    plt.title('LNS/RS %s as a function of the relax rate (%s).' %("hamming distance" if dist else "diversification time", get_name(field)), fontsize=15)
+    plt.title('Effect of the relax rate on the %s' %(get_name(field) + " distance" if dist else "Solving time"), fontsize=15)
     #fig.set_size_inches(18.5/3, 12.5/3)
-    fig.set_size_inches(18.5, 9.5)
-    plt.savefig("lns_vs_ra_" + ("dist" if dist else "time") + "_" + metric + ".pdf", dpi=400, format='pdf')
+    fig.set_size_inches(9, 5)
+    plt.savefig("lns_vs_rs_" + ("dist" if dist else "time") + "_" + metric + ".pdf", dpi=400, format='pdf')
     #plt.legend(loc='center right')
     plt.show()
 
