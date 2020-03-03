@@ -27,8 +27,8 @@ for f in listdir("."):
 
 print ds.keys()
 
-def checkif(d, b, arch, method, metric, agap, branch, relax, field):
-    return d.has_key(b) and d[b].has_key(arch) and d[b][arch].has_key(method) and d[b][arch][method].has_key(metric) and d[b][arch][method][metric].has_key(agap) and d[b][arch][method][metric][agap].has_key(branch) and d[b][arch][method][metric][agap][branch].has_key(relax) and d[b][arch][method][metric][agap][branch][relax].has_key(field)
+def checkif(d, b, arch, method, metric, agap, branch, relax, mindist, field):
+    return d.has_key(b) and d[b].has_key(arch) and d[b][arch].has_key(method) and d[b][arch][method].has_key(metric) and d[b][arch][method][metric].has_key(agap) and d[b][arch][method][metric][agap].has_key(branch) and d[b][arch][method][metric][agap][branch].has_key(relax) and d[b][arch][method][metric][agap][branch][relax].has_key(mindist) and d[b][arch][method][metric][agap][branch][relax][mindist].has_key(field)
 
 
 def avg(l):
@@ -44,17 +44,17 @@ def stdev(l,av):
     else: 
         return 0
 
-def create_dicts(ds, b, arch, method, metric, agap, branch, relax, field):
+def create_dicts(ds, b, arch, method, metric, agap, branch, relax, mindist, field):
   hamm = dict()
   mhamm = dict()
   dhamm = dict()
   stime = dict()
   for di in ds:
-      if checkif(ds[di], b, arch, method, metric, agap, branch, relax, field):
-          for i in ds[di][b][arch][method][metric][agap][branch][relax][field]:
-              val = ds[di][b][arch][method][metric][agap][branch][relax][field][i]['num']
-              mval = ds[di][b][arch][method][metric][agap][branch][relax][field][i]['maxnum']
-              stval = ds[di][b][arch][method][metric][agap][branch][relax][field][i]['stime']
+      if checkif(ds[di], b, arch, method, metric, agap, branch, relax, mindist, field):
+          for i in ds[di][b][arch][method][metric][agap][branch][relax][mindist][field]:
+              val = ds[di][b][arch][method][metric][agap][branch][relax][mindist][field][i]['num']
+              mval = ds[di][b][arch][method][metric][agap][branch][relax][mindist][field][i]['maxnum']
+              stval = ds[di][b][arch][method][metric][agap][branch][relax][mindist][field][i]['stime']
               #dval = [da for da in ds[di][b][arch][method][metric][agap][branch][relax]['avg'][i]['data'] ]
               if hamm.has_key(i):
                   hamm[i].append(val)
@@ -76,35 +76,46 @@ def create_dicts(ds, b, arch, method, metric, agap, branch, relax, field):
 
 
 
+benchmarks = {b for i in ds for b in ds[i]} 
+arches = {arch for i in ds for b in ds[i] for arch in ds[i][b]} 
+methods = {method for i in ds for b in ds[i] for arch in ds[i][b] for method in ds[i][b][arch]} 
+metrics = {metric for i in ds for b in ds[i] for arch in ds[i][b] for method in ds[i][b][arch] for metric in ds[i][b][arch][method]} 
+agaps = {agap for i in ds for b in ds[i] for arch in ds[i][b] for method in ds[i][b][arch] for metric in ds[i][b][arch][method] for agap in ds[i][b][arch][method][metric]} 
+branches = {branch for i in ds for b in ds[i] for arch in ds[i][b] for method in ds[i][b][arch] for metric in ds[i][b][arch][method] for agap in ds[i][b][arch][method][metric] for branch in ds[i][b][arch][method][metric][agap]} 
+rrates = {relax for i in ds for b in ds[i] for arch in ds[i][b] for method in ds[i][b][arch] for metric in ds[i][b][arch][method] for agap in ds[i][b][arch][method][metric] for branch in ds[i][b][arch][method][metric][agap] for relax in ds[i][b][arch][method][metric][agap][branch]} 
+dists = {mdist for i in ds for b in ds[i] for arch in ds[i][b] for method in ds[i][b][arch] for metric in ds[i][b][arch][method] for agap in ds[i][b][arch][method][metric] for branch in ds[i][b][arch][method][metric][agap] for relax in ds[i][b][arch][method][metric][agap][branch] for mdist in ds[i][b][arch][method][metric][agap][branch][relax]} 
 
-
-for b in ds[0]:
+for b in benchmarks:
     d[b] = dict()
-    for arch in ds[0][b]:
+    for arch in arches:
         d[b][arch] = dict()
-        for method in ds[0][b][arch]:
+        for method in methods:
             d[b][arch][method] = dict()
-            for metric in ds[0][b][arch][method]:
+            for metric in metrics:
                 d[b][arch][method][metric] = dict()
-                for agap in ds[0][b][arch][method][metric]:
+                for agap in agaps:
                     d[b][arch][method][metric][agap] = dict()
-                    for branch in ds[0][b][arch][method][metric][agap]:
+                    for branch in branches:
                         d[b][arch][method][metric][agap][branch] = dict()
-                        for relax in ds[0][b][arch][method][metric][agap][branch]:
-                            d[b][arch][method][metric][agap][branch][relax] = dict()
-                            print b, arch, method, metric, agap, branch, relax
+                        for relax in rrates:
+                          d[b][arch][method][metric][agap][branch][relax] = dict()
+                          for mindist in dists:  
+                            d[b][arch][method][metric][agap][branch][relax][mindist] = dict()
+                            print b, arch, method, metric, agap, branch, relax, mindist
                         # get average of divs
                             num = len(ds.keys())
                             for di in ds:
                                 try: 
-                                    ds[di][b][arch][method][metric][agap][branch][relax]
+                                    ds[di][b][arch][method][metric][agap][branch][relax][mindist]
                                 except:
                                     num -= 1
-                                    print "In", di, b, arch, method, metric, agap, branch, relax
+                                    print "In", di, b, arch, method, metric, agap, branch, relax, mindist
 
+                            if (num==0): continue
+                                
 
-                            divs = [ds[di][b][arch][method][metric][agap][branch][relax]['divs'] for di in ds if checkif(ds[di], b, arch, method, metric, agap, branch, relax, 'divs')]
-                            d[b][arch][method][metric][agap][branch][relax]['divs'] = sum(divs)/len(divs)
+                            divs = [ds[di][b][arch][method][metric][agap][branch][relax][mindist]['divs'] for di in ds if checkif(ds[di], b, arch, method, metric, agap, branch, relax, mindist, 'divs')]
+                            d[b][arch][method][metric][agap][branch][relax][mindist]['divs'] = sum(divs)/len(divs)
 
                             # cost = [ds[di][b][arch][method][metric][agap][branch][relax]['cost']['num'] for di in ds if checkif(ds[di], b, arch, method, metric, agap, branch, relax, 'cost')]
                             #av = avg(cost)
@@ -122,7 +133,7 @@ for b in ds[0]:
 #                                d[b][arch][method][metric][agap][branch][relax]['stime'] = {i: { 'num': av[i], 'stdev': std[i], 'n': n[i], 'maxnum': 0} for i in stime}
 
                             
-                            (cost, _, _, stime) = create_dicts(ds, b, arch, method, metric, agap, branch, relax, 'avg')
+                            (cost, _, _, stime) = create_dicts(ds, b, arch, method, metric, agap, branch, relax, mindist, 'avg')
 
 
                             if len(cost)>0:
@@ -132,11 +143,11 @@ for b in ds[0]:
                                 m = {i: 0 for i in cost}
                                 #d = {i: [] for i in cost}
                                 st = {i: 0 for i in stime}
-                                d[b][arch][method][metric][agap][branch][relax]['avg'] = {i: { 'num': av[i], 'stdev': std[i], 'n': n[i], 'maxnum': m[i],  'stime': st} for i in cost}
+                                d[b][arch][method][metric][agap][branch][relax][mindist]['cost'] = {i: { 'num': av[i], 'stdev': std[i], 'n': n[i], 'maxnum': m[i],  'stime': st} for i in cost}
 
  
                             
-                            (hamm, mhamm, dhamm, stime) = create_dicts(ds, b, arch, method, metric, agap, branch, relax, 'avg')
+                            (hamm, mhamm, dhamm, stime) = create_dicts(ds, b, arch, method, metric, agap, branch, relax, mindist, 'avg')
 
 
                             if len(hamm)>0 and len(mhamm) > 0:
@@ -146,9 +157,9 @@ for b in ds[0]:
                                 n = {i: len(hamm[i]) for i in hamm}
                                 st = {i: avg(stime[i]) for i in stime}
                                 ststd = {i: stdev(stime[i],st[i]) for i in stime}
-                                d[b][arch][method][metric][agap][branch][relax]['avg'] = {i: { 'num': av[i], 'stdev': std[i], 'n': n[i], 'maxnum': mn[i],  'stime': st[i], 'stime_stdev': ststd[i]} for i in hamm}
+                                d[b][arch][method][metric][agap][branch][relax][mindist]['avg'] = {i: { 'num': av[i], 'stdev': std[i], 'n': n[i], 'maxnum': mn[i],  'stime': st[i], 'stime_stdev': ststd[i]} for i in hamm}
 
-                            (brhamm, mbrhamm, dbrhamm, stime) = create_dicts(ds, b, arch, method, metric, agap, branch, relax, 'bravg')
+                            (brhamm, mbrhamm, dbrhamm, stime) = create_dicts(ds, b, arch, method, metric, agap, branch, relax, mindist, 'bravg')
 
 
                             if len(brhamm)>0 and len(mbrhamm) > 0:
@@ -158,10 +169,10 @@ for b in ds[0]:
                                 n = {i: len(brhamm[i]) for i in brhamm}
                                 st = {i: avg(stime[i]) for i in stime}
                                 ststd = {i: stdev(stime[i],st[i]) for i in stime}
-                                d[b][arch][method][metric][agap][branch][relax]['bravg'] = {i: { 'num': av[i], 'stdev': std[i], 'n': n[i], 'maxnum': mn[i],  'stime': st[i], 'stime_stdev': ststd[i] } for i in brhamm}
+                                d[b][arch][method][metric][agap][branch][relax][mindist]['bravg'] = {i: { 'num': av[i], 'stdev': std[i], 'n': n[i], 'maxnum': mn[i],  'stime': st[i], 'stime_stdev': ststd[i] } for i in brhamm}
 
 
-                            (brdiff, mbrdiff, dbrdiff, stime) = create_dicts(ds, b, arch, method, metric, agap, branch, relax, 'brdiff')
+                            (brdiff, mbrdiff, dbrdiff, stime) = create_dicts(ds, b, arch, method, metric, agap, branch, relax, mindist, 'brdiff')
 
                             if len(brdiff)>0 and len(mbrdiff) > 0:
                                 av = {i: avg(brdiff[i]) for i in brdiff}
@@ -170,10 +181,10 @@ for b in ds[0]:
                                 n = {i: len(brdiff[i]) for i in brdiff}
                                 st = {i: avg(stime[i]) for i in stime}
                                 ststd = {i: stdev(stime[i],st[i]) for i in stime}
-                                d[b][arch][method][metric][agap][branch][relax]['brdiff'] = {i: { 'num': av[i], 'stdev': std[i], 'n': n[i], 'maxnum': mn[i],  'stime': st[i], 'stime_stdev': ststd[i]} for i in brdiff}
+                                d[b][arch][method][metric][agap][branch][relax][mindist]['brdiff'] = {i: { 'num': av[i], 'stdev': std[i], 'n': n[i], 'maxnum': mn[i],  'stime': st[i], 'stime_stdev': ststd[i]} for i in brdiff}
 
 
-                            (levenshtein, mlevenshtein, dlevenshtein, stime) = create_dicts(ds, b, arch, method, metric, agap, branch, relax, 'levenshtein')
+                            (levenshtein, mlevenshtein, dlevenshtein, stime) = create_dicts(ds, b, arch, method, metric, agap, branch, relax, mindist, 'levenshtein')
 
                             if len(levenshtein)>0 and len(mlevenshtein) > 0:
                                 av = {i: avg(levenshtein[i]) for i in levenshtein}
@@ -182,12 +193,12 @@ for b in ds[0]:
                                 n = {i: len(levenshtein[i]) for i in levenshtein}
                                 st = {i: avg(stime[i]) for i in stime}
                                 ststd = {i: stdev(stime[i],st[i]) for i in stime}
-                                d[b][arch][method][metric][agap][branch][relax]['levenshtein'] = {i: { 'num': av[i], 'stdev': std[i], 'n': n[i], 'maxnum': mn[i],  'stime': st[i] , 'stime_stdev': ststd[i]} for i in levenshtein}
+                                d[b][arch][method][metric][agap][branch][relax][mindist]['levenshtein'] = {i: { 'num': av[i], 'stdev': std[i], 'n': n[i], 'maxnum': mn[i],  'stime': st[i] , 'stime_stdev': ststd[i]} for i in levenshtein}
 
 
-                            d[b][arch][method][metric][agap][branch][relax]['num'] = num # number of iterations
+                            d[b][arch][method][metric][agap][branch][relax][mindist]['num'] = num # number of iterations
 
-                            (reghamm, mreghamm, dreghamm, stime) = create_dicts(ds, b, arch, method, metric, agap, branch, relax, 'reghamm')
+                            (reghamm, mreghamm, dreghamm, stime) = create_dicts(ds, b, arch, method, metric, agap, branch, relax, mindist, 'reghamm')
 
                             if len(reghamm)>0 and len(mreghamm) > 0:
                                 av = {i: avg(reghamm[i]) for i in reghamm}
@@ -196,7 +207,7 @@ for b in ds[0]:
                                 n = {i: len(reghamm[i]) for i in reghamm}
                                 st = {i: avg(stime[i]) for i in stime}
                                 ststd = {i: stdev(stime[i],st[i]) for i in stime}
-                                d[b][arch][method][metric][agap][branch][relax]['reghamm'] = {i: { 'num': av[i], 'stdev': std[i], 'n': n[i], 'maxnum': mn[i],  'stime': st[i], 'stime_stdev': ststd[i]} for i in reghamm}
+                                d[b][arch][method][metric][agap][branch][relax][mindist]['reghamm'] = {i: { 'num': av[i], 'stdev': std[i], 'n': n[i], 'maxnum': mn[i],  'stime': st[i], 'stime_stdev': ststd[i]} for i in reghamm}
 
 
 
