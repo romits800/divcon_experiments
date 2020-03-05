@@ -40,7 +40,7 @@ benchmarks = sorted([   "h264ref.sei.UpdateRandomAccess",
                         "mesa.api.glIndexd",
                         "gobmk.owl_vital_apat.autohelperowl_vital_apat34"])
 
-rrates = [ "-", "0.0",  "0.05", "0.1", "0.15", "0.2", "0.25", "0.3", "0.4", "0.5", "0.6", "0.7", "0.8", "0.9"]
+rrates = [ "-",  "0.05", "0.1", "0.15", "0.2", "0.25", "0.3", "0.4", "0.5", "0.6", "0.7", "0.8", "0.9"]
 #rrates = [ "-", "0.1", "0.2", "0.4", "0.6", "0.8", "0.9"]
 
 
@@ -1691,20 +1691,22 @@ def plot_rs_vs_lns( d_lns, metric, field, agap, colors, num, mindist, loc='upper
         ax.set_ylim([-20,50])
         #ax.set_yscale('log')
 
-    ax.set_xlim([0,1.07])
+    ax.set_xlim([0.05,0.9])
 
-    plt.fill_between(x, [-1. for _ in x], [1. for _ in x], linestyle='-.', color='gray', alpha=0.8, hatch='/')
+    xn = [ float(r) for r in rrates[1:]]
+    plt.fill_between(xn, [-1. for _ in xn], [1. for _ in xn], linestyle='-.', color='gray', alpha=0.8, hatch='/')
     if dist:
-	label = r'$\frac{\delta_{HD}(S_{LNS})}{\delta_{HD}(S_{RA})}$'
+	label = r'$\frac{\delta_{HD}(S_{LNS})}{\delta_{HD}(S_{RS})}$'
         ax.set_ylabel(label, rotation=0, fontsize=22, labelpad=5)
 	ax.yaxis.set_label_coords(-0.07,0.95)
     else:
-	label = r'$\frac{t_{LNS}}{t_{RA}}$'
+	label = r'$\frac{t_{LNS}}{t_{RS}}$'
         ax.set_ylabel(label, rotation=0, fontsize=22, labelpad=5)
+	ax.yaxis.set_label_coords(-0.09,0.55)
 
     ax.set_xlabel("relax rate", fontsize=20)
 
-    ax.legend(loc=loc, fontsize=12)
+    #ax.legend(loc=loc, fontsize=12)
 
     ax.tick_params(axis = 'both', which = 'major', labelsize = 20)
     ax.tick_params(axis = 'both', which = 'minor', labelsize = 14)
