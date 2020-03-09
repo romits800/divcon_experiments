@@ -40,6 +40,10 @@ benchmarks = sorted([   "h264ref.sei.UpdateRandomAccess",
                         "mesa.api.glIndexd",
                         "gobmk.owl_vital_apat.autohelperowl_vital_apat34"])
 
+dbench = dict()
+for bi,b in enumerate(benchmarks,1):
+    dbench[b] = "b%d"%bi
+
 rrates = [ "-",  "0.05", "0.1", "0.15", "0.2", "0.25", "0.3", "0.4", "0.5", "0.6", "0.7", "0.8", "0.9"]
 #rrates = [ "-", "0.1", "0.2", "0.4", "0.6", "0.8", "0.9"]
 
@@ -503,7 +507,7 @@ def tex_distances(d, field, agap, num, mindist, relax, metrics, texname='outfile
 
 
 
-def plot_maxdiv_lns_new(d, b, metric, field, agap, relax, mindist, num, dist=True):
+def plot_maxdiv_lns_new(d, b, metric, field, agap, relax, mindist, dist=True):
     arch = 'mips'
     rel = str(relax)
     agap = str(agap)
@@ -565,7 +569,7 @@ def plot_maxdiv_lns_new(d, b, metric, field, agap, relax, mindist, num, dist=Tru
  
     ax.set_xlabel("Number of Variants (k)", fontsize=14)
     ax.legend(loc='lower right', fontsize=14)
-    plt.title(b, fontsize=20)
+    plt.title(dbench[b], fontsize=20)
     ax.tick_params(axis = 'both', which = 'major', labelsize = 14)
     ax.tick_params(axis = 'both', which = 'minor', labelsize = 14)
     fig.set_size_inches(18.5/3, 15/3.)
