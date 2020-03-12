@@ -14,6 +14,7 @@ import math
 
 #import getopt
 
+min_num_seeds = 5
 
 d = dict()
 
@@ -51,6 +52,9 @@ def create_dicts(ds, b, arch, method, metric, agap, branch, relax, mindist, fiel
   stime = dict()
   for di in ds:
       if checkif(ds[di], b, arch, method, metric, agap, branch, relax, mindist, field):
+          if field == 'cost':
+                print ds[di][b][arch][method][metric][agap][branch][relax][mindist][field]
+ 
           for i in ds[di][b][arch][method][metric][agap][branch][relax][mindist][field]:
               val = ds[di][b][arch][method][metric][agap][branch][relax][mindist][field][i]['num']
               mval = ds[di][b][arch][method][metric][agap][branch][relax][mindist][field][i]['maxnum']
@@ -133,7 +137,7 @@ for b in benchmarks:
 #                                d[b][arch][method][metric][agap][branch][relax]['stime'] = {i: { 'num': av[i], 'stdev': std[i], 'n': n[i], 'maxnum': 0} for i in stime}
 
                             
-                            (cost, _, _, stime) = create_dicts(ds, b, arch, method, metric, agap, branch, relax, mindist, 'avg')
+                            (cost, _, _, stime) = create_dicts(ds, b, arch, method, metric, agap, branch, relax, mindist, 'cost')
 
 
                             if len(cost)>0:
@@ -143,7 +147,7 @@ for b in benchmarks:
                                 m = {i: 0 for i in cost}
                                 #d = {i: [] for i in cost}
                                 st = {i: 0 for i in stime}
-                                d[b][arch][method][metric][agap][branch][relax][mindist]['cost'] = {i: { 'num': av[i], 'stdev': std[i], 'n': n[i], 'maxnum': m[i],  'stime': st} for i in cost}
+                                d[b][arch][method][metric][agap][branch][relax][mindist]['cost'] = {i: { 'num': av[i], 'stdev': std[i], 'n': n[i], 'maxnum': m[i],  'stime': st} for i in cost if n[i] >= min_num_seeds}
 
  
                             
@@ -157,7 +161,7 @@ for b in benchmarks:
                                 n = {i: len(hamm[i]) for i in hamm}
                                 st = {i: avg(stime[i]) for i in stime}
                                 ststd = {i: stdev(stime[i],st[i]) for i in stime}
-                                d[b][arch][method][metric][agap][branch][relax][mindist]['avg'] = {i: { 'num': av[i], 'stdev': std[i], 'n': n[i], 'maxnum': mn[i],  'stime': st[i], 'stime_stdev': ststd[i]} for i in hamm}
+                                d[b][arch][method][metric][agap][branch][relax][mindist]['avg'] = {i: { 'num': av[i], 'stdev': std[i], 'n': n[i], 'maxnum': mn[i],  'stime': st[i], 'stime_stdev': ststd[i]} for i in hamm if n[i] >= min_num_seeds}
 
                             (brhamm, mbrhamm, dbrhamm, stime) = create_dicts(ds, b, arch, method, metric, agap, branch, relax, mindist, 'bravg')
 
@@ -169,7 +173,7 @@ for b in benchmarks:
                                 n = {i: len(brhamm[i]) for i in brhamm}
                                 st = {i: avg(stime[i]) for i in stime}
                                 ststd = {i: stdev(stime[i],st[i]) for i in stime}
-                                d[b][arch][method][metric][agap][branch][relax][mindist]['bravg'] = {i: { 'num': av[i], 'stdev': std[i], 'n': n[i], 'maxnum': mn[i],  'stime': st[i], 'stime_stdev': ststd[i] } for i in brhamm}
+                                d[b][arch][method][metric][agap][branch][relax][mindist]['bravg'] = {i: { 'num': av[i], 'stdev': std[i], 'n': n[i], 'maxnum': mn[i],  'stime': st[i], 'stime_stdev': ststd[i] } for i in brhamm if n[i] >= min_num_seeds}
 
 
                             (brdiff, mbrdiff, dbrdiff, stime) = create_dicts(ds, b, arch, method, metric, agap, branch, relax, mindist, 'brdiff')
@@ -181,7 +185,7 @@ for b in benchmarks:
                                 n = {i: len(brdiff[i]) for i in brdiff}
                                 st = {i: avg(stime[i]) for i in stime}
                                 ststd = {i: stdev(stime[i],st[i]) for i in stime}
-                                d[b][arch][method][metric][agap][branch][relax][mindist]['brdiff'] = {i: { 'num': av[i], 'stdev': std[i], 'n': n[i], 'maxnum': mn[i],  'stime': st[i], 'stime_stdev': ststd[i]} for i in brdiff}
+                                d[b][arch][method][metric][agap][branch][relax][mindist]['brdiff'] = {i: { 'num': av[i], 'stdev': std[i], 'n': n[i], 'maxnum': mn[i],  'stime': st[i], 'stime_stdev': ststd[i]} for i in brdiff if n[i] >= min_num_seeds}
 
 
                             (levenshtein, mlevenshtein, dlevenshtein, stime) = create_dicts(ds, b, arch, method, metric, agap, branch, relax, mindist, 'levenshtein')
@@ -193,7 +197,7 @@ for b in benchmarks:
                                 n = {i: len(levenshtein[i]) for i in levenshtein}
                                 st = {i: avg(stime[i]) for i in stime}
                                 ststd = {i: stdev(stime[i],st[i]) for i in stime}
-                                d[b][arch][method][metric][agap][branch][relax][mindist]['levenshtein'] = {i: { 'num': av[i], 'stdev': std[i], 'n': n[i], 'maxnum': mn[i],  'stime': st[i] , 'stime_stdev': ststd[i]} for i in levenshtein}
+                                d[b][arch][method][metric][agap][branch][relax][mindist]['levenshtein'] = {i: { 'num': av[i], 'stdev': std[i], 'n': n[i], 'maxnum': mn[i],  'stime': st[i] , 'stime_stdev': ststd[i]} for i in levenshtein if n[i] >= min_num_seeds}
 
 
                             d[b][arch][method][metric][agap][branch][relax][mindist]['num'] = num # number of iterations
@@ -207,7 +211,7 @@ for b in benchmarks:
                                 n = {i: len(reghamm[i]) for i in reghamm}
                                 st = {i: avg(stime[i]) for i in stime}
                                 ststd = {i: stdev(stime[i],st[i]) for i in stime}
-                                d[b][arch][method][metric][agap][branch][relax][mindist]['reghamm'] = {i: { 'num': av[i], 'stdev': std[i], 'n': n[i], 'maxnum': mn[i],  'stime': st[i], 'stime_stdev': ststd[i]} for i in reghamm}
+                                d[b][arch][method][metric][agap][branch][relax][mindist]['reghamm'] = {i: { 'num': av[i], 'stdev': std[i], 'n': n[i], 'maxnum': mn[i],  'stime': st[i], 'stime_stdev': ststd[i]} for i in reghamm if n[i] >= min_num_seeds}
 
 
 

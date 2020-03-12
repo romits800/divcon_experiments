@@ -91,14 +91,14 @@ interval_list = range(2,201)
 for benchmark in listdir(pathname):
     print benchmark
     d[benchmark] = dict()
-    pat = re.compile("(lns|max)div_monolithic_([^_]*)_([^_]*)_%s_([0-9]+)_([0-9]+)_([^0-9]*hamming|levenshtein|hamm_reg_gadget)_([^_]+)_([0-9]+)_([0-9]+)(_.*|).pickle"  %benchmark)
+    pat = re.compile("(max)div_monolithic_([^_]*)_([^_]*)_%s_([0-9]+)_([0-9]+)_([^0-9]*hamming|levenshtein|hamm_reg_gadget)_([^_]+)_([0-9]+)_([0-9]+)(_.*|).pickle"  %benchmark)
     for pfile in listdir(path.join(pathname,benchmark)):
         if pfile.endswith("pickle"):
             try:
                 a = re.match(pat,pfile)
                 experiment,method,arch,agap,divs,metric,branch,seed,mindist,rest = a.groups()
             except:
-                print "Exception: ", pfile
+                print "Exception max: ", pfile
                 continue
             #if metric != s_metric  or agap != s_agap :
             #    continue
@@ -138,6 +138,7 @@ for benchmark in listdir(pathname):
             else:
                 continue
  
+            var_costs = {h:files[h]['cost'][0] for h in files if files[h].has_key('cost')}# the cost
             cost = [files[h]['cost'][0] for h in files if files[h].has_key('cost')]# the cost
             
             avgcost = 0
@@ -162,11 +163,27 @@ for benchmark in listdir(pathname):
                 d[benchmark][arch][method][metric][agap][branch][relax][mindist] = dict()
  
             d[benchmark][arch][method][metric][agap][branch][relax][mindist]['divs'] = len(fnames_sorted)
-            d[benchmark][arch][method][metric][agap][branch][relax][mindist]['cost'] = { 'num': avgcost, 'maxnum': 0}
+            #d[benchmark][arch][method][metric][agap][branch][relax][mindist]['cost'] = { 'num': avgcost, 'maxnum': 0}
             d[benchmark][arch][method][metric][agap][branch][relax][mindist]['stime'] = { 'num': stime, 'maxnum': 0}
 
 
 
+            ## Hamming Distance
+            d[benchmark][arch][method][metric][agap][branch][relax][mindist]['cost'] = dict()
+
+            intd = dict()
+            sumhd = 0
+            count = 0
+            for curi,ii in enumerate(interval_list):
+                maxnum = 0
+                if len(fnames_sorted)<ii:
+                    break
+                fnames = fnames_sorted[:ii]
+                stime = solver_times[fnames[-1]]
+                cost = var_costs[fnames[-1]]
+
+                if not count == 0:
+                    d[benchmark][arch][method][metric][agap][branch][relax][mindist]['cost'][ii] = { 'num': cost, 'maxnum': -1,  'stime': stime }
 
 
             ## Hamming Distance

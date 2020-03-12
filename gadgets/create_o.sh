@@ -6,8 +6,12 @@ path=$2
 export PATH=${PATH}:/home/romi/didaktoriko/unison/romi_unison/divCon/src/solvers/gecode:/home/romi/didaktoriko/unison/romi_unison/divCon/src/solvers/multi_backend/minizinc/:/home/romi/didaktoriko/unison/romi_unison/divCon/src/solvers/multi_backend/:/home/romi/didaktoriko/misc/minizinc/MiniZincIDE-2.1.2-bundle-linux-x86_64/ UNISON_DIR=/home/romi/didaktoriko/unison/romi_unison/divCon/ #/home/romi/didaktoriko/unison/romi_unison/divCon/src/solvers/multi_backend/portfolio-solver -o test.out.json  --verbose test.ext.json
 # /usr/local/bin/uni
 
+pushd $path
+cp ../create_bin.py .
+cp ../jop_dist.py .
 
-for pic in ${path}/divs_?/${bench}/*.pickle #_?(constant|[0-9][0-9][0-9]).pickle
+for pic in divs_?/${bench}/*.pickle
+#for pic in ${path}/divs_?/${bench}/*.pickle 
 do
     if [[ "$pic" == *_result.pickle ]]
     then
@@ -30,11 +34,9 @@ do
 
     for i in *.out.json; 
     do 
-        uni export --keepnops --target=Mips ${path}/${bench}.alt.uni -o $i.unison.mir --basefile=${path}/${bench}.llvm.mir --solfile=$i; 
+        #uni export --keepnops --target=Mips ${path}/${bench}.alt.uni -o $i.unison.mir --basefile=${path}/${bench}.llvm.mir --solfile=$i; 
+        uni export --keepnops --target=Mips ${bench}.alt.uni -o $i.unison.mir --solfile=$i; 
     done
-
-# /usr/local/bin/uni
-#uni export --target=Mips $input.alt.uni -o $input.unison.mir --basefile=$input.llvm.mir --solfile=$input.out.json
 
 
 #. /home/romi/opt/mcb32tools/environment
@@ -49,3 +51,6 @@ do
     done
     python jop_dist.py `pwd` $pic
 done
+
+popd 
+

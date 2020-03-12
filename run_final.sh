@@ -1,6 +1,8 @@
 #!/usr/bin/bash -x
 
 
+export PATH=${PATH}:${DIVCON_PATH}/src/solvers/gecode:${DIVCON_PATH}/src/solvers/multi_backend/minizinc/:${DIVCON_PATH}/src/solvers/multi_backend/:${MINIZINC_PATH}:${DIVCON_PATH}/src/solvers/multi_backend/common/ UNISON_DIR=${DIVCON_PATH}
+
 flags="--disable-copy-dominance-constraints --disable-infinite-register-dominance-constraints --disable-operand-symmetry-breaking-constraints --disable-register-symmetry-breaking-constraints --disable-temporary-symmetry-breaking-constraints --disable-wcet-constraints"
 
 #missing_files="/home/romi/didaktoriko/unison/romi_unison/divCon/src/unison/test/fast/Hexagon/speed/mesa.api.glIndexd.mir /home/romi/didaktoriko/unison/romi_unison/divCon/src/unison/test/fast/Hexagon/speed/sphinx3.glist.glist_tail.mir /home/romi/didaktoriko/unison/romi_unison/divCon/src/unison/test/fast/Hexagon/speed/sphinx3.profile.ptmr_init.mir"
@@ -91,16 +93,18 @@ do
 	# /usr/local/bin/uni
 	uni augment --target=$archc $fnoextension.ext.uni -o $fnoextension.alt.uni
 	# /usr/local/bin/uni
-	uni normalize --target=$archc $fullnamenoext.asm.mir -o $fnoextension.llvm.mir
+	# uni normalize --target=$archc $fullnamenoext.asm.mir -o $fnoextension.llvm.mir
 	# /usr/local/bin/uni
-	uni model --target=$archc $fnoextension.alt.uni -o $fnoextension.json --basefile=$fnoextension.llvm.mir +RTS -K20M -RTS
+	uni model --target=$archc $fnoextension.alt.uni -o $fnoextension.json 
+	#uni model --target=$archc $fnoextension.alt.uni -o $fnoextension.json --basefile=$fnoextension.llvm.mir +RTS -K20M -RTS
 	# /usr/local/bin/gecode-presolver
-	gecode-presolver -o $fnoextension.ext.json --verbose $fnoextension.json
+	gecode-presolver -o $fnoextension.ext.json -dzn $fnoextension.dzn --verbose $fnoextension.json
 	# /usr/local/bin/gecode-solver
 	if [ ! -f $fnoextension.out.json ]; then
             rm $fnoextension.out.json
         fi
-	gecode-solver  -o $fnoextension.out.json --verbose $fnoextension.ext.json
+	#gecode-solver  -o $fnoextension.out.json --verbose $fnoextension.ext.json
+        ${DIVCON_PATH}/src/solvers/multi_backend/portfolio-solver -o $fnoextension.out.json --verbose $fnoextension.ext.json
 	
         RESULT_PATH=${DIVS_PATH}/${fnoextension}
 
@@ -130,7 +134,7 @@ do
                         echo "File not found! Falling back to llvm basefile"
                         time timeout 30m gecode-diversify ${flags} --acceptable-gap $agap --div-method monolithic_dfs --seed $seed --distance ${dist} --number-divs $ndivs --divs-dir $DIVS_DIR  -o $fnoextension.out.json --branching ${branch} --verbose $fnoextension.ext.json
                     else
-                        time timeout 30m gecode-diversify  ${flags} --acceptable-gap $agap  --div-method monolithic_dfs --seed $seed --distance ${dist} --number-divs $ndivs --solver-file $fnoextension.out.json --use-optimal-for-diversification --divs-dir $DIVS_DIR -o $fnoextension.out.json --branching ${branch} --verbose $fnoextension.ext.json
+                        time timeout 30m gecode-diversify  ${flags} --acceptable-gap $agap  --div-method monolithic_dfs --seed $seed --distance ${dist} --number-divs $ndivs --solver-file $fnoextension.out.json --use-optimal-for-diversification --divs-dir $DIVS_DIR -o $fnoextension.out.json --enable-solver-solution-brancher --branching ${branch} --verbose $fnoextension.ext.json
                     fi
                     python stats.py maxdiv_monolithic_dfs_${arch}_${fnoextension}_${agap}_${ndivs}_${dist}_${branch}_${seed}_1 ${fnoextension}  ${DIVS_DIR} ${RESULT_PATH} 
                     echo "Deleting the diversified files."
@@ -138,7 +142,7 @@ do
                     #fi
                     for relax in 0.8
                     do
-                        for lp in 5000 10000 #100000 
+                        for lp in 5000 #10000 #100000 
                         do
                             for rest in "constant"
                             do
@@ -146,7 +150,7 @@ do
                                     echo "File not found! Falling back to llvm basefile"
                                     time timeout 30m gecode-diversify  ${flags} --acceptable-gap $agap --relax $relax --seed $seed --distance ${dist} --restart $rest --restart-scale $lp --number-divs $ndivs --div-method monolithic_lns --divs-dir $DIVS_DIR -o $fnoextension.out.json --branching ${branch} --verbose $fnoextension.ext.json
                                 else
-                                    time timeout 30m gecode-diversify  ${flags} --acceptable-gap $agap --relax $relax --seed $seed --distance ${dist} --restart $rest --restart-scale $lp --number-divs $ndivs --solver-file $fnoextension.out.json --use-optimal-for-diversification --div-method monolithic_lns --divs-dir $DIVS_DIR -o $fnoextension.out.json --branching ${branch}  --verbose $fnoextension.ext.json
+                                    time timeout 30m gecode-diversify  ${flags} --acceptable-gap $agap --relax $relax --seed $seed --distance ${dist} --restart $rest --restart-scale $lp --number-divs $ndivs --solver-file $fnoextension.out.json --use-optimal-for-diversification --div-method monolithic_lns --divs-dir $DIVS_DIR -o $fnoextension.out.json --enable-solver-solution-brancher --branching ${branch}  --verbose $fnoextension.ext.json
                                 fi
                                 python stats.py maxdiv_monolithic_lns_${arch}_${fnoextension}_${agap}_${ndivs}_${dist}_${branch}_${seed}_1_${relax}_${lp}_${rest} ${fnoextension} ${DIVS_DIR} ${RESULT_PATH} 
                                 echo "Deleting the diversified files."
@@ -173,15 +177,15 @@ do
                         echo "File not found! Falling back to llvm basefile"
                         time timeout 10m gecode-diversify ${flags} --acceptable-gap $agap --div-method monolithic_dfs --seed $seed --distance ${dist} --number-divs $ndivs --divs-dir $DIVS_DIR  -o $fnoextension.out.json --branching ${branch} --verbose $fnoextension.ext.json
                     else
-                        time timeout 10m gecode-diversify  ${flags} --acceptable-gap $agap  --div-method monolithic_dfs --seed $seed --distance ${dist} --number-divs $ndivs --solver-file $fnoextension.out.json --use-optimal-for-diversification --divs-dir $DIVS_DIR -o $fnoextension.out.json --branching ${branch} --verbose $fnoextension.ext.json
+                        time timeout 10m gecode-diversify  ${flags} --acceptable-gap $agap  --div-method monolithic_dfs --seed $seed --distance ${dist} --number-divs $ndivs --solver-file $fnoextension.out.json --use-optimal-for-diversification --divs-dir $DIVS_DIR -o $fnoextension.out.json --enable-solver-solution-brancher --branching ${branch} --verbose $fnoextension.ext.json
                     fi
                     python stats.py lnsdiv_monolithic_dfs_${arch}_${fnoextension}_${agap}_${ndivs}_${dist}_${branch}_${seed}_1 ${fnoextension}  ${DIVS_DIR} ${RESULT_PATH} 
                     echo "Deleting the diversified files."
                     rm ${DIVS_DIR}/*.$fnoextension.out.json
                     #fi
-                    for relax in 0.0 0.05 0.1 0.15 0.2 0.25 0.3 0.4 0.5 0.6 0.7 0.8 0.9
+                    for relax in 0.05 0.1 0.15 0.2 0.25 0.3 0.4 0.5 0.6 0.7 0.8 0.9
                     do
-                        for lp in 10000 #100000 
+                        for lp in 5000 #10000 #100000 
                         do
                             for rest in "constant"
                             do
@@ -189,7 +193,7 @@ do
                                     echo "File not found! Falling back to llvm basefile"
                                     time timeout 10m gecode-diversify  ${flags} --acceptable-gap $agap --relax $relax --seed $seed --distance ${dist} --restart $rest --restart-scale $lp --number-divs $ndivs --div-method monolithic_lns --divs-dir $DIVS_DIR -o $fnoextension.out.json --branching ${branch} --verbose $fnoextension.ext.json
                                 else
-                                    time timeout 10m gecode-diversify  ${flags} --acceptable-gap $agap --relax $relax --seed $seed --distance ${dist} --restart $rest --restart-scale $lp --number-divs $ndivs --solver-file $fnoextension.out.json --use-optimal-for-diversification --div-method monolithic_lns --divs-dir $DIVS_DIR -o $fnoextension.out.json --branching ${branch}  --verbose $fnoextension.ext.json
+                                    time timeout 10m gecode-diversify  ${flags} --acceptable-gap $agap --relax $relax --seed $seed --distance ${dist} --restart $rest --restart-scale $lp --number-divs $ndivs --solver-file $fnoextension.out.json --use-optimal-for-diversification --div-method monolithic_lns --divs-dir $DIVS_DIR -o $fnoextension.out.json --enable-solver-solution-brancher --branching ${branch}  --verbose $fnoextension.ext.json
                                 fi
                                 python stats.py lnsdiv_monolithic_lns_${arch}_${fnoextension}_${agap}_${ndivs}_${dist}_${branch}_${seed}_1_${relax}_${lp}_${rest} ${fnoextension} ${DIVS_DIR} ${RESULT_PATH} 
                                 echo "Deleting the diversified files."
@@ -213,19 +217,19 @@ do
 	        for dist in "hamming" #"reg_hamming" "hamming"
 		do
                     branch="clrandom"
-                    if [ ! -f $fnoextension.out.json ]; then
-                        echo "File not found! Falling back to llvm basefile"
-                        time timeout 10m gecode-diversify ${flags} --acceptable-gap $agap --div-method monolithic_dfs --seed $seed --distance ${dist} --number-divs $ndivs --divs-dir $DIVS_DIR  -o $fnoextension.out.json --branching ${branch} --verbose $fnoextension.ext.json
-                    else
-                        time timeout 10m gecode-diversify  ${flags} --acceptable-gap $agap  --div-method monolithic_dfs --seed $seed --distance ${dist} --number-divs $ndivs --solver-file $fnoextension.out.json --use-optimal-for-diversification --divs-dir $DIVS_DIR -o $fnoextension.out.json --branching ${branch} --verbose $fnoextension.ext.json
-                    fi
-                    python stats.py agapdiv_monolithic_dfs_${arch}_${fnoextension}_${agap}_${ndivs}_${dist}_${branch}_${seed}_1 ${fnoextension}  ${DIVS_DIR} ${RESULT_PATH} 
-                    echo "Deleting the diversified files."
-                    rm ${DIVS_DIR}/*.$fnoextension.out.json
+#                     if [ ! -f $fnoextension.out.json ]; then
+#                         echo "File not found! Falling back to llvm basefile"
+#                         time timeout 10m gecode-diversify ${flags} --acceptable-gap $agap --div-method monolithic_dfs --seed $seed --distance ${dist} --number-divs $ndivs --divs-dir $DIVS_DIR  -o $fnoextension.out.json --branching ${branch} --verbose $fnoextension.ext.json
+#                     else
+#                         time timeout 10m gecode-diversify  ${flags} --acceptable-gap $agap  --div-method monolithic_dfs --seed $seed --distance ${dist} --number-divs $ndivs --solver-file $fnoextension.out.json --use-optimal-for-diversification --divs-dir $DIVS_DIR -o $fnoextension.out.json --enable-solver-solution-brancher --branching ${branch} --verbose $fnoextension.ext.json
+#                     fi
+#                    python stats.py agapdiv_monolithic_dfs_${arch}_${fnoextension}_${agap}_${ndivs}_${dist}_${branch}_${seed}_1 ${fnoextension}  ${DIVS_DIR} ${RESULT_PATH} 
+#                    echo "Deleting the diversified files."
+#                    rm ${DIVS_DIR}/*.$fnoextension.out.json
                     #fi
                     for relax in 0.8
                     do
-                        for lp in 10000 #100000 
+                        for lp in 5000 #10000 #100000 
                         do
                             for rest in "constant"
                             do
@@ -233,7 +237,7 @@ do
                                     echo "File not found! Falling back to llvm basefile"
                                     time timeout 10m gecode-diversify  ${flags} --acceptable-gap $agap --relax $relax --seed $seed --distance ${dist} --restart $rest --restart-scale $lp --number-divs $ndivs --div-method monolithic_lns --divs-dir $DIVS_DIR -o $fnoextension.out.json --branching ${branch} --verbose $fnoextension.ext.json
                                 else
-                                    time timeout 10m gecode-diversify  ${flags} --acceptable-gap $agap --relax $relax --seed $seed --distance ${dist} --restart $rest --restart-scale $lp --number-divs $ndivs --solver-file $fnoextension.out.json --use-optimal-for-diversification --div-method monolithic_lns --divs-dir $DIVS_DIR -o $fnoextension.out.json --branching ${branch}  --verbose $fnoextension.ext.json
+                                    time timeout 10m gecode-diversify  ${flags} --acceptable-gap $agap --relax $relax --seed $seed --distance ${dist} --restart $rest --restart-scale $lp --number-divs $ndivs --solver-file $fnoextension.out.json --use-optimal-for-diversification --div-method monolithic_lns --divs-dir $DIVS_DIR -o $fnoextension.out.json --enable-solver-solution-brancher --branching ${branch}  --verbose $fnoextension.ext.json
                                 fi
                                 python stats.py agapdiv_monolithic_lns_${arch}_${fnoextension}_${agap}_${ndivs}_${dist}_${branch}_${seed}_1_${relax}_${lp}_${rest} ${fnoextension} ${DIVS_DIR} ${RESULT_PATH} 
                                 echo "Deleting the diversified files."
@@ -262,7 +266,7 @@ do
                         echo "File not found! Falling back to llvm basefile"
                         time timeout 10m gecode-diversify ${flags} --acceptable-gap $agap --div-method monolithic_dfs --seed $seed --distance ${dist} --number-divs $ndivs --divs-dir $DIVS_DIR  -o $fnoextension.out.json --branching ${branch} --verbose $fnoextension.ext.json
                     else
-                        time timeout 10m gecode-diversify  ${flags} --acceptable-gap $agap  --div-method monolithic_dfs --seed $seed --distance ${dist} --number-divs $ndivs --solver-file $fnoextension.out.json --use-optimal-for-diversification --divs-dir $DIVS_DIR -o $fnoextension.out.json --branching ${branch} --verbose $fnoextension.ext.json
+                        time timeout 10m gecode-diversify  ${flags} --acceptable-gap $agap  --div-method monolithic_dfs --seed $seed --distance ${dist} --number-divs $ndivs --solver-file $fnoextension.out.json --use-optimal-for-diversification --divs-dir $DIVS_DIR -o $fnoextension.out.json --enable-solver-solution-brancher --branching ${branch} --verbose $fnoextension.ext.json
                     fi
                     python stats.py metrdiv_monolithic_dfs_${arch}_${fnoextension}_${agap}_${ndivs}_${dist}_${branch}_${seed}_1 ${fnoextension}  ${DIVS_DIR} ${RESULT_PATH} 
                     echo "Deleting the diversified files."
@@ -270,7 +274,7 @@ do
                     #fi
                     for relax in 0.8
                     do
-                        for lp in 10000 #100000 
+                        for lp in 5000 #10000 #100000 
                         do
                             for rest in "constant"
                             do
@@ -278,7 +282,7 @@ do
                                     echo "File not found! Falling back to llvm basefile"
                                     time timeout 10m gecode-diversify  ${flags} --acceptable-gap $agap --relax $relax --seed $seed --distance ${dist} --restart $rest --restart-scale $lp --number-divs $ndivs --div-method monolithic_lns --divs-dir $DIVS_DIR -o $fnoextension.out.json --branching ${branch} --verbose $fnoextension.ext.json
                                 else
-                                    time timeout 10m gecode-diversify  ${flags} --acceptable-gap $agap --relax $relax --seed $seed --distance ${dist} --restart $rest --restart-scale $lp --number-divs $ndivs --solver-file $fnoextension.out.json --use-optimal-for-diversification --div-method monolithic_lns --divs-dir $DIVS_DIR -o $fnoextension.out.json --branching ${branch}  --verbose $fnoextension.ext.json
+                                    time timeout 10m gecode-diversify  ${flags} --acceptable-gap $agap --relax $relax --seed $seed --distance ${dist} --restart $rest --restart-scale $lp --number-divs $ndivs --solver-file $fnoextension.out.json --use-optimal-for-diversification --div-method monolithic_lns --divs-dir $DIVS_DIR -o $fnoextension.out.json --enable-solver-solution-brancher --branching ${branch}  --verbose $fnoextension.ext.json
                                 fi
                                 python stats.py metrdiv_monolithic_lns_${arch}_${fnoextension}_${agap}_${ndivs}_${dist}_${branch}_${seed}_1_${relax}_${lp}_${rest} ${fnoextension} ${DIVS_DIR} ${RESULT_PATH} 
                                 echo "Deleting the diversified files."
@@ -293,49 +297,49 @@ do
 
 
 
-        echo "k-dist Evaluation"
-        # Distance Evaluation
-	for agap in 10 #2 5 10 20 50
-	do
-	    for ndivs in 200
-	    do
-	        for dist in "reg_hamming" "hamm_reg_gadget" "hamming"
-		do
-	          for mdist in 1 2 5 10 20
-                  do
-                    branch="clrandom"
-                    if [ ! -f $fnoextension.out.json ]; then
-                        echo "File not found! Falling back to llvm basefile"
-                        time timeout 10m gecode-diversify ${flags} --acceptable-gap $agap --div-method monolithic_dfs --seed $seed --distance ${dist} --number-divs $ndivs --divs-dir $DIVS_DIR  -o $fnoextension.out.json --min-dist $mdist --branching ${branch} --verbose $fnoextension.ext.json
-                    else
-                        time timeout 10m gecode-diversify  ${flags} --acceptable-gap $agap  --div-method monolithic_dfs --seed $seed --distance ${dist} --number-divs $ndivs --solver-file $fnoextension.out.json --use-optimal-for-diversification --divs-dir $DIVS_DIR -o $fnoextension.out.json --min-dist $mdist --branching ${branch} --verbose $fnoextension.ext.json
-                    fi
-                    python stats.py kdiv_monolithic_dfs_${arch}_${fnoextension}_${agap}_${ndivs}_${dist}_${branch}_${seed}_${mdist} ${fnoextension}  ${DIVS_DIR} ${RESULT_PATH} 
-                    echo "Deleting the diversified files."
-                    rm ${DIVS_DIR}/*.$fnoextension.out.json
-                    #fi
-                    for relax in 0.8
-                    do
-                        for lp in 10000 #100000 
-                        do
-                            for rest in "constant"
-                            do
-                                if [ ! -f $fnoextension.out.json ]; then
-                                    echo "File not found! Falling back to llvm basefile"
-                                    time timeout 10m gecode-diversify  ${flags} --acceptable-gap $agap --relax $relax --seed $seed --distance ${dist} --restart $rest --restart-scale $lp --number-divs $ndivs --div-method monolithic_lns --divs-dir $DIVS_DIR -o $fnoextension.out.json --min-dist $mdist --branching ${branch} --verbose $fnoextension.ext.json
-                                else
-                                    time timeout 10m gecode-diversify  ${flags} --acceptable-gap $agap --relax $relax --seed $seed --distance ${dist} --restart $rest --restart-scale $lp --number-divs $ndivs --solver-file $fnoextension.out.json --use-optimal-for-diversification --div-method monolithic_lns --divs-dir $DIVS_DIR -o $fnoextension.out.json --min-dist $mdist --branching ${branch}  --verbose $fnoextension.ext.json
-                                fi
-                                python stats.py kdiv_monolithic_lns_${arch}_${fnoextension}_${agap}_${ndivs}_${dist}_${branch}_${seed}_${mdist}_${relax}_${lp}_${rest} ${fnoextension} ${DIVS_DIR} ${RESULT_PATH} 
-                                echo "Deleting the diversified files."
-                                rm ${DIVS_DIR}/*.$fnoextension.out.json
-                            done # rest
-                        done #lp
-                    done # relax
-                  done # mdist
-                done # dist
-            done # ndivs
-        done # agap
+#         echo "k-dist Evaluation"
+#         # Distance Evaluation
+# 	for agap in 10 #2 5 10 20 50
+# 	do
+# 	    for ndivs in 200
+# 	    do
+# 	        for dist in "reg_hamming" "hamm_reg_gadget" "hamming"
+# 		do
+# 	          for mdist in 1 2 5 10 20
+#                   do
+#                     branch="clrandom"
+#                     if [ ! -f $fnoextension.out.json ]; then
+#                         echo "File not found! Falling back to llvm basefile"
+#                         time timeout 10m gecode-diversify ${flags} --acceptable-gap $agap --div-method monolithic_dfs --seed $seed --distance ${dist} --number-divs $ndivs --divs-dir $DIVS_DIR  -o $fnoextension.out.json --min-dist $mdist --branching ${branch} --verbose $fnoextension.ext.json
+#                     else
+#                         time timeout 10m gecode-diversify  ${flags} --acceptable-gap $agap  --div-method monolithic_dfs --seed $seed --distance ${dist} --number-divs $ndivs --solver-file $fnoextension.out.json --use-optimal-for-diversification --divs-dir $DIVS_DIR -o $fnoextension.out.json --min-dist $mdist --branching ${branch} --verbose $fnoextension.ext.json
+#                     fi
+#                     python stats.py kdiv_monolithic_dfs_${arch}_${fnoextension}_${agap}_${ndivs}_${dist}_${branch}_${seed}_${mdist} ${fnoextension}  ${DIVS_DIR} ${RESULT_PATH} 
+#                     echo "Deleting the diversified files."
+#                     rm ${DIVS_DIR}/*.$fnoextension.out.json
+#                     #fi
+#                     for relax in 0.8
+#                     do
+#                         for lp in 10000 #100000 
+#                         do
+#                             for rest in "constant"
+#                             do
+#                                 if [ ! -f $fnoextension.out.json ]; then
+#                                     echo "File not found! Falling back to llvm basefile"
+#                                     time timeout 10m gecode-diversify  ${flags} --acceptable-gap $agap --relax $relax --seed $seed --distance ${dist} --restart $rest --restart-scale $lp --number-divs $ndivs --div-method monolithic_lns --divs-dir $DIVS_DIR -o $fnoextension.out.json --min-dist $mdist --branching ${branch} --verbose $fnoextension.ext.json
+#                                 else
+#                                     time timeout 10m gecode-diversify  ${flags} --acceptable-gap $agap --relax $relax --seed $seed --distance ${dist} --restart $rest --restart-scale $lp --number-divs $ndivs --solver-file $fnoextension.out.json --use-optimal-for-diversification --div-method monolithic_lns --divs-dir $DIVS_DIR -o $fnoextension.out.json --min-dist $mdist --branching ${branch}  --verbose $fnoextension.ext.json
+#                                 fi
+#                                 python stats.py kdiv_monolithic_lns_${arch}_${fnoextension}_${agap}_${ndivs}_${dist}_${branch}_${seed}_${mdist}_${relax}_${lp}_${rest} ${fnoextension} ${DIVS_DIR} ${RESULT_PATH} 
+#                                 echo "Deleting the diversified files."
+#                                 rm ${DIVS_DIR}/*.$fnoextension.out.json
+#                             done # rest
+#                         done #lp
+#                     done # relax
+#                   done # mdist
+#                 done # dist
+#             done # ndivs
+#         done # agap
 
 
 
