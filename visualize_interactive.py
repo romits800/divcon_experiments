@@ -47,6 +47,19 @@ for bi,b in enumerate(benchmarks,1):
 rrates = [ "-",  "0.05", "0.1", "0.15", "0.2", "0.25", "0.3", "0.4", "0.5", "0.6", "0.7", "0.8", "0.9"]
 #rrates = [ "-", "0.1", "0.2", "0.4", "0.6", "0.8", "0.9"]
 
+def dist_to_delta(dist):
+	if dist == "reg_hamming":
+		return r'$\delta_r$'
+	elif dist == "hamming":
+		return r'$\delta_h$'
+	elif dist == "br_hamming":
+		return r'$\delta_{bh}$'
+	elif dist == "levenshtein":
+		return r'$\delta_{lev}$'
+	else:
+		return r'$\delta$'
+
+
 
 def improvement(lns, dfs):
     if (lns > dfs):
@@ -286,7 +299,7 @@ def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile
         print >> f, "\\cline{6-%d}"%(5+len(relax)*2)
         print >> f, "&%s&%s\\\\" %( "&".join(["\\multicolumn{2}{c|}{}", "\\multicolumn{2}{c|}{}"]), "&".join(map(lambda x: "\\multicolumn{2}{c|}{%s}"%x, relax)))
         print >> f, "\\cline{2-%d}"%(5+len(relax)*2)
-        print >> f, "&%s\\\\" %( "&".join(["dist", "time"]*(len(relax)+2)))
+        print >> f, "&%s\\\\" %( "&".join([r"$d$", "time (s)"]*(len(relax)+2)))
     # MaxDiversekSet
        # print >> f, "&\\footnotesize dfs (%s\\textbackslash maxd (N))&\\footnotesize  lns (%s\\textbackslash maxd (N))&\\footnotesize  improv. \\%%  \\\\" %( ind, ind) 
         print >> f, "\\hline" 
@@ -298,11 +311,16 @@ def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile
 		branch = "cloriginal"
 		return  mipsm and d[benchmark]["mips"]["dfs"][metric][agap][branch][None][mindist][field].has_key(num)
 	    branch = "clrandom"
-            mipsrs = d[benchmark].has_key("mips") and d[benchmark]["mips"].has_key("dfs") and d[benchmark]["mips"]["dfs"].has_key(metric) and d[benchmark]["mips"]["dfs"][metric].has_key(agap) and d[benchmark]["mips"]["dfs"][metric][agap].has_key(branch) and d[benchmark]["mips"]["dfs"][metric][agap][branch][None].has_key(mindist) and d[benchmark]["mips"]["dfs"][metric][agap][branch][None][mindist].has_key(field) and d[benchmark]["mips"]["dfs"][metric][agap][branch][None][mindist][field].has_key(num)
+            mipsrs = d[benchmark].has_key("mips") and d[benchmark]["mips"].has_key("dfs") and d[benchmark]["mips"]["dfs"].has_key(metric) and d[benchmark]["mips"]["dfs"][metric].has_key(agap) and d[benchmark]["mips"]["dfs"][metric][agap].has_key(branch) and d[benchmark]["mips"]["dfs"][metric][agap][branch][None].has_key(mindist) and d[benchmark]["mips"]["dfs"][metric][agap][branch][None][mindist].has_key(field) 
+	    def mipsrsnum(num):
+		return mipsrs and d[benchmark]["mips"]["dfs"][metric][agap][branch][None][mindist][field].has_key(num)
+
             def mipslns(relax):
                 #print relax
 		branch = "clrandom"
-                return d[benchmark].has_key("mips") and d[benchmark]["mips"].has_key("lns") and d[benchmark]["mips"]["lns"].has_key(metric) and d[benchmark]["mips"]["lns"][metric].has_key(agap) and d[benchmark]["mips"]["lns"][metric][agap].has_key(branch) and d[benchmark]["mips"]["lns"][metric][agap][branch].has_key(relax) and d[benchmark]["mips"]["lns"][metric][agap][branch][relax].has_key(mindist) and d[benchmark]["mips"]["lns"][metric][agap][branch][relax][mindist].has_key(field) and d[benchmark]["mips"]["lns"][metric][agap][branch][relax][mindist][field].has_key(num) 
+                return d[benchmark].has_key("mips") and d[benchmark]["mips"].has_key("lns") and d[benchmark]["mips"]["lns"].has_key(metric) and d[benchmark]["mips"]["lns"][metric].has_key(agap) and d[benchmark]["mips"]["lns"][metric][agap].has_key(branch) and d[benchmark]["mips"]["lns"][metric][agap][branch].has_key(relax) and d[benchmark]["mips"]["lns"][metric][agap][branch][relax].has_key(mindist) and d[benchmark]["mips"]["lns"][metric][agap][branch][relax][mindist].has_key(field) 
+	    def mipslnsnum(relax, num):
+		return mipslns(relax) and d[benchmark]["mips"]["lns"][metric][agap][branch][relax][mindist][field].has_key(num) 
 
 
             arg = {r: "-" for r in relax + ["-", "max"]}
@@ -338,7 +356,7 @@ def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile
 
 
 	    branch = "clrandom"
-            if mipsrs:
+            if mipsrsnum(num):
 		r = '-'
 		nrelax = None
                 (rsnum,rsstd,rsnseeds) =  get_fields(benchmark, "mips", "dfs", metric, agap, branch, None, mindist, field, num, "num", "stdev") 
@@ -353,9 +371,27 @@ def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile
 
 		val[r] = rsnum
 		valtime[r] = trsnum
+	    elif mipsrs:
+		maxn = max(d[benchmark]["mips"]["dfs"][metric][agap][branch][None][mindist][field].keys())
+		r = '-'
+		nrelax = None
+                (rsnum,rsstd,rsnseeds) =  get_fields(benchmark, "mips", "dfs", metric, agap, branch, None, mindist, field, maxn, "num", "stdev") 
+                (trsnum,trsstd,trsnseeds) =  get_fields(benchmark, "mips", "dfs", metric, agap, branch, None, mindist, field, maxn, "stime", "stime_stdev") 
+	
+		if debug:
+			arg[r] = "\\textit{%.2f$\\pm$%.2f (%d)}" %(rsnum, rsstd, rsnseeds)
+			argtime[r] = "\\textit{%.2f$\\pm$%.2f (%d)}" %(trsnum/1000., trsstd/1000., trsnseeds)
+		else:
+			arg[r] = "\\textit{%.2f$\\pm$%.2f}" %(rsnum, rsstd)
+			argtime[r] = "\\textit{%.2f$\\pm$%.2f (%d)}" %(trsnum/1000., trsstd/1000., maxn)
+
+		val[r] = rsnum
+		valtime[r] = trsnum
+
+
 
             for r in relax:
-                    if mipslns(r):
+                    if mipslnsnum(r, num):
 			(lnsnum,lnsstd,lnsnseeds) =  get_fields(benchmark, "mips", "lns", metric, agap, branch, r, mindist, field, num, "num", "stdev") 
 			(tlnsnum,tlnsstd,tlnsnseeds) =  get_fields(benchmark, "mips", "lns", metric, agap, branch, r, mindist, field, num, "stime", "stime_stdev") 
 	
@@ -367,15 +403,37 @@ def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile
 				argtime[r] = "%.2f$\\pm$%.2f" %(tlnsnum/1000., tlnsstd/1000.)
                         val[r] = lnsnum
                         valtime[r] = tlnsnum
+                    elif mipslns(r):
+			maxn = max(d[benchmark]["mips"]["lns"][metric][agap][branch][r][mindist][field].keys())
+			(lnsnum,lnsstd,lnsnseeds) =  get_fields(benchmark, "mips", "lns", metric, agap, branch, r, mindist, field, maxn, "num", "stdev") 
+			(tlnsnum,tlnsstd,tlnsnseeds) =  get_fields(benchmark, "mips", "lns", metric, agap, branch, r, mindist, field, maxn, "stime", "stime_stdev") 
+	
+			if debug:
+				arg[r] = "\\textit{%.2f$\\pm$%.2f (%d)}" %(lnsnum, lnsstd, lnsnseeds)
+				argtime[r] = "\\textit{%.2f$\\pm$%.2f (%d)}" %(tlnsnum/1000., tlnsstd/1000., tlnsnseeds)
+			else:
+				arg[r] = "\\textit{%.2f$\\pm$%.2f}" %(lnsnum, lnsstd)
+				argtime[r] = "\\textit{%.2f$\\pm$%.2f (%d)}" %(tlnsnum/1000., tlnsstd/1000., maxn)
+                        val[r] = lnsnum
+                        valtime[r] = tlnsnum
 
-            #vitems = filter(lambda (m,y): "textit" not in arg[m] or arg[m] == '-', val.items())
-            vitems = filter(lambda (m,y): arg[m] != '-', val.items())
+
+            #vitems = filter(lambda (m,y): "textit" not in arg[m] and arg[m] == '-', val.items())
+            vitems = filter(lambda (m,y): "textit" not in arg[m] and arg[m] != '-', val.items())
             
             if (len(vitems)>0) and (sum(zip(*vitems)[1]) > 0):
                 mr, m = max(vitems, key=lambda (x,y): y)
                 mrs,_ = zip(*filter(lambda (x,y): abs(y - m) < 1, vitems))
                 for r in mrs:
                     arg[r] = "\\textbf{%s}" %arg[r]
+
+            vitems = filter(lambda (m,y): "textit" not in argtime[m] and argtime[m] != '-', valtime.items())
+            
+            if (len(vitems)>0) and (sum(zip(*vitems)[1]) > 0):
+                mr, m = min(vitems, key=lambda (x,y): y)
+                mrs,_ = zip(*filter(lambda (x,y): abs(y - m) < 1, vitems))
+                for r in mrs:
+                    argtime[r] = "\\textbf{%s}" %argtime[r]
 
 
             print >> f, "&".join(["b" + str(bi)] + [ "%s & %s" %(arg[r],argtime[r])  for r in ["max", "-"] + relax ]) #"%s&%s&%s&%s\\\\"%("b" + str(bi), arg1, arg2, impr1)
@@ -429,7 +487,7 @@ def tex_distances(d, field, agap, num, mindist, relax, metrics, texname='outfile
         print >> f, "\\hline" 
         #print >> f, "&\\multicolumn{2}{c|}{\\multirow{2}{*}{\\textsc{MaxDiverse$k$Set}}}&\\multicolumn{2}{c|}{\\multirow{2}{*}{RS}}&\\multicolumn{%d}{c|}{LNS}\\\\" %2*len(relax) 
         #print >> f, "\\cline{6-%d}"%(5+len(relax)*2)
-        print >> f, "&%s\\\\" %( "&".join(map(lambda x: "\\multicolumn{2}{c|}{%s}"%x.replace("_", "\\_"), metrics)))
+        print >> f, "&%s\\\\" %( "&".join(map(lambda x: "\\multicolumn{2}{c|}{%s}"%(dist_to_delta(x)), metrics)))
         print >> f, "\\cline{2-%d}"%(1 + len(metrics)*2)
         print >> f, "&%s\\\\" %( "&".join(["time", "num"]*(len(metrics))))
     # MaxDiversekSet
@@ -458,7 +516,7 @@ def tex_distances(d, field, agap, num, mindist, relax, metrics, texname='outfile
                         arg[metric] = "%.2f$\\pm$%.2f (%d)" %(lnsnum, lnsstd, lnsnseeds)
                         argtime[metric] = "%.2f$\\pm$%.2f (%d)" %(tlnsnum/1000., tlnsstd/1000., tlnsnseeds)
                 else:
-                        arg[metric] = "%d (%d)" %(num, lnsnseeds)
+                        arg[metric] = "%d " %(num)
                         argtime[metric] = "%.2f$\\pm$%.2f" %(tlnsnum/1000., tlnsstd/1000.)
 
                 val[metric] = lnsnum
@@ -466,7 +524,9 @@ def tex_distances(d, field, agap, num, mindist, relax, metrics, texname='outfile
 
               else:
                 if mipslns_0(metric):
-                    n = max(d[benchmark]["mips"]["lns"][metric][agap][branch][relax][mindist][field].keys())
+		    keys = d[benchmark]["mips"]["lns"][metric][agap][branch][relax][mindist][field].keys()
+		    remlown = filter(lambda x: d[benchmark]["mips"]["lns"][metric][agap][branch][relax][mindist][field][x]['n'] >= 5, keys)
+                    n = max(remlown)
 
                     (lnsnum,lnsstd,lnsnseeds) = get_fields(benchmark, "mips", "lns", metric, agap, branch, relax, mindist, field, n, "num", "stdev") 
                     (tlnsnum,tlnsstd,tlnsnseeds) = get_fields(benchmark, "mips", "lns", metric, agap, branch, relax, mindist, field, n, "stime", "stime_stdev") 
@@ -474,15 +534,15 @@ def tex_distances(d, field, agap, num, mindist, relax, metrics, texname='outfile
                         arg[metric] = "\\textit{%.2f$\\pm$%.2f (%d)}" %(lnsnum, lnsstd, lnsnseeds)
                         argtime[metric] = "\\textit{%.2f$\\pm$%.2f (%d)}" %(tlnsnum/1000., tlnsstd/1000., tlnsnseeds)
                     else:
-                        arg[metric] = "\\textit{%d (%d)}" %(n, lnsnseeds)
+                        arg[metric] = "\\textit{%d }" %(n)
                         argtime[metric] = "\\textit{%.2f$\\pm$%.2f}" %(tlnsnum/1000., tlnsstd/1000.)
  
                     val[metric] = lnsnum
                     valtime[metric] = tlnsnum/1000.
 
 
-            vitems = filter(lambda (m,y): "textit" not in argtime[m] or argtime[m] != '-', valtime.items())
-            if sum(zip(*vitems)[1]) > 0:
+            vitems = filter(lambda (m,y): "textit" not in argtime[m] and argtime[m] != '-', valtime.items())
+            if len(vitems)>0 and sum(zip(*vitems)[1]) > 0:
                 mr, m = min(vitems, key=lambda (x,y): y)
                 mrs,_ = zip(*filter(lambda (x,y): abs(y - m) < 0.5, vitems))
                 for m in mrs:
@@ -507,7 +567,7 @@ def tex_distances(d, field, agap, num, mindist, relax, metrics, texname='outfile
 
 
 
-def plot_maxdiv_lns_new(d, b, metric, field, agap, relax, mindist, dist=True):
+def plot_maxdiv_lns_new(d, b, metric, field, agap, relax, mindist, dist=True, legend_loc='lower right'):
     arch = 'mips'
     rel = str(relax)
     agap = str(agap)
@@ -560,15 +620,16 @@ def plot_maxdiv_lns_new(d, b, metric, field, agap, relax, mindist, dist=True):
 
     if dist:
         ax.set_ylim(bottom=0)
-        ax.set_ylabel(get_ind(field), fontsize=14)
+        ax.set_ylabel(r'$d(\delta_h)$', fontsize=14)
+        #ax.set_ylabel(et_ind(field), fontsize=14)
  
     else:      
         ax.set_yscale('log')
         ax.set_ylim(bottom=1)
         ax.set_ylabel(get_ind('stime'), fontsize=14)
  
-    ax.set_xlabel("Number of Variants (k)", fontsize=14)
-    ax.legend(loc='lower right', fontsize=14)
+    ax.set_xlabel("Number of Variants", fontsize=14)
+    ax.legend(loc=legend_loc, fontsize=14)
     plt.title(dbench[b], fontsize=20)
     ax.tick_params(axis = 'both', which = 'major', labelsize = 14)
     ax.tick_params(axis = 'both', which = 'minor', labelsize = 14)
@@ -719,14 +780,14 @@ def plot_rs_vs_lns( d_lns, metric, field, agap, colors, num, mindist, loc='upper
 
 
     #ax.set_ylim(bottom=0,top=1.1)
-    x = [0.1, 0.2, 0.4, 0.6, 0.8, 0.9]
+    x = [0.1, 0.2, 0.4, 0.6, 0.8]
     
     ax.set_xticks(x)
     if dist:
         ax.set_yticks([-2, -1, 0, 1, 2, 5, 10])
     else:
         ax.set_yticks([-10, -5, -1, 1, 5, 10, 50] )
-        ax.set_ylim([-20,50])
+        ax.set_ylim([-20,100])
         #ax.set_yscale('log')
 
     ax.set_xlim([0.05,0.9])
@@ -734,13 +795,13 @@ def plot_rs_vs_lns( d_lns, metric, field, agap, colors, num, mindist, loc='upper
     xn = [ float(r) for r in rrates[1:]]
     plt.fill_between(xn, [-1. for _ in xn], [1. for _ in xn], linestyle='-.', color='gray', alpha=0.8, hatch='/')
     if dist:
-	label = r'$\frac{\delta_{HD}(S_{LNS})}{\delta_{HD}(S_{RS})}$'
-        ax.set_ylabel(label, rotation=0, fontsize=22, labelpad=5)
-	ax.yaxis.set_label_coords(-0.07,0.95)
+	label = r'$P_{\delta}(\delta_h, S_{LNS}, S_{RS})$'
+        ax.set_ylabel(label, rotation=0, fontsize=10, labelpad=5)
+	ax.yaxis.set_label_coords(-0.08,0.95)
     else:
-	label = r'$\frac{t_{LNS}}{t_{RS}}$'
-        ax.set_ylabel(label, rotation=0, fontsize=22, labelpad=5)
-	ax.yaxis.set_label_coords(-0.09,0.55)
+	label = r'$P_{t}(t_{LSN}, t_{RS})$'
+        ax.set_ylabel(label, rotation=0, fontsize=12, labelpad=5)
+	ax.yaxis.set_label_coords(-0.07,0.95)
 
     ax.set_xlabel("relax rate", fontsize=20)
 
