@@ -2,7 +2,7 @@
 input=$1
 func=$2
 
-export PATH=${PATH}:/home/romi/didaktoriko/unison/romi_unison/divCon/src/solvers/gecode:/home/romi/didaktoriko/unison/romi_unison/divCon/src/solvers/multi_backend/minizinc/:/home/romi/didaktoriko/unison/romi_unison/divCon/src/solvers/multi_backend/:/home/romi/didaktoriko/misc/minizinc/MiniZincIDE-2.1.2-bundle-linux-x86_64/ UNISON_DIR=/home/romi/didaktoriko/unison/romi_unison/divCon/ #/home/romi/didaktoriko/unison/romi_unison/divCon/src/solvers/multi_backend/portfolio-solver -o test.out.json  --verbose test.ext.json
+export PATH=${PATH}:${DIVCON_PATH}/src/solvers/gecode:${DIVCON_PATH}/src/solvers/multi_backend/minizinc/:${DIVCON_PATH}/src/solvers/multi_backend/:/home/romi/didaktoriko/misc/minizinc/MiniZincIDE-2.1.2-bundle-linux-x86_64/:${DIVCON_PATH}/src/solvers/multi_backend/common/ UNISON_DIR=/home/romi/didaktoriko/unison/romi_unison/divCon/ #/home/romi/didaktoriko/unison/romi_unison/divCon/src/solvers/multi_backend/portfolio-solver -o test.out.json  --verbose test.ext.json
 # /usr/local/bin/uni
 uni import --target=Mips $input.mir -o $input.uni --function=$func --maxblocksize=25 --goal=speed
 # /usr/local/bin/uni
