@@ -527,7 +527,7 @@ def plot_maxdiv_lns_new(d, b, metric, field, agap, relax, mindist, dist=True):
         xy = [ (i, cdict[i][avg], 2*cdict[i][stdev]/math.sqrt(cdict[i]['n'])) for i in  k]
         if len(xy) > 0:
             x,y,err = map(np.array,zip(*xy))
-            plt.plot(x, y, linestyle='--', color='r', label='MaxDiversekSet')
+            plt.plot(x, y, linestyle='--', lw=2, color='r', label='MaxDiversekSet')
             plt.fill_between(x, y-err, y+err, linestyle='-.', color='r', alpha = 0.2)
             #plt.errorbar(x, y, yerr=err, linestyle=':', color='k', label='MaxDiversekSet')
 
@@ -541,7 +541,7 @@ def plot_maxdiv_lns_new(d, b, metric, field, agap, relax, mindist, dist=True):
         xy = [ (i, cdict[i][avg], 2*cdict[i][stdev]/math.sqrt(cdict[i]['n'])) for i in  k]
         if len(xy) > 0:
             x,y,err = map(np.array, zip(*xy))
-            plt.plot(x, y, linestyle='--', color='g', label='Random Search')
+            plt.plot(x, y, linestyle='--', lw=2, color='g', label='Random Search')
             plt.fill_between(x, y-err, y+err, linestyle='-.', color='g', alpha = 0.2)
             #plt.errorbar(x, y, yerr=err, linestyle='-.', color='k', label='Random Search')
  
@@ -555,7 +555,7 @@ def plot_maxdiv_lns_new(d, b, metric, field, agap, relax, mindist, dist=True):
         xy = [ (i, cdict[i][avg], 2*cdict[i][stdev]/math.sqrt(cdict[i]['n'])) for i in k ]
         if len(xy) > 0:
             x,y,err = map(np.array, zip(*xy))
-            plt.plot(x, y, linestyle='--', color='b', label='LNS')
+            plt.plot(x, y, linestyle='--', lw=2, color='b', label='LNS')
             plt.fill_between(x, y-err, y+err, linestyle='-.', color='b', alpha = 0.2)
 
     if dist:
