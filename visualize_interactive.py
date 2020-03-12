@@ -51,7 +51,7 @@ def dist_to_delta(dist):
 	if dist == "reg_hamming":
 		return r'$\delta_r$'
 	elif dist == "hamming":
-		return r'$\delta_h$'
+		return r'$\delta_c$'
 	elif dist == "br_hamming":
 		return r'$\delta_{bh}$'
 	elif dist == "levenshtein":
@@ -341,7 +341,9 @@ def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile
 		val[r] = maxnum
 		valtime[r] = tmaxnum
 	    elif mipsm:
-		maxn = max(d[benchmark]["mips"]["dfs"][metric][agap][branch][None][mindist][field].keys())
+                keys = d[benchmark]["mips"]["dfs"][metric][agap][branch][None][mindist][field].keys()
+                if len(keys) == 0: continue
+		maxn = max(keys)
 		r = 'max'
                 (maxnum,maxstd,maxnseeds) =  get_fields(benchmark, "mips", "dfs", metric, agap, "cloriginal", None, mindist, field, maxn, "num", "stdev") 
                 (tmaxnum,tmaxstd,tmaxnseeds) =  get_fields(benchmark, "mips", "dfs", metric, agap, "cloriginal", None, mindist, field, maxn, "stime", "stime_stdev") 
@@ -372,7 +374,9 @@ def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile
 		val[r] = rsnum
 		valtime[r] = trsnum
 	    elif mipsrs:
-		maxn = max(d[benchmark]["mips"]["dfs"][metric][agap][branch][None][mindist][field].keys())
+                keys = d[benchmark]["mips"]["dfs"][metric][agap][branch][None][mindist][field].keys()
+                if len(keys) == 0: continue
+		maxn = max(keys)
 		r = '-'
 		nrelax = None
                 (rsnum,rsstd,rsnseeds) =  get_fields(benchmark, "mips", "dfs", metric, agap, branch, None, mindist, field, maxn, "num", "stdev") 
@@ -404,7 +408,9 @@ def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile
                         val[r] = lnsnum
                         valtime[r] = tlnsnum
                     elif mipslns(r):
-			maxn = max(d[benchmark]["mips"]["lns"][metric][agap][branch][r][mindist][field].keys())
+                        keys = d[benchmark]["mips"]["lns"][metric][agap][branch][r][mindist][field].keys()
+                        if len(keys) == 0: continue
+			maxn = max(keys)
 			(lnsnum,lnsstd,lnsnseeds) =  get_fields(benchmark, "mips", "lns", metric, agap, branch, r, mindist, field, maxn, "num", "stdev") 
 			(tlnsnum,tlnsstd,tlnsnseeds) =  get_fields(benchmark, "mips", "lns", metric, agap, branch, r, mindist, field, maxn, "stime", "stime_stdev") 
 	
@@ -489,7 +495,7 @@ def tex_distances(d, field, agap, num, mindist, relax, metrics, texname='outfile
         #print >> f, "\\cline{6-%d}"%(5+len(relax)*2)
         print >> f, "&%s\\\\" %( "&".join(map(lambda x: "\\multicolumn{2}{c|}{%s}"%(dist_to_delta(x)), metrics)))
         print >> f, "\\cline{2-%d}"%(1 + len(metrics)*2)
-        print >> f, "&%s\\\\" %( "&".join(["time", "num"]*(len(metrics))))
+        print >> f, "&%s\\\\" %( "&".join([r"$t$", "num"]*(len(metrics))))
     # MaxDiversekSet
        # print >> f, "&\\footnotesize dfs (%s\\textbackslash maxd (N))&\\footnotesize  lns (%s\\textbackslash maxd (N))&\\footnotesize  improv. \\%%  \\\\" %( ind, ind) 
         print >> f, "\\hline" 
@@ -620,7 +626,7 @@ def plot_maxdiv_lns_new(d, b, metric, field, agap, relax, mindist, dist=True, le
 
     if dist:
         ax.set_ylim(bottom=0)
-        ax.set_ylabel(r'$d(\delta_h)$', fontsize=14)
+        ax.set_ylabel(r'$d(\delta_c)$', fontsize=14)
         #ax.set_ylabel(et_ind(field), fontsize=14)
  
     else:      
@@ -795,7 +801,7 @@ def plot_rs_vs_lns( d_lns, metric, field, agap, colors, num, mindist, loc='upper
     xn = [ float(r) for r in rrates[1:]]
     plt.fill_between(xn, [-1. for _ in xn], [1. for _ in xn], linestyle='-.', color='gray', alpha=0.8, hatch='/')
     if dist:
-	label = r'$P_{\delta}(\delta_h, S_{LNS}, S_{RS})$'
+	label = r'$P_{\delta}(\delta_c, S_{LNS}, S_{RS})$'
         ax.set_ylabel(label, rotation=0, fontsize=10, labelpad=5)
 	ax.yaxis.set_label_coords(-0.08,0.95)
     else:
