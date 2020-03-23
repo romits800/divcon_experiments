@@ -65,6 +65,10 @@ if [[ -z "${DIVCON_PATH}" ]]; then
 fi
 
 
+if [ -d ${CURRENT_DIR}/solution_files ]
+then
+    cp ${CURRENT_DIR}/solution_files/* .
+fi
  
 for arch in mips #hexagon #mips #arm
 do
@@ -85,26 +89,28 @@ do
 	archc="${arch^}"
 	
 	# /usr/local/bin/uni
-	uni import --target=$archc $fullname -o $fnoextension.uni --function=$func --maxblocksize=50 --goal=speed
-	# /usr/local/bin/uni
-	uni linearize --target=$archc $fnoextension.uni -o $fnoextension.lssa.uni
-	# /usr/local/bin/uni
-	uni extend --target=$archc $fnoextension.lssa.uni -o $fnoextension.ext.uni
-	# /usr/local/bin/uni
-	uni augment --target=$archc $fnoextension.ext.uni -o $fnoextension.alt.uni
-	# /usr/local/bin/uni
-	# uni normalize --target=$archc $fullnamenoext.asm.mir -o $fnoextension.llvm.mir
-	# /usr/local/bin/uni
-	uni model --target=$archc $fnoextension.alt.uni -o $fnoextension.json 
-	#uni model --target=$archc $fnoextension.alt.uni -o $fnoextension.json --basefile=$fnoextension.llvm.mir +RTS -K20M -RTS
-	# /usr/local/bin/gecode-presolver
-	gecode-presolver -o $fnoextension.ext.json -dzn $fnoextension.dzn --verbose $fnoextension.json
-	# /usr/local/bin/gecode-solver
-	if [ ! -f $fnoextension.out.json ]; then
-            rm $fnoextension.out.json
-        fi
-	#gecode-solver  -o $fnoextension.out.json --verbose $fnoextension.ext.json
-        ${DIVCON_PATH}/src/solvers/multi_backend/portfolio-solver -o $fnoextension.out.json --verbose $fnoextension.ext.json
+# 	uni import --target=$archc $fullname -o $fnoextension.uni --function=$func --maxblocksize=50 --goal=speed
+# 	# /usr/local/bin/uni
+# 	uni linearize --target=$archc $fnoextension.uni -o $fnoextension.lssa.uni
+# 	# /usr/local/bin/uni
+# 	uni extend --target=$archc $fnoextension.lssa.uni -o $fnoextension.ext.uni
+# 	# /usr/local/bin/uni
+# 	uni augment --target=$archc $fnoextension.ext.uni -o $fnoextension.alt.uni
+# 	# /usr/local/bin/uni
+# 	# uni normalize --target=$archc $fullnamenoext.asm.mir -o $fnoextension.llvm.mir
+# 	# /usr/local/bin/uni
+# t
+# 	uni model --target=$archc $fnoextension.alt.uni -o $fnoextension.json 
+# 	#uni model --target=$archc $fnoextension.alt.uni -o $fnoextension.json --basefile=$fnoextension.llvm.mir +RTS -K20M -RTS
+# 	# /usr/local/bin/gecode-presolver
+# 	gecode-presolver -o $fnoextension.ext.json -dzn $fnoextension.dzn --verbose $fnoextension.json
+# 	# /usr/local/bin/gecode-solver
+# 	if [ ! -f $fnoextension.out.json ]; then
+#             rm $fnoextension.out.json
+#         fi
+# 	#gecode-solver  -o $fnoextension.out.json --verbose $fnoextension.ext.json
+#         ${DIVCON_PATH}/src/solvers/multi_backend/portfolio-solver -o $fnoextension.out.json --verbose $fnoextension.ext.json
+
 	
         RESULT_PATH=${DIVS_PATH}/${fnoextension}
 
@@ -140,7 +146,7 @@ do
                     echo "Deleting the diversified files."
                     rm ${DIVS_DIR}/*.$fnoextension.out.json
                     #fi
-                    for relax in 0.8
+                    for relax in 0.7
                     do
                         for lp in 5000 #10000 #100000 
                         do
@@ -210,24 +216,14 @@ do
 
         echo "Agap evaluation"
         # Agap evaluation
-	for agap in 0 2 5 10 20 #2 5 10 20 50
+	for agap in 0 5 20 #2 5 10 20 50
 	do
 	    for ndivs in 200
 	    do
-	        for dist in "hamming" #"reg_hamming" "hamming"
+	        for dist in "hamming" #"reg_hamming" #"hamming"
 		do
                     branch="clrandom"
-#                     if [ ! -f $fnoextension.out.json ]; then
-#                         echo "File not found! Falling back to llvm basefile"
-#                         time timeout 10m gecode-diversify ${flags} --acceptable-gap $agap --div-method monolithic_dfs --seed $seed --distance ${dist} --number-divs $ndivs --divs-dir $DIVS_DIR  -o $fnoextension.out.json --branching ${branch} --verbose $fnoextension.ext.json
-#                     else
-#                         time timeout 10m gecode-diversify  ${flags} --acceptable-gap $agap  --div-method monolithic_dfs --seed $seed --distance ${dist} --number-divs $ndivs --solver-file $fnoextension.out.json --use-optimal-for-diversification --divs-dir $DIVS_DIR -o $fnoextension.out.json --enable-solver-solution-brancher --branching ${branch} --verbose $fnoextension.ext.json
-#                     fi
-#                    python stats.py agapdiv_monolithic_dfs_${arch}_${fnoextension}_${agap}_${ndivs}_${dist}_${branch}_${seed}_1 ${fnoextension}  ${DIVS_DIR} ${RESULT_PATH} 
-#                    echo "Deleting the diversified files."
-#                    rm ${DIVS_DIR}/*.$fnoextension.out.json
-                    #fi
-                    for relax in 0.8
+                   for relax in 0.7
                     do
                         for lp in 5000 #10000 #100000 
                         do
@@ -255,24 +251,24 @@ do
 
         echo "Distance Evaluation"
         # Distance Evaluation
-	for agap in 0 10 #2 5 10 20 50
+	for agap in 10 #2 5 10 20 50
 	do
 	    for ndivs in 200
 	    do
-	        for dist in "br_reg_hamming" "reg_hamming" "hamm_reg_gadget" "diff_br_hamming" "hamming" "br_hamming" "levenshtein" 
+	        for dist in "br_hamming" "levenshtein" #"hamming" #"reg_hamming" "hamm_reg_gadget" "diff_br_hamming"  "br_reg_hamming" 
 		do
                     branch="clrandom"
-                    if [ ! -f $fnoextension.out.json ]; then
-                        echo "File not found! Falling back to llvm basefile"
-                        time timeout 10m gecode-diversify ${flags} --acceptable-gap $agap --div-method monolithic_dfs --seed $seed --distance ${dist} --number-divs $ndivs --divs-dir $DIVS_DIR  -o $fnoextension.out.json --branching ${branch} --verbose $fnoextension.ext.json
-                    else
-                        time timeout 10m gecode-diversify  ${flags} --acceptable-gap $agap  --div-method monolithic_dfs --seed $seed --distance ${dist} --number-divs $ndivs --solver-file $fnoextension.out.json --use-optimal-for-diversification --divs-dir $DIVS_DIR -o $fnoextension.out.json --enable-solver-solution-brancher --branching ${branch} --verbose $fnoextension.ext.json
-                    fi
-                    python stats.py metrdiv_monolithic_dfs_${arch}_${fnoextension}_${agap}_${ndivs}_${dist}_${branch}_${seed}_1 ${fnoextension}  ${DIVS_DIR} ${RESULT_PATH} 
-                    echo "Deleting the diversified files."
-                    rm ${DIVS_DIR}/*.$fnoextension.out.json
+#                     if [ ! -f $fnoextension.out.json ]; then
+#                         echo "File not found! Falling back to llvm basefile"
+#                         time timeout 10m gecode-diversify ${flags} --acceptable-gap $agap --div-method monolithic_dfs --seed $seed --distance ${dist} --number-divs $ndivs --divs-dir $DIVS_DIR  -o $fnoextension.out.json --branching ${branch} --verbose $fnoextension.ext.json
+#                     else
+#                         time timeout 10m gecode-diversify  ${flags} --acceptable-gap $agap  --div-method monolithic_dfs --seed $seed --distance ${dist} --number-divs $ndivs --solver-file $fnoextension.out.json --use-optimal-for-diversification --divs-dir $DIVS_DIR -o $fnoextension.out.json --enable-solver-solution-brancher --branching ${branch} --verbose $fnoextension.ext.json
+#                     fi
+#                     python stats.py metrdiv_monolithic_dfs_${arch}_${fnoextension}_${agap}_${ndivs}_${dist}_${branch}_${seed}_1 ${fnoextension}  ${DIVS_DIR} ${RESULT_PATH} 
+#                     echo "Deleting the diversified files."
+#                     rm ${DIVS_DIR}/*.$fnoextension.out.json
                     #fi
-                    for relax in 0.8
+                    for relax in 0.7
                     do
                         for lp in 5000 #10000 #100000 
                         do
@@ -318,7 +314,7 @@ do
 #                     echo "Deleting the diversified files."
 #                     rm ${DIVS_DIR}/*.$fnoextension.out.json
 #                     #fi
-#                     for relax in 0.8
+#                     for relax in 0.7
 #                     do
 #                         for lp in 10000 #100000 
 #                         do

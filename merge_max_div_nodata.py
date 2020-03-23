@@ -22,7 +22,7 @@ ds = dict()
 
 i = 0
 for f in listdir("."):
-    if f.endswith(".pickle") and f.startswith("max_div_divs_"):
+    if f.endswith(".pickle"):
         ds[i] = pickle.load(open(f))
         i+=1 
 
@@ -119,6 +119,7 @@ for b in benchmarks:
                                 
 
                             divs = [ds[di][b][arch][method][metric][agap][branch][relax][mindist]['divs'] for di in ds if checkif(ds[di], b, arch, method, metric, agap, branch, relax, mindist, 'divs')]
+                            if (len(divs) == 0): continue
                             d[b][arch][method][metric][agap][branch][relax][mindist]['divs'] = sum(divs)/len(divs)
 
                             # cost = [ds[di][b][arch][method][metric][agap][branch][relax]['cost']['num'] for di in ds if checkif(ds[di], b, arch, method, metric, agap, branch, relax, 'cost')]

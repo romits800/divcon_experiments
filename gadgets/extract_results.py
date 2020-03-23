@@ -18,7 +18,7 @@ filepat = re.compile("divs_[0-9]+_[0-9]$")
 
 
 metrics = ["br_hamming", "levenshtein", "hamming", "diff_br_hamming", "reg_hamming", "hamm_reg_gadget"]
-rrates = rrates =  ["-", "0.1", "0.2", "0.4", "0.6", "0.8", "0.9"]
+rrates = rrates =  ["-", "0.1", "0.2", "0.4", "0.6", "0.7", "0.8", "0.9"]
 
 benchmarks = sorted([   "h264ref.sei.UpdateRandomAccess", 
                         "hmmer.tophits.AllocFancyAli",
@@ -92,15 +92,16 @@ def compress_data(data):
 # Open a file
 l = dict()
 d = dict()
-dist_vs_gadgets = {'gadget': dict(), 'hamm': dict(), 'brhamm': dict(), 'brdiff': dict(), 'reghamm': dict(), 'lev': dict()}
-dist_vs_gadgets_points = dict()
+#dist_vs_gadgets = {'gadget': dict(), 'hamm': dict(), 'brhamm': dict(), 'brdiff': dict(), 'reghamm': dict(), 'lev': dict()}
+#dist_vs_gadgets_points = dict()
+d_rc = dict()
 
 def update_dict(d, d1):
-    for key in d1:
-        if d.has_key(key):
-            d[key] += d1[key]
+    for srate in d1:
+        if d.has_key(srate):
+            d[srate].update(d1[srate])
         else:
-            d[key] = d1[key]
+            d[srate] = d1[srate]
 
 for meas in os.listdir(path):
 
@@ -135,13 +136,15 @@ for meas in os.listdir(path):
                 data = inp[gmetric]['data']
                 name = fil.split("/")[-1]
                 m.append((data, name, numdivs, avg, std))
-                if inp.has_key("dist_vs_gadgets"):
-                    if type(inp['dist_vs_gadgets']) == type(dict()):
-                      for fiel in inp['dist_vs_gadgets']:
-                        update_dict(dist_vs_gadgets[fiel], inp['dist_vs_gadgets'][fiel])
+                #if inp.has_key("dist_vs_gadgets"):
+                #    if type(inp['dist_vs_gadgets']) == type(dict()):
+                #      for fiel in inp['dist_vs_gadgets']:
+                #        update_dict(dist_vs_gadgets[fiel], inp['dist_vs_gadgets'][fiel])
                         #dist_vs_gadgets[fiel].update(inp['dist_vs_gadgets'][fiel])
-                if inp.has_key("dist_vs_gadgets_points"):
-                    update_dict(dist_vs_gadgets_points, inp['dist_vs_gadgets_points'])
+                #if inp.has_key("dist_vs_gadgets_points"):
+                #    update_dict(dist_vs_gadgets_points, inp['dist_vs_gadgets_points'])
+                #if inp.has_key("rc"):
+                #    update_dict(d_rc, inp['rc'])
             else:
                 print "Error", inp[gmetric]
 
@@ -370,7 +373,6 @@ for ag in d:
 
 # HIST
 def formatdataout(v):
-    #res = v['data']ufloat(*v['res'])
     dat = compress_data(v['data'])
     num = str(v['avgnum'])
     it = dat.items()
@@ -505,6 +507,7 @@ with open("benchmarks.csv", "w") as f:
     
     
 pickle.dump(d, open("divs_gadgets.pickle", "w"))
+#pickle.dump(d_rc, open("d_rc.pickle", "w"))
 
-pickle.dump(dist_vs_gadgets, open("dist_vs_gadgets.pickle", "w"))
-pickle.dump(dist_vs_gadgets_points, open("dist_vs_gadgets_points.pickle", "w"))
+#pickle.dump(dist_vs_gadgets, open("dist_vs_gadgets.pickle", "w"))
+#pickle.dump(dist_vs_gadgets_points, open("dist_vs_gadgets_points.pickle", "w"))

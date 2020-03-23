@@ -145,11 +145,11 @@ do
 
         echo "Agap evaluation"
         # Agap evaluation
-	for agap in 0 2 5 10 20 #2 5 10 20 50
+	for agap in 0 5 10 20 #2 5 10 20 50
 	do
 	    for ndivs in 200
 	    do
-	        for dist in "hamming" #"reg_hamming" "hamming"
+	        for dist in "hamming" "reg_hamming" #"hamming"
 		do
                     branch="clrandom"
 #                     if [ ! -f $fnoextension.out.json ]; then
@@ -190,11 +190,11 @@ do
 
         echo "Distance Evaluation"
         # Distance Evaluation
-	for agap in 0 10 #2 5 10 20 50
+	for agap in 10 #2 5 10 20 50
 	do
 	    for ndivs in 200
 	    do
-	        for dist in "br_reg_hamming" "reg_hamming" "hamm_reg_gadget" "diff_br_hamming" "hamming" "br_hamming" "levenshtein" 
+	        for dist in "reg_hamming" "hamm_reg_gadget" "diff_br_hamming" "hamming" "br_hamming" "levenshtein" 
 		do
                     branch="clrandom"
                     for relax in 0.7

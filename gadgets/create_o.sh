@@ -8,7 +8,7 @@ export PATH=${PATH}:/home/romi/didaktoriko/unison/romi_unison/divCon/src/solvers
 
 pushd $path
 cp ../create_bin.py .
-cp ../jop_dist.py .
+cp ../jop_rc.py .
 
 for pic in divs_?/${bench}/*.pickle
 #for pic in ${path}/divs_?/${bench}/*.pickle 
@@ -49,7 +49,7 @@ do
         inoext4="${inoext3%.*}"   # filename without extension 
         llc $i -filetype=obj -march=mipsel -mcpu=mips32 -disable-post-ra -disable-tail-duplicate -disable-branch-fold -disable-block-placement -start-after livedebugvars -o $inoext4.o
     done
-    python jop_dist.py `pwd` $pic
+    python jop_rc.py `pwd` $pic
 done
 
 popd 
