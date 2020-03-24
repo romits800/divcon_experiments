@@ -1,0 +1,132 @@
+// @lint: --nocostoverflow=false
+function: autohelperpat1088
+b0 (entry, exit, return, freq: 1):
+    o0: [p0{t0}:a0,p1{t1}:a1,p2{t2}:a2,p3{t3}:t9,p4{t4}:v0,p5{t5}:s0,p6{t6}:s1,p7{t7}:s2,p8{t8}:s3,p9{t9}:s4,p10{t10}:s5,p11{t11}:s6,p12{t12}:s7,p13{t13}:d10,p14{t14}:d11,p15{t15}:d12,p16{t16}:d13,p17{t17}:d14,p18{t18}:d15,p19{t19}:zero,p20{t20}:k0,p21{t21}:k1,p22{t22}:sp,p23{t23}:ra] <- (in) []
+    o1: [] <- LoadGPDisp [] (writes: [control])
+    o2: [] <- {-, ADDiu_negsp} [%frame-size] (reads: [control,sp], writes: [sp],
+activators: [STORE,LOAD,STORE_D,LOAD_D,SW_sp])
+    o3: [p25{-, t24}] <- {-, MOVE, STORE} [p24{-, t0}] (reads: [control,sp])
+    o4: [p27{-, t25}] <- {-, MOVE, STORE} [p26{-, t1}] (reads: [control,sp])
+    o5: [p29{-, t26}] <- {-, MOVE, STORE} [p28{-, t2}] (reads: [control,sp])
+    o6: [p31{-, t27}] <- {-, MOVE, STORE} [p30{-, t3}] (reads: [control,sp])
+    o7: [p33{-, t28}] <- {-, MOVE, STORE} [p32{-, t4}] (reads: [control,sp])
+    o8: [p35{-, t29}] <- {-, STORE} [p34{-, t5}] (reads: [control,sp])
+    o9: [p37{-, t30}] <- {-, STORE} [p36{-, t6}] (reads: [control,sp])
+    o10: [p39{-, t31}] <- {-, STORE} [p38{-, t7}] (reads: [control,sp])
+    o11: [p41{-, t32}] <- {-, STORE} [p40{-, t8}] (reads: [control,sp])
+    o12: [p43{-, t33}] <- {-, STORE} [p42{-, t9}] (reads: [control,sp])
+    o13: [p45{-, t34}] <- {-, STORE} [p44{-, t10}] (reads: [control,sp])
+    o14: [p47{-, t35}] <- {-, STORE} [p46{-, t11}] (reads: [control,sp])
+    o15: [p49{-, t36}] <- {-, STORE} [p48{-, t12}] (reads: [control,sp])
+    o16: [p51{-, t37}] <- {-, STORE_D} [p50{-, t13}] (reads: [control,sp])
+    o17: [p53{-, t38}] <- {-, STORE_D} [p52{-, t14}] (reads: [control,sp])
+    o18: [p55{-, t39}] <- {-, STORE_D} [p54{-, t15}] (reads: [control,sp])
+    o19: [p57{-, t40}] <- {-, STORE_D} [p56{-, t16}] (reads: [control,sp])
+    o20: [p59{-, t41}] <- {-, STORE_D} [p58{-, t17}] (reads: [control,sp])
+    o21: [p61{-, t42}] <- {-, STORE_D} [p60{-, t18}] (reads: [control,sp])
+    o22: [p63{-, t43}] <- {-, MOVE, STORE} [p62{-, t23}] (reads: [control,sp])
+    o23: [p65{-, t44}] <- {-, MOVE, LOAD} [p64{-, t3, t27}] (reads: [control,sp])
+    o24: [p67{-, t45}] <- {-, MOVE, LOAD} [p66{-, t4, t28}] (reads: [control,sp])
+    o25: [p70{t46}] <- ADDu [p68{t4, t28, t45},p69{t3, t27, t44}] (reads: [control])
+    o26: [p72{-, t47}] <- {-, MOVE, STORE} [p71{-, t46}] (reads: [control,sp])
+    o27: [p74{-, t48}] <- {-, MOVE, LOAD} [p73{-, t0, t24}] (reads: [control,sp])
+    o28: [p76{t49}] <- SLL [p75{t0, t24, t48},2] (reads: [control])
+    o29: [p78{-, t50}] <- {-, MOVE, STORE} [p77{-, t49}] (reads: [control,sp])
+    o30: [p80{-, t51}] <- {-, MOVE, LOAD} [p79{-, t46, t47}] (reads: [control,sp])
+    o31: [p82{t52}] <- LW [p81{t46, t47, t51, t77, t83},@transformation] (reads: [control,mem-0])
+    o32: [p84{-, t53}] <- {-, MOVE, STORE} [p83{-, t52}] (reads: [control,sp])
+    o33: [p86{-, t54}] <- {-, MOVE, LOAD} [p85{-, t49, t50}] (reads: [control,sp])
+    o34: [p88{-, t55}] <- {-, MOVE, LOAD} [p87{-, t52, t53}] (reads: [control,sp])
+    o35: [p91{t56}] <- ADDu [p89{t52, t53, t55},p90{t49, t50, t54}] (reads: [control])
+    o36: [p93{-, t57}] <- {-, MOVE, STORE} [p92{-, t56}] (reads: [control,sp])
+    o37: [p95{-, t58}] <- {-, MOVE, LOAD} [p94{-, t56, t57}] (reads: [control,sp])
+    o38: [p97{t59}] <- LW [p96{t56, t57, t58, t61},23040] (reads: [control,mem-0])
+    o39: [p99{-, t60}] <- {-, MOVE, STORE} [p98{-, t59}] (reads: [control,sp])
+    o40: [p101{-, t61}] <- {-, MOVE, LOAD} [p100{-, t56, t57}] (reads: [control,sp])
+    o41: [p103{t62}] <- LW [p102{t56, t57, t58, t61},21856] (reads: [control,mem-0])
+    o42: [p105{-, t63}] <- {-, MOVE, STORE} [p104{-, t62}] (reads: [control,sp])
+    o43: [p107{t64}] <- ADDiu [p106{t19},0] (reads: [control])
+    o44: [p109{-, t65}] <- {-, MOVE, STORE} [p108{-, t64}] (reads: [control,sp])
+    o45: [p111{t66}] <- ADDiu [p110{t19},1] (reads: [control])
+    o46: [p113{-, t67}] <- {-, MOVE, STORE} [p112{-, t66}] (reads: [control,sp])
+    o47: [p115{-, t68}] <- {-, MOVE, LOAD} [p114{-, t1, t25}] (reads: [control,sp])
+    o48: [p117{-, t69}] <- {-, MOVE, LOAD} [p116{-, t62, t63}] (reads: [control,sp])
+    o49: [p120{t70}] <- ADDu [p118{t62, t63, t69},p119{t1, t25, t68, t73}] (reads: [control])
+    o50: [p122{-, t71}] <- {-, MOVE, STORE} [p121{-, t70}] (reads: [control,sp])
+    o51: [p124{-, t72}] <- {-, MOVE, LOAD} [p123{-, t70, t71}] (reads: [control,sp])
+    o52: [] <- SW_sp [p125{t70, t71, t72},16] (reads: [control,sp], writes: [mem-0])
+    o53: [p127{-, t73}] <- {-, MOVE, LOAD} [p126{-, t1, t25}] (reads: [control,sp])
+    o54: [p129{-, t74}] <- {-, MOVE, LOAD} [p128{-, t59, t60}] (reads: [control,sp])
+    o55: [p132{t75}] <- ADDu [p130{t59, t60, t74},p131{t1, t25, t68, t73}] (reads: [control])
+    o56: [p134{-, t76}] <- {-, MOVE, STORE} [p133{-, t75}] (reads: [control,sp])
+    o57: [p136{-, t77}] <- {-, MOVE, LOAD} [p135{-, t46, t47}] (reads: [control,sp])
+    o58: [p138{t78}] <- LW [p137{t46, t47, t51, t77, t83},@play_attack_defend_n] (reads: [control,mem-0])
+    o59: [p140{-, t79}] <- {-, MOVE, STORE} [p139{-, t78}] (reads: [control,sp])
+    o60: [p141{t80}:ra] <- CLOBBER_RA [] (reads: [control])
+    o61: [p143{-, t81}] <- {-, MOVE, LOAD} [p142{-, t78, t79}] (reads: [control,sp])
+    o62: [p145{-, t82}] <- {-, MOVE, LOAD} [p144{-, t2, t26}] (reads: [control,sp])
+    o63: [p147{-, t83}] <- {-, MOVE, LOAD} [p146{-, t46, t47}] (reads: [control,sp])
+    o64: [p149{-, t84}] <- {-, MOVE, LOAD} [p148{-, t64, t65}] (reads: [control,sp])
+    o65: [p151{-, t85}] <- {-, MOVE, LOAD} [p150{-, t66, t67}] (reads: [control,sp])
+    o66: [p153{-, t86}] <- {-, MOVE, LOAD} [p152{-, t75, t76}] (reads: [control,sp])
+    o67: [] <- {JALRPseudo, JALRPseudo_NOP} [p154{t78, t79, t81}:t9] (reads: [control], writes: [ra])
+    o68: [p161{t87}:v0,p162{t88}:at,p163{t89}:v1,p164{t90}:a0,p165{t91}:a1,p166{t92}:a2,p167{t93}:a3,p168{t94}:t0,p169{t95}:t1,p170{t96}:t2,p171{t97}:t3,p172{t98}:t4,p173{t99}:t5,p174{t100}:t6,p175{t101}:t7,p176{t102}:t89,p177{t103}:gp,p178{t104}:fpra,p179{t105}:ac0,p180{t106}:d09] <- (fun) [p155{t2, t26, t82}:a0,p156{t64, t65, t84}:a1,p157{t66, t67, t85}:a2,p158{t75, t76, t86}:a3,p159{t46, t47, t51, t77, t83}:gp,p160{t80}:ra] (writes: [mem-0,pc], call: o67)
+    o69: [] <- (kill) [p181{t88},p182{t89},p183{t90},p184{t91},p185{t92},p186{t93},p187{t94},p188{t95},p189{t96},p190{t97},p191{t98},p192{t99},p193{t100},p194{t101},p195{t102},p196{t103},p197{t104},p198{t105},p199{t106}]
+    o70: [p201{-, t107}] <- {-, MOVE, STORE} [p200{-, t87}] (reads: [control,sp])
+    o71: [p203{-, t108}] <- {-, MOVE, LOAD} [p202{-, t87, t107}] (reads: [control,sp])
+    o72: [p205{t109}] <- SLTiu [p204{t87, t107, t108},1] (reads: [control])
+    o73: [p207{-, t110}] <- {-, MOVE, STORE} [p206{-, t109}] (reads: [control,sp])
+    o74: [p209{-, t111}] <- {-, MOVE, LOAD} [p208{-, t23, t43}] (reads: [control,sp])
+    o75: [p211{-, t112}] <- {-, LOAD} [p210{-, t5, t29}] (reads: [control,sp])
+    o76: [p213{-, t113}] <- {-, LOAD} [p212{-, t6, t30}] (reads: [control,sp])
+    o77: [p215{-, t114}] <- {-, LOAD} [p214{-, t7, t31}] (reads: [control,sp])
+    o78: [p217{-, t115}] <- {-, LOAD} [p216{-, t8, t32}] (reads: [control,sp])
+    o79: [p219{-, t116}] <- {-, LOAD} [p218{-, t9, t33}] (reads: [control,sp])
+    o80: [p221{-, t117}] <- {-, LOAD} [p220{-, t10, t34}] (reads: [control,sp])
+    o81: [p223{-, t118}] <- {-, LOAD} [p222{-, t11, t35}] (reads: [control,sp])
+    o82: [p225{-, t119}] <- {-, LOAD} [p224{-, t12, t36}] (reads: [control,sp])
+    o83: [p227{-, t120}] <- {-, LOAD_D} [p226{-, t13, t37}] (reads: [control,sp])
+    o84: [p229{-, t121}] <- {-, LOAD_D} [p228{-, t14, t38}] (reads: [control,sp])
+    o85: [p231{-, t122}] <- {-, LOAD_D} [p230{-, t15, t39}] (reads: [control,sp])
+    o86: [p233{-, t123}] <- {-, LOAD_D} [p232{-, t16, t40}] (reads: [control,sp])
+    o87: [p235{-, t124}] <- {-, LOAD_D} [p234{-, t17, t41}] (reads: [control,sp])
+    o88: [p237{-, t125}] <- {-, LOAD_D} [p236{-, t18, t42}] (reads: [control,sp])
+    o89: [p239{-, t126}] <- {-, MOVE, LOAD} [p238{-, t109, t110}] (reads: [control,sp])
+    o90: [] <- {-, ADDiu_sp} [%frame-size] (reads: [control,sp], writes: [sp],
+activators: [STORE,LOAD,STORE_D,LOAD_D,SW_sp])
+    o91: [] <- {PseudoReturn, PseudoReturn_NOP} [p240{t23, t43, t111}] (writes: [control,pc])
+    o92: [] <- (out) [p241{t5, t29, t112}:s0,p242{t6, t30, t113}:s1,p243{t7, t31, t114}:s2,p244{t8, t32, t115}:s3,p245{t9, t33, t116}:s4,p246{t10, t34, t117}:s5,p247{t11, t35, t118}:s6,p248{t12, t36, t119}:s7,p249{t13, t37, t120}:d10,p250{t14, t38, t121}:d11,p251{t15, t39, t122}:d12,p252{t16, t40, t123}:d13,p253{t17, t41, t124}:d14,p254{t18, t42, t125}:d15,p255{t19}:zero,p256{t20}:k0,p257{t21}:k1,p258{t22}:sp,p259{t109, t110, t126}:v0]
+adjacent:
+rematerializable:
+fixed-frame:
+frame:
+stack-pointer-offset: 0
+stack-arg-size: 0
+constants:
+jump-table:
+goal: speed
+removed-freqs:
+source:
+; ModuleID = '../unison/src/unison/test/fast/Mips/speed/gobmk.patterns.autohelperpat1088.ll'
+target datalayout = "E-m:m-p:32:32-i8:8:32-i16:16:32-i64:64-n32-S64"
+target triple = "mips--linux-gnu"
+@transformation = external global [1369 x [8 x i32]], align 4
+; Function Attrs: nounwind
+define hidden i32 @autohelperpat1088(i32 signext %trans, i32 signext %move, i32 signext %color, i32 signext %action) #0 {
+%1 = getelementptr inbounds [1369 x [8 x i32]], [1369 x [8 x i32]]* @transformation, i32 0, i32 720, i32 %trans
+%2 = load i32, i32* %1, align 4
+%3 = add nsw i32 %2, %move
+%4 = getelementptr inbounds [1369 x [8 x i32]], [1369 x [8 x i32]]* @transformation, i32 0, i32 683, i32 %trans
+%5 = load i32, i32* %4, align 4
+%6 = add nsw i32 %5, %move
+%7 = tail call i32 (i32, i32, i32, ...) @play_attack_defend_n(i32 signext %color, i32 signext 0, i32 signext 1, i32 signext %3, i32 signext %6) #2
+%8 = icmp eq i32 %7, 0
+%9 = zext i1 %8 to i32
+ret i32 %9
+}
+declare i32 @play_attack_defend_n(i32 signext, i32 signext, i32 signext, ...) #1
+attributes #0 = { nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #1 = { "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #2 = { nounwind }
+!llvm.ident = !{!0}
+!0 = !{!"clang version 3.8.0 (http://llvm.org/git/clang.git 2d49f0a0ae8366964a93e3b7b26e29679bee7160) (http://llvm.org/git/llvm.git 60bc66b44837125843b58ed3e0fd2e6bb948d839)"}

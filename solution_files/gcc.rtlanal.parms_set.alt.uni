@@ -1,0 +1,210 @@
+// @lint: --nocostoverflow=false
+function: parms_set
+b0 (entry, freq: 51):
+    o0: [p0{t0}:a0,p1{t1}:a2,p2{t2}:s0,p3{t3}:s1,p4{t4}:s2,p5{t5}:s3,p6{t6}:s4,p7{t7}:s5,p8{t8}:s6,p9{t9}:s7,p10{t10}:d10,p11{t11}:d11,p12{t12}:d12,p13{t13}:d13,p14{t14}:d14,p15{t15}:d15,p16{t16}:zero,p17{t17}:k0,p18{t18}:k1,p19{t19}:sp,p20{t20}:ra] <- (in) []
+    o1: [] <- {-, ADDiu_negsp} [%frame-size] (reads: [control,sp], writes: [sp],
+activators: [STORE,LOAD,STORE_D,LOAD_D])
+    o2: [p22{-, t21}] <- {-, MOVE, STORE} [p21{-, t0}] (reads: [control,sp])
+    o3: [p24{-, t22}] <- {-, MOVE, STORE} [p23{-, t1}] (reads: [control,sp])
+    o4: [p26{-, t23}] <- {-, STORE} [p25{-, t2}] (reads: [control,sp])
+    o5: [p28{-, t24}] <- {-, STORE} [p27{-, t3}] (reads: [control,sp])
+    o6: [p30{-, t25}] <- {-, STORE} [p29{-, t4}] (reads: [control,sp])
+    o7: [p32{-, t26}] <- {-, STORE} [p31{-, t5}] (reads: [control,sp])
+    o8: [p34{-, t27}] <- {-, STORE} [p33{-, t6}] (reads: [control,sp])
+    o9: [p36{-, t28}] <- {-, STORE} [p35{-, t7}] (reads: [control,sp])
+    o10: [p38{-, t29}] <- {-, STORE} [p37{-, t8}] (reads: [control,sp])
+    o11: [p40{-, t30}] <- {-, STORE} [p39{-, t9}] (reads: [control,sp])
+    o12: [p42{-, t31}] <- {-, STORE_D} [p41{-, t10}] (reads: [control,sp])
+    o13: [p44{-, t32}] <- {-, STORE_D} [p43{-, t11}] (reads: [control,sp])
+    o14: [p46{-, t33}] <- {-, STORE_D} [p45{-, t12}] (reads: [control,sp])
+    o15: [p48{-, t34}] <- {-, STORE_D} [p47{-, t13}] (reads: [control,sp])
+    o16: [p50{-, t35}] <- {-, STORE_D} [p49{-, t14}] (reads: [control,sp])
+    o17: [p52{-, t36}] <- {-, STORE_D} [p51{-, t15}] (reads: [control,sp])
+    o18: [p54{-, t37}] <- {-, MOVE, STORE} [p53{-, t20}] (reads: [control,sp])
+    o19: [p56{-, t38}] <- {-, MOVE, LOAD} [p55{-, t0, t21}] (reads: [control,sp])
+    o20: [p58{t39}] <- LW [p57{t0, t21, t38, t47},0] (reads: [control,mem-0])
+    o21: [p60{-, t40}] <- {-, MOVE, STORE} [p59{-, t39}] (reads: [control,sp])
+    o22: [p61{t41}] <- LUi [65535] (reads: [control])
+    o23: [p63{-, t42}] <- {-, MOVE, LOAD} [p62{-, t39, t40}] (reads: [control,sp])
+    o24: [p66{t43}] <- AND [p64{t39, t40, t42},p65{t41}] (reads: [control])
+    o25: [p68{-, t44}] <- {-, MOVE, STORE} [p67{-, t43}] (reads: [control,sp])
+    o26: [p69{t45}] <- LUi [61] (reads: [control])
+    o27: [p71{-, t46}] <- {-, MOVE, LOAD} [p70{-, t43, t44}] (reads: [control,sp])
+    o28: [p73{-, t47}] <- {-, MOVE, LOAD} [p72{-, t0, t21}] (reads: [control,sp])
+    o29: [p75{-, t48}] <- {-, MOVE, LOAD} [p74{-, t1, t22}] (reads: [control,sp])
+    o30: [p77{-, t49}] <- {-, MOVE, LOAD} [p76{-, t20, t37}] (reads: [control,sp])
+    o31: [] <- {BNE, BNE_NOP} [p78{t43, t44, t46},p79{t45},b4] (writes: [control,pc,at], taken: true)
+    o32: [] <- (out) [p80{t0, t21, t38, t47},p81{t1, t22, t48},p82{t2, t23},p83{t3, t24},p84{t4, t25},p85{t5, t26},p86{t6, t27},p87{t7, t28},p88{t8, t29},p89{t9, t30},p90{t10, t31},p91{t11, t32},p92{t12, t33},p93{t13, t34},p94{t14, t35},p95{t15, t36},p96{t16},p97{t17},p98{t18},p99{t19},p100{t20, t37, t49}]
+b1 (freq: 25):
+    o33: [p101{t50},p102{t51},p103{t52},p104{t53},p105{t54},p106{t55},p107{t56},p108{t57},p109{t58},p110{t59},p111{t60},p112{t61},p113{t62},p114{t63},p115{t64},p116{t65},p117{t66},p118{t67},p119{t68},p120{t69},p121{t70}] <- (in) []
+    o34: [p123{-, t71}] <- {-, MOVE, STORE} [p122{-, t50}] (reads: [control,sp])
+    o35: [p125{-, t72}] <- {-, MOVE, STORE} [p124{-, t51}] (reads: [control,sp])
+    o36: [p127{-, t73}] <- {-, MOVE, STORE} [p126{-, t70}] (reads: [control,sp])
+    o37: [p129{-, t74}] <- {-, MOVE, LOAD} [p128{-, t50, t71}] (reads: [control,sp])
+    o38: [p131{t75}] <- LW [p130{t50, t71, t74},4] (reads: [control,mem-0])
+    o39: [p133{-, t76}] <- {-, MOVE, STORE} [p132{-, t75}] (reads: [control,sp])
+    o40: [p135{-, t77}] <- {-, MOVE, LOAD} [p134{-, t75, t76}] (reads: [control,sp])
+    o41: [p137{t78}] <- SLTiu [p136{t75, t76, t77, t83},53] (reads: [control])
+    o42: [p139{-, t79}] <- {-, MOVE, STORE} [p138{-, t78}] (reads: [control,sp])
+    o43: [p141{-, t80}] <- {-, MOVE, LOAD} [p140{-, t78, t79}] (reads: [control,sp])
+    o44: [p143{-, t81}] <- {-, MOVE, LOAD} [p142{-, t51, t72}] (reads: [control,sp])
+    o45: [p145{-, t82}] <- {-, MOVE, LOAD} [p144{-, t70, t73}] (reads: [control,sp])
+    o46: [p147{-, t83}] <- {-, MOVE, LOAD} [p146{-, t75, t76}] (reads: [control,sp])
+    o47: [] <- {BEQ, BEQ_NOP} [p148{t78, t79, t80},p149{t66},b4] (writes: [control,pc,at], taken: true)
+    o48: [] <- (out) [p150{t51, t72, t81},p151{t52},p152{t53},p153{t54},p154{t55},p155{t56},p156{t57},p157{t58},p158{t59},p159{t60},p160{t61},p161{t62},p162{t63},p163{t64},p164{t65},p165{t66},p166{t67},p167{t68},p168{t69},p169{t70, t73, t82},p170{t75, t76, t77, t83}]
+b2 (freq: 12):
+    o49: [p171{t84},p172{t85},p173{t86},p174{t87},p175{t88},p176{t89},p177{t90},p178{t91},p179{t92},p180{t93},p181{t94},p182{t95},p183{t96},p184{t97},p185{t98},p186{t99},p187{t100},p188{t101},p189{t102},p190{t103},p191{t104}] <- (in) []
+    o50: [p193{-, t105}] <- {-, MOVE, STORE} [p192{-, t84}] (reads: [control,sp])
+    o51: [p195{-, t106}] <- {-, MOVE, STORE} [p194{-, t103}] (reads: [control,sp])
+    o52: [p197{-, t107}] <- {-, MOVE, STORE} [p196{-, t104}] (reads: [control,sp])
+    o53: [p199{t108}] <- ADDiu [p198{t99},1] (reads: [control])
+    o54: [p201{-, t109}] <- {-, MOVE, STORE} [p200{-, t108}] (reads: [control,sp])
+    o55: [p203{-, t110}] <- {-, MOVE, LOAD} [p202{-, t104, t107}] (reads: [control,sp])
+    o56: [p205{-, t111}] <- {-, MOVE, LOAD} [p204{-, t108, t109}] (reads: [control,sp])
+    o57: [p208{t112}] <- SLLV [p206{t108, t109, t111},p207{t104, t107, t110}] (reads: [control])
+    o58: [p210{-, t113}] <- {-, MOVE, STORE} [p209{-, t112}] (reads: [control,sp])
+    o59: [p212{-, t114}] <- {-, MOVE, LOAD} [p211{-, t84, t105}] (reads: [control,sp])
+    o60: [p214{t115}] <- LW [p213{t84, t105, t114, t122},4] (reads: [control,mem-0])
+    o61: [p216{-, t116}] <- {-, MOVE, STORE} [p215{-, t115}] (reads: [control,sp])
+    o62: [p218{-, t117}] <- {-, MOVE, LOAD} [p217{-, t112, t113}] (reads: [control,sp])
+    o63: [p220{-, t118}] <- {-, MOVE, LOAD} [p219{-, t115, t116}] (reads: [control,sp])
+    o64: [p223{t119}] <- AND [p221{t115, t116, t118, t125},p222{t112, t113, t117, t124}] (reads: [control])
+    o65: [p225{-, t120}] <- {-, MOVE, STORE} [p224{-, t119}] (reads: [control,sp])
+    o66: [p227{-, t121}] <- {-, MOVE, LOAD} [p226{-, t119, t120}] (reads: [control,sp])
+    o67: [p229{-, t122}] <- {-, MOVE, LOAD} [p228{-, t84, t105}] (reads: [control,sp])
+    o68: [p231{-, t123}] <- {-, MOVE, LOAD} [p230{-, t103, t106}] (reads: [control,sp])
+    o69: [p233{-, t124}] <- {-, MOVE, LOAD} [p232{-, t112, t113}] (reads: [control,sp])
+    o70: [p235{-, t125}] <- {-, MOVE, LOAD} [p234{-, t115, t116}] (reads: [control,sp])
+    o71: [] <- {BEQ, BEQ_NOP} [p236{t119, t120, t121},p237{t99},b4] (writes: [control,pc,at], taken: false)
+    o72: [] <- (out) [p238{t84, t105, t114, t122},p239{t85},p240{t86},p241{t87},p242{t88},p243{t89},p244{t90},p245{t91},p246{t92},p247{t93},p248{t94},p249{t95},p250{t96},p251{t97},p252{t98},p253{t99},p254{t100},p255{t101},p256{t102},p257{t103, t106, t123},p258{t112, t113, t117, t124},p259{t115, t116, t118, t125}]
+b3 (freq: 8):
+    o73: [p260{t126},p261{t127},p262{t128},p263{t129},p264{t130},p265{t131},p266{t132},p267{t133},p268{t134},p269{t135},p270{t136},p271{t137},p272{t138},p273{t139},p274{t140},p275{t141},p276{t142},p277{t143},p278{t144},p279{t145},p280{t146},p281{t147}] <- (in) []
+    o74: [p283{-, t148}] <- {-, MOVE, STORE} [p282{-, t126}] (reads: [control,sp])
+    o75: [p285{-, t149}] <- {-, MOVE, STORE} [p284{-, t145}] (reads: [control,sp])
+    o76: [p287{-, t150}] <- {-, MOVE, STORE} [p286{-, t146}] (reads: [control,sp])
+    o77: [p289{-, t151}] <- {-, MOVE, STORE} [p288{-, t147}] (reads: [control,sp])
+    o78: [p291{-, t152}] <- {-, MOVE, LOAD} [p290{-, t146, t150}] (reads: [control,sp])
+    o79: [p294{t153}] <- NOR [p292{t146, t150, t152},p293{t141}] (reads: [control])
+    o80: [p296{-, t154}] <- {-, MOVE, STORE} [p295{-, t153}] (reads: [control,sp])
+    o81: [p298{-, t155}] <- {-, MOVE, LOAD} [p297{-, t147, t151}] (reads: [control,sp])
+    o82: [p300{-, t156}] <- {-, MOVE, LOAD} [p299{-, t153, t154}] (reads: [control,sp])
+    o83: [p303{t157}] <- AND [p301{t147, t151, t155},p302{t153, t154, t156}] (reads: [control])
+    o84: [p305{-, t158}] <- {-, MOVE, STORE} [p304{-, t157}] (reads: [control,sp])
+    o85: [p307{-, t159}] <- {-, MOVE, LOAD} [p306{-, t126, t148}] (reads: [control,sp])
+    o86: [p309{-, t160}] <- {-, MOVE, LOAD} [p308{-, t157, t158}] (reads: [control,sp])
+    o87: [] <- SW [p310{t157, t158, t160},p311{t126, t148, t159, t161, t167},4] (reads: [control], writes: [mem-0])
+    o88: [p313{-, t161}] <- {-, MOVE, LOAD} [p312{-, t126, t148}] (reads: [control,sp])
+    o89: [p315{t162}] <- LW [p314{t126, t148, t159, t161, t167},0] (reads: [control,mem-0])
+    o90: [p317{-, t163}] <- {-, MOVE, STORE} [p316{-, t162}] (reads: [control,sp])
+    o91: [p319{-, t164}] <- {-, MOVE, LOAD} [p318{-, t162, t163}] (reads: [control,sp])
+    o92: [p321{t165}] <- ADDiu [p320{t162, t163, t164},-1] (reads: [control])
+    o93: [p323{-, t166}] <- {-, MOVE, STORE} [p322{-, t165}] (reads: [control,sp])
+    o94: [p325{-, t167}] <- {-, MOVE, LOAD} [p324{-, t126, t148}] (reads: [control,sp])
+    o95: [p327{-, t168}] <- {-, MOVE, LOAD} [p326{-, t165, t166}] (reads: [control,sp])
+    o96: [] <- SW [p328{t165, t166, t168},p329{t126, t148, t159, t161, t167},0] (reads: [control], writes: [mem-0])
+    o97: [p331{-, t169}] <- {-, MOVE, LOAD} [p330{-, t145, t149}] (reads: [control,sp])
+    o98: [] <- (out) [p332{t127},p333{t128},p334{t129},p335{t130},p336{t131},p337{t132},p338{t133},p339{t134},p340{t135},p341{t136},p342{t137},p343{t138},p344{t139},p345{t140},p346{t141},p347{t142},p348{t143},p349{t144},p350{t145, t149, t169}]
+b4 (exit, return, freq: 51):
+    o99: [p351{t170},p352{t171},p353{t172},p354{t173},p355{t174},p356{t175},p357{t176},p358{t177},p359{t178},p360{t179},p361{t180},p362{t181},p363{t182},p364{t183},p365{t184},p366{t185},p367{t186},p368{t187},p369{t188}] <- (in) []
+    o100: [p371{-, t189}] <- {-, MOVE, STORE} [p370{-, t188}] (reads: [control,sp])
+    o101: [p373{-, t190}] <- {-, MOVE, LOAD} [p372{-, t188, t189}] (reads: [control,sp])
+    o102: [p375{-, t191}] <- {-, LOAD} [p374{-, t170}] (reads: [control,sp])
+    o103: [p377{-, t192}] <- {-, LOAD} [p376{-, t171}] (reads: [control,sp])
+    o104: [p379{-, t193}] <- {-, LOAD} [p378{-, t172}] (reads: [control,sp])
+    o105: [p381{-, t194}] <- {-, LOAD} [p380{-, t173}] (reads: [control,sp])
+    o106: [p383{-, t195}] <- {-, LOAD} [p382{-, t174}] (reads: [control,sp])
+    o107: [p385{-, t196}] <- {-, LOAD} [p384{-, t175}] (reads: [control,sp])
+    o108: [p387{-, t197}] <- {-, LOAD} [p386{-, t176}] (reads: [control,sp])
+    o109: [p389{-, t198}] <- {-, LOAD} [p388{-, t177}] (reads: [control,sp])
+    o110: [p391{-, t199}] <- {-, LOAD_D} [p390{-, t178}] (reads: [control,sp])
+    o111: [p393{-, t200}] <- {-, LOAD_D} [p392{-, t179}] (reads: [control,sp])
+    o112: [p395{-, t201}] <- {-, LOAD_D} [p394{-, t180}] (reads: [control,sp])
+    o113: [p397{-, t202}] <- {-, LOAD_D} [p396{-, t181}] (reads: [control,sp])
+    o114: [p399{-, t203}] <- {-, LOAD_D} [p398{-, t182}] (reads: [control,sp])
+    o115: [p401{-, t204}] <- {-, LOAD_D} [p400{-, t183}] (reads: [control,sp])
+    o116: [] <- {-, ADDiu_sp} [%frame-size] (reads: [control,sp], writes: [sp],
+activators: [STORE,LOAD,STORE_D,LOAD_D])
+    o117: [] <- {PseudoReturn, PseudoReturn_NOP} [p402{t188, t189, t190}] (writes: [control,pc])
+    o118: [] <- (out) [p403{t170, t191}:s0,p404{t171, t192}:s1,p405{t172, t193}:s2,p406{t173, t194}:s3,p407{t174, t195}:s4,p408{t175, t196}:s5,p409{t176, t197}:s6,p410{t177, t198}:s7,p411{t178, t199}:d10,p412{t179, t200}:d11,p413{t180, t201}:d12,p414{t181, t202}:d13,p415{t182, t203}:d14,p416{t183, t204}:d15,p417{t184}:zero,p418{t185}:k0,p419{t186}:k1,p420{t187}:sp]
+adjacent:
+    p80 -> p101, p81 -> p102, p82 -> p103, p82 -> p351, p83 -> p104,
+    p83 -> p352, p84 -> p105, p84 -> p353, p85 -> p106, p85 -> p354,
+    p86 -> p107, p86 -> p355, p87 -> p108, p87 -> p356, p88 -> p109,
+    p88 -> p357, p89 -> p110, p89 -> p358, p90 -> p111, p90 -> p359,
+    p91 -> p112, p91 -> p360, p92 -> p113, p92 -> p361, p93 -> p114,
+    p93 -> p362, p94 -> p115, p94 -> p363, p95 -> p116, p95 -> p364,
+    p96 -> p117, p96 -> p365, p97 -> p118, p97 -> p366, p98 -> p119,
+    p98 -> p367, p99 -> p120, p99 -> p368, p100 -> p121, p100 -> p369,
+    p150 -> p171, p151 -> p172, p151 -> p351, p152 -> p173, p152 -> p352,
+    p153 -> p174, p153 -> p353, p154 -> p175, p154 -> p354, p155 -> p176,
+    p155 -> p355, p156 -> p177, p156 -> p356, p157 -> p178, p157 -> p357,
+    p158 -> p179, p158 -> p358, p159 -> p180, p159 -> p359, p160 -> p181,
+    p160 -> p360, p161 -> p182, p161 -> p361, p162 -> p183, p162 -> p362,
+    p163 -> p184, p163 -> p363, p164 -> p185, p164 -> p364, p165 -> p186,
+    p165 -> p365, p166 -> p187, p166 -> p366, p167 -> p188, p167 -> p367,
+    p168 -> p189, p168 -> p368, p169 -> p190, p169 -> p369, p170 -> p191,
+    p238 -> p260, p239 -> p261, p239 -> p351, p240 -> p262, p240 -> p352,
+    p241 -> p263, p241 -> p353, p242 -> p264, p242 -> p354, p243 -> p265,
+    p243 -> p355, p244 -> p266, p244 -> p356, p245 -> p267, p245 -> p357,
+    p246 -> p268, p246 -> p358, p247 -> p269, p247 -> p359, p248 -> p270,
+    p248 -> p360, p249 -> p271, p249 -> p361, p250 -> p272, p250 -> p362,
+    p251 -> p273, p251 -> p363, p252 -> p274, p252 -> p364, p253 -> p275,
+    p253 -> p365, p254 -> p276, p254 -> p366, p255 -> p277, p255 -> p367,
+    p256 -> p278, p256 -> p368, p257 -> p279, p257 -> p369, p258 -> p280,
+    p259 -> p281, p332 -> p351, p333 -> p352, p334 -> p353, p335 -> p354,
+    p336 -> p355, p337 -> p356, p338 -> p357, p339 -> p358, p340 -> p359,
+    p341 -> p360, p342 -> p361, p343 -> p362, p344 -> p363, p345 -> p364,
+    p346 -> p365, p347 -> p366, p348 -> p367, p349 -> p368, p350 -> p369
+rematerializable:
+fixed-frame:
+frame:
+stack-pointer-offset: 0
+stack-arg-size: 0
+constants:
+jump-table:
+goal: speed
+removed-freqs:
+source:
+; ModuleID = '../unison/src/unison/test/fast/Mips/speed/gcc.rtlanal.parms_set.ll'
+target datalayout = "E-m:m-p:32:32-i8:8:32-i16:16:32-i64:64-n32-S64"
+target triple = "mips--linux-gnu"
+%struct.rtx_def.365 = type { i32, [1 x %union.rtunion_def.366] }
+%union.rtunion_def.366 = type { i32 }
+; Function Attrs: norecurse nounwind
+define hidden void @parms_set(%struct.rtx_def.365* nocapture readonly %x, %struct.rtx_def.365* nocapture readnone %pat, i8* nocapture %data) #0 {
+%1 = bitcast %struct.rtx_def.365* %x to i32*
+%2 = load i32, i32* %1, align 4
+%.mask = and i32 %2, -65536
+%3 = icmp eq i32 %.mask, 3997696
+br i1 %3, label %4, label %21
+; <label>:4                                       ; preds = %0
+%5 = getelementptr inbounds %struct.rtx_def.365, %struct.rtx_def.365* %x, i32 0, i32 1, i32 0, i32 0
+%6 = load i32, i32* %5, align 4
+%7 = icmp ult i32 %6, 53
+br i1 %7, label %8, label %21
+; <label>:8                                       ; preds = %4
+%9 = getelementptr inbounds i8, i8* %data, i32 4
+%10 = bitcast i8* %9 to i32*
+%11 = load i32, i32* %10, align 4
+%12 = shl i32 1, %6
+%13 = and i32 %11, %12
+%14 = icmp eq i32 %13, 0
+br i1 %14, label %21, label %15
+; <label>:15                                      ; preds = %8
+%16 = xor i32 %12, -1
+%17 = and i32 %11, %16
+%sunkaddr = ptrtoint i8* %data to i32
+%sunkaddr1 = add i32 %sunkaddr, 4
+%sunkaddr2 = inttoptr i32 %sunkaddr1 to i32*
+store i32 %17, i32* %sunkaddr2, align 4
+%18 = bitcast i8* %data to i32*
+%19 = load i32, i32* %18, align 4
+%20 = add nsw i32 %19, -1
+store i32 %20, i32* %18, align 4
+br label %21
+; <label>:21                                      ; preds = %15, %8, %4, %0
+ret void
+}
+attributes #0 = { norecurse nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+!llvm.ident = !{!0}
+!0 = !{!"clang version 3.8.0 (http://llvm.org/git/clang.git 2d49f0a0ae8366964a93e3b7b26e29679bee7160) (http://llvm.org/git/llvm.git 60bc66b44837125843b58ed3e0fd2e6bb948d839)"}

@@ -1,0 +1,187 @@
+// @lint: --nocostoverflow=false
+function: get_frame_alias_set
+b0 (entry, freq: 17):
+    o0: [p0{t0}:t9,p1{t1}:v0,p2{t2}:s0,p3{t3}:s1,p4{t4}:s2,p5{t5}:s3,p6{t6}:s4,p7{t7}:s5,p8{t8}:s6,p9{t9}:s7,p10{t10}:d10,p11{t11}:d11,p12{t12}:d12,p13{t13}:d13,p14{t14}:d14,p15{t15}:d15,p16{t16}:zero,p17{t17}:k0,p18{t18}:k1,p19{t19}:sp,p20{t20}:ra] <- (in) []
+    o1: [] <- LoadGPDisp [] (writes: [control])
+    o2: [] <- {-, ADDiu_negsp} [%frame-size] (reads: [control,sp], writes: [sp],
+activators: [STORE,LOAD,STORE_D,LOAD_D])
+    o3: [p22{-, t21}] <- {-, MOVE, STORE} [p21{-, t0}] (reads: [control,sp])
+    o4: [p24{-, t22}] <- {-, MOVE, STORE} [p23{-, t1}] (reads: [control,sp])
+    o5: [p26{-, t23}] <- {-, STORE} [p25{-, t2}] (reads: [control,sp])
+    o6: [p28{-, t24}] <- {-, STORE} [p27{-, t3}] (reads: [control,sp])
+    o7: [p30{-, t25}] <- {-, STORE} [p29{-, t4}] (reads: [control,sp])
+    o8: [p32{-, t26}] <- {-, STORE} [p31{-, t5}] (reads: [control,sp])
+    o9: [p34{-, t27}] <- {-, STORE} [p33{-, t6}] (reads: [control,sp])
+    o10: [p36{-, t28}] <- {-, STORE} [p35{-, t7}] (reads: [control,sp])
+    o11: [p38{-, t29}] <- {-, STORE} [p37{-, t8}] (reads: [control,sp])
+    o12: [p40{-, t30}] <- {-, STORE} [p39{-, t9}] (reads: [control,sp])
+    o13: [p42{-, t31}] <- {-, STORE_D} [p41{-, t10}] (reads: [control,sp])
+    o14: [p44{-, t32}] <- {-, STORE_D} [p43{-, t11}] (reads: [control,sp])
+    o15: [p46{-, t33}] <- {-, STORE_D} [p45{-, t12}] (reads: [control,sp])
+    o16: [p48{-, t34}] <- {-, STORE_D} [p47{-, t13}] (reads: [control,sp])
+    o17: [p50{-, t35}] <- {-, STORE_D} [p49{-, t14}] (reads: [control,sp])
+    o18: [p52{-, t36}] <- {-, STORE_D} [p51{-, t15}] (reads: [control,sp])
+    o19: [p54{-, t37}] <- {-, MOVE, STORE} [p53{-, t20}] (reads: [control,sp])
+    o20: [p56{-, t38}] <- {-, MOVE, LOAD} [p55{-, t0, t21}] (reads: [control,sp])
+    o21: [p58{-, t39}] <- {-, MOVE, LOAD} [p57{-, t1, t22}] (reads: [control,sp])
+    o22: [p61{t40}] <- ADDu [p59{t1, t22, t39},p60{t0, t21, t38}] (reads: [control])
+    o23: [p63{-, t41}] <- {-, MOVE, STORE} [p62{-, t40}] (reads: [control,sp])
+    o24: [p65{-, t42}] <- {-, MOVE, LOAD} [p64{-, t40, t41}] (reads: [control,sp])
+    o25: [p67{t43}] <- LW [p66{t40, t41, t42, t53},@get_frame_alias_set.set] (reads: [control,mem-0])
+    o26: [p69{-, t44}] <- {-, MOVE, STORE} [p68{-, t43}] (reads: [control,sp])
+    o27: [p71{-, t45}] <- {-, MOVE, LOAD} [p70{-, t43, t44}] (reads: [control,sp])
+    o28: [p73{t46}] <- LW [p72{t43, t44, t45, t54},0] (reads: [control,mem-1])
+    o29: [p75{-, t47}] <- {-, MOVE, STORE} [p74{-, t46}] (reads: [control,sp])
+    o30: [p77{t48}] <- ADDiu [p76{t16},-1] (reads: [control])
+    o31: [p79{-, t49}] <- {-, MOVE, STORE} [p78{-, t48}] (reads: [control,sp])
+    o32: [p81{-, t50}] <- {-, MOVE, LOAD} [p80{-, t46, t47}] (reads: [control,sp])
+    o33: [p83{-, t51}] <- {-, MOVE, LOAD} [p82{-, t48, t49}] (reads: [control,sp])
+    o34: [p85{-, t52}] <- {-, MOVE, LOAD} [p84{-, t20, t37}] (reads: [control,sp])
+    o35: [p87{-, t53}] <- {-, MOVE, LOAD} [p86{-, t40, t41}] (reads: [control,sp])
+    o36: [p89{-, t54}] <- {-, MOVE, LOAD} [p88{-, t43, t44}] (reads: [control,sp])
+    o37: [p91{-, t55}] <- {-, MOVE, LOAD} [p90{-, t46, t47}] (reads: [control,sp])
+    o38: [] <- {BNE, BNE_NOP} [p92{t46, t47, t50, t55},p93{t48, t49, t51},b4] (writes: [control,pc,at], taken: true)
+    o39: [] <- (out) [p94{t2, t23},p95{t3, t24},p96{t4, t25},p97{t5, t26},p98{t6, t27},p99{t7, t28},p100{t8, t29},p101{t9, t30},p102{t10, t31},p103{t11, t32},p104{t12, t33},p105{t13, t34},p106{t14, t35},p107{t15, t36},p108{t16},p109{t17},p110{t18},p111{t19},p112{t20, t37, t52},p113{t40, t41, t42, t53},p114{t43, t44, t45, t54},p115{t46, t47, t50, t55}]
+b1 (freq: 6):
+    o40: [p116{t56},p117{t57},p118{t58},p119{t59},p120{t60},p121{t61},p122{t62},p123{t63},p124{t64},p125{t65},p126{t66},p127{t67},p128{t68},p129{t69},p130{t70},p131{t71},p132{t72},p133{t73},p134{t74},p135{t75},p136{t76}] <- (in) []
+    o41: [p138{-, t77}] <- {-, MOVE, STORE} [p137{-, t74}] (reads: [control,sp])
+    o42: [p140{-, t78}] <- {-, MOVE, STORE} [p139{-, t75}] (reads: [control,sp])
+    o43: [p142{-, t79}] <- {-, MOVE, STORE} [p141{-, t76}] (reads: [control,sp])
+    o44: [p144{-, t80}] <- {-, MOVE, LOAD} [p143{-, t75, t78}] (reads: [control,sp])
+    o45: [p146{t81}] <- LW [p145{t75, t78, t80, t90},@flag_strict_aliasing] (reads: [control,mem-0])
+    o46: [p148{-, t82}] <- {-, MOVE, STORE} [p147{-, t81}] (reads: [control,sp])
+    o47: [p150{-, t83}] <- {-, MOVE, LOAD} [p149{-, t81, t82}] (reads: [control,sp])
+    o48: [p152{t84}] <- LW [p151{t81, t82, t83},0] (reads: [control,mem-1])
+    o49: [p154{-, t85}] <- {-, MOVE, STORE} [p153{-, t84}] (reads: [control,sp])
+    o50: [p156{t86}] <- ADDiu [p155{t70},0] (reads: [control])
+    o51: [p158{-, t87}] <- {-, MOVE, STORE} [p157{-, t86}] (reads: [control,sp])
+    o52: [p160{-, t88}] <- {-, MOVE, LOAD} [p159{-, t84, t85}] (reads: [control,sp])
+    o53: [p162{-, t89}] <- {-, MOVE, LOAD} [p161{-, t74, t77}] (reads: [control,sp])
+    o54: [p164{-, t90}] <- {-, MOVE, LOAD} [p163{-, t75, t78}] (reads: [control,sp])
+    o55: [p166{-, t91}] <- {-, MOVE, LOAD} [p165{-, t76, t79}] (reads: [control,sp])
+    o56: [p168{-, t92}] <- {-, MOVE, LOAD} [p167{-, t86, t87}] (reads: [control,sp])
+    o57: [] <- {BEQ, BEQ_NOP} [p169{t84, t85, t88},p170{t70},b3] (writes: [control,pc,at], taken: false)
+    o58: [] <- (out) [p171{t56},p172{t57},p173{t58},p174{t59},p175{t60},p176{t61},p177{t62},p178{t63},p179{t64},p180{t65},p181{t66},p182{t67},p183{t68},p184{t69},p185{t70},p186{t71},p187{t72},p188{t73},p189{t74, t77, t89},p190{t75, t78, t80, t90},p191{t76, t79, t91},p192{t86, t87, t92}]
+b2 (freq: 4):
+    o59: [p193{t93},p194{t94},p195{t95},p196{t96},p197{t97},p198{t98},p199{t99},p200{t100},p201{t101},p202{t102},p203{t103},p204{t104},p205{t105},p206{t106},p207{t107},p208{t108},p209{t109},p210{t110},p211{t111},p212{t112},p213{t113}] <- (in) []
+    o60: [p215{-, t114}] <- {-, MOVE, STORE} [p214{-, t111}] (reads: [control,sp])
+    o61: [p217{-, t115}] <- {-, MOVE, STORE} [p216{-, t112}] (reads: [control,sp])
+    o62: [p219{-, t116}] <- {-, MOVE, STORE} [p218{-, t113}] (reads: [control,sp])
+    o63: [p221{-, t117}] <- {-, MOVE, LOAD} [p220{-, t112, t115}] (reads: [control,sp])
+    o64: [p223{t118}] <- LW [p222{t112, t115, t117},@new_alias_set.last_alias_set] (reads: [control,mem-0])
+    o65: [p225{-, t119}] <- {-, MOVE, STORE} [p224{-, t118}] (reads: [control,sp])
+    o66: [p227{-, t120}] <- {-, MOVE, LOAD} [p226{-, t118, t119}] (reads: [control,sp])
+    o67: [p229{t121}] <- LW [p228{t118, t119, t120, t126},0] (reads: [control,mem-0])
+    o68: [p231{-, t122}] <- {-, MOVE, STORE} [p230{-, t121}] (reads: [control,sp])
+    o69: [p233{-, t123}] <- {-, MOVE, LOAD} [p232{-, t121, t122}] (reads: [control,sp])
+    o70: [p235{t124}] <- ADDiu [p234{t121, t122, t123},1] (reads: [control])
+    o71: [p237{-, t125}] <- {-, MOVE, STORE} [p236{-, t124}] (reads: [control,sp])
+    o72: [p239{-, t126}] <- {-, MOVE, LOAD} [p238{-, t118, t119}] (reads: [control,sp])
+    o73: [p241{-, t127}] <- {-, MOVE, LOAD} [p240{-, t124, t125}] (reads: [control,sp])
+    o74: [] <- SW [p242{t124, t125, t127, t130},p243{t118, t119, t120, t126},0] (reads: [control], writes: [mem-0])
+    o75: [p245{-, t128}] <- {-, MOVE, LOAD} [p244{-, t111, t114}] (reads: [control,sp])
+    o76: [p247{-, t129}] <- {-, MOVE, LOAD} [p246{-, t113, t116}] (reads: [control,sp])
+    o77: [p249{-, t130}] <- {-, MOVE, LOAD} [p248{-, t124, t125}] (reads: [control,sp])
+    o78: [] <- (out) [p250{t93},p251{t94},p252{t95},p253{t96},p254{t97},p255{t98},p256{t99},p257{t100},p258{t101},p259{t102},p260{t103},p261{t104},p262{t105},p263{t106},p264{t107},p265{t108},p266{t109},p267{t110},p268{t111, t114, t128},p269{t113, t116, t129},p270{t124, t125, t127, t130}]
+b3 (freq: 6):
+    o79: [p271{t131},p272{t132},p273{t133},p274{t134},p275{t135},p276{t136},p277{t137},p278{t138},p279{t139},p280{t140},p281{t141},p282{t142},p283{t143},p284{t144},p285{t145},p286{t146},p287{t147},p288{t148},p289{t149},p290{t150},p291{t151}] <- (in) []
+    o80: [p293{-, t152}] <- {-, MOVE, STORE} [p292{-, t131}] (reads: [control,sp])
+    o81: [p295{-, t153}] <- {-, MOVE, STORE} [p294{-, t150}] (reads: [control,sp])
+    o82: [p297{-, t154}] <- {-, MOVE, STORE} [p296{-, t151}] (reads: [control,sp])
+    o83: [p299{-, t155}] <- {-, MOVE, LOAD} [p298{-, t131, t152}] (reads: [control,sp])
+    o84: [p301{-, t156}] <- {-, MOVE, LOAD} [p300{-, t151, t154}] (reads: [control,sp])
+    o85: [] <- SW [p302{t131, t152, t155, t157},p303{t151, t154, t156},0] (reads: [control], writes: [mem-0])
+    o86: [p305{-, t157}] <- {-, MOVE, LOAD} [p304{-, t131, t152}] (reads: [control,sp])
+    o87: [p307{-, t158}] <- {-, MOVE, LOAD} [p306{-, t150, t153}] (reads: [control,sp])
+    o88: [] <- (out) [p308{t131, t152, t155, t157},p309{t132},p310{t133},p311{t134},p312{t135},p313{t136},p314{t137},p315{t138},p316{t139},p317{t140},p318{t141},p319{t142},p320{t143},p321{t144},p322{t145},p323{t146},p324{t147},p325{t148},p326{t149},p327{t150, t153, t158}]
+b4 (exit, return, freq: 17):
+    o89: [p328{t159},p329{t160},p330{t161},p331{t162},p332{t163},p333{t164},p334{t165},p335{t166},p336{t167},p337{t168},p338{t169},p339{t170},p340{t171},p341{t172},p342{t173},p343{t174},p344{t175},p345{t176},p346{t177},p347{t178}] <- (in) []
+    o90: [p349{-, t179}] <- {-, MOVE, STORE} [p348{-, t159}] (reads: [control,sp])
+    o91: [p351{-, t180}] <- {-, MOVE, STORE} [p350{-, t178}] (reads: [control,sp])
+    o92: [p353{-, t181}] <- {-, MOVE, LOAD} [p352{-, t178, t180}] (reads: [control,sp])
+    o93: [p355{-, t182}] <- {-, LOAD} [p354{-, t160}] (reads: [control,sp])
+    o94: [p357{-, t183}] <- {-, LOAD} [p356{-, t161}] (reads: [control,sp])
+    o95: [p359{-, t184}] <- {-, LOAD} [p358{-, t162}] (reads: [control,sp])
+    o96: [p361{-, t185}] <- {-, LOAD} [p360{-, t163}] (reads: [control,sp])
+    o97: [p363{-, t186}] <- {-, LOAD} [p362{-, t164}] (reads: [control,sp])
+    o98: [p365{-, t187}] <- {-, LOAD} [p364{-, t165}] (reads: [control,sp])
+    o99: [p367{-, t188}] <- {-, LOAD} [p366{-, t166}] (reads: [control,sp])
+    o100: [p369{-, t189}] <- {-, LOAD} [p368{-, t167}] (reads: [control,sp])
+    o101: [p371{-, t190}] <- {-, LOAD_D} [p370{-, t168}] (reads: [control,sp])
+    o102: [p373{-, t191}] <- {-, LOAD_D} [p372{-, t169}] (reads: [control,sp])
+    o103: [p375{-, t192}] <- {-, LOAD_D} [p374{-, t170}] (reads: [control,sp])
+    o104: [p377{-, t193}] <- {-, LOAD_D} [p376{-, t171}] (reads: [control,sp])
+    o105: [p379{-, t194}] <- {-, LOAD_D} [p378{-, t172}] (reads: [control,sp])
+    o106: [p381{-, t195}] <- {-, LOAD_D} [p380{-, t173}] (reads: [control,sp])
+    o107: [p383{-, t196}] <- {-, MOVE, LOAD} [p382{-, t159, t179}] (reads: [control,sp])
+    o108: [] <- {-, ADDiu_sp} [%frame-size] (reads: [control,sp], writes: [sp],
+activators: [STORE,LOAD,STORE_D,LOAD_D])
+    o109: [] <- {PseudoReturn, PseudoReturn_NOP} [p384{t178, t180, t181}] (writes: [control,pc])
+    o110: [] <- (out) [p385{t159, t179, t196}:v0,p386{t160, t182}:s0,p387{t161, t183}:s1,p388{t162, t184}:s2,p389{t163, t185}:s3,p390{t164, t186}:s4,p391{t165, t187}:s5,p392{t166, t188}:s6,p393{t167, t189}:s7,p394{t168, t190}:d10,p395{t169, t191}:d11,p396{t170, t192}:d12,p397{t171, t193}:d13,p398{t172, t194}:d14,p399{t173, t195}:d15,p400{t174}:zero,p401{t175}:k0,p402{t176}:k1,p403{t177}:sp]
+adjacent:
+    p94 -> p116, p94 -> p329, p95 -> p117, p95 -> p330, p96 -> p118,
+    p96 -> p331, p97 -> p119, p97 -> p332, p98 -> p120, p98 -> p333,
+    p99 -> p121, p99 -> p334, p100 -> p122, p100 -> p335, p101 -> p123,
+    p101 -> p336, p102 -> p124, p102 -> p337, p103 -> p125, p103 -> p338,
+    p104 -> p126, p104 -> p339, p105 -> p127, p105 -> p340, p106 -> p128,
+    p106 -> p341, p107 -> p129, p107 -> p342, p108 -> p130, p108 -> p343,
+    p109 -> p131, p109 -> p344, p110 -> p132, p110 -> p345, p111 -> p133,
+    p111 -> p346, p112 -> p134, p112 -> p347, p113 -> p135, p114 -> p136,
+    p115 -> p328, p171 -> p193, p171 -> p272, p172 -> p194, p172 -> p273,
+    p173 -> p195, p173 -> p274, p174 -> p196, p174 -> p275, p175 -> p197,
+    p175 -> p276, p176 -> p198, p176 -> p277, p177 -> p199, p177 -> p278,
+    p178 -> p200, p178 -> p279, p179 -> p201, p179 -> p280, p180 -> p202,
+    p180 -> p281, p181 -> p203, p181 -> p282, p182 -> p204, p182 -> p283,
+    p183 -> p205, p183 -> p284, p184 -> p206, p184 -> p285, p185 -> p207,
+    p185 -> p286, p186 -> p208, p186 -> p287, p187 -> p209, p187 -> p288,
+    p188 -> p210, p188 -> p289, p189 -> p211, p189 -> p290, p190 -> p212,
+    p191 -> p213, p191 -> p291, p192 -> p271, p250 -> p272, p251 -> p273,
+    p252 -> p274, p253 -> p275, p254 -> p276, p255 -> p277, p256 -> p278,
+    p257 -> p279, p258 -> p280, p259 -> p281, p260 -> p282, p261 -> p283,
+    p262 -> p284, p263 -> p285, p264 -> p286, p265 -> p287, p266 -> p288,
+    p267 -> p289, p268 -> p290, p269 -> p291, p270 -> p271, p308 -> p328,
+    p309 -> p329, p310 -> p330, p311 -> p331, p312 -> p332, p313 -> p333,
+    p314 -> p334, p315 -> p335, p316 -> p336, p317 -> p337, p318 -> p338,
+    p319 -> p339, p320 -> p340, p321 -> p341, p322 -> p342, p323 -> p343,
+    p324 -> p344, p325 -> p345, p326 -> p346, p327 -> p347
+rematerializable:
+fixed-frame:
+frame:
+stack-pointer-offset: 0
+stack-arg-size: 0
+constants:
+jump-table:
+goal: speed
+removed-freqs:
+source:
+; ModuleID = '../unison/src/unison/test/fast/Mips/speed/gcc.alias.get_frame_alias_set.ll'
+target datalayout = "E-m:m-p:32:32-i8:8:32-i16:16:32-i64:64-n32-S64"
+target triple = "mips--linux-gnu"
+@flag_strict_aliasing = external global i32, align 4
+@new_alias_set.last_alias_set = external hidden unnamed_addr global i32, align 4
+@get_frame_alias_set.set = external hidden unnamed_addr global i32, align 4
+; Function Attrs: norecurse nounwind
+define i32 @get_frame_alias_set() #0 {
+%1 = load i32, i32* @get_frame_alias_set.set, align 4
+%2 = icmp eq i32 %1, -1
+br i1 %2, label %3, label %9
+; <label>:3                                       ; preds = %0
+%4 = load i32, i32* @flag_strict_aliasing, align 4
+%5 = icmp eq i32 %4, 0
+br i1 %5, label %new_alias_set.exit, label %6
+; <label>:6                                       ; preds = %3
+%7 = load i32, i32* @new_alias_set.last_alias_set, align 4
+%8 = add nsw i32 %7, 1
+store i32 %8, i32* @new_alias_set.last_alias_set, align 4
+br label %new_alias_set.exit
+new_alias_set.exit:                               ; preds = %6, %3
+%.0.i = phi i32 [ %8, %6 ], [ 0, %3 ]
+store i32 %.0.i, i32* @get_frame_alias_set.set, align 4
+br label %9
+; <label>:9                                       ; preds = %new_alias_set.exit, %0
+%10 = phi i32 [ %.0.i, %new_alias_set.exit ], [ %1, %0 ]
+ret i32 %10
+}
+attributes #0 = { norecurse nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+!llvm.ident = !{!0}
+!0 = !{!"clang version 3.8.0 (http://llvm.org/git/clang.git 2d49f0a0ae8366964a93e3b7b26e29679bee7160) (http://llvm.org/git/llvm.git 60bc66b44837125843b58ed3e0fd2e6bb948d839)"}
