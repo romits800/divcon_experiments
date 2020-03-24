@@ -10,7 +10,7 @@ import math
 import cPickle as pickle
 import os
 
-pat = re.compile("(agap|metr|k)div_monolithic_([^_]*)_([^_]*)_([a-zA-Z_0-9]*\.[a-zA-Z_0-9]*\.[a-zA-Z_0-9]*)_([0-9]+)_([0-9]+)_([^0-9]+)_(random|clrandom|original|cloriginal)_([0-9]+)_([0-9]+)(_.*|)_result.pickle")
+pat = re.compile("(lns|agap|metr|k)div_monolithic_([^_]*)_([^_]*)_([a-zA-Z_0-9]*\.[a-zA-Z_0-9]*\.[a-zA-Z_0-9]*)_([0-9]+)_([0-9]+)_([^0-9]+)_(random|clrandom|original|cloriginal)_([0-9]+)_([0-9]+)(_.*|)_result.pickle")
 # div_monolithic_lns_mips_gcc.alias.get_frame_alias_set_10_1000_br_hamming_clrandom_105_0.4_10000_constant.pickle
 pat2 = re.compile("_([01]\.[0-9]+)_([0-9]+)_([a-z]+)")
 
@@ -407,7 +407,31 @@ for ag in d:
             f.write(",".join(cdata))
             f.write("\n")
  
-    
+rrates2 = ["-", "0.7"]
+for ag in d:
+  for m in metrics:
+    with open("hist_output" + m + ag + ".csv", "w") as f:
+
+        f.write(",".join([""] + [ ",".join(map(lambda x: "\\tiny{%s}"%x, [("$\\le$" if v>0 else "$=$") + str(int(v*100))   for v in vals] + ["num"]) ) for _ in cmetrics]))
+        f.write("\n")
+        for bi,bench in enumerate(benchmarks, 1):
+            if not d.has_key(ag): continue
+            if not d[ag].has_key(bench): continue
+            #if not d[ag][bench].has_key(r): continue
+            #if not d[ag][bench][r].has_key(m): continue
+            #if not d[ag][bench][r][m].has_key(mindist): continue
+            # find minimum values to mark
+            data = [ (ufloat(*d[ag][bench][r][m][mindist]['res']),r) for r in rrates if d[ag][bench].has_key(r) and d[ag][bench][r].has_key(m) and d[ag][bench][r][m].has_key(mindist) ]
+            data = ["b" + str(bi)] + [ ",".join([ "-" for _ in range(len(vals)+1)])  if  not d[ag].has_key(bench) or not d[ag][bench].has_key(r) or not d[ag][bench][r].has_key(m) or not d[ag][bench][r][m].has_key(mindist) else formatdataout(d[ag][bench][r][m][mindist]) for r in rrates2]
+            if data == []: continue
+            cdata = map (lambda x: x.replace("_", "\\_"), data)
+            cdata = map (lambda x: x.replace("%", "\\%"), cdata)
+            cdata = map (lambda x: x.replace("+/-", "$\\pm$"), cdata)
+            cdata = map (lambda x: x.replace("|", "$|$"), cdata)
+            f.write(",".join(cdata))
+            f.write("\n")
+
+   
 for ag in d:
   for m in metrics:
     with open("output" + m + ag + ".csv", "w") as f:
