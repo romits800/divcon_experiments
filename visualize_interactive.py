@@ -287,7 +287,6 @@ def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile
 	mseeds = d[benchmark][arch][heuristic][metric][agap][branch][relax][mindist][field][num]["n"]
 	return (mnum, mstd, mseeds)
 
-    bees = dict()
     names = sorted(d.keys())
     with open(texname + '.tex', 'w') as f:
 	if show:
@@ -425,7 +424,6 @@ def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile
 				val[r] = lnsnum
 				valtime[r] = tlnsnum
 
-	    bees[bi] = {'val': val, 'valtime': valtime}
 
             #vitems = filter(lambda (m,y): "textit" not in arg[m] and arg[m] == '-', val.items())
             vitems = filter(lambda (m,y): "textit" not in arg[m] and arg[m] != '-', val.items())
@@ -449,7 +447,6 @@ def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile
             print >> f, "\\\\"
 
 
-	print bees
         #impr1 = improvement(arg2, arg1)
         print >> f, "\\hline" 
 	print >> f, '''\\caption{\label{tab:dist_max_rs_lns} Evaluation of \\ac{LNS} with \\ac{RS} and \\textsc{MaxDiverse$k$Set}
@@ -570,12 +567,15 @@ def tex_distances(d, field, agap, num, mindist, relax, metrics, texname='outfile
 
         #impr1 = improvement(arg2, arg1)
         print >> f, "\\hline" 
-	print >> f, '''\\caption{\\label{tab:distances}{The diversification time, $t$, and the number of produced
-		      variants, $num$,  within the given time limit (10 min)
+	print >> f, '''\\caption{\\label{tab:distances}{The table shows 
+		      the diversification time, $t$, and the number of generated
+		      variants, $num$, within the given time limit (10 min), gap=10\%,
+		      and \\ac{LNS} relax rate=70\%
 		      for the four distances $\delta_c$, $\delta_{bh}$,
 		      and $\delta_{lev}$.
-		      The values in  \\textbf{bold} are the minimum value of the
-		      diversification time for each benchmark.}}'''
+		      The values in  \\textbf{bold} represent the minimum 
+		      diversification time for each benchmark and the values in \\emph{italic} 
+		      correspond to incomplete experiments.}}'''
         print >> f, "\\end{longtable}" 
 	if show:
 		print >> f, "\\end{document}" 
@@ -588,7 +588,7 @@ def tex_distances(d, field, agap, num, mindist, relax, metrics, texname='outfile
 
 
 
-def plot_maxdiv_lns_new(d, b, metric, field, agap, relax, mindist, dist=True, legend_loc='lower right'):
+def plot_maxdiv_lns_new(d, b, metric, field, agap, relax, mindist, dist=True, path=".", legend_loc='lower right'):
     arch = 'mips'
     rel = str(relax)
     agap = str(agap)
@@ -655,11 +655,11 @@ def plot_maxdiv_lns_new(d, b, metric, field, agap, relax, mindist, dist=True, le
     ax.tick_params(axis = 'both', which = 'major', labelsize = 14)
     ax.tick_params(axis = 'both', which = 'minor', labelsize = 14)
     fig.set_size_inches(18.5/3, 15/3.)
-    plt.savefig("%s_" %("dist" if dist else "time") + b + "_" + metric + ".pdf", dpi=400, format='pdf')
+    plt.savefig(path + "/" + "%s_" %("dist" if dist else "time") + b + "_" + metric + ".pdf", dpi=400, format='pdf')
     #plt.legend(loc='center right')
 
 
-    plt.show()
+    #plt.show()
 
 
 
@@ -726,8 +726,6 @@ def plot_coefficient_of_variation(d_maxdiv, d_lns, b, metric, field, agap, relax
 
 
     plt.show()
-
-
 
 
 def plot_rs_vs_lns( d_lns, metric, field, agap, colors, num, mindist, loc='upper right', dist=True):
@@ -817,12 +815,13 @@ def plot_rs_vs_lns( d_lns, metric, field, agap, colors, num, mindist, loc='upper
     plt.fill_between(xn, [-1. for _ in xn], [1. for _ in xn], linestyle='-.', color='gray', alpha=0.8, hatch='/')
     if dist:
 	label = r'$P_{\delta}(\delta_c, S_{LNS}, S_{RS})$'
-        ax.set_ylabel(label, rotation=0, fontsize=10, labelpad=5)
-	ax.yaxis.set_label_coords(-0.08,0.95)
+        ax.set_ylabel(label, fontsize=14, labelpad=5)
+	ax.yaxis.set_label_coords(-0.02,0.95)
     else:
 	label = r'$P_{t}(t_{LSN}, t_{RS})$'
-        ax.set_ylabel(label, rotation=0, fontsize=12, labelpad=5)
-	ax.yaxis.set_label_coords(-0.07,0.95)
+        ax.set_ylabel(label, fontsize=14, labelpad=5)
+        #ax.set_ylabel(label, rotation=0, fontsize=12, labelpad=5)
+	ax.yaxis.set_label_coords(-0.02,0.95)
 
     ax.set_xlabel("relax rate", fontsize=20)
 
