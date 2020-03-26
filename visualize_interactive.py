@@ -728,7 +728,7 @@ def plot_coefficient_of_variation(d_maxdiv, d_lns, b, metric, field, agap, relax
     plt.show()
 
 
-def plot_rs_vs_lns( d_lns, metric, field, agap, colors, num, mindist, loc='upper right', dist=True):
+def plot_rs_vs_lns( d_lns, metric, field, agap, colors, num, mindist, loc='upper right', dist=True, path="."):
     arch = 'mips'
     agap = str(agap)
     l = dict()
@@ -834,7 +834,7 @@ def plot_rs_vs_lns( d_lns, metric, field, agap, colors, num, mindist, loc='upper
     plt.title('LNS over RS', fontsize=24)
     #fig.set_size_inches(18.5/3, 12.5/3)
     fig.set_size_inches(8.5, 6.0)
-    plt.savefig("lns_vs_rs_" + ("dist" if dist else "time") + "_" + metric + ".pdf", dpi=400, format='pdf')
+    plt.savefig( path + "/" + "lns_vs_rs_" + ("dist" if dist else "time") + "_" + metric + ".pdf", dpi=400, format='pdf')
     #plt.legend(loc='center right')
     plt.show()
 
