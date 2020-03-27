@@ -21,10 +21,6 @@ do
     then
         continue
     fi
-    if [[ "$pic" == *lnsdiv*.pickle ]]
-    then
-        continue
-    fi
 
     echo $pic
     rm *.out.json

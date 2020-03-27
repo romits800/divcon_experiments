@@ -412,7 +412,7 @@ for ag in d:
   for m in metrics:
     with open("hist_output" + m + ag + ".csv", "w") as f:
 
-        f.write(",".join([""] + [ ",".join(map(lambda x: "\\tiny{%s}"%x, [("$\\le$" if v>0 else "$=$") + str(int(v*100))   for v in vals] + ["num"]) ) for _ in cmetrics]))
+        f.write(",".join([""] + [ ",".join(map(lambda x: "\\tiny{%s}"%x, [("$\\le$" if v>0 else "$=$") + str(int(v*100))   for v in vals] + ["num"]) ) for _ in rrates2]))
         f.write("\n")
         for bi,bench in enumerate(benchmarks, 1):
             if not d.has_key(ag): continue
