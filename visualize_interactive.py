@@ -571,7 +571,7 @@ def tex_distances(d, field, agap, num, mindist, relax, metrics, texname='outfile
 		      the diversification time, $t$, and the number of generated
 		      variants, $num$, within the given time limit (10 min), gap=10\%,
 		      and \\ac{LNS} relax rate=70\%
-		      for the four distances $\delta_c$, $\delta_{bh}$,
+		      for the three distances $\delta_c$, $\delta_{bh}$,
 		      and $\delta_{lev}$.
 		      The values in  \\textbf{bold} represent the minimum 
 		      diversification time for each benchmark and the values in \\emph{italic} 
@@ -836,7 +836,7 @@ def plot_rs_vs_lns( d_lns, metric, field, agap, colors, num, mindist, loc='upper
     fig.set_size_inches(8.5, 6.0)
     plt.savefig( path + "/" + "lns_vs_rs_" + ("dist" if dist else "time") + "_" + metric + ".pdf", dpi=400, format='pdf')
     #plt.legend(loc='center right')
-    plt.show()
+    #plt.show()
 
 agaps = ['5', '10', '20']
 metrics = ["hamming", "reg_hamming", "levenshtein", "br_hamming", "diff_br_hamming", "hamm_reg_gadget"]
