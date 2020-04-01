@@ -296,15 +296,15 @@ def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile
 		print >> f, "\\begin{document}"
         print >> f, "\\begin{longtable}{|l|%s}"%("c|"*2*(len(relax)+2)) 
 	print >> f, '''\\caption{\label{tab:dist_max_rs_lns} Evaluation of \\ac{LNS} with \\ac{RS} and \\textsc{MaxDiverse$k$Set}
-		for 200 variants. \\textbf{Bold} text indicates the highest value of pairwise distance $d$
-		and lowest diversification time. \\textit{Italic} text indicates that the algorithm was not able to generate
+		with regards to pairwise distance $d$ and diversification time $t$ for 200 variants. \\textbf{Bold} text indicates the highest value of $d$
+		and lowest $t$. \\textit{Italic} text indicates that the algorithm was not able to generate
 		200 variants, with the number in parenthesis indicating how many variants the algorithm generates in average.}\\\\'''
         print >> f, "\\hline" 
         print >> f, "&\\multicolumn{2}{c|}{\\textsc{MaxDiverse$k$Set}}&\\multicolumn{2}{c|}{{RS}}&\\multicolumn{%d}{c|}{LNS (0.7)}\\\\" %(2*len(relax)) 
         #print >> f, "\\cline{6-%d}"%(5+len(relax)*2)
         #print >> f, "&%s&%s\\\\" %( "&".join(["\\multicolumn{2}{c|}{}", "\\multicolumn{2}{c|}{}"]), "&".join(map(lambda x: "\\multicolumn{2}{c|}{%s}"%x, relax)))
         print >> f, "\\cline{2-%d}"%(5+len(relax)*2)
-        print >> f, "&%s\\\\" %( "&".join([r"$d$", "time (s)"]*(len(relax)+2)))
+        print >> f, "&%s\\\\" %( "&".join([r"$d$", "$t(s)$"]*(len(relax)+2)))
     # MaxDiversekSet
        # print >> f, "&\\footnotesize dfs (%s\\textbackslash maxd (N))&\\footnotesize  lns (%s\\textbackslash maxd (N))&\\footnotesize  improv. \\%%  \\\\" %( ind, ind) 
         print >> f, "\\hline" 
@@ -357,7 +357,7 @@ def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile
 				argtime[r] = "%.2f$\\pm$%.2f (%d,%d)" %(tmaxnum/1000., tmaxstd/1000., num, tmaxnseeds)
 			else:
 				arg[r] = "\\textit{%.2f$\\pm$%.2f}" %(maxnum, maxstd)
-				argtime[r] = "- (%d)" %(tmaxnum/1000., maxn)
+				argtime[r] = "- (%d)" %(maxn) if benchmark !=  "sphinx3.profile.ptmr_init" else "%.2f$\\pm$%.2f (%d)" %(tmaxnum/1000., tmaxstd/1000., maxn)
 			val[r] = maxnum
 			valtime[r] = tmaxnum
 
@@ -392,7 +392,7 @@ def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile
 				argtime[r] = "\\textit{%.2f$\\pm$%.2f (%d)}" %(trsnum/1000., trsstd/1000., trsnseeds)
 			else:
 				arg[r] = "\\textit{%.2f$\\pm$%.2f}" %(rsnum, rsstd)
-				argtime[r] = "- (%d)" %(trsnum/1000.,  maxn)
+				argtime[r] = "- (%d)" %( maxn) if benchmark !=  "sphinx3.profile.ptmr_init" else "%.2f$\\pm$%.2f (%d)" %(trsnum/1000., trsstd/1000., maxn)
 
 			val[r] = rsnum
 			valtime[r] = trsnum
@@ -424,7 +424,7 @@ def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile
 					argtime[r] = "\\textit{%.2f$\\pm$%.2f (%d)}" %(tlnsnum/1000., tlnsstd/1000., tlnsnseeds)
 				else:
 					arg[r] = "\\textit{%.2f$\\pm$%.2f}" %(lnsnum, lnsstd)
-					argtime[r] = "- (%d)" %(tlnsnum/1000.,  maxn)
+					argtime[r] = "- (%d)" %(maxn) if benchmark !=  "sphinx3.profile.ptmr_init" else "%.2f$\\pm$%.2f (%d)" %(tlnsnum/1000., tlnsstd/1000., maxn)
 				val[r] = lnsnum
 				valtime[r] = tlnsnum
 
@@ -510,7 +510,7 @@ def tex_distances(d, field, agap, num, mindist, relax, metrics, texname='outfile
         #print >> f, "\\cline{6-%d}"%(5+len(relax)*2)
         print >> f, "&%s\\\\" %( "&".join(map(lambda x: "\\multicolumn{2}{c|}{%s}"%(dist_to_delta(x)), metrics)))
         print >> f, "\\cline{2-%d}"%(1 + len(metrics)*2)
-        print >> f, "&%s\\\\" %( "&".join([r"$t$", "num"]*(len(metrics))))
+        print >> f, "&%s\\\\" %( "&".join([r"$t(s)$", "num"]*(len(metrics))))
     # MaxDiversekSet
        # print >> f, "&\\footnotesize dfs (%s\\textbackslash maxd (N))&\\footnotesize  lns (%s\\textbackslash maxd (N))&\\footnotesize  improv. \\%%  \\\\" %( ind, ind) 
         print >> f, "\\hline" 
@@ -556,7 +556,7 @@ def tex_distances(d, field, agap, num, mindist, relax, metrics, texname='outfile
                         argtime[metric] = "\\textit{%.2f$\\pm$%.2f (%d)}" %(tlnsnum/1000., tlnsstd/1000., tlnsnseeds)
                     else:
                         arg[metric] = "\\textit{%d }" %(n)
-                        argtime[metric] = "-" %(tlnsnum/1000., tlnsstd/1000.)
+                        argtime[metric] = "-" # if benchmark !=  "sphinx3.profile.ptmr_init" and metric != "br_hamming" else "%.2f$\\pm$%.2f" %(tlnsnum/1000., tlnsstd/1000.)
  
                     val[metric] = lnsnum
                     valtime[metric] = tlnsnum/1000.
