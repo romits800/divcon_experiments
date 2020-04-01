@@ -295,6 +295,10 @@ def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile
 		print >> f, "\\usepackage{longtable}"
 		print >> f, "\\begin{document}"
         print >> f, "\\begin{longtable}{|l|%s}"%("c|"*2*(len(relax)+2)) 
+	print >> f, '''\\caption{\label{tab:dist_max_rs_lns} Evaluation of \\ac{LNS} with \\ac{RS} and \\textsc{MaxDiverse$k$Set}
+		for 200 variants. \\textbf{Bold} text indicates the highest value of pairwise distance $d$
+		and lowest diversification time. \\textit{Italic} text indicates that the algorithm was not able to generate
+		200 variants, with the number in parenthesis indicating how many variants the algorithm generates in average.}\\\\'''
         print >> f, "\\hline" 
         print >> f, "&\\multicolumn{2}{c|}{\\textsc{MaxDiverse$k$Set}}&\\multicolumn{2}{c|}{{RS}}&\\multicolumn{%d}{c|}{LNS (0.7)}\\\\" %(2*len(relax)) 
         #print >> f, "\\cline{6-%d}"%(5+len(relax)*2)
@@ -449,10 +453,6 @@ def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile
 
         #impr1 = improvement(arg2, arg1)
         print >> f, "\\hline" 
-	print >> f, '''\\caption{\label{tab:dist_max_rs_lns} Evaluation of \\ac{LNS} with \\ac{RS} and \\textsc{MaxDiverse$k$Set}
-		for 200 variants. \\textbf{Bold} text indicates the highest value of pairwise distance $d$
-		and lowest diversification time. \\textit{Italic} text indicates that the algorithm was not able to generate
-		200 variants, with the number in parenthesis indicating how many variants the algorithm generates in average.}'''
         print >> f, "\\end{longtable}" 
 	if show:
 		print >> f, "\\end{document}" 
@@ -496,6 +496,15 @@ def tex_distances(d, field, agap, num, mindist, relax, metrics, texname='outfile
 		print >> f, "\\usepackage{longtable}"
 		print >> f, "\\begin{document}"
         print >> f, "\\begin{longtable}{|l|%s}"%("c|"*2*(len(metrics))) 
+	print >> f, '''\\caption{\\label{tab:distances}{The table shows 
+		      the diversification time, $t$, and the number of generated
+		      variants, $num$, within the given time limit (10 min), gap=10\%,
+		      and \\ac{LNS} relax rate=70\%
+		      for the three distances $\delta_c$, $\delta_{bh}$,
+		      and $\delta_{lev}$.
+		      The values in  \\textbf{bold} represent the minimum 
+		      diversification time for each benchmark and the values in \\emph{italic} 
+		      correspond to incomplete experiments.}}\\\\'''
         print >> f, "\\hline" 
         #print >> f, "&\\multicolumn{2}{c|}{\\multirow{2}{*}{\\textsc{MaxDiverse$k$Set}}}&\\multicolumn{2}{c|}{\\multirow{2}{*}{RS}}&\\multicolumn{%d}{c|}{LNS}\\\\" %2*len(relax) 
         #print >> f, "\\cline{6-%d}"%(5+len(relax)*2)
@@ -567,15 +576,6 @@ def tex_distances(d, field, agap, num, mindist, relax, metrics, texname='outfile
 
         #impr1 = improvement(arg2, arg1)
         print >> f, "\\hline" 
-	print >> f, '''\\caption{\\label{tab:distances}{The table shows 
-		      the diversification time, $t$, and the number of generated
-		      variants, $num$, within the given time limit (10 min), gap=10\%,
-		      and \\ac{LNS} relax rate=70\%
-		      for the three distances $\delta_c$, $\delta_{bh}$,
-		      and $\delta_{lev}$.
-		      The values in  \\textbf{bold} represent the minimum 
-		      diversification time for each benchmark and the values in \\emph{italic} 
-		      correspond to incomplete experiments.}}'''
         print >> f, "\\end{longtable}" 
 	if show:
 		print >> f, "\\end{document}" 
