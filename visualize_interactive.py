@@ -357,7 +357,7 @@ def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile
 				argtime[r] = "%.2f$\\pm$%.2f (%d,%d)" %(tmaxnum/1000., tmaxstd/1000., num, tmaxnseeds)
 			else:
 				arg[r] = "\\textit{%.2f$\\pm$%.2f}" %(maxnum, maxstd)
-				argtime[r] = "\\textit{%.2f$\\pm$%.2f (%d)}" %(tmaxnum/1000., tmaxstd/1000., maxn)
+				argtime[r] = "- (%d)" %(tmaxnum/1000., maxn)
 			val[r] = maxnum
 			valtime[r] = tmaxnum
 
@@ -392,7 +392,7 @@ def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile
 				argtime[r] = "\\textit{%.2f$\\pm$%.2f (%d)}" %(trsnum/1000., trsstd/1000., trsnseeds)
 			else:
 				arg[r] = "\\textit{%.2f$\\pm$%.2f}" %(rsnum, rsstd)
-				argtime[r] = "\\textit{%.2f$\\pm$%.2f (%d)}" %(trsnum/1000., trsstd/1000., maxn)
+				argtime[r] = "- (%d)" %(trsnum/1000.,  maxn)
 
 			val[r] = rsnum
 			valtime[r] = trsnum
@@ -424,7 +424,7 @@ def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile
 					argtime[r] = "\\textit{%.2f$\\pm$%.2f (%d)}" %(tlnsnum/1000., tlnsstd/1000., tlnsnseeds)
 				else:
 					arg[r] = "\\textit{%.2f$\\pm$%.2f}" %(lnsnum, lnsstd)
-					argtime[r] = "\\textit{%.2f$\\pm$%.2f (%d)}" %(tlnsnum/1000., tlnsstd/1000., maxn)
+					argtime[r] = "- (%d)" %(tlnsnum/1000.,  maxn)
 				val[r] = lnsnum
 				valtime[r] = tlnsnum
 
@@ -438,7 +438,7 @@ def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile
                 for r in mrs:
                     arg[r] = "\\textbf{%s}" %arg[r]
 
-            vitems = filter(lambda (m,y): "textit" not in argtime[m] and argtime[m] != '-', valtime.items())
+            vitems = filter(lambda (m,y): "textit" not in argtime[m] and "-" not in argtime[m], valtime.items())
             
             if (len(vitems)>0) and (sum(zip(*vitems)[1]) > 0):
                 mr, m = min(vitems, key=lambda (x,y): y)
@@ -556,13 +556,13 @@ def tex_distances(d, field, agap, num, mindist, relax, metrics, texname='outfile
                         argtime[metric] = "\\textit{%.2f$\\pm$%.2f (%d)}" %(tlnsnum/1000., tlnsstd/1000., tlnsnseeds)
                     else:
                         arg[metric] = "\\textit{%d }" %(n)
-                        argtime[metric] = "\\textit{%.2f$\\pm$%.2f}" %(tlnsnum/1000., tlnsstd/1000.)
+                        argtime[metric] = "-" %(tlnsnum/1000., tlnsstd/1000.)
  
                     val[metric] = lnsnum
                     valtime[metric] = tlnsnum/1000.
 
 
-            vitems = filter(lambda (m,y): "textit" not in argtime[m] and argtime[m] != '-', valtime.items())
+            vitems = filter(lambda (m,y): "textit" not in argtime[m] and "-" not in argtime[m], valtime.items())
             if len(vitems)>0 and sum(zip(*vitems)[1]) > 0:
                 mr, m = min(vitems, key=lambda (x,y): y)
                 mrs,_ = zip(*filter(lambda (x,y): abs(y - m) < 0.5, vitems))
