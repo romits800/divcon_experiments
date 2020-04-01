@@ -32,8 +32,8 @@ def calc_stats(summa, d):
     c = len(summa)
     avg = s/c
     std = [(i-avg)**2 for i in summa]
-    std = math.sqrt(sum(std)/(len(std)-1)) 
-    conf = 2.* std/math.sqrt(len(summa))
+    std = math.sqrt(sum(std)/(len(std)-1))  if len(std) > 1 else 0.
+    conf = 2.* std/math.sqrt(len(summa)) if len(summa) > 0 else 0.
 
     #data
     df = dict()

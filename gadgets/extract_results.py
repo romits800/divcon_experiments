@@ -17,7 +17,7 @@ pat2 = re.compile("_([01]\.[0-9]+)_([0-9]+)_([a-z]+)")
 filepat = re.compile("divs_[0-9]+_[0-9]$")
 
 
-metrics = ["br_hamming", "levenshtein", "hamming", "diff_br_hamming", "reg_hamming", "hamm_reg_gadget"]
+metrics = ["br_hamming", "levenshtein", "hamming", "diff_br_hamming", "reg_hamming", "hamm_reg_gadget", "reg_gadget", "cyc_gadget"]
 rrates = rrates =  ["-", "0.1", "0.2", "0.4", "0.6", "0.7", "0.8", "0.9"]
 
 benchmarks = sorted([   "h264ref.sei.UpdateRandomAccess", 
@@ -51,6 +51,8 @@ def print_metric(metric):
     elif metric == "levenshtein": return "lev"
     elif metric == "reg_hamming": return "reg"
     elif metric == "hamm_reg_gadget": return "hrg"
+    elif metric == "reg_gadget": return "rg"
+    elif metric == "cyc_gadget": return "cg"
     else: return "None"
     
  
