@@ -22,23 +22,23 @@ import getopt
 
 import math
 
-benchmarks = sorted([   "h264ref.sei.UpdateRandomAccess",
-                        "hmmer.tophits.AllocFancyAli",
-                        "gobmk.board.get_last_player",
-                        "gcc.expmed.ceil_log2",
-                        "h264ref.vlc.symbol2uvlc",
-                        "gobmk.patterns.autohelperpat1088",
-                        "gobmk.owl_attackpat.autohelperowl_attackpat68",
-                        "gobmk.owl_defendpat.autohelperowl_defendpat421",
-                        "gcc.xexit.xexit",
-                        "gcc.rtlanal.parms_set",
-                        "gcc.alias.get_frame_alias_set",
-                        "mesa.api.glVertex2i",
-                        "gcc.jump.unsigned_condition",
-                        "sphinx3.glist.glist_tail",
-                        "sphinx3.profile.ptmr_init",
-                        "mesa.api.glIndexd",
-                        "gobmk.owl_vital_apat.autohelperowl_vital_apat34"])
+benchmarks = [ "sphinx3.profile.ptmr_init", 
+		"sphinx3.glist.glist_tail",
+		"gobmk.board.get_last_player",
+		"gcc.expmed.ceil_log2",
+		"mesa.api.glIndexd",
+		"h264ref.vlc.symbol2uvlc",
+		"h264ref.sei.UpdateRandomAccess",
+		"gcc.xexit.xexit",
+		"gcc.alias.get_frame_alias_set",
+		"mesa.api.glVertex2i",
+		"gobmk.owl_defendpat.autohelperowl_defendpat421",
+		"gcc.jump.unsigned_condition",
+		"gcc.rtlanal.parms_set",
+		"hmmer.tophits.AllocFancyAli",
+		"gobmk.owl_vital_apat.autohelperowl_vital_apat34",
+		"gobmk.patterns.autohelperpat1088",
+		"gobmk.owl_attackpat.autohelperowl_attackpat68"]
 
 dbench = dict()
 for bi,b in enumerate(benchmarks,1):
