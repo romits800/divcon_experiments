@@ -42,6 +42,44 @@ benchmarks = [
 		"gcc.alias.get_frame_alias_set",
 		"gcc.rtlanal.parms_set"]
 
+number_instr = {
+	"sphinx3.profile.ptmr_init":10,
+	"gcc.expmed.ceil_log2":14,
+	"mesa.api.glIndexd":14,
+	"h264ref.vlc.symbol2uvlc":15,
+	"gobmk.owl_defendpat.autohelperowl_defendpat421":23,
+	"mesa.api.glVertex2i":23,
+	"hmmer.tophits.AllocFancyAli":25,
+	"gobmk.owl_vital_apat.autohelperowl_vital_apat34":27,
+	"gobmk.patterns.autohelperpat1088":29,
+	"gobmk.owl_attackpat.autohelperowl_attackpat68":30,
+	"gobmk.board.get_last_player":13,
+	"h264ref.sei.UpdateRandomAccess":16,
+	"gcc.xexit.xexit":17,
+	"gcc.jump.unsigned_condition":24,
+	"sphinx3.glist.glist_tail":10,
+	"gcc.alias.get_frame_alias_set":20,
+	"gcc.rtlanal.parms_set":25 }
+
+basic_blocks = {
+	"sphinx3.profile.ptmr_init":1,
+	"gcc.expmed.ceil_log2":1,
+	"mesa.api.glIndexd":1,
+	"h264ref.vlc.symbol2uvlc":1,
+	"gobmk.owl_defendpat.autohelperowl_defendpat421":1,
+	"mesa.api.glVertex2i":1,
+	"hmmer.tophits.AllocFancyAli":1,
+	"gobmk.owl_vital_apat.autohelperowl_vital_apat34":1,
+	"gobmk.patterns.autohelperpat1088":1,
+	"gobmk.owl_attackpat.autohelperowl_attackpat68":1,
+	"gobmk.board.get_last_player":3,
+	"h264ref.sei.UpdateRandomAccess":3,
+	"gcc.xexit.xexit":3,
+	"gcc.jump.unsigned_condition":3,
+	"sphinx3.glist.glist_tail":4,
+	"gcc.alias.get_frame_alias_set":5,
+	"gcc.rtlanal.parms_set":5 }
+
 # Sort by number of size
 #benchmarks = [ "sphinx3.profile.ptmr_init", 
 #		"sphinx3.glist.glist_tail",
@@ -516,8 +554,14 @@ def tex_distances(d, field, agap, num, mindist, relax, metrics, texname='outfile
 		print >> f, "\\usepackage{multirow}"
 		print >> f, "\\usepackage{longtable}"
 		print >> f, "\\begin{document}"
-        print >> f, "\\begin{longtable}{|l|%s}"%("c|"*2*(len(metrics))) 
-	print >> f, '''\\caption{\\label{tab:distances}{The table shows 
+        print >> f, "\\begin{longtable}{|l|l|l|l|l||%s}"%("c|"*2*(len(metrics))) 
+	print >> f, '''\\caption{\\label{tab:distances}{The first five
+		      columns present information about
+		      the benchmarks, i.e.\ the application the come from,
+		      the function name, the number of basic blocks (b), and 
+		      the lines of MIPS intermediate \\ac{IR} code (l).
+		      The last six columns, show the results of the distance
+		      evaluation with
 		      the diversification time, $t$, and the number of generated
 		      variants, $num$, within the given time limit (10 min), gap=10\%,
 		      and \\ac{LNS} relax rate=70\%
@@ -529,9 +573,9 @@ def tex_distances(d, field, agap, num, mindist, relax, metrics, texname='outfile
         print >> f, "\\hline" 
         #print >> f, "&\\multicolumn{2}{c|}{\\multirow{2}{*}{\\textsc{MaxDiverse$k$Set}}}&\\multicolumn{2}{c|}{\\multirow{2}{*}{RS}}&\\multicolumn{%d}{c|}{LNS}\\\\" %2*len(relax) 
         #print >> f, "\\cline{6-%d}"%(5+len(relax)*2)
-        print >> f, "&%s\\\\" %( "&".join(map(lambda x: "\\multicolumn{2}{c|}{%s}"%(dist_to_delta(x)), metrics)))
-        print >> f, "\\cline{2-%d}"%(1 + len(metrics)*2)
-        print >> f, "&%s\\\\" %( "&".join([r"$t(s)$", "num"]*(len(metrics))))
+        print >> f, "\\multirow{2}{*}{id}&\\multirow{2}{*}{app}&\\multirow{2}{*}{function name}&\\multirow{2}{*}{b}&\\multirow{2}{*}{l}&%s\\\\" %( "&".join(map(lambda x: "\\multicolumn{2}{c|}{%s}"%(dist_to_delta(x)), metrics)))
+        print >> f, "\\cline{6-%d}"%(5 + len(metrics)*2)
+        print >> f, "&&&&&%s\\\\" %( "&".join([r"$t(s)$", "num"]*(len(metrics))))
     # MaxDiversekSet
        # print >> f, "&\\footnotesize dfs (%s\\textbackslash maxd (N))&\\footnotesize  lns (%s\\textbackslash maxd (N))&\\footnotesize  improv. \\%%  \\\\" %( ind, ind) 
         print >> f, "\\hline" 
@@ -590,8 +634,11 @@ def tex_distances(d, field, agap, num, mindist, relax, metrics, texname='outfile
                 for m in mrs:
                     argtime[m] = "\\textbf{%s}" %argtime[m]
 
-
-            print >> f, "&".join(["b" + str(bi)] + [ "%s & %s" %(argtime[m], arg[m])  for m in metrics ]) #"%s&%s&%s&%s\\\\"%("b" + str(bi), arg1, arg2, impr1)
+	    bmark = benchmark.split(".")
+	    app = bmark[0]
+	    func = bmark[-1] if len(bmark[-1])<=19 else "%s.."%bmark[-1][:19]
+	    func = func.replace("_","\\_")
+            print >> f, "&".join(["b%d" %bi, app, func, str(basic_blocks[benchmark]), str(number_instr[benchmark])] + [ "%s & %s" %(argtime[m], arg[m])  for m in metrics ]) #"%s&%s&%s&%s\\\\"%("b" + str(bi), arg1, arg2, impr1)
             print >> f, "\\\\"
 
 
