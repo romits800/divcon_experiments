@@ -359,7 +359,7 @@ def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile
 		and lowest $t$. \\textit{Italic} text indicates that the algorithm was not able to generate
 		200 variants, with the number in parenthesis indicating how many variants the algorithm generates in average.}\\\\'''
         print >> f, "\\hline" 
-        print >> f, "&\\multicolumn{2}{c|}{\\textsc{MaxDiverse$k$Set}}&\\multicolumn{2}{c|}{{RS}}&\\multicolumn{%d}{c|}{LNS (0.7)}\\\\" %(2*len(relax)) 
+        print >> f, "\multirow{2}{*}{id}&\\multicolumn{2}{c|}{\\textsc{MaxDiverse$k$Set}}&\\multicolumn{2}{c|}{{RS}}&\\multicolumn{%d}{c|}{LNS (0.7)}\\\\" %(2*len(relax)) 
         #print >> f, "\\cline{6-%d}"%(5+len(relax)*2)
         #print >> f, "&%s&%s\\\\" %( "&".join(["\\multicolumn{2}{c|}{}", "\\multicolumn{2}{c|}{}"]), "&".join(map(lambda x: "\\multicolumn{2}{c|}{%s}"%x, relax)))
         print >> f, "\\cline{2-%d}"%(5+len(relax)*2)
@@ -554,7 +554,7 @@ def tex_distances(d, field, agap, num, mindist, relax, metrics, texname='outfile
 		print >> f, "\\usepackage{multirow}"
 		print >> f, "\\usepackage{longtable}"
 		print >> f, "\\begin{document}"
-        print >> f, "\\begin{longtable}{|l|l|l|l|l||%s}"%("c|"*2*(len(metrics))) 
+        print >> f, "\\begin{longtable}{|l|l|l|l|l\"%s}"%("c|"*2*(len(metrics))) 
 	print >> f, '''\\caption{\\label{tab:distances}{The first five
 		      columns present information about
 		      the benchmarks, i.e.\ the application the come from,
@@ -654,6 +654,118 @@ def tex_distances(d, field, agap, num, mindist, relax, metrics, texname='outfile
 	    p = subprocess.Popen(["evince", texname + ".pdf"], stdout=subprocess.PIPE)
 	    p.communicate()
 
+
+def tex_agap(d, metric, field, agaps, num, mindist, relax, texname='outfile_agap', debug=False, show=True):
+    '''
+	d: the dictionary with the measurements
+		e.g. d = pickle.load(open("divs.pickle"))
+	metric: the metric of the measurement (from divcon - unison)
+	field: 'avg', 'bravg', 'brdiff' output metric
+	agap: 10, 20 allowed gap from the optimal solution
+	branch: original, random, cloriginal, clrandom
+        texname: name of the output .tex file - default = 'outfile'
+    ''' 
+    ind = get_ind(field)
+
+    #title = "%s for measurements of (%s, %s%%)" %(ind.capitalize(), metric, str(agap))
+
+
+    def get_fields(benchmark, arch, heuristic, metric, agap, branch, relax, mindist, field, num, avg, stdev):
+	mnum = d[benchmark][arch][heuristic][metric][agap][branch][relax][mindist][field][num][avg]
+	#mnum = mnum if dist else maxnum/1000.
+	mstd = d[benchmark][arch][heuristic][metric][agap][branch][relax][mindist][field][num][stdev]
+	#maxstd = maxstd if dist else maxstd/1000.
+	mseeds = d[benchmark][arch][heuristic][metric][agap][branch][relax][mindist][field][num]["n"]
+	return (mnum, mstd, mseeds)
+
+    names = sorted(d.keys())
+    with open(texname + '.tex', 'w') as f:
+	if show:
+		print >> f, "\\documentclass{standalone}"
+		print >> f, "\\usepackage{multirow}"
+		print >> f, "\\usepackage{longtable}"
+		print >> f, "\\begin{document}"
+        print >> f, "\\begin{longtable}{|l|%s}"%("c|"*(2*len(agaps))) 
+	print >> f, '''\\caption{\label{tab:agaps} Evaluation of gap from optimal. LNS, .. }\\\\'''
+        print >> f, "\\hline" 
+        print >> f, "\multirow{2}{*}{id}&" + "&".join(["\\multicolumn{2}{c|}{%d\\%%}"%agap for agap in agaps])  + "\\\\" 
+        print >> f, "\\cline{2-%d}"%(1+len(agaps)*2)
+        print >> f, "&%s\\\\" %( "&".join([r"$d$", "num"]*(len(agaps))))
+    # MaxDiversekSet
+       # print >> f, "&\\footnotesize dfs (%s\\textbackslash maxd (N))&\\footnotesize  lns (%s\\textbackslash maxd (N))&\\footnotesize  improv. \\%%  \\\\" %( ind, ind) 
+        print >> f, "\\hline" 
+
+        for bi,benchmark in enumerate(benchmarks,1):
+	    branch = "clrandom"
+            def mipslns(agap):
+                #print relax
+                return d[benchmark].has_key("mips") and d[benchmark]["mips"].has_key("lns") and d[benchmark]["mips"]["lns"].has_key(metric) and d[benchmark]["mips"]["lns"][metric].has_key(agap) and d[benchmark]["mips"]["lns"][metric][agap].has_key(branch) and d[benchmark]["mips"]["lns"][metric][agap][branch].has_key(relax) and d[benchmark]["mips"]["lns"][metric][agap][branch][relax].has_key(mindist) and d[benchmark]["mips"]["lns"][metric][agap][branch][relax][mindist].has_key(field) 
+	    def mipslnsnum(agap, num):
+		return mipslns(agap) and d[benchmark]["mips"]["lns"][metric][agap][branch][relax][mindist][field].has_key(num) 
+
+
+            arg = {str(agap): "-" for agap in agaps}
+            argtime = {str(agap): "-" for agap in agaps}
+            val = {str(agap): 0 for agap in agaps}
+            valtime = {str(agap): 0 for agap in agaps}
+
+
+            for agap in agaps:
+		    agap = str(agap)
+                    if mipslnsnum(agap, num):
+			(lnsnum,lnsstd,lnsnseeds) =  get_fields(benchmark, "mips", "lns", metric, agap, branch, relax, mindist, field, num, "num", "stdev") 
+			(tlnsnum,tlnsstd,tlnsnseeds) =  get_fields(benchmark, "mips", "lns", metric, agap, branch, relax, mindist, field, num, "stime", "stime_stdev") 
+	
+			if debug:
+				arg[agap] = "%.2f$\\pm$%.2f (%d)" %(lnsnum, lnsstd, lnsnseeds)
+				argtime[agap] = "%.2f$\\pm$%.2f (%d)" %(tlnsnum/1000., tlnsstd/1000., tlnsnseeds)
+			else:
+				arg[agap] = "%.2f$\\pm$%.2f" %(lnsnum, lnsstd)
+				argtime[agap] = "%d"%num #"%.2f$\\pm$%.2f" %(tlnsnum/1000., tlnsstd/1000.)
+                        val[agap] = lnsnum
+                        valtime[agap] = num #tlnsnum
+                    elif mipslns(agap):
+                        keys = d[benchmark]["mips"]["lns"][metric][agap][branch][relax][mindist][field].keys()
+                        if len(keys) != 0:
+				maxn = max(keys)
+				(lnsnum,lnsstd,lnsnseeds) =  get_fields(benchmark, "mips", "lns", metric, agap, branch, relax, mindist, field, maxn, "num", "stdev") 
+				(tlnsnum,tlnsstd,tlnsnseeds) =  get_fields(benchmark, "mips", "lns", metric, agap, branch, relax, mindist, field, maxn, "stime", "stime_stdev") 
+		
+				if debug:
+					arg[agap] = "\\textit{%.2f$\\pm$%.2f (%d)}" %(lnsnum, lnsstd, lnsnseeds)
+					argtime[agap] = "\\textit{%.2f$\\pm$%.2f (%d)}" %(tlnsnum/1000., tlnsstd/1000., tlnsnseeds)
+				else:
+					arg[agap] = "\\textit{%.2f$\\pm$%.2f}" %(lnsnum, lnsstd)
+					argtime[agap] =  "%d"%maxn #"- (%d)" %(maxn) if benchmark !=  "sphinx3.profile.ptmr_init" else "%.2f$\\pm$%.2f (%d)" %(tlnsnum/1000., tlnsstd/1000., maxn)
+				val[agap] = lnsnum
+				valtime[agap] = maxn #tlnsnum
+
+
+            #vitems = filter(lambda (m,y): "textit" not in arg[m] and arg[m] == '-', val.items())
+            vitems = filter(lambda (m,y): "textit" not in arg[m] and arg[m] != '-', val.items())
+            
+            if (len(vitems)>0) and (sum(zip(*vitems)[1]) > 0):
+                mr, m = max(vitems, key=lambda (x,y): y)
+                mrs,_ = zip(*filter(lambda (x,y): abs(y - m) < 1, vitems))
+                for r in mrs:
+                    arg[r] = "\\textbf{%s}" %arg[r]
+
+
+            print >> f, "&".join(["b" + str(bi)] + [ "%s & %s" %(arg[str(agap)],argtime[str(agap)])  for agap in agaps ]) #"%s&%s&%s&%s\\\\"%("b" + str(bi), arg1, arg2, impr1)
+            print >> f, "\\\\"
+
+
+        #impr1 = improvement(arg2, arg1)
+        print >> f, "\\hline" 
+        print >> f, "\\end{longtable}" 
+	if show:
+		print >> f, "\\end{document}" 
+
+    if show:
+	    p = subprocess.Popen(["pdflatex", texname + ".tex"], stdout=subprocess.PIPE)
+	    p.communicate()
+	    p = subprocess.Popen(["evince", texname + ".pdf"], stdout=subprocess.PIPE)
+	    p.communicate()
 
 
 def plot_maxdiv_lns_new(d, b, metric, field, agap, relax, mindist, dist=True, path=".", legend_loc='lower right'):
