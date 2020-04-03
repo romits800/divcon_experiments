@@ -397,11 +397,11 @@ def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile
                 (maxnum,maxstd,maxnseeds) =  get_fields(benchmark, "mips", "dfs", metric, agap, "cloriginal", None, mindist, field, num, "num", "stdev") 
                 (tmaxnum,tmaxstd,tmaxnseeds) =  get_fields(benchmark, "mips", "dfs", metric, agap, "cloriginal", None, mindist, field, num, "stime", "stime_stdev") 
 		if debug:
-			arg[r] = "%.2f$\\pm$%.2f (%d,%d)" %(maxnum, maxstd, num, maxnseeds)
-			argtime[r] = "%.2f$\\pm$%.2f (%d,%d)" %(tmaxnum/1000., tmaxstd/1000., num, tmaxnseeds)
+			arg[r] = "%.1f$\\pm$%.1f (%d,%d)" %(maxnum, maxstd, num, maxnseeds)
+			argtime[r] = "%.1f$\\pm$%.1f (%d,%d)" %(tmaxnum/1000., tmaxstd/1000., num, tmaxnseeds)
 		else:
-			arg[r] = "%.2f$\\pm$%.2f" %(maxnum, maxstd)
-			argtime[r] = "%.2f$\\pm$%.2f" %(tmaxnum/1000., tmaxstd/1000.)
+			arg[r] = "%.1f$\\pm$%.1f" %(maxnum, maxstd)
+			argtime[r] = "%.1f$\\pm$%.1f" %(tmaxnum/1000., tmaxstd/1000.)
 		val[r] = maxnum
 		valtime[r] = tmaxnum
 	    elif mipsm:
@@ -412,11 +412,11 @@ def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile
 			(maxnum,maxstd,maxnseeds) =  get_fields(benchmark, "mips", "dfs", metric, agap, "cloriginal", None, mindist, field, maxn, "num", "stdev") 
 			(tmaxnum,tmaxstd,tmaxnseeds) =  get_fields(benchmark, "mips", "dfs", metric, agap, "cloriginal", None, mindist, field, maxn, "stime", "stime_stdev") 
 			if debug:
-				arg[r] = "\\textit{%.2f$\\pm$%.2f (%d,%d)}" %(maxnum, maxstd, maxn, maxnseeds)
-				argtime[r] = "%.2f$\\pm$%.2f (%d,%d)" %(tmaxnum/1000., tmaxstd/1000., num, tmaxnseeds)
+				arg[r] = "\\textit{%.1f$\\pm$%.1f (%d,%d)}" %(maxnum, maxstd, maxn, maxnseeds)
+				argtime[r] = "%.1f$\\pm$%.1f (%d,%d)" %(tmaxnum/1000., tmaxstd/1000., num, tmaxnseeds)
 			else:
-				arg[r] = "\\textit{%.2f$\\pm$%.2f}" %(maxnum, maxstd)
-				argtime[r] = "- (%d)" %(maxn) if benchmark !=  "sphinx3.profile.ptmr_init" else "%.2f$\\pm$%.2f (%d)" %(tmaxnum/1000., tmaxstd/1000., maxn)
+				arg[r] = "\\textit{%.1f$\\pm$%.1f}" %(maxnum, maxstd)
+				argtime[r] = "- (%d)" %(maxn) if benchmark !=  "sphinx3.profile.ptmr_init" else "%.1f$\\pm$%.1f (%d)" %(tmaxnum/1000., tmaxstd/1000., maxn)
 			val[r] = maxnum
 			valtime[r] = tmaxnum
 
@@ -429,11 +429,11 @@ def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile
                 (trsnum,trsstd,trsnseeds) =  get_fields(benchmark, "mips", "dfs", metric, agap, branch, None, mindist, field, num, "stime", "stime_stdev") 
 	
 		if debug:
-			arg[r] = "%.2f$\\pm$%.2f (%d)" %(rsnum, rsstd, rsnseeds)
-			argtime[r] = "%.2f$\\pm$%.2f (%d)" %(trsnum/1000., trsstd/1000., trsnseeds)
+			arg[r] = "%.1f$\\pm$%.1f (%d)" %(rsnum, rsstd, rsnseeds)
+			argtime[r] = "%.1f$\\pm$%.1f (%d)" %(trsnum/1000., trsstd/1000., trsnseeds)
 		else:
-			arg[r] = "%.2f$\\pm$%.2f" %(rsnum, rsstd)
-			argtime[r] = "%.2f$\\pm$%.2f" %(trsnum/1000., trsstd/1000.)
+			arg[r] = "%.1f$\\pm$%.1f" %(rsnum, rsstd)
+			argtime[r] = "%.1f$\\pm$%.1f" %(trsnum/1000., trsstd/1000.)
 
 		val[r] = rsnum
 		valtime[r] = trsnum
@@ -447,11 +447,11 @@ def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile
 			(trsnum,trsstd,trsnseeds) =  get_fields(benchmark, "mips", "dfs", metric, agap, branch, None, mindist, field, maxn, "stime", "stime_stdev") 
 		
 			if debug:
-				arg[r] = "\\textit{%.2f$\\pm$%.2f (%d)}" %(rsnum, rsstd, rsnseeds)
-				argtime[r] = "\\textit{%.2f$\\pm$%.2f (%d)}" %(trsnum/1000., trsstd/1000., trsnseeds)
+				arg[r] = "\\textit{%.1f$\\pm$%.1f (%d)}" %(rsnum, rsstd, rsnseeds)
+				argtime[r] = "\\textit{%.1f$\\pm$%.1f (%d)}" %(trsnum/1000., trsstd/1000., trsnseeds)
 			else:
-				arg[r] = "\\textit{%.2f$\\pm$%.2f}" %(rsnum, rsstd)
-				argtime[r] = "- (%d)" %( maxn) if benchmark !=  "sphinx3.profile.ptmr_init" else "%.2f$\\pm$%.2f (%d)" %(trsnum/1000., trsstd/1000., maxn)
+				arg[r] = "\\textit{%.1f$\\pm$%.1f}" %(rsnum, rsstd)
+				argtime[r] = "- (%d)" %( maxn) if benchmark !=  "sphinx3.profile.ptmr_init" else "%.1f$\\pm$%.1f (%d)" %(trsnum/1000., trsstd/1000., maxn)
 
 			val[r] = rsnum
 			valtime[r] = trsnum
@@ -464,11 +464,11 @@ def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile
 			(tlnsnum,tlnsstd,tlnsnseeds) =  get_fields(benchmark, "mips", "lns", metric, agap, branch, r, mindist, field, num, "stime", "stime_stdev") 
 	
 			if debug:
-				arg[r] = "%.2f$\\pm$%.2f (%d)" %(lnsnum, lnsstd, lnsnseeds)
-				argtime[r] = "%.2f$\\pm$%.2f (%d)" %(tlnsnum/1000., tlnsstd/1000., tlnsnseeds)
+				arg[r] = "%.1f$\\pm$%.1f (%d)" %(lnsnum, lnsstd, lnsnseeds)
+				argtime[r] = "%.1f$\\pm$%.1f (%d)" %(tlnsnum/1000., tlnsstd/1000., tlnsnseeds)
 			else:
-				arg[r] = "%.2f$\\pm$%.2f" %(lnsnum, lnsstd)
-				argtime[r] = "%.2f$\\pm$%.2f" %(tlnsnum/1000., tlnsstd/1000.)
+				arg[r] = "%.1f$\\pm$%.1f" %(lnsnum, lnsstd)
+				argtime[r] = "%.1f$\\pm$%.1f" %(tlnsnum/1000., tlnsstd/1000.)
                         val[r] = lnsnum
                         valtime[r] = tlnsnum
                     elif mipslns(r):
@@ -479,11 +479,11 @@ def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile
 				(tlnsnum,tlnsstd,tlnsnseeds) =  get_fields(benchmark, "mips", "lns", metric, agap, branch, r, mindist, field, maxn, "stime", "stime_stdev") 
 		
 				if debug:
-					arg[r] = "\\textit{%.2f$\\pm$%.2f (%d)}" %(lnsnum, lnsstd, lnsnseeds)
-					argtime[r] = "\\textit{%.2f$\\pm$%.2f (%d)}" %(tlnsnum/1000., tlnsstd/1000., tlnsnseeds)
+					arg[r] = "\\textit{%.1f$\\pm$%.1f (%d)}" %(lnsnum, lnsstd, lnsnseeds)
+					argtime[r] = "\\textit{%.1f$\\pm$%.1f (%d)}" %(tlnsnum/1000., tlnsstd/1000., tlnsnseeds)
 				else:
-					arg[r] = "\\textit{%.2f$\\pm$%.2f}" %(lnsnum, lnsstd)
-					argtime[r] = "- (%d)" %(maxn) if benchmark !=  "sphinx3.profile.ptmr_init" else "%.2f$\\pm$%.2f (%d)" %(tlnsnum/1000., tlnsstd/1000., maxn)
+					arg[r] = "\\textit{%.1f$\\pm$%.1f}" %(lnsnum, lnsstd)
+					argtime[r] = "- (%d)" %(maxn) if benchmark !=  "sphinx3.profile.ptmr_init" else "%.1f$\\pm$%.1f (%d)" %(tlnsnum/1000., tlnsstd/1000., maxn)
 				val[r] = lnsnum
 				valtime[r] = tlnsnum
 
@@ -557,18 +557,16 @@ def tex_distances(d, field, agap, num, mindist, relax, metrics, texname='outfile
         print >> f, "\\begin{longtable}{|l|l|l|l|l\"%s}"%("c|"*2*(len(metrics))) 
 	print >> f, '''\\caption{\\label{tab:distances}{The first five
 		      columns present information about
-		      the benchmarks, i.e.\ the application the come from,
+		      the benchmarks, i.e.\ the application they come from,
 		      the function name, the number of basic blocks (b), and 
-		      the lines of MIPS intermediate \\ac{IR} code (l).
+		      the lines of instructions (l).
 		      The last six columns, show the results of the distance
 		      evaluation with
 		      the diversification time, $t$, and the number of generated
-		      variants, $num$, within the given time limit (10 min), gap=10\%,
-		      and \\ac{LNS} relax rate=70\%
-		      for the three distances $\delta_c$, $\delta_{bh}$,
-		      and $\delta_{lev}$.
+		      variants, $num$, for the three distances 
+		      $\delta_c$, $\delta_{bh}$, and $\delta_{lev}$.
 		      The values in  \\textbf{bold} represent the minimum 
-		      diversification time for each benchmark and the values in \\emph{italic} 
+		      diversification time for each benchmark and ``-''
 		      correspond to incomplete experiments.}}\\\\'''
         print >> f, "\\hline" 
         #print >> f, "&\\multicolumn{2}{c|}{\\multirow{2}{*}{\\textsc{MaxDiverse$k$Set}}}&\\multicolumn{2}{c|}{\\multirow{2}{*}{RS}}&\\multicolumn{%d}{c|}{LNS}\\\\" %2*len(relax) 
@@ -599,11 +597,11 @@ def tex_distances(d, field, agap, num, mindist, relax, metrics, texname='outfile
                 (lnsnum,lnsstd,lnsnseeds) = get_fields(benchmark, "mips", "lns", metric, agap, branch, relax, mindist, field, num, "num", "stdev") 
                 (tlnsnum,tlnsstd,tlnsnseeds) = get_fields(benchmark, "mips", "lns", metric, agap, branch, relax, mindist, field, num, "stime", "stime_stdev") 
                 if debug:
-                        arg[metric] = "%.2f$\\pm$%.2f (%d)" %(lnsnum, lnsstd, lnsnseeds)
-                        argtime[metric] = "%.2f$\\pm$%.2f (%d)" %(tlnsnum/1000., tlnsstd/1000., tlnsnseeds)
+                        arg[metric] = "%.1f$\\pm$%.1f (%d)" %(lnsnum, lnsstd, lnsnseeds)
+                        argtime[metric] = "%.1f$\\pm$%.1f (%d)" %(tlnsnum/1000., tlnsstd/1000., tlnsnseeds)
                 else:
                         arg[metric] = "%d " %(num)
-                        argtime[metric] = "%.2f$\\pm$%.2f" %(tlnsnum/1000., tlnsstd/1000.)
+                        argtime[metric] = "%.1f$\\pm$%.1f" %(tlnsnum/1000., tlnsstd/1000.)
 
                 val[metric] = lnsnum
                 valtime[metric] = tlnsnum/1000.
@@ -617,17 +615,17 @@ def tex_distances(d, field, agap, num, mindist, relax, metrics, texname='outfile
                     (lnsnum,lnsstd,lnsnseeds) = get_fields(benchmark, "mips", "lns", metric, agap, branch, relax, mindist, field, n, "num", "stdev") 
                     (tlnsnum,tlnsstd,tlnsnseeds) = get_fields(benchmark, "mips", "lns", metric, agap, branch, relax, mindist, field, n, "stime", "stime_stdev") 
                     if debug:
-                        arg[metric] = "\\textit{%.2f$\\pm$%.2f (%d)}" %(lnsnum, lnsstd, lnsnseeds)
-                        argtime[metric] = "\\textit{%.2f$\\pm$%.2f (%d)}" %(tlnsnum/1000., tlnsstd/1000., tlnsnseeds)
+                        arg[metric] = "\\textit{%.1f$\\pm$%.1f (%d)}" %(lnsnum, lnsstd, lnsnseeds)
+                        argtime[metric] = "\\textit{%.1f$\\pm$%.1f (%d)}" %(tlnsnum/1000., tlnsstd/1000., tlnsnseeds)
                     else:
-                        arg[metric] = "\\textit{%d }" %(n)
+                        arg[metric] = "%d" %(n)
                         argtime[metric] = "-" # if benchmark !=  "sphinx3.profile.ptmr_init" and metric != "br_hamming" else "%.2f$\\pm$%.2f" %(tlnsnum/1000., tlnsstd/1000.)
  
                     val[metric] = lnsnum
                     valtime[metric] = tlnsnum/1000.
 
 
-            vitems = filter(lambda (m,y): "textit" not in argtime[m] and "-" not in argtime[m], valtime.items())
+            vitems = filter(lambda (m,y): "-" not in argtime[m], valtime.items())
             if len(vitems)>0 and sum(zip(*vitems)[1]) > 0:
                 mr, m = min(vitems, key=lambda (x,y): y)
                 mrs,_ = zip(*filter(lambda (x,y): abs(y - m) < 0.5, vitems))
@@ -686,7 +684,9 @@ def tex_agap(d, metric, field, agaps, num, mindist, relax, texname='outfile_agap
 		print >> f, "\\usepackage{longtable}"
 		print >> f, "\\begin{document}"
         print >> f, "\\begin{longtable}{|l|%s}"%("c|"*(2*len(agaps))) 
-	print >> f, '''\\caption{\label{tab:agaps} Evaluation of gap from optimal. LNS, .. }\\\\'''
+	print >> f, '''\\caption{\label{tab:agaps} The table shows the pairwise distance 
+			$d$ (Equation~\\ref{eq:aggr}), and the number of generated variants, $num$ (max  200),
+			for different values of the gap to optimal \{0\%, 5\%, 10\%, 20\%\}.}\\\\'''
         print >> f, "\\hline" 
         print >> f, "\multirow{2}{*}{id}&" + "&".join(["\\multicolumn{2}{c|}{%d\\%%}"%agap for agap in agaps])  + "\\\\" 
         print >> f, "\\cline{2-%d}"%(1+len(agaps)*2)
@@ -717,10 +717,10 @@ def tex_agap(d, metric, field, agaps, num, mindist, relax, texname='outfile_agap
 			(tlnsnum,tlnsstd,tlnsnseeds) =  get_fields(benchmark, "mips", "lns", metric, agap, branch, relax, mindist, field, num, "stime", "stime_stdev") 
 	
 			if debug:
-				arg[agap] = "%.2f$\\pm$%.2f (%d)" %(lnsnum, lnsstd, lnsnseeds)
-				argtime[agap] = "%.2f$\\pm$%.2f (%d)" %(tlnsnum/1000., tlnsstd/1000., tlnsnseeds)
+				arg[agap] = "%.1f$\\pm$%.1f (%d)" %(lnsnum, lnsstd, lnsnseeds)
+				argtime[agap] = "%.1f$\\pm$%.1f (%d)" %(tlnsnum/1000., tlnsstd/1000., tlnsnseeds)
 			else:
-				arg[agap] = "%.2f$\\pm$%.2f" %(lnsnum, lnsstd)
+				arg[agap] = "%.1f$\\pm$%.1f" %(lnsnum, lnsstd)
 				argtime[agap] = "%d"%num #"%.2f$\\pm$%.2f" %(tlnsnum/1000., tlnsstd/1000.)
                         val[agap] = lnsnum
                         valtime[agap] = num #tlnsnum
@@ -732,10 +732,10 @@ def tex_agap(d, metric, field, agaps, num, mindist, relax, texname='outfile_agap
 				(tlnsnum,tlnsstd,tlnsnseeds) =  get_fields(benchmark, "mips", "lns", metric, agap, branch, relax, mindist, field, maxn, "stime", "stime_stdev") 
 		
 				if debug:
-					arg[agap] = "\\textit{%.2f$\\pm$%.2f (%d)}" %(lnsnum, lnsstd, lnsnseeds)
-					argtime[agap] = "\\textit{%.2f$\\pm$%.2f (%d)}" %(tlnsnum/1000., tlnsstd/1000., tlnsnseeds)
+					arg[agap] = "\\textit{%.1f$\\pm$%.1f (%d)}" %(lnsnum, lnsstd, lnsnseeds)
+					argtime[agap] = "\\textit{%.1f$\\pm$%.1f (%d)}" %(tlnsnum/1000., tlnsstd/1000., tlnsnseeds)
 				else:
-					arg[agap] = "\\textit{%.2f$\\pm$%.2f}" %(lnsnum, lnsstd)
+					arg[agap] = "\\textit{%.1f$\\pm$%.1f}" %(lnsnum, lnsstd)
 					argtime[agap] =  "%d"%maxn #"- (%d)" %(maxn) if benchmark !=  "sphinx3.profile.ptmr_init" else "%.2f$\\pm$%.2f (%d)" %(tlnsnum/1000., tlnsstd/1000., maxn)
 				val[agap] = lnsnum
 				valtime[agap] = maxn #tlnsnum
