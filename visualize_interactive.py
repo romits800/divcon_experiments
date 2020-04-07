@@ -355,11 +355,14 @@ def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile
 		print >> f, "\\begin{document}"
         print >> f, "\\begin{longtable}{|l|%s}"%("c|"*2*(len(relax)+2)) 
 	print >> f, '''\\caption{\label{tab:dist_max_rs_lns} Evaluation of \\ac{LNS} with \\ac{RS} and \\textsc{MaxDiverse$k$Set}
-		with regards to pairwise distance $d$ and diversification time $t$ for 200 variants. \\textbf{Bold} text indicates the highest value of $d$
-		and lowest $t$. \\textit{Italic} text indicates that the algorithm was not able to generate
-		200 variants, with the number in parenthesis indicating how many variants the algorithm generates in average.}\\\\'''
+		with regards to pairwise distance $d$ and diversification time $t$ for 200 variants. The values
+		show the mean and the standard deviation over the random seeds.
+		\\textbf{Bold} text indicates the highest value of $d$ and lowest value of $t$
+		for the completed experiments. 
+		\\textit{Italic} text indicates the incomplete experiments, 
+		with the number of generated variants (in average) in parenthesis.}\\\\'''
         print >> f, "\\hline" 
-        print >> f, "\multirow{2}{*}{id}&\\multicolumn{2}{c|}{\\textsc{MaxDiverse$k$Set}}&\\multicolumn{2}{c|}{{RS}}&\\multicolumn{%d}{c|}{LNS (0.7)}\\\\" %(2*len(relax)) 
+        print >> f, "\multirow{2}{*}{ID}&\\multicolumn{2}{c|}{\\textsc{MaxDiverse$k$Set}}&\\multicolumn{2}{c|}{{RS}}&\\multicolumn{%d}{c|}{LNS (0.7)}\\\\" %(2*len(relax)) 
         #print >> f, "\\cline{6-%d}"%(5+len(relax)*2)
         #print >> f, "&%s&%s\\\\" %( "&".join(["\\multicolumn{2}{c|}{}", "\\multicolumn{2}{c|}{}"]), "&".join(map(lambda x: "\\multicolumn{2}{c|}{%s}"%x, relax)))
         print >> f, "\\cline{2-%d}"%(5+len(relax)*2)
@@ -557,21 +560,21 @@ def tex_distances(d, field, agap, num, mindist, relax, metrics, texname='outfile
         print >> f, "\\begin{longtable}{|l|l|l|l|l\"%s}"%("c|"*2*(len(metrics))) 
 	print >> f, '''\\caption{\\label{tab:distances}{The first five
 		      columns present information about
-		      the benchmarks, i.e.\ the application they come from,
+		      the benchmarks, i.e.\ their origin application,
 		      the function name, the number of basic blocks (b), and 
 		      the lines of instructions (l).
-		      The last six columns, show the results of the distance
+		      The last six columns show the results of the distance
 		      evaluation with
 		      the diversification time, $t$, and the number of generated
 		      variants, $num$, for the three distances 
 		      $\delta_c$, $\delta_{bh}$, and $\delta_{lev}$.
 		      The values in  \\textbf{bold} represent the minimum 
 		      diversification time for each benchmark and ``-''
-		      correspond to incomplete experiments.}}\\\\'''
+		      correspond to incomplete experiments with less than 200 variants.}}\\\\'''
         print >> f, "\\hline" 
         #print >> f, "&\\multicolumn{2}{c|}{\\multirow{2}{*}{\\textsc{MaxDiverse$k$Set}}}&\\multicolumn{2}{c|}{\\multirow{2}{*}{RS}}&\\multicolumn{%d}{c|}{LNS}\\\\" %2*len(relax) 
         #print >> f, "\\cline{6-%d}"%(5+len(relax)*2)
-        print >> f, "\\multirow{2}{*}{id}&\\multirow{2}{*}{app}&\\multirow{2}{*}{function name}&\\multirow{2}{*}{b}&\\multirow{2}{*}{l}&%s\\\\" %( "&".join(map(lambda x: "\\multicolumn{2}{c|}{%s}"%(dist_to_delta(x)), metrics)))
+        print >> f, "\\multirow{2}{*}{ID}&\\multirow{2}{*}{app}&\\multirow{2}{*}{function name}&\\multirow{2}{*}{b}&\\multirow{2}{*}{l}&%s\\\\" %( "&".join(map(lambda x: "\\multicolumn{2}{c|}{%s}"%(dist_to_delta(x)), metrics)))
         print >> f, "\\cline{6-%d}"%(5 + len(metrics)*2)
         print >> f, "&&&&&%s\\\\" %( "&".join([r"$t(s)$", "num"]*(len(metrics))))
     # MaxDiversekSet
@@ -684,11 +687,11 @@ def tex_agap(d, metric, field, agaps, num, mindist, relax, texname='outfile_agap
 		print >> f, "\\usepackage{longtable}"
 		print >> f, "\\begin{document}"
         print >> f, "\\begin{longtable}{|l|%s}"%("c|"*(2*len(agaps))) 
-	print >> f, '''\\caption{\label{tab:agaps} The table shows the pairwise distance 
+	print >> f, '''\\caption{\label{tab:agaps} The table shows the mean and standard deviation of the pairwise distance 
 			$d$ (Equation~\\ref{eq:aggr}), and the number of generated variants, $num$ (max  200),
-			for different values of the gap to optimal \{0\%, 5\%, 10\%, 20\%\}.}\\\\'''
+			for different values of the gap to optimal $p\in$\{0\%, 5\%, 10\%, 20\%\}.}\\\\'''
         print >> f, "\\hline" 
-        print >> f, "\multirow{2}{*}{id}&" + "&".join(["\\multicolumn{2}{c|}{%d\\%%}"%agap for agap in agaps])  + "\\\\" 
+        print >> f, "\multirow{2}{*}{ID}&" + "&".join(["\\multicolumn{2}{c|}{%d\\%%}"%agap for agap in agaps])  + "\\\\" 
         print >> f, "\\cline{2-%d}"%(1+len(agaps)*2)
         print >> f, "&%s\\\\" %( "&".join([r"$d$", "num"]*(len(agaps))))
     # MaxDiversekSet
