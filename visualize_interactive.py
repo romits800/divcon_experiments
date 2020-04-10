@@ -108,13 +108,13 @@ rrates = [ "-",  "0.05", "0.1", "0.15", "0.2", "0.25", "0.3", "0.4", "0.5", "0.6
 
 def dist_to_delta(dist):
 	if dist == "reg_hamming":
-		return r'$\delta_r$'
+		return r'$\delta_{RH}$'
 	elif dist == "hamming":
-		return r'$\delta_c$'
+		return r'$\delta_{CHD}$'
 	elif dist == "br_hamming":
-		return r'$\delta_{bh}$'
+		return r'$\delta_{BHD}$'
 	elif dist == "levenshtein":
-		return r'$\delta_{lev}$'
+		return r'$\delta_{LD}$'
 	else:
 		return r'$\delta$'
 
@@ -558,6 +558,7 @@ def tex_distances(d, field, agap, num, mindist, relax, metrics, texname='outfile
 		print >> f, "\\usepackage{longtable}"
 		print >> f, "\\begin{document}"
         print >> f, "\\begin{longtable}{|l|l|l|l|l\"%s}"%("c|"*2*(len(metrics))) 
+	deltas = map(dist_to_delta, metrics)
 	print >> f, '''\\caption{\\label{tab:distances}{The first five
 		      columns present information about
 		      the benchmarks, i.e.\ their origin application,
@@ -567,10 +568,10 @@ def tex_distances(d, field, agap, num, mindist, relax, metrics, texname='outfile
 		      evaluation with
 		      the diversification time, $t$, and the number of generated
 		      variants, $num$, for the three distances 
-		      $\delta_c$, $\delta_{bh}$, and $\delta_{lev}$.
+		      %s. 
 		      The values in  \\textbf{bold} represent the minimum 
 		      diversification time for each benchmark and ``-''
-		      correspond to incomplete experiments with less than 200 variants.}}\\\\'''
+		      correspond to incomplete experiments with less than 200 variants.}}\\\\'''%(",".join(deltas[:-1]) + ", and" + deltas[-1])
         print >> f, "\\hline" 
         #print >> f, "&\\multicolumn{2}{c|}{\\multirow{2}{*}{\\textsc{MaxDiverse$k$Set}}}&\\multicolumn{2}{c|}{\\multirow{2}{*}{RS}}&\\multicolumn{%d}{c|}{LNS}\\\\" %2*len(relax) 
         #print >> f, "\\cline{6-%d}"%(5+len(relax)*2)
@@ -824,7 +825,7 @@ def plot_maxdiv_lns_new(d, b, metric, field, agap, relax, mindist, dist=True, pa
 
     if dist:
         ax.set_ylim(bottom=0)
-        ax.set_ylabel(r'$d(\delta_c)$', fontsize=14)
+        ax.set_ylabel(r'$d(\delta_{CHD})$', fontsize=14)
         #ax.set_ylabel(et_ind(field), fontsize=14)
  
     else:      
@@ -997,7 +998,7 @@ def plot_rs_vs_lns( d_lns, metric, field, agap, colors, num, mindist, loc='upper
     xn = [ float(r) for r in rrates[1:]]
     plt.fill_between(xn, [-1. for _ in xn], [1. for _ in xn], linestyle='-.', color='gray', alpha=0.8, hatch='/')
     if dist:
-	label = r'$P_{\delta}(\delta_c, S_{LNS}, S_{RS})$'
+	label = r'$P_{\delta}(\delta_{CHD}, S_{LNS}, S_{RS})$'
         ax.set_ylabel(label, fontsize=14, labelpad=5)
 	ax.yaxis.set_label_coords(-0.02,0.95)
     else:
