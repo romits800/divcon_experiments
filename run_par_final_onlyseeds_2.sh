@@ -12,12 +12,13 @@ do
     procs=$((cpu1 | cpu2))
 
 
-    sh -c "
-        IFS=','; seedsarr=($s); unset IFS;
+    bash -c "
+        seeds=$s
+        IFS=','; seedsarr=(\$seeds); unset IFS;
         for i in {0..3} 
         do
-            s=${seedsarr[$i]}
-            time taskset `printf '0x%x\n' $procs` nohup ./run_final.sh divs_${i} divs_dir_${i} divs_${s}_${i} $s &> out_lns_${s}_${i}
+            s=\${seedsarr[\$i]}
+            time taskset `printf '0x%x\n' $procs` nohup ./run_final.sh divs_\${i} divs_dir_\${i} divs_\${s}_\${i} \$s &> out_lns_\${s}_\${i}
         done" &
 
 done
