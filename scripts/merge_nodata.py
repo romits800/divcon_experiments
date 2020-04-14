@@ -20,9 +20,33 @@ d = dict()
 
 ds = dict()
 
+pathname = "."
+name = ""
+
+try:
+    opts, args = getopt.getopt(sys.argv[1:],"hp:n:",["pathname=", "name="])
+except getopt.GetoptError:
+    print "$ python merge_nodata.py -p <path of the measurments> -n <sufix of the pickle files>"
+    # print 'test.py -i <inputfile> -o <outputfile>'
+    sys.exit(2)
+
+for opt, arg in opts:
+    if opt == '-h':
+        print "$ python calculate.py -p <path of the measurments> -n <sufix of the pickle files>"
+        sys.exit()
+    elif opt in ("-p", "--pathname"):
+        pathname = arg
+        print "path", opt, arg
+    elif opt in ("-n", "--name"):
+	name = arg
+    else:
+        print "Not correct", opt
+
+
+
 i = 0
 for f in listdir("."):
-    if f.endswith(".pickle"):
+    if f.endswith(".pickle") and f.startswith(name):
         ds[i] = pickle.load(open(f))
         i+=1 
 
@@ -216,5 +240,5 @@ for b in benchmarks:
 
 
 
-pickle.dump(d, open("divs.pickle", "w"))
+pickle.dump(d, open(name + "_divs.pickle", "w"))
 

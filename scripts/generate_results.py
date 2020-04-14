@@ -4,8 +4,13 @@
 import cPickle as pickle
 import visualize_interactive as vi
 import os
+import sys
 
-res_folder = "../results/"
+if len(sys.argv) < 2:
+	print "Give the path to divcon_experiments as the first argument"
+
+res_folder = os.path.join(sys.argv[1], "results")
+
 pickles = "pickles"
 maxdiv = "maxdiv_lns_rs"
 rest = "rest"
