@@ -15,6 +15,9 @@ merge:
 	./run_calculate.sh
 	python merge.py &> outmerge
 
+results:
+	python generate_results.py
+
 clean: 
 	${RM} out* *.json *.uni *.llvm.mir
 
