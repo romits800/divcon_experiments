@@ -360,7 +360,7 @@ def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile
 		\\textbf{Bold} text indicates the highest value of $d$ and lowest value of $t$
 		for the completed experiments. 
 		\\textit{Italic} text indicates the incomplete experiments, 
-		with the number of generated variants (in average) in parenthesis.}\\\\'''
+		with the number of generated variants in parenthesis.}\\\\'''
         print >> f, "\\hline" 
         print >> f, "\multirow{2}{*}{ID}&\\multicolumn{2}{c|}{\\textsc{MaxDiverse$k$Set}}&\\multicolumn{2}{c|}{{RS}}&\\multicolumn{%d}{c|}{LNS (0.7)}\\\\" %(2*len(relax)) 
         #print >> f, "\\cline{6-%d}"%(5+len(relax)*2)
@@ -571,7 +571,7 @@ def tex_distances(d, field, agap, num, mindist, relax, metrics, texname='outfile
 		      %s. 
 		      The values in  \\textbf{bold} represent the minimum 
 		      diversification time for each benchmark and ``-''
-		      correspond to incomplete experiments with less than 200 variants.}}\\\\'''%(",".join(deltas[:-1]) + ", and" + deltas[-1])
+		      correspond to incomplete experiments with less than 200 variants.}}\\\\'''%(", ".join(deltas[:-1]) + ", and " + deltas[-1])
         print >> f, "\\hline" 
         #print >> f, "&\\multicolumn{2}{c|}{\\multirow{2}{*}{\\textsc{MaxDiverse$k$Set}}}&\\multicolumn{2}{c|}{\\multirow{2}{*}{RS}}&\\multicolumn{%d}{c|}{LNS}\\\\" %2*len(relax) 
         #print >> f, "\\cline{6-%d}"%(5+len(relax)*2)
