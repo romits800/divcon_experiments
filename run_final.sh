@@ -29,7 +29,7 @@ then
     mkdir $RUN_DIR
 fi
 
-cp stats.py $RUN_DIR
+cp scripts/stats.py $RUN_DIR
 
 pushd $RUN_DIR
 
