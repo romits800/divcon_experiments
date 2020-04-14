@@ -37,7 +37,6 @@ done
 #uni export --target=Mips $input.alt.uni -o $input.unison.mir --basefile=$input.llvm.mir --solfile=$input.out.json
 
 
-#. /home/romi/opt/mcb32tools/environment
 
 for i in *.${input}.out.json.unison.mir
 do
