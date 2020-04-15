@@ -52,7 +52,7 @@ results: ${GENRES_SCRIPT}
 	python ${GENRES_SCRIPT} $(PWD)
 
 clean: 
-	${RM} ${PICKLES} ${OUTFILE} *.csv
+	${RM} ${PICKLES} ${OUTFILE} *.csv *.pickle
 
 clean-divs: 
 	${RM} -rf ${RESULTS} 
