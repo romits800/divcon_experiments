@@ -12,7 +12,7 @@ import re
 import math
 #import subprocess
 
-#import getopt
+import getopt
 
 min_num_seeds = 5
 
