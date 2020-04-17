@@ -19,6 +19,12 @@ sudo pip install capstone matplotlib
 
 Follow the instruction in [DivCon](https://github.com/romits800/divCon).
 
+Set environment variable DIVCON_PATH
+
+```bash
+export DIVCON_PATH=/path/to/divcon
+```
+
 ## Run the experiments
 To run the experiments in parallel write:
 
