@@ -561,7 +561,7 @@ def tex_distances(d, field, agap, num, mindist, relax, metrics, texname='outfile
 	deltas = map(dist_to_delta, metrics)
 	print >> f, '''\\caption{\\label{tab:distances}{The first five
 		      columns present information about
-		      the benchmarks, i.e.\ their origin application,
+		      the benchmarks, i.e.\ their respective ID, their origin application,
 		      the function name, the number of basic blocks (b), and 
 		      the lines of instructions (l).
 		      The last six columns show the results of the distance

@@ -1,5 +1,5 @@
 
-.PHONY: clean run-par
+.PHONY: clean run-par results extract gadgets merge aggr
 
 SCRIPTS_PATH = scripts
 GADG_PATH = ${SCRIPTS_PATH}/gadgets
@@ -48,7 +48,7 @@ extract: ${EXTRACT_SCRIPT}
 	@echo "python ${EXTRACT_SCRIPT} ${PWD} both true  &> ${ELOG_FILE}"
 	python ${EXTRACT_SCRIPT} ${PWD} both true  &> ${ELOG_FILE}
 
-results: ${GENRES_SCRIPT} 
+results: 
 	python ${GENRES_SCRIPT} $(PWD)
 
 clean: 
