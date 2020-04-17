@@ -2,10 +2,6 @@
 This repo contains experiments for [DivCon](https://github.com/romits800/divCon).
 
 
-
-## Run the experiments
-
-
 ### Prerequisites
 
 [ROPgadget](http://shell-storm.org/project/ROPgadget/)
