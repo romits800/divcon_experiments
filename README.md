@@ -4,13 +4,16 @@ This repo contains experiments for [DivCon](https://github.com/romits800/divCon)
 
 ## Prerequisites
 
-[ROPgadget](http://shell-storm.org/project/ROPgadget/)
+[ROPgadget](http://shell-storm.org/project/ROPgadget/),[capstone](https://www.capstone-engine.org/lang_python.html),
+[matplotlib](https://matplotlib.org/)
+
+```
+sudo pip install capstone matplotlib
+```
+
 
 #### Python libraries
 
-[capstone](https://www.capstone-engine.org/lang_python.html)
-
-[matplotlib](https://matplotlib.org/)
 
 #### Install DivCon
 
