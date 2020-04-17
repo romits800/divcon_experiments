@@ -12,6 +12,7 @@ GENRES_SCRIPT = ${SCRIPTS_PATH}/generate_results.py
 
 RESULT_PATH = results
 PICKLES_PATH = ${RESULT_PATH}/pickles
+GADGETS_PATH = ${RESULT_PATH}/gadgets
 
 LOG_FILE = out_final
 CLOG_FILE = out_calc
@@ -51,8 +52,8 @@ gadgets:
 	bash -x ${GADG_SCRIPT} ${PWD}/${GADG_PATH}  ${PWD} &> ${GLOG_FILE}
 
 extract: 
-	@echo "python ${EXTRACT_SCRIPT} ${PWD} both true  &> ${ELOG_FILE}"
-	python ${EXTRACT_SCRIPT} ${PWD} both true  &> ${ELOG_FILE}
+	@echo "python ${EXTRACT_SCRIPT} ${PWD} both true ${GADGETS_PATH} &> ${ELOG_FILE}"
+	python ${EXTRACT_SCRIPT} ${PWD} both true ${GADGETS_PATH} &> ${ELOG_FILE}
 
 clean: 
 	${RM} ${PICKLES} ${OUTFILE} *.csv *.pickle
