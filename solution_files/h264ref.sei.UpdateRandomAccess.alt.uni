@@ -1,0 +1,160 @@
+// @lint: --nocostoverflow=false
+function: UpdateRandomAccess
+b0 (entry, freq: 2):
+    o0: [p0{t0}:t9,p1{t1}:v0,p2{t2}:s0,p3{t3}:s1,p4{t4}:s2,p5{t5}:s3,p6{t6}:s4,p7{t7}:s5,p8{t8}:s6,p9{t9}:s7,p10{t10}:d10,p11{t11}:d11,p12{t12}:d12,p13{t13}:d13,p14{t14}:d14,p15{t15}:d15,p16{t16}:zero,p17{t17}:k0,p18{t18}:k1,p19{t19}:sp,p20{t20}:ra] <- (in) []
+    o1: [] <- LoadGPDisp [] (writes: [control])
+    o2: [] <- {-, ADDiu_negsp} [%frame-size] (reads: [control,sp], writes: [sp],
+activators: [STORE,LOAD,STORE_D,LOAD_D])
+    o3: [p22{-, t21}] <- {-, MOVE, STORE} [p21{-, t0}] (reads: [control,sp])
+    o4: [p24{-, t22}] <- {-, MOVE, STORE} [p23{-, t1}] (reads: [control,sp])
+    o5: [p26{-, t23}] <- {-, STORE} [p25{-, t2}] (reads: [control,sp])
+    o6: [p28{-, t24}] <- {-, STORE} [p27{-, t3}] (reads: [control,sp])
+    o7: [p30{-, t25}] <- {-, STORE} [p29{-, t4}] (reads: [control,sp])
+    o8: [p32{-, t26}] <- {-, STORE} [p31{-, t5}] (reads: [control,sp])
+    o9: [p34{-, t27}] <- {-, STORE} [p33{-, t6}] (reads: [control,sp])
+    o10: [p36{-, t28}] <- {-, STORE} [p35{-, t7}] (reads: [control,sp])
+    o11: [p38{-, t29}] <- {-, STORE} [p37{-, t8}] (reads: [control,sp])
+    o12: [p40{-, t30}] <- {-, STORE} [p39{-, t9}] (reads: [control,sp])
+    o13: [p42{-, t31}] <- {-, STORE_D} [p41{-, t10}] (reads: [control,sp])
+    o14: [p44{-, t32}] <- {-, STORE_D} [p43{-, t11}] (reads: [control,sp])
+    o15: [p46{-, t33}] <- {-, STORE_D} [p45{-, t12}] (reads: [control,sp])
+    o16: [p48{-, t34}] <- {-, STORE_D} [p47{-, t13}] (reads: [control,sp])
+    o17: [p50{-, t35}] <- {-, STORE_D} [p49{-, t14}] (reads: [control,sp])
+    o18: [p52{-, t36}] <- {-, STORE_D} [p51{-, t15}] (reads: [control,sp])
+    o19: [p54{-, t37}] <- {-, MOVE, STORE} [p53{-, t20}] (reads: [control,sp])
+    o20: [p56{-, t38}] <- {-, MOVE, LOAD} [p55{-, t0, t21}] (reads: [control,sp])
+    o21: [p58{-, t39}] <- {-, MOVE, LOAD} [p57{-, t1, t22}] (reads: [control,sp])
+    o22: [p61{t40}] <- ADDu [p59{t1, t22, t39},p60{t0, t21, t38}] (reads: [control])
+    o23: [p63{-, t41}] <- {-, MOVE, STORE} [p62{-, t40}] (reads: [control,sp])
+    o24: [p65{-, t42}] <- {-, MOVE, LOAD} [p64{-, t40, t41}] (reads: [control,sp])
+    o25: [p67{t43}] <- LW [p66{t40, t41, t42, t58},@img] (reads: [control,mem-0])
+    o26: [p69{-, t44}] <- {-, MOVE, STORE} [p68{-, t43}] (reads: [control,sp])
+    o27: [p71{-, t45}] <- {-, MOVE, LOAD} [p70{-, t43, t44}] (reads: [control,sp])
+    o28: [p73{t46}] <- LW [p72{t43, t44, t45},0] (reads: [control,mem-1])
+    o29: [p75{-, t47}] <- {-, MOVE, STORE} [p74{-, t46}] (reads: [control,sp])
+    o30: [p77{-, t48}] <- {-, MOVE, LOAD} [p76{-, t46, t47}] (reads: [control,sp])
+    o31: [p79{t49}] <- LW [p78{t46, t47, t48},24] (reads: [control,mem-2])
+    o32: [p81{-, t50}] <- {-, MOVE, STORE} [p80{-, t49}] (reads: [control,sp])
+    o33: [p83{t51}] <- ADDiu [p82{t16},0] (reads: [control])
+    o34: [p85{-, t52}] <- {-, MOVE, STORE} [p84{-, t51}] (reads: [control,sp])
+    o35: [p87{t53}] <- ADDiu [p86{t16},2] (reads: [control])
+    o36: [p89{-, t54}] <- {-, MOVE, STORE} [p88{-, t53}] (reads: [control,sp])
+    o37: [p91{-, t55}] <- {-, MOVE, LOAD} [p90{-, t49, t50}] (reads: [control,sp])
+    o38: [p93{-, t56}] <- {-, MOVE, LOAD} [p92{-, t53, t54}] (reads: [control,sp])
+    o39: [p95{-, t57}] <- {-, MOVE, LOAD} [p94{-, t20, t37}] (reads: [control,sp])
+    o40: [p97{-, t58}] <- {-, MOVE, LOAD} [p96{-, t40, t41}] (reads: [control,sp])
+    o41: [p99{-, t59}] <- {-, MOVE, LOAD} [p98{-, t51, t52}] (reads: [control,sp])
+    o42: [] <- {BNE, BNE_NOP} [p100{t49, t50, t55},p101{t53, t54, t56},b2] (writes: [control,pc,at], taken: true)
+    o43: [] <- (out) [p102{t2, t23},p103{t3, t24},p104{t4, t25},p105{t5, t26},p106{t6, t27},p107{t7, t28},p108{t8, t29},p109{t9, t30},p110{t10, t31},p111{t11, t32},p112{t12, t33},p113{t13, t34},p114{t14, t35},p115{t15, t36},p116{t16},p117{t17},p118{t18},p119{t19},p120{t20, t37, t57},p121{t40, t41, t42, t58},p122{t51, t52, t59}]
+b1 (freq: 1):
+    o44: [p123{t60},p124{t61},p125{t62},p126{t63},p127{t64},p128{t65},p129{t66},p130{t67},p131{t68},p132{t69},p133{t70},p134{t71},p135{t72},p136{t73},p137{t74},p138{t75},p139{t76},p140{t77},p141{t78},p142{t79}] <- (in) []
+    o45: [p144{-, t80}] <- {-, MOVE, STORE} [p143{-, t78}] (reads: [control,sp])
+    o46: [p146{-, t81}] <- {-, MOVE, STORE} [p145{-, t79}] (reads: [control,sp])
+    o47: [p148{-, t82}] <- {-, MOVE, LOAD} [p147{-, t79, t81}] (reads: [control,sp])
+    o48: [p150{t83}] <- LW [p149{t79, t81, t82, t91},@seiRandomAccess] (reads: [control,mem-0])
+    o49: [p152{-, t84}] <- {-, MOVE, STORE} [p151{-, t83}] (reads: [control,sp])
+    o50: [p154{t85}] <- ADDiu [p153{t74},1] (reads: [control])
+    o51: [p156{-, t86}] <- {-, MOVE, STORE} [p155{-, t85}] (reads: [control,sp])
+    o52: [p158{-, t87}] <- {-, MOVE, LOAD} [p157{-, t83, t84}] (reads: [control,sp])
+    o53: [p160{-, t88}] <- {-, MOVE, LOAD} [p159{-, t85, t86}] (reads: [control,sp])
+    o54: [] <- SH [p161{t85, t86, t88, t92},p162{t83, t84, t87, t89},0] (reads: [control], writes: [mem-0])
+    o55: [p164{-, t89}] <- {-, MOVE, LOAD} [p163{-, t83, t84}] (reads: [control,sp])
+    o56: [] <- SB [p165{t74},p166{t83, t84, t87, t89},2] (reads: [control], writes: [mem-0])
+    o57: [p168{-, t90}] <- {-, MOVE, LOAD} [p167{-, t78, t80}] (reads: [control,sp])
+    o58: [p170{-, t91}] <- {-, MOVE, LOAD} [p169{-, t79, t81}] (reads: [control,sp])
+    o59: [p172{-, t92}] <- {-, MOVE, LOAD} [p171{-, t85, t86}] (reads: [control,sp])
+    o60: [] <- (out) [p173{t60},p174{t61},p175{t62},p176{t63},p177{t64},p178{t65},p179{t66},p180{t67},p181{t68},p182{t69},p183{t70},p184{t71},p185{t72},p186{t73},p187{t74},p188{t75},p189{t76},p190{t77},p191{t78, t80, t90},p192{t79, t81, t82, t91},p193{t85, t86, t88, t92}]
+b2 (exit, return, freq: 2):
+    o61: [p194{t93},p195{t94},p196{t95},p197{t96},p198{t97},p199{t98},p200{t99},p201{t100},p202{t101},p203{t102},p204{t103},p205{t104},p206{t105},p207{t106},p208{t107},p209{t108},p210{t109},p211{t110},p212{t111},p213{t112},p214{t113}] <- (in) []
+    o62: [p216{-, t114}] <- {-, MOVE, STORE} [p215{-, t93}] (reads: [control,sp])
+    o63: [p218{-, t115}] <- {-, MOVE, STORE} [p217{-, t112}] (reads: [control,sp])
+    o64: [p220{-, t116}] <- {-, MOVE, STORE} [p219{-, t113}] (reads: [control,sp])
+    o65: [p222{-, t117}] <- {-, MOVE, LOAD} [p221{-, t113, t116}] (reads: [control,sp])
+    o66: [p224{t118}] <- LW [p223{t113, t116, t117},@seiHasRandomAccess_info] (reads: [control,mem-0])
+    o67: [p226{-, t119}] <- {-, MOVE, STORE} [p225{-, t118}] (reads: [control,sp])
+    o68: [p228{-, t120}] <- {-, MOVE, LOAD} [p227{-, t93, t114}] (reads: [control,sp])
+    o69: [p230{-, t121}] <- {-, MOVE, LOAD} [p229{-, t118, t119}] (reads: [control,sp])
+    o70: [] <- SW [p231{t93, t114, t120},p232{t118, t119, t121},0] (reads: [control], writes: [mem-0])
+    o71: [p234{-, t122}] <- {-, MOVE, LOAD} [p233{-, t112, t115}] (reads: [control,sp])
+    o72: [p236{-, t123}] <- {-, LOAD} [p235{-, t94}] (reads: [control,sp])
+    o73: [p238{-, t124}] <- {-, LOAD} [p237{-, t95}] (reads: [control,sp])
+    o74: [p240{-, t125}] <- {-, LOAD} [p239{-, t96}] (reads: [control,sp])
+    o75: [p242{-, t126}] <- {-, LOAD} [p241{-, t97}] (reads: [control,sp])
+    o76: [p244{-, t127}] <- {-, LOAD} [p243{-, t98}] (reads: [control,sp])
+    o77: [p246{-, t128}] <- {-, LOAD} [p245{-, t99}] (reads: [control,sp])
+    o78: [p248{-, t129}] <- {-, LOAD} [p247{-, t100}] (reads: [control,sp])
+    o79: [p250{-, t130}] <- {-, LOAD} [p249{-, t101}] (reads: [control,sp])
+    o80: [p252{-, t131}] <- {-, LOAD_D} [p251{-, t102}] (reads: [control,sp])
+    o81: [p254{-, t132}] <- {-, LOAD_D} [p253{-, t103}] (reads: [control,sp])
+    o82: [p256{-, t133}] <- {-, LOAD_D} [p255{-, t104}] (reads: [control,sp])
+    o83: [p258{-, t134}] <- {-, LOAD_D} [p257{-, t105}] (reads: [control,sp])
+    o84: [p260{-, t135}] <- {-, LOAD_D} [p259{-, t106}] (reads: [control,sp])
+    o85: [p262{-, t136}] <- {-, LOAD_D} [p261{-, t107}] (reads: [control,sp])
+    o86: [] <- {-, ADDiu_sp} [%frame-size] (reads: [control,sp], writes: [sp],
+activators: [STORE,LOAD,STORE_D,LOAD_D])
+    o87: [] <- {PseudoReturn, PseudoReturn_NOP} [p263{t112, t115, t122}] (writes: [control,pc])
+    o88: [] <- (out) [p264{t94, t123}:s0,p265{t95, t124}:s1,p266{t96, t125}:s2,p267{t97, t126}:s3,p268{t98, t127}:s4,p269{t99, t128}:s5,p270{t100, t129}:s6,p271{t101, t130}:s7,p272{t102, t131}:d10,p273{t103, t132}:d11,p274{t104, t133}:d12,p275{t105, t134}:d13,p276{t106, t135}:d14,p277{t107, t136}:d15,p278{t108}:zero,p279{t109}:k0,p280{t110}:k1,p281{t111}:sp]
+adjacent:
+    p102 -> p123, p102 -> p195, p103 -> p124, p103 -> p196, p104 -> p125,
+    p104 -> p197, p105 -> p126, p105 -> p198, p106 -> p127, p106 -> p199,
+    p107 -> p128, p107 -> p200, p108 -> p129, p108 -> p201, p109 -> p130,
+    p109 -> p202, p110 -> p131, p110 -> p203, p111 -> p132, p111 -> p204,
+    p112 -> p133, p112 -> p205, p113 -> p134, p113 -> p206, p114 -> p135,
+    p114 -> p207, p115 -> p136, p115 -> p208, p116 -> p137, p116 -> p209,
+    p117 -> p138, p117 -> p210, p118 -> p139, p118 -> p211, p119 -> p140,
+    p119 -> p212, p120 -> p141, p120 -> p213, p121 -> p142, p121 -> p214,
+    p122 -> p194, p173 -> p195, p174 -> p196, p175 -> p197, p176 -> p198,
+    p177 -> p199, p178 -> p200, p179 -> p201, p180 -> p202, p181 -> p203,
+    p182 -> p204, p183 -> p205, p184 -> p206, p185 -> p207, p186 -> p208,
+    p187 -> p209, p188 -> p210, p189 -> p211, p190 -> p212, p191 -> p213,
+    p192 -> p214, p193 -> p194
+rematerializable:
+fixed-frame:
+frame:
+stack-pointer-offset: 0
+stack-arg-size: 0
+constants:
+jump-table:
+goal: speed
+removed-freqs:
+source:
+; ModuleID = '../unison/src/unison/test/fast/Mips/speed/h264ref.sei.UpdateRandomAccess.ll'
+target datalayout = "E-m:m-p:32:32-i8:8:32-i16:16:32-i64:64-n32-S64"
+target triple = "mips--linux-gnu"
+%struct.ImageParameters.1372 = type { i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, float, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32**, i32**, i32, i32***, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, [9 x [16 x [16 x i16]]], [5 x [16 x [16 x i16]]], [9 x [8 x [8 x i16]]], [2 x [4 x [16 x [16 x i16]]]], [16 x [16 x i16]], [16 x [16 x i32]], i32****, i32***, %struct.Picture.1373*, %struct.Slice.1374*, %struct.macroblock.1375*, [1200 x %struct.syntaxelement.1376], i32*, i32*, i32, i32, i32, i32, [4 x [4 x i32]], i32, i32, i32, i32, i32, double, i32, i32, i32, i32, i16******, i16******, i16******, i16******, [15 x i16], i32, i32, i32, i32, i32, i32, i32, i32, [6 x [15 x i32]], i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, [1 x i32], i32, i32, [2 x i32], i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, %struct.DecRefPicMarking_s.1377*, i32, i32, i32, i32, i32, double, i32, i32, i32, i32, i32, i32, i32, double*, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, [2 x i32], i32, i32, i32 }
+%struct.Picture.1373 = type { i32, i32, [100 x %struct.Slice.1374*], i32, float, float, float }
+%struct.Slice.1374 = type { i32, i32, i32, i32, i32, i32, %struct.datapartition.1378*, %struct.MotionInfoContexts.1379*, %struct.TextureInfoContexts.1380*, %struct.RMPNIbuffer_s.1381*, i32, i32*, i32*, i32*, i32, i32*, i32*, i32*, i32 (i32)*, [3 x [2 x i32]] }
+%struct.datapartition.1378 = type { %struct.Bitstream.1370*, %struct.EncodingEnvironment.1382, i32 (%struct.syntaxelement.1376*, %struct.datapartition.1378*)* }
+%struct.Bitstream.1370 = type { i32, i32, i8, i32, i32, i8, i8, i32, i32, i8*, i32 }
+%struct.EncodingEnvironment.1382 = type { i32, i32, i32, i32, i32, i8*, i32*, i32, i32, i32, i32, i32, i8*, i32*, i32, i32, i32, i32, i32, i32 }
+%struct.syntaxelement.1376 = type { i32, i32, i32, i32, i32, i32, i32, i32, void (i32, i32, i32*, i32*)*, void (%struct.syntaxelement.1376*, %struct.EncodingEnvironment.1382*)* }
+%struct.MotionInfoContexts.1379 = type { [3 x [11 x %struct.BiContextType.1383]], [2 x [9 x %struct.BiContextType.1383]], [2 x [10 x %struct.BiContextType.1383]], [2 x [6 x %struct.BiContextType.1383]], [4 x %struct.BiContextType.1383], [4 x %struct.BiContextType.1383], [3 x %struct.BiContextType.1383] }
+%struct.BiContextType.1383 = type { i16, i8, i32 }
+%struct.TextureInfoContexts.1380 = type { [2 x %struct.BiContextType.1383], [4 x %struct.BiContextType.1383], [3 x [4 x %struct.BiContextType.1383]], [10 x [4 x %struct.BiContextType.1383]], [10 x [15 x %struct.BiContextType.1383]], [10 x [15 x %struct.BiContextType.1383]], [10 x [5 x %struct.BiContextType.1383]], [10 x [5 x %struct.BiContextType.1383]], [10 x [15 x %struct.BiContextType.1383]], [10 x [15 x %struct.BiContextType.1383]] }
+%struct.RMPNIbuffer_s.1381 = type { i32, i32, %struct.RMPNIbuffer_s.1381* }
+%struct.macroblock.1375 = type { i32, i32, i32, i32, i32, [8 x i32], %struct.macroblock.1375*, %struct.macroblock.1375*, i32, [2 x [4 x [4 x [2 x i32]]]], [16 x i32], [16 x i32], i32, i64, [4 x i32], [4 x i32], i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, double, i32, i32, i32, i32, i32, i32, i32, i32, i32 }
+%struct.DecRefPicMarking_s.1377 = type { i32, i32, i32, i32, i32, %struct.DecRefPicMarking_s.1377* }
+%struct.randomaccess_information_struct.1391 = type { i8, i8, i8, %struct.Bitstream.1370*, i32 }
+@img = external global %struct.ImageParameters.1372*, align 4
+@seiHasRandomAccess_info = external global i32, align 4
+@seiRandomAccess = external global %struct.randomaccess_information_struct.1391, align 4
+; Function Attrs: norecurse nounwind
+define void @UpdateRandomAccess() #0 {
+%1 = load %struct.ImageParameters.1372*, %struct.ImageParameters.1372** @img, align 4
+%2 = getelementptr inbounds %struct.ImageParameters.1372, %struct.ImageParameters.1372* %1, i32 0, i32 6
+%3 = load i32, i32* %2, align 8
+%4 = icmp eq i32 %3, 2
+br i1 %4, label %5, label %6
+; <label>:5                                       ; preds = %0
+store i8 0, i8* getelementptr inbounds (%struct.randomaccess_information_struct.1391, %struct.randomaccess_information_struct.1391* @seiRandomAccess, i32 0, i32 0), align 4
+store i8 1, i8* getelementptr inbounds (%struct.randomaccess_information_struct.1391, %struct.randomaccess_information_struct.1391* @seiRandomAccess, i32 0, i32 1), align 1
+store i8 0, i8* getelementptr inbounds (%struct.randomaccess_information_struct.1391, %struct.randomaccess_information_struct.1391* @seiRandomAccess, i32 0, i32 2), align 2
+br label %6
+; <label>:6                                       ; preds = %5, %0
+%storemerge = phi i32 [ 1, %5 ], [ 0, %0 ]
+store i32 %storemerge, i32* @seiHasRandomAccess_info, align 4
+ret void
+}
+attributes #0 = { norecurse nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+!llvm.ident = !{!0}
+!0 = !{!"clang version 3.8.0 (http://llvm.org/git/clang.git 2d49f0a0ae8366964a93e3b7b26e29679bee7160) (http://llvm.org/git/llvm.git 60bc66b44837125843b58ed3e0fd2e6bb948d839)"}

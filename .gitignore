@@ -11,3 +11,5 @@ divs*
 */*/diffs.txt
 *.s
 *.pdf
+*.csv
+*.pickle

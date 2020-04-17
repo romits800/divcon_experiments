@@ -1,0 +1,91 @@
+// @lint: --nocostoverflow=false
+function: xexit
+b0 (entry, freq: 2):
+    o0: [p0{t0}:a0,p1{t1}:t9,p2{t2}:v0,p3{t3}:zero,p4{t4}:k0,p5{t5}:k1,p6{t6}:sp] <- (in) []
+    o1: [] <- LoadGPDisp [] (writes: [control])
+    o2: [] <- {-, ADDiu_negsp} [%frame-size] (reads: [control,sp], writes: [sp], activators: [STORE,LOAD])
+    o3: [p8{-, t7}] <- {-, MOVE, STORE} [p7{-, t0}] (reads: [control,sp])
+    o4: [p10{-, t8}] <- {-, MOVE, STORE} [p9{-, t1}] (reads: [control,sp])
+    o5: [p12{-, t9}] <- {-, MOVE, STORE} [p11{-, t2}] (reads: [control,sp])
+    o6: [p14{-, t10}] <- {-, MOVE, LOAD} [p13{-, t1, t8}] (reads: [control,sp])
+    o7: [p16{-, t11}] <- {-, MOVE, LOAD} [p15{-, t2, t9}] (reads: [control,sp])
+    o8: [p19{t12}] <- ADDu [p17{t2, t9, t11},p18{t1, t8, t10}] (reads: [control])
+    o9: [p21{-, t13}] <- {-, MOVE, STORE} [p20{-, t12}] (reads: [control,sp])
+    o10: [p23{-, t14}] <- {-, MOVE, LOAD} [p22{-, t12, t13}] (reads: [control,sp])
+    o11: [p25{t15}] <- LW [p24{t12, t13, t14, t22},@_xexit_cleanup] (reads: [control,mem-0])
+    o12: [p27{-, t16}] <- {-, MOVE, STORE} [p26{-, t15}] (reads: [control,sp])
+    o13: [p29{-, t17}] <- {-, MOVE, LOAD} [p28{-, t15, t16}] (reads: [control,sp])
+    o14: [p31{t18}] <- LW [p30{t15, t16, t17},0] (reads: [control,mem-1])
+    o15: [p33{-, t19}] <- {-, MOVE, STORE} [p32{-, t18}] (reads: [control,sp])
+    o16: [p35{-, t20}] <- {-, MOVE, LOAD} [p34{-, t18, t19}] (reads: [control,sp])
+    o17: [p37{-, t21}] <- {-, MOVE, LOAD} [p36{-, t0, t7}] (reads: [control,sp])
+    o18: [p39{-, t22}] <- {-, MOVE, LOAD} [p38{-, t12, t13}] (reads: [control,sp])
+    o19: [p41{-, t23}] <- {-, MOVE, LOAD} [p40{-, t18, t19}] (reads: [control,sp])
+    o20: [] <- {BEQ, BEQ_NOP} [p42{t18, t19, t20, t23},p43{t3},b2] (writes: [control,pc,at], taken: true)
+    o21: [] <- (out) [p44{t0, t7, t21},p45{t3},p46{t4},p47{t5},p48{t6},p49{t12, t13, t14, t22},p50{t18, t19, t20, t23}]
+b1 (freq: 1):
+    o22: [p51{t24},p52{t25},p53{t26},p54{t27},p55{t28},p56{t29},p57{t30}] <- (in) []
+    o23: [p59{-, t31}] <- {-, MOVE, STORE} [p58{-, t24}] (reads: [control,sp])
+    o24: [p61{-, t32}] <- {-, MOVE, STORE} [p60{-, t29}] (reads: [control,sp])
+    o25: [p63{-, t33}] <- {-, MOVE, STORE} [p62{-, t30}] (reads: [control,sp])
+    o26: [p64{t34}:ra] <- CLOBBER_RA [] (reads: [control])
+    o27: [p66{-, t35}] <- {-, MOVE, LOAD} [p65{-, t30, t33}] (reads: [control,sp])
+    o28: [] <- {JALRPseudo, JALRPseudo_NOP} [p67{t30, t33, t35}:t9] (reads: [control], writes: [ra])
+    o29: [p69{t36}:att7,p70{t37}:t89,p71{t38}:gp,p72{t39}:fpra,p73{t40}:ac0,p74{t41}:d09] <- (fun) [p68{t34}:ra] (writes: [pc], call: o28)
+    o30: [] <- (kill) [p75{t36},p76{t37},p77{t38},p78{t39},p79{t40},p80{t41}]
+    o31: [p82{-, t42}] <- {-, MOVE, LOAD} [p81{-, t24, t31}] (reads: [control,sp])
+    o32: [p84{-, t43}] <- {-, MOVE, LOAD} [p83{-, t29, t32}] (reads: [control,sp])
+    o33: [] <- (out) [p85{t24, t31, t42},p86{t25},p87{t26},p88{t27},p89{t28},p90{t29, t32, t43}]
+b2 (exit, freq: 2):
+    o34: [p91{t44},p92{t45},p93{t46},p94{t47},p95{t48},p96{t49}] <- (in) []
+    o35: [p98{-, t50}] <- {-, MOVE, STORE} [p97{-, t44}] (reads: [control,sp])
+    o36: [p100{-, t51}] <- {-, MOVE, STORE} [p99{-, t49}] (reads: [control,sp])
+    o37: [p102{-, t52}] <- {-, MOVE, LOAD} [p101{-, t49, t51}] (reads: [control,sp])
+    o38: [p104{t53}] <- LW [p103{t49, t51, t52, t58},@exit] (reads: [control,mem-0])
+    o39: [p106{-, t54}] <- {-, MOVE, STORE} [p105{-, t53}] (reads: [control,sp])
+    o40: [p107{t55}:ra] <- CLOBBER_RA [] (reads: [control])
+    o41: [p109{-, t56}] <- {-, MOVE, LOAD} [p108{-, t53, t54}] (reads: [control,sp])
+    o42: [p111{-, t57}] <- {-, MOVE, LOAD} [p110{-, t44, t50}] (reads: [control,sp])
+    o43: [p113{-, t58}] <- {-, MOVE, LOAD} [p112{-, t49, t51}] (reads: [control,sp])
+    o44: [] <- {JALRPseudo, JALRPseudo_NOP} [p114{t53, t54, t56}:t9] (reads: [control], writes: [ra])
+    o45: [p118{t59}:att7,p119{t60}:t89,p120{t61}:gp,p121{t62}:fpra,p122{t63}:ac0,p123{t64}:d09] <- (fun) [p115{t44, t50, t57}:a0,p116{t49, t51, t52, t58}:gp,p117{t55}:ra] (writes: [mem-0,pc], call: o44)
+    o46: [] <- (kill) [p124{t59},p125{t60},p126{t61},p127{t62},p128{t63},p129{t64}]
+    o47: [] <- (out) [p130{t45}:zero,p131{t46}:k0,p132{t47}:k1,p133{t48}:sp]
+adjacent:
+    p44 -> p51, p44 -> p91, p45 -> p52, p45 -> p92, p46 -> p53, p46 -> p93,
+    p47 -> p54, p47 -> p94, p48 -> p55, p48 -> p95, p49 -> p56, p49 -> p96,
+    p50 -> p57, p85 -> p91, p86 -> p92, p87 -> p93, p88 -> p94, p89 -> p95,
+    p90 -> p96
+rematerializable:
+fixed-frame:
+frame:
+stack-pointer-offset: 0
+stack-arg-size: 0
+constants:
+jump-table:
+goal: speed
+removed-freqs:
+source:
+; ModuleID = '../unison/src/unison/test/fast/Mips/speed/gcc.xexit.xexit.ll'
+target datalayout = "E-m:m-p:32:32-i8:8:32-i16:16:32-i64:64-n32-S64"
+target triple = "mips--linux-gnu"
+@_xexit_cleanup = external global void ()*, align 4
+; Function Attrs: noreturn nounwind
+define void @xexit(i32 signext %code) #0 {
+%1 = load void ()*, void ()** @_xexit_cleanup, align 4
+%2 = icmp eq void ()* %1, null
+br i1 %2, label %4, label %3
+; <label>:3                                       ; preds = %0
+tail call void %1() #1
+br label %4
+; <label>:4                                       ; preds = %3, %0
+tail call void @exit(i32 signext %code) #2
+unreachable
+}
+; Function Attrs: noreturn nounwind
+declare void @exit(i32 signext) #0
+attributes #0 = { noreturn nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #1 = { nounwind }
+attributes #2 = { noreturn nounwind }
+!llvm.ident = !{!0}
+!0 = !{!"clang version 3.8.0 (http://llvm.org/git/clang.git 2d49f0a0ae8366964a93e3b7b26e29679bee7160) (http://llvm.org/git/llvm.git 60bc66b44837125843b58ed3e0fd2e6bb948d839)"}
