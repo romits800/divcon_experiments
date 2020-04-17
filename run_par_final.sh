@@ -18,7 +18,7 @@ do
         for i in {0..3} 
         do
             s=\${seedsarr[\$i]}
-            time taskset `printf '0x%x\n' $procs` nohup ./run_final.sh divs_\${i} divs_dir_\${i} divs_\${s}_\${i} \$s &> out_lns_\${s}_\${i}
+            time taskset `printf '0x%x\n' $procs` nohup bash -x run_final.sh divs_\${i} divs_dir_\${i} divs_\${s}_\${i} \$s &> out_lns_\${s}_\${i}
         done" &
 
 done
