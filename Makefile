@@ -31,28 +31,22 @@ OUTFILE = hist_gaps_output0.7hamming.csv
 all: run-par aggr merge gadgets results
 
 run-par: 
-	@echo "bash -x ${RUN_SCRIPT} > ${LOG_FILE} 2>&1"
-	bash -x ${RUN_SCRIPT}  > ${LOG_FILE} 2>&1 &
+	bash -x ${RUN_SCRIPT}  > ${LOG_FILE} 2>&1 
 	
 aggr: 
-	@echo "bash -x ${CALC_SCRIPT} $(PWD) &> ${CLOG_FILE}"
 	bash -x ${CALC_SCRIPT} $(PWD) &> ${CLOG_FILE} 
 
 merge: 
-	@echo "python ${MERGE_SCRIPT} -n max_div -s ${PICKLES_PATH} &> ${MLOG_FILE}"
 	python ${MERGE_SCRIPT} -n max_div -s ${PICKLES_PATH} &> ${MLOG_FILE}
-	@echo "python ${MERGE_SCRIPT} -n rest -s ${PICKLES_PATH} &> ${MLOG_FILE}"
 	python ${MERGE_SCRIPT} -n rest -s ${PICKLES_PATH} &> ${MLOG_FILE}
 
 results: 
 	python ${GENRES_SCRIPT} $(PWD)
 
 gadgets: 
-	@echo "bash -x ${GADG_SCRIPT} ${PWD}/${GADG_PATH} ${PWD} &> ${GLOG_FILE}"
 	bash -x ${GADG_SCRIPT} ${PWD}/${GADG_PATH}  ${PWD} &> ${GLOG_FILE}
 
 extract: 
-	@echo "python ${EXTRACT_SCRIPT} ${PWD} both true ${GADGETS_PATH} &> ${ELOG_FILE}"
 	python ${EXTRACT_SCRIPT} ${PWD} both true ${GADGETS_PATH} &> ${ELOG_FILE}
 
 clean: 
