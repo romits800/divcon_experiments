@@ -36,7 +36,7 @@ git clone https://github.com/unison-code/llvm.git
 
 Select the unsion branch:
 ```
-git branch -b release_38-unison
+git checkout -b release_38-unison origin/release_38-unison
 ```
 
 Install llc:
