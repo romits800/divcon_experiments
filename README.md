@@ -79,7 +79,7 @@ make results
 make gadgets
 ```
 
-#### Extract .csv files
+Extract .csv files
 
 ```bash
 make extract
