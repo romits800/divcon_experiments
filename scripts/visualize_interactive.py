@@ -687,7 +687,7 @@ def tex_agap(d, metric, field, agaps, num, mindist, relax, texname='outfile_agap
         print >> f, "\\begin{longtable}{|l|%s}"%("c|"*(2*len(agaps))) 
 	print >> f, '''\\caption{\label{tab:agaps} The table shows the mean and standard deviation of the pairwise distance 
 			$d$ (Equation~\\ref{eq:aggr}), and the number of generated variants, $num$ (max  200),
-			for different values of the gap to optimal $p\in$\{0\%, 5\%, 10\%, 20\%\}.}\\\\'''
+			for different values of the gap to optimal $p\in$\{0\%, 5\%, 10\%, 20\%\}. \\textbf{Bold} values indicate maximum $d$.}\\\\'''
         print >> f, "\\hline" 
         print >> f, "\multirow{2}{*}{ID}&" + "&".join(["\\multicolumn{2}{c|}{%d\\%%}"%agap for agap in agaps])  + "\\\\" 
         print >> f, "\\cline{2-%d}"%(1+len(agaps)*2)
