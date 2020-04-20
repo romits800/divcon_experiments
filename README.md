@@ -42,6 +42,7 @@ git checkout -b release_38-unison origin/release_38-unison
 Install llc:
 ```
 mkdir build
+cd build
 cmake -G "Unix Makefiles" ..
 make && sudo make install
 ```
