@@ -17,9 +17,6 @@ sudo apt-get install python-tk
 ```
 
 
-#### Python libraries
-
-
 #### Install DivCon
 
 Follow the instruction in [DivCon](https://github.com/romits800/divCon).
