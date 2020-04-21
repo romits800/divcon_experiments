@@ -24,7 +24,7 @@ sudo apt-get install python-tk
 ```
 
 
-#### Install DivCon
+### Install DivCon
 
 Follow the instruction in [DivCon](https://github.com/romits800/divCon).
 
@@ -34,7 +34,7 @@ Set environment variable DIVCON_PATH
 export DIVCON_PATH=/path/to/divcon
 ```
 
-#### Install the llc unison extension
+### Install the llc unison extension
 Clone the git repository with Unison extension:
 
 ```
