@@ -2,7 +2,7 @@
 This repo contains experiments for [DivCon](https://github.com/romits800/divCon).
 For running these experiments as is, you need to have available:
 * 5 physical cores
-* 50GB of memory (less would also probably work)
+* 50GB of memory (less will also probably work)
 
 
 ## Prerequisites
