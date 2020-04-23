@@ -78,7 +78,7 @@ def print_metric(metric):
     else: return "None"
     
  
-if (len(sys.argv) < 4):
+if (len(sys.argv) < 5):
     print "Give as argument folder to the bench folders and the metric"
     print "python extract_results.py <divs_? folder> <max|both> <perc=true|false>" 
     exit (0)
@@ -86,6 +86,7 @@ if (len(sys.argv) < 4):
 path = sys.argv[1]
 gmetric = sys.argv[2]
 perc = sys.argv[3] == "true"
+savefolder = sys.argv[4]
 #agap = sys.argv[3]
 
 
@@ -376,7 +377,7 @@ cmetrics = map(lambda x: x.replace("_", ""), metrics)
 mindist = "1"
 for ag in d:
   for r in rrates:
-    with open("output" + r + ag + ".csv", "w") as f:
+    with open(os.path.join(savefolder,"output" + r + ag + ".csv"), "w") as f:
         f.write(",".join(["Benchmark"] + cmetrics))
         f.write("\n")
         for bi,bench in enumerate(benchmarks, 1):
@@ -413,7 +414,7 @@ def formatdataout(v):
 mindist = "1"
 for ag in d:
   for r in rrates:
-    with open("hist_output" + r + ag + ".csv", "w") as f:
+    with open(os.path.join(savefolder,"hist_output" + r + ag + ".csv"), "w") as f:
         #f.write(",".join(["Benchmark"] + cmetrics))
         #f.write("\n")
         f.write(",".join([""] + [ ",".join(map(lambda x: "\\tiny{%s}"%x, [("$\\le$" if v>0 else "$=$") + str(int(v*100))   for v in vals] + ["num"]) ) for _ in cmetrics]))
@@ -434,7 +435,7 @@ for ag in d:
 rrates2 = ["-", "0.7"]
 for ag in d:
   for m in metrics:
-    with open("hist_output" + m + ag + ".csv", "w") as f:
+    with open(os.path.join(savefolder,"hist_output" + m + ag + ".csv"), "w") as f:
 
         f.write(",".join([""] + [ ",".join(map(lambda x: "\\tiny{%s}"%x, [("$\\le$" if v>0 else "$=$") + str(int(v*100))   for v in vals] + ["num"]) ) for _ in rrates2]))
         f.write("\n")
@@ -458,7 +459,7 @@ for ag in d:
    
 for ag in d:
   for m in metrics:
-    with open("output" + m + ag + ".csv", "w") as f:
+    with open(os.path.join(savefolder,"output" + m + ag + ".csv"), "w") as f:
         f.write(",".join(["Benchmark"] + rrates))
         f.write("\n")
         for bi,bench in enumerate(benchmarks, 1):
@@ -484,7 +485,7 @@ agaps = sorted(d.keys(), key=lambda x: int(x))
 print "agaps", agaps
 for m in metrics:
   for r in rrates:
-    with open("gaps_output" + m + r + ".csv", "w") as f:
+    with open(os.path.join(savefolder,"gaps_output" + m + r + ".csv"), "w") as f:
         f.write(",".join(["Benchmark"] + agaps ))
         f.write("\n")
         for bi,bench in enumerate(benchmarks, 1):
@@ -505,7 +506,7 @@ for m in metrics:
 #for ag in d:
 for m in metrics:
   for r in rrates:
-    with open("hist_gaps_output" + r + m + ".csv", "w") as f:
+    with open(os.path.join(savefolder,"hist_gaps_output" + r + m + ".csv"), "w") as f:
         #f.write(",".join(["Benchmark"] + cmetrics))
         #f.write("\n")
         f.write(",".join([""] + [ ",".join(map(lambda x: "\\tiny{%s}"%x, [("$\\le$" if v>0 else "$=$") + str(int(v*100))   for v in vals] + ["num"]) ) for _ in agaps]))
@@ -525,7 +526,7 @@ print "ks", ks
 for ag in agaps:
  for m in metrics:
   for r in rrates:
-    with open("hist_k_output" + r + m + ag + ".csv", "w") as f:
+    with open(os.path.join(savefolder,"hist_k_output" + r + m + ag + ".csv"), "w") as f:
         #f.write(",".join(["Benchmark"] + cmetrics))
         #f.write("\n")
         f.write(",".join([""] + [ ",".join(map(lambda x: "\\tiny{%s}"%x, [("$\\le$" if v>0 else "$=$") + str(int(v*100))   for v in vals] + ["num"]) ) for _ in agaps]))
@@ -542,7 +543,7 @@ for ag in agaps:
             f.write("\n")
 
 
-with open("benchmarks.csv", "w") as f:
+with open(os.path.join(savefolder,"benchmarks.csv"), "w") as f:
     f.write(",".join(["Bid", "Benchmark"]))
     f.write("\n")
     for bi,b in enumerate(benchmarks,1):

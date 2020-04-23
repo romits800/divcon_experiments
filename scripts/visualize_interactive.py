@@ -3,10 +3,7 @@
 from os import listdir
 
 import numpy as np
-import matplotlib.mlab as mlab
 import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle
-from mpl_toolkits.mplot3d import Axes3D
 from uncertainties import ufloat
 
 import json
@@ -231,11 +228,11 @@ def create_tex(d, metric, field, relax, agap, branch, texname='outfile'):
         c["hexagon"]["lns"] = {'sum':0.,'count':0.}
 
         for benchmark in names:
-            mipsdfs = d[benchmark].has_key("mips") and d[benchmark]["mips"].has_key("dfs") and d[benchmark]["mips"]["dfs"].has_key(metric) and d[benchmark]["mips"]["dfs"][metric].has_key(agap) and d[benchmark]["mips"]["dfs"][metric][agap].has_key(branch) and d[benchmark]["mips"]["dfs"][metric][agap][branch][None].has_key(field)
-	    mipslns = d[benchmark].has_key("mips") and d[benchmark]["mips"].has_key("lns") and d[benchmark]["mips"]["lns"].has_key(metric) and d[benchmark]["mips"]["lns"][metric].has_key(agap) and d[benchmark]["mips"]["lns"][metric][agap].has_key(branch) and d[benchmark]["mips"]["lns"][metric][agap][branch].has_key(relax) and d[benchmark]["mips"]["lns"][metric][agap][branch][relax].has_key(field)
+            mipsdfs = d.has_key(benchmark) and d[benchmark].has_key("mips") and d[benchmark]["mips"].has_key("dfs") and d[benchmark]["mips"]["dfs"].has_key(metric) and d[benchmark]["mips"]["dfs"][metric].has_key(agap) and d[benchmark]["mips"]["dfs"][metric][agap].has_key(branch) and d[benchmark]["mips"]["dfs"][metric][agap][branch][None].has_key(field)
+	    mipslns = d.has_key(benchmark) and d[benchmark].has_key("mips") and d[benchmark]["mips"].has_key("lns") and d[benchmark]["mips"]["lns"].has_key(metric) and d[benchmark]["mips"]["lns"][metric].has_key(agap) and d[benchmark]["mips"]["lns"][metric][agap].has_key(branch) and d[benchmark]["mips"]["lns"][metric][agap][branch].has_key(relax) and d[benchmark]["mips"]["lns"][metric][agap][branch][relax].has_key(field)
 
-            hexagondfs = d[benchmark].has_key("hexagon") and d[benchmark]["hexagon"].has_key("dfs") and d[benchmark]["hexagon"]["dfs"].has_key(metric) and d[benchmark]["hexagon"]["dfs"][metric].has_key(agap) and d[benchmark]["hexagon"]["dfs"][metric][agap].has_key(branch) and d[benchmark]["hexagon"]["dfs"][metric][agap][branch][None].has_key(field)
-            hexagonlns = d[benchmark].has_key("hexagon") and d[benchmark]["hexagon"].has_key("lns") and d[benchmark]["hexagon"]["lns"].has_key(metric) and d[benchmark]["hexagon"]["lns"][metric].has_key(agap) and d[benchmark]["hexagon"]["lns"][metric][agap].has_key(branch) and d[benchmark]["hexagon"]["lns"][metric][agap][branch].has_key(relax) and d[benchmark]["hexagon"]["lns"][metric][agap][branch][relax].has_key(field)
+            hexagondfs = d.has_key(benchmark) and d[benchmark].has_key("hexagon") and d[benchmark]["hexagon"].has_key("dfs") and d[benchmark]["hexagon"]["dfs"].has_key(metric) and d[benchmark]["hexagon"]["dfs"][metric].has_key(agap) and d[benchmark]["hexagon"]["dfs"][metric][agap].has_key(branch) and d[benchmark]["hexagon"]["dfs"][metric][agap][branch][None].has_key(field)
+            hexagonlns = d.has_key(benchmark) and d[benchmark].has_key("hexagon") and d[benchmark]["hexagon"].has_key("lns") and d[benchmark]["hexagon"]["lns"].has_key(metric) and d[benchmark]["hexagon"]["lns"][metric].has_key(agap) and d[benchmark]["hexagon"]["lns"][metric][agap].has_key(branch) and d[benchmark]["hexagon"]["lns"][metric][agap][branch].has_key(relax) and d[benchmark]["hexagon"]["lns"][metric][agap][branch][relax].has_key(field)
 
             arg1 = "-"
             arg2 = "-"
@@ -354,13 +351,7 @@ def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile
 		print >> f, "\\usepackage{longtable}"
 		print >> f, "\\begin{document}"
         print >> f, "\\begin{longtable}{|l|%s}"%("c|"*2*(len(relax)+2)) 
-	print >> f, '''\\caption{\label{tab:dist_max_rs_lns} Evaluation of \\ac{LNS} with \\ac{RS} and \\textsc{MaxDiverse$k$Set}
-		with regards to pairwise distance $d$ and diversification time $t$ for 200 variants. The values
-		show the mean and the standard deviation over the random seeds.
-		\\textbf{Bold} text indicates the highest value of $d$ and lowest value of $t$
-		for the completed experiments. 
-		\\textit{Italic} text indicates the incomplete experiments, 
-		with the number of generated variants in parenthesis.}\\\\'''
+	print >> f, '''\\caption{\label{tab:dist_max_rs_lns} Evaluation of \\ac{LNS} with \\ac{RS} and \\textsc{MaxDiverse$k$Set}}\\\\'''
         print >> f, "\\hline" 
         print >> f, "\multirow{2}{*}{ID}&\\multicolumn{2}{c|}{\\textsc{MaxDiverse$k$Set}}&\\multicolumn{2}{c|}{{RS}}&\\multicolumn{%d}{c|}{LNS (0.7)}\\\\" %(2*len(relax)) 
         #print >> f, "\\cline{6-%d}"%(5+len(relax)*2)
@@ -373,19 +364,19 @@ def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile
 
         for bi,benchmark in enumerate(benchmarks,1):
 	    branch = "cloriginal"
-	    mipsm = d[benchmark].has_key("mips") and d[benchmark]["mips"].has_key("dfs") and d[benchmark]["mips"]["dfs"].has_key(metric) and d[benchmark]["mips"]["dfs"][metric].has_key(agap) and d[benchmark]["mips"]["dfs"][metric][agap].has_key(branch) and d[benchmark]["mips"]["dfs"][metric][agap][branch][None].has_key(mindist) and d[benchmark]["mips"]["dfs"][metric][agap][branch][None][mindist].has_key(field)
+	    mipsm = d.has_key(benchmark) and d[benchmark].has_key("mips") and d[benchmark]["mips"].has_key("dfs") and d[benchmark]["mips"]["dfs"].has_key(metric) and d[benchmark]["mips"]["dfs"][metric].has_key(agap) and d[benchmark]["mips"]["dfs"][metric][agap].has_key(branch) and d[benchmark]["mips"]["dfs"][metric][agap][branch][None].has_key(mindist) and d[benchmark]["mips"]["dfs"][metric][agap][branch][None][mindist].has_key(field)
 	    def mipsmax(num):
 		branch = "cloriginal"
 		return  mipsm and d[benchmark]["mips"]["dfs"][metric][agap][branch][None][mindist][field].has_key(num)
 	    branch = "clrandom"
-            mipsrs = d[benchmark].has_key("mips") and d[benchmark]["mips"].has_key("dfs") and d[benchmark]["mips"]["dfs"].has_key(metric) and d[benchmark]["mips"]["dfs"][metric].has_key(agap) and d[benchmark]["mips"]["dfs"][metric][agap].has_key(branch) and d[benchmark]["mips"]["dfs"][metric][agap][branch][None].has_key(mindist) and d[benchmark]["mips"]["dfs"][metric][agap][branch][None][mindist].has_key(field) 
+            mipsrs = d.has_key(benchmark) and d[benchmark].has_key("mips") and d[benchmark]["mips"].has_key("dfs") and d[benchmark]["mips"]["dfs"].has_key(metric) and d[benchmark]["mips"]["dfs"][metric].has_key(agap) and d[benchmark]["mips"]["dfs"][metric][agap].has_key(branch) and d[benchmark]["mips"]["dfs"][metric][agap][branch][None].has_key(mindist) and d[benchmark]["mips"]["dfs"][metric][agap][branch][None][mindist].has_key(field) 
 	    def mipsrsnum(num):
 		return mipsrs and d[benchmark]["mips"]["dfs"][metric][agap][branch][None][mindist][field].has_key(num)
 
             def mipslns(relax):
                 #print relax
 		branch = "clrandom"
-                return d[benchmark].has_key("mips") and d[benchmark]["mips"].has_key("lns") and d[benchmark]["mips"]["lns"].has_key(metric) and d[benchmark]["mips"]["lns"][metric].has_key(agap) and d[benchmark]["mips"]["lns"][metric][agap].has_key(branch) and d[benchmark]["mips"]["lns"][metric][agap][branch].has_key(relax) and d[benchmark]["mips"]["lns"][metric][agap][branch][relax].has_key(mindist) and d[benchmark]["mips"]["lns"][metric][agap][branch][relax][mindist].has_key(field) 
+                return d.has_key(benchmark) and d[benchmark].has_key("mips") and d[benchmark]["mips"].has_key("lns") and d[benchmark]["mips"]["lns"].has_key(metric) and d[benchmark]["mips"]["lns"][metric].has_key(agap) and d[benchmark]["mips"]["lns"][metric][agap].has_key(branch) and d[benchmark]["mips"]["lns"][metric][agap][branch].has_key(relax) and d[benchmark]["mips"]["lns"][metric][agap][branch][relax].has_key(mindist) and d[benchmark]["mips"]["lns"][metric][agap][branch][relax][mindist].has_key(field) 
 	    def mipslnsnum(relax, num):
 		return mipslns(relax) and d[benchmark]["mips"]["lns"][metric][agap][branch][relax][mindist][field].has_key(num) 
 
@@ -559,19 +550,7 @@ def tex_distances(d, field, agap, num, mindist, relax, metrics, texname='outfile
 		print >> f, "\\begin{document}"
         print >> f, "\\begin{longtable}{|l|l|l|l|l\"%s}"%("c|"*2*(len(metrics))) 
 	deltas = map(dist_to_delta, metrics)
-	print >> f, '''\\caption{\\label{tab:distances}{The first five
-		      columns present information about
-		      the benchmarks, i.e.\ their origin application,
-		      the function name, the number of basic blocks (b), and 
-		      the lines of instructions (l).
-		      The last six columns show the results of the distance
-		      evaluation with
-		      the diversification time, $t$, and the number of generated
-		      variants, $num$, for the three distances 
-		      %s. 
-		      The values in  \\textbf{bold} represent the minimum 
-		      diversification time for each benchmark and ``-''
-		      correspond to incomplete experiments with less than 200 variants.}}\\\\'''%(", ".join(deltas[:-1]) + ", and " + deltas[-1])
+	print >> f, '''\\caption{\\label{tab:distances}{Benchamrk Details and Distance Evaluation}}\\\\'''%(", ".join(deltas[:-1]) + ", and " + deltas[-1])
         print >> f, "\\hline" 
         #print >> f, "&\\multicolumn{2}{c|}{\\multirow{2}{*}{\\textsc{MaxDiverse$k$Set}}}&\\multicolumn{2}{c|}{\\multirow{2}{*}{RS}}&\\multicolumn{%d}{c|}{LNS}\\\\" %2*len(relax) 
         #print >> f, "\\cline{6-%d}"%(5+len(relax)*2)
@@ -585,7 +564,7 @@ def tex_distances(d, field, agap, num, mindist, relax, metrics, texname='outfile
         for bi,benchmark in enumerate(benchmarks, 1):
             def mipslns_0(metric):
 		branch = "clrandom"
-                return d[benchmark].has_key("mips") and d[benchmark]["mips"].has_key("lns") and d[benchmark]["mips"]["lns"].has_key(metric) and d[benchmark]["mips"]["lns"][metric].has_key(agap) and d[benchmark]["mips"]["lns"][metric][agap].has_key(branch) and d[benchmark]["mips"]["lns"][metric][agap][branch].has_key(relax) and d[benchmark]["mips"]["lns"][metric][agap][branch][relax].has_key(mindist) and d[benchmark]["mips"]["lns"][metric][agap][branch][relax][mindist].has_key(field)
+                return d.has_key(benchmark) and d[benchmark].has_key("mips") and d[benchmark]["mips"].has_key("lns") and d[benchmark]["mips"]["lns"].has_key(metric) and d[benchmark]["mips"]["lns"][metric].has_key(agap) and d[benchmark]["mips"]["lns"][metric][agap].has_key(branch) and d[benchmark]["mips"]["lns"][metric][agap][branch].has_key(relax) and d[benchmark]["mips"]["lns"][metric][agap][branch][relax].has_key(mindist) and d[benchmark]["mips"]["lns"][metric][agap][branch][relax][mindist].has_key(field)
             def mipslns(metric, num):
 		branch = "clrandom"
                 return mipslns_0(metric) and d[benchmark]["mips"]["lns"][metric][agap][branch][relax][mindist][field].has_key(num)
@@ -688,9 +667,7 @@ def tex_agap(d, metric, field, agaps, num, mindist, relax, texname='outfile_agap
 		print >> f, "\\usepackage{longtable}"
 		print >> f, "\\begin{document}"
         print >> f, "\\begin{longtable}{|l|%s}"%("c|"*(2*len(agaps))) 
-	print >> f, '''\\caption{\label{tab:agaps} The table shows the mean and standard deviation of the pairwise distance 
-			$d$ (Equation~\\ref{eq:aggr}), and the number of generated variants, $num$ (max  200),
-			for different values of the gap to optimal $p\in$\{0\%, 5\%, 10\%, 20\%\}.}\\\\'''
+	print >> f, '''\\caption{\label{tab:agaps} Trade-off between Diversity and Optimality}\\\\'''
         print >> f, "\\hline" 
         print >> f, "\multirow{2}{*}{ID}&" + "&".join(["\\multicolumn{2}{c|}{%d\\%%}"%agap for agap in agaps])  + "\\\\" 
         print >> f, "\\cline{2-%d}"%(1+len(agaps)*2)
@@ -703,7 +680,7 @@ def tex_agap(d, metric, field, agaps, num, mindist, relax, texname='outfile_agap
 	    branch = "clrandom"
             def mipslns(agap):
                 #print relax
-                return d[benchmark].has_key("mips") and d[benchmark]["mips"].has_key("lns") and d[benchmark]["mips"]["lns"].has_key(metric) and d[benchmark]["mips"]["lns"][metric].has_key(agap) and d[benchmark]["mips"]["lns"][metric][agap].has_key(branch) and d[benchmark]["mips"]["lns"][metric][agap][branch].has_key(relax) and d[benchmark]["mips"]["lns"][metric][agap][branch][relax].has_key(mindist) and d[benchmark]["mips"]["lns"][metric][agap][branch][relax][mindist].has_key(field) 
+                return d.has_key(benchmark) and d[benchmark].has_key("mips") and d[benchmark]["mips"].has_key("lns") and d[benchmark]["mips"]["lns"].has_key(metric) and d[benchmark]["mips"]["lns"][metric].has_key(agap) and d[benchmark]["mips"]["lns"][metric][agap].has_key(branch) and d[benchmark]["mips"]["lns"][metric][agap][branch].has_key(relax) and d[benchmark]["mips"]["lns"][metric][agap][branch][relax].has_key(mindist) and d[benchmark]["mips"]["lns"][metric][agap][branch][relax][mindist].has_key(field) 
 	    def mipslnsnum(agap, num):
 		return mipslns(agap) and d[benchmark]["mips"]["lns"][metric][agap][branch][relax][mindist][field].has_key(num) 
 
@@ -786,7 +763,7 @@ def plot_maxdiv_lns_new(d, b, metric, field, agap, relax, mindist, dist=True, pa
     algo = 'dfs'
     br   = 'cloriginal'
  
-    if (d[b].has_key(arch) and d[b][arch].has_key(algo) and d[b][arch][algo].has_key(metric) and d[b][arch][algo][metric].has_key(agap) and d[b][arch][algo][metric][agap].has_key(br) and d[b][arch][algo][metric][agap][br][None].has_key(mindist) and d[b][arch][algo][metric][agap][br][None][mindist].has_key(field)):
+    if (d.has_key(b) and d[b].has_key(arch) and d[b][arch].has_key(algo) and d[b][arch][algo].has_key(metric) and d[b][arch][algo][metric].has_key(agap) and d[b][arch][algo][metric][agap].has_key(br) and d[b][arch][algo][metric][agap][br][None].has_key(mindist) and d[b][arch][algo][metric][agap][br][None][mindist].has_key(field)):
         cdict = dict(**d[b][arch][algo][metric][agap][br][None][mindist][field])
         k = sorted(cdict.keys())
         xy = [ (i, cdict[i][avg], 2*cdict[i][stdev]/math.sqrt(cdict[i]['n'])) for i in  k]
@@ -800,7 +777,7 @@ def plot_maxdiv_lns_new(d, b, metric, field, agap, relax, mindist, dist=True, pa
     algo = 'dfs'
     br   = 'clrandom'
  
-    if (d[b].has_key(arch) and d[b][arch].has_key(algo) and d[b][arch][algo].has_key(metric) and d[b][arch][algo][metric].has_key(agap) and d[b][arch][algo][metric][agap].has_key(br) and d[b][arch][algo][metric][agap][br].has_key(None) and d[b][arch][algo][metric][agap][br][None].has_key(mindist) and d[b][arch][algo][metric][agap][br][None][mindist].has_key(field)):
+    if (d.has_key(b) and d[b].has_key(arch) and d[b][arch].has_key(algo) and d[b][arch][algo].has_key(metric) and d[b][arch][algo][metric].has_key(agap) and d[b][arch][algo][metric][agap].has_key(br) and d[b][arch][algo][metric][agap][br].has_key(None) and d[b][arch][algo][metric][agap][br][None].has_key(mindist) and d[b][arch][algo][metric][agap][br][None][mindist].has_key(field)):
         cdict = dict(**d[b][arch][algo][metric][agap][br][None][mindist][field])
         k = sorted(cdict.keys())
         xy = [ (i, cdict[i][avg], 2*cdict[i][stdev]/math.sqrt(cdict[i]['n'])) for i in  k]
@@ -814,7 +791,7 @@ def plot_maxdiv_lns_new(d, b, metric, field, agap, relax, mindist, dist=True, pa
     algo = 'lns'
     br   = 'clrandom'
  
-    if (d[b].has_key(arch) and d[b][arch].has_key(algo) and d[b][arch][algo].has_key(metric) and d[b][arch][algo][metric].has_key(agap) and d[b][arch][algo][metric][agap].has_key(br) and d[b][arch][algo][metric][agap][br].has_key(rel) and d[b][arch][algo][metric][agap][br][None].has_key(mindist) and d[b][arch][algo][metric][agap][br][rel][mindist].has_key(field)):
+    if (d.has_key(b) and d[b].has_key(arch) and d[b][arch].has_key(algo) and d[b][arch][algo].has_key(metric) and d[b][arch][algo][metric].has_key(agap) and d[b][arch][algo][metric][agap].has_key(br) and d[b][arch][algo][metric][agap][br].has_key(rel) and d[b][arch][algo][metric][agap][br][None].has_key(mindist) and d[b][arch][algo][metric][agap][br][rel][mindist].has_key(field)):
         cdict = dict(**d[b][arch][algo][metric][agap][br][rel][mindist][field])
         k = sorted(cdict.keys())
         xy = [ (i, cdict[i][avg], 2*cdict[i][stdev]/math.sqrt(cdict[i]['n'])) for i in k ]
@@ -866,7 +843,7 @@ def plot_coefficient_of_variation(d_maxdiv, d_lns, b, metric, field, agap, relax
     algo = 'dfs'
     br   = 'cloriginal'
  
-    if (d_maxdiv[b].has_key(arch) and d_maxdiv[b][arch].has_key(algo) and d_maxdiv[b][arch][algo].has_key(metric) and d_maxdiv[b][arch][algo][metric].has_key(agap) and d_maxdiv[b][arch][algo][metric][agap].has_key(br) and d_maxdiv[b][arch][algo][metric][agap][br][None].has_key(field)):
+    if (d_maxdiv.has_key(b) and d_maxdiv[b].has_key(arch) and d_maxdiv[b][arch].has_key(algo) and d_maxdiv[b][arch][algo].has_key(metric) and d_maxdiv[b][arch][algo][metric].has_key(agap) and d_maxdiv[b][arch][algo][metric][agap].has_key(br) and d_maxdiv[b][arch][algo][metric][agap][br][None].has_key(field)):
         cdict = dict(**d_maxdiv[b][arch][algo][metric][agap][br][None][field])
         k = sorted(cdict.keys())
         xy = [ (i, cdict[i][stdev]/cdict[i][mean] if cdict[i][mean]>0 else 0) for i in  k]
@@ -878,7 +855,7 @@ def plot_coefficient_of_variation(d_maxdiv, d_lns, b, metric, field, agap, relax
     algo = 'dfs'
     br   = 'clrandom'
  
-    if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(None) and d_lns[b][arch][algo][metric][agap][br][None].has_key(field)):
+    if (d_lns.has_key(b) and d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(None) and d_lns[b][arch][algo][metric][agap][br][None].has_key(field)):
         cdict = dict(**d_lns[b][arch][algo][metric][agap][br][None][field])
         k = sorted(cdict.keys())
         xy = [ (i, cdict[i][stdev]/cdict[i][mean] if cdict[i][mean]>0 else 0) for i in  k]
@@ -890,7 +867,7 @@ def plot_coefficient_of_variation(d_maxdiv, d_lns, b, metric, field, agap, relax
     algo = 'lns'
     br   = 'clrandom'
  
-    if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(rel) and d_lns[b][arch][algo][metric][agap][br][rel].has_key(field)):
+    if (d_lns.has_key(b) and d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(rel) and d_lns[b][arch][algo][metric][agap][br][rel].has_key(field)):
         cdict = dict(**d_lns[b][arch][algo][metric][agap][br][rel][field])
         k = sorted(cdict.keys())
         xy = [ (i, cdict[i][stdev]/cdict[i][mean] if cdict[i][mean]>0 else 0) for i in  k]
@@ -937,7 +914,7 @@ def plot_rs_vs_lns( d_lns, metric, field, agap, colors, num, mindist, loc='upper
         algo = 'dfs'
         br   = 'clrandom'
      
-        if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(None) and d_lns[b][arch][algo][metric][agap][br][None].has_key(mindist) and d_lns[b][arch][algo][metric][agap][br][None][mindist].has_key(field) and d_lns[b][arch][algo][metric][agap][br][None][mindist][field].has_key(num)):
+        if (d_lns.has_key(b) and d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(None) and d_lns[b][arch][algo][metric][agap][br][None].has_key(mindist) and d_lns[b][arch][algo][metric][agap][br][None][mindist].has_key(field) and d_lns[b][arch][algo][metric][agap][br][None][mindist][field].has_key(num)):
             cdict = dict(**d_lns[b][arch][algo][metric][agap][br][None][mindist][field])
             k = sorted(cdict.keys())
             
@@ -957,7 +934,7 @@ def plot_rs_vs_lns( d_lns, metric, field, agap, colors, num, mindist, loc='upper
                 #if not lns.has_key(rel):
                  #       lns[rel] = dict()
 
-                if (d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(rel) and d_lns[b][arch][algo][metric][agap][br][rel].has_key(mindist) and d_lns[b][arch][algo][metric][agap][br][rel][mindist].has_key(field) and d_lns[b][arch][algo][metric][agap][br][rel][mindist][field].has_key(num)):
+                if (d_lns.has_key(b) and d_lns[b].has_key(arch) and d_lns[b][arch].has_key(algo) and d_lns[b][arch][algo].has_key(metric) and d_lns[b][arch][algo][metric].has_key(agap) and d_lns[b][arch][algo][metric][agap].has_key(br) and d_lns[b][arch][algo][metric][agap][br].has_key(rel) and d_lns[b][arch][algo][metric][agap][br][rel].has_key(mindist) and d_lns[b][arch][algo][metric][agap][br][rel][mindist].has_key(field) and d_lns[b][arch][algo][metric][agap][br][rel][mindist][field].has_key(num)):
                     lnsdict = dict(**d_lns[b][arch][algo][metric][agap][br][rel][mindist][field][num])
                     #k = sorted(cdict.keys())
 

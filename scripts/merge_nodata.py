@@ -1,7 +1,6 @@
 #!/usr/bin/python
 
-from os import listdir
-
+from os import listdir, path
 import json
 
 import sys
@@ -21,10 +20,11 @@ d = dict()
 ds = dict()
 
 pathname = "."
+savepath = "."
 name = ""
 
 try:
-    opts, args = getopt.getopt(sys.argv[1:],"hp:n:",["pathname=", "name="])
+    opts, args = getopt.getopt(sys.argv[1:],"hp:n:s:",["pathname=", "name=", "savepath="])
 except getopt.GetoptError:
     print "$ python merge_nodata.py -p <path of the measurments> -n <sufix of the pickle files>"
     # print 'test.py -i <inputfile> -o <outputfile>'
@@ -39,13 +39,15 @@ for opt, arg in opts:
         print "path", opt, arg
     elif opt in ("-n", "--name"):
 	name = arg
+    elif opt in ("-s", "--savepath"):
+	savepath = arg
     else:
         print "Not correct", opt
 
 
 
 i = 0
-for f in listdir("."):
+for f in listdir(pathname):
     if f.endswith(".pickle") and f.startswith(name):
         ds[i] = pickle.load(open(f))
         i+=1 
@@ -240,5 +242,5 @@ for b in benchmarks:
 
 
 
-pickle.dump(d, open(name + "_divs.pickle", "w"))
+pickle.dump(d, open(path.join(savepath, name + "_divs.pickle"), "w"))
 
