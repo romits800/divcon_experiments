@@ -148,7 +148,7 @@ do
                     #fi
                     for relax in 0.7
                     do
-                        for lp in 5000 #10000 #100000 
+                        for lp in 500 #10000 #100000 
                         do
                             for rest in "constant"
                             do
@@ -191,7 +191,7 @@ do
                     #fi
                     for relax in 0.05 0.1 0.15 0.2 0.25 0.3 0.4 0.5 0.6 0.7 0.8 0.9
                     do
-                        for lp in 5000 #10000 #100000 
+                        for lp in 500 #10000 #100000 
                         do
                             for rest in "constant"
                             do
@@ -225,7 +225,7 @@ do
                     branch="clrandom"
                    for relax in 0.7
                     do
-                        for lp in 5000 #10000 #100000 
+                        for lp in 500 #10000 #100000 
                         do
                             for rest in "constant"
                             do
@@ -270,7 +270,7 @@ do
                     #fi
                     for relax in 0.7
                     do
-                        for lp in 5000 #10000 #100000 
+                        for lp in 500 #10000 #100000 
                         do
                             for rest in "constant"
                             do

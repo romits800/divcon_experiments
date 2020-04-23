@@ -1,6 +1,0 @@
-1
-('17.factorial.out.json', '30.factorial.out.json')
-11
-('11.factorial.out.json', '0.factorial.out.json')
-4950.0
-Hdist: 5.52303030303
