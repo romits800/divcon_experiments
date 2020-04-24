@@ -10,7 +10,7 @@ For running these experiments as is, you need to have available:
 The scripts in this code have dependencies on [ROPgadget](http://shell-storm.org/project/ROPgadget/),
 [capstone](https://www.capstone-engine.org/lang_python.html),
 [matplotlib](https://matplotlib.org/), 
-[numpy](https://numpy.org/) and,
+[numpy](https://numpy.org/), and
 [uncertainties](https://pythonhosted.org/uncertainties/)
 
 To install these run:

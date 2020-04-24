@@ -550,7 +550,7 @@ def tex_distances(d, field, agap, num, mindist, relax, metrics, texname='outfile
 		print >> f, "\\begin{document}"
         print >> f, "\\begin{longtable}{|l|l|l|l|l\"%s}"%("c|"*2*(len(metrics))) 
 	deltas = map(dist_to_delta, metrics)
-	print >> f, '''\\caption{\\label{tab:distances}{Benchamrk Details and Distance Evaluation}}\\\\'''%(", ".join(deltas[:-1]) + ", and " + deltas[-1])
+	print >> f, '''\\caption{\\label{tab:distances}{Benchamrk Details and Distance Evaluation}}\\\\'''
         print >> f, "\\hline" 
         #print >> f, "&\\multicolumn{2}{c|}{\\multirow{2}{*}{\\textsc{MaxDiverse$k$Set}}}&\\multicolumn{2}{c|}{\\multirow{2}{*}{RS}}&\\multicolumn{%d}{c|}{LNS}\\\\" %2*len(relax) 
         #print >> f, "\\cline{6-%d}"%(5+len(relax)*2)
