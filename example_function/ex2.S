@@ -4,7 +4,7 @@
 
 ex2:
 	slt $t1, $a0, $0
-	bzeq $t1, if1
+	beq $t1, $0, if1
 	nop
 	add $v0, $a0, $0
 	jr $ra
