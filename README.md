@@ -26,9 +26,9 @@ sudo apt-get install python-tk
 
 ### Install DivCon
 
-Follow the instruction in [DivCon](https://github.com/romits800/divCon).
+To Install DivCon, follow the instruction in [DivCon](https://github.com/romits800/divCon).
 
-Set environment variable DIVCON_PATH
+After successfully installing DivCon, set environment variable DIVCON_PATH:
 
 ```bash
 export DIVCON_PATH=/path/to/divcon
