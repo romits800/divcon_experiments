@@ -484,7 +484,6 @@ def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile
 
             #vitems = filter(lambda (m,y): "textit" not in arg[m] and arg[m] == '-', val.items())
             vitems = filter(lambda (m,y): "textit" not in arg[m] and arg[m] != '-', val.items())
-            
             if (len(vitems)>0) and (sum(zip(*vitems)[1]) > 0):
                 mr, m = max(vitems, key=lambda (x,y): y)
                 mrs,_ = zip(*filter(lambda (x,y): abs(y - m) < 1, vitems))
@@ -492,7 +491,6 @@ def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile
                     arg[r] = "\\textbf{%s}" %arg[r]
 
             vitems = filter(lambda (m,y): "textit" not in argtime[m] and "-" not in argtime[m], valtime.items())
-            
             if (len(vitems)>0) and (sum(zip(*vitems)[1]) > 0):
                 mr, m = min(vitems, key=lambda (x,y): y)
                 mrs,_ = zip(*filter(lambda (x,y): abs(y - m) < 1, vitems))
@@ -505,10 +503,10 @@ def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile
 
 
         #impr1 = improvement(arg2, arg1)
-        print >> f, "\\hline" 
-        print >> f, "\\end{longtable}" 
+        print >> f, "\\hline"
+        print >> f, "\\end{longtable}"
 	if show:
-		print >> f, "\\end{document}" 
+		print >> f, "\\end{document}"
 
     if show:
 	    p = subprocess.Popen(["pdflatex", texname + ".tex"], stdout=subprocess.PIPE)
@@ -516,6 +514,37 @@ def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile
 	    p = subprocess.Popen(["evince", texname + ".pdf"], stdout=subprocess.PIPE)
 	    p.communicate()
 
+
+
+def tex_benchmarks(texname='outfile'):
+    '''
+	d: the dictionary with the measurements
+		e.g. d = pickle.load(open("divs.pickle"))
+	field: 'avg', 'bravg', 'brdiff' output metric
+	agap: 5, 10, 20 allowed gap from the optimal solution
+	metric: the metrics of the measurement (from divcon - unison)
+        texname: name of the output .tex file - default = 'outfile'
+    '''
+
+    with open(texname + '.tex', 'w') as f:
+        print >> f, "\\begin{longtable}{|l|l|l|l|l|}"
+        print >> f, '''\\caption{\\label{tab:benchmarks}{Benchmarks}}\\\\'''
+        print >> f, "\\hline"
+        print >> f, "{ID}&{app}&{function name}&{b}&{l}\\\\"
+        print >> f, "\\hline"
+        for bi,benchmark in enumerate(benchmarks, 1):
+            bmark = benchmark.split(".")
+	    app = bmark[0]
+	    func = bmark[-1] if len(bmark[-1])<=19 else "%s.."%bmark[-1][:19]
+	    func = func.replace("_","\\_")
+            print >> f, "&".join(["b%d" %bi, app, func, str(basic_blocks[benchmark]), str(number_instr[benchmark])])
+            print >> f, "\\\\"
+
+        print >> f, "\\hline"
+        print >> f, "\\end{longtable}"
+
+
+        #impr1 = improvement(arg2, arg1)
 
 def tex_distances(d, field, agap, num, mindist, relax, metrics, texname='outfile', debug=False, show=True):
     '''
@@ -548,15 +577,14 @@ def tex_distances(d, field, agap, num, mindist, relax, metrics, texname='outfile
 		print >> f, "\\usepackage{multirow}"
 		print >> f, "\\usepackage{longtable}"
 		print >> f, "\\begin{document}"
-        print >> f, "\\begin{longtable}{|l|l|l|l|l\"%s}"%("c|"*2*(len(metrics))) 
+
+        print >> f, "\\begin{longtable}{|l|%s}"%("c|"*2*(len(metrics)))
 	deltas = map(dist_to_delta, metrics)
-	print >> f, '''\\caption{\\label{tab:distances}{Benchamrk Details and Distance Evaluation}}\\\\'''
-        print >> f, "\\hline" 
-        #print >> f, "&\\multicolumn{2}{c|}{\\multirow{2}{*}{\\textsc{MaxDiverse$k$Set}}}&\\multicolumn{2}{c|}{\\multirow{2}{*}{RS}}&\\multicolumn{%d}{c|}{LNS}\\\\" %2*len(relax) 
-        #print >> f, "\\cline{6-%d}"%(5+len(relax)*2)
-        print >> f, "\\multirow{2}{*}{ID}&\\multirow{2}{*}{app}&\\multirow{2}{*}{function name}&\\multirow{2}{*}{b}&\\multirow{2}{*}{l}&%s\\\\" %( "&".join(map(lambda x: "\\multicolumn{2}{c|}{%s}"%(dist_to_delta(x)), metrics)))
-        print >> f, "\\cline{6-%d}"%(5 + len(metrics)*2)
-        print >> f, "&&&&&%s\\\\" %( "&".join([r"$t(s)$", "num"]*(len(metrics))))
+	print >> f, '''\\caption{\\label{tab:distances}{Distance Evaluation}}\\\\'''
+        print >> f, "\\hline"
+        print >> f, "\\multirow{2}{*}{ID}&%s\\\\" %( "&".join(map(lambda x: "\\multicolumn{2}{c|}{%s}"%(dist_to_delta(x)), metrics)))
+        print >> f, "\\cline{2-%d}"%(1 + len(metrics)*2)
+        print >> f, "&%s\\\\" %( "&".join([r"$t(s)$", "num"]*(len(metrics))))
     # MaxDiversekSet
        # print >> f, "&\\footnotesize dfs (%s\\textbackslash maxd (N))&\\footnotesize  lns (%s\\textbackslash maxd (N))&\\footnotesize  improv. \\%%  \\\\" %( ind, ind) 
         print >> f, "\\hline" 
@@ -615,11 +643,11 @@ def tex_distances(d, field, agap, num, mindist, relax, metrics, texname='outfile
                 for m in mrs:
                     argtime[m] = "\\textbf{%s}" %argtime[m]
 
-	    bmark = benchmark.split(".")
-	    app = bmark[0]
-	    func = bmark[-1] if len(bmark[-1])<=19 else "%s.."%bmark[-1][:19]
-	    func = func.replace("_","\\_")
-            print >> f, "&".join(["b%d" %bi, app, func, str(basic_blocks[benchmark]), str(number_instr[benchmark])] + [ "%s & %s" %(argtime[m], arg[m])  for m in metrics ]) #"%s&%s&%s&%s\\\\"%("b" + str(bi), arg1, arg2, impr1)
+	    # bmark = benchmark.split(".")
+	    # app = bmark[0]
+	    # func = bmark[-1] if len(bmark[-1])<=19 else "%s.."%bmark[-1][:19]
+	    # func = func.replace("_","\\_")
+            print >> f, "&".join(["b%d" %bi] + [ "%s & %s" %(argtime[m], arg[m])  for m in metrics ])
             print >> f, "\\\\"
 
 

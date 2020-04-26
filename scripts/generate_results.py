@@ -29,11 +29,14 @@ d_rest = pickle.load(open(os.path.join(res_folder, pickles, "rest_divs.pickle"))
 
 vi.tex_agap(d_rest, "hamming", "avg", [0, 5, 10,20], 200, "1", "0.7", texname=os.path.join(res_folder, rest, "lns_gaps"), show=False)
 
+# Benchmarks
+vi.tex_benchmarks(texname=os.path.join(res_folder, rest, "benchmarks"))
+
 # Distance evaluation
 vi.tex_distances(d_rest, "avg", "10", 200, "1", "0.7", ["hamming", "br_hamming", "levenshtein"], texname=os.path.join(res_folder, rest, "lns_distances"), show=False)
 
 # Generate figures for appendix - Selection of relax rate
-colors = ['rosybrown', "firebrick", "darkred","chocolate", "darkorange", "khaki", "yellowgreen", "limegreen", 
+colors = ['rosybrown', "firebrick", "darkred","chocolate", "darkorange", "khaki", "yellowgreen", "limegreen",
 	  "darkgreen", "steelblue", "darkblue", "slateblue", "darkorchid","purple", "crimson"]
 vi.plot_rs_vs_lns(d_rest, "hamming", "avg", 10, colors, 200, "1", dist=False, path=os.path.join(res_folder, rest))
 vi.plot_rs_vs_lns(d_rest, "hamming", "avg", 10, colors, 200, "1", path=os.path.join(res_folder, rest))
