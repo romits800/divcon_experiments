@@ -630,23 +630,19 @@ def tex_distances(d, field, agap, num, mindist, relax, metrics, texname='outfile
                         argtime[metric] = "\\textit{%.1f$\\pm$%.1f (%d)}" %(tlnsnum/1000., tlnsstd/1000., tlnsnseeds)
                     else:
                         arg[metric] = "%d" %(n)
-                        argtime[metric] = "-" # if benchmark !=  "sphinx3.profile.ptmr_init" and metric != "br_hamming" else "%.2f$\\pm$%.2f" %(tlnsnum/1000., tlnsstd/1000.)
+                        argtime[metric] = "-"
  
                     val[metric] = lnsnum
                     valtime[metric] = tlnsnum/1000.
 
 
-            vitems = filter(lambda (m,y): "-" not in argtime[m], valtime.items())
-            if len(vitems)>0 and sum(zip(*vitems)[1]) > 0:
-                mr, m = min(vitems, key=lambda (x,y): y)
-                mrs,_ = zip(*filter(lambda (x,y): abs(y - m) < 0.5, vitems))
-                for m in mrs:
-                    argtime[m] = "\\textbf{%s}" %argtime[m]
+            # vitems = filter(lambda (m,y): "-" not in argtime[m], valtime.items())
+            # if len(vitems)>0 and sum(zip(*vitems)[1]) > 0:
+            #     mr, m = min(vitems, key=lambda (x,y): y)
+            #     mrs,_ = zip(*filter(lambda (x,y): abs(y - m) < 0.5, vitems))
+            #     for m in mrs:
+            #         argtime[m] = "\\textbf{%s}" %argtime[m]
 
-	    # bmark = benchmark.split(".")
-	    # app = bmark[0]
-	    # func = bmark[-1] if len(bmark[-1])<=19 else "%s.."%bmark[-1][:19]
-	    # func = func.replace("_","\\_")
             print >> f, "&".join(["b%d" %bi] + [ "%s & %s" %(argtime[m], arg[m])  for m in metrics ])
             print >> f, "\\\\"
 
@@ -739,7 +735,6 @@ def tex_agap(d, metric, field, agaps, num, mindist, relax, texname='outfile_agap
 				maxn = max(keys)
 				(lnsnum,lnsstd,lnsnseeds) =  get_fields(benchmark, "mips", "lns", metric, agap, branch, relax, mindist, field, maxn, "num", "stdev") 
 				(tlnsnum,tlnsstd,tlnsnseeds) =  get_fields(benchmark, "mips", "lns", metric, agap, branch, relax, mindist, field, maxn, "stime", "stime_stdev") 
-		
 				if debug:
 					arg[agap] = "\\textit{%.1f$\\pm$%.1f (%d)}" %(lnsnum, lnsstd, lnsnseeds)
 					argtime[agap] = "\\textit{%.1f$\\pm$%.1f (%d)}" %(tlnsnum/1000., tlnsstd/1000., tlnsnseeds)
@@ -750,9 +745,7 @@ def tex_agap(d, metric, field, agaps, num, mindist, relax, texname='outfile_agap
 				valtime[agap] = maxn #tlnsnum
 
 
-            #vitems = filter(lambda (m,y): "textit" not in arg[m] and arg[m] == '-', val.items())
             vitems = filter(lambda (m,y): "textit" not in arg[m] and arg[m] != '-', val.items())
-            
             if (len(vitems)>0) and (sum(zip(*vitems)[1]) > 0):
                 mr, m = max(vitems, key=lambda (x,y): y)
                 mrs,_ = zip(*filter(lambda (x,y): abs(y - m) < 1, vitems))
