@@ -7,6 +7,19 @@ For running these experiments as is, you need to have available:
 
 ## Prerequisites
 
+All scripts require Python 2, e.g.: 
+```
+python -V
+Python 2.7.12
+```
+
+A way to switch to Python 2 is by using `alias`:
+```
+alias python="/usr/bin/python2.7"
+```
+More ways are described [here](https://stackoverflow.com/questions/7237415/python-2-instead-of-python-3-as-the-temporary-default-python)
+
+
 The scripts in this code have dependencies on [ROPgadget](http://shell-storm.org/project/ROPgadget/),
 [capstone](https://www.capstone-engine.org/lang_python.html),
 [matplotlib](https://matplotlib.org/), 
