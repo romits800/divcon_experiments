@@ -274,8 +274,8 @@ def create_tex(d, metric, field, relax, agap, branch, texname='outfile'):
 
                 c["hexagon"]["dfs"]["sum"] += d[benchmark]["hexagon"]["dfs"][metric][agap][branch][nrelax][field]['num']
                 c["hexagon"]["dfs"]["count"] += 1
-                
-            if hexagonlns: 
+
+            if hexagonlns:
                 lnsnum = d[benchmark]["hexagon"]["lns"][metric][agap][branch][relax][field]['num']
                 lnsmaxnum = d[benchmark]["hexagon"]["lns"][metric][agap][branch][relax][field]['maxnum']
                 lnsdivs = d[benchmark]["hexagon"]["lns"][metric][agap][branch][relax]["divs"]
@@ -351,7 +351,7 @@ def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile
 		print >> f, "\\usepackage{longtable}"
 		print >> f, "\\begin{document}"
         print >> f, "\\begin{longtable}{|l|%s}"%("c|"*2*(len(relax)+2)) 
-	print >> f, '''\\caption{\label{tab:dist_max_rs_lns} Evaluation of \\ac{LNS} with \\ac{RS} and \\textsc{MaxDiverse$k$Set}}\\\\'''
+	print >> f, '''\\caption{\label{tab:dist_max_rs_lns} Distance and Scalability Evaluation of \\ac{LNS} with \\ac{RS} and \\textsc{MaxDiverse$k$Set}}\\\\'''
         print >> f, "\\hline" 
         print >> f, "\multirow{2}{*}{ID}&\\multicolumn{2}{c|}{\\textsc{MaxDiverse$k$Set}}&\\multicolumn{2}{c|}{{RS}}&\\multicolumn{%d}{c|}{LNS (0.7)}\\\\" %(2*len(relax)) 
         #print >> f, "\\cline{6-%d}"%(5+len(relax)*2)
@@ -528,7 +528,7 @@ def tex_benchmarks(texname='outfile'):
 
     with open(texname + '.tex', 'w') as f:
         print >> f, "\\begin{longtable}{|l|l|l|l|l|}"
-        print >> f, '''\\caption{\\label{tab:benchmarks}{Benchmarks}}\\\\'''
+        print >> f, '''\\caption{\\label{tab:benchmarks}{Benchmarks functions with basic-block size and line length}}\\\\'''
         print >> f, "\\hline"
         print >> f, "{ID}&{app}&{function name}&{b}&{l}\\\\"
         print >> f, "\\hline"
@@ -580,7 +580,7 @@ def tex_distances(d, field, agap, num, mindist, relax, metrics, texname='outfile
 
         print >> f, "\\begin{longtable}{|l|%s}"%("c|"*2*(len(metrics)))
 	deltas = map(dist_to_delta, metrics)
-	print >> f, '''\\caption{\\label{tab:distances}{Distance Evaluation}}\\\\'''
+	print >> f, '''\\caption{\\label{tab:distances}{Scalability Evaluation for $\delta_{HD}$ and $\delta_{LD}$}}\\\\'''
         print >> f, "\\hline"
         print >> f, "\\multirow{2}{*}{ID}&%s\\\\" %( "&".join(map(lambda x: "\\multicolumn{2}{c|}{%s}"%(dist_to_delta(x)), metrics)))
         print >> f, "\\cline{2-%d}"%(1 + len(metrics)*2)
