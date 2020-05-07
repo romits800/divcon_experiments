@@ -107,7 +107,7 @@ def dist_to_delta(dist):
 	if dist == "reg_hamming":
 		return r'$\delta_{RH}$'
 	elif dist == "hamming":
-		return r'$\delta_{CHD}$'
+		return r'$\delta_{HD}$'
 	elif dist == "br_hamming":
 		return r'$\delta_{BHD}$'
 	elif dist == "levenshtein":
@@ -351,7 +351,7 @@ def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile
 		print >> f, "\\usepackage{longtable}"
 		print >> f, "\\begin{document}"
         print >> f, "\\begin{longtable}{|l|%s}"%("c|"*2*(len(relax)+2)) 
-	print >> f, '''\\caption{\label{tab:dist_max_rs_lns} Distance and Scalability Evaluation of \\ac{LNS} with \\ac{RS} and \\textsc{MaxDiverse$k$Set}}\\\\'''
+	print >> f, '''\\caption{\label{tab:dist_max_rs_lns} Distance and Scalability of \\ac{LNS} with \\ac{RS} and \\textsc{MaxDiverse$k$Set}}\\\\'''
         print >> f, "\\hline" 
         print >> f, "\multirow{2}{*}{ID}&\\multicolumn{2}{c|}{\\textsc{MaxDiverse$k$Set}}&\\multicolumn{2}{c|}{{RS}}&\\multicolumn{%d}{c|}{LNS (0.7)}\\\\" %(2*len(relax)) 
         #print >> f, "\\cline{6-%d}"%(5+len(relax)*2)
@@ -528,7 +528,7 @@ def tex_benchmarks(texname='outfile'):
 
     with open(texname + '.tex', 'w') as f:
         print >> f, "\\begin{longtable}{|l|l|l|l|l|}"
-        print >> f, '''\\caption{\\label{tab:benchmarks}{Benchmarks functions with basic-block size and line length}}\\\\'''
+        print >> f, '''\\caption{\\label{tab:benchmarks}{Benchmarks functions}}\\\\'''
         print >> f, "\\hline"
         print >> f, "{ID}&{app}&{function name}&{b}&{l}\\\\"
         print >> f, "\\hline"
@@ -580,7 +580,7 @@ def tex_distances(d, field, agap, num, mindist, relax, metrics, texname='outfile
 
         print >> f, "\\begin{longtable}{|l|%s}"%("c|"*2*(len(metrics)))
 	deltas = map(dist_to_delta, metrics)
-	print >> f, '''\\caption{\\label{tab:distances}{Scalability Evaluation for $\delta_{HD}$ and $\delta_{LD}$}}\\\\'''
+	print >> f, '''\\caption{\\label{tab:distances}{Scalability of $\delta_{HD}, \delta_{LD}$}}\\\\'''
         print >> f, "\\hline"
         print >> f, "\\multirow{2}{*}{ID}&%s\\\\" %( "&".join(map(lambda x: "\\multicolumn{2}{c|}{%s}"%(dist_to_delta(x)), metrics)))
         print >> f, "\\cline{2-%d}"%(1 + len(metrics)*2)
@@ -628,6 +628,9 @@ def tex_distances(d, field, agap, num, mindist, relax, metrics, texname='outfile
                     if debug:
                         arg[metric] = "\\textit{%.1f$\\pm$%.1f (%d)}" %(lnsnum, lnsstd, lnsnseeds)
                         argtime[metric] = "\\textit{%.1f$\\pm$%.1f (%d)}" %(tlnsnum/1000., tlnsstd/1000., tlnsnseeds)
+                    elif (benchmark ==  "sphinx3.profile.ptmr_init"):
+                        arg[metric] = "%d" %(n)
+                        argtime[metric] = "%.1f$\\pm$%.1f" %(tlnsnum/1000., tlnsstd/1000.)
                     else:
                         arg[metric] = "%d" %(n)
                         argtime[metric] = "-"
@@ -823,7 +826,7 @@ def plot_maxdiv_lns_new(d, b, metric, field, agap, relax, mindist, dist=True, pa
 
     if dist:
         ax.set_ylim(bottom=0)
-        ax.set_ylabel(r'$d(\delta_{CHD})$', fontsize=14)
+        ax.set_ylabel(r'$d(\delta_{HD})$', fontsize=14)
         #ax.set_ylabel(et_ind(field), fontsize=14)
  
     else:      
@@ -996,7 +999,7 @@ def plot_rs_vs_lns( d_lns, metric, field, agap, colors, num, mindist, loc='upper
     xn = [ float(r) for r in rrates[1:]]
     plt.fill_between(xn, [-1. for _ in xn], [1. for _ in xn], linestyle='-.', color='gray', alpha=0.8, hatch='/')
     if dist:
-	label = r'$P_{\delta}(\delta_{CHD}, S_{LNS}, S_{RS})$'
+	label = r'$P_{\delta}(\delta_{HD}, S_{LNS}, S_{RS})$'
         ax.set_ylabel(label, fontsize=14, labelpad=5)
 	ax.yaxis.set_label_coords(-0.02,0.95)
     else:
