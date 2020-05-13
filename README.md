@@ -73,12 +73,14 @@ To run the experiments in parallel write:
 ```bash
 make run-par
 ```
+> **_NOTE:_**  The experiments are spawned to the background and might take a while before finishing.
 
 ### Extract aggregated data
 
 ```bash
 make aggr
 ```
+> **_NOTE:_**  The experiments are spawned to the background and might take a while before finishing.
 
 then:
 
@@ -98,6 +100,7 @@ make results
 ```bash
 make gadgets
 ```
+> **_NOTE:_**  The experiments are spawned to the background and might take a while before finishing.
 
 Extract .csv files
 
