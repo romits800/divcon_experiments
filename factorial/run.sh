@@ -30,7 +30,7 @@ uni extend --target=$archc $fnoextension.lssa.uni -o $fnoextension.ext.uni
 uni augment --target=$archc $fnoextension.ext.uni -o $fnoextension.alt.uni
 uni model --target=$archc $fnoextension.alt.uni -o $fnoextension.json 
 gecode-presolver -o $fnoextension.ext.json -dzn $fnoextension.dzn --verbose $fnoextension.json
- ${DIVCON_PATH}/src/solvers/multi_backend/portfolio-solver -o $fnoextension.out.json --verbose $fnoextension.ext.json
+${DIVCON_PATH}/src/solvers/multi_backend/portfolio-solver -o $fnoextension.out.json --verbose $fnoextension.ext.json
 
 
 branch="clrandom"
@@ -59,6 +59,6 @@ do
     inoext2="${inoext%.*}"   # filename without extension 
     inoext3="${inoext2%.*}"   # filename without extension 
     inoext4="${inoext3%.*}"   # filename without extension 
-llc $i  -filetype=obj -march=mipsel -mcpu=mips32 -disable-post-ra -disable-tail-duplicate -disable-branch-fold -disable-block-placement -start-after livedebugvars -o $inoext4.o
+    llc $i  -filetype=obj -march=mipsel -mcpu=mips32 -disable-post-ra -disable-tail-duplicate -disable-branch-fold -disable-block-placement -start-after livedebugvars -o $inoext4.o
 done
  
