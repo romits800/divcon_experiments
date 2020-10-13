@@ -1,0 +1,3 @@
+[submodule "crypto_libs/bearSSL"]
+	path = crypto_libs/bearSSL
+	url = https://www.bearssl.org/git/BearSSL
