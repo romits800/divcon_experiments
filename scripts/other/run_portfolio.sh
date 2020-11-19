@@ -14,14 +14,15 @@ uni augment --target=Mips $input.ext.uni -o $input.alt.uni
 # /usr/local/bin/uni
 uni normalize --target=Mips $input.asm.mir -o $input.llvm.mir
 # /usr/local/bin/uni
-uni model --target=Mips $input.alt.uni -o $input.json --basefile=$input.llvm.mir +RTS -K20M -RTS
+#uni model --target=Mips $input.alt.uni -o $input.json --basefile=$input.llvm.mir +RTS -K20M -RTS
+uni model --target=Mips $input.alt.uni -o $input.json  +RTS -K20M -RTS
 # /usr/local/bin/gecode-presolver
 gecode-presolver -o $input.ext.json -dzn $input.dzn --verbose $input.json
 # /usr/local/bin/gecode-solver
 #gecode-solver  -o $input.out.json --verbose $input.ext.json
 
 #echo "/home/romi/didaktoriko/unison/romi_unison/unison/src/solvers/multi_backend/portfolio-solver -o $input.out.json --verbose $input.ext.json"
-/home/romi/didaktoriko/unison/romi_unison/unison/src/solvers/multi_backend/portfolio-solver -o $input.out.json --verbose $input.ext.json
+${DIVCON_PATH}/src/solvers/multi_backend/portfolio-solver -o $input.out.json --verbose $input.ext.json
 
 flags="--disable-copy-dominance-constraints --disable-infinite-register-dominance-constraints --disable-operand-symmetry-breaking-constraints --disable-register-symmetry-breaking-constraints --disable-temporary-symmetry-breaking-constraints --disable-wcet-constraints"
 

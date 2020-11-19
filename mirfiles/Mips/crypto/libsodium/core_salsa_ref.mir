@@ -1,0 +1,2758 @@
+--- |
+  ; ModuleID = 'core_salsa_ref.ll'
+  target datalayout = "E-m:m-p:32:32-i8:8:32-i16:16:32-i64:64-n32-S64"
+  target triple = "x86_64-pc-linux-gnu"
+  
+  ; Function Attrs: norecurse nounwind uwtable
+  define i32 @crypto_core_salsa20(i8* nocapture nonnull %out, i8* nocapture nonnull readonly %in, i8* nocapture nonnull readonly %k, i8* readonly %c) #0 {
+    tail call fastcc void @crypto_core_salsa(i8* nonnull %out, i8* nonnull %in, i8* nonnull %k, i8* %c, i32 20)
+    ret i32 0
+  }
+  
+  ; Function Attrs: norecurse nounwind uwtable
+  define internal fastcc void @crypto_core_salsa(i8* nocapture %out, i8* nocapture readonly %in, i8* nocapture readonly %k, i8* readonly %c, i32 %rounds) unnamed_addr #0 {
+    %1 = icmp eq i8* %c, null
+    br i1 %1, label %60, label %2
+  
+  ; <label>:2                                       ; preds = %0
+    %3 = load i8, i8* %c, align 1, !tbaa !1
+    %4 = getelementptr inbounds i8, i8* %c, i64 1
+    %5 = load i8, i8* %4, align 1, !tbaa !1
+    %6 = getelementptr inbounds i8, i8* %c, i64 2
+    %7 = load i8, i8* %6, align 1, !tbaa !1
+    %8 = getelementptr inbounds i8, i8* %c, i64 3
+    %9 = load i8, i8* %8, align 1, !tbaa !1
+    %10 = getelementptr inbounds i8, i8* %c, i64 4
+    %11 = load i8, i8* %10, align 1, !tbaa !1
+    %12 = getelementptr inbounds i8, i8* %c, i64 5
+    %13 = load i8, i8* %12, align 1, !tbaa !1
+    %14 = getelementptr inbounds i8, i8* %c, i64 6
+    %15 = load i8, i8* %14, align 1, !tbaa !1
+    %16 = getelementptr inbounds i8, i8* %c, i64 7
+    %17 = load i8, i8* %16, align 1, !tbaa !1
+    %18 = getelementptr inbounds i8, i8* %c, i64 8
+    %19 = load i8, i8* %18, align 1, !tbaa !1
+    %20 = getelementptr inbounds i8, i8* %c, i64 9
+    %21 = load i8, i8* %20, align 1, !tbaa !1
+    %22 = getelementptr inbounds i8, i8* %c, i64 10
+    %23 = load i8, i8* %22, align 1, !tbaa !1
+    %24 = getelementptr inbounds i8, i8* %c, i64 11
+    %25 = load i8, i8* %24, align 1, !tbaa !1
+    %26 = getelementptr inbounds i8, i8* %c, i64 12
+    %27 = load i8, i8* %26, align 1, !tbaa !1
+    %28 = insertelement <4 x i8> undef, i8 %27, i32 0
+    %29 = insertelement <4 x i8> %28, i8 %3, i32 1
+    %30 = insertelement <4 x i8> %29, i8 %19, i32 2
+    %31 = insertelement <4 x i8> %30, i8 %11, i32 3
+    %32 = zext <4 x i8> %31 to <4 x i32>
+    %33 = getelementptr inbounds i8, i8* %c, i64 13
+    %34 = load i8, i8* %33, align 1, !tbaa !1
+    %35 = insertelement <4 x i8> undef, i8 %34, i32 0
+    %36 = insertelement <4 x i8> %35, i8 %5, i32 1
+    %37 = insertelement <4 x i8> %36, i8 %21, i32 2
+    %38 = insertelement <4 x i8> %37, i8 %13, i32 3
+    %39 = zext <4 x i8> %38 to <4 x i32>
+    %40 = shl nuw nsw <4 x i32> %39, <i32 8, i32 8, i32 8, i32 8>
+    %41 = or <4 x i32> %40, %32
+    %42 = getelementptr inbounds i8, i8* %c, i64 14
+    %43 = load i8, i8* %42, align 1, !tbaa !1
+    %44 = insertelement <4 x i8> undef, i8 %43, i32 0
+    %45 = insertelement <4 x i8> %44, i8 %7, i32 1
+    %46 = insertelement <4 x i8> %45, i8 %23, i32 2
+    %47 = insertelement <4 x i8> %46, i8 %15, i32 3
+    %48 = zext <4 x i8> %47 to <4 x i32>
+    %49 = shl nuw nsw <4 x i32> %48, <i32 16, i32 16, i32 16, i32 16>
+    %50 = or <4 x i32> %41, %49
+    %51 = getelementptr inbounds i8, i8* %c, i64 15
+    %52 = load i8, i8* %51, align 1, !tbaa !1
+    %53 = insertelement <4 x i8> undef, i8 %52, i32 0
+    %54 = insertelement <4 x i8> %53, i8 %9, i32 1
+    %55 = insertelement <4 x i8> %54, i8 %25, i32 2
+    %56 = insertelement <4 x i8> %55, i8 %17, i32 3
+    %57 = zext <4 x i8> %56 to <4 x i32>
+    %58 = shl nuw <4 x i32> %57, <i32 24, i32 24, i32 24, i32 24>
+    %59 = or <4 x i32> %50, %58
+    br label %60
+  
+  ; <label>:60                                      ; preds = %2, %0
+    %61 = phi <4 x i32> [ %59, %2 ], [ <i32 1797285236, i32 1634760805, i32 2036477234, i32 857760878>, %0 ]
+    %62 = load i8, i8* %k, align 1, !tbaa !1
+    %63 = zext i8 %62 to i32
+    %64 = getelementptr inbounds i8, i8* %k, i64 1
+    %65 = load i8, i8* %64, align 1, !tbaa !1
+    %66 = zext i8 %65 to i32
+    %67 = shl nuw nsw i32 %66, 8
+    %68 = or i32 %67, %63
+    %69 = getelementptr inbounds i8, i8* %k, i64 2
+    %70 = load i8, i8* %69, align 1, !tbaa !1
+    %71 = zext i8 %70 to i32
+    %72 = shl nuw nsw i32 %71, 16
+    %73 = or i32 %68, %72
+    %74 = getelementptr inbounds i8, i8* %k, i64 3
+    %75 = load i8, i8* %74, align 1, !tbaa !1
+    %76 = zext i8 %75 to i32
+    %77 = shl nuw i32 %76, 24
+    %78 = or i32 %73, %77
+    %79 = getelementptr inbounds i8, i8* %k, i64 4
+    %80 = load i8, i8* %79, align 1, !tbaa !1
+    %81 = zext i8 %80 to i32
+    %82 = getelementptr inbounds i8, i8* %k, i64 5
+    %83 = load i8, i8* %82, align 1, !tbaa !1
+    %84 = zext i8 %83 to i32
+    %85 = shl nuw nsw i32 %84, 8
+    %86 = or i32 %85, %81
+    %87 = getelementptr inbounds i8, i8* %k, i64 6
+    %88 = load i8, i8* %87, align 1, !tbaa !1
+    %89 = zext i8 %88 to i32
+    %90 = shl nuw nsw i32 %89, 16
+    %91 = or i32 %86, %90
+    %92 = getelementptr inbounds i8, i8* %k, i64 7
+    %93 = load i8, i8* %92, align 1, !tbaa !1
+    %94 = zext i8 %93 to i32
+    %95 = shl nuw i32 %94, 24
+    %96 = or i32 %91, %95
+    %97 = getelementptr inbounds i8, i8* %k, i64 8
+    %98 = load i8, i8* %97, align 1, !tbaa !1
+    %99 = zext i8 %98 to i32
+    %100 = getelementptr inbounds i8, i8* %k, i64 9
+    %101 = load i8, i8* %100, align 1, !tbaa !1
+    %102 = zext i8 %101 to i32
+    %103 = shl nuw nsw i32 %102, 8
+    %104 = or i32 %103, %99
+    %105 = getelementptr inbounds i8, i8* %k, i64 10
+    %106 = load i8, i8* %105, align 1, !tbaa !1
+    %107 = zext i8 %106 to i32
+    %108 = shl nuw nsw i32 %107, 16
+    %109 = or i32 %104, %108
+    %110 = getelementptr inbounds i8, i8* %k, i64 11
+    %111 = load i8, i8* %110, align 1, !tbaa !1
+    %112 = zext i8 %111 to i32
+    %113 = shl nuw i32 %112, 24
+    %114 = or i32 %109, %113
+    %115 = getelementptr inbounds i8, i8* %k, i64 12
+    %116 = load i8, i8* %115, align 1, !tbaa !1
+    %117 = zext i8 %116 to i32
+    %118 = getelementptr inbounds i8, i8* %k, i64 13
+    %119 = load i8, i8* %118, align 1, !tbaa !1
+    %120 = zext i8 %119 to i32
+    %121 = shl nuw nsw i32 %120, 8
+    %122 = or i32 %121, %117
+    %123 = getelementptr inbounds i8, i8* %k, i64 14
+    %124 = load i8, i8* %123, align 1, !tbaa !1
+    %125 = zext i8 %124 to i32
+    %126 = shl nuw nsw i32 %125, 16
+    %127 = or i32 %122, %126
+    %128 = getelementptr inbounds i8, i8* %k, i64 15
+    %129 = load i8, i8* %128, align 1, !tbaa !1
+    %130 = zext i8 %129 to i32
+    %131 = shl nuw i32 %130, 24
+    %132 = or i32 %127, %131
+    %133 = getelementptr inbounds i8, i8* %k, i64 16
+    %134 = load i8, i8* %133, align 1, !tbaa !1
+    %135 = zext i8 %134 to i32
+    %136 = getelementptr inbounds i8, i8* %k, i64 17
+    %137 = load i8, i8* %136, align 1, !tbaa !1
+    %138 = zext i8 %137 to i32
+    %139 = shl nuw nsw i32 %138, 8
+    %140 = or i32 %139, %135
+    %141 = getelementptr inbounds i8, i8* %k, i64 18
+    %142 = load i8, i8* %141, align 1, !tbaa !1
+    %143 = zext i8 %142 to i32
+    %144 = shl nuw nsw i32 %143, 16
+    %145 = or i32 %140, %144
+    %146 = getelementptr inbounds i8, i8* %k, i64 19
+    %147 = load i8, i8* %146, align 1, !tbaa !1
+    %148 = zext i8 %147 to i32
+    %149 = shl nuw i32 %148, 24
+    %150 = or i32 %145, %149
+    %151 = getelementptr inbounds i8, i8* %k, i64 20
+    %152 = load i8, i8* %151, align 1, !tbaa !1
+    %153 = zext i8 %152 to i32
+    %154 = getelementptr inbounds i8, i8* %k, i64 21
+    %155 = load i8, i8* %154, align 1, !tbaa !1
+    %156 = zext i8 %155 to i32
+    %157 = shl nuw nsw i32 %156, 8
+    %158 = or i32 %157, %153
+    %159 = getelementptr inbounds i8, i8* %k, i64 22
+    %160 = load i8, i8* %159, align 1, !tbaa !1
+    %161 = zext i8 %160 to i32
+    %162 = shl nuw nsw i32 %161, 16
+    %163 = or i32 %158, %162
+    %164 = getelementptr inbounds i8, i8* %k, i64 23
+    %165 = load i8, i8* %164, align 1, !tbaa !1
+    %166 = zext i8 %165 to i32
+    %167 = shl nuw i32 %166, 24
+    %168 = or i32 %163, %167
+    %169 = getelementptr inbounds i8, i8* %k, i64 24
+    %170 = load i8, i8* %169, align 1, !tbaa !1
+    %171 = zext i8 %170 to i32
+    %172 = getelementptr inbounds i8, i8* %k, i64 25
+    %173 = load i8, i8* %172, align 1, !tbaa !1
+    %174 = zext i8 %173 to i32
+    %175 = shl nuw nsw i32 %174, 8
+    %176 = or i32 %175, %171
+    %177 = getelementptr inbounds i8, i8* %k, i64 26
+    %178 = load i8, i8* %177, align 1, !tbaa !1
+    %179 = zext i8 %178 to i32
+    %180 = shl nuw nsw i32 %179, 16
+    %181 = or i32 %176, %180
+    %182 = getelementptr inbounds i8, i8* %k, i64 27
+    %183 = load i8, i8* %182, align 1, !tbaa !1
+    %184 = zext i8 %183 to i32
+    %185 = shl nuw i32 %184, 24
+    %186 = or i32 %181, %185
+    %187 = getelementptr inbounds i8, i8* %k, i64 28
+    %188 = load i8, i8* %187, align 1, !tbaa !1
+    %189 = zext i8 %188 to i32
+    %190 = getelementptr inbounds i8, i8* %k, i64 29
+    %191 = load i8, i8* %190, align 1, !tbaa !1
+    %192 = zext i8 %191 to i32
+    %193 = shl nuw nsw i32 %192, 8
+    %194 = or i32 %193, %189
+    %195 = getelementptr inbounds i8, i8* %k, i64 30
+    %196 = load i8, i8* %195, align 1, !tbaa !1
+    %197 = zext i8 %196 to i32
+    %198 = shl nuw nsw i32 %197, 16
+    %199 = or i32 %194, %198
+    %200 = getelementptr inbounds i8, i8* %k, i64 31
+    %201 = load i8, i8* %200, align 1, !tbaa !1
+    %202 = zext i8 %201 to i32
+    %203 = shl nuw i32 %202, 24
+    %204 = or i32 %199, %203
+    %205 = load i8, i8* %in, align 1, !tbaa !1
+    %206 = zext i8 %205 to i32
+    %207 = getelementptr inbounds i8, i8* %in, i64 1
+    %208 = load i8, i8* %207, align 1, !tbaa !1
+    %209 = zext i8 %208 to i32
+    %210 = shl nuw nsw i32 %209, 8
+    %211 = or i32 %210, %206
+    %212 = getelementptr inbounds i8, i8* %in, i64 2
+    %213 = load i8, i8* %212, align 1, !tbaa !1
+    %214 = zext i8 %213 to i32
+    %215 = shl nuw nsw i32 %214, 16
+    %216 = or i32 %211, %215
+    %217 = getelementptr inbounds i8, i8* %in, i64 3
+    %218 = load i8, i8* %217, align 1, !tbaa !1
+    %219 = zext i8 %218 to i32
+    %220 = shl nuw i32 %219, 24
+    %221 = or i32 %216, %220
+    %222 = getelementptr inbounds i8, i8* %in, i64 4
+    %223 = load i8, i8* %222, align 1, !tbaa !1
+    %224 = zext i8 %223 to i32
+    %225 = getelementptr inbounds i8, i8* %in, i64 5
+    %226 = load i8, i8* %225, align 1, !tbaa !1
+    %227 = zext i8 %226 to i32
+    %228 = shl nuw nsw i32 %227, 8
+    %229 = or i32 %228, %224
+    %230 = getelementptr inbounds i8, i8* %in, i64 6
+    %231 = load i8, i8* %230, align 1, !tbaa !1
+    %232 = zext i8 %231 to i32
+    %233 = shl nuw nsw i32 %232, 16
+    %234 = or i32 %229, %233
+    %235 = getelementptr inbounds i8, i8* %in, i64 7
+    %236 = load i8, i8* %235, align 1, !tbaa !1
+    %237 = zext i8 %236 to i32
+    %238 = shl nuw i32 %237, 24
+    %239 = or i32 %234, %238
+    %240 = getelementptr inbounds i8, i8* %in, i64 8
+    %241 = load i8, i8* %240, align 1, !tbaa !1
+    %242 = zext i8 %241 to i32
+    %243 = getelementptr inbounds i8, i8* %in, i64 9
+    %244 = load i8, i8* %243, align 1, !tbaa !1
+    %245 = zext i8 %244 to i32
+    %246 = shl nuw nsw i32 %245, 8
+    %247 = or i32 %246, %242
+    %248 = getelementptr inbounds i8, i8* %in, i64 10
+    %249 = load i8, i8* %248, align 1, !tbaa !1
+    %250 = zext i8 %249 to i32
+    %251 = shl nuw nsw i32 %250, 16
+    %252 = or i32 %247, %251
+    %253 = getelementptr inbounds i8, i8* %in, i64 11
+    %254 = load i8, i8* %253, align 1, !tbaa !1
+    %255 = zext i8 %254 to i32
+    %256 = shl nuw i32 %255, 24
+    %257 = or i32 %252, %256
+    %258 = getelementptr inbounds i8, i8* %in, i64 12
+    %259 = load i8, i8* %258, align 1, !tbaa !1
+    %260 = zext i8 %259 to i32
+    %261 = getelementptr inbounds i8, i8* %in, i64 13
+    %262 = load i8, i8* %261, align 1, !tbaa !1
+    %263 = zext i8 %262 to i32
+    %264 = shl nuw nsw i32 %263, 8
+    %265 = or i32 %264, %260
+    %266 = getelementptr inbounds i8, i8* %in, i64 14
+    %267 = load i8, i8* %266, align 1, !tbaa !1
+    %268 = zext i8 %267 to i32
+    %269 = shl nuw nsw i32 %268, 16
+    %270 = or i32 %265, %269
+    %271 = getelementptr inbounds i8, i8* %in, i64 15
+    %272 = load i8, i8* %271, align 1, !tbaa !1
+    %273 = zext i8 %272 to i32
+    %274 = shl nuw i32 %273, 24
+    %275 = or i32 %270, %274
+    %276 = icmp sgt i32 %rounds, 0
+    %277 = extractelement <4 x i32> %61, i32 0
+    %278 = extractelement <4 x i32> %61, i32 1
+    %279 = extractelement <4 x i32> %61, i32 2
+    %280 = extractelement <4 x i32> %61, i32 3
+    br i1 %276, label %.lr.ph, label %._crit_edge
+  
+  .lr.ph:                                           ; preds = %60, %.lr.ph
+    %i.017 = phi i32 [ %441, %.lr.ph ], [ 0, %60 ]
+    %x0.116 = phi i32 [ %380, %.lr.ph ], [ %278, %60 ]
+    %x1.015 = phi i32 [ %365, %.lr.ph ], [ %78, %60 ]
+    %x2.014 = phi i32 [ %370, %.lr.ph ], [ %96, %60 ]
+    %x3.013 = phi i32 [ %375, %.lr.ph ], [ %114, %60 ]
+    %x4.012 = phi i32 [ %395, %.lr.ph ], [ %132, %60 ]
+    %x5.111 = phi i32 [ %400, %.lr.ph ], [ %280, %60 ]
+    %x6.010 = phi i32 [ %385, %.lr.ph ], [ %221, %60 ]
+    %x7.09 = phi i32 [ %390, %.lr.ph ], [ %239, %60 ]
+    %x8.08 = phi i32 [ %410, %.lr.ph ], [ %257, %60 ]
+    %x9.07 = phi i32 [ %415, %.lr.ph ], [ %275, %60 ]
+    %x10.16 = phi i32 [ %420, %.lr.ph ], [ %279, %60 ]
+    %x11.05 = phi i32 [ %405, %.lr.ph ], [ %150, %60 ]
+    %x15.14 = phi i32 [ %440, %.lr.ph ], [ %277, %60 ]
+    %x14.03 = phi i32 [ %435, %.lr.ph ], [ %204, %60 ]
+    %x13.02 = phi i32 [ %430, %.lr.ph ], [ %186, %60 ]
+    %x12.01 = phi i32 [ %425, %.lr.ph ], [ %168, %60 ]
+    %281 = add i32 %x0.116, %x12.01
+    %282 = shl i32 %281, 7
+    %283 = lshr i32 %281, 25
+    %284 = or i32 %283, %282
+    %285 = xor i32 %284, %x4.012
+    %286 = add i32 %285, %x0.116
+    %287 = shl i32 %286, 9
+    %288 = lshr i32 %286, 23
+    %289 = or i32 %288, %287
+    %290 = xor i32 %289, %x8.08
+    %291 = add i32 %290, %285
+    %292 = shl i32 %291, 13
+    %293 = lshr i32 %291, 19
+    %294 = or i32 %293, %292
+    %295 = xor i32 %294, %x12.01
+    %296 = add i32 %295, %290
+    %297 = shl i32 %296, 18
+    %298 = lshr i32 %296, 14
+    %299 = or i32 %298, %297
+    %300 = xor i32 %299, %x0.116
+    %301 = add i32 %x1.015, %x5.111
+    %302 = shl i32 %301, 7
+    %303 = lshr i32 %301, 25
+    %304 = or i32 %303, %302
+    %305 = xor i32 %304, %x9.07
+    %306 = add i32 %305, %x5.111
+    %307 = shl i32 %306, 9
+    %308 = lshr i32 %306, 23
+    %309 = or i32 %308, %307
+    %310 = xor i32 %309, %x13.02
+    %311 = add i32 %310, %305
+    %312 = shl i32 %311, 13
+    %313 = lshr i32 %311, 19
+    %314 = or i32 %313, %312
+    %315 = xor i32 %314, %x1.015
+    %316 = add i32 %315, %310
+    %317 = shl i32 %316, 18
+    %318 = lshr i32 %316, 14
+    %319 = or i32 %318, %317
+    %320 = xor i32 %319, %x5.111
+    %321 = add i32 %x6.010, %x10.16
+    %322 = shl i32 %321, 7
+    %323 = lshr i32 %321, 25
+    %324 = or i32 %323, %322
+    %325 = xor i32 %324, %x14.03
+    %326 = add i32 %325, %x10.16
+    %327 = shl i32 %326, 9
+    %328 = lshr i32 %326, 23
+    %329 = or i32 %328, %327
+    %330 = xor i32 %329, %x2.014
+    %331 = add i32 %330, %325
+    %332 = shl i32 %331, 13
+    %333 = lshr i32 %331, 19
+    %334 = or i32 %333, %332
+    %335 = xor i32 %334, %x6.010
+    %336 = add i32 %335, %330
+    %337 = shl i32 %336, 18
+    %338 = lshr i32 %336, 14
+    %339 = or i32 %338, %337
+    %340 = xor i32 %339, %x10.16
+    %341 = add i32 %x11.05, %x15.14
+    %342 = shl i32 %341, 7
+    %343 = lshr i32 %341, 25
+    %344 = or i32 %343, %342
+    %345 = xor i32 %x3.013, %344
+    %346 = add i32 %345, %x15.14
+    %347 = shl i32 %346, 9
+    %348 = lshr i32 %346, 23
+    %349 = or i32 %348, %347
+    %350 = xor i32 %349, %x7.09
+    %351 = add i32 %350, %345
+    %352 = shl i32 %351, 13
+    %353 = lshr i32 %351, 19
+    %354 = or i32 %353, %352
+    %355 = xor i32 %354, %x11.05
+    %356 = add i32 %355, %350
+    %357 = shl i32 %356, 18
+    %358 = lshr i32 %356, 14
+    %359 = or i32 %358, %357
+    %360 = xor i32 %359, %x15.14
+    %361 = add i32 %300, %345
+    %362 = shl i32 %361, 7
+    %363 = lshr i32 %361, 25
+    %364 = or i32 %363, %362
+    %365 = xor i32 %364, %315
+    %366 = add i32 %365, %300
+    %367 = shl i32 %366, 9
+    %368 = lshr i32 %366, 23
+    %369 = or i32 %368, %367
+    %370 = xor i32 %369, %330
+    %371 = add i32 %370, %365
+    %372 = shl i32 %371, 13
+    %373 = lshr i32 %371, 19
+    %374 = or i32 %373, %372
+    %375 = xor i32 %374, %345
+    %376 = add i32 %375, %370
+    %377 = shl i32 %376, 18
+    %378 = lshr i32 %376, 14
+    %379 = or i32 %378, %377
+    %380 = xor i32 %379, %300
+    %381 = add i32 %320, %285
+    %382 = shl i32 %381, 7
+    %383 = lshr i32 %381, 25
+    %384 = or i32 %383, %382
+    %385 = xor i32 %384, %335
+    %386 = add i32 %385, %320
+    %387 = shl i32 %386, 9
+    %388 = lshr i32 %386, 23
+    %389 = or i32 %388, %387
+    %390 = xor i32 %389, %350
+    %391 = add i32 %390, %385
+    %392 = shl i32 %391, 13
+    %393 = lshr i32 %391, 19
+    %394 = or i32 %393, %392
+    %395 = xor i32 %394, %285
+    %396 = add i32 %395, %390
+    %397 = shl i32 %396, 18
+    %398 = lshr i32 %396, 14
+    %399 = or i32 %398, %397
+    %400 = xor i32 %399, %320
+    %401 = add i32 %340, %305
+    %402 = shl i32 %401, 7
+    %403 = lshr i32 %401, 25
+    %404 = or i32 %403, %402
+    %405 = xor i32 %404, %355
+    %406 = add i32 %405, %340
+    %407 = shl i32 %406, 9
+    %408 = lshr i32 %406, 23
+    %409 = or i32 %408, %407
+    %410 = xor i32 %409, %290
+    %411 = add i32 %410, %405
+    %412 = shl i32 %411, 13
+    %413 = lshr i32 %411, 19
+    %414 = or i32 %413, %412
+    %415 = xor i32 %414, %305
+    %416 = add i32 %415, %410
+    %417 = shl i32 %416, 18
+    %418 = lshr i32 %416, 14
+    %419 = or i32 %418, %417
+    %420 = xor i32 %419, %340
+    %421 = add i32 %360, %325
+    %422 = shl i32 %421, 7
+    %423 = lshr i32 %421, 25
+    %424 = or i32 %423, %422
+    %425 = xor i32 %424, %295
+    %426 = add i32 %425, %360
+    %427 = shl i32 %426, 9
+    %428 = lshr i32 %426, 23
+    %429 = or i32 %428, %427
+    %430 = xor i32 %429, %310
+    %431 = add i32 %430, %425
+    %432 = shl i32 %431, 13
+    %433 = lshr i32 %431, 19
+    %434 = or i32 %433, %432
+    %435 = xor i32 %434, %325
+    %436 = add i32 %435, %430
+    %437 = shl i32 %436, 18
+    %438 = lshr i32 %436, 14
+    %439 = or i32 %438, %437
+    %440 = xor i32 %439, %360
+    %441 = add nuw nsw i32 %i.017, 2
+    %442 = icmp slt i32 %441, %rounds
+    br i1 %442, label %.lr.ph, label %._crit_edge
+  
+  ._crit_edge:                                      ; preds = %.lr.ph, %60
+    %x0.1.lcssa = phi i32 [ %278, %60 ], [ %380, %.lr.ph ]
+    %x1.0.lcssa = phi i32 [ %78, %60 ], [ %365, %.lr.ph ]
+    %x2.0.lcssa = phi i32 [ %96, %60 ], [ %370, %.lr.ph ]
+    %x3.0.lcssa = phi i32 [ %114, %60 ], [ %375, %.lr.ph ]
+    %x4.0.lcssa = phi i32 [ %132, %60 ], [ %395, %.lr.ph ]
+    %x5.1.lcssa = phi i32 [ %280, %60 ], [ %400, %.lr.ph ]
+    %x6.0.lcssa = phi i32 [ %221, %60 ], [ %385, %.lr.ph ]
+    %x7.0.lcssa = phi i32 [ %239, %60 ], [ %390, %.lr.ph ]
+    %x8.0.lcssa = phi i32 [ %257, %60 ], [ %410, %.lr.ph ]
+    %x9.0.lcssa = phi i32 [ %275, %60 ], [ %415, %.lr.ph ]
+    %x10.1.lcssa = phi i32 [ %279, %60 ], [ %420, %.lr.ph ]
+    %x11.0.lcssa = phi i32 [ %150, %60 ], [ %405, %.lr.ph ]
+    %x15.1.lcssa = phi i32 [ %277, %60 ], [ %440, %.lr.ph ]
+    %x14.0.lcssa = phi i32 [ %204, %60 ], [ %435, %.lr.ph ]
+    %x13.0.lcssa = phi i32 [ %186, %60 ], [ %430, %.lr.ph ]
+    %x12.0.lcssa = phi i32 [ %168, %60 ], [ %425, %.lr.ph ]
+    %443 = add i32 %x0.1.lcssa, %278
+    %444 = trunc i32 %443 to i8
+    store i8 %444, i8* %out, align 1, !tbaa !1
+    %445 = lshr i32 %443, 8
+    %446 = trunc i32 %445 to i8
+    %447 = getelementptr inbounds i8, i8* %out, i64 1
+    store i8 %446, i8* %447, align 1, !tbaa !1
+    %448 = lshr i32 %443, 16
+    %449 = trunc i32 %448 to i8
+    %450 = getelementptr inbounds i8, i8* %out, i64 2
+    store i8 %449, i8* %450, align 1, !tbaa !1
+    %451 = lshr i32 %443, 24
+    %452 = trunc i32 %451 to i8
+    %453 = getelementptr inbounds i8, i8* %out, i64 3
+    store i8 %452, i8* %453, align 1, !tbaa !1
+    %454 = getelementptr inbounds i8, i8* %out, i64 4
+    %455 = add i32 %x1.0.lcssa, %78
+    %456 = trunc i32 %455 to i8
+    store i8 %456, i8* %454, align 1, !tbaa !1
+    %457 = lshr i32 %455, 8
+    %458 = trunc i32 %457 to i8
+    %459 = getelementptr inbounds i8, i8* %out, i64 5
+    store i8 %458, i8* %459, align 1, !tbaa !1
+    %460 = lshr i32 %455, 16
+    %461 = trunc i32 %460 to i8
+    %462 = getelementptr inbounds i8, i8* %out, i64 6
+    store i8 %461, i8* %462, align 1, !tbaa !1
+    %463 = lshr i32 %455, 24
+    %464 = trunc i32 %463 to i8
+    %465 = getelementptr inbounds i8, i8* %out, i64 7
+    store i8 %464, i8* %465, align 1, !tbaa !1
+    %466 = getelementptr inbounds i8, i8* %out, i64 8
+    %467 = add i32 %x2.0.lcssa, %96
+    %468 = trunc i32 %467 to i8
+    store i8 %468, i8* %466, align 1, !tbaa !1
+    %469 = lshr i32 %467, 8
+    %470 = trunc i32 %469 to i8
+    %471 = getelementptr inbounds i8, i8* %out, i64 9
+    store i8 %470, i8* %471, align 1, !tbaa !1
+    %472 = lshr i32 %467, 16
+    %473 = trunc i32 %472 to i8
+    %474 = getelementptr inbounds i8, i8* %out, i64 10
+    store i8 %473, i8* %474, align 1, !tbaa !1
+    %475 = lshr i32 %467, 24
+    %476 = trunc i32 %475 to i8
+    %477 = getelementptr inbounds i8, i8* %out, i64 11
+    store i8 %476, i8* %477, align 1, !tbaa !1
+    %478 = getelementptr inbounds i8, i8* %out, i64 12
+    %479 = add i32 %x3.0.lcssa, %114
+    %480 = trunc i32 %479 to i8
+    store i8 %480, i8* %478, align 1, !tbaa !1
+    %481 = lshr i32 %479, 8
+    %482 = trunc i32 %481 to i8
+    %483 = getelementptr inbounds i8, i8* %out, i64 13
+    store i8 %482, i8* %483, align 1, !tbaa !1
+    %484 = lshr i32 %479, 16
+    %485 = trunc i32 %484 to i8
+    %486 = getelementptr inbounds i8, i8* %out, i64 14
+    store i8 %485, i8* %486, align 1, !tbaa !1
+    %487 = lshr i32 %479, 24
+    %488 = trunc i32 %487 to i8
+    %489 = getelementptr inbounds i8, i8* %out, i64 15
+    store i8 %488, i8* %489, align 1, !tbaa !1
+    %490 = getelementptr inbounds i8, i8* %out, i64 16
+    %491 = add i32 %x4.0.lcssa, %132
+    %492 = trunc i32 %491 to i8
+    store i8 %492, i8* %490, align 1, !tbaa !1
+    %493 = lshr i32 %491, 8
+    %494 = trunc i32 %493 to i8
+    %495 = getelementptr inbounds i8, i8* %out, i64 17
+    store i8 %494, i8* %495, align 1, !tbaa !1
+    %496 = lshr i32 %491, 16
+    %497 = trunc i32 %496 to i8
+    %498 = getelementptr inbounds i8, i8* %out, i64 18
+    store i8 %497, i8* %498, align 1, !tbaa !1
+    %499 = lshr i32 %491, 24
+    %500 = trunc i32 %499 to i8
+    %501 = getelementptr inbounds i8, i8* %out, i64 19
+    store i8 %500, i8* %501, align 1, !tbaa !1
+    %502 = getelementptr inbounds i8, i8* %out, i64 20
+    %503 = add i32 %x5.1.lcssa, %280
+    %504 = trunc i32 %503 to i8
+    store i8 %504, i8* %502, align 1, !tbaa !1
+    %505 = lshr i32 %503, 8
+    %506 = trunc i32 %505 to i8
+    %507 = getelementptr inbounds i8, i8* %out, i64 21
+    store i8 %506, i8* %507, align 1, !tbaa !1
+    %508 = lshr i32 %503, 16
+    %509 = trunc i32 %508 to i8
+    %510 = getelementptr inbounds i8, i8* %out, i64 22
+    store i8 %509, i8* %510, align 1, !tbaa !1
+    %511 = lshr i32 %503, 24
+    %512 = trunc i32 %511 to i8
+    %513 = getelementptr inbounds i8, i8* %out, i64 23
+    store i8 %512, i8* %513, align 1, !tbaa !1
+    %514 = getelementptr inbounds i8, i8* %out, i64 24
+    %515 = add i32 %x6.0.lcssa, %221
+    %516 = trunc i32 %515 to i8
+    store i8 %516, i8* %514, align 1, !tbaa !1
+    %517 = lshr i32 %515, 8
+    %518 = trunc i32 %517 to i8
+    %519 = getelementptr inbounds i8, i8* %out, i64 25
+    store i8 %518, i8* %519, align 1, !tbaa !1
+    %520 = lshr i32 %515, 16
+    %521 = trunc i32 %520 to i8
+    %522 = getelementptr inbounds i8, i8* %out, i64 26
+    store i8 %521, i8* %522, align 1, !tbaa !1
+    %523 = lshr i32 %515, 24
+    %524 = trunc i32 %523 to i8
+    %525 = getelementptr inbounds i8, i8* %out, i64 27
+    store i8 %524, i8* %525, align 1, !tbaa !1
+    %526 = getelementptr inbounds i8, i8* %out, i64 28
+    %527 = add i32 %x7.0.lcssa, %239
+    %528 = trunc i32 %527 to i8
+    store i8 %528, i8* %526, align 1, !tbaa !1
+    %529 = lshr i32 %527, 8
+    %530 = trunc i32 %529 to i8
+    %531 = getelementptr inbounds i8, i8* %out, i64 29
+    store i8 %530, i8* %531, align 1, !tbaa !1
+    %532 = lshr i32 %527, 16
+    %533 = trunc i32 %532 to i8
+    %534 = getelementptr inbounds i8, i8* %out, i64 30
+    store i8 %533, i8* %534, align 1, !tbaa !1
+    %535 = lshr i32 %527, 24
+    %536 = trunc i32 %535 to i8
+    %537 = getelementptr inbounds i8, i8* %out, i64 31
+    store i8 %536, i8* %537, align 1, !tbaa !1
+    %538 = getelementptr inbounds i8, i8* %out, i64 32
+    %539 = add i32 %x8.0.lcssa, %257
+    %540 = trunc i32 %539 to i8
+    store i8 %540, i8* %538, align 1, !tbaa !1
+    %541 = lshr i32 %539, 8
+    %542 = trunc i32 %541 to i8
+    %543 = getelementptr inbounds i8, i8* %out, i64 33
+    store i8 %542, i8* %543, align 1, !tbaa !1
+    %544 = lshr i32 %539, 16
+    %545 = trunc i32 %544 to i8
+    %546 = getelementptr inbounds i8, i8* %out, i64 34
+    store i8 %545, i8* %546, align 1, !tbaa !1
+    %547 = lshr i32 %539, 24
+    %548 = trunc i32 %547 to i8
+    %549 = getelementptr inbounds i8, i8* %out, i64 35
+    store i8 %548, i8* %549, align 1, !tbaa !1
+    %550 = getelementptr inbounds i8, i8* %out, i64 36
+    %551 = add i32 %x9.0.lcssa, %275
+    %552 = trunc i32 %551 to i8
+    store i8 %552, i8* %550, align 1, !tbaa !1
+    %553 = lshr i32 %551, 8
+    %554 = trunc i32 %553 to i8
+    %555 = getelementptr inbounds i8, i8* %out, i64 37
+    store i8 %554, i8* %555, align 1, !tbaa !1
+    %556 = lshr i32 %551, 16
+    %557 = trunc i32 %556 to i8
+    %558 = getelementptr inbounds i8, i8* %out, i64 38
+    store i8 %557, i8* %558, align 1, !tbaa !1
+    %559 = lshr i32 %551, 24
+    %560 = trunc i32 %559 to i8
+    %561 = getelementptr inbounds i8, i8* %out, i64 39
+    store i8 %560, i8* %561, align 1, !tbaa !1
+    %562 = getelementptr inbounds i8, i8* %out, i64 40
+    %563 = add i32 %x10.1.lcssa, %279
+    %564 = trunc i32 %563 to i8
+    store i8 %564, i8* %562, align 1, !tbaa !1
+    %565 = lshr i32 %563, 8
+    %566 = trunc i32 %565 to i8
+    %567 = getelementptr inbounds i8, i8* %out, i64 41
+    store i8 %566, i8* %567, align 1, !tbaa !1
+    %568 = lshr i32 %563, 16
+    %569 = trunc i32 %568 to i8
+    %570 = getelementptr inbounds i8, i8* %out, i64 42
+    store i8 %569, i8* %570, align 1, !tbaa !1
+    %571 = lshr i32 %563, 24
+    %572 = trunc i32 %571 to i8
+    %573 = getelementptr inbounds i8, i8* %out, i64 43
+    store i8 %572, i8* %573, align 1, !tbaa !1
+    %574 = getelementptr inbounds i8, i8* %out, i64 44
+    %575 = add i32 %x11.0.lcssa, %150
+    %576 = trunc i32 %575 to i8
+    store i8 %576, i8* %574, align 1, !tbaa !1
+    %577 = lshr i32 %575, 8
+    %578 = trunc i32 %577 to i8
+    %579 = getelementptr inbounds i8, i8* %out, i64 45
+    store i8 %578, i8* %579, align 1, !tbaa !1
+    %580 = lshr i32 %575, 16
+    %581 = trunc i32 %580 to i8
+    %582 = getelementptr inbounds i8, i8* %out, i64 46
+    store i8 %581, i8* %582, align 1, !tbaa !1
+    %583 = lshr i32 %575, 24
+    %584 = trunc i32 %583 to i8
+    %585 = getelementptr inbounds i8, i8* %out, i64 47
+    store i8 %584, i8* %585, align 1, !tbaa !1
+    %586 = getelementptr inbounds i8, i8* %out, i64 48
+    %587 = add i32 %x12.0.lcssa, %168
+    %588 = trunc i32 %587 to i8
+    store i8 %588, i8* %586, align 1, !tbaa !1
+    %589 = lshr i32 %587, 8
+    %590 = trunc i32 %589 to i8
+    %591 = getelementptr inbounds i8, i8* %out, i64 49
+    store i8 %590, i8* %591, align 1, !tbaa !1
+    %592 = lshr i32 %587, 16
+    %593 = trunc i32 %592 to i8
+    %594 = getelementptr inbounds i8, i8* %out, i64 50
+    store i8 %593, i8* %594, align 1, !tbaa !1
+    %595 = lshr i32 %587, 24
+    %596 = trunc i32 %595 to i8
+    %597 = getelementptr inbounds i8, i8* %out, i64 51
+    store i8 %596, i8* %597, align 1, !tbaa !1
+    %598 = getelementptr inbounds i8, i8* %out, i64 52
+    %599 = add i32 %x13.0.lcssa, %186
+    %600 = trunc i32 %599 to i8
+    store i8 %600, i8* %598, align 1, !tbaa !1
+    %601 = lshr i32 %599, 8
+    %602 = trunc i32 %601 to i8
+    %603 = getelementptr inbounds i8, i8* %out, i64 53
+    store i8 %602, i8* %603, align 1, !tbaa !1
+    %604 = lshr i32 %599, 16
+    %605 = trunc i32 %604 to i8
+    %606 = getelementptr inbounds i8, i8* %out, i64 54
+    store i8 %605, i8* %606, align 1, !tbaa !1
+    %607 = lshr i32 %599, 24
+    %608 = trunc i32 %607 to i8
+    %609 = getelementptr inbounds i8, i8* %out, i64 55
+    store i8 %608, i8* %609, align 1, !tbaa !1
+    %610 = getelementptr inbounds i8, i8* %out, i64 56
+    %611 = add i32 %x14.0.lcssa, %204
+    %612 = trunc i32 %611 to i8
+    store i8 %612, i8* %610, align 1, !tbaa !1
+    %613 = lshr i32 %611, 8
+    %614 = trunc i32 %613 to i8
+    %615 = getelementptr inbounds i8, i8* %out, i64 57
+    store i8 %614, i8* %615, align 1, !tbaa !1
+    %616 = lshr i32 %611, 16
+    %617 = trunc i32 %616 to i8
+    %618 = getelementptr inbounds i8, i8* %out, i64 58
+    store i8 %617, i8* %618, align 1, !tbaa !1
+    %619 = lshr i32 %611, 24
+    %620 = trunc i32 %619 to i8
+    %621 = getelementptr inbounds i8, i8* %out, i64 59
+    store i8 %620, i8* %621, align 1, !tbaa !1
+    %622 = getelementptr inbounds i8, i8* %out, i64 60
+    %623 = add i32 %x15.1.lcssa, %277
+    %624 = trunc i32 %623 to i8
+    store i8 %624, i8* %622, align 1, !tbaa !1
+    %625 = lshr i32 %623, 8
+    %626 = trunc i32 %625 to i8
+    %627 = getelementptr inbounds i8, i8* %out, i64 61
+    store i8 %626, i8* %627, align 1, !tbaa !1
+    %628 = lshr i32 %623, 16
+    %629 = trunc i32 %628 to i8
+    %630 = getelementptr inbounds i8, i8* %out, i64 62
+    store i8 %629, i8* %630, align 1, !tbaa !1
+    %631 = lshr i32 %623, 24
+    %632 = trunc i32 %631 to i8
+    %633 = getelementptr inbounds i8, i8* %out, i64 63
+    store i8 %632, i8* %633, align 1, !tbaa !1
+    ret void
+  }
+  
+  ; Function Attrs: norecurse nounwind readnone uwtable
+  define i64 @crypto_core_salsa20_outputbytes() #1 {
+    ret i64 64
+  }
+  
+  ; Function Attrs: norecurse nounwind readnone uwtable
+  define i64 @crypto_core_salsa20_inputbytes() #1 {
+    ret i64 16
+  }
+  
+  ; Function Attrs: norecurse nounwind readnone uwtable
+  define i64 @crypto_core_salsa20_keybytes() #1 {
+    ret i64 32
+  }
+  
+  ; Function Attrs: norecurse nounwind readnone uwtable
+  define i64 @crypto_core_salsa20_constbytes() #1 {
+    ret i64 16
+  }
+  
+  ; Function Attrs: norecurse nounwind uwtable
+  define i32 @crypto_core_salsa2012(i8* nocapture nonnull %out, i8* nocapture nonnull readonly %in, i8* nocapture nonnull readonly %k, i8* readonly %c) #0 {
+    tail call fastcc void @crypto_core_salsa(i8* nonnull %out, i8* nonnull %in, i8* nonnull %k, i8* %c, i32 12)
+    ret i32 0
+  }
+  
+  ; Function Attrs: norecurse nounwind readnone uwtable
+  define i64 @crypto_core_salsa2012_outputbytes() #1 {
+    ret i64 64
+  }
+  
+  ; Function Attrs: norecurse nounwind readnone uwtable
+  define i64 @crypto_core_salsa2012_inputbytes() #1 {
+    ret i64 16
+  }
+  
+  ; Function Attrs: norecurse nounwind readnone uwtable
+  define i64 @crypto_core_salsa2012_keybytes() #1 {
+    ret i64 32
+  }
+  
+  ; Function Attrs: norecurse nounwind readnone uwtable
+  define i64 @crypto_core_salsa2012_constbytes() #1 {
+    ret i64 16
+  }
+  
+  ; Function Attrs: norecurse nounwind uwtable
+  define i32 @crypto_core_salsa208(i8* nocapture nonnull %out, i8* nocapture nonnull readonly %in, i8* nocapture nonnull readonly %k, i8* readonly %c) #0 {
+    tail call fastcc void @crypto_core_salsa(i8* nonnull %out, i8* nonnull %in, i8* nonnull %k, i8* %c, i32 8)
+    ret i32 0
+  }
+  
+  ; Function Attrs: norecurse nounwind readnone uwtable
+  define i64 @crypto_core_salsa208_outputbytes() #1 {
+    ret i64 64
+  }
+  
+  ; Function Attrs: norecurse nounwind readnone uwtable
+  define i64 @crypto_core_salsa208_inputbytes() #1 {
+    ret i64 16
+  }
+  
+  ; Function Attrs: norecurse nounwind readnone uwtable
+  define i64 @crypto_core_salsa208_keybytes() #1 {
+    ret i64 32
+  }
+  
+  ; Function Attrs: norecurse nounwind readnone uwtable
+  define i64 @crypto_core_salsa208_constbytes() #1 {
+    ret i64 16
+  }
+  
+  attributes #0 = { norecurse nounwind uwtable "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+fxsr,+mmx,+sse,+sse2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #1 = { norecurse nounwind readnone uwtable "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+fxsr,+mmx,+sse,+sse2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  
+  !llvm.ident = !{!0}
+  
+  !0 = !{!"clang version 3.8.0-2ubuntu4 (tags/RELEASE_380/final)"}
+  !1 = !{!2, !2, i64 0}
+  !2 = !{!"omnipotent char", !3, i64 0}
+  !3 = !{!"Simple C/C++ TBAA"}
+
+...
+---
+name:            crypto_core_salsa20
+alignment:       2
+exposesReturnsTwice: false
+hasInlineAsm:    false
+isSSA:           true
+tracksRegLiveness: true
+tracksSubRegLiveness: false
+registers:       
+  - { id: 0, class: gpr32 }
+  - { id: 1, class: gpr32 }
+  - { id: 2, class: gpr32 }
+  - { id: 3, class: gpr32 }
+  - { id: 4, class: gpr32 }
+  - { id: 5, class: gpr32 }
+  - { id: 6, class: gpr32 }
+  - { id: 7, class: gpr32 }
+  - { id: 8, class: gpr32 }
+  - { id: 9, class: gpr32 }
+  - { id: 10, class: gpr32 }
+liveins:         
+  - { reg: '%a0', virtual-reg: '%0' }
+  - { reg: '%a1', virtual-reg: '%1' }
+  - { reg: '%a2', virtual-reg: '%2' }
+  - { reg: '%a3', virtual-reg: '%3' }
+  - { reg: '%t9' }
+  - { reg: '%v0' }
+frameInfo:       
+  isFrameAddressTaken: false
+  isReturnAddressTaken: false
+  hasStackMap:     false
+  hasPatchPoint:   false
+  stackSize:       0
+  offsetAdjustment: 0
+  maxAlignment:    1
+  adjustsStack:    false
+  hasCalls:        true
+  maxCallFrameSize: 0
+  hasOpaqueSPAdjustment: false
+  hasVAStart:      false
+  hasMustTailInVarArgFunc: false
+body:             |
+  bb.0 (%ir-block.0, freq 8):
+    liveins: %a0, %a1, %a2, %a3, %t9, %v0
+    liveouts: %v0
+  
+    %4 = ADDu %v0, %t9
+    %3 = COPY %a3
+    %2 = COPY %a2
+    %1 = COPY %a1
+    %0 = COPY %a0
+    ADJCALLSTACKDOWN 0, implicit-def dead %sp, implicit %sp
+    %5 = LW %4, target-flags(<unknown>) @crypto_core_salsa, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %6 = ADDiu killed %5, target-flags(<unknown>) @crypto_core_salsa
+    %7 = ADDiu %zero, 20
+    %a0 = COPY %0
+    %a1 = COPY %1
+    %a2 = COPY %2
+    %a3 = COPY %3
+    %t0 = COPY %7
+    %t9 = COPY %6
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %a3, implicit %t0, implicit-def %sp
+    ADJCALLSTACKUP 0, 0, implicit-def dead %sp, implicit %sp
+    %8 = ADDiu %zero, 0
+    %v0 = COPY %8
+    RetRA implicit %v0
+
+...
+--- |
+  ; ModuleID = 'core_salsa_ref.ll'
+  target datalayout = "E-m:m-p:32:32-i8:8:32-i16:16:32-i64:64-n32-S64"
+  target triple = "x86_64-pc-linux-gnu"
+  
+  ; Function Attrs: norecurse nounwind uwtable
+  define i32 @crypto_core_salsa20(i8* nocapture nonnull %out, i8* nocapture nonnull readonly %in, i8* nocapture nonnull readonly %k, i8* readonly %c) #0 {
+    tail call fastcc void @crypto_core_salsa(i8* nonnull %out, i8* nonnull %in, i8* nonnull %k, i8* %c, i32 20)
+    ret i32 0
+  }
+  
+  ; Function Attrs: norecurse nounwind uwtable
+  define internal fastcc void @crypto_core_salsa(i8* nocapture %out, i8* nocapture readonly %in, i8* nocapture readonly %k, i8* readonly %c, i32 %rounds) unnamed_addr #0 {
+    %1 = icmp eq i8* %c, null
+    br i1 %1, label %60, label %2
+  
+  ; <label>:2                                       ; preds = %0
+    %3 = load i8, i8* %c, align 1, !tbaa !1
+    %4 = getelementptr inbounds i8, i8* %c, i64 1
+    %5 = load i8, i8* %4, align 1, !tbaa !1
+    %6 = getelementptr inbounds i8, i8* %c, i64 2
+    %7 = load i8, i8* %6, align 1, !tbaa !1
+    %8 = getelementptr inbounds i8, i8* %c, i64 3
+    %9 = load i8, i8* %8, align 1, !tbaa !1
+    %10 = getelementptr inbounds i8, i8* %c, i64 4
+    %11 = load i8, i8* %10, align 1, !tbaa !1
+    %12 = getelementptr inbounds i8, i8* %c, i64 5
+    %13 = load i8, i8* %12, align 1, !tbaa !1
+    %14 = getelementptr inbounds i8, i8* %c, i64 6
+    %15 = load i8, i8* %14, align 1, !tbaa !1
+    %16 = getelementptr inbounds i8, i8* %c, i64 7
+    %17 = load i8, i8* %16, align 1, !tbaa !1
+    %18 = getelementptr inbounds i8, i8* %c, i64 8
+    %19 = load i8, i8* %18, align 1, !tbaa !1
+    %20 = getelementptr inbounds i8, i8* %c, i64 9
+    %21 = load i8, i8* %20, align 1, !tbaa !1
+    %22 = getelementptr inbounds i8, i8* %c, i64 10
+    %23 = load i8, i8* %22, align 1, !tbaa !1
+    %24 = getelementptr inbounds i8, i8* %c, i64 11
+    %25 = load i8, i8* %24, align 1, !tbaa !1
+    %26 = getelementptr inbounds i8, i8* %c, i64 12
+    %27 = load i8, i8* %26, align 1, !tbaa !1
+    %28 = insertelement <4 x i8> undef, i8 %27, i32 0
+    %29 = insertelement <4 x i8> %28, i8 %3, i32 1
+    %30 = insertelement <4 x i8> %29, i8 %19, i32 2
+    %31 = insertelement <4 x i8> %30, i8 %11, i32 3
+    %32 = zext <4 x i8> %31 to <4 x i32>
+    %33 = getelementptr inbounds i8, i8* %c, i64 13
+    %34 = load i8, i8* %33, align 1, !tbaa !1
+    %35 = insertelement <4 x i8> undef, i8 %34, i32 0
+    %36 = insertelement <4 x i8> %35, i8 %5, i32 1
+    %37 = insertelement <4 x i8> %36, i8 %21, i32 2
+    %38 = insertelement <4 x i8> %37, i8 %13, i32 3
+    %39 = zext <4 x i8> %38 to <4 x i32>
+    %40 = shl nuw nsw <4 x i32> %39, <i32 8, i32 8, i32 8, i32 8>
+    %41 = or <4 x i32> %40, %32
+    %42 = getelementptr inbounds i8, i8* %c, i64 14
+    %43 = load i8, i8* %42, align 1, !tbaa !1
+    %44 = insertelement <4 x i8> undef, i8 %43, i32 0
+    %45 = insertelement <4 x i8> %44, i8 %7, i32 1
+    %46 = insertelement <4 x i8> %45, i8 %23, i32 2
+    %47 = insertelement <4 x i8> %46, i8 %15, i32 3
+    %48 = zext <4 x i8> %47 to <4 x i32>
+    %49 = shl nuw nsw <4 x i32> %48, <i32 16, i32 16, i32 16, i32 16>
+    %50 = or <4 x i32> %41, %49
+    %51 = getelementptr inbounds i8, i8* %c, i64 15
+    %52 = load i8, i8* %51, align 1, !tbaa !1
+    %53 = insertelement <4 x i8> undef, i8 %52, i32 0
+    %54 = insertelement <4 x i8> %53, i8 %9, i32 1
+    %55 = insertelement <4 x i8> %54, i8 %25, i32 2
+    %56 = insertelement <4 x i8> %55, i8 %17, i32 3
+    %57 = zext <4 x i8> %56 to <4 x i32>
+    %58 = shl nuw <4 x i32> %57, <i32 24, i32 24, i32 24, i32 24>
+    %59 = or <4 x i32> %50, %58
+    br label %60
+  
+  ; <label>:60                                      ; preds = %2, %0
+    %61 = phi <4 x i32> [ %59, %2 ], [ <i32 1797285236, i32 1634760805, i32 2036477234, i32 857760878>, %0 ]
+    %62 = load i8, i8* %k, align 1, !tbaa !1
+    %63 = zext i8 %62 to i32
+    %64 = getelementptr inbounds i8, i8* %k, i64 1
+    %65 = load i8, i8* %64, align 1, !tbaa !1
+    %66 = zext i8 %65 to i32
+    %67 = shl nuw nsw i32 %66, 8
+    %68 = or i32 %67, %63
+    %69 = getelementptr inbounds i8, i8* %k, i64 2
+    %70 = load i8, i8* %69, align 1, !tbaa !1
+    %71 = zext i8 %70 to i32
+    %72 = shl nuw nsw i32 %71, 16
+    %73 = or i32 %68, %72
+    %74 = getelementptr inbounds i8, i8* %k, i64 3
+    %75 = load i8, i8* %74, align 1, !tbaa !1
+    %76 = zext i8 %75 to i32
+    %77 = shl nuw i32 %76, 24
+    %78 = or i32 %73, %77
+    %79 = getelementptr inbounds i8, i8* %k, i64 4
+    %80 = load i8, i8* %79, align 1, !tbaa !1
+    %81 = zext i8 %80 to i32
+    %82 = getelementptr inbounds i8, i8* %k, i64 5
+    %83 = load i8, i8* %82, align 1, !tbaa !1
+    %84 = zext i8 %83 to i32
+    %85 = shl nuw nsw i32 %84, 8
+    %86 = or i32 %85, %81
+    %87 = getelementptr inbounds i8, i8* %k, i64 6
+    %88 = load i8, i8* %87, align 1, !tbaa !1
+    %89 = zext i8 %88 to i32
+    %90 = shl nuw nsw i32 %89, 16
+    %91 = or i32 %86, %90
+    %92 = getelementptr inbounds i8, i8* %k, i64 7
+    %93 = load i8, i8* %92, align 1, !tbaa !1
+    %94 = zext i8 %93 to i32
+    %95 = shl nuw i32 %94, 24
+    %96 = or i32 %91, %95
+    %97 = getelementptr inbounds i8, i8* %k, i64 8
+    %98 = load i8, i8* %97, align 1, !tbaa !1
+    %99 = zext i8 %98 to i32
+    %100 = getelementptr inbounds i8, i8* %k, i64 9
+    %101 = load i8, i8* %100, align 1, !tbaa !1
+    %102 = zext i8 %101 to i32
+    %103 = shl nuw nsw i32 %102, 8
+    %104 = or i32 %103, %99
+    %105 = getelementptr inbounds i8, i8* %k, i64 10
+    %106 = load i8, i8* %105, align 1, !tbaa !1
+    %107 = zext i8 %106 to i32
+    %108 = shl nuw nsw i32 %107, 16
+    %109 = or i32 %104, %108
+    %110 = getelementptr inbounds i8, i8* %k, i64 11
+    %111 = load i8, i8* %110, align 1, !tbaa !1
+    %112 = zext i8 %111 to i32
+    %113 = shl nuw i32 %112, 24
+    %114 = or i32 %109, %113
+    %115 = getelementptr inbounds i8, i8* %k, i64 12
+    %116 = load i8, i8* %115, align 1, !tbaa !1
+    %117 = zext i8 %116 to i32
+    %118 = getelementptr inbounds i8, i8* %k, i64 13
+    %119 = load i8, i8* %118, align 1, !tbaa !1
+    %120 = zext i8 %119 to i32
+    %121 = shl nuw nsw i32 %120, 8
+    %122 = or i32 %121, %117
+    %123 = getelementptr inbounds i8, i8* %k, i64 14
+    %124 = load i8, i8* %123, align 1, !tbaa !1
+    %125 = zext i8 %124 to i32
+    %126 = shl nuw nsw i32 %125, 16
+    %127 = or i32 %122, %126
+    %128 = getelementptr inbounds i8, i8* %k, i64 15
+    %129 = load i8, i8* %128, align 1, !tbaa !1
+    %130 = zext i8 %129 to i32
+    %131 = shl nuw i32 %130, 24
+    %132 = or i32 %127, %131
+    %133 = getelementptr inbounds i8, i8* %k, i64 16
+    %134 = load i8, i8* %133, align 1, !tbaa !1
+    %135 = zext i8 %134 to i32
+    %136 = getelementptr inbounds i8, i8* %k, i64 17
+    %137 = load i8, i8* %136, align 1, !tbaa !1
+    %138 = zext i8 %137 to i32
+    %139 = shl nuw nsw i32 %138, 8
+    %140 = or i32 %139, %135
+    %141 = getelementptr inbounds i8, i8* %k, i64 18
+    %142 = load i8, i8* %141, align 1, !tbaa !1
+    %143 = zext i8 %142 to i32
+    %144 = shl nuw nsw i32 %143, 16
+    %145 = or i32 %140, %144
+    %146 = getelementptr inbounds i8, i8* %k, i64 19
+    %147 = load i8, i8* %146, align 1, !tbaa !1
+    %148 = zext i8 %147 to i32
+    %149 = shl nuw i32 %148, 24
+    %150 = or i32 %145, %149
+    %151 = getelementptr inbounds i8, i8* %k, i64 20
+    %152 = load i8, i8* %151, align 1, !tbaa !1
+    %153 = zext i8 %152 to i32
+    %154 = getelementptr inbounds i8, i8* %k, i64 21
+    %155 = load i8, i8* %154, align 1, !tbaa !1
+    %156 = zext i8 %155 to i32
+    %157 = shl nuw nsw i32 %156, 8
+    %158 = or i32 %157, %153
+    %159 = getelementptr inbounds i8, i8* %k, i64 22
+    %160 = load i8, i8* %159, align 1, !tbaa !1
+    %161 = zext i8 %160 to i32
+    %162 = shl nuw nsw i32 %161, 16
+    %163 = or i32 %158, %162
+    %164 = getelementptr inbounds i8, i8* %k, i64 23
+    %165 = load i8, i8* %164, align 1, !tbaa !1
+    %166 = zext i8 %165 to i32
+    %167 = shl nuw i32 %166, 24
+    %168 = or i32 %163, %167
+    %169 = getelementptr inbounds i8, i8* %k, i64 24
+    %170 = load i8, i8* %169, align 1, !tbaa !1
+    %171 = zext i8 %170 to i32
+    %172 = getelementptr inbounds i8, i8* %k, i64 25
+    %173 = load i8, i8* %172, align 1, !tbaa !1
+    %174 = zext i8 %173 to i32
+    %175 = shl nuw nsw i32 %174, 8
+    %176 = or i32 %175, %171
+    %177 = getelementptr inbounds i8, i8* %k, i64 26
+    %178 = load i8, i8* %177, align 1, !tbaa !1
+    %179 = zext i8 %178 to i32
+    %180 = shl nuw nsw i32 %179, 16
+    %181 = or i32 %176, %180
+    %182 = getelementptr inbounds i8, i8* %k, i64 27
+    %183 = load i8, i8* %182, align 1, !tbaa !1
+    %184 = zext i8 %183 to i32
+    %185 = shl nuw i32 %184, 24
+    %186 = or i32 %181, %185
+    %187 = getelementptr inbounds i8, i8* %k, i64 28
+    %188 = load i8, i8* %187, align 1, !tbaa !1
+    %189 = zext i8 %188 to i32
+    %190 = getelementptr inbounds i8, i8* %k, i64 29
+    %191 = load i8, i8* %190, align 1, !tbaa !1
+    %192 = zext i8 %191 to i32
+    %193 = shl nuw nsw i32 %192, 8
+    %194 = or i32 %193, %189
+    %195 = getelementptr inbounds i8, i8* %k, i64 30
+    %196 = load i8, i8* %195, align 1, !tbaa !1
+    %197 = zext i8 %196 to i32
+    %198 = shl nuw nsw i32 %197, 16
+    %199 = or i32 %194, %198
+    %200 = getelementptr inbounds i8, i8* %k, i64 31
+    %201 = load i8, i8* %200, align 1, !tbaa !1
+    %202 = zext i8 %201 to i32
+    %203 = shl nuw i32 %202, 24
+    %204 = or i32 %199, %203
+    %205 = load i8, i8* %in, align 1, !tbaa !1
+    %206 = zext i8 %205 to i32
+    %207 = getelementptr inbounds i8, i8* %in, i64 1
+    %208 = load i8, i8* %207, align 1, !tbaa !1
+    %209 = zext i8 %208 to i32
+    %210 = shl nuw nsw i32 %209, 8
+    %211 = or i32 %210, %206
+    %212 = getelementptr inbounds i8, i8* %in, i64 2
+    %213 = load i8, i8* %212, align 1, !tbaa !1
+    %214 = zext i8 %213 to i32
+    %215 = shl nuw nsw i32 %214, 16
+    %216 = or i32 %211, %215
+    %217 = getelementptr inbounds i8, i8* %in, i64 3
+    %218 = load i8, i8* %217, align 1, !tbaa !1
+    %219 = zext i8 %218 to i32
+    %220 = shl nuw i32 %219, 24
+    %221 = or i32 %216, %220
+    %222 = getelementptr inbounds i8, i8* %in, i64 4
+    %223 = load i8, i8* %222, align 1, !tbaa !1
+    %224 = zext i8 %223 to i32
+    %225 = getelementptr inbounds i8, i8* %in, i64 5
+    %226 = load i8, i8* %225, align 1, !tbaa !1
+    %227 = zext i8 %226 to i32
+    %228 = shl nuw nsw i32 %227, 8
+    %229 = or i32 %228, %224
+    %230 = getelementptr inbounds i8, i8* %in, i64 6
+    %231 = load i8, i8* %230, align 1, !tbaa !1
+    %232 = zext i8 %231 to i32
+    %233 = shl nuw nsw i32 %232, 16
+    %234 = or i32 %229, %233
+    %235 = getelementptr inbounds i8, i8* %in, i64 7
+    %236 = load i8, i8* %235, align 1, !tbaa !1
+    %237 = zext i8 %236 to i32
+    %238 = shl nuw i32 %237, 24
+    %239 = or i32 %234, %238
+    %240 = getelementptr inbounds i8, i8* %in, i64 8
+    %241 = load i8, i8* %240, align 1, !tbaa !1
+    %242 = zext i8 %241 to i32
+    %243 = getelementptr inbounds i8, i8* %in, i64 9
+    %244 = load i8, i8* %243, align 1, !tbaa !1
+    %245 = zext i8 %244 to i32
+    %246 = shl nuw nsw i32 %245, 8
+    %247 = or i32 %246, %242
+    %248 = getelementptr inbounds i8, i8* %in, i64 10
+    %249 = load i8, i8* %248, align 1, !tbaa !1
+    %250 = zext i8 %249 to i32
+    %251 = shl nuw nsw i32 %250, 16
+    %252 = or i32 %247, %251
+    %253 = getelementptr inbounds i8, i8* %in, i64 11
+    %254 = load i8, i8* %253, align 1, !tbaa !1
+    %255 = zext i8 %254 to i32
+    %256 = shl nuw i32 %255, 24
+    %257 = or i32 %252, %256
+    %258 = getelementptr inbounds i8, i8* %in, i64 12
+    %259 = load i8, i8* %258, align 1, !tbaa !1
+    %260 = zext i8 %259 to i32
+    %261 = getelementptr inbounds i8, i8* %in, i64 13
+    %262 = load i8, i8* %261, align 1, !tbaa !1
+    %263 = zext i8 %262 to i32
+    %264 = shl nuw nsw i32 %263, 8
+    %265 = or i32 %264, %260
+    %266 = getelementptr inbounds i8, i8* %in, i64 14
+    %267 = load i8, i8* %266, align 1, !tbaa !1
+    %268 = zext i8 %267 to i32
+    %269 = shl nuw nsw i32 %268, 16
+    %270 = or i32 %265, %269
+    %271 = getelementptr inbounds i8, i8* %in, i64 15
+    %272 = load i8, i8* %271, align 1, !tbaa !1
+    %273 = zext i8 %272 to i32
+    %274 = shl nuw i32 %273, 24
+    %275 = or i32 %270, %274
+    %276 = icmp sgt i32 %rounds, 0
+    %277 = extractelement <4 x i32> %61, i32 0
+    %278 = extractelement <4 x i32> %61, i32 1
+    %279 = extractelement <4 x i32> %61, i32 2
+    %280 = extractelement <4 x i32> %61, i32 3
+    br i1 %276, label %.lr.ph, label %._crit_edge
+  
+  .lr.ph:                                           ; preds = %60, %.lr.ph
+    %i.017 = phi i32 [ %441, %.lr.ph ], [ 0, %60 ]
+    %x0.116 = phi i32 [ %380, %.lr.ph ], [ %278, %60 ]
+    %x1.015 = phi i32 [ %365, %.lr.ph ], [ %78, %60 ]
+    %x2.014 = phi i32 [ %370, %.lr.ph ], [ %96, %60 ]
+    %x3.013 = phi i32 [ %375, %.lr.ph ], [ %114, %60 ]
+    %x4.012 = phi i32 [ %395, %.lr.ph ], [ %132, %60 ]
+    %x5.111 = phi i32 [ %400, %.lr.ph ], [ %280, %60 ]
+    %x6.010 = phi i32 [ %385, %.lr.ph ], [ %221, %60 ]
+    %x7.09 = phi i32 [ %390, %.lr.ph ], [ %239, %60 ]
+    %x8.08 = phi i32 [ %410, %.lr.ph ], [ %257, %60 ]
+    %x9.07 = phi i32 [ %415, %.lr.ph ], [ %275, %60 ]
+    %x10.16 = phi i32 [ %420, %.lr.ph ], [ %279, %60 ]
+    %x11.05 = phi i32 [ %405, %.lr.ph ], [ %150, %60 ]
+    %x15.14 = phi i32 [ %440, %.lr.ph ], [ %277, %60 ]
+    %x14.03 = phi i32 [ %435, %.lr.ph ], [ %204, %60 ]
+    %x13.02 = phi i32 [ %430, %.lr.ph ], [ %186, %60 ]
+    %x12.01 = phi i32 [ %425, %.lr.ph ], [ %168, %60 ]
+    %281 = add i32 %x0.116, %x12.01
+    %282 = shl i32 %281, 7
+    %283 = lshr i32 %281, 25
+    %284 = or i32 %283, %282
+    %285 = xor i32 %284, %x4.012
+    %286 = add i32 %285, %x0.116
+    %287 = shl i32 %286, 9
+    %288 = lshr i32 %286, 23
+    %289 = or i32 %288, %287
+    %290 = xor i32 %289, %x8.08
+    %291 = add i32 %290, %285
+    %292 = shl i32 %291, 13
+    %293 = lshr i32 %291, 19
+    %294 = or i32 %293, %292
+    %295 = xor i32 %294, %x12.01
+    %296 = add i32 %295, %290
+    %297 = shl i32 %296, 18
+    %298 = lshr i32 %296, 14
+    %299 = or i32 %298, %297
+    %300 = xor i32 %299, %x0.116
+    %301 = add i32 %x1.015, %x5.111
+    %302 = shl i32 %301, 7
+    %303 = lshr i32 %301, 25
+    %304 = or i32 %303, %302
+    %305 = xor i32 %304, %x9.07
+    %306 = add i32 %305, %x5.111
+    %307 = shl i32 %306, 9
+    %308 = lshr i32 %306, 23
+    %309 = or i32 %308, %307
+    %310 = xor i32 %309, %x13.02
+    %311 = add i32 %310, %305
+    %312 = shl i32 %311, 13
+    %313 = lshr i32 %311, 19
+    %314 = or i32 %313, %312
+    %315 = xor i32 %314, %x1.015
+    %316 = add i32 %315, %310
+    %317 = shl i32 %316, 18
+    %318 = lshr i32 %316, 14
+    %319 = or i32 %318, %317
+    %320 = xor i32 %319, %x5.111
+    %321 = add i32 %x6.010, %x10.16
+    %322 = shl i32 %321, 7
+    %323 = lshr i32 %321, 25
+    %324 = or i32 %323, %322
+    %325 = xor i32 %324, %x14.03
+    %326 = add i32 %325, %x10.16
+    %327 = shl i32 %326, 9
+    %328 = lshr i32 %326, 23
+    %329 = or i32 %328, %327
+    %330 = xor i32 %329, %x2.014
+    %331 = add i32 %330, %325
+    %332 = shl i32 %331, 13
+    %333 = lshr i32 %331, 19
+    %334 = or i32 %333, %332
+    %335 = xor i32 %334, %x6.010
+    %336 = add i32 %335, %330
+    %337 = shl i32 %336, 18
+    %338 = lshr i32 %336, 14
+    %339 = or i32 %338, %337
+    %340 = xor i32 %339, %x10.16
+    %341 = add i32 %x11.05, %x15.14
+    %342 = shl i32 %341, 7
+    %343 = lshr i32 %341, 25
+    %344 = or i32 %343, %342
+    %345 = xor i32 %x3.013, %344
+    %346 = add i32 %345, %x15.14
+    %347 = shl i32 %346, 9
+    %348 = lshr i32 %346, 23
+    %349 = or i32 %348, %347
+    %350 = xor i32 %349, %x7.09
+    %351 = add i32 %350, %345
+    %352 = shl i32 %351, 13
+    %353 = lshr i32 %351, 19
+    %354 = or i32 %353, %352
+    %355 = xor i32 %354, %x11.05
+    %356 = add i32 %355, %350
+    %357 = shl i32 %356, 18
+    %358 = lshr i32 %356, 14
+    %359 = or i32 %358, %357
+    %360 = xor i32 %359, %x15.14
+    %361 = add i32 %300, %345
+    %362 = shl i32 %361, 7
+    %363 = lshr i32 %361, 25
+    %364 = or i32 %363, %362
+    %365 = xor i32 %364, %315
+    %366 = add i32 %365, %300
+    %367 = shl i32 %366, 9
+    %368 = lshr i32 %366, 23
+    %369 = or i32 %368, %367
+    %370 = xor i32 %369, %330
+    %371 = add i32 %370, %365
+    %372 = shl i32 %371, 13
+    %373 = lshr i32 %371, 19
+    %374 = or i32 %373, %372
+    %375 = xor i32 %374, %345
+    %376 = add i32 %375, %370
+    %377 = shl i32 %376, 18
+    %378 = lshr i32 %376, 14
+    %379 = or i32 %378, %377
+    %380 = xor i32 %379, %300
+    %381 = add i32 %320, %285
+    %382 = shl i32 %381, 7
+    %383 = lshr i32 %381, 25
+    %384 = or i32 %383, %382
+    %385 = xor i32 %384, %335
+    %386 = add i32 %385, %320
+    %387 = shl i32 %386, 9
+    %388 = lshr i32 %386, 23
+    %389 = or i32 %388, %387
+    %390 = xor i32 %389, %350
+    %391 = add i32 %390, %385
+    %392 = shl i32 %391, 13
+    %393 = lshr i32 %391, 19
+    %394 = or i32 %393, %392
+    %395 = xor i32 %394, %285
+    %396 = add i32 %395, %390
+    %397 = shl i32 %396, 18
+    %398 = lshr i32 %396, 14
+    %399 = or i32 %398, %397
+    %400 = xor i32 %399, %320
+    %401 = add i32 %340, %305
+    %402 = shl i32 %401, 7
+    %403 = lshr i32 %401, 25
+    %404 = or i32 %403, %402
+    %405 = xor i32 %404, %355
+    %406 = add i32 %405, %340
+    %407 = shl i32 %406, 9
+    %408 = lshr i32 %406, 23
+    %409 = or i32 %408, %407
+    %410 = xor i32 %409, %290
+    %411 = add i32 %410, %405
+    %412 = shl i32 %411, 13
+    %413 = lshr i32 %411, 19
+    %414 = or i32 %413, %412
+    %415 = xor i32 %414, %305
+    %416 = add i32 %415, %410
+    %417 = shl i32 %416, 18
+    %418 = lshr i32 %416, 14
+    %419 = or i32 %418, %417
+    %420 = xor i32 %419, %340
+    %421 = add i32 %360, %325
+    %422 = shl i32 %421, 7
+    %423 = lshr i32 %421, 25
+    %424 = or i32 %423, %422
+    %425 = xor i32 %424, %295
+    %426 = add i32 %425, %360
+    %427 = shl i32 %426, 9
+    %428 = lshr i32 %426, 23
+    %429 = or i32 %428, %427
+    %430 = xor i32 %429, %310
+    %431 = add i32 %430, %425
+    %432 = shl i32 %431, 13
+    %433 = lshr i32 %431, 19
+    %434 = or i32 %433, %432
+    %435 = xor i32 %434, %325
+    %436 = add i32 %435, %430
+    %437 = shl i32 %436, 18
+    %438 = lshr i32 %436, 14
+    %439 = or i32 %438, %437
+    %440 = xor i32 %439, %360
+    %441 = add nuw nsw i32 %i.017, 2
+    %442 = icmp slt i32 %441, %rounds
+    br i1 %442, label %.lr.ph, label %._crit_edge
+  
+  ._crit_edge:                                      ; preds = %.lr.ph, %60
+    %x0.1.lcssa = phi i32 [ %278, %60 ], [ %380, %.lr.ph ]
+    %x1.0.lcssa = phi i32 [ %78, %60 ], [ %365, %.lr.ph ]
+    %x2.0.lcssa = phi i32 [ %96, %60 ], [ %370, %.lr.ph ]
+    %x3.0.lcssa = phi i32 [ %114, %60 ], [ %375, %.lr.ph ]
+    %x4.0.lcssa = phi i32 [ %132, %60 ], [ %395, %.lr.ph ]
+    %x5.1.lcssa = phi i32 [ %280, %60 ], [ %400, %.lr.ph ]
+    %x6.0.lcssa = phi i32 [ %221, %60 ], [ %385, %.lr.ph ]
+    %x7.0.lcssa = phi i32 [ %239, %60 ], [ %390, %.lr.ph ]
+    %x8.0.lcssa = phi i32 [ %257, %60 ], [ %410, %.lr.ph ]
+    %x9.0.lcssa = phi i32 [ %275, %60 ], [ %415, %.lr.ph ]
+    %x10.1.lcssa = phi i32 [ %279, %60 ], [ %420, %.lr.ph ]
+    %x11.0.lcssa = phi i32 [ %150, %60 ], [ %405, %.lr.ph ]
+    %x15.1.lcssa = phi i32 [ %277, %60 ], [ %440, %.lr.ph ]
+    %x14.0.lcssa = phi i32 [ %204, %60 ], [ %435, %.lr.ph ]
+    %x13.0.lcssa = phi i32 [ %186, %60 ], [ %430, %.lr.ph ]
+    %x12.0.lcssa = phi i32 [ %168, %60 ], [ %425, %.lr.ph ]
+    %443 = add i32 %x0.1.lcssa, %278
+    %444 = trunc i32 %443 to i8
+    store i8 %444, i8* %out, align 1, !tbaa !1
+    %445 = lshr i32 %443, 8
+    %446 = trunc i32 %445 to i8
+    %447 = getelementptr inbounds i8, i8* %out, i64 1
+    store i8 %446, i8* %447, align 1, !tbaa !1
+    %448 = lshr i32 %443, 16
+    %449 = trunc i32 %448 to i8
+    %450 = getelementptr inbounds i8, i8* %out, i64 2
+    store i8 %449, i8* %450, align 1, !tbaa !1
+    %451 = lshr i32 %443, 24
+    %452 = trunc i32 %451 to i8
+    %453 = getelementptr inbounds i8, i8* %out, i64 3
+    store i8 %452, i8* %453, align 1, !tbaa !1
+    %454 = getelementptr inbounds i8, i8* %out, i64 4
+    %455 = add i32 %x1.0.lcssa, %78
+    %456 = trunc i32 %455 to i8
+    store i8 %456, i8* %454, align 1, !tbaa !1
+    %457 = lshr i32 %455, 8
+    %458 = trunc i32 %457 to i8
+    %459 = getelementptr inbounds i8, i8* %out, i64 5
+    store i8 %458, i8* %459, align 1, !tbaa !1
+    %460 = lshr i32 %455, 16
+    %461 = trunc i32 %460 to i8
+    %462 = getelementptr inbounds i8, i8* %out, i64 6
+    store i8 %461, i8* %462, align 1, !tbaa !1
+    %463 = lshr i32 %455, 24
+    %464 = trunc i32 %463 to i8
+    %465 = getelementptr inbounds i8, i8* %out, i64 7
+    store i8 %464, i8* %465, align 1, !tbaa !1
+    %466 = getelementptr inbounds i8, i8* %out, i64 8
+    %467 = add i32 %x2.0.lcssa, %96
+    %468 = trunc i32 %467 to i8
+    store i8 %468, i8* %466, align 1, !tbaa !1
+    %469 = lshr i32 %467, 8
+    %470 = trunc i32 %469 to i8
+    %471 = getelementptr inbounds i8, i8* %out, i64 9
+    store i8 %470, i8* %471, align 1, !tbaa !1
+    %472 = lshr i32 %467, 16
+    %473 = trunc i32 %472 to i8
+    %474 = getelementptr inbounds i8, i8* %out, i64 10
+    store i8 %473, i8* %474, align 1, !tbaa !1
+    %475 = lshr i32 %467, 24
+    %476 = trunc i32 %475 to i8
+    %477 = getelementptr inbounds i8, i8* %out, i64 11
+    store i8 %476, i8* %477, align 1, !tbaa !1
+    %478 = getelementptr inbounds i8, i8* %out, i64 12
+    %479 = add i32 %x3.0.lcssa, %114
+    %480 = trunc i32 %479 to i8
+    store i8 %480, i8* %478, align 1, !tbaa !1
+    %481 = lshr i32 %479, 8
+    %482 = trunc i32 %481 to i8
+    %483 = getelementptr inbounds i8, i8* %out, i64 13
+    store i8 %482, i8* %483, align 1, !tbaa !1
+    %484 = lshr i32 %479, 16
+    %485 = trunc i32 %484 to i8
+    %486 = getelementptr inbounds i8, i8* %out, i64 14
+    store i8 %485, i8* %486, align 1, !tbaa !1
+    %487 = lshr i32 %479, 24
+    %488 = trunc i32 %487 to i8
+    %489 = getelementptr inbounds i8, i8* %out, i64 15
+    store i8 %488, i8* %489, align 1, !tbaa !1
+    %490 = getelementptr inbounds i8, i8* %out, i64 16
+    %491 = add i32 %x4.0.lcssa, %132
+    %492 = trunc i32 %491 to i8
+    store i8 %492, i8* %490, align 1, !tbaa !1
+    %493 = lshr i32 %491, 8
+    %494 = trunc i32 %493 to i8
+    %495 = getelementptr inbounds i8, i8* %out, i64 17
+    store i8 %494, i8* %495, align 1, !tbaa !1
+    %496 = lshr i32 %491, 16
+    %497 = trunc i32 %496 to i8
+    %498 = getelementptr inbounds i8, i8* %out, i64 18
+    store i8 %497, i8* %498, align 1, !tbaa !1
+    %499 = lshr i32 %491, 24
+    %500 = trunc i32 %499 to i8
+    %501 = getelementptr inbounds i8, i8* %out, i64 19
+    store i8 %500, i8* %501, align 1, !tbaa !1
+    %502 = getelementptr inbounds i8, i8* %out, i64 20
+    %503 = add i32 %x5.1.lcssa, %280
+    %504 = trunc i32 %503 to i8
+    store i8 %504, i8* %502, align 1, !tbaa !1
+    %505 = lshr i32 %503, 8
+    %506 = trunc i32 %505 to i8
+    %507 = getelementptr inbounds i8, i8* %out, i64 21
+    store i8 %506, i8* %507, align 1, !tbaa !1
+    %508 = lshr i32 %503, 16
+    %509 = trunc i32 %508 to i8
+    %510 = getelementptr inbounds i8, i8* %out, i64 22
+    store i8 %509, i8* %510, align 1, !tbaa !1
+    %511 = lshr i32 %503, 24
+    %512 = trunc i32 %511 to i8
+    %513 = getelementptr inbounds i8, i8* %out, i64 23
+    store i8 %512, i8* %513, align 1, !tbaa !1
+    %514 = getelementptr inbounds i8, i8* %out, i64 24
+    %515 = add i32 %x6.0.lcssa, %221
+    %516 = trunc i32 %515 to i8
+    store i8 %516, i8* %514, align 1, !tbaa !1
+    %517 = lshr i32 %515, 8
+    %518 = trunc i32 %517 to i8
+    %519 = getelementptr inbounds i8, i8* %out, i64 25
+    store i8 %518, i8* %519, align 1, !tbaa !1
+    %520 = lshr i32 %515, 16
+    %521 = trunc i32 %520 to i8
+    %522 = getelementptr inbounds i8, i8* %out, i64 26
+    store i8 %521, i8* %522, align 1, !tbaa !1
+    %523 = lshr i32 %515, 24
+    %524 = trunc i32 %523 to i8
+    %525 = getelementptr inbounds i8, i8* %out, i64 27
+    store i8 %524, i8* %525, align 1, !tbaa !1
+    %526 = getelementptr inbounds i8, i8* %out, i64 28
+    %527 = add i32 %x7.0.lcssa, %239
+    %528 = trunc i32 %527 to i8
+    store i8 %528, i8* %526, align 1, !tbaa !1
+    %529 = lshr i32 %527, 8
+    %530 = trunc i32 %529 to i8
+    %531 = getelementptr inbounds i8, i8* %out, i64 29
+    store i8 %530, i8* %531, align 1, !tbaa !1
+    %532 = lshr i32 %527, 16
+    %533 = trunc i32 %532 to i8
+    %534 = getelementptr inbounds i8, i8* %out, i64 30
+    store i8 %533, i8* %534, align 1, !tbaa !1
+    %535 = lshr i32 %527, 24
+    %536 = trunc i32 %535 to i8
+    %537 = getelementptr inbounds i8, i8* %out, i64 31
+    store i8 %536, i8* %537, align 1, !tbaa !1
+    %538 = getelementptr inbounds i8, i8* %out, i64 32
+    %539 = add i32 %x8.0.lcssa, %257
+    %540 = trunc i32 %539 to i8
+    store i8 %540, i8* %538, align 1, !tbaa !1
+    %541 = lshr i32 %539, 8
+    %542 = trunc i32 %541 to i8
+    %543 = getelementptr inbounds i8, i8* %out, i64 33
+    store i8 %542, i8* %543, align 1, !tbaa !1
+    %544 = lshr i32 %539, 16
+    %545 = trunc i32 %544 to i8
+    %546 = getelementptr inbounds i8, i8* %out, i64 34
+    store i8 %545, i8* %546, align 1, !tbaa !1
+    %547 = lshr i32 %539, 24
+    %548 = trunc i32 %547 to i8
+    %549 = getelementptr inbounds i8, i8* %out, i64 35
+    store i8 %548, i8* %549, align 1, !tbaa !1
+    %550 = getelementptr inbounds i8, i8* %out, i64 36
+    %551 = add i32 %x9.0.lcssa, %275
+    %552 = trunc i32 %551 to i8
+    store i8 %552, i8* %550, align 1, !tbaa !1
+    %553 = lshr i32 %551, 8
+    %554 = trunc i32 %553 to i8
+    %555 = getelementptr inbounds i8, i8* %out, i64 37
+    store i8 %554, i8* %555, align 1, !tbaa !1
+    %556 = lshr i32 %551, 16
+    %557 = trunc i32 %556 to i8
+    %558 = getelementptr inbounds i8, i8* %out, i64 38
+    store i8 %557, i8* %558, align 1, !tbaa !1
+    %559 = lshr i32 %551, 24
+    %560 = trunc i32 %559 to i8
+    %561 = getelementptr inbounds i8, i8* %out, i64 39
+    store i8 %560, i8* %561, align 1, !tbaa !1
+    %562 = getelementptr inbounds i8, i8* %out, i64 40
+    %563 = add i32 %x10.1.lcssa, %279
+    %564 = trunc i32 %563 to i8
+    store i8 %564, i8* %562, align 1, !tbaa !1
+    %565 = lshr i32 %563, 8
+    %566 = trunc i32 %565 to i8
+    %567 = getelementptr inbounds i8, i8* %out, i64 41
+    store i8 %566, i8* %567, align 1, !tbaa !1
+    %568 = lshr i32 %563, 16
+    %569 = trunc i32 %568 to i8
+    %570 = getelementptr inbounds i8, i8* %out, i64 42
+    store i8 %569, i8* %570, align 1, !tbaa !1
+    %571 = lshr i32 %563, 24
+    %572 = trunc i32 %571 to i8
+    %573 = getelementptr inbounds i8, i8* %out, i64 43
+    store i8 %572, i8* %573, align 1, !tbaa !1
+    %574 = getelementptr inbounds i8, i8* %out, i64 44
+    %575 = add i32 %x11.0.lcssa, %150
+    %576 = trunc i32 %575 to i8
+    store i8 %576, i8* %574, align 1, !tbaa !1
+    %577 = lshr i32 %575, 8
+    %578 = trunc i32 %577 to i8
+    %579 = getelementptr inbounds i8, i8* %out, i64 45
+    store i8 %578, i8* %579, align 1, !tbaa !1
+    %580 = lshr i32 %575, 16
+    %581 = trunc i32 %580 to i8
+    %582 = getelementptr inbounds i8, i8* %out, i64 46
+    store i8 %581, i8* %582, align 1, !tbaa !1
+    %583 = lshr i32 %575, 24
+    %584 = trunc i32 %583 to i8
+    %585 = getelementptr inbounds i8, i8* %out, i64 47
+    store i8 %584, i8* %585, align 1, !tbaa !1
+    %586 = getelementptr inbounds i8, i8* %out, i64 48
+    %587 = add i32 %x12.0.lcssa, %168
+    %588 = trunc i32 %587 to i8
+    store i8 %588, i8* %586, align 1, !tbaa !1
+    %589 = lshr i32 %587, 8
+    %590 = trunc i32 %589 to i8
+    %591 = getelementptr inbounds i8, i8* %out, i64 49
+    store i8 %590, i8* %591, align 1, !tbaa !1
+    %592 = lshr i32 %587, 16
+    %593 = trunc i32 %592 to i8
+    %594 = getelementptr inbounds i8, i8* %out, i64 50
+    store i8 %593, i8* %594, align 1, !tbaa !1
+    %595 = lshr i32 %587, 24
+    %596 = trunc i32 %595 to i8
+    %597 = getelementptr inbounds i8, i8* %out, i64 51
+    store i8 %596, i8* %597, align 1, !tbaa !1
+    %598 = getelementptr inbounds i8, i8* %out, i64 52
+    %599 = add i32 %x13.0.lcssa, %186
+    %600 = trunc i32 %599 to i8
+    store i8 %600, i8* %598, align 1, !tbaa !1
+    %601 = lshr i32 %599, 8
+    %602 = trunc i32 %601 to i8
+    %603 = getelementptr inbounds i8, i8* %out, i64 53
+    store i8 %602, i8* %603, align 1, !tbaa !1
+    %604 = lshr i32 %599, 16
+    %605 = trunc i32 %604 to i8
+    %606 = getelementptr inbounds i8, i8* %out, i64 54
+    store i8 %605, i8* %606, align 1, !tbaa !1
+    %607 = lshr i32 %599, 24
+    %608 = trunc i32 %607 to i8
+    %609 = getelementptr inbounds i8, i8* %out, i64 55
+    store i8 %608, i8* %609, align 1, !tbaa !1
+    %610 = getelementptr inbounds i8, i8* %out, i64 56
+    %611 = add i32 %x14.0.lcssa, %204
+    %612 = trunc i32 %611 to i8
+    store i8 %612, i8* %610, align 1, !tbaa !1
+    %613 = lshr i32 %611, 8
+    %614 = trunc i32 %613 to i8
+    %615 = getelementptr inbounds i8, i8* %out, i64 57
+    store i8 %614, i8* %615, align 1, !tbaa !1
+    %616 = lshr i32 %611, 16
+    %617 = trunc i32 %616 to i8
+    %618 = getelementptr inbounds i8, i8* %out, i64 58
+    store i8 %617, i8* %618, align 1, !tbaa !1
+    %619 = lshr i32 %611, 24
+    %620 = trunc i32 %619 to i8
+    %621 = getelementptr inbounds i8, i8* %out, i64 59
+    store i8 %620, i8* %621, align 1, !tbaa !1
+    %622 = getelementptr inbounds i8, i8* %out, i64 60
+    %623 = add i32 %x15.1.lcssa, %277
+    %624 = trunc i32 %623 to i8
+    store i8 %624, i8* %622, align 1, !tbaa !1
+    %625 = lshr i32 %623, 8
+    %626 = trunc i32 %625 to i8
+    %627 = getelementptr inbounds i8, i8* %out, i64 61
+    store i8 %626, i8* %627, align 1, !tbaa !1
+    %628 = lshr i32 %623, 16
+    %629 = trunc i32 %628 to i8
+    %630 = getelementptr inbounds i8, i8* %out, i64 62
+    store i8 %629, i8* %630, align 1, !tbaa !1
+    %631 = lshr i32 %623, 24
+    %632 = trunc i32 %631 to i8
+    %633 = getelementptr inbounds i8, i8* %out, i64 63
+    store i8 %632, i8* %633, align 1, !tbaa !1
+    ret void
+  }
+  
+  ; Function Attrs: norecurse nounwind readnone uwtable
+  define i64 @crypto_core_salsa20_outputbytes() #1 {
+    ret i64 64
+  }
+  
+  ; Function Attrs: norecurse nounwind readnone uwtable
+  define i64 @crypto_core_salsa20_inputbytes() #1 {
+    ret i64 16
+  }
+  
+  ; Function Attrs: norecurse nounwind readnone uwtable
+  define i64 @crypto_core_salsa20_keybytes() #1 {
+    ret i64 32
+  }
+  
+  ; Function Attrs: norecurse nounwind readnone uwtable
+  define i64 @crypto_core_salsa20_constbytes() #1 {
+    ret i64 16
+  }
+  
+  ; Function Attrs: norecurse nounwind uwtable
+  define i32 @crypto_core_salsa2012(i8* nocapture nonnull %out, i8* nocapture nonnull readonly %in, i8* nocapture nonnull readonly %k, i8* readonly %c) #0 {
+    tail call fastcc void @crypto_core_salsa(i8* nonnull %out, i8* nonnull %in, i8* nonnull %k, i8* %c, i32 12)
+    ret i32 0
+  }
+  
+  ; Function Attrs: norecurse nounwind readnone uwtable
+  define i64 @crypto_core_salsa2012_outputbytes() #1 {
+    ret i64 64
+  }
+  
+  ; Function Attrs: norecurse nounwind readnone uwtable
+  define i64 @crypto_core_salsa2012_inputbytes() #1 {
+    ret i64 16
+  }
+  
+  ; Function Attrs: norecurse nounwind readnone uwtable
+  define i64 @crypto_core_salsa2012_keybytes() #1 {
+    ret i64 32
+  }
+  
+  ; Function Attrs: norecurse nounwind readnone uwtable
+  define i64 @crypto_core_salsa2012_constbytes() #1 {
+    ret i64 16
+  }
+  
+  ; Function Attrs: norecurse nounwind uwtable
+  define i32 @crypto_core_salsa208(i8* nocapture nonnull %out, i8* nocapture nonnull readonly %in, i8* nocapture nonnull readonly %k, i8* readonly %c) #0 {
+    tail call fastcc void @crypto_core_salsa(i8* nonnull %out, i8* nonnull %in, i8* nonnull %k, i8* %c, i32 8)
+    ret i32 0
+  }
+  
+  ; Function Attrs: norecurse nounwind readnone uwtable
+  define i64 @crypto_core_salsa208_outputbytes() #1 {
+    ret i64 64
+  }
+  
+  ; Function Attrs: norecurse nounwind readnone uwtable
+  define i64 @crypto_core_salsa208_inputbytes() #1 {
+    ret i64 16
+  }
+  
+  ; Function Attrs: norecurse nounwind readnone uwtable
+  define i64 @crypto_core_salsa208_keybytes() #1 {
+    ret i64 32
+  }
+  
+  ; Function Attrs: norecurse nounwind readnone uwtable
+  define i64 @crypto_core_salsa208_constbytes() #1 {
+    ret i64 16
+  }
+  
+  attributes #0 = { norecurse nounwind uwtable "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+fxsr,+mmx,+sse,+sse2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #1 = { norecurse nounwind readnone uwtable "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+fxsr,+mmx,+sse,+sse2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  
+  !llvm.ident = !{!0}
+  
+  !0 = !{!"clang version 3.8.0-2ubuntu4 (tags/RELEASE_380/final)"}
+  !1 = !{!2, !2, i64 0}
+  !2 = !{!"omnipotent char", !3, i64 0}
+  !3 = !{!"Simple C/C++ TBAA"}
+
+...
+---
+name:            crypto_core_salsa
+alignment:       2
+exposesReturnsTwice: false
+hasInlineAsm:    false
+isSSA:           true
+tracksRegLiveness: true
+tracksSubRegLiveness: false
+registers:       
+  - { id: 0, class: gpr32 }
+  - { id: 1, class: gpr32 }
+  - { id: 2, class: gpr32 }
+  - { id: 3, class: gpr32 }
+  - { id: 4, class: gpr32 }
+  - { id: 5, class: gpr32 }
+  - { id: 6, class: gpr32 }
+  - { id: 7, class: gpr32 }
+  - { id: 8, class: gpr32 }
+  - { id: 9, class: gpr32 }
+  - { id: 10, class: gpr32 }
+  - { id: 11, class: gpr32 }
+  - { id: 12, class: gpr32 }
+  - { id: 13, class: gpr32 }
+  - { id: 14, class: gpr32 }
+  - { id: 15, class: gpr32 }
+  - { id: 16, class: gpr32 }
+  - { id: 17, class: gpr32 }
+  - { id: 18, class: gpr32 }
+  - { id: 19, class: gpr32 }
+  - { id: 20, class: gpr32 }
+  - { id: 21, class: gpr32 }
+  - { id: 22, class: gpr32 }
+  - { id: 23, class: gpr32 }
+  - { id: 24, class: gpr32 }
+  - { id: 25, class: gpr32 }
+  - { id: 26, class: gpr32 }
+  - { id: 27, class: gpr32 }
+  - { id: 28, class: gpr32 }
+  - { id: 29, class: gpr32 }
+  - { id: 30, class: gpr32 }
+  - { id: 31, class: gpr32 }
+  - { id: 32, class: gpr32 }
+  - { id: 33, class: gpr32 }
+  - { id: 34, class: gpr32 }
+  - { id: 35, class: gpr32 }
+  - { id: 36, class: gpr32 }
+  - { id: 37, class: gpr32 }
+  - { id: 38, class: gpr32 }
+  - { id: 39, class: gpr32 }
+  - { id: 40, class: gpr32 }
+  - { id: 41, class: gpr32 }
+  - { id: 42, class: gpr32 }
+  - { id: 43, class: gpr32 }
+  - { id: 44, class: gpr32 }
+  - { id: 45, class: gpr32 }
+  - { id: 46, class: gpr32 }
+  - { id: 47, class: gpr32 }
+  - { id: 48, class: gpr32 }
+  - { id: 49, class: gpr32 }
+  - { id: 50, class: gpr32 }
+  - { id: 51, class: gpr32 }
+  - { id: 52, class: gpr32 }
+  - { id: 53, class: gpr32 }
+  - { id: 54, class: gpr32 }
+  - { id: 55, class: gpr32 }
+  - { id: 56, class: gpr32 }
+  - { id: 57, class: gpr32 }
+  - { id: 58, class: gpr32 }
+  - { id: 59, class: gpr32 }
+  - { id: 60, class: gpr32 }
+  - { id: 61, class: gpr32 }
+  - { id: 62, class: gpr32 }
+  - { id: 63, class: gpr32 }
+  - { id: 64, class: gpr32 }
+  - { id: 65, class: gpr32 }
+  - { id: 66, class: gpr32 }
+  - { id: 67, class: gpr32 }
+  - { id: 68, class: gpr32 }
+  - { id: 69, class: gpr32 }
+  - { id: 70, class: gpr32 }
+  - { id: 71, class: gpr32 }
+  - { id: 72, class: gpr32 }
+  - { id: 73, class: gpr32 }
+  - { id: 74, class: gpr32 }
+  - { id: 75, class: gpr32 }
+  - { id: 76, class: gpr32 }
+  - { id: 77, class: gpr32 }
+  - { id: 78, class: gpr32 }
+  - { id: 79, class: gpr32 }
+  - { id: 80, class: gpr32 }
+  - { id: 81, class: gpr32 }
+  - { id: 82, class: gpr32 }
+  - { id: 83, class: gpr32 }
+  - { id: 84, class: gpr32 }
+  - { id: 85, class: gpr32 }
+  - { id: 86, class: gpr32 }
+  - { id: 87, class: gpr32 }
+  - { id: 88, class: gpr32 }
+  - { id: 89, class: gpr32 }
+  - { id: 90, class: gpr32 }
+  - { id: 91, class: gpr32 }
+  - { id: 92, class: gpr32 }
+  - { id: 93, class: gpr32 }
+  - { id: 94, class: gpr32 }
+  - { id: 95, class: gpr32 }
+  - { id: 96, class: gpr32 }
+  - { id: 97, class: gpr32 }
+  - { id: 98, class: gpr32 }
+  - { id: 99, class: gpr32 }
+  - { id: 100, class: gpr32 }
+  - { id: 101, class: gpr32 }
+  - { id: 102, class: gpr32 }
+  - { id: 103, class: gpr32 }
+  - { id: 104, class: gpr32 }
+  - { id: 105, class: gpr32 }
+  - { id: 106, class: gpr32 }
+  - { id: 107, class: gpr32 }
+  - { id: 108, class: gpr32 }
+  - { id: 109, class: gpr32 }
+  - { id: 110, class: gpr32 }
+  - { id: 111, class: gpr32 }
+  - { id: 112, class: gpr32 }
+  - { id: 113, class: gpr32 }
+  - { id: 114, class: gpr32 }
+  - { id: 115, class: gpr32 }
+  - { id: 116, class: gpr32 }
+  - { id: 117, class: gpr32 }
+  - { id: 118, class: gpr32 }
+  - { id: 119, class: gpr32 }
+  - { id: 120, class: gpr32 }
+  - { id: 121, class: gpr32 }
+  - { id: 122, class: gpr32 }
+  - { id: 123, class: gpr32 }
+  - { id: 124, class: gpr32 }
+  - { id: 125, class: gpr32 }
+  - { id: 126, class: gpr32 }
+  - { id: 127, class: gpr32 }
+  - { id: 128, class: gpr32 }
+  - { id: 129, class: gpr32 }
+  - { id: 130, class: gpr32 }
+  - { id: 131, class: gpr32 }
+  - { id: 132, class: gpr32 }
+  - { id: 133, class: gpr32 }
+  - { id: 134, class: gpr32 }
+  - { id: 135, class: gpr32 }
+  - { id: 136, class: gpr32 }
+  - { id: 137, class: gpr32 }
+  - { id: 138, class: gpr32 }
+  - { id: 139, class: gpr32 }
+  - { id: 140, class: gpr32 }
+  - { id: 141, class: gpr32 }
+  - { id: 142, class: gpr32 }
+  - { id: 143, class: gpr32 }
+  - { id: 144, class: gpr32 }
+  - { id: 145, class: gpr32 }
+  - { id: 146, class: gpr32 }
+  - { id: 147, class: gpr32 }
+  - { id: 148, class: gpr32 }
+  - { id: 149, class: gpr32 }
+  - { id: 150, class: gpr32 }
+  - { id: 151, class: gpr32 }
+  - { id: 152, class: gpr32 }
+  - { id: 153, class: gpr32 }
+  - { id: 154, class: gpr32 }
+  - { id: 155, class: gpr32 }
+  - { id: 156, class: gpr32 }
+  - { id: 157, class: gpr32 }
+  - { id: 158, class: gpr32 }
+  - { id: 159, class: gpr32 }
+  - { id: 160, class: gpr32 }
+  - { id: 161, class: gpr32 }
+  - { id: 162, class: gpr32 }
+  - { id: 163, class: gpr32 }
+  - { id: 164, class: gpr32 }
+  - { id: 165, class: gpr32 }
+  - { id: 166, class: gpr32 }
+  - { id: 167, class: gpr32 }
+  - { id: 168, class: gpr32 }
+  - { id: 169, class: gpr32 }
+  - { id: 170, class: gpr32 }
+  - { id: 171, class: gpr32 }
+  - { id: 172, class: gpr32 }
+  - { id: 173, class: gpr32 }
+  - { id: 174, class: gpr32 }
+  - { id: 175, class: gpr32 }
+  - { id: 176, class: gpr32 }
+  - { id: 177, class: gpr32 }
+  - { id: 178, class: gpr32 }
+  - { id: 179, class: gpr32 }
+  - { id: 180, class: gpr32 }
+  - { id: 181, class: gpr32 }
+  - { id: 182, class: gpr32 }
+  - { id: 183, class: gpr32 }
+  - { id: 184, class: gpr32 }
+  - { id: 185, class: gpr32 }
+  - { id: 186, class: gpr32 }
+  - { id: 187, class: gpr32 }
+  - { id: 188, class: gpr32 }
+  - { id: 189, class: gpr32 }
+  - { id: 190, class: gpr32 }
+  - { id: 191, class: gpr32 }
+  - { id: 192, class: gpr32 }
+  - { id: 193, class: gpr32 }
+  - { id: 194, class: gpr32 }
+  - { id: 195, class: gpr32 }
+  - { id: 196, class: gpr32 }
+  - { id: 197, class: gpr32 }
+  - { id: 198, class: gpr32 }
+  - { id: 199, class: gpr32 }
+  - { id: 200, class: gpr32 }
+  - { id: 201, class: gpr32 }
+  - { id: 202, class: gpr32 }
+  - { id: 203, class: gpr32 }
+  - { id: 204, class: gpr32 }
+  - { id: 205, class: gpr32 }
+  - { id: 206, class: gpr32 }
+  - { id: 207, class: gpr32 }
+  - { id: 208, class: gpr32 }
+  - { id: 209, class: gpr32 }
+  - { id: 210, class: gpr32 }
+  - { id: 211, class: gpr32 }
+  - { id: 212, class: gpr32 }
+  - { id: 213, class: gpr32 }
+  - { id: 214, class: gpr32 }
+  - { id: 215, class: gpr32 }
+  - { id: 216, class: gpr32 }
+  - { id: 217, class: gpr32 }
+  - { id: 218, class: gpr32 }
+  - { id: 219, class: gpr32 }
+  - { id: 220, class: gpr32 }
+  - { id: 221, class: gpr32 }
+  - { id: 222, class: gpr32 }
+  - { id: 223, class: gpr32 }
+  - { id: 224, class: gpr32 }
+  - { id: 225, class: gpr32 }
+  - { id: 226, class: gpr32 }
+  - { id: 227, class: gpr32 }
+  - { id: 228, class: gpr32 }
+  - { id: 229, class: gpr32 }
+  - { id: 230, class: gpr32 }
+  - { id: 231, class: gpr32 }
+  - { id: 232, class: gpr32 }
+  - { id: 233, class: gpr32 }
+  - { id: 234, class: gpr32 }
+  - { id: 235, class: gpr32 }
+  - { id: 236, class: gpr32 }
+  - { id: 237, class: gpr32 }
+  - { id: 238, class: gpr32 }
+  - { id: 239, class: gpr32 }
+  - { id: 240, class: gpr32 }
+  - { id: 241, class: gpr32 }
+  - { id: 242, class: gpr32 }
+  - { id: 243, class: gpr32 }
+  - { id: 244, class: gpr32 }
+  - { id: 245, class: gpr32 }
+  - { id: 246, class: gpr32 }
+  - { id: 247, class: gpr32 }
+  - { id: 248, class: gpr32 }
+  - { id: 249, class: gpr32 }
+  - { id: 250, class: gpr32 }
+  - { id: 251, class: gpr32 }
+  - { id: 252, class: gpr32 }
+  - { id: 253, class: gpr32 }
+  - { id: 254, class: gpr32 }
+  - { id: 255, class: gpr32 }
+  - { id: 256, class: gpr32 }
+  - { id: 257, class: gpr32 }
+  - { id: 258, class: gpr32 }
+  - { id: 259, class: gpr32 }
+  - { id: 260, class: gpr32 }
+  - { id: 261, class: gpr32 }
+  - { id: 262, class: gpr32 }
+  - { id: 263, class: gpr32 }
+  - { id: 264, class: gpr32 }
+  - { id: 265, class: gpr32 }
+  - { id: 266, class: gpr32 }
+  - { id: 267, class: gpr32 }
+  - { id: 268, class: gpr32 }
+  - { id: 269, class: gpr32 }
+  - { id: 270, class: gpr32 }
+  - { id: 271, class: gpr32 }
+  - { id: 272, class: gpr32 }
+  - { id: 273, class: gpr32 }
+  - { id: 274, class: gpr32 }
+  - { id: 275, class: gpr32 }
+  - { id: 276, class: gpr32 }
+  - { id: 277, class: gpr32 }
+  - { id: 278, class: gpr32 }
+  - { id: 279, class: gpr32 }
+  - { id: 280, class: gpr32 }
+  - { id: 281, class: gpr32 }
+  - { id: 282, class: gpr32 }
+  - { id: 283, class: gpr32 }
+  - { id: 284, class: gpr32 }
+  - { id: 285, class: gpr32 }
+  - { id: 286, class: gpr32 }
+  - { id: 287, class: gpr32 }
+  - { id: 288, class: gpr32 }
+  - { id: 289, class: gpr32 }
+  - { id: 290, class: gpr32 }
+  - { id: 291, class: gpr32 }
+  - { id: 292, class: gpr32 }
+  - { id: 293, class: gpr32 }
+  - { id: 294, class: gpr32 }
+  - { id: 295, class: gpr32 }
+  - { id: 296, class: gpr32 }
+  - { id: 297, class: gpr32 }
+  - { id: 298, class: gpr32 }
+  - { id: 299, class: gpr32 }
+  - { id: 300, class: gpr32 }
+  - { id: 301, class: gpr32 }
+  - { id: 302, class: gpr32 }
+  - { id: 303, class: gpr32 }
+  - { id: 304, class: gpr32 }
+  - { id: 305, class: gpr32 }
+  - { id: 306, class: gpr32 }
+  - { id: 307, class: gpr32 }
+  - { id: 308, class: gpr32 }
+  - { id: 309, class: gpr32 }
+  - { id: 310, class: gpr32 }
+  - { id: 311, class: gpr32 }
+  - { id: 312, class: gpr32 }
+  - { id: 313, class: gpr32 }
+  - { id: 314, class: gpr32 }
+  - { id: 315, class: gpr32 }
+  - { id: 316, class: gpr32 }
+  - { id: 317, class: gpr32 }
+  - { id: 318, class: gpr32 }
+  - { id: 319, class: gpr32 }
+  - { id: 320, class: gpr32 }
+  - { id: 321, class: gpr32 }
+  - { id: 322, class: gpr32 }
+  - { id: 323, class: gpr32 }
+  - { id: 324, class: gpr32 }
+  - { id: 325, class: gpr32 }
+  - { id: 326, class: gpr32 }
+  - { id: 327, class: gpr32 }
+  - { id: 328, class: gpr32 }
+  - { id: 329, class: gpr32 }
+  - { id: 330, class: gpr32 }
+  - { id: 331, class: gpr32 }
+  - { id: 332, class: gpr32 }
+  - { id: 333, class: gpr32 }
+  - { id: 334, class: gpr32 }
+  - { id: 335, class: gpr32 }
+  - { id: 336, class: gpr32 }
+  - { id: 337, class: gpr32 }
+  - { id: 338, class: gpr32 }
+  - { id: 339, class: gpr32 }
+  - { id: 340, class: gpr32 }
+  - { id: 341, class: gpr32 }
+  - { id: 342, class: gpr32 }
+  - { id: 343, class: gpr32 }
+  - { id: 344, class: gpr32 }
+  - { id: 345, class: gpr32 }
+  - { id: 346, class: gpr32 }
+  - { id: 347, class: gpr32 }
+  - { id: 348, class: gpr32 }
+  - { id: 349, class: gpr32 }
+  - { id: 350, class: gpr32 }
+  - { id: 351, class: gpr32 }
+  - { id: 352, class: gpr32 }
+  - { id: 353, class: gpr32 }
+  - { id: 354, class: gpr32 }
+  - { id: 355, class: gpr32 }
+  - { id: 356, class: gpr32 }
+  - { id: 357, class: gpr32 }
+  - { id: 358, class: gpr32 }
+  - { id: 359, class: gpr32 }
+  - { id: 360, class: gpr32 }
+  - { id: 361, class: gpr32 }
+  - { id: 362, class: gpr32 }
+  - { id: 363, class: gpr32 }
+  - { id: 364, class: gpr32 }
+  - { id: 365, class: gpr32 }
+  - { id: 366, class: gpr32 }
+  - { id: 367, class: gpr32 }
+  - { id: 368, class: gpr32 }
+  - { id: 369, class: gpr32 }
+  - { id: 370, class: gpr32 }
+  - { id: 371, class: gpr32 }
+  - { id: 372, class: gpr32 }
+  - { id: 373, class: gpr32 }
+  - { id: 374, class: gpr32 }
+  - { id: 375, class: gpr32 }
+  - { id: 376, class: gpr32 }
+  - { id: 377, class: gpr32 }
+  - { id: 378, class: gpr32 }
+  - { id: 379, class: gpr32 }
+  - { id: 380, class: gpr32 }
+  - { id: 381, class: gpr32 }
+  - { id: 382, class: gpr32 }
+  - { id: 383, class: gpr32 }
+  - { id: 384, class: gpr32 }
+  - { id: 385, class: gpr32 }
+  - { id: 386, class: gpr32 }
+  - { id: 387, class: gpr32 }
+  - { id: 388, class: gpr32 }
+  - { id: 389, class: gpr32 }
+  - { id: 390, class: gpr32 }
+  - { id: 391, class: gpr32 }
+  - { id: 392, class: gpr32 }
+  - { id: 393, class: gpr32 }
+  - { id: 394, class: gpr32 }
+  - { id: 395, class: gpr32 }
+  - { id: 396, class: gpr32 }
+  - { id: 397, class: gpr32 }
+  - { id: 398, class: gpr32 }
+  - { id: 399, class: gpr32 }
+  - { id: 400, class: gpr32 }
+  - { id: 401, class: gpr32 }
+  - { id: 402, class: gpr32 }
+  - { id: 403, class: gpr32 }
+  - { id: 404, class: gpr32 }
+  - { id: 405, class: gpr32 }
+  - { id: 406, class: gpr32 }
+  - { id: 407, class: gpr32 }
+  - { id: 408, class: gpr32 }
+  - { id: 409, class: gpr32 }
+  - { id: 410, class: gpr32 }
+  - { id: 411, class: gpr32 }
+  - { id: 412, class: gpr32 }
+  - { id: 413, class: gpr32 }
+  - { id: 414, class: gpr32 }
+  - { id: 415, class: gpr32 }
+  - { id: 416, class: gpr32 }
+  - { id: 417, class: gpr32 }
+  - { id: 418, class: gpr32 }
+  - { id: 419, class: gpr32 }
+  - { id: 420, class: gpr32 }
+  - { id: 421, class: gpr32 }
+  - { id: 422, class: gpr32 }
+  - { id: 423, class: gpr32 }
+  - { id: 424, class: gpr32 }
+  - { id: 425, class: gpr32 }
+  - { id: 426, class: gpr32 }
+  - { id: 427, class: gpr32 }
+  - { id: 428, class: gpr32 }
+  - { id: 429, class: gpr32 }
+  - { id: 430, class: gpr32 }
+  - { id: 431, class: gpr32 }
+  - { id: 432, class: gpr32 }
+  - { id: 433, class: gpr32 }
+  - { id: 434, class: gpr32 }
+  - { id: 435, class: gpr32 }
+  - { id: 436, class: gpr32 }
+  - { id: 437, class: gpr32 }
+  - { id: 438, class: gpr32 }
+  - { id: 439, class: gpr32 }
+  - { id: 440, class: gpr32 }
+liveins:         
+  - { reg: '%a0', virtual-reg: '%74' }
+  - { reg: '%a1', virtual-reg: '%75' }
+  - { reg: '%a2', virtual-reg: '%76' }
+  - { reg: '%a3', virtual-reg: '%77' }
+  - { reg: '%t0', virtual-reg: '%78' }
+frameInfo:       
+  isFrameAddressTaken: false
+  isReturnAddressTaken: false
+  hasStackMap:     false
+  hasPatchPoint:   false
+  stackSize:       0
+  offsetAdjustment: 0
+  maxAlignment:    1
+  adjustsStack:    false
+  hasCalls:        false
+  maxCallFrameSize: 0
+  hasOpaqueSPAdjustment: false
+  hasVAStart:      false
+  hasMustTailInVarArgFunc: false
+body:             |
+  bb.0 (%ir-block.0, freq 21):
+    successors: %bb.6(37), %bb.1(62)
+    liveins: %a0, %a1, %a2, %a3, %t0
+  
+    %78 = COPY %t0
+    %77 = COPY %a3
+    %76 = COPY %a2
+    %75 = COPY %a1
+    %74 = COPY %a0
+    BNE %77, %zero, %bb.1, implicit-def %at
+  
+  bb.6 (freq 8):
+    successors: %bb.2(100)
+  
+    %83 = LUi 13088
+    %82 = ORi %83, 25710
+    %84 = LUi 31074
+    %81 = ORi %84, 11570
+    %85 = LUi 24944
+    %80 = ORi %85, 30821
+    %86 = LUi 27424
+    %79 = ORi %86, 25972
+    B %bb.2, implicit-def %at
+  
+  bb.1 (%ir-block.2, freq 13):
+    successors: %bb.2(100)
+  
+    %87 = LBu %77, 4, <0x4c50f10> = !{!"unison-memory-partition", i32 8} :: (load 1 from %ir.10, !tbaa !1)
+    %88 = LBu %77, 5, <0x4c768a0> = !{!"unison-memory-partition", i32 9} :: (load 1 from %ir.12, !tbaa !1)
+    %89 = SLL killed %88, 8
+    %90 = LBu %77, 0, <0x4c13820> = !{!"unison-memory-partition", i32 10} :: (load 1 from %ir.c, !tbaa !1)
+    %91 = LBu %77, 1, <0x4c12930> = !{!"unison-memory-partition", i32 11} :: (load 1 from %ir.4, !tbaa !1)
+    %92 = SLL killed %91, 8
+    %93 = OR killed %92, killed %90
+    %94 = OR killed %89, killed %87
+    %95 = LBu %77, 8, <0x4c8ad10> = !{!"unison-memory-partition", i32 12} :: (load 1 from %ir.18, !tbaa !1)
+    %96 = LBu %77, 9, <0x4ca30d0> = !{!"unison-memory-partition", i32 13} :: (load 1 from %ir.20, !tbaa !1)
+    %97 = SLL killed %96, 8
+    %98 = OR killed %97, killed %95
+    %99 = LBu %77, 6, <0x4c16f80> = !{!"unison-memory-partition", i32 14} :: (load 1 from %ir.14, !tbaa !1)
+    %100 = SLL killed %99, 16
+    %101 = LBu %77, 10, <0x4c17050> = !{!"unison-memory-partition", i32 15} :: (load 1 from %ir.22, !tbaa !1)
+    %102 = SLL killed %101, 16
+    %103 = OR killed %98, killed %102
+    %104 = OR killed %94, killed %100
+    %105 = LBu %77, 3, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (load 1 from %ir.8, !tbaa !1)
+    %106 = LBu %77, 13, <0x4c17120> = !{!"unison-memory-partition", i32 1} :: (load 1 from %ir.33, !tbaa !1)
+    %107 = LBu %77, 2, <0x4c171f0> = !{!"unison-memory-partition", i32 2} :: (load 1 from %ir.6, !tbaa !1)
+    %108 = SLL killed %107, 16
+    %109 = OR killed %93, killed %108
+    %110 = LBu %77, 12, <0x4b98ef0> = !{!"unison-memory-partition", i32 3} :: (load 1 from %ir.26, !tbaa !1)
+    %111 = SLL killed %106, 8
+    %112 = SLL killed %105, 24
+    %113 = LBu %77, 11, <0x4b98fc0> = !{!"unison-memory-partition", i32 4} :: (load 1 from %ir.24, !tbaa !1)
+    %114 = SLL killed %113, 24
+    %115 = LBu %77, 7, <0x4b99090> = !{!"unison-memory-partition", i32 5} :: (load 1 from %ir.16, !tbaa !1)
+    %116 = SLL killed %115, 24
+    %3 = OR killed %104, killed %116
+    %2 = OR killed %103, killed %114
+    %1 = OR killed %109, killed %112
+    %117 = OR killed %111, killed %110
+    %118 = LBu %77, 14, <0x4b99160> = !{!"unison-memory-partition", i32 6} :: (load 1 from %ir.42, !tbaa !1)
+    %119 = SLL killed %118, 16
+    %120 = OR killed %117, killed %119
+    %121 = LBu %77, 15, <0x4b99230> = !{!"unison-memory-partition", i32 7} :: (load 1 from %ir.51, !tbaa !1)
+    %122 = SLL killed %121, 24
+    %0 = OR killed %120, killed %122
+  
+  bb.2 (%ir-block.60, freq 21):
+    successors: %bb.5(62), %bb.4.._crit_edge(37)
+  
+    %4 = PHI %79, %bb.6, %0, %bb.1
+    %5 = PHI %80, %bb.6, %1, %bb.1
+    %6 = PHI %81, %bb.6, %2, %bb.1
+    %7 = PHI %82, %bb.6, %3, %bb.1
+    %124 = LBu %75, 13, <0x4c827c0> = !{!"unison-memory-partition", i32 28} :: (load 1 from %ir.261, !tbaa !1)
+    %125 = LBu %75, 14, <0x4c82890> = !{!"unison-memory-partition", i32 29} :: (load 1 from %ir.266, !tbaa !1)
+    %126 = LBu %75, 12, <0x4c82960> = !{!"unison-memory-partition", i32 30} :: (load 1 from %ir.258, !tbaa !1)
+    %127 = SLL killed %124, 8
+    %128 = LBu %75, 5, <0x4c82a30> = !{!"unison-memory-partition", i32 31} :: (load 1 from %ir.225, !tbaa !1)
+    %129 = LBu %76, 1, <0x4c82b00> = !{!"unison-memory-partition", i32 32} :: (load 1 from %ir.64, !tbaa !1)
+    %130 = LBu %75, 6, <0x4c82bd0> = !{!"unison-memory-partition", i32 33} :: (load 1 from %ir.230, !tbaa !1)
+    %131 = LBu %75, 9, <0x4c82ca0> = !{!"unison-memory-partition", i32 34} :: (load 1 from %ir.243, !tbaa !1)
+    %132 = LBu %75, 4, <0x4c82d70> = !{!"unison-memory-partition", i32 35} :: (load 1 from %ir.222, !tbaa !1)
+    %133 = SLL killed %128, 8
+    %134 = OR killed %127, killed %126
+    %135 = LBu %75, 15, <0x4c82e40> = !{!"unison-memory-partition", i32 36} :: (load 1 from %ir.271, !tbaa !1)
+    %136 = LBu %76, 2, <0x4c65230> = !{!"unison-memory-partition", i32 37} :: (load 1 from %ir.69, !tbaa !1)
+    %137 = LBu %76, 6, <0x4c65300> = !{!"unison-memory-partition", i32 38} :: (load 1 from %ir.87, !tbaa !1)
+    %138 = LBu %76, 10, <0x4c653d0> = !{!"unison-memory-partition", i32 39} :: (load 1 from %ir.105, !tbaa !1)
+    %139 = LBu %76, 14, <0x4c654a0> = !{!"unison-memory-partition", i32 40} :: (load 1 from %ir.123, !tbaa !1)
+    %140 = SLL killed %125, 16
+    %141 = LBu %76, 0, <0x4c65570> = !{!"unison-memory-partition", i32 41} :: (load 1 from %ir.k, !tbaa !1)
+    %142 = SLL killed %129, 8
+    %143 = LBu %76, 21, <0x4c65640> = !{!"unison-memory-partition", i32 42} :: (load 1 from %ir.154, !tbaa !1)
+    %144 = LBu %76, 17, <0x4c65710> = !{!"unison-memory-partition", i32 43} :: (load 1 from %ir.136, !tbaa !1)
+    %145 = LBu %76, 13, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (load 1 from %ir.118, !tbaa !1)
+    %146 = LBu %76, 9, <0x4c17120> = !{!"unison-memory-partition", i32 1} :: (load 1 from %ir.100, !tbaa !1)
+    %147 = LBu %76, 5, <0x4c171f0> = !{!"unison-memory-partition", i32 2} :: (load 1 from %ir.82, !tbaa !1)
+    %148 = LBu %76, 16, <0x4b98ef0> = !{!"unison-memory-partition", i32 3} :: (load 1 from %ir.133, !tbaa !1)
+    %149 = LBu %75, 1, <0x4b98fc0> = !{!"unison-memory-partition", i32 4} :: (load 1 from %ir.207, !tbaa !1)
+    %150 = LBu %76, 25, <0x4b99090> = !{!"unison-memory-partition", i32 5} :: (load 1 from %ir.172, !tbaa !1)
+    %151 = OR killed %133, killed %132
+    %152 = SLL killed %131, 8
+    %153 = SLL killed %130, 16
+    %154 = LBu %76, 20, <0x4b99160> = !{!"unison-memory-partition", i32 6} :: (load 1 from %ir.151, !tbaa !1)
+    %155 = LBu %76, 29, <0x4b99230> = !{!"unison-memory-partition", i32 7} :: (load 1 from %ir.190, !tbaa !1)
+    %156 = SLL killed %147, 8
+    %157 = SLL killed %146, 8
+    %158 = SLL killed %145, 8
+    %159 = SLL killed %144, 8
+    %160 = SLL killed %143, 8
+    %161 = OR killed %142, killed %141
+    %162 = OR killed %134, killed %140
+    %163 = SLL killed %139, 16
+    %164 = SLL killed %138, 16
+    %165 = SLL killed %137, 16
+    %166 = SLL killed %136, 16
+    %167 = SLL killed %135, 24
+    %168 = LBu %75, 0, <0x4c50f10> = !{!"unison-memory-partition", i32 8} :: (load 1 from %ir.in, !tbaa !1)
+    %169 = LBu %75, 8, <0x4c768a0> = !{!"unison-memory-partition", i32 9} :: (load 1 from %ir.240, !tbaa !1)
+    %170 = LBu %76, 22, <0x4c13820> = !{!"unison-memory-partition", i32 10} :: (load 1 from %ir.159, !tbaa !1)
+    %171 = LBu %76, 26, <0x4c12930> = !{!"unison-memory-partition", i32 11} :: (load 1 from %ir.177, !tbaa !1)
+    %172 = LBu %76, 24, <0x4c8ad10> = !{!"unison-memory-partition", i32 12} :: (load 1 from %ir.169, !tbaa !1)
+    %173 = SLL killed %150, 8
+    %174 = SLL killed %149, 8
+    %175 = LBu %76, 18, <0x4ca30d0> = !{!"unison-memory-partition", i32 13} :: (load 1 from %ir.141, !tbaa !1)
+    %176 = OR killed %159, killed %148
+    %177 = LBu %76, 12, <0x4c16f80> = !{!"unison-memory-partition", i32 14} :: (load 1 from %ir.115, !tbaa !1)
+    %178 = OR killed %158, killed %177
+    %179 = LBu %76, 8, <0x4c17050> = !{!"unison-memory-partition", i32 15} :: (load 1 from %ir.97, !tbaa !1)
+    %180 = OR killed %157, killed %179
+    %181 = LBu %76, 4, <0x4c657e0> = !{!"unison-memory-partition", i32 16} :: (load 1 from %ir.79, !tbaa !1)
+    %182 = OR killed %156, killed %181
+    %183 = SLL killed %155, 8
+    %184 = SLL killed %175, 16
+    %185 = LBu %75, 2, <0x4c658b0> = !{!"unison-memory-partition", i32 17} :: (load 1 from %ir.212, !tbaa !1)
+    %186 = OR killed %173, killed %172
+    %187 = LBu %75, 10, <0x4c65980> = !{!"unison-memory-partition", i32 18} :: (load 1 from %ir.248, !tbaa !1)
+    %188 = OR killed %160, killed %154
+    %189 = SLL killed %171, 16
+    %190 = SLL killed %170, 16
+    %191 = LBu %75, 11, <0x4c65a50> = !{!"unison-memory-partition", i32 19} :: (load 1 from %ir.253, !tbaa !1)
+    %192 = OR killed %151, killed %153
+    %193 = LBu %75, 7, <0x4c65b20> = !{!"unison-memory-partition", i32 20} :: (load 1 from %ir.235, !tbaa !1)
+    %194 = LBu %75, 3, <0x4c65bf0> = !{!"unison-memory-partition", i32 21} :: (load 1 from %ir.217, !tbaa !1)
+    %195 = OR killed %152, killed %169
+    %196 = LBu %76, 28, <0x4c65cc0> = !{!"unison-memory-partition", i32 22} :: (load 1 from %ir.187, !tbaa !1)
+    %197 = OR killed %174, killed %168
+    %198 = LBu %76, 31, <0x4b93b00> = !{!"unison-memory-partition", i32 23} :: (load 1 from %ir.200, !tbaa !1)
+    %199 = OR killed %183, killed %196
+    %200 = LBu %76, 27, <0x4b93bd0> = !{!"unison-memory-partition", i32 24} :: (load 1 from %ir.182, !tbaa !1)
+    %19 = OR killed %162, killed %167
+    %201 = LBu %76, 19, <0x4b93ca0> = !{!"unison-memory-partition", i32 25} :: (load 1 from %ir.146, !tbaa !1)
+    %202 = OR killed %161, killed %166
+    %203 = LBu %76, 15, <0x4b93d70> = !{!"unison-memory-partition", i32 26} :: (load 1 from %ir.128, !tbaa !1)
+    %204 = OR killed %182, killed %165
+    %205 = LBu %76, 11, <0x4b93e40> = !{!"unison-memory-partition", i32 27} :: (load 1 from %ir.110, !tbaa !1)
+    %206 = OR killed %180, killed %164
+    %207 = LBu %76, 7, <0x4ba8350> = !{!"unison-memory-partition", i32 44} :: (load 1 from %ir.92, !tbaa !1)
+    %208 = OR killed %178, killed %163
+    %209 = LBu %76, 3, <0x4ba8420> = !{!"unison-memory-partition", i32 45} :: (load 1 from %ir.74, !tbaa !1)
+    %210 = OR killed %176, killed %184
+    %211 = LBu %76, 30, <0x4b94320> = !{!"unison-memory-partition", i32 46} :: (load 1 from %ir.195, !tbaa !1)
+    %212 = LBu %76, 23, <0x4b943f0> = !{!"unison-memory-partition", i32 47} :: (load 1 from %ir.164, !tbaa !1)
+    %213 = SLL killed %212, 24
+    %214 = SLL killed %193, 24
+    %215 = SLL killed %191, 24
+    %216 = SLL killed %187, 16
+    %217 = SLL killed %185, 16
+    %218 = SLL killed %211, 16
+    %219 = SLL killed %209, 24
+    %220 = SLL killed %207, 24
+    %221 = SLL killed %205, 24
+    %222 = SLL killed %203, 24
+    %223 = SLL killed %201, 24
+    %224 = SLL killed %200, 24
+    %225 = SLL killed %198, 24
+    %226 = SLL killed %194, 24
+    %227 = OR killed %188, killed %190
+    %228 = OR killed %186, killed %189
+    %229 = OR killed %199, killed %218
+    %230 = OR killed %197, killed %217
+    %231 = OR killed %195, killed %216
+    %18 = OR killed %231, killed %215
+    %17 = OR killed %192, killed %214
+    %16 = OR killed %230, killed %226
+    %15 = OR killed %229, killed %225
+    %14 = OR killed %228, killed %224
+    %13 = OR killed %227, killed %213
+    %12 = OR killed %210, killed %223
+    %11 = OR killed %208, killed %222
+    %10 = OR killed %206, killed %221
+    %9 = OR killed %204, killed %220
+    %8 = OR killed %202, killed %219
+    %20 = COPY %4
+    %21 = COPY %5
+    %22 = COPY %6
+    %23 = COPY %7
+    BLEZ %78, %bb.4.._crit_edge, implicit-def %at
+  
+  bb.5 (freq 13):
+    successors: %bb.3..lr.ph(100)
+  
+    %123 = ADDiu %zero, 0
+  
+  bb.3..lr.ph (freq 426):
+    successors: %bb.3..lr.ph(96), %bb.4.._crit_edge(3)
+  
+    %24 = PHI %123, %bb.5, %57, %bb.3..lr.ph
+    %25 = PHI %21, %bb.5, %44, %bb.3..lr.ph
+    %26 = PHI %8, %bb.5, %41, %bb.3..lr.ph
+    %27 = PHI %9, %bb.5, %42, %bb.3..lr.ph
+    %28 = PHI %10, %bb.5, %43, %bb.3..lr.ph
+    %29 = PHI %11, %bb.5, %47, %bb.3..lr.ph
+    %30 = PHI %23, %bb.5, %48, %bb.3..lr.ph
+    %31 = PHI %16, %bb.5, %45, %bb.3..lr.ph
+    %32 = PHI %17, %bb.5, %46, %bb.3..lr.ph
+    %33 = PHI %18, %bb.5, %50, %bb.3..lr.ph
+    %34 = PHI %19, %bb.5, %51, %bb.3..lr.ph
+    %35 = PHI %22, %bb.5, %52, %bb.3..lr.ph
+    %36 = PHI %12, %bb.5, %49, %bb.3..lr.ph
+    %37 = PHI %20, %bb.5, %56, %bb.3..lr.ph
+    %38 = PHI %15, %bb.5, %55, %bb.3..lr.ph
+    %39 = PHI %14, %bb.5, %54, %bb.3..lr.ph
+    %40 = PHI %13, %bb.5, %53, %bb.3..lr.ph
+    %232 = ADDu %36, %37
+    %233 = SLL %232, 7
+    %234 = SRL %232, 25
+    %235 = OR killed %234, killed %233
+    %236 = XOR %28, killed %235
+    %237 = ADDu %236, %37
+    %238 = ADDu %25, %40
+    %239 = ADDu %26, %30
+    %240 = ADDu %31, %35
+    %241 = SLL %237, 9
+    %242 = SRL %237, 23
+    %243 = SLL %240, 7
+    %244 = SRL %240, 25
+    %245 = SLL %239, 7
+    %246 = SRL %239, 25
+    %247 = SLL %238, 7
+    %248 = SRL %238, 25
+    %249 = OR killed %248, killed %247
+    %57 = ADDiu %24, 2
+    %250 = OR killed %246, killed %245
+    %251 = OR killed %242, killed %241
+    %252 = OR killed %244, killed %243
+    %253 = XOR killed %252, %38
+    %254 = ADDu %253, %35
+    %255 = SLL %254, 9
+    %256 = SRL %254, 23
+    %257 = OR killed %256, killed %255
+    %258 = XOR killed %257, %27
+    %259 = XOR killed %251, %32
+    %260 = XOR killed %249, %29
+    %261 = ADDu %260, %25
+    %262 = SLL %261, 9
+    %263 = SRL %261, 23
+    %264 = SLT %57, %78
+    %265 = ADDu %259, %236
+    %266 = SLL %265, 13
+    %267 = SRL %265, 19
+    %268 = OR killed %267, killed %266
+    %269 = XOR killed %268, %36
+    %270 = ADDu %258, %253
+    %271 = XOR killed %250, %34
+    %272 = OR killed %263, killed %262
+    %273 = XOR killed %272, %33
+    %274 = ADDu %273, %260
+    %275 = SLL %274, 13
+    %276 = SRL %274, 19
+    %277 = OR killed %276, killed %275
+    %278 = XOR killed %277, %40
+    %279 = ADDu %278, %273
+    %280 = SLL %279, 18
+    %281 = SRL %279, 14
+    %282 = OR killed %281, killed %280
+    %283 = ADDu %269, %259
+    %284 = SLL %270, 13
+    %285 = SRL %270, 19
+    %286 = OR killed %285, killed %284
+    %287 = ADDu %271, %30
+    %288 = SLL %287, 9
+    %289 = SRL %287, 23
+    %290 = OR killed %289, killed %288
+    %291 = XOR killed %286, %31
+    %292 = SLL %283, 18
+    %293 = SRL %283, 14
+    %294 = XOR killed %290, %39
+    %295 = ADDu %294, %271
+    %296 = XOR killed %282, %25
+    %297 = ADDu %296, %236
+    %298 = SLL %297, 7
+    %299 = SRL %297, 25
+    %300 = OR killed %299, killed %298
+    %301 = OR killed %293, killed %292
+    %302 = XOR killed %301, %37
+    %303 = ADDu %291, %258
+    %304 = SLL %295, 13
+    %305 = SRL %295, 19
+    %306 = OR killed %305, killed %304
+    %307 = XOR killed %306, %26
+    %41 = XOR killed %300, %307
+    %308 = ADDu %41, %296
+    %309 = ADDu %302, %253
+    %310 = SLL %303, 18
+    %311 = SRL %303, 14
+    %312 = ADDu %307, %294
+    %313 = SLL %312, 18
+    %314 = SRL %312, 14
+    %315 = OR killed %311, killed %310
+    %316 = SLL %308, 9
+    %317 = SRL %308, 23
+    %318 = OR killed %317, killed %316
+    %319 = SLL %309, 7
+    %320 = SRL %309, 25
+    %321 = OR killed %320, killed %319
+    %53 = XOR killed %321, %278
+    %322 = ADDu %53, %302
+    %323 = OR killed %314, killed %313
+    %324 = XOR killed %323, %30
+    %325 = ADDu %324, %260
+    %42 = XOR killed %318, %258
+    %326 = SLL %322, 9
+    %327 = SRL %322, 23
+    %328 = OR killed %327, killed %326
+    %54 = XOR killed %328, %294
+    %329 = SLL %325, 7
+    %330 = SRL %325, 25
+    %331 = ADDu %54, %53
+    %332 = ADDu %42, %41
+    %333 = OR killed %330, killed %329
+    %334 = XOR killed %315, %35
+    %335 = ADDu %334, %271
+    %336 = SLL %335, 7
+    %337 = SRL %335, 25
+    %338 = OR killed %337, killed %336
+    %339 = SLL %331, 13
+    %340 = SRL %331, 19
+    %45 = XOR killed %333, %291
+    %341 = ADDu %45, %324
+    %342 = SLL %341, 9
+    %343 = SRL %341, 23
+    %344 = OR killed %340, killed %339
+    %345 = OR killed %343, killed %342
+    %346 = SLL %332, 13
+    %347 = SRL %332, 19
+    %49 = XOR killed %338, %269
+    %348 = ADDu %49, %334
+    %349 = SLL %348, 9
+    %350 = SRL %348, 23
+    %351 = OR killed %350, killed %349
+    %50 = XOR killed %351, %273
+    %352 = ADDu %50, %49
+    %353 = OR killed %347, killed %346
+    %46 = XOR killed %345, %259
+    %55 = XOR killed %344, %253
+    %354 = ADDu %55, %54
+    %355 = SLL %354, 18
+    %356 = SRL %354, 14
+    %357 = SLL %352, 13
+    %358 = SRL %352, 19
+    %359 = OR killed %358, killed %357
+    %51 = XOR killed %359, %271
+    %360 = ADDu %51, %50
+    %361 = SLL %360, 18
+    %362 = SRL %360, 14
+    %363 = OR killed %362, killed %361
+    %364 = OR killed %356, killed %355
+    %365 = ADDu %46, %45
+    %43 = XOR killed %353, %236
+    %366 = ADDu %43, %42
+    %367 = SLL %366, 18
+    %368 = SRL %366, 14
+    %369 = SLL %365, 13
+    %370 = SRL %365, 19
+    %56 = XOR killed %364, %302
+    %52 = XOR killed %363, %334
+    %371 = OR killed %368, killed %367
+    %372 = OR killed %370, killed %369
+    %47 = XOR killed %372, %260
+    %373 = ADDu %47, %46
+    %374 = SLL %373, 18
+    %375 = SRL %373, 14
+    %376 = OR killed %375, killed %374
+    %48 = XOR killed %376, %324
+    %44 = XOR killed %371, %296
+    BNE killed %264, %zero, %bb.3..lr.ph, implicit-def dead %at
+    B %bb.4.._crit_edge, implicit-def dead %at
+  
+  bb.4.._crit_edge (freq 21):
+    liveouts:
+  
+    %58 = PHI %21, %bb.2, %44, %bb.3..lr.ph
+    %59 = PHI %8, %bb.2, %41, %bb.3..lr.ph
+    %60 = PHI %9, %bb.2, %42, %bb.3..lr.ph
+    %61 = PHI %10, %bb.2, %43, %bb.3..lr.ph
+    %62 = PHI %11, %bb.2, %47, %bb.3..lr.ph
+    %63 = PHI %23, %bb.2, %48, %bb.3..lr.ph
+    %64 = PHI %16, %bb.2, %45, %bb.3..lr.ph
+    %65 = PHI %17, %bb.2, %46, %bb.3..lr.ph
+    %66 = PHI %18, %bb.2, %50, %bb.3..lr.ph
+    %67 = PHI %19, %bb.2, %51, %bb.3..lr.ph
+    %68 = PHI %22, %bb.2, %52, %bb.3..lr.ph
+    %69 = PHI %12, %bb.2, %49, %bb.3..lr.ph
+    %70 = PHI %20, %bb.2, %56, %bb.3..lr.ph
+    %71 = PHI %15, %bb.2, %55, %bb.3..lr.ph
+    %72 = PHI %14, %bb.2, %54, %bb.3..lr.ph
+    %73 = PHI %13, %bb.2, %53, %bb.3..lr.ph
+    %377 = ADDu %58, %5
+    SB %377, %74, 0, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.out, !tbaa !1)
+    %378 = SRL %377, 8
+    SB killed %378, %74, 1, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.447, !tbaa !1)
+    %379 = SRL %377, 16
+    SB killed %379, %74, 2, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.450, !tbaa !1)
+    %380 = SRL %377, 24
+    SB killed %380, %74, 3, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.453, !tbaa !1)
+    %381 = ADDu %59, %8
+    SB %381, %74, 4, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.454, !tbaa !1)
+    %382 = SRL %381, 8
+    %383 = ADDu %62, %11
+    %384 = ADDu %60, %9
+    %385 = ADDu %63, %7
+    SB killed %382, %74, 5, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.459, !tbaa !1)
+    %386 = ADDu %61, %10
+    %387 = SRL %381, 16
+    %388 = SRL %384, 24
+    %389 = SRL %384, 8
+    %390 = ADDu %64, %16
+    %391 = ADDu %71, %15
+    %392 = SRL %383, 24
+    %393 = SRL %383, 16
+    %394 = ADDu %70, %4
+    %395 = ADDu %72, %14
+    %396 = SRL %385, 8
+    %397 = ADDu %73, %13
+    SB killed %387, %74, 6, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.462, !tbaa !1)
+    %398 = SRL %386, 16
+    %399 = ADDu %66, %18
+    %400 = SRL %386, 8
+    %401 = ADDu %65, %17
+    %402 = SRL %384, 16
+    %403 = SRL %381, 24
+    %404 = SRL %383, 8
+    %405 = ADDu %68, %6
+    %406 = SRL %386, 24
+    %407 = ADDu %69, %12
+    %408 = SRL %385, 16
+    %409 = ADDu %67, %19
+    %410 = SRL %390, 24
+    SB killed %403, %74, 7, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.465, !tbaa !1)
+    %411 = SRL %390, 16
+    SB %384, %74, 8, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.466, !tbaa !1)
+    %412 = SRL %390, 8
+    SB killed %389, %74, 9, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.471, !tbaa !1)
+    %413 = SRL %385, 24
+    SB killed %402, %74, 10, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.474, !tbaa !1)
+    %414 = SRL %401, 24
+    SB killed %388, %74, 11, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.477, !tbaa !1)
+    %415 = SRL %401, 16
+    SB %386, %74, 12, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.478, !tbaa !1)
+    %416 = SRL %401, 8
+    SB killed %400, %74, 13, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.483, !tbaa !1)
+    %417 = SRL %399, 24
+    SB killed %398, %74, 14, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.486, !tbaa !1)
+    %418 = SRL %399, 16
+    SB killed %406, %74, 15, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.489, !tbaa !1)
+    %419 = SRL %399, 8
+    SB %383, %74, 16, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.490, !tbaa !1)
+    %420 = SRL %394, 24
+    SB killed %404, %74, 17, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.495, !tbaa !1)
+    %421 = SRL %394, 16
+    SB killed %393, %74, 18, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.498, !tbaa !1)
+    %422 = SRL %394, 8
+    SB killed %392, %74, 19, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.501, !tbaa !1)
+    %423 = SRL %391, 24
+    SB %385, %74, 20, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.502, !tbaa !1)
+    %424 = SRL %391, 16
+    SB killed %396, %74, 21, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.507, !tbaa !1)
+    %425 = SRL %391, 8
+    SB killed %408, %74, 22, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.510, !tbaa !1)
+    %426 = SRL %395, 24
+    SB killed %413, %74, 23, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.513, !tbaa !1)
+    %427 = SRL %395, 16
+    SB %390, %74, 24, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.514, !tbaa !1)
+    %428 = SRL %395, 8
+    SB killed %412, %74, 25, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.519, !tbaa !1)
+    %429 = SRL %397, 24
+    SB killed %411, %74, 26, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.522, !tbaa !1)
+    %430 = SRL %397, 16
+    SB killed %410, %74, 27, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.525, !tbaa !1)
+    %431 = SRL %397, 8
+    SB %401, %74, 28, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.526, !tbaa !1)
+    %432 = SRL %407, 24
+    SB killed %416, %74, 29, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.531, !tbaa !1)
+    %433 = SRL %407, 16
+    SB killed %415, %74, 30, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.534, !tbaa !1)
+    %434 = SRL %407, 8
+    SB killed %414, %74, 31, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.537, !tbaa !1)
+    %435 = SRL %405, 24
+    SB %399, %74, 32, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.538, !tbaa !1)
+    %436 = SRL %405, 16
+    SB killed %419, %74, 33, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.543, !tbaa !1)
+    %437 = SRL %409, 24
+    SB killed %418, %74, 34, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.546, !tbaa !1)
+    %438 = SRL %409, 16
+    SB killed %417, %74, 35, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.549, !tbaa !1)
+    %439 = SRL %409, 8
+    SB %409, %74, 36, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.550, !tbaa !1)
+    %440 = SRL %405, 8
+    SB killed %439, %74, 37, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.555, !tbaa !1)
+    SB killed %438, %74, 38, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.558, !tbaa !1)
+    SB killed %437, %74, 39, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.561, !tbaa !1)
+    SB %405, %74, 40, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.562, !tbaa !1)
+    SB killed %440, %74, 41, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.567, !tbaa !1)
+    SB killed %436, %74, 42, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.570, !tbaa !1)
+    SB killed %435, %74, 43, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.573, !tbaa !1)
+    SB %407, %74, 44, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.574, !tbaa !1)
+    SB killed %434, %74, 45, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.579, !tbaa !1)
+    SB killed %433, %74, 46, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.582, !tbaa !1)
+    SB killed %432, %74, 47, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.585, !tbaa !1)
+    SB %397, %74, 48, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.586, !tbaa !1)
+    SB killed %431, %74, 49, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.591, !tbaa !1)
+    SB killed %430, %74, 50, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.594, !tbaa !1)
+    SB killed %429, %74, 51, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.597, !tbaa !1)
+    SB %395, %74, 52, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.598, !tbaa !1)
+    SB killed %428, %74, 53, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.603, !tbaa !1)
+    SB killed %427, %74, 54, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.606, !tbaa !1)
+    SB killed %426, %74, 55, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.609, !tbaa !1)
+    SB %391, %74, 56, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.610, !tbaa !1)
+    SB killed %425, %74, 57, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.615, !tbaa !1)
+    SB killed %424, %74, 58, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.618, !tbaa !1)
+    SB killed %423, %74, 59, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.621, !tbaa !1)
+    SB %394, %74, 60, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.622, !tbaa !1)
+    SB killed %422, %74, 61, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.627, !tbaa !1)
+    SB killed %421, %74, 62, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.630, !tbaa !1)
+    SB killed %420, %74, 63, <0x4c201b0> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.633, !tbaa !1)
+    RetRA
+
+...

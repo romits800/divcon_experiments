@@ -318,7 +318,7 @@ def create_tex(d, metric, field, relax, agap, branch, texname='outfile'):
     p = subprocess.Popen(["evince", texname + ".pdf"], stdout=subprocess.PIPE)
     p.communicate()
 
-def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile', debug=False, show=True):
+def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile', debug=False, show=True, error=True):
     '''
 	d: the dictionary with the measurements
 		e.g. d = pickle.load(open("divs.pickle"))
@@ -393,9 +393,12 @@ def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile
 		if debug:
 			arg[r] = "%.1f$\\pm$%.1f (%d,%d)" %(maxnum, maxstd, num, maxnseeds)
 			argtime[r] = "%.1f$\\pm$%.1f (%d,%d)" %(tmaxnum/1000., tmaxstd/1000., num, tmaxnseeds)
-		else:
+                elif error:
 			arg[r] = "%.1f$\\pm$%.1f" %(maxnum, maxstd)
 			argtime[r] = "%.1f$\\pm$%.1f" %(tmaxnum/1000., tmaxstd/1000.)
+                else:
+			arg[r] = "%.1f" %maxnum
+			argtime[r] = "%.1f" %(tmaxnum/1000.)
 		val[r] = maxnum
 		valtime[r] = tmaxnum
 	    elif mipsm:
@@ -408,9 +411,13 @@ def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile
 			if debug:
 				arg[r] = "\\textit{%.1f$\\pm$%.1f (%d,%d)}" %(maxnum, maxstd, maxn, maxnseeds)
 				argtime[r] = "%.1f$\\pm$%.1f (%d,%d)" %(tmaxnum/1000., tmaxstd/1000., num, tmaxnseeds)
-			else:
+                        elif error:
 				arg[r] = "\\textit{%.1f$\\pm$%.1f}" %(maxnum, maxstd)
 				argtime[r] = "- (%d)" %(maxn) if benchmark !=  "sphinx3.profile.ptmr_init" else "%.1f$\\pm$%.1f (%d)" %(tmaxnum/1000., tmaxstd/1000., maxn)
+                        else:
+				arg[r] = "\\textit{%.1f}" %maxnum
+				argtime[r] = "- (%d)" %(maxn) if benchmark !=  "sphinx3.profile.ptmr_init" else "%.1f (%d)" %(tmaxnum/1000., maxn)
+
 			val[r] = maxnum
 			valtime[r] = tmaxnum
 
@@ -425,9 +432,12 @@ def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile
 		if debug:
 			arg[r] = "%.1f$\\pm$%.1f (%d)" %(rsnum, rsstd, rsnseeds)
 			argtime[r] = "%.1f$\\pm$%.1f (%d)" %(trsnum/1000., trsstd/1000., trsnseeds)
-		else:
+                elif error:
 			arg[r] = "%.1f$\\pm$%.1f" %(rsnum, rsstd)
 			argtime[r] = "%.1f$\\pm$%.1f" %(trsnum/1000., trsstd/1000.)
+		else:
+			arg[r] = "%.1f" %(rsnum)
+			argtime[r] = "%.1f" %(trsnum/1000.)
 
 		val[r] = rsnum
 		valtime[r] = trsnum
@@ -443,9 +453,13 @@ def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile
 			if debug:
 				arg[r] = "\\textit{%.1f$\\pm$%.1f (%d)}" %(rsnum, rsstd, rsnseeds)
 				argtime[r] = "\\textit{%.1f$\\pm$%.1f (%d)}" %(trsnum/1000., trsstd/1000., trsnseeds)
-			else:
+                        elif error:
 				arg[r] = "\\textit{%.1f$\\pm$%.1f}" %(rsnum, rsstd)
 				argtime[r] = "- (%d)" %( maxn) if benchmark !=  "sphinx3.profile.ptmr_init" else "%.1f$\\pm$%.1f (%d)" %(trsnum/1000., trsstd/1000., maxn)
+			else:
+				arg[r] = "\\textit{%.1f}" %(rsnum)
+				argtime[r] = "- (%d)" %( maxn) if benchmark !=  "sphinx3.profile.ptmr_init" else "%.1f (%d)" %(trsnum/1000., maxn)
+
 
 			val[r] = rsnum
 			valtime[r] = trsnum
@@ -460,9 +474,12 @@ def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile
 			if debug:
 				arg[r] = "%.1f$\\pm$%.1f (%d)" %(lnsnum, lnsstd, lnsnseeds)
 				argtime[r] = "%.1f$\\pm$%.1f (%d)" %(tlnsnum/1000., tlnsstd/1000., tlnsnseeds)
-			else:
+                        elif error:
 				arg[r] = "%.1f$\\pm$%.1f" %(lnsnum, lnsstd)
 				argtime[r] = "%.1f$\\pm$%.1f" %(tlnsnum/1000., tlnsstd/1000.)
+			else:
+				arg[r] = "%.1f" %(lnsnum)
+				argtime[r] = "%.1f" %(tlnsnum/1000.)
                         val[r] = lnsnum
                         valtime[r] = tlnsnum
                     elif mipslns(r):
@@ -475,9 +492,12 @@ def tex_max_lns_rs(d, metric, field, agap, num, mindist, relax, texname='outfile
 				if debug:
 					arg[r] = "\\textit{%.1f$\\pm$%.1f (%d)}" %(lnsnum, lnsstd, lnsnseeds)
 					argtime[r] = "\\textit{%.1f$\\pm$%.1f (%d)}" %(tlnsnum/1000., tlnsstd/1000., tlnsnseeds)
-				else:
+                                elif error:
 					arg[r] = "\\textit{%.1f$\\pm$%.1f}" %(lnsnum, lnsstd)
 					argtime[r] = "- (%d)" %(maxn) if benchmark !=  "sphinx3.profile.ptmr_init" else "%.1f$\\pm$%.1f (%d)" %(tlnsnum/1000., tlnsstd/1000., maxn)
+				else:
+					arg[r] = "\\textit{%.1f}" %(lnsnum)
+					argtime[r] = "- (%d)" %(maxn) if benchmark !=  "sphinx3.profile.ptmr_init" else "%.1f (%d)" %(tlnsnum/1000.,  maxn)
 				val[r] = lnsnum
 				valtime[r] = tlnsnum
 
@@ -546,7 +566,7 @@ def tex_benchmarks(texname='outfile'):
 
         #impr1 = improvement(arg2, arg1)
 
-def tex_distances(d, field, agap, num, mindist, relax, metrics, texname='outfile', debug=False, show=True):
+def tex_distances(d, field, agap, num, mindist, relax, metrics, texname='outfile', debug=False, show=True, error=True):
     '''
 	d: the dictionary with the measurements
 		e.g. d = pickle.load(open("divs.pickle"))
@@ -610,9 +630,12 @@ def tex_distances(d, field, agap, num, mindist, relax, metrics, texname='outfile
                 if debug:
                         arg[metric] = "%.1f$\\pm$%.1f (%d)" %(lnsnum, lnsstd, lnsnseeds)
                         argtime[metric] = "%.1f$\\pm$%.1f (%d)" %(tlnsnum/1000., tlnsstd/1000., tlnsnseeds)
-                else:
+                elif error:
                         arg[metric] = "%d " %(num)
                         argtime[metric] = "%.1f$\\pm$%.1f" %(tlnsnum/1000., tlnsstd/1000.)
+                else:
+                        arg[metric] = "%d " %(num)
+                        argtime[metric] = "%.1f" %(tlnsnum/1000.)
 
                 val[metric] = lnsnum
                 valtime[metric] = tlnsnum/1000.
@@ -630,7 +653,10 @@ def tex_distances(d, field, agap, num, mindist, relax, metrics, texname='outfile
                         argtime[metric] = "\\textit{%.1f$\\pm$%.1f (%d)}" %(tlnsnum/1000., tlnsstd/1000., tlnsnseeds)
                     elif (benchmark ==  "sphinx3.profile.ptmr_init"):
                         arg[metric] = "%d" %(n)
-                        argtime[metric] = "%.1f$\\pm$%.1f" %(tlnsnum/1000., tlnsstd/1000.)
+                        if error:
+                            argtime[metric] = "%.1f$\\pm$%.1f" %(tlnsnum/1000., tlnsstd/1000.)
+                        else:
+                            argtime[metric] = "%.1f" %(tlnsnum/1000.)
                     else:
                         arg[metric] = "%d" %(n)
                         argtime[metric] = "-"
@@ -663,7 +689,7 @@ def tex_distances(d, field, agap, num, mindist, relax, metrics, texname='outfile
 	    p.communicate()
 
 
-def tex_agap(d, metric, field, agaps, num, mindist, relax, texname='outfile_agap', debug=False, show=True):
+def tex_agap(d, metric, field, agaps, num, mindist, relax, texname='outfile_agap', debug=False, show=True, error = True):
     '''
 	d: the dictionary with the measurements
 		e.g. d = pickle.load(open("divs.pickle"))
@@ -672,6 +698,7 @@ def tex_agap(d, metric, field, agaps, num, mindist, relax, texname='outfile_agap
 	agap: 10, 20 allowed gap from the optimal solution
 	branch: original, random, cloriginal, clrandom
         texname: name of the output .tex file - default = 'outfile'
+        error: include standard deviation in .tex
     ''' 
     ind = get_ind(field)
 
@@ -727,9 +754,13 @@ def tex_agap(d, metric, field, agaps, num, mindist, relax, texname='outfile_agap
 			if debug:
 				arg[agap] = "%.1f$\\pm$%.1f (%d)" %(lnsnum, lnsstd, lnsnseeds)
 				argtime[agap] = "%.1f$\\pm$%.1f (%d)" %(tlnsnum/1000., tlnsstd/1000., tlnsnseeds)
-			else:
+                        elif error:
 				arg[agap] = "%.1f$\\pm$%.1f" %(lnsnum, lnsstd)
 				argtime[agap] = "%d"%num #"%.2f$\\pm$%.2f" %(tlnsnum/1000., tlnsstd/1000.)
+                        else:
+				arg[agap] = "%.1f" %(lnsnum)
+				argtime[agap] = "%d"%num 
+ 
                         val[agap] = lnsnum
                         valtime[agap] = num #tlnsnum
                     elif mipslns(agap):
@@ -741,9 +772,13 @@ def tex_agap(d, metric, field, agaps, num, mindist, relax, texname='outfile_agap
 				if debug:
 					arg[agap] = "\\textit{%.1f$\\pm$%.1f (%d)}" %(lnsnum, lnsstd, lnsnseeds)
 					argtime[agap] = "\\textit{%.1f$\\pm$%.1f (%d)}" %(tlnsnum/1000., tlnsstd/1000., tlnsnseeds)
-				else:
+                                elif error:
 					arg[agap] = "\\textit{%.1f$\\pm$%.1f}" %(lnsnum, lnsstd)
 					argtime[agap] =  "%d"%maxn #"- (%d)" %(maxn) if benchmark !=  "sphinx3.profile.ptmr_init" else "%.2f$\\pm$%.2f (%d)" %(tlnsnum/1000., tlnsstd/1000., maxn)
+				else:
+					arg[agap] = "\\textit{%.1f}" %(lnsnum)
+					argtime[agap] =  "%d"%maxn 
+	
 				val[agap] = lnsnum
 				valtime[agap] = maxn #tlnsnum
 
