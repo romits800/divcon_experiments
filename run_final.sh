@@ -73,10 +73,15 @@ fi
 for arch in mips #hexagon #mips #arm
 do
     Arch="$(tr '[:lower:]' '[:upper:]' <<< ${arch:0:1})${arch:1}"
-    for i in ${CURRENT_DIR}/mirfiles/Mips/fast/*[!m].mir
+    for i in ${CURRENT_DIR}/mirfiles/Mips/fast/*.mir
     # for i in $DIVCON_PATH/src/unison/test/fast/${Arch}/speed/*[!m].mir
     # for i in /home/romi/didaktoriko/unison/unison-experiments/experiments/${arch}/selected-functions/size-toplas/*[!m].mir
     do
+        if [[ "$i" == *.asm.mir ]]
+        then 
+            continue
+        fi
+
 	fullname=$i 		# filepath: file with path and extension
 	fullnamenoext="${fullname%.*}" 		# filepath: file with path and extension
 	filename="${fullname##*/}" # filename: file without the path but with extension
