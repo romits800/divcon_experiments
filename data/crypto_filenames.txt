@@ -1,0 +1,4 @@
+aes_small_enc.c br_aes_small_encrypt
+aes_big_enc.c br_aes_big_encrypt
+des_tab.c br_des_tab_keysched
+des_tab.c br_des_tab_process_block

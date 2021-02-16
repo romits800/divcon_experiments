@@ -1,7 +1,6 @@
 out_*
 *.json
 *.uni
-*.mir
 div_*
 divs*
 *.pyc

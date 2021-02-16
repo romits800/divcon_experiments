@@ -1,0 +1,841 @@
+--- |
+  ; ModuleID = 'aes_big_enc.ll'
+  target datalayout = "E-m:m-p:32:32-i8:8:32-i16:16:32-i64:64-n32-S64"
+  target triple = "mipsel"
+  
+  @Ssm0 = internal unnamed_addr constant [256 x i32] [i32 -966564955, i32 -126059388, i32 -294160487, i32 -159679603, i32 -855539, i32 -697603139, i32 -563122255, i32 -1849309868, i32 1613770832, i32 33620227, i32 -832084055, i32 1445669757, i32 -402719207, i32 -1244145822, i32 1303096294, i32 -327780710, i32 -1882535355, i32 528646813, i32 -1983264448, i32 -92439161, i32 -268764651, i32 -1302767125, i32 -1907931191, i32 -68095989, i32 1101901292, i32 -1277897625, i32 1604494077, i32 1169141738, i32 597466303, i32 1403299063, i32 -462261610, i32 -1681866661, i32 1974974402, i32 -503448292, i32 1033081774, i32 1277568618, i32 1815492186, i32 2118074177, i32 -168298750, i32 -2083730353, i32 1748251740, i32 1369810420, i32 -773462732, i32 -101584632, i32 -495881837, i32 -1411852173, i32 1647391059, i32 706024767, i32 134480908, i32 -1782069422, i32 1176707941, i32 -1648114850, i32 806885416, i32 932615841, i32 168101135, i32 798661301, i32 235341577, i32 605164086, i32 461406363, i32 -538779075, i32 -840176858, i32 1311188841, i32 2142417613, i32 -361400929, i32 302582043, i32 495158174, i32 1479289972, i32 874125870, i32 907746093, i32 -596742478, i32 -1269146898, i32 1537253627, i32 -1538108682, i32 1983593293, i32 -1210657183, i32 2108928974, i32 1378429307, i32 -572267714, i32 1580150641, i32 327451799, i32 -1504488459, i32 -1177431704, i32 0, i32 -1041371860, i32 1075847264, i32 -469959649, i32 2041688520, i32 -1235526675, i32 -731223362, i32 -1916023994, i32 1740553945, i32 1916352843, i32 -1807070498, i32 -1739830060, i32 -1336387352, i32 -2049978550, i32 -1143943061, i32 -974131414, i32 1336584933, i32 -302253290, i32 -2042412091, i32 -1706209833, i32 1714631509, i32 293963156, i32 -1975171633, i32 -369493744, i32 67240454, i32 -25198719, i32 -1605349136, i32 2017213508, i32 631218106, i32 1269344483, i32 -1571728909, i32 1571005438, i32 -2143272768, i32 93294474, i32 1066570413, i32 563977660, i32 1882732616, i32 -235539196, i32 1673313503, i32 2008463041, i32 -1344611723, i32 1109467491, i32 537923632, i32 -436207846, i32 -34344178, i32 -1076702611, i32 -2117218996, i32 403442708, i32 638784309, i32 -1007883217, i32 -1101045791, i32 899127202, i32 -2008791860, i32 773265209, i32 -1815821225, i32 1437050866, i32 -58818942, i32 2050833735, i32 -932944724, i32 -1168286233, i32 840505643, i32 -428641387, i32 -1067425632, i32 427917720, i32 -1638969391, i32 -1545806721, i32 1143087718, i32 1412049534, i32 999329963, i32 193497219, i32 -1941551414, i32 -940642775, i32 1807268051, i32 672404540, i32 -1478566279, i32 -1134666014, i32 369822493, i32 -1378100362, i32 -606019525, i32 1681011286, i32 1949973070, i32 336202270, i32 -1840690725, i32 201721354, i32 1210328172, i32 -1201906460, i32 -1614626211, i32 -1110191250, i32 1135389935, i32 -1000185178, i32 965841320, i32 831886756, i32 -739974089, i32 -226920053, i32 -706222286, i32 -1949775805, i32 1849112409, i32 -630362697, i32 26054028, i32 -1311386268, i32 -1672589614, i32 1235855840, i32 -663982924, i32 -1403627782, i32 -202050553, i32 -806688219, i32 -899324497, i32 -193299826, i32 1202630377, i32 268961816, i32 1874508501, i32 -260540280, i32 1243948399, i32 1546530418, i32 941366308, i32 1470539505, i32 1941222599, i32 -1748580783, i32 -873928669, i32 -1579295364, i32 -395021156, i32 1042226977, i32 -1773450275, i32 1639824860, i32 227249030, i32 260737669, i32 -529502064, i32 2084453954, i32 1907733956, i32 -865704278, i32 -1874310952, i32 100860677, i32 -134810111, i32 470683154, i32 -1033805405, i32 1781871967, i32 -1370007559, i32 1773779408, i32 394692241, i32 -1715355304, i32 974986535, i32 664706745, i32 -639508168, i32 -336005101, i32 731420851, i32 571543859, i32 -764843589, i32 -1445340816, i32 126783113, i32 865375399, i32 765172662, i32 1008606754, i32 361203602, i32 -907417312, i32 -2016489911, i32 -1437248001, i32 1344809080, i32 -1512054918, i32 59542671, i32 1503764984, i32 160008576, i32 437062935, i32 1707065306, i32 -672733647, i32 -2076032314, i32 -798463816, i32 -2109652541, i32 697932208, i32 1512910199, i32 504303377, i32 2075177163, i32 -1470868228, i32 1841019862, i32 739644986], align 4
+  @br_aes_S = external constant [0 x i8], align 1
+  
+  ; Function Attrs: norecurse nounwind
+  define void @br_aes_big_encrypt(i32 signext %num_rounds, i32* nocapture readonly %skey, i8* nocapture %data) #0 {
+    %1 = load i8, i8* %data, align 1, !tbaa !1
+    %2 = zext i8 %1 to i32
+    %3 = shl nuw i32 %2, 24
+    %4 = getelementptr inbounds i8, i8* %data, i32 1
+    %5 = load i8, i8* %4, align 1, !tbaa !1
+    %6 = zext i8 %5 to i32
+    %7 = shl nuw nsw i32 %6, 16
+    %8 = or i32 %7, %3
+    %9 = getelementptr inbounds i8, i8* %data, i32 2
+    %10 = load i8, i8* %9, align 1, !tbaa !1
+    %11 = zext i8 %10 to i32
+    %12 = shl nuw nsw i32 %11, 8
+    %13 = or i32 %8, %12
+    %14 = getelementptr inbounds i8, i8* %data, i32 3
+    %15 = load i8, i8* %14, align 1, !tbaa !1
+    %16 = zext i8 %15 to i32
+    %17 = or i32 %13, %16
+    %18 = getelementptr inbounds i8, i8* %data, i32 4
+    %19 = load i8, i8* %18, align 1, !tbaa !1
+    %20 = zext i8 %19 to i32
+    %21 = shl nuw i32 %20, 24
+    %22 = getelementptr inbounds i8, i8* %data, i32 5
+    %23 = load i8, i8* %22, align 1, !tbaa !1
+    %24 = zext i8 %23 to i32
+    %25 = shl nuw nsw i32 %24, 16
+    %26 = or i32 %25, %21
+    %27 = getelementptr inbounds i8, i8* %data, i32 6
+    %28 = load i8, i8* %27, align 1, !tbaa !1
+    %29 = zext i8 %28 to i32
+    %30 = shl nuw nsw i32 %29, 8
+    %31 = or i32 %26, %30
+    %32 = getelementptr inbounds i8, i8* %data, i32 7
+    %33 = load i8, i8* %32, align 1, !tbaa !1
+    %34 = zext i8 %33 to i32
+    %35 = or i32 %31, %34
+    %36 = getelementptr inbounds i8, i8* %data, i32 8
+    %37 = load i8, i8* %36, align 1, !tbaa !1
+    %38 = zext i8 %37 to i32
+    %39 = shl nuw i32 %38, 24
+    %40 = getelementptr inbounds i8, i8* %data, i32 9
+    %41 = load i8, i8* %40, align 1, !tbaa !1
+    %42 = zext i8 %41 to i32
+    %43 = shl nuw nsw i32 %42, 16
+    %44 = or i32 %43, %39
+    %45 = getelementptr inbounds i8, i8* %data, i32 10
+    %46 = load i8, i8* %45, align 1, !tbaa !1
+    %47 = zext i8 %46 to i32
+    %48 = shl nuw nsw i32 %47, 8
+    %49 = or i32 %44, %48
+    %50 = getelementptr inbounds i8, i8* %data, i32 11
+    %51 = load i8, i8* %50, align 1, !tbaa !1
+    %52 = zext i8 %51 to i32
+    %53 = or i32 %49, %52
+    %54 = getelementptr inbounds i8, i8* %data, i32 12
+    %55 = load i8, i8* %54, align 1, !tbaa !1
+    %56 = zext i8 %55 to i32
+    %57 = shl nuw i32 %56, 24
+    %58 = getelementptr inbounds i8, i8* %data, i32 13
+    %59 = load i8, i8* %58, align 1, !tbaa !1
+    %60 = zext i8 %59 to i32
+    %61 = shl nuw nsw i32 %60, 16
+    %62 = or i32 %61, %57
+    %63 = getelementptr inbounds i8, i8* %data, i32 14
+    %64 = load i8, i8* %63, align 1, !tbaa !1
+    %65 = zext i8 %64 to i32
+    %66 = shl nuw nsw i32 %65, 8
+    %67 = or i32 %62, %66
+    %68 = getelementptr inbounds i8, i8* %data, i32 15
+    %69 = load i8, i8* %68, align 1, !tbaa !1
+    %70 = zext i8 %69 to i32
+    %71 = or i32 %67, %70
+    %72 = load i32, i32* %skey, align 4, !tbaa !4
+    %73 = xor i32 %72, %17
+    %74 = getelementptr inbounds i32, i32* %skey, i32 1
+    %75 = load i32, i32* %74, align 4, !tbaa !4
+    %76 = xor i32 %75, %35
+    %77 = getelementptr inbounds i32, i32* %skey, i32 2
+    %78 = load i32, i32* %77, align 4, !tbaa !4
+    %79 = xor i32 %78, %53
+    %80 = getelementptr inbounds i32, i32* %skey, i32 3
+    %81 = load i32, i32* %80, align 4, !tbaa !4
+    %82 = xor i32 %81, %71
+    %83 = icmp ugt i32 %num_rounds, 1
+    %84 = lshr i32 %73, 24
+    br i1 %83, label %.lr.ph.preheader, label %._crit_edge
+  
+  .lr.ph.preheader:                                 ; preds = %0
+    %85 = add i32 %num_rounds, -1
+    %scevgep = getelementptr i32, i32* %skey, i32 7
+    br label %.lr.ph
+  
+  .lr.ph:                                           ; preds = %.lr.ph, %.lr.ph.preheader
+    %lsr.iv1 = phi i32* [ %scevgep2, %.lr.ph ], [ %scevgep, %.lr.ph.preheader ]
+    %lsr.iv = phi i32 [ %lsr.iv.next, %.lr.ph ], [ %85, %.lr.ph.preheader ]
+    %86 = phi i32 [ %198, %.lr.ph ], [ %84, %.lr.ph.preheader ]
+    %s0.05 = phi i32 [ %191, %.lr.ph ], [ %73, %.lr.ph.preheader ]
+    %s1.04 = phi i32 [ %193, %.lr.ph ], [ %76, %.lr.ph.preheader ]
+    %s2.03 = phi i32 [ %195, %.lr.ph ], [ %79, %.lr.ph.preheader ]
+    %s3.02 = phi i32 [ %197, %.lr.ph ], [ %82, %.lr.ph.preheader ]
+    %87 = getelementptr inbounds [256 x i32], [256 x i32]* @Ssm0, i32 0, i32 %86
+    %88 = load i32, i32* %87, align 4, !tbaa !4
+    %89 = lshr i32 %s1.04, 16
+    %90 = and i32 %89, 255
+    %91 = getelementptr inbounds [256 x i32], [256 x i32]* @Ssm0, i32 0, i32 %90
+    %92 = load i32, i32* %91, align 4, !tbaa !4
+    %93 = shl i32 %92, 24
+    %94 = lshr i32 %92, 8
+    %95 = or i32 %93, %94
+    %96 = xor i32 %95, %88
+    %97 = lshr i32 %s2.03, 8
+    %98 = and i32 %97, 255
+    %99 = getelementptr inbounds [256 x i32], [256 x i32]* @Ssm0, i32 0, i32 %98
+    %100 = load i32, i32* %99, align 4, !tbaa !4
+    %101 = shl i32 %100, 16
+    %102 = lshr i32 %100, 16
+    %103 = or i32 %101, %102
+    %104 = xor i32 %96, %103
+    %105 = and i32 %s3.02, 255
+    %106 = getelementptr inbounds [256 x i32], [256 x i32]* @Ssm0, i32 0, i32 %105
+    %107 = load i32, i32* %106, align 4, !tbaa !4
+    %108 = shl i32 %107, 8
+    %109 = lshr i32 %107, 24
+    %110 = or i32 %108, %109
+    %111 = xor i32 %104, %110
+    %112 = lshr i32 %s1.04, 24
+    %113 = getelementptr inbounds [256 x i32], [256 x i32]* @Ssm0, i32 0, i32 %112
+    %114 = load i32, i32* %113, align 4, !tbaa !4
+    %115 = lshr i32 %s2.03, 16
+    %116 = and i32 %115, 255
+    %117 = getelementptr inbounds [256 x i32], [256 x i32]* @Ssm0, i32 0, i32 %116
+    %118 = load i32, i32* %117, align 4, !tbaa !4
+    %119 = shl i32 %118, 24
+    %120 = lshr i32 %118, 8
+    %121 = or i32 %119, %120
+    %122 = xor i32 %121, %114
+    %123 = lshr i32 %s3.02, 8
+    %124 = and i32 %123, 255
+    %125 = getelementptr inbounds [256 x i32], [256 x i32]* @Ssm0, i32 0, i32 %124
+    %126 = load i32, i32* %125, align 4, !tbaa !4
+    %127 = shl i32 %126, 16
+    %128 = lshr i32 %126, 16
+    %129 = or i32 %127, %128
+    %130 = xor i32 %122, %129
+    %131 = and i32 %s0.05, 255
+    %132 = getelementptr inbounds [256 x i32], [256 x i32]* @Ssm0, i32 0, i32 %131
+    %133 = load i32, i32* %132, align 4, !tbaa !4
+    %134 = shl i32 %133, 8
+    %135 = lshr i32 %133, 24
+    %136 = or i32 %134, %135
+    %137 = xor i32 %130, %136
+    %138 = lshr i32 %s2.03, 24
+    %139 = getelementptr inbounds [256 x i32], [256 x i32]* @Ssm0, i32 0, i32 %138
+    %140 = load i32, i32* %139, align 4, !tbaa !4
+    %141 = lshr i32 %s3.02, 16
+    %142 = and i32 %141, 255
+    %143 = getelementptr inbounds [256 x i32], [256 x i32]* @Ssm0, i32 0, i32 %142
+    %144 = load i32, i32* %143, align 4, !tbaa !4
+    %145 = shl i32 %144, 24
+    %146 = lshr i32 %144, 8
+    %147 = or i32 %145, %146
+    %148 = xor i32 %147, %140
+    %149 = lshr i32 %s0.05, 8
+    %150 = and i32 %149, 255
+    %151 = getelementptr inbounds [256 x i32], [256 x i32]* @Ssm0, i32 0, i32 %150
+    %152 = load i32, i32* %151, align 4, !tbaa !4
+    %153 = shl i32 %152, 16
+    %154 = lshr i32 %152, 16
+    %155 = or i32 %153, %154
+    %156 = xor i32 %148, %155
+    %157 = and i32 %s1.04, 255
+    %158 = getelementptr inbounds [256 x i32], [256 x i32]* @Ssm0, i32 0, i32 %157
+    %159 = load i32, i32* %158, align 4, !tbaa !4
+    %160 = shl i32 %159, 8
+    %161 = lshr i32 %159, 24
+    %162 = or i32 %160, %161
+    %163 = xor i32 %156, %162
+    %164 = lshr i32 %s3.02, 24
+    %165 = getelementptr inbounds [256 x i32], [256 x i32]* @Ssm0, i32 0, i32 %164
+    %166 = load i32, i32* %165, align 4, !tbaa !4
+    %167 = lshr i32 %s0.05, 16
+    %168 = and i32 %167, 255
+    %169 = getelementptr inbounds [256 x i32], [256 x i32]* @Ssm0, i32 0, i32 %168
+    %170 = load i32, i32* %169, align 4, !tbaa !4
+    %171 = shl i32 %170, 24
+    %172 = lshr i32 %170, 8
+    %173 = or i32 %171, %172
+    %174 = xor i32 %173, %166
+    %175 = lshr i32 %s1.04, 8
+    %176 = and i32 %175, 255
+    %177 = getelementptr inbounds [256 x i32], [256 x i32]* @Ssm0, i32 0, i32 %176
+    %178 = load i32, i32* %177, align 4, !tbaa !4
+    %179 = shl i32 %178, 16
+    %180 = lshr i32 %178, 16
+    %181 = or i32 %179, %180
+    %182 = xor i32 %174, %181
+    %183 = and i32 %s2.03, 255
+    %184 = getelementptr inbounds [256 x i32], [256 x i32]* @Ssm0, i32 0, i32 %183
+    %185 = load i32, i32* %184, align 4, !tbaa !4
+    %186 = shl i32 %185, 8
+    %187 = lshr i32 %185, 24
+    %188 = or i32 %186, %187
+    %189 = xor i32 %182, %188
+    %scevgep5 = getelementptr i32, i32* %lsr.iv1, i32 -3
+    %190 = load i32, i32* %scevgep5, align 4, !tbaa !4
+    %191 = xor i32 %111, %190
+    %scevgep4 = getelementptr i32, i32* %lsr.iv1, i32 -2
+    %192 = load i32, i32* %scevgep4, align 4, !tbaa !4
+    %193 = xor i32 %137, %192
+    %scevgep3 = getelementptr i32, i32* %lsr.iv1, i32 -1
+    %194 = load i32, i32* %scevgep3, align 4, !tbaa !4
+    %195 = xor i32 %163, %194
+    %196 = load i32, i32* %lsr.iv1, align 4, !tbaa !4
+    %197 = xor i32 %189, %196
+    %198 = lshr i32 %191, 24
+    %lsr.iv.next = add i32 %lsr.iv, -1
+    %scevgep2 = getelementptr i32, i32* %lsr.iv1, i32 4
+    %exitcond = icmp eq i32 %lsr.iv.next, 0
+    br i1 %exitcond, label %._crit_edge, label %.lr.ph
+  
+  ._crit_edge:                                      ; preds = %.lr.ph, %0
+    %.lcssa = phi i32 [ %84, %0 ], [ %198, %.lr.ph ]
+    %s0.0.lcssa = phi i32 [ %73, %0 ], [ %191, %.lr.ph ]
+    %s1.0.lcssa = phi i32 [ %76, %0 ], [ %193, %.lr.ph ]
+    %s2.0.lcssa = phi i32 [ %79, %0 ], [ %195, %.lr.ph ]
+    %s3.0.lcssa = phi i32 [ %82, %0 ], [ %197, %.lr.ph ]
+    %199 = getelementptr inbounds [0 x i8], [0 x i8]* @br_aes_S, i32 0, i32 %.lcssa
+    %200 = load i8, i8* %199, align 1, !tbaa !1
+    %201 = zext i8 %200 to i32
+    %202 = shl nuw i32 %201, 24
+    %203 = lshr i32 %s1.0.lcssa, 16
+    %204 = and i32 %203, 255
+    %205 = getelementptr inbounds [0 x i8], [0 x i8]* @br_aes_S, i32 0, i32 %204
+    %206 = load i8, i8* %205, align 1, !tbaa !1
+    %207 = zext i8 %206 to i32
+    %208 = shl nuw nsw i32 %207, 16
+    %209 = or i32 %208, %202
+    %210 = lshr i32 %s2.0.lcssa, 8
+    %211 = and i32 %210, 255
+    %212 = getelementptr inbounds [0 x i8], [0 x i8]* @br_aes_S, i32 0, i32 %211
+    %213 = load i8, i8* %212, align 1, !tbaa !1
+    %214 = zext i8 %213 to i32
+    %215 = shl nuw nsw i32 %214, 8
+    %216 = or i32 %209, %215
+    %217 = and i32 %s3.0.lcssa, 255
+    %218 = getelementptr inbounds [0 x i8], [0 x i8]* @br_aes_S, i32 0, i32 %217
+    %219 = load i8, i8* %218, align 1, !tbaa !1
+    %220 = zext i8 %219 to i32
+    %221 = or i32 %216, %220
+    %222 = lshr i32 %s1.0.lcssa, 24
+    %223 = getelementptr inbounds [0 x i8], [0 x i8]* @br_aes_S, i32 0, i32 %222
+    %224 = load i8, i8* %223, align 1, !tbaa !1
+    %225 = zext i8 %224 to i32
+    %226 = shl nuw i32 %225, 24
+    %227 = lshr i32 %s2.0.lcssa, 16
+    %228 = and i32 %227, 255
+    %229 = getelementptr inbounds [0 x i8], [0 x i8]* @br_aes_S, i32 0, i32 %228
+    %230 = load i8, i8* %229, align 1, !tbaa !1
+    %231 = zext i8 %230 to i32
+    %232 = shl nuw nsw i32 %231, 16
+    %233 = or i32 %232, %226
+    %234 = lshr i32 %s3.0.lcssa, 8
+    %235 = and i32 %234, 255
+    %236 = getelementptr inbounds [0 x i8], [0 x i8]* @br_aes_S, i32 0, i32 %235
+    %237 = load i8, i8* %236, align 1, !tbaa !1
+    %238 = zext i8 %237 to i32
+    %239 = shl nuw nsw i32 %238, 8
+    %240 = or i32 %233, %239
+    %241 = and i32 %s0.0.lcssa, 255
+    %242 = getelementptr inbounds [0 x i8], [0 x i8]* @br_aes_S, i32 0, i32 %241
+    %243 = load i8, i8* %242, align 1, !tbaa !1
+    %244 = zext i8 %243 to i32
+    %245 = or i32 %240, %244
+    %246 = lshr i32 %s2.0.lcssa, 24
+    %247 = getelementptr inbounds [0 x i8], [0 x i8]* @br_aes_S, i32 0, i32 %246
+    %248 = load i8, i8* %247, align 1, !tbaa !1
+    %249 = zext i8 %248 to i32
+    %250 = shl nuw i32 %249, 24
+    %251 = lshr i32 %s3.0.lcssa, 16
+    %252 = and i32 %251, 255
+    %253 = getelementptr inbounds [0 x i8], [0 x i8]* @br_aes_S, i32 0, i32 %252
+    %254 = load i8, i8* %253, align 1, !tbaa !1
+    %255 = zext i8 %254 to i32
+    %256 = shl nuw nsw i32 %255, 16
+    %257 = or i32 %256, %250
+    %258 = lshr i32 %s0.0.lcssa, 8
+    %259 = and i32 %258, 255
+    %260 = getelementptr inbounds [0 x i8], [0 x i8]* @br_aes_S, i32 0, i32 %259
+    %261 = load i8, i8* %260, align 1, !tbaa !1
+    %262 = zext i8 %261 to i32
+    %263 = shl nuw nsw i32 %262, 8
+    %264 = or i32 %257, %263
+    %265 = and i32 %s1.0.lcssa, 255
+    %266 = getelementptr inbounds [0 x i8], [0 x i8]* @br_aes_S, i32 0, i32 %265
+    %267 = load i8, i8* %266, align 1, !tbaa !1
+    %268 = zext i8 %267 to i32
+    %269 = or i32 %264, %268
+    %270 = lshr i32 %s3.0.lcssa, 24
+    %271 = getelementptr inbounds [0 x i8], [0 x i8]* @br_aes_S, i32 0, i32 %270
+    %272 = load i8, i8* %271, align 1, !tbaa !1
+    %273 = zext i8 %272 to i32
+    %274 = shl nuw i32 %273, 24
+    %275 = lshr i32 %s0.0.lcssa, 16
+    %276 = and i32 %275, 255
+    %277 = getelementptr inbounds [0 x i8], [0 x i8]* @br_aes_S, i32 0, i32 %276
+    %278 = load i8, i8* %277, align 1, !tbaa !1
+    %279 = zext i8 %278 to i32
+    %280 = shl nuw nsw i32 %279, 16
+    %281 = or i32 %280, %274
+    %282 = lshr i32 %s1.0.lcssa, 8
+    %283 = and i32 %282, 255
+    %284 = getelementptr inbounds [0 x i8], [0 x i8]* @br_aes_S, i32 0, i32 %283
+    %285 = load i8, i8* %284, align 1, !tbaa !1
+    %286 = zext i8 %285 to i32
+    %287 = shl nuw nsw i32 %286, 8
+    %288 = or i32 %281, %287
+    %289 = and i32 %s2.0.lcssa, 255
+    %290 = getelementptr inbounds [0 x i8], [0 x i8]* @br_aes_S, i32 0, i32 %289
+    %291 = load i8, i8* %290, align 1, !tbaa !1
+    %292 = zext i8 %291 to i32
+    %293 = or i32 %288, %292
+    %294 = shl i32 %num_rounds, 2
+    %295 = getelementptr inbounds i32, i32* %skey, i32 %294
+    %296 = load i32, i32* %295, align 4, !tbaa !4
+    %297 = xor i32 %296, %221
+    %298 = or i32 %294, 1
+    %299 = getelementptr inbounds i32, i32* %skey, i32 %298
+    %300 = load i32, i32* %299, align 4, !tbaa !4
+    %301 = xor i32 %300, %245
+    %302 = or i32 %294, 2
+    %303 = getelementptr inbounds i32, i32* %skey, i32 %302
+    %304 = load i32, i32* %303, align 4, !tbaa !4
+    %305 = xor i32 %304, %269
+    %306 = or i32 %294, 3
+    %307 = getelementptr inbounds i32, i32* %skey, i32 %306
+    %308 = load i32, i32* %307, align 4, !tbaa !4
+    %309 = xor i32 %308, %293
+    %310 = lshr i32 %297, 24
+    %311 = trunc i32 %310 to i8
+    store i8 %311, i8* %data, align 1, !tbaa !1
+    %312 = lshr i32 %297, 16
+    %313 = trunc i32 %312 to i8
+    %sunkaddr = ptrtoint i8* %data to i32
+    %sunkaddr6 = add i32 %sunkaddr, 1
+    %sunkaddr7 = inttoptr i32 %sunkaddr6 to i8*
+    store i8 %313, i8* %sunkaddr7, align 1, !tbaa !1
+    %314 = lshr i32 %297, 8
+    %315 = trunc i32 %314 to i8
+    %sunkaddr8 = ptrtoint i8* %data to i32
+    %sunkaddr9 = add i32 %sunkaddr8, 2
+    %sunkaddr10 = inttoptr i32 %sunkaddr9 to i8*
+    store i8 %315, i8* %sunkaddr10, align 1, !tbaa !1
+    %316 = trunc i32 %297 to i8
+    %sunkaddr11 = ptrtoint i8* %data to i32
+    %sunkaddr12 = add i32 %sunkaddr11, 3
+    %sunkaddr13 = inttoptr i32 %sunkaddr12 to i8*
+    store i8 %316, i8* %sunkaddr13, align 1, !tbaa !1
+    %317 = lshr i32 %301, 24
+    %318 = trunc i32 %317 to i8
+    %sunkaddr14 = ptrtoint i8* %data to i32
+    %sunkaddr15 = add i32 %sunkaddr14, 4
+    %sunkaddr16 = inttoptr i32 %sunkaddr15 to i8*
+    store i8 %318, i8* %sunkaddr16, align 1, !tbaa !1
+    %319 = lshr i32 %301, 16
+    %320 = trunc i32 %319 to i8
+    %sunkaddr17 = ptrtoint i8* %data to i32
+    %sunkaddr18 = add i32 %sunkaddr17, 5
+    %sunkaddr19 = inttoptr i32 %sunkaddr18 to i8*
+    store i8 %320, i8* %sunkaddr19, align 1, !tbaa !1
+    %321 = lshr i32 %301, 8
+    %322 = trunc i32 %321 to i8
+    %sunkaddr20 = ptrtoint i8* %data to i32
+    %sunkaddr21 = add i32 %sunkaddr20, 6
+    %sunkaddr22 = inttoptr i32 %sunkaddr21 to i8*
+    store i8 %322, i8* %sunkaddr22, align 1, !tbaa !1
+    %323 = trunc i32 %301 to i8
+    %sunkaddr23 = ptrtoint i8* %data to i32
+    %sunkaddr24 = add i32 %sunkaddr23, 7
+    %sunkaddr25 = inttoptr i32 %sunkaddr24 to i8*
+    store i8 %323, i8* %sunkaddr25, align 1, !tbaa !1
+    %324 = lshr i32 %305, 24
+    %325 = trunc i32 %324 to i8
+    %sunkaddr26 = ptrtoint i8* %data to i32
+    %sunkaddr27 = add i32 %sunkaddr26, 8
+    %sunkaddr28 = inttoptr i32 %sunkaddr27 to i8*
+    store i8 %325, i8* %sunkaddr28, align 1, !tbaa !1
+    %326 = lshr i32 %305, 16
+    %327 = trunc i32 %326 to i8
+    %sunkaddr29 = ptrtoint i8* %data to i32
+    %sunkaddr30 = add i32 %sunkaddr29, 9
+    %sunkaddr31 = inttoptr i32 %sunkaddr30 to i8*
+    store i8 %327, i8* %sunkaddr31, align 1, !tbaa !1
+    %328 = lshr i32 %305, 8
+    %329 = trunc i32 %328 to i8
+    %sunkaddr32 = ptrtoint i8* %data to i32
+    %sunkaddr33 = add i32 %sunkaddr32, 10
+    %sunkaddr34 = inttoptr i32 %sunkaddr33 to i8*
+    store i8 %329, i8* %sunkaddr34, align 1, !tbaa !1
+    %330 = trunc i32 %305 to i8
+    %sunkaddr35 = ptrtoint i8* %data to i32
+    %sunkaddr36 = add i32 %sunkaddr35, 11
+    %sunkaddr37 = inttoptr i32 %sunkaddr36 to i8*
+    store i8 %330, i8* %sunkaddr37, align 1, !tbaa !1
+    %331 = lshr i32 %309, 24
+    %332 = trunc i32 %331 to i8
+    %sunkaddr38 = ptrtoint i8* %data to i32
+    %sunkaddr39 = add i32 %sunkaddr38, 12
+    %sunkaddr40 = inttoptr i32 %sunkaddr39 to i8*
+    store i8 %332, i8* %sunkaddr40, align 1, !tbaa !1
+    %333 = lshr i32 %309, 16
+    %334 = trunc i32 %333 to i8
+    %sunkaddr41 = ptrtoint i8* %data to i32
+    %sunkaddr42 = add i32 %sunkaddr41, 13
+    %sunkaddr43 = inttoptr i32 %sunkaddr42 to i8*
+    store i8 %334, i8* %sunkaddr43, align 1, !tbaa !1
+    %335 = lshr i32 %309, 8
+    %336 = trunc i32 %335 to i8
+    %sunkaddr44 = ptrtoint i8* %data to i32
+    %sunkaddr45 = add i32 %sunkaddr44, 14
+    %sunkaddr46 = inttoptr i32 %sunkaddr45 to i8*
+    store i8 %336, i8* %sunkaddr46, align 1, !tbaa !1
+    %337 = trunc i32 %309 to i8
+    %sunkaddr47 = ptrtoint i8* %data to i32
+    %sunkaddr48 = add i32 %sunkaddr47, 15
+    %sunkaddr49 = inttoptr i32 %sunkaddr48 to i8*
+    store i8 %337, i8* %sunkaddr49, align 1, !tbaa !1
+    ret void
+  }
+  
+  attributes #0 = { norecurse nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="true" "no-frame-pointer-elim-non-leaf" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  
+  !llvm.ident = !{!0}
+  
+  !0 = !{!"clang version 3.8.0-2ubuntu4 (tags/RELEASE_380/final)"}
+  !1 = !{!2, !2, i64 0}
+  !2 = !{!"omnipotent char", !3, i64 0}
+  !3 = !{!"Simple C/C++ TBAA"}
+  !4 = !{!5, !5, i64 0}
+  !5 = !{!"int", !2, i64 0}
+
+...
+---
+name:            br_aes_big_encrypt
+alignment:       2
+exposesReturnsTwice: false
+hasInlineAsm:    false
+isSSA:           false
+tracksRegLiveness: false
+tracksSubRegLiveness: false
+liveins:         
+  - { reg: '%a0' }
+  - { reg: '%a1' }
+  - { reg: '%a2' }
+  - { reg: '%t9' }
+  - { reg: '%v0' }
+frameInfo:       
+  isFrameAddressTaken: false
+  isReturnAddressTaken: false
+  hasStackMap:     false
+  hasPatchPoint:   false
+  stackSize:       48
+  offsetAdjustment: 0
+  maxAlignment:    4
+  adjustsStack:    false
+  hasCalls:        false
+  maxCallFrameSize: 0
+  hasOpaqueSPAdjustment: false
+  hasVAStart:      false
+  hasMustTailInVarArgFunc: false
+stack:           
+  - { id: 0, type: spill-slot, offset: -44, size: 4, alignment: 4 }
+  - { id: 1, type: spill-slot, offset: -4, size: 4, alignment: 4, callee-saved-register: '%ra' }
+  - { id: 2, type: spill-slot, offset: -8, size: 4, alignment: 4, callee-saved-register: '%fp' }
+  - { id: 3, type: spill-slot, offset: -12, size: 4, alignment: 4, callee-saved-register: '%s7' }
+  - { id: 4, type: spill-slot, offset: -16, size: 4, alignment: 4, callee-saved-register: '%s6' }
+  - { id: 5, type: spill-slot, offset: -20, size: 4, alignment: 4, callee-saved-register: '%s5' }
+  - { id: 6, type: spill-slot, offset: -24, size: 4, alignment: 4, callee-saved-register: '%s4' }
+  - { id: 7, type: spill-slot, offset: -28, size: 4, alignment: 4, callee-saved-register: '%s3' }
+  - { id: 8, type: spill-slot, offset: -32, size: 4, alignment: 4, callee-saved-register: '%s2' }
+  - { id: 9, type: spill-slot, offset: -36, size: 4, alignment: 4, callee-saved-register: '%s1' }
+  - { id: 10, type: spill-slot, offset: -40, size: 4, alignment: 4, callee-saved-register: '%s0' }
+body:             |
+  bb.0 (%ir-block.0, freq 16):
+    successors: %bb.1..lr.ph.preheader(50), %bb.4(50)
+    liveins: %a0, %a1, %a2, %t9, %ra, %fp, %s7, %s6, %s5, %s4, %s3, %s2, %s1, %s0
+  
+    %v0 = LUi target-flags(<unknown>) $_gp_disp
+    %v0 = ADDiu %v0, target-flags(<unknown>) $_gp_disp
+    %sp = ADDiu %sp, -48
+    CFI_INSTRUCTION .cfi_def_cfa_offset 48
+    SW killed %ra, %sp, 44 :: (store 4 into stack)
+    SW killed %fp, %sp, 40 :: (store 4 into stack)
+    SW killed %s7, %sp, 36 :: (store 4 into stack)
+    SW killed %s6, %sp, 32 :: (store 4 into stack)
+    SW killed %s5, %sp, 28 :: (store 4 into stack)
+    SW killed %s4, %sp, 24 :: (store 4 into stack)
+    SW killed %s3, %sp, 20 :: (store 4 into stack)
+    SW killed %s2, %sp, 16 :: (store 4 into stack)
+    SW killed %s1, %sp, 12 :: (store 4 into stack)
+    SW killed %s0, %sp, 8 :: (store 4 into stack)
+    CFI_INSTRUCTION .cfi_offset %ra_64, -4
+    CFI_INSTRUCTION .cfi_offset %fp_64, -8
+    CFI_INSTRUCTION .cfi_offset %s7_64, -12
+    CFI_INSTRUCTION .cfi_offset %s6_64, -16
+    CFI_INSTRUCTION .cfi_offset %s5_64, -20
+    CFI_INSTRUCTION .cfi_offset %s4_64, -24
+    CFI_INSTRUCTION .cfi_offset %s3_64, -28
+    CFI_INSTRUCTION .cfi_offset %s2_64, -32
+    CFI_INSTRUCTION .cfi_offset %s1_64, -36
+    CFI_INSTRUCTION .cfi_offset %s0_64, -40
+    %fp = frame-setup OR %sp, %zero
+    CFI_INSTRUCTION .cfi_def_cfa_register %fp_64
+    %v0 = ADDu %v0, %t9
+    %at = LBu %a2, 4 :: (load 1 from %ir.18, !tbaa !1)
+    %v1 = LBu %a2, 9 :: (load 1 from %ir.40, !tbaa !1)
+    %a3 = LBu %a2, 8 :: (load 1 from %ir.36, !tbaa !1)
+    %t0 = LBu %a2, 13 :: (load 1 from %ir.58, !tbaa !1)
+    %t1 = LBu %a2, 12 :: (load 1 from %ir.54, !tbaa !1)
+    %t2 = LBu %a2, 10 :: (load 1 from %ir.45, !tbaa !1)
+    %t3 = LBu %a2, 6 :: (load 1 from %ir.27, !tbaa !1)
+    %t1 = SLL killed %t1, 24
+    %t0 = SLL killed %t0, 16
+    %a3 = SLL killed %a3, 24
+    %v1 = SLL killed %v1, 16
+    %at = SLL killed %at, 24
+    %t4 = LBu %a2, 5 :: (load 1 from %ir.22, !tbaa !1)
+    %t4 = SLL killed %t4, 16
+    %at = OR killed %t4, killed %at
+    %v1 = OR killed %v1, killed %a3
+    %a3 = OR killed %t0, killed %t1
+    %t0 = SLL killed %t3, 8
+    %t1 = SLL killed %t2, 8
+    %t2 = LBu %a2, 14 :: (load 1 from %ir.63, !tbaa !1)
+    %t2 = SLL killed %t2, 8
+    %a3 = OR killed %a3, killed %t2
+    %v1 = OR killed %v1, killed %t1
+    %at = OR killed %at, killed %t0
+    %t0 = LBu %a2, 2 :: (load 1 from %ir.9, !tbaa !1)
+    %t1 = LBu %a2, 15 :: (load 1 from %ir.68, !tbaa !1)
+    %t2 = LBu %a2, 11 :: (load 1 from %ir.50, !tbaa !1)
+    %t3 = LBu %a2, 7 :: (load 1 from %ir.32, !tbaa !1)
+    %t4 = LBu %a2, 0 :: (load 1 from %ir.data, !tbaa !1)
+    %t4 = SLL killed %t4, 24
+    %t5 = LBu %a2, 1 :: (load 1 from %ir.4, !tbaa !1)
+    %t5 = SLL killed %t5, 16
+    %t4 = OR killed %t5, killed %t4
+    %at = OR killed %at, killed %t3
+    %v1 = OR killed %v1, killed %t2
+    %a3 = OR killed %a3, killed %t1
+    %t1 = LW %a1, 0 :: (load 4 from %ir.skey, !tbaa !4)
+    %t2 = SLL killed %t0, 8
+    %t3 = LW %a1, 4 :: (load 4 from %ir.74, !tbaa !4)
+    %t5 = LW %a1, 8 :: (load 4 from %ir.77, !tbaa !4)
+    %t0 = LW %a1, 12 :: (load 4 from %ir.80, !tbaa !4)
+    %t6 = SLTiu %a0, 2
+    %t0 = XOR killed %t0, killed %a3
+    %a3 = XOR killed %t5, killed %v1
+    %v1 = XOR killed %t3, killed %at
+    %at = OR killed %t4, killed %t2
+    %t2 = LBu %a2, 3 :: (load 1 from %ir.14, !tbaa !1)
+    %at = OR killed %at, killed %t2
+    %t1 = XOR killed %t1, killed %at
+    BNE %t6, %zero, %bb.4, implicit-def %at {
+      %t4 = SRL %t1, 24
+    }
+  
+  bb.1..lr.ph.preheader (freq 8):
+    successors: %bb.2..lr.ph(100)
+    liveins: %a0, %a1, %a2, %a3, %t0, %t1, %t4, %v0, %v1
+  
+    %t5 = ADDiu %a1, 28
+    %t2 = ADDiu %a0, -1
+    %at = LW %v0, target-flags(<unknown>) @Ssm0 :: (load 4 from got)
+    SW killed %v0, %fp, 4 :: (store 4 into stack)
+    %t3 = ADDiu killed %at, target-flags(<unknown>) @Ssm0
+  
+  bb.2..lr.ph (freq 16):
+    successors: %bb.3..lr.ph(50), %bb.2..lr.ph(50)
+    liveins: %a0, %a1, %a2, %a3, %t0, %t1, %t2, %t3, %t4, %t5, %v1
+  
+    %at = SRL %t0, 14
+    %t6 = SRL %t1, 6
+    %t7 = ANDi %v1, 255
+    %t8 = ANDi %t1, 255
+    %at = ANDi killed %at, 1020
+    %t9 = SRL %t0, 6
+    %gp = SRL %v1, 6
+    %gp = ANDi killed %gp, 1020
+    %gp = ADDu %t3, killed %gp
+    %t9 = ANDi killed %t9, 1020
+    %s0 = ADDu %t3, killed %at
+    %s1 = SRL %t0, 22
+    %at = SLL killed %t8, 2
+    %t7 = SLL killed %t7, 2
+    %t6 = ANDi killed %t6, 1020
+    %t8 = SRL %a3, 22
+    %t8 = ANDi killed %t8, 1020
+    %s2 = SRL %v1, 22
+    %s2 = ANDi killed %s2, 1020
+    %t8 = ADDu %t3, killed %t8
+    %t9 = ADDu %t3, killed %t9
+    %t6 = ADDu %t3, killed %t6
+    %t7 = ADDu %t3, killed %t7
+    %s3 = ADDu %t3, killed %at
+    %gp = LW killed %gp, 0 :: (load 4 from %ir.177, !tbaa !4)
+    %at = ADDiu %t5, 16
+    %t4 = SLL killed %t4, 2
+    %s1 = ANDi killed %s1, 1020
+    %s4 = SRL %a3, 6
+    %t2 = ADDiu killed %t2, -1
+    %t0 = ANDi killed %t0, 255
+    %s2 = ADDu %t3, killed %s2
+    %s0 = LW killed %s0, 0 :: (load 4 from %ir.143, !tbaa !4)
+    %s3 = LW killed %s3, 0 :: (load 4 from %ir.132, !tbaa !4)
+    %t7 = LW killed %t7, 0 :: (load 4 from %ir.158, !tbaa !4)
+    %s5 = ANDi %a3, 255
+    %s4 = ANDi killed %s4, 1020
+    %s1 = ADDu %t3, killed %s1
+    %t6 = LW killed %t6, 0 :: (load 4 from %ir.151, !tbaa !4)
+    %t9 = LW killed %t9, 0 :: (load 4 from %ir.125, !tbaa !4)
+    %t8 = LW killed %t8, 0 :: (load 4 from %ir.139, !tbaa !4)
+    %t4 = ADDu %t3, killed %t4
+    %s6 = LW %t5, -8 :: (load 4 from %ir.scevgep4, !tbaa !4)
+    %s7 = LW %t5, -4 :: (load 4 from %ir.scevgep3, !tbaa !4)
+    %ra = LW %t5, 0 :: (load 4 from %ir.lsr.iv1, !tbaa !4)
+    %t5 = LW killed %t5, -12 :: (load 4 from %ir.scevgep5, !tbaa !4)
+    %v0 = SLL killed %t0, 2
+    %t0 = ROTR killed %gp, 16
+    %t7 = ROTR killed %t7, 24
+    %gp = ROTR killed %s3, 24
+    %s3 = ADDu %t3, killed %s4
+    %s4 = SLL killed %s5, 2
+    %s0 = ROTR killed %s0, 8
+    %s2 = LW killed %s2, 0 :: (load 4 from %ir.113, !tbaa !4)
+    %a3 = SRL killed %a3, 14
+    %a3 = ANDi killed %a3, 1020
+    %a3 = ADDu %t3, killed %a3
+    %a3 = LW killed %a3, 0 :: (load 4 from %ir.117, !tbaa !4)
+    %a3 = ROTR killed %a3, 8
+    %a3 = XOR killed %a3, killed %s2
+    %t8 = XOR killed %s0, killed %t8
+    %t9 = ROTR killed %t9, 16
+    %t6 = ROTR killed %t6, 16
+    %s0 = LW killed %s1, 0 :: (load 4 from %ir.165, !tbaa !4)
+    %t1 = SRL killed %t1, 14
+    %t1 = ANDi killed %t1, 1020
+    %t1 = ADDu %t3, killed %t1
+    %t1 = LW killed %t1, 0 :: (load 4 from %ir.169, !tbaa !4)
+    %t1 = ROTR killed %t1, 8
+    %t1 = XOR killed %t1, killed %s0
+    %t6 = XOR killed %t8, killed %t6
+    %a3 = XOR killed %a3, killed %t9
+    %t4 = LW killed %t4, 0 :: (load 4 from %ir.87, !tbaa !4)
+    %v1 = SRL killed %v1, 14
+    %v1 = ANDi killed %v1, 1020
+    %v1 = ADDu %t3, killed %v1
+    %v1 = LW killed %v1, 0 :: (load 4 from %ir.91, !tbaa !4)
+    %v1 = ROTR killed %v1, 8
+    %t4 = XOR killed %v1, killed %t4
+    %v1 = XOR killed %a3, killed %gp
+    %a3 = XOR killed %t6, killed %t7
+    %t0 = XOR killed %t1, killed %t0
+    %t1 = ADDu %t3, killed %s4
+    %t1 = LW killed %t1, 0 :: (load 4 from %ir.184, !tbaa !4)
+    %t1 = ROTR killed %t1, 24
+    %t0 = XOR killed %t0, killed %t1
+    %t1 = LW killed %s3, 0 :: (load 4 from %ir.99, !tbaa !4)
+    %t1 = ROTR killed %t1, 16
+    %t0 = XOR killed %t0, killed %ra
+    %a3 = XOR killed %a3, killed %s7
+    %v1 = XOR killed %v1, killed %s6
+    %t1 = XOR killed %t4, killed %t1
+    %v0 = ADDu %t3, killed %v0
+    %v0 = LW killed %v0, 0 :: (load 4 from %ir.106, !tbaa !4)
+    %v0 = ROTR killed %v0, 24
+    %v0 = XOR killed %t1, killed %v0
+    %t1 = XOR killed %v0, killed %t5
+    %t4 = SRL %t1, 24
+    BNE %t2, %zero, %bb.2..lr.ph, implicit-def %at {
+      %t5 = OR killed %at, %zero
+    }
+  
+  bb.3..lr.ph (freq 8):
+    successors: %bb.5.._crit_edge(100)
+  
+    B %bb.5.._crit_edge, implicit-def %at {
+      NOP
+    }
+  
+  bb.4 (freq 8):
+    successors: %bb.5.._crit_edge(100)
+    liveins: %a0, %a1, %a2, %a3, %t0, %t1, %t4, %v0, %v1
+  
+    SW killed %v0, %fp, 4 :: (store 4 into stack)
+  
+  bb.5.._crit_edge (freq 16):
+    liveins: %a0, %a1, %a2, %a3, %t0, %t1, %t4, %v1
+    liveouts:
+  
+    %v0 = SLL killed %a0, 4
+    %a0 = EXT %t0, 8, 8
+    %at = LW %fp, 4 :: (load 4 from stack)
+    %at = LW killed %at, target-flags(<unknown>) @br_aes_S :: (load 4 from got)
+    %a0 = ADDu %at, killed %a0
+    %t2 = SRL %a3, 24
+    %t3 = EXT %t1, 8, 8
+    %t5 = SRL %v1, 24
+    %t6 = ORi %v0, 12
+    %t7 = SRL %t0, 24
+    %t8 = ANDi %v1, 255
+    %t9 = EXT %t1, 16, 8
+    %t9 = ADDu %at, killed %t9
+    %t8 = ADDu %at, killed %t8
+    %t7 = ADDu %at, killed %t7
+    %t6 = ADDu %a1, killed %t6
+    %a0 = LBu killed %a0, 0 :: (load 1 from %ir.236, !tbaa !1)
+    %t5 = ADDu %at, killed %t5
+    %t3 = ADDu %at, killed %t3
+    %t2 = ADDu %at, killed %t2
+    %gp = ORi %v0, 4
+    %s0 = ORi %v0, 8
+    %t4 = ADDu %at, killed %t4
+    %s0 = ADDu %a1, killed %s0
+    %s1 = ANDi %a3, 255
+    %t1 = ANDi killed %t1, 255
+    %t2 = LBu killed %t2, 0 :: (load 1 from %ir.247, !tbaa !1)
+    %v0 = ADDu %a1, killed %v0
+    %a1 = ADDu killed %a1, killed %gp
+    %t3 = LBu killed %t3, 0 :: (load 1 from %ir.260, !tbaa !1)
+    %gp = EXT %t0, 16, 8
+    %t5 = LBu killed %t5, 0 :: (load 1 from %ir.223, !tbaa !1)
+    %t9 = LBu killed %t9, 0 :: (load 1 from %ir.277, !tbaa !1)
+    %t7 = LBu killed %t7, 0 :: (load 1 from %ir.271, !tbaa !1)
+    %s2 = EXT %a3, 16, 8
+    %t4 = LBu killed %t4, 0 :: (load 1 from %ir.199, !tbaa !1)
+    %t1 = ADDu %at, killed %t1
+    %s1 = ADDu %at, killed %s1
+    %a0 = SLL killed %a0, 8
+    %t8 = LBu killed %t8, 0 :: (load 1 from %ir.266, !tbaa !1)
+    %s3 = EXT %v1, 8, 8
+    %v1 = EXT killed %v1, 16, 8
+    %t6 = LW killed %t6, 0 :: (load 4 from %ir.307, !tbaa !4)
+    %s0 = LW killed %s0, 0 :: (load 4 from %ir.303, !tbaa !4)
+    %a1 = LW killed %a1, 0 :: (load 4 from %ir.299, !tbaa !4)
+    %v0 = LW killed %v0, 0 :: (load 4 from %ir.295, !tbaa !4)
+    %t0 = ANDi killed %t0, 255
+    %a3 = EXT killed %a3, 8, 8
+    %t2 = SLL killed %t2, 24
+    %gp = ADDu %at, killed %gp
+    %gp = LBu killed %gp, 0 :: (load 1 from %ir.253, !tbaa !1)
+    %gp = SLL killed %gp, 16
+    %t2 = OR killed %gp, killed %t2
+    %t7 = SLL killed %t7, 24
+    %t9 = SLL killed %t9, 16
+    %t3 = SLL killed %t3, 8
+    %t5 = SLL killed %t5, 24
+    %gp = ADDu %at, killed %s2
+    %gp = LBu killed %gp, 0 :: (load 1 from %ir.229, !tbaa !1)
+    %gp = SLL killed %gp, 16
+    %t5 = OR killed %gp, killed %t5
+    %t2 = OR killed %t2, killed %t3
+    %t3 = OR killed %t9, killed %t7
+    %t7 = ADDu %at, killed %s3
+    %t7 = LBu killed %t7, 0 :: (load 1 from %ir.284, !tbaa !1)
+    %t7 = SLL killed %t7, 8
+    %t3 = OR killed %t3, killed %t7
+    %t2 = OR killed %t2, killed %t8
+    %a0 = OR killed %t5, killed %a0
+    %t5 = LBu killed %s1, 0 :: (load 1 from %ir.290, !tbaa !1)
+    %t1 = LBu killed %t1, 0 :: (load 1 from %ir.242, !tbaa !1)
+    %t4 = SLL killed %t4, 24
+    %v1 = ADDu %at, killed %v1
+    %v1 = LBu killed %v1, 0 :: (load 1 from %ir.205, !tbaa !1)
+    %v1 = SLL killed %v1, 16
+    %v1 = OR killed %v1, killed %t4
+    %a3 = ADDu %at, killed %a3
+    %a3 = LBu killed %a3, 0 :: (load 1 from %ir.212, !tbaa !1)
+    %a3 = SLL killed %a3, 8
+    %v1 = OR killed %v1, killed %a3
+    %at = ADDu killed %at, killed %t0
+    %at = LBu killed %at, 0 :: (load 1 from %ir.218, !tbaa !1)
+    %at = OR killed %v1, killed %at
+    %at = XOR killed %v0, killed %at
+    %v0 = SRL %at, 24
+    SB killed %v0, %a2, 0 :: (store 1 into %ir.data, !tbaa !1)
+    %v0 = SRL %at, 16
+    SB killed %v0, %a2, 1 :: (store 1 into %ir.sunkaddr7, !tbaa !1)
+    %v0 = SRL %at, 8
+    SB killed %v0, %a2, 2 :: (store 1 into %ir.sunkaddr10, !tbaa !1)
+    SB killed %at, %a2, 3 :: (store 1 into %ir.sunkaddr13, !tbaa !1)
+    %at = OR killed %a0, killed %t1
+    %at = XOR killed %a1, killed %at
+    %v0 = SRL %at, 24
+    SB killed %v0, %a2, 4 :: (store 1 into %ir.sunkaddr16, !tbaa !1)
+    %v0 = XOR killed %s0, killed %t2
+    %v1 = OR killed %t3, killed %t5
+    %v1 = XOR killed %t6, killed %v1
+    %a0 = SRL %at, 16
+    SB killed %a0, %a2, 5 :: (store 1 into %ir.sunkaddr19, !tbaa !1)
+    %a0 = SRL %v1, 8
+    %a1 = SRL %v1, 16
+    %a3 = SRL %v1, 24
+    %t0 = SRL %v0, 8
+    %t1 = SRL %v0, 16
+    %t2 = SRL %v0, 24
+    %t3 = SRL %at, 8
+    SB killed %t3, %a2, 6 :: (store 1 into %ir.sunkaddr22, !tbaa !1)
+    SB killed %at, %a2, 7 :: (store 1 into %ir.sunkaddr25, !tbaa !1)
+    SB killed %t2, %a2, 8 :: (store 1 into %ir.sunkaddr28, !tbaa !1)
+    SB killed %t1, %a2, 9 :: (store 1 into %ir.sunkaddr31, !tbaa !1)
+    SB killed %t0, %a2, 10 :: (store 1 into %ir.sunkaddr34, !tbaa !1)
+    SB killed %v0, %a2, 11 :: (store 1 into %ir.sunkaddr37, !tbaa !1)
+    SB killed %a3, %a2, 12 :: (store 1 into %ir.sunkaddr40, !tbaa !1)
+    SB killed %a1, %a2, 13 :: (store 1 into %ir.sunkaddr43, !tbaa !1)
+    SB killed %a0, %a2, 14 :: (store 1 into %ir.sunkaddr46, !tbaa !1)
+    SB killed %v1, killed %a2, 15 :: (store 1 into %ir.sunkaddr49, !tbaa !1)
+    %sp = OR %fp, %zero
+    %s0 = LW %sp, 8 :: (load 4 from stack)
+    %s1 = LW %sp, 12 :: (load 4 from stack)
+    %s2 = LW %sp, 16 :: (load 4 from stack)
+    %s3 = LW %sp, 20 :: (load 4 from stack)
+    %s4 = LW %sp, 24 :: (load 4 from stack)
+    %s5 = LW %sp, 28 :: (load 4 from stack)
+    %s6 = LW %sp, 32 :: (load 4 from stack)
+    %s7 = LW %sp, 36 :: (load 4 from stack)
+    %fp = LW %sp, 40 :: (load 4 from stack)
+    %ra = LW %sp, 44 :: (load 4 from stack)
+    PseudoReturn %ra {
+      %sp = ADDiu %sp, 48
+    }
+
+...
