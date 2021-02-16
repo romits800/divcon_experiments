@@ -26,7 +26,7 @@ ${DIVCON_PATH}/src/solvers/multi_backend/portfolio-solver -o $input.out.json --v
 
 flags="--disable-copy-dominance-constraints --disable-infinite-register-dominance-constraints --disable-operand-symmetry-breaking-constraints --disable-register-symmetry-breaking-constraints --disable-temporary-symmetry-breaking-constraints --disable-wcet-constraints"
 
-gecode-diversify $flags --acceptable-gap 45 --relax 0.8 --seed 12 --number-divs 100 --restart constant --restart-base 10000 --distance levenshtein --div-method monolithic_lns -o $input.out.json --use-optimal-for-diversification --solver-file $input.out.json  --branching random --verbose $input.ext.json
+gecode-diversify $flags --acceptable-gap 45 --relax 0.8 --seed 12 --number-divs 100 --restart constant --restart-scale 10000 --distance levenshtein --div-method monolithic_lns -o $input.out.json --use-optimal-for-diversification --solver-file $input.out.json  --branching random --verbose $input.ext.json
 
 
 for i in *.${input}.out.json; 
