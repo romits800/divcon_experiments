@@ -1,0 +1,3741 @@
+--- |
+  ; ModuleID = 'des_tab.ll'
+  target datalayout = "E-m:m-p:32:32-i8:8:32-i16:16:32-i64:64-n32-S64"
+  target triple = "mipsel"
+  
+  @S1 = internal unnamed_addr constant [64 x i32] [i32 8421888, i32 0, i32 32768, i32 8421890, i32 8421378, i32 33282, i32 2, i32 32768, i32 512, i32 8421888, i32 8421890, i32 512, i32 8389122, i32 8421378, i32 8388608, i32 2, i32 514, i32 8389120, i32 8389120, i32 33280, i32 33280, i32 8421376, i32 8421376, i32 8389122, i32 32770, i32 8388610, i32 8388610, i32 32770, i32 0, i32 514, i32 33282, i32 8388608, i32 32768, i32 8421890, i32 2, i32 8421376, i32 8421888, i32 8388608, i32 8388608, i32 512, i32 8421378, i32 32768, i32 33280, i32 8388610, i32 512, i32 2, i32 8389122, i32 33282, i32 8421890, i32 32770, i32 8421376, i32 8389122, i32 8388610, i32 514, i32 33282, i32 8421888, i32 514, i32 8389120, i32 8389120, i32 0, i32 32770, i32 33280, i32 0, i32 8421378], align 4
+  @S2 = internal unnamed_addr constant [64 x i32] [i32 1074282512, i32 1073758208, i32 16384, i32 540688, i32 524288, i32 16, i32 1074266128, i32 1073758224, i32 1073741840, i32 1074282512, i32 1074282496, i32 1073741824, i32 1073758208, i32 524288, i32 16, i32 1074266128, i32 540672, i32 524304, i32 1073758224, i32 0, i32 1073741824, i32 16384, i32 540688, i32 1074266112, i32 524304, i32 1073741840, i32 0, i32 540672, i32 16400, i32 1074282496, i32 1074266112, i32 16400, i32 0, i32 540688, i32 1074266128, i32 524288, i32 1073758224, i32 1074266112, i32 1074282496, i32 16384, i32 1074266112, i32 1073758208, i32 16, i32 1074282512, i32 540688, i32 16, i32 16384, i32 1073741824, i32 16400, i32 1074282496, i32 524288, i32 1073741840, i32 524304, i32 1073758224, i32 1073741840, i32 524304, i32 540672, i32 0, i32 1073758208, i32 16400, i32 1073741824, i32 1074266128, i32 1074282512, i32 540672], align 4
+  @S3 = internal unnamed_addr constant [64 x i32] [i32 260, i32 67174656, i32 0, i32 67174404, i32 67109120, i32 0, i32 65796, i32 67109120, i32 65540, i32 67108868, i32 67108868, i32 65536, i32 67174660, i32 65540, i32 67174400, i32 260, i32 67108864, i32 4, i32 67174656, i32 256, i32 65792, i32 67174400, i32 67174404, i32 65796, i32 67109124, i32 65792, i32 65536, i32 67109124, i32 4, i32 67174660, i32 256, i32 67108864, i32 67174656, i32 67108864, i32 65540, i32 260, i32 65536, i32 67174656, i32 67109120, i32 0, i32 256, i32 65540, i32 67174660, i32 67109120, i32 67108868, i32 256, i32 0, i32 67174404, i32 67109124, i32 65536, i32 67108864, i32 67174660, i32 4, i32 65796, i32 65792, i32 67108868, i32 67174400, i32 67109124, i32 260, i32 67174400, i32 65796, i32 4, i32 67174404, i32 65792], align 4
+  @S4 = internal unnamed_addr constant [64 x i32] [i32 -2143285248, i32 -2147479488, i32 -2147479488, i32 64, i32 4198464, i32 -2143289280, i32 -2143289344, i32 -2147479552, i32 0, i32 4198400, i32 4198400, i32 -2143285184, i32 -2147483584, i32 0, i32 4194368, i32 -2143289344, i32 -2147483648, i32 4096, i32 4194304, i32 -2143285248, i32 64, i32 4194304, i32 -2147479552, i32 4160, i32 -2143289280, i32 -2147483648, i32 4160, i32 4194368, i32 4096, i32 4198464, i32 -2143285184, i32 -2147483584, i32 4194368, i32 -2143289344, i32 4198400, i32 -2143285184, i32 -2147483584, i32 0, i32 0, i32 4198400, i32 4160, i32 4194368, i32 -2143289280, i32 -2147483648, i32 -2143285248, i32 -2147479488, i32 -2147479488, i32 64, i32 -2143285184, i32 -2147483584, i32 -2147483648, i32 4096, i32 -2143289344, i32 -2147479552, i32 4198464, i32 -2143289280, i32 -2147479552, i32 4160, i32 4194304, i32 -2143285248, i32 64, i32 4194304, i32 4096, i32 4198464], align 4
+  @S5 = internal unnamed_addr constant [64 x i32] [i32 128, i32 17039488, i32 17039360, i32 553648256, i32 262144, i32 128, i32 536870912, i32 17039360, i32 537133184, i32 262144, i32 16777344, i32 537133184, i32 553648256, i32 553910272, i32 262272, i32 536870912, i32 16777216, i32 537133056, i32 537133056, i32 0, i32 536871040, i32 553910400, i32 553910400, i32 16777344, i32 553910272, i32 536871040, i32 0, i32 553648128, i32 17039488, i32 16777216, i32 553648128, i32 262272, i32 262144, i32 553648256, i32 128, i32 16777216, i32 536870912, i32 17039360, i32 553648256, i32 537133184, i32 16777344, i32 536870912, i32 553910272, i32 17039488, i32 537133184, i32 128, i32 16777216, i32 553910272, i32 553910400, i32 262272, i32 553648128, i32 553910400, i32 17039360, i32 0, i32 537133056, i32 553648128, i32 262272, i32 16777344, i32 536871040, i32 262144, i32 0, i32 537133056, i32 17039488, i32 536871040], align 4
+  @S6 = internal unnamed_addr constant [64 x i32] [i32 268435464, i32 270532608, i32 8192, i32 270540808, i32 270532608, i32 8, i32 270540808, i32 2097152, i32 268443648, i32 2105352, i32 2097152, i32 268435464, i32 2097160, i32 268443648, i32 268435456, i32 8200, i32 0, i32 2097160, i32 268443656, i32 8192, i32 2105344, i32 268443656, i32 8, i32 270532616, i32 270532616, i32 0, i32 2105352, i32 270540800, i32 8200, i32 2105344, i32 270540800, i32 268435456, i32 268443648, i32 8, i32 270532616, i32 2105344, i32 270540808, i32 2097152, i32 8200, i32 268435464, i32 2097152, i32 268443648, i32 268435456, i32 8200, i32 268435464, i32 270540808, i32 2105344, i32 270532608, i32 2105352, i32 270540800, i32 0, i32 270532616, i32 8, i32 8192, i32 270532608, i32 2105352, i32 8192, i32 2097160, i32 268443656, i32 0, i32 270540800, i32 268435456, i32 2097160, i32 268443656], align 4
+  @S7 = internal unnamed_addr constant [64 x i32] [i32 1048576, i32 34603009, i32 33555457, i32 0, i32 1024, i32 33555457, i32 1049601, i32 34604032, i32 34604033, i32 1048576, i32 0, i32 33554433, i32 1, i32 33554432, i32 34603009, i32 1025, i32 33555456, i32 1049601, i32 1048577, i32 33555456, i32 33554433, i32 34603008, i32 34604032, i32 1048577, i32 34603008, i32 1024, i32 1025, i32 34604033, i32 1049600, i32 1, i32 33554432, i32 1049600, i32 33554432, i32 1049600, i32 1048576, i32 33555457, i32 33555457, i32 34603009, i32 34603009, i32 1, i32 1048577, i32 33554432, i32 33555456, i32 1048576, i32 34604032, i32 1025, i32 1049601, i32 34604032, i32 1025, i32 33554433, i32 34604033, i32 34603008, i32 1049600, i32 0, i32 1, i32 34604033, i32 0, i32 1049601, i32 34603008, i32 1024, i32 33554433, i32 33555456, i32 1024, i32 1048577], align 4
+  @S8 = internal unnamed_addr constant [64 x i32] [i32 134219808, i32 2048, i32 131072, i32 134350880, i32 134217728, i32 134219808, i32 32, i32 134217728, i32 131104, i32 134348800, i32 134350880, i32 133120, i32 134350848, i32 133152, i32 2048, i32 32, i32 134348800, i32 134217760, i32 134219776, i32 2080, i32 133120, i32 131104, i32 134348832, i32 134350848, i32 2080, i32 0, i32 0, i32 134348832, i32 134217760, i32 134219776, i32 133152, i32 131072, i32 133152, i32 131072, i32 134350848, i32 2048, i32 32, i32 134348832, i32 2048, i32 133152, i32 134219776, i32 32, i32 134217760, i32 134348800, i32 134348832, i32 134217728, i32 131072, i32 134219808, i32 0, i32 134350880, i32 131104, i32 134217760, i32 134348800, i32 134219776, i32 134219808, i32 0, i32 134350880, i32 133120, i32 133120, i32 2080, i32 2080, i32 131104, i32 134217728, i32 134350848], align 4
+  @PC2left = internal unnamed_addr constant [28 x i8] c"\10\03\07\18\14\0B\18\0D\02\0A\18\16\05\0F\17\01\09\15\0C\18\06\04\0E\12\08\11\00\13", align 1
+  @PC2right = internal unnamed_addr constant [28 x i8] c"\08\12\18\06\16\0F\03\0A\0C\13\05\0E\0B\18\04\17\10\09\18\14\02\18\07\0D\00\15\11\01", align 1
+  
+  ; Function Attrs: nounwind
+  define void @br_des_tab_process_block(i32 signext %num_rounds, i32* nocapture readonly %skey, i8* nocapture %block) #0 {
+    %l = alloca i32, align 4
+    %r = alloca i32, align 4
+    %1 = bitcast i32* %l to i8*
+    call void @llvm.lifetime.start(i64 4, i8* %1) #3
+    %2 = bitcast i32* %r to i8*
+    call void @llvm.lifetime.start(i64 4, i8* %2) #3
+    %3 = load i8, i8* %block, align 1, !tbaa !1
+    %4 = zext i8 %3 to i32
+    %5 = shl nuw i32 %4, 24
+    %6 = getelementptr inbounds i8, i8* %block, i32 1
+    %7 = load i8, i8* %6, align 1, !tbaa !1
+    %8 = zext i8 %7 to i32
+    %9 = shl nuw nsw i32 %8, 16
+    %10 = or i32 %9, %5
+    %11 = getelementptr inbounds i8, i8* %block, i32 2
+    %12 = load i8, i8* %11, align 1, !tbaa !1
+    %13 = zext i8 %12 to i32
+    %14 = shl nuw nsw i32 %13, 8
+    %15 = or i32 %10, %14
+    %16 = getelementptr inbounds i8, i8* %block, i32 3
+    %17 = load i8, i8* %16, align 1, !tbaa !1
+    %18 = zext i8 %17 to i32
+    %19 = or i32 %15, %18
+    store i32 %19, i32* %l, align 4, !tbaa !4
+    %20 = getelementptr inbounds i8, i8* %block, i32 4
+    %21 = load i8, i8* %20, align 1, !tbaa !1
+    %22 = zext i8 %21 to i32
+    %23 = shl nuw i32 %22, 24
+    %24 = getelementptr inbounds i8, i8* %block, i32 5
+    %25 = load i8, i8* %24, align 1, !tbaa !1
+    %26 = zext i8 %25 to i32
+    %27 = shl nuw nsw i32 %26, 16
+    %28 = or i32 %27, %23
+    %29 = getelementptr inbounds i8, i8* %block, i32 6
+    %30 = load i8, i8* %29, align 1, !tbaa !1
+    %31 = zext i8 %30 to i32
+    %32 = shl nuw nsw i32 %31, 8
+    %33 = or i32 %28, %32
+    %34 = getelementptr inbounds i8, i8* %block, i32 7
+    %35 = load i8, i8* %34, align 1, !tbaa !1
+    %36 = zext i8 %35 to i32
+    %37 = or i32 %33, %36
+    store i32 %37, i32* %r, align 4, !tbaa !4
+    call void @br_des_do_IP(i32* nonnull %l, i32* nonnull %r) #3
+    %38 = icmp eq i32 %num_rounds, 0
+    br i1 %38, label %._crit_edge, label %.lr.ph.preheader
+  
+  .lr.ph.preheader:                                 ; preds = %0
+    %.pre = load i32, i32* %l, align 4, !tbaa !4
+    %.pre4 = load i32, i32* %r, align 4, !tbaa !4
+    br label %.lr.ph
+  
+  .lr.ph:                                           ; preds = %process_block_unit.exit, %.lr.ph.preheader
+    %39 = phi i32 [ %r.02.i, %process_block_unit.exit ], [ %.pre4, %.lr.ph.preheader ]
+    %40 = phi i32 [ %101, %process_block_unit.exit ], [ %.pre, %.lr.ph.preheader ]
+    %.03 = phi i32 [ %102, %process_block_unit.exit ], [ %num_rounds, %.lr.ph.preheader ]
+    %.012 = phi i32* [ %103, %process_block_unit.exit ], [ %skey, %.lr.ph.preheader ]
+    br label %41
+  
+  ; <label>:41                                      ; preds = %41, %.lr.ph
+    %lsr.iv = phi i32 [ %lsr.iv.next, %41 ], [ 0, %.lr.ph ]
+    %r.02.i = phi i32 [ %39, %.lr.ph ], [ %101, %41 ]
+    %l.01.i = phi i32 [ %40, %.lr.ph ], [ %r.02.i, %41 ]
+    %42 = bitcast i32* %.012 to i8*
+    %uglygep3 = getelementptr i8, i8* %42, i32 %lsr.iv
+    %uglygep34 = bitcast i8* %uglygep3 to i32*
+    %43 = load i32, i32* %uglygep34, align 4, !tbaa !4
+    %uglygep = getelementptr i8, i8* %42, i32 %lsr.iv
+    %uglygep2 = bitcast i8* %uglygep to i32*
+    %scevgep = getelementptr i32, i32* %uglygep2, i32 1
+    %44 = load i32, i32* %scevgep, align 4, !tbaa !4
+    %45 = shl i32 %r.02.i, 16
+    %46 = lshr i32 %r.02.i, 16
+    %47 = or i32 %45, %46
+    %48 = lshr i32 %47, 11
+    %49 = lshr i32 %43, 18
+    %50 = xor i32 %49, %48
+    %51 = and i32 %50, 63
+    %52 = getelementptr inbounds [64 x i32], [64 x i32]* @S1, i32 0, i32 %51
+    %53 = load i32, i32* %52, align 4, !tbaa !4
+    %54 = lshr i32 %r.02.i, 23
+    %55 = lshr i32 %43, 12
+    %56 = xor i32 %55, %54
+    %57 = and i32 %56, 63
+    %58 = getelementptr inbounds [64 x i32], [64 x i32]* @S2, i32 0, i32 %57
+    %59 = load i32, i32* %58, align 4, !tbaa !4
+    %60 = or i32 %59, %53
+    %61 = lshr i32 %r.02.i, 19
+    %62 = lshr i32 %43, 6
+    %63 = xor i32 %62, %61
+    %64 = and i32 %63, 63
+    %65 = getelementptr inbounds [64 x i32], [64 x i32]* @S3, i32 0, i32 %64
+    %66 = load i32, i32* %65, align 4, !tbaa !4
+    %67 = or i32 %60, %66
+    %68 = lshr i32 %r.02.i, 15
+    %69 = xor i32 %43, %68
+    %70 = and i32 %69, 63
+    %71 = getelementptr inbounds [64 x i32], [64 x i32]* @S4, i32 0, i32 %70
+    %72 = load i32, i32* %71, align 4, !tbaa !4
+    %73 = or i32 %67, %72
+    %74 = lshr i32 %r.02.i, 11
+    %75 = lshr i32 %44, 18
+    %76 = xor i32 %75, %74
+    %77 = and i32 %76, 63
+    %78 = getelementptr inbounds [64 x i32], [64 x i32]* @S5, i32 0, i32 %77
+    %79 = load i32, i32* %78, align 4, !tbaa !4
+    %80 = or i32 %73, %79
+    %81 = lshr i32 %r.02.i, 7
+    %82 = lshr i32 %44, 12
+    %83 = xor i32 %82, %81
+    %84 = and i32 %83, 63
+    %85 = getelementptr inbounds [64 x i32], [64 x i32]* @S6, i32 0, i32 %84
+    %86 = load i32, i32* %85, align 4, !tbaa !4
+    %87 = or i32 %80, %86
+    %88 = lshr i32 %r.02.i, 3
+    %89 = lshr i32 %44, 6
+    %90 = xor i32 %89, %88
+    %91 = and i32 %90, 63
+    %92 = getelementptr inbounds [64 x i32], [64 x i32]* @S7, i32 0, i32 %91
+    %93 = load i32, i32* %92, align 4, !tbaa !4
+    %94 = or i32 %87, %93
+    %95 = lshr i32 %47, 15
+    %96 = xor i32 %44, %95
+    %97 = and i32 %96, 63
+    %98 = getelementptr inbounds [64 x i32], [64 x i32]* @S8, i32 0, i32 %97
+    %99 = load i32, i32* %98, align 4, !tbaa !4
+    %100 = or i32 %94, %99
+    %101 = xor i32 %100, %l.01.i
+    %lsr.iv.next = add nuw nsw i32 %lsr.iv, 8
+    %exitcond.i = icmp eq i32 %lsr.iv.next, 128
+    br i1 %exitcond.i, label %process_block_unit.exit, label %41
+  
+  process_block_unit.exit:                          ; preds = %41
+    %102 = add i32 %.03, -1
+    store i32 %101, i32* %l, align 4, !tbaa !4
+    store i32 %r.02.i, i32* %r, align 4, !tbaa !4
+    %103 = getelementptr inbounds i32, i32* %.012, i32 32
+    %104 = icmp eq i32 %102, 0
+    br i1 %104, label %._crit_edge, label %.lr.ph
+  
+  ._crit_edge:                                      ; preds = %process_block_unit.exit, %0
+    %105 = bitcast i32* %r to i8*
+    %106 = bitcast i32* %l to i8*
+    call void @br_des_do_invIP(i32* nonnull %l, i32* nonnull %r) #3
+    %107 = load i32, i32* %l, align 4, !tbaa !4
+    %108 = lshr i32 %107, 24
+    %109 = trunc i32 %108 to i8
+    store i8 %109, i8* %block, align 1, !tbaa !1
+    %110 = lshr i32 %107, 16
+    %111 = trunc i32 %110 to i8
+    %sunkaddr = ptrtoint i8* %block to i32
+    %sunkaddr5 = add i32 %sunkaddr, 1
+    %sunkaddr6 = inttoptr i32 %sunkaddr5 to i8*
+    store i8 %111, i8* %sunkaddr6, align 1, !tbaa !1
+    %112 = lshr i32 %107, 8
+    %113 = trunc i32 %112 to i8
+    %sunkaddr7 = ptrtoint i8* %block to i32
+    %sunkaddr8 = add i32 %sunkaddr7, 2
+    %sunkaddr9 = inttoptr i32 %sunkaddr8 to i8*
+    store i8 %113, i8* %sunkaddr9, align 1, !tbaa !1
+    %114 = trunc i32 %107 to i8
+    %sunkaddr10 = ptrtoint i8* %block to i32
+    %sunkaddr11 = add i32 %sunkaddr10, 3
+    %sunkaddr12 = inttoptr i32 %sunkaddr11 to i8*
+    store i8 %114, i8* %sunkaddr12, align 1, !tbaa !1
+    %115 = load i32, i32* %r, align 4, !tbaa !4
+    %116 = lshr i32 %115, 24
+    %117 = trunc i32 %116 to i8
+    %sunkaddr13 = ptrtoint i8* %block to i32
+    %sunkaddr14 = add i32 %sunkaddr13, 4
+    %sunkaddr15 = inttoptr i32 %sunkaddr14 to i8*
+    store i8 %117, i8* %sunkaddr15, align 1, !tbaa !1
+    %118 = lshr i32 %115, 16
+    %119 = trunc i32 %118 to i8
+    %sunkaddr16 = ptrtoint i8* %block to i32
+    %sunkaddr17 = add i32 %sunkaddr16, 5
+    %sunkaddr18 = inttoptr i32 %sunkaddr17 to i8*
+    store i8 %119, i8* %sunkaddr18, align 1, !tbaa !1
+    %120 = lshr i32 %115, 8
+    %121 = trunc i32 %120 to i8
+    %sunkaddr19 = ptrtoint i8* %block to i32
+    %sunkaddr20 = add i32 %sunkaddr19, 6
+    %sunkaddr21 = inttoptr i32 %sunkaddr20 to i8*
+    store i8 %121, i8* %sunkaddr21, align 1, !tbaa !1
+    %122 = trunc i32 %115 to i8
+    %sunkaddr22 = ptrtoint i8* %block to i32
+    %sunkaddr23 = add i32 %sunkaddr22, 7
+    %sunkaddr24 = inttoptr i32 %sunkaddr23 to i8*
+    store i8 %122, i8* %sunkaddr24, align 1, !tbaa !1
+    call void @llvm.lifetime.end(i64 4, i8* %105) #3
+    call void @llvm.lifetime.end(i64 4, i8* %106) #3
+    ret void
+  }
+  
+  ; Function Attrs: argmemonly nounwind
+  declare void @llvm.lifetime.start(i64, i8* nocapture) #1
+  
+  declare void @br_des_do_IP(i32*, i32*) #2
+  
+  declare void @br_des_do_invIP(i32*, i32*) #2
+  
+  ; Function Attrs: argmemonly nounwind
+  declare void @llvm.lifetime.end(i64, i8* nocapture) #1
+  
+  ; Function Attrs: nounwind
+  define i32 @br_des_tab_keysched(i32* %skey, i8* %key, i32 signext %key_len) #0 {
+    switch i32 %key_len, label %77 [
+      i32 8, label %1
+      i32 16, label %25
+    ]
+  
+  ; <label>:1                                       ; preds = %0
+    tail call void @br_des_keysched_unit(i32* %skey, i8* %key) #3
+    br label %2
+  
+  ; <label>:2                                       ; preds = %23, %1
+    %i.06.i = phi i32 [ 0, %1 ], [ %24, %23 ]
+    %3 = shl i32 %i.06.i, 1
+    %4 = getelementptr inbounds i32, i32* %skey, i32 %3
+    %5 = load i32, i32* %4, align 4, !tbaa !4
+    %6 = or i32 %3, 1
+    %7 = getelementptr inbounds i32, i32* %skey, i32 %6
+    %8 = load i32, i32* %7, align 4, !tbaa !4
+    br label %9
+  
+  ; <label>:9                                       ; preds = %9, %2
+    %j.05.i = phi i32 [ 0, %2 ], [ %22, %9 ]
+    %ur.04.i = phi i32 [ 0, %2 ], [ %19, %9 ]
+    %ul.03.i = phi i32 [ 0, %2 ], [ %14, %9 ]
+    %xr.02.i = phi i32 [ %8, %2 ], [ %21, %9 ]
+    %xl.01.i = phi i32 [ %5, %2 ], [ %20, %9 ]
+    %10 = and i32 %xl.01.i, 1
+    %scevgep7 = getelementptr [28 x i8], [28 x i8]* @PC2left, i32 0, i32 %j.05.i
+    %11 = load i8, i8* %scevgep7, align 1, !tbaa !1
+    %12 = zext i8 %11 to i32
+    %13 = shl i32 %10, %12
+    %14 = or i32 %13, %ul.03.i
+    %15 = and i32 %xr.02.i, 1
+    %scevgep6 = getelementptr [28 x i8], [28 x i8]* @PC2right, i32 0, i32 %j.05.i
+    %16 = load i8, i8* %scevgep6, align 1, !tbaa !1
+    %17 = zext i8 %16 to i32
+    %18 = shl i32 %15, %17
+    %19 = or i32 %18, %ur.04.i
+    %20 = lshr i32 %xl.01.i, 1
+    %21 = lshr i32 %xr.02.i, 1
+    %22 = add nuw nsw i32 %j.05.i, 1
+    %exitcond.i = icmp eq i32 %22, 28
+    br i1 %exitcond.i, label %23, label %9
+  
+  ; <label>:23                                      ; preds = %9
+    store i32 %14, i32* %4, align 4, !tbaa !4
+    store i32 %19, i32* %7, align 4, !tbaa !4
+    %24 = add nuw nsw i32 %i.06.i, 1
+    %exitcond8.i = icmp eq i32 %24, 16
+    br i1 %exitcond8.i, label %keysched_unit.exit, label %2
+  
+  ; <label>:25                                      ; preds = %0
+    tail call void @br_des_keysched_unit(i32* %skey, i8* %key) #3
+    br label %26
+  
+  ; <label>:26                                      ; preds = %47, %25
+    %i.06.i1 = phi i32 [ 0, %25 ], [ %48, %47 ]
+    %27 = shl i32 %i.06.i1, 1
+    %28 = getelementptr inbounds i32, i32* %skey, i32 %27
+    %29 = load i32, i32* %28, align 4, !tbaa !4
+    %30 = or i32 %27, 1
+    %31 = getelementptr inbounds i32, i32* %skey, i32 %30
+    %32 = load i32, i32* %31, align 4, !tbaa !4
+    br label %33
+  
+  ; <label>:33                                      ; preds = %33, %26
+    %j.05.i2 = phi i32 [ 0, %26 ], [ %46, %33 ]
+    %ur.04.i3 = phi i32 [ 0, %26 ], [ %43, %33 ]
+    %ul.03.i4 = phi i32 [ 0, %26 ], [ %38, %33 ]
+    %xr.02.i5 = phi i32 [ %32, %26 ], [ %45, %33 ]
+    %xl.01.i6 = phi i32 [ %29, %26 ], [ %44, %33 ]
+    %34 = and i32 %xl.01.i6, 1
+    %scevgep11 = getelementptr [28 x i8], [28 x i8]* @PC2left, i32 0, i32 %j.05.i2
+    %35 = load i8, i8* %scevgep11, align 1, !tbaa !1
+    %36 = zext i8 %35 to i32
+    %37 = shl i32 %34, %36
+    %38 = or i32 %37, %ul.03.i4
+    %39 = and i32 %xr.02.i5, 1
+    %scevgep10 = getelementptr [28 x i8], [28 x i8]* @PC2right, i32 0, i32 %j.05.i2
+    %40 = load i8, i8* %scevgep10, align 1, !tbaa !1
+    %41 = zext i8 %40 to i32
+    %42 = shl i32 %39, %41
+    %43 = or i32 %42, %ur.04.i3
+    %44 = lshr i32 %xl.01.i6, 1
+    %45 = lshr i32 %xr.02.i5, 1
+    %46 = add nuw nsw i32 %j.05.i2, 1
+    %exitcond.i7 = icmp eq i32 %46, 28
+    br i1 %exitcond.i7, label %47, label %33
+  
+  ; <label>:47                                      ; preds = %33
+    store i32 %38, i32* %28, align 4, !tbaa !4
+    store i32 %43, i32* %31, align 4, !tbaa !4
+    %48 = add nuw nsw i32 %i.06.i1, 1
+    %exitcond8.i8 = icmp eq i32 %48, 16
+    br i1 %exitcond8.i8, label %keysched_unit.exit9, label %26
+  
+  keysched_unit.exit9:                              ; preds = %47
+    %49 = getelementptr inbounds i32, i32* %skey, i32 32
+    %50 = getelementptr inbounds i8, i8* %key, i32 8
+    tail call void @br_des_keysched_unit(i32* %49, i8* %50) #3
+    br label %51
+  
+  ; <label>:51                                      ; preds = %72, %keysched_unit.exit9
+    %i.06.i10 = phi i32 [ 0, %keysched_unit.exit9 ], [ %73, %72 ]
+    %52 = shl i32 %i.06.i10, 1
+    %53 = getelementptr inbounds i32, i32* %49, i32 %52
+    %54 = load i32, i32* %53, align 4, !tbaa !4
+    %55 = or i32 %52, 1
+    %56 = getelementptr inbounds i32, i32* %49, i32 %55
+    %57 = load i32, i32* %56, align 4, !tbaa !4
+    br label %58
+  
+  ; <label>:58                                      ; preds = %58, %51
+    %j.05.i11 = phi i32 [ 0, %51 ], [ %71, %58 ]
+    %ur.04.i12 = phi i32 [ 0, %51 ], [ %68, %58 ]
+    %ul.03.i13 = phi i32 [ 0, %51 ], [ %63, %58 ]
+    %xr.02.i14 = phi i32 [ %57, %51 ], [ %70, %58 ]
+    %xl.01.i15 = phi i32 [ %54, %51 ], [ %69, %58 ]
+    %59 = and i32 %xl.01.i15, 1
+    %scevgep9 = getelementptr [28 x i8], [28 x i8]* @PC2left, i32 0, i32 %j.05.i11
+    %60 = load i8, i8* %scevgep9, align 1, !tbaa !1
+    %61 = zext i8 %60 to i32
+    %62 = shl i32 %59, %61
+    %63 = or i32 %62, %ul.03.i13
+    %64 = and i32 %xr.02.i14, 1
+    %scevgep8 = getelementptr [28 x i8], [28 x i8]* @PC2right, i32 0, i32 %j.05.i11
+    %65 = load i8, i8* %scevgep8, align 1, !tbaa !1
+    %66 = zext i8 %65 to i32
+    %67 = shl i32 %64, %66
+    %68 = or i32 %67, %ur.04.i12
+    %69 = lshr i32 %xl.01.i15, 1
+    %70 = lshr i32 %xr.02.i14, 1
+    %71 = add nuw nsw i32 %j.05.i11, 1
+    %exitcond.i16 = icmp eq i32 %71, 28
+    br i1 %exitcond.i16, label %72, label %58
+  
+  ; <label>:72                                      ; preds = %58
+    store i32 %63, i32* %53, align 4, !tbaa !4
+    store i32 %68, i32* %56, align 4, !tbaa !4
+    %73 = add nuw nsw i32 %i.06.i10, 1
+    %exitcond8.i17 = icmp eq i32 %73, 16
+    br i1 %exitcond8.i17, label %keysched_unit.exit18, label %51
+  
+  keysched_unit.exit18:                             ; preds = %72
+    tail call void @br_des_rev_skey(i32* nonnull %49) #3
+    %74 = getelementptr inbounds i32, i32* %skey, i32 64
+    %75 = bitcast i32* %74 to i8*
+    %76 = bitcast i32* %skey to i8*
+    tail call void @llvm.memcpy.p0i8.p0i8.i32(i8* %75, i8* %76, i32 128, i32 4, i1 false)
+    br label %keysched_unit.exit
+  
+  ; <label>:77                                      ; preds = %0
+    tail call void @br_des_keysched_unit(i32* %skey, i8* %key) #3
+    br label %78
+  
+  ; <label>:78                                      ; preds = %99, %77
+    %i.06.i19 = phi i32 [ 0, %77 ], [ %100, %99 ]
+    %79 = shl i32 %i.06.i19, 1
+    %80 = getelementptr inbounds i32, i32* %skey, i32 %79
+    %81 = load i32, i32* %80, align 4, !tbaa !4
+    %82 = or i32 %79, 1
+    %83 = getelementptr inbounds i32, i32* %skey, i32 %82
+    %84 = load i32, i32* %83, align 4, !tbaa !4
+    br label %85
+  
+  ; <label>:85                                      ; preds = %85, %78
+    %j.05.i20 = phi i32 [ 0, %78 ], [ %98, %85 ]
+    %ur.04.i21 = phi i32 [ 0, %78 ], [ %95, %85 ]
+    %ul.03.i22 = phi i32 [ 0, %78 ], [ %90, %85 ]
+    %xr.02.i23 = phi i32 [ %84, %78 ], [ %97, %85 ]
+    %xl.01.i24 = phi i32 [ %81, %78 ], [ %96, %85 ]
+    %86 = and i32 %xl.01.i24, 1
+    %scevgep5 = getelementptr [28 x i8], [28 x i8]* @PC2left, i32 0, i32 %j.05.i20
+    %87 = load i8, i8* %scevgep5, align 1, !tbaa !1
+    %88 = zext i8 %87 to i32
+    %89 = shl i32 %86, %88
+    %90 = or i32 %89, %ul.03.i22
+    %91 = and i32 %xr.02.i23, 1
+    %scevgep4 = getelementptr [28 x i8], [28 x i8]* @PC2right, i32 0, i32 %j.05.i20
+    %92 = load i8, i8* %scevgep4, align 1, !tbaa !1
+    %93 = zext i8 %92 to i32
+    %94 = shl i32 %91, %93
+    %95 = or i32 %94, %ur.04.i21
+    %96 = lshr i32 %xl.01.i24, 1
+    %97 = lshr i32 %xr.02.i23, 1
+    %98 = add nuw nsw i32 %j.05.i20, 1
+    %exitcond.i25 = icmp eq i32 %98, 28
+    br i1 %exitcond.i25, label %99, label %85
+  
+  ; <label>:99                                      ; preds = %85
+    store i32 %90, i32* %80, align 4, !tbaa !4
+    store i32 %95, i32* %83, align 4, !tbaa !4
+    %100 = add nuw nsw i32 %i.06.i19, 1
+    %exitcond8.i26 = icmp eq i32 %100, 16
+    br i1 %exitcond8.i26, label %keysched_unit.exit27, label %78
+  
+  keysched_unit.exit27:                             ; preds = %99
+    %101 = getelementptr inbounds i32, i32* %skey, i32 32
+    %102 = getelementptr inbounds i8, i8* %key, i32 8
+    tail call void @br_des_keysched_unit(i32* %101, i8* %102) #3
+    br label %103
+  
+  ; <label>:103                                     ; preds = %124, %keysched_unit.exit27
+    %i.06.i28 = phi i32 [ 0, %keysched_unit.exit27 ], [ %125, %124 ]
+    %104 = shl i32 %i.06.i28, 1
+    %105 = getelementptr inbounds i32, i32* %101, i32 %104
+    %106 = load i32, i32* %105, align 4, !tbaa !4
+    %107 = or i32 %104, 1
+    %108 = getelementptr inbounds i32, i32* %101, i32 %107
+    %109 = load i32, i32* %108, align 4, !tbaa !4
+    br label %110
+  
+  ; <label>:110                                     ; preds = %110, %103
+    %j.05.i29 = phi i32 [ 0, %103 ], [ %123, %110 ]
+    %ur.04.i30 = phi i32 [ 0, %103 ], [ %120, %110 ]
+    %ul.03.i31 = phi i32 [ 0, %103 ], [ %115, %110 ]
+    %xr.02.i32 = phi i32 [ %109, %103 ], [ %122, %110 ]
+    %xl.01.i33 = phi i32 [ %106, %103 ], [ %121, %110 ]
+    %111 = and i32 %xl.01.i33, 1
+    %scevgep3 = getelementptr [28 x i8], [28 x i8]* @PC2left, i32 0, i32 %j.05.i29
+    %112 = load i8, i8* %scevgep3, align 1, !tbaa !1
+    %113 = zext i8 %112 to i32
+    %114 = shl i32 %111, %113
+    %115 = or i32 %114, %ul.03.i31
+    %116 = and i32 %xr.02.i32, 1
+    %scevgep2 = getelementptr [28 x i8], [28 x i8]* @PC2right, i32 0, i32 %j.05.i29
+    %117 = load i8, i8* %scevgep2, align 1, !tbaa !1
+    %118 = zext i8 %117 to i32
+    %119 = shl i32 %116, %118
+    %120 = or i32 %119, %ur.04.i30
+    %121 = lshr i32 %xl.01.i33, 1
+    %122 = lshr i32 %xr.02.i32, 1
+    %123 = add nuw nsw i32 %j.05.i29, 1
+    %exitcond.i34 = icmp eq i32 %123, 28
+    br i1 %exitcond.i34, label %124, label %110
+  
+  ; <label>:124                                     ; preds = %110
+    store i32 %115, i32* %105, align 4, !tbaa !4
+    store i32 %120, i32* %108, align 4, !tbaa !4
+    %125 = add nuw nsw i32 %i.06.i28, 1
+    %exitcond8.i35 = icmp eq i32 %125, 16
+    br i1 %exitcond8.i35, label %keysched_unit.exit36, label %103
+  
+  keysched_unit.exit36:                             ; preds = %124
+    tail call void @br_des_rev_skey(i32* nonnull %101) #3
+    %126 = getelementptr inbounds i32, i32* %skey, i32 64
+    %127 = getelementptr inbounds i8, i8* %key, i32 16
+    tail call void @br_des_keysched_unit(i32* %126, i8* %127) #3
+    br label %128
+  
+  ; <label>:128                                     ; preds = %149, %keysched_unit.exit36
+    %i.06.i37 = phi i32 [ 0, %keysched_unit.exit36 ], [ %150, %149 ]
+    %129 = shl i32 %i.06.i37, 1
+    %130 = getelementptr inbounds i32, i32* %126, i32 %129
+    %131 = load i32, i32* %130, align 4, !tbaa !4
+    %132 = or i32 %129, 1
+    %133 = getelementptr inbounds i32, i32* %126, i32 %132
+    %134 = load i32, i32* %133, align 4, !tbaa !4
+    br label %135
+  
+  ; <label>:135                                     ; preds = %135, %128
+    %j.05.i38 = phi i32 [ 0, %128 ], [ %148, %135 ]
+    %ur.04.i39 = phi i32 [ 0, %128 ], [ %145, %135 ]
+    %ul.03.i40 = phi i32 [ 0, %128 ], [ %140, %135 ]
+    %xr.02.i41 = phi i32 [ %134, %128 ], [ %147, %135 ]
+    %xl.01.i42 = phi i32 [ %131, %128 ], [ %146, %135 ]
+    %136 = and i32 %xl.01.i42, 1
+    %scevgep1 = getelementptr [28 x i8], [28 x i8]* @PC2left, i32 0, i32 %j.05.i38
+    %137 = load i8, i8* %scevgep1, align 1, !tbaa !1
+    %138 = zext i8 %137 to i32
+    %139 = shl i32 %136, %138
+    %140 = or i32 %139, %ul.03.i40
+    %141 = and i32 %xr.02.i41, 1
+    %scevgep = getelementptr [28 x i8], [28 x i8]* @PC2right, i32 0, i32 %j.05.i38
+    %142 = load i8, i8* %scevgep, align 1, !tbaa !1
+    %143 = zext i8 %142 to i32
+    %144 = shl i32 %141, %143
+    %145 = or i32 %144, %ur.04.i39
+    %146 = lshr i32 %xl.01.i42, 1
+    %147 = lshr i32 %xr.02.i41, 1
+    %148 = add nuw nsw i32 %j.05.i38, 1
+    %exitcond.i43 = icmp eq i32 %148, 28
+    br i1 %exitcond.i43, label %149, label %135
+  
+  ; <label>:149                                     ; preds = %135
+    store i32 %140, i32* %130, align 4, !tbaa !4
+    store i32 %145, i32* %133, align 4, !tbaa !4
+    %150 = add nuw nsw i32 %i.06.i37, 1
+    %exitcond8.i44 = icmp eq i32 %150, 16
+    br i1 %exitcond8.i44, label %keysched_unit.exit, label %128
+  
+  keysched_unit.exit:                               ; preds = %23, %149, %keysched_unit.exit18
+    %.0 = phi i32 [ 3, %keysched_unit.exit18 ], [ 3, %149 ], [ 1, %23 ]
+    ret i32 %.0
+  }
+  
+  declare void @br_des_rev_skey(i32*) #2
+  
+  ; Function Attrs: argmemonly nounwind
+  declare void @llvm.memcpy.p0i8.p0i8.i32(i8* nocapture, i8* nocapture readonly, i32, i32, i1) #1
+  
+  declare void @br_des_keysched_unit(i32*, i8*) #2
+  
+  attributes #0 = { nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="true" "no-frame-pointer-elim-non-leaf" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #1 = { argmemonly nounwind "target-cpu"="mips32" }
+  attributes #2 = { "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="true" "no-frame-pointer-elim-non-leaf" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #3 = { nounwind }
+  
+  !llvm.ident = !{!0}
+  
+  !0 = !{!"clang version 3.8.0-2ubuntu4 (tags/RELEASE_380/final)"}
+  !1 = !{!2, !2, i64 0}
+  !2 = !{!"omnipotent char", !3, i64 0}
+  !3 = !{!"Simple C/C++ TBAA"}
+  !4 = !{!5, !5, i64 0}
+  !5 = !{!"int", !2, i64 0}
+
+...
+---
+name:            br_des_tab_process_block
+alignment:       2
+exposesReturnsTwice: false
+hasInlineAsm:    false
+isSSA:           true
+tracksRegLiveness: true
+tracksSubRegLiveness: false
+registers:       
+  - { id: 0, class: gpr32 }
+  - { id: 1, class: gpr32 }
+  - { id: 2, class: gpr32 }
+  - { id: 3, class: gpr32 }
+  - { id: 4, class: gpr32 }
+  - { id: 5, class: gpr32 }
+  - { id: 6, class: gpr32 }
+  - { id: 7, class: gpr32 }
+  - { id: 8, class: gpr32 }
+  - { id: 9, class: gpr32 }
+  - { id: 10, class: gpr32 }
+  - { id: 11, class: gpr32 }
+  - { id: 12, class: gpr32 }
+  - { id: 13, class: gpr32 }
+  - { id: 14, class: gpr32 }
+  - { id: 15, class: gpr32 }
+  - { id: 16, class: gpr32 }
+  - { id: 17, class: gpr32 }
+  - { id: 18, class: gpr32 }
+  - { id: 19, class: gpr32 }
+  - { id: 20, class: gpr32 }
+  - { id: 21, class: gpr32 }
+  - { id: 22, class: gpr32 }
+  - { id: 23, class: gpr32 }
+  - { id: 24, class: gpr32 }
+  - { id: 25, class: gpr32 }
+  - { id: 26, class: gpr32 }
+  - { id: 27, class: gpr32 }
+  - { id: 28, class: gpr32 }
+  - { id: 29, class: gpr32 }
+  - { id: 30, class: gpr32 }
+  - { id: 31, class: gpr32 }
+  - { id: 32, class: gpr32 }
+  - { id: 33, class: gpr32 }
+  - { id: 34, class: gpr32 }
+  - { id: 35, class: gpr32 }
+  - { id: 36, class: gpr32 }
+  - { id: 37, class: gpr32 }
+  - { id: 38, class: gpr32 }
+  - { id: 39, class: gpr32 }
+  - { id: 40, class: gpr32 }
+  - { id: 41, class: gpr32 }
+  - { id: 42, class: gpr32 }
+  - { id: 43, class: gpr32 }
+  - { id: 44, class: gpr32 }
+  - { id: 45, class: gpr32 }
+  - { id: 46, class: gpr32 }
+  - { id: 47, class: gpr32 }
+  - { id: 48, class: gpr32 }
+  - { id: 49, class: gpr32 }
+  - { id: 50, class: gpr32 }
+  - { id: 51, class: gpr32 }
+  - { id: 52, class: gpr32 }
+  - { id: 53, class: gpr32 }
+  - { id: 54, class: gpr32 }
+  - { id: 55, class: gpr32 }
+  - { id: 56, class: gpr32 }
+  - { id: 57, class: gpr32 }
+  - { id: 58, class: gpr32 }
+  - { id: 59, class: gpr32 }
+  - { id: 60, class: gpr32 }
+  - { id: 61, class: gpr32 }
+  - { id: 62, class: gpr32 }
+  - { id: 63, class: gpr32 }
+  - { id: 64, class: gpr32 }
+  - { id: 65, class: gpr32 }
+  - { id: 66, class: gpr32 }
+  - { id: 67, class: gpr32 }
+  - { id: 68, class: gpr32 }
+  - { id: 69, class: gpr32 }
+  - { id: 70, class: gpr32 }
+  - { id: 71, class: gpr32 }
+  - { id: 72, class: gpr32 }
+  - { id: 73, class: gpr32 }
+  - { id: 74, class: gpr32 }
+  - { id: 75, class: gpr32 }
+  - { id: 76, class: gpr32 }
+  - { id: 77, class: gpr32 }
+  - { id: 78, class: gpr32 }
+  - { id: 79, class: gpr32 }
+  - { id: 80, class: gpr32 }
+  - { id: 81, class: gpr32 }
+  - { id: 82, class: gpr32 }
+  - { id: 83, class: gpr32 }
+  - { id: 84, class: gpr32 }
+  - { id: 85, class: gpr32 }
+  - { id: 86, class: gpr32 }
+  - { id: 87, class: gpr32 }
+  - { id: 88, class: gpr32 }
+  - { id: 89, class: gpr32 }
+  - { id: 90, class: gpr32 }
+  - { id: 91, class: gpr32 }
+  - { id: 92, class: gpr32 }
+  - { id: 93, class: gpr32 }
+  - { id: 94, class: gpr32 }
+  - { id: 95, class: gpr32 }
+  - { id: 96, class: gpr32 }
+  - { id: 97, class: gpr32 }
+  - { id: 98, class: gpr32 }
+  - { id: 99, class: gpr32 }
+  - { id: 100, class: gpr32 }
+  - { id: 101, class: gpr32 }
+  - { id: 102, class: gpr32 }
+  - { id: 103, class: gpr32 }
+  - { id: 104, class: gpr32 }
+  - { id: 105, class: gpr32 }
+  - { id: 106, class: gpr32 }
+  - { id: 107, class: gpr32 }
+  - { id: 108, class: gpr32 }
+  - { id: 109, class: gpr32 }
+  - { id: 110, class: gpr32 }
+  - { id: 111, class: gpr32 }
+  - { id: 112, class: gpr32 }
+  - { id: 113, class: gpr32 }
+  - { id: 114, class: gpr32 }
+  - { id: 115, class: gpr32 }
+  - { id: 116, class: gpr32 }
+  - { id: 117, class: gpr32 }
+  - { id: 118, class: gpr32 }
+  - { id: 119, class: gpr32 }
+  - { id: 120, class: gpr32 }
+  - { id: 121, class: gpr32 }
+  - { id: 122, class: gpr32 }
+  - { id: 123, class: gpr32 }
+  - { id: 124, class: gpr32 }
+  - { id: 125, class: gpr32 }
+  - { id: 126, class: gpr32 }
+  - { id: 127, class: gpr32 }
+  - { id: 128, class: gpr32 }
+  - { id: 129, class: gpr32 }
+  - { id: 130, class: gpr32 }
+  - { id: 131, class: gpr32 }
+  - { id: 132, class: gpr32 }
+  - { id: 133, class: gpr32 }
+  - { id: 134, class: gpr32 }
+  - { id: 135, class: gpr32 }
+liveins:         
+  - { reg: '%a0', virtual-reg: '%13' }
+  - { reg: '%a1', virtual-reg: '%14' }
+  - { reg: '%a2', virtual-reg: '%15' }
+  - { reg: '%t9' }
+  - { reg: '%v0' }
+frameInfo:       
+  isFrameAddressTaken: false
+  isReturnAddressTaken: false
+  hasStackMap:     false
+  hasPatchPoint:   false
+  stackSize:       0
+  offsetAdjustment: 0
+  maxAlignment:    4
+  adjustsStack:    false
+  hasCalls:        true
+  maxCallFrameSize: 0
+  hasOpaqueSPAdjustment: false
+  hasVAStart:      false
+  hasMustTailInVarArgFunc: false
+stack:           
+  - { id: 0, name: l, offset: 0, size: 4, alignment: 4 }
+  - { id: 1, name: r, offset: 0, size: 4, alignment: 4 }
+body:             |
+  bb.0 (%ir-block.0, freq 12):
+    successors: %bb.5.._crit_edge(37), %bb.1..lr.ph.preheader(62)
+    liveins: %a0, %a1, %a2, %t9, %v0
+  
+    %16 = ADDu %v0, %t9
+    %15 = COPY %a2
+    %14 = COPY %a1
+    %13 = COPY %a0
+    %17 = LBu %15, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 1 from %ir.block, !tbaa !1)
+    %18 = SLL killed %17, 24
+    %19 = LBu %15, 1, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 1 from %ir.6, !tbaa !1)
+    %20 = SLL killed %19, 16
+    %21 = OR killed %20, killed %18
+    %22 = LBu %15, 2, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 1 from %ir.11, !tbaa !1)
+    %23 = SLL killed %22, 8
+    %24 = LEA_ADDiu %stack.0.l, 0
+    %25 = LEA_ADDiu %stack.1.r, 0
+    %26 = OR killed %21, killed %23
+    %27 = LBu %15, 3, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 1 from %ir.16, !tbaa !1)
+    %28 = OR killed %26, killed %27
+    SW killed %28, %stack.0.l, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.l, !tbaa !4)
+    %29 = LBu %15, 4, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 1 from %ir.20, !tbaa !1)
+    %30 = SLL killed %29, 24
+    %31 = LBu %15, 5, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 1 from %ir.24, !tbaa !1)
+    %32 = SLL killed %31, 16
+    %33 = OR killed %32, killed %30
+    %34 = LBu %15, 6, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 1 from %ir.29, !tbaa !1)
+    %35 = SLL killed %34, 8
+    %36 = OR killed %33, killed %35
+    %37 = LBu %15, 7, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 1 from %ir.34, !tbaa !1)
+    %38 = OR killed %36, killed %37
+    SW killed %38, %stack.1.r, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.r, !tbaa !4)
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %39 = LW %16, target-flags(<unknown>) @br_des_do_IP, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @br_des_do_IP)
+    %a0 = COPY %24
+    %a1 = COPY %25
+    %gp = COPY %16
+    %t9 = COPY %39
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %gp, implicit-def %sp
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    BEQ %13, %zero, %bb.5.._crit_edge, implicit-def dead %at
+    B %bb.1..lr.ph.preheader, implicit-def dead %at
+  
+  bb.1..lr.ph.preheader (freq 8):
+    successors: %bb.2..lr.ph(100)
+  
+    %1 = LW %stack.1.r, 0, <0x3d38680> = !{!"unison-memory-partition", i32 6} :: (load 4 from %ir.r, !tbaa !4)
+    %0 = LW %stack.0.l, 0, <0x3cb7f80> = !{!"unison-memory-partition", i32 7} :: (load 4 from %ir.l, !tbaa !4)
+    %56 = LW %16, target-flags(<unknown>) @S1, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %61 = ADDiu %56, target-flags(<unknown>) @S1
+    %62 = LW %16, target-flags(<unknown>) @S2, <0x3cbcd30> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %66 = LW %16, target-flags(<unknown>) @S6, <0x3d4b2b0> = !{!"unison-memory-partition", i32 2} :: (load 4 from got)
+    %67 = ADDiu %zero, 128
+    %74 = ADDiu %62, target-flags(<unknown>) @S2
+    %75 = LW %16, target-flags(<unknown>) @S3, <0x3cf40e0> = !{!"unison-memory-partition", i32 3} :: (load 4 from got)
+    %76 = LW %16, target-flags(<unknown>) @S4, <0x3d56ef0> = !{!"unison-memory-partition", i32 4} :: (load 4 from got)
+    %77 = LW %16, target-flags(<unknown>) @S7, <0x3d56fc0> = !{!"unison-memory-partition", i32 5} :: (load 4 from got)
+    %78 = LW %16, target-flags(<unknown>) @S5, <0x3d4cfb0> = !{!"unison-memory-partition", i32 8} :: (load 4 from got)
+    %86 = ADDiu %78, target-flags(<unknown>) @S5
+    %90 = ADDiu %77, target-flags(<unknown>) @S7
+    %91 = ADDiu %76, target-flags(<unknown>) @S4
+    %92 = ADDiu %75, target-flags(<unknown>) @S3
+    %108 = LW %16, target-flags(<unknown>) @S8, <0x3d4d0c0> = !{!"unison-memory-partition", i32 9} :: (load 4 from got)
+    %109 = ADDiu %108, target-flags(<unknown>) @S8
+    %117 = ADDiu %66, target-flags(<unknown>) @S6
+  
+  bb.2..lr.ph (freq 255):
+    successors: %bb.3(100)
+  
+    %2 = PHI %1, %bb.1..lr.ph.preheader, %7, %bb.4.process_block_unit.exit
+    %3 = PHI %0, %bb.1..lr.ph.preheader, %9, %bb.4.process_block_unit.exit
+    %4 = PHI %13, %bb.1..lr.ph.preheader, %11, %bb.4.process_block_unit.exit
+    %5 = PHI %14, %bb.1..lr.ph.preheader, %12, %bb.4.process_block_unit.exit
+    %40 = ADDiu %zero, 0
+  
+  bb.3 (%ir-block.41, freq 8191):
+    successors: %bb.4.process_block_unit.exit(3), %bb.3(96)
+  
+    %6 = PHI %40, %bb.2..lr.ph, %10, %bb.3
+    %7 = PHI %2, %bb.2..lr.ph, %9, %bb.3
+    %8 = PHI %3, %bb.2..lr.ph, %7, %bb.3
+    %41 = ADDu %5, %6
+    %42 = LW %41, 4, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.scevgep, !tbaa !4)
+    %43 = LW %41, 0, <0x3cbcd30> = !{!"unison-memory-partition", i32 1} :: (load 4 from %ir.uglygep34, !tbaa !4)
+    %44 = SRL %43, 18
+    %45 = SRL %42, 6
+    %46 = ROTR %7, 16
+    %47 = SRL %46, 11
+    %48 = SRL %7, 3
+    %49 = XOR killed %45, killed %48
+    %50 = SRL %42, 18
+    %51 = SRL %43, 12
+    %52 = XOR killed %44, killed %47
+    %53 = SRL %7, 15
+    %54 = SRL %7, 11
+    %55 = SRL %7, 23
+    %57 = ANDi killed %52, 63
+    %10 = ADDiu %6, 8
+    %58 = XOR killed %51, killed %55
+    %59 = XOR killed %50, killed %54
+    %60 = XOR %43, killed %53
+    %63 = ANDi killed %49, 63
+    %64 = SRL %46, 15
+    %65 = SRL %7, 7
+    %68 = SLL killed %57, 2
+    %69 = ADDu %61, killed %68
+    %70 = LW killed %69, 0, <0x3d4b2b0> = !{!"unison-memory-partition", i32 2} :: (load 4 from %ir.52, !tbaa !4)
+    %71 = ANDi killed %60, 63
+    %72 = ANDi killed %59, 63
+    %73 = ANDi killed %58, 63
+    %79 = SLL killed %73, 2
+    %80 = ADDu %74, killed %79
+    %81 = SRL %43, 6
+    %82 = SRL %7, 19
+    %83 = XOR killed %81, killed %82
+    %84 = LW killed %80, 0, <0x3cf40e0> = !{!"unison-memory-partition", i32 3} :: (load 4 from %ir.58, !tbaa !4)
+    %85 = SLL killed %72, 2
+    %87 = ADDu %86, killed %85
+    %88 = SLL killed %63, 2
+    %89 = SLL killed %71, 2
+    %93 = SRL %42, 12
+    %94 = OR killed %84, killed %70
+    %95 = ANDi killed %83, 63
+    %96 = SLL killed %95, 2
+    %97 = ADDu %92, killed %96
+    %98 = LW killed %97, 0, <0x3d56ef0> = !{!"unison-memory-partition", i32 4} :: (load 4 from %ir.65, !tbaa !4)
+    %99 = OR killed %94, killed %98
+    %100 = ADDu %91, killed %89
+    %101 = LW killed %100, 0, <0x3d56fc0> = !{!"unison-memory-partition", i32 5} :: (load 4 from %ir.71, !tbaa !4)
+    %102 = OR killed %99, killed %101
+    %103 = ADDu %90, killed %88
+    %104 = LW killed %87, 0, <0x3d38680> = !{!"unison-memory-partition", i32 6} :: (load 4 from %ir.78, !tbaa !4)
+    %105 = XOR %42, killed %64
+    %106 = ANDi killed %105, 63
+    %107 = SLL killed %106, 2
+    %110 = ADDu %109, killed %107
+    %111 = LW killed %110, 0, <0x3cb7f80> = !{!"unison-memory-partition", i32 7} :: (load 4 from %ir.98, !tbaa !4)
+    %112 = OR killed %102, killed %104
+    %113 = LW killed %103, 0, <0x3d4cfb0> = !{!"unison-memory-partition", i32 8} :: (load 4 from %ir.92, !tbaa !4)
+    %114 = XOR killed %93, killed %65
+    %115 = ANDi killed %114, 63
+    %116 = SLL killed %115, 2
+    %118 = ADDu %117, killed %116
+    %119 = LW killed %118, 0, <0x3d4d0c0> = !{!"unison-memory-partition", i32 9} :: (load 4 from %ir.85, !tbaa !4)
+    %120 = OR killed %112, killed %119
+    %121 = OR killed %120, killed %113
+    %122 = OR killed %121, killed %111
+    %9 = XOR killed %122, %8
+    BNE %10, %67, %bb.3, implicit-def dead %at
+    B %bb.4.process_block_unit.exit, implicit-def dead %at
+  
+  bb.4.process_block_unit.exit (freq 255):
+    successors: %bb.5.._crit_edge(3), %bb.2..lr.ph(96)
+  
+    SW %9, %stack.0.l, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.l, !tbaa !4)
+    SW %7, %stack.1.r, 0, <0x3cbcd30> = !{!"unison-memory-partition", i32 1} :: (store 4 into %ir.r, !tbaa !4)
+    %12 = ADDiu %5, 128
+    %11 = ADDiu %4, -1
+    BNE %11, %zero, %bb.2..lr.ph, implicit-def dead %at
+    B %bb.5.._crit_edge, implicit-def dead %at
+  
+  bb.5.._crit_edge (freq 12):
+    liveouts:
+  
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %123 = LW %16, target-flags(<unknown>) @br_des_do_invIP, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @br_des_do_invIP)
+    %124 = LEA_ADDiu %stack.0.l, 0
+    %125 = LEA_ADDiu %stack.1.r, 0
+    %a0 = COPY %124
+    %a1 = COPY %125
+    %gp = COPY %16
+    %t9 = COPY %123
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %gp, implicit-def %sp
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    %126 = LW %stack.0.l, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.l, !tbaa !4)
+    %127 = SRL %126, 24
+    SB killed %127, %15, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.block, !tbaa !1)
+    %128 = SRL %126, 16
+    SB killed %128, %15, 1, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.sunkaddr6, !tbaa !1)
+    %129 = SRL %126, 8
+    SB killed %129, %15, 2, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.sunkaddr9, !tbaa !1)
+    SB %126, %15, 3, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.sunkaddr12, !tbaa !1)
+    %130 = LW %stack.1.r, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.r, !tbaa !4)
+    %131 = SRL %130, 24
+    SB killed %131, %15, 4, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.sunkaddr15, !tbaa !1)
+    %132 = SRL %130, 16
+    SB killed %132, %15, 5, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.sunkaddr18, !tbaa !1)
+    %133 = SRL %130, 8
+    SB killed %133, %15, 6, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.sunkaddr21, !tbaa !1)
+    SB %130, %15, 7, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.sunkaddr24, !tbaa !1)
+    RetRA
+
+...
+--- |
+  ; ModuleID = 'des_tab.ll'
+  target datalayout = "E-m:m-p:32:32-i8:8:32-i16:16:32-i64:64-n32-S64"
+  target triple = "mipsel"
+  
+  @S1 = internal unnamed_addr constant [64 x i32] [i32 8421888, i32 0, i32 32768, i32 8421890, i32 8421378, i32 33282, i32 2, i32 32768, i32 512, i32 8421888, i32 8421890, i32 512, i32 8389122, i32 8421378, i32 8388608, i32 2, i32 514, i32 8389120, i32 8389120, i32 33280, i32 33280, i32 8421376, i32 8421376, i32 8389122, i32 32770, i32 8388610, i32 8388610, i32 32770, i32 0, i32 514, i32 33282, i32 8388608, i32 32768, i32 8421890, i32 2, i32 8421376, i32 8421888, i32 8388608, i32 8388608, i32 512, i32 8421378, i32 32768, i32 33280, i32 8388610, i32 512, i32 2, i32 8389122, i32 33282, i32 8421890, i32 32770, i32 8421376, i32 8389122, i32 8388610, i32 514, i32 33282, i32 8421888, i32 514, i32 8389120, i32 8389120, i32 0, i32 32770, i32 33280, i32 0, i32 8421378], align 4
+  @S2 = internal unnamed_addr constant [64 x i32] [i32 1074282512, i32 1073758208, i32 16384, i32 540688, i32 524288, i32 16, i32 1074266128, i32 1073758224, i32 1073741840, i32 1074282512, i32 1074282496, i32 1073741824, i32 1073758208, i32 524288, i32 16, i32 1074266128, i32 540672, i32 524304, i32 1073758224, i32 0, i32 1073741824, i32 16384, i32 540688, i32 1074266112, i32 524304, i32 1073741840, i32 0, i32 540672, i32 16400, i32 1074282496, i32 1074266112, i32 16400, i32 0, i32 540688, i32 1074266128, i32 524288, i32 1073758224, i32 1074266112, i32 1074282496, i32 16384, i32 1074266112, i32 1073758208, i32 16, i32 1074282512, i32 540688, i32 16, i32 16384, i32 1073741824, i32 16400, i32 1074282496, i32 524288, i32 1073741840, i32 524304, i32 1073758224, i32 1073741840, i32 524304, i32 540672, i32 0, i32 1073758208, i32 16400, i32 1073741824, i32 1074266128, i32 1074282512, i32 540672], align 4
+  @S3 = internal unnamed_addr constant [64 x i32] [i32 260, i32 67174656, i32 0, i32 67174404, i32 67109120, i32 0, i32 65796, i32 67109120, i32 65540, i32 67108868, i32 67108868, i32 65536, i32 67174660, i32 65540, i32 67174400, i32 260, i32 67108864, i32 4, i32 67174656, i32 256, i32 65792, i32 67174400, i32 67174404, i32 65796, i32 67109124, i32 65792, i32 65536, i32 67109124, i32 4, i32 67174660, i32 256, i32 67108864, i32 67174656, i32 67108864, i32 65540, i32 260, i32 65536, i32 67174656, i32 67109120, i32 0, i32 256, i32 65540, i32 67174660, i32 67109120, i32 67108868, i32 256, i32 0, i32 67174404, i32 67109124, i32 65536, i32 67108864, i32 67174660, i32 4, i32 65796, i32 65792, i32 67108868, i32 67174400, i32 67109124, i32 260, i32 67174400, i32 65796, i32 4, i32 67174404, i32 65792], align 4
+  @S4 = internal unnamed_addr constant [64 x i32] [i32 -2143285248, i32 -2147479488, i32 -2147479488, i32 64, i32 4198464, i32 -2143289280, i32 -2143289344, i32 -2147479552, i32 0, i32 4198400, i32 4198400, i32 -2143285184, i32 -2147483584, i32 0, i32 4194368, i32 -2143289344, i32 -2147483648, i32 4096, i32 4194304, i32 -2143285248, i32 64, i32 4194304, i32 -2147479552, i32 4160, i32 -2143289280, i32 -2147483648, i32 4160, i32 4194368, i32 4096, i32 4198464, i32 -2143285184, i32 -2147483584, i32 4194368, i32 -2143289344, i32 4198400, i32 -2143285184, i32 -2147483584, i32 0, i32 0, i32 4198400, i32 4160, i32 4194368, i32 -2143289280, i32 -2147483648, i32 -2143285248, i32 -2147479488, i32 -2147479488, i32 64, i32 -2143285184, i32 -2147483584, i32 -2147483648, i32 4096, i32 -2143289344, i32 -2147479552, i32 4198464, i32 -2143289280, i32 -2147479552, i32 4160, i32 4194304, i32 -2143285248, i32 64, i32 4194304, i32 4096, i32 4198464], align 4
+  @S5 = internal unnamed_addr constant [64 x i32] [i32 128, i32 17039488, i32 17039360, i32 553648256, i32 262144, i32 128, i32 536870912, i32 17039360, i32 537133184, i32 262144, i32 16777344, i32 537133184, i32 553648256, i32 553910272, i32 262272, i32 536870912, i32 16777216, i32 537133056, i32 537133056, i32 0, i32 536871040, i32 553910400, i32 553910400, i32 16777344, i32 553910272, i32 536871040, i32 0, i32 553648128, i32 17039488, i32 16777216, i32 553648128, i32 262272, i32 262144, i32 553648256, i32 128, i32 16777216, i32 536870912, i32 17039360, i32 553648256, i32 537133184, i32 16777344, i32 536870912, i32 553910272, i32 17039488, i32 537133184, i32 128, i32 16777216, i32 553910272, i32 553910400, i32 262272, i32 553648128, i32 553910400, i32 17039360, i32 0, i32 537133056, i32 553648128, i32 262272, i32 16777344, i32 536871040, i32 262144, i32 0, i32 537133056, i32 17039488, i32 536871040], align 4
+  @S6 = internal unnamed_addr constant [64 x i32] [i32 268435464, i32 270532608, i32 8192, i32 270540808, i32 270532608, i32 8, i32 270540808, i32 2097152, i32 268443648, i32 2105352, i32 2097152, i32 268435464, i32 2097160, i32 268443648, i32 268435456, i32 8200, i32 0, i32 2097160, i32 268443656, i32 8192, i32 2105344, i32 268443656, i32 8, i32 270532616, i32 270532616, i32 0, i32 2105352, i32 270540800, i32 8200, i32 2105344, i32 270540800, i32 268435456, i32 268443648, i32 8, i32 270532616, i32 2105344, i32 270540808, i32 2097152, i32 8200, i32 268435464, i32 2097152, i32 268443648, i32 268435456, i32 8200, i32 268435464, i32 270540808, i32 2105344, i32 270532608, i32 2105352, i32 270540800, i32 0, i32 270532616, i32 8, i32 8192, i32 270532608, i32 2105352, i32 8192, i32 2097160, i32 268443656, i32 0, i32 270540800, i32 268435456, i32 2097160, i32 268443656], align 4
+  @S7 = internal unnamed_addr constant [64 x i32] [i32 1048576, i32 34603009, i32 33555457, i32 0, i32 1024, i32 33555457, i32 1049601, i32 34604032, i32 34604033, i32 1048576, i32 0, i32 33554433, i32 1, i32 33554432, i32 34603009, i32 1025, i32 33555456, i32 1049601, i32 1048577, i32 33555456, i32 33554433, i32 34603008, i32 34604032, i32 1048577, i32 34603008, i32 1024, i32 1025, i32 34604033, i32 1049600, i32 1, i32 33554432, i32 1049600, i32 33554432, i32 1049600, i32 1048576, i32 33555457, i32 33555457, i32 34603009, i32 34603009, i32 1, i32 1048577, i32 33554432, i32 33555456, i32 1048576, i32 34604032, i32 1025, i32 1049601, i32 34604032, i32 1025, i32 33554433, i32 34604033, i32 34603008, i32 1049600, i32 0, i32 1, i32 34604033, i32 0, i32 1049601, i32 34603008, i32 1024, i32 33554433, i32 33555456, i32 1024, i32 1048577], align 4
+  @S8 = internal unnamed_addr constant [64 x i32] [i32 134219808, i32 2048, i32 131072, i32 134350880, i32 134217728, i32 134219808, i32 32, i32 134217728, i32 131104, i32 134348800, i32 134350880, i32 133120, i32 134350848, i32 133152, i32 2048, i32 32, i32 134348800, i32 134217760, i32 134219776, i32 2080, i32 133120, i32 131104, i32 134348832, i32 134350848, i32 2080, i32 0, i32 0, i32 134348832, i32 134217760, i32 134219776, i32 133152, i32 131072, i32 133152, i32 131072, i32 134350848, i32 2048, i32 32, i32 134348832, i32 2048, i32 133152, i32 134219776, i32 32, i32 134217760, i32 134348800, i32 134348832, i32 134217728, i32 131072, i32 134219808, i32 0, i32 134350880, i32 131104, i32 134217760, i32 134348800, i32 134219776, i32 134219808, i32 0, i32 134350880, i32 133120, i32 133120, i32 2080, i32 2080, i32 131104, i32 134217728, i32 134350848], align 4
+  @PC2left = internal unnamed_addr constant [28 x i8] c"\10\03\07\18\14\0B\18\0D\02\0A\18\16\05\0F\17\01\09\15\0C\18\06\04\0E\12\08\11\00\13", align 1
+  @PC2right = internal unnamed_addr constant [28 x i8] c"\08\12\18\06\16\0F\03\0A\0C\13\05\0E\0B\18\04\17\10\09\18\14\02\18\07\0D\00\15\11\01", align 1
+  
+  ; Function Attrs: nounwind
+  define void @br_des_tab_process_block(i32 signext %num_rounds, i32* nocapture readonly %skey, i8* nocapture %block) #0 {
+    %l = alloca i32, align 4
+    %r = alloca i32, align 4
+    %1 = bitcast i32* %l to i8*
+    call void @llvm.lifetime.start(i64 4, i8* %1) #3
+    %2 = bitcast i32* %r to i8*
+    call void @llvm.lifetime.start(i64 4, i8* %2) #3
+    %3 = load i8, i8* %block, align 1, !tbaa !1
+    %4 = zext i8 %3 to i32
+    %5 = shl nuw i32 %4, 24
+    %6 = getelementptr inbounds i8, i8* %block, i32 1
+    %7 = load i8, i8* %6, align 1, !tbaa !1
+    %8 = zext i8 %7 to i32
+    %9 = shl nuw nsw i32 %8, 16
+    %10 = or i32 %9, %5
+    %11 = getelementptr inbounds i8, i8* %block, i32 2
+    %12 = load i8, i8* %11, align 1, !tbaa !1
+    %13 = zext i8 %12 to i32
+    %14 = shl nuw nsw i32 %13, 8
+    %15 = or i32 %10, %14
+    %16 = getelementptr inbounds i8, i8* %block, i32 3
+    %17 = load i8, i8* %16, align 1, !tbaa !1
+    %18 = zext i8 %17 to i32
+    %19 = or i32 %15, %18
+    store i32 %19, i32* %l, align 4, !tbaa !4
+    %20 = getelementptr inbounds i8, i8* %block, i32 4
+    %21 = load i8, i8* %20, align 1, !tbaa !1
+    %22 = zext i8 %21 to i32
+    %23 = shl nuw i32 %22, 24
+    %24 = getelementptr inbounds i8, i8* %block, i32 5
+    %25 = load i8, i8* %24, align 1, !tbaa !1
+    %26 = zext i8 %25 to i32
+    %27 = shl nuw nsw i32 %26, 16
+    %28 = or i32 %27, %23
+    %29 = getelementptr inbounds i8, i8* %block, i32 6
+    %30 = load i8, i8* %29, align 1, !tbaa !1
+    %31 = zext i8 %30 to i32
+    %32 = shl nuw nsw i32 %31, 8
+    %33 = or i32 %28, %32
+    %34 = getelementptr inbounds i8, i8* %block, i32 7
+    %35 = load i8, i8* %34, align 1, !tbaa !1
+    %36 = zext i8 %35 to i32
+    %37 = or i32 %33, %36
+    store i32 %37, i32* %r, align 4, !tbaa !4
+    call void @br_des_do_IP(i32* nonnull %l, i32* nonnull %r) #3
+    %38 = icmp eq i32 %num_rounds, 0
+    br i1 %38, label %._crit_edge, label %.lr.ph.preheader
+  
+  .lr.ph.preheader:                                 ; preds = %0
+    %.pre = load i32, i32* %l, align 4, !tbaa !4
+    %.pre4 = load i32, i32* %r, align 4, !tbaa !4
+    br label %.lr.ph
+  
+  .lr.ph:                                           ; preds = %process_block_unit.exit, %.lr.ph.preheader
+    %39 = phi i32 [ %r.02.i, %process_block_unit.exit ], [ %.pre4, %.lr.ph.preheader ]
+    %40 = phi i32 [ %101, %process_block_unit.exit ], [ %.pre, %.lr.ph.preheader ]
+    %.03 = phi i32 [ %102, %process_block_unit.exit ], [ %num_rounds, %.lr.ph.preheader ]
+    %.012 = phi i32* [ %103, %process_block_unit.exit ], [ %skey, %.lr.ph.preheader ]
+    br label %41
+  
+  ; <label>:41                                      ; preds = %41, %.lr.ph
+    %lsr.iv = phi i32 [ %lsr.iv.next, %41 ], [ 0, %.lr.ph ]
+    %r.02.i = phi i32 [ %39, %.lr.ph ], [ %101, %41 ]
+    %l.01.i = phi i32 [ %40, %.lr.ph ], [ %r.02.i, %41 ]
+    %42 = bitcast i32* %.012 to i8*
+    %uglygep3 = getelementptr i8, i8* %42, i32 %lsr.iv
+    %uglygep34 = bitcast i8* %uglygep3 to i32*
+    %43 = load i32, i32* %uglygep34, align 4, !tbaa !4
+    %uglygep = getelementptr i8, i8* %42, i32 %lsr.iv
+    %uglygep2 = bitcast i8* %uglygep to i32*
+    %scevgep = getelementptr i32, i32* %uglygep2, i32 1
+    %44 = load i32, i32* %scevgep, align 4, !tbaa !4
+    %45 = shl i32 %r.02.i, 16
+    %46 = lshr i32 %r.02.i, 16
+    %47 = or i32 %45, %46
+    %48 = lshr i32 %47, 11
+    %49 = lshr i32 %43, 18
+    %50 = xor i32 %49, %48
+    %51 = and i32 %50, 63
+    %52 = getelementptr inbounds [64 x i32], [64 x i32]* @S1, i32 0, i32 %51
+    %53 = load i32, i32* %52, align 4, !tbaa !4
+    %54 = lshr i32 %r.02.i, 23
+    %55 = lshr i32 %43, 12
+    %56 = xor i32 %55, %54
+    %57 = and i32 %56, 63
+    %58 = getelementptr inbounds [64 x i32], [64 x i32]* @S2, i32 0, i32 %57
+    %59 = load i32, i32* %58, align 4, !tbaa !4
+    %60 = or i32 %59, %53
+    %61 = lshr i32 %r.02.i, 19
+    %62 = lshr i32 %43, 6
+    %63 = xor i32 %62, %61
+    %64 = and i32 %63, 63
+    %65 = getelementptr inbounds [64 x i32], [64 x i32]* @S3, i32 0, i32 %64
+    %66 = load i32, i32* %65, align 4, !tbaa !4
+    %67 = or i32 %60, %66
+    %68 = lshr i32 %r.02.i, 15
+    %69 = xor i32 %43, %68
+    %70 = and i32 %69, 63
+    %71 = getelementptr inbounds [64 x i32], [64 x i32]* @S4, i32 0, i32 %70
+    %72 = load i32, i32* %71, align 4, !tbaa !4
+    %73 = or i32 %67, %72
+    %74 = lshr i32 %r.02.i, 11
+    %75 = lshr i32 %44, 18
+    %76 = xor i32 %75, %74
+    %77 = and i32 %76, 63
+    %78 = getelementptr inbounds [64 x i32], [64 x i32]* @S5, i32 0, i32 %77
+    %79 = load i32, i32* %78, align 4, !tbaa !4
+    %80 = or i32 %73, %79
+    %81 = lshr i32 %r.02.i, 7
+    %82 = lshr i32 %44, 12
+    %83 = xor i32 %82, %81
+    %84 = and i32 %83, 63
+    %85 = getelementptr inbounds [64 x i32], [64 x i32]* @S6, i32 0, i32 %84
+    %86 = load i32, i32* %85, align 4, !tbaa !4
+    %87 = or i32 %80, %86
+    %88 = lshr i32 %r.02.i, 3
+    %89 = lshr i32 %44, 6
+    %90 = xor i32 %89, %88
+    %91 = and i32 %90, 63
+    %92 = getelementptr inbounds [64 x i32], [64 x i32]* @S7, i32 0, i32 %91
+    %93 = load i32, i32* %92, align 4, !tbaa !4
+    %94 = or i32 %87, %93
+    %95 = lshr i32 %47, 15
+    %96 = xor i32 %44, %95
+    %97 = and i32 %96, 63
+    %98 = getelementptr inbounds [64 x i32], [64 x i32]* @S8, i32 0, i32 %97
+    %99 = load i32, i32* %98, align 4, !tbaa !4
+    %100 = or i32 %94, %99
+    %101 = xor i32 %100, %l.01.i
+    %lsr.iv.next = add nuw nsw i32 %lsr.iv, 8
+    %exitcond.i = icmp eq i32 %lsr.iv.next, 128
+    br i1 %exitcond.i, label %process_block_unit.exit, label %41
+  
+  process_block_unit.exit:                          ; preds = %41
+    %102 = add i32 %.03, -1
+    store i32 %101, i32* %l, align 4, !tbaa !4
+    store i32 %r.02.i, i32* %r, align 4, !tbaa !4
+    %103 = getelementptr inbounds i32, i32* %.012, i32 32
+    %104 = icmp eq i32 %102, 0
+    br i1 %104, label %._crit_edge, label %.lr.ph
+  
+  ._crit_edge:                                      ; preds = %process_block_unit.exit, %0
+    %105 = bitcast i32* %r to i8*
+    %106 = bitcast i32* %l to i8*
+    call void @br_des_do_invIP(i32* nonnull %l, i32* nonnull %r) #3
+    %107 = load i32, i32* %l, align 4, !tbaa !4
+    %108 = lshr i32 %107, 24
+    %109 = trunc i32 %108 to i8
+    store i8 %109, i8* %block, align 1, !tbaa !1
+    %110 = lshr i32 %107, 16
+    %111 = trunc i32 %110 to i8
+    %sunkaddr = ptrtoint i8* %block to i32
+    %sunkaddr5 = add i32 %sunkaddr, 1
+    %sunkaddr6 = inttoptr i32 %sunkaddr5 to i8*
+    store i8 %111, i8* %sunkaddr6, align 1, !tbaa !1
+    %112 = lshr i32 %107, 8
+    %113 = trunc i32 %112 to i8
+    %sunkaddr7 = ptrtoint i8* %block to i32
+    %sunkaddr8 = add i32 %sunkaddr7, 2
+    %sunkaddr9 = inttoptr i32 %sunkaddr8 to i8*
+    store i8 %113, i8* %sunkaddr9, align 1, !tbaa !1
+    %114 = trunc i32 %107 to i8
+    %sunkaddr10 = ptrtoint i8* %block to i32
+    %sunkaddr11 = add i32 %sunkaddr10, 3
+    %sunkaddr12 = inttoptr i32 %sunkaddr11 to i8*
+    store i8 %114, i8* %sunkaddr12, align 1, !tbaa !1
+    %115 = load i32, i32* %r, align 4, !tbaa !4
+    %116 = lshr i32 %115, 24
+    %117 = trunc i32 %116 to i8
+    %sunkaddr13 = ptrtoint i8* %block to i32
+    %sunkaddr14 = add i32 %sunkaddr13, 4
+    %sunkaddr15 = inttoptr i32 %sunkaddr14 to i8*
+    store i8 %117, i8* %sunkaddr15, align 1, !tbaa !1
+    %118 = lshr i32 %115, 16
+    %119 = trunc i32 %118 to i8
+    %sunkaddr16 = ptrtoint i8* %block to i32
+    %sunkaddr17 = add i32 %sunkaddr16, 5
+    %sunkaddr18 = inttoptr i32 %sunkaddr17 to i8*
+    store i8 %119, i8* %sunkaddr18, align 1, !tbaa !1
+    %120 = lshr i32 %115, 8
+    %121 = trunc i32 %120 to i8
+    %sunkaddr19 = ptrtoint i8* %block to i32
+    %sunkaddr20 = add i32 %sunkaddr19, 6
+    %sunkaddr21 = inttoptr i32 %sunkaddr20 to i8*
+    store i8 %121, i8* %sunkaddr21, align 1, !tbaa !1
+    %122 = trunc i32 %115 to i8
+    %sunkaddr22 = ptrtoint i8* %block to i32
+    %sunkaddr23 = add i32 %sunkaddr22, 7
+    %sunkaddr24 = inttoptr i32 %sunkaddr23 to i8*
+    store i8 %122, i8* %sunkaddr24, align 1, !tbaa !1
+    call void @llvm.lifetime.end(i64 4, i8* %105) #3
+    call void @llvm.lifetime.end(i64 4, i8* %106) #3
+    ret void
+  }
+  
+  ; Function Attrs: argmemonly nounwind
+  declare void @llvm.lifetime.start(i64, i8* nocapture) #1
+  
+  declare void @br_des_do_IP(i32*, i32*) #2
+  
+  declare void @br_des_do_invIP(i32*, i32*) #2
+  
+  ; Function Attrs: argmemonly nounwind
+  declare void @llvm.lifetime.end(i64, i8* nocapture) #1
+  
+  ; Function Attrs: nounwind
+  define i32 @br_des_tab_keysched(i32* %skey, i8* %key, i32 signext %key_len) #0 {
+    switch i32 %key_len, label %77 [
+      i32 8, label %1
+      i32 16, label %25
+    ]
+  
+  ; <label>:1                                       ; preds = %0
+    tail call void @br_des_keysched_unit(i32* %skey, i8* %key) #3
+    br label %2
+  
+  ; <label>:2                                       ; preds = %23, %1
+    %i.06.i = phi i32 [ 0, %1 ], [ %24, %23 ]
+    %3 = shl i32 %i.06.i, 1
+    %4 = getelementptr inbounds i32, i32* %skey, i32 %3
+    %5 = load i32, i32* %4, align 4, !tbaa !4
+    %6 = or i32 %3, 1
+    %7 = getelementptr inbounds i32, i32* %skey, i32 %6
+    %8 = load i32, i32* %7, align 4, !tbaa !4
+    br label %9
+  
+  ; <label>:9                                       ; preds = %9, %2
+    %j.05.i = phi i32 [ 0, %2 ], [ %22, %9 ]
+    %ur.04.i = phi i32 [ 0, %2 ], [ %19, %9 ]
+    %ul.03.i = phi i32 [ 0, %2 ], [ %14, %9 ]
+    %xr.02.i = phi i32 [ %8, %2 ], [ %21, %9 ]
+    %xl.01.i = phi i32 [ %5, %2 ], [ %20, %9 ]
+    %10 = and i32 %xl.01.i, 1
+    %scevgep7 = getelementptr [28 x i8], [28 x i8]* @PC2left, i32 0, i32 %j.05.i
+    %11 = load i8, i8* %scevgep7, align 1, !tbaa !1
+    %12 = zext i8 %11 to i32
+    %13 = shl i32 %10, %12
+    %14 = or i32 %13, %ul.03.i
+    %15 = and i32 %xr.02.i, 1
+    %scevgep6 = getelementptr [28 x i8], [28 x i8]* @PC2right, i32 0, i32 %j.05.i
+    %16 = load i8, i8* %scevgep6, align 1, !tbaa !1
+    %17 = zext i8 %16 to i32
+    %18 = shl i32 %15, %17
+    %19 = or i32 %18, %ur.04.i
+    %20 = lshr i32 %xl.01.i, 1
+    %21 = lshr i32 %xr.02.i, 1
+    %22 = add nuw nsw i32 %j.05.i, 1
+    %exitcond.i = icmp eq i32 %22, 28
+    br i1 %exitcond.i, label %23, label %9
+  
+  ; <label>:23                                      ; preds = %9
+    store i32 %14, i32* %4, align 4, !tbaa !4
+    store i32 %19, i32* %7, align 4, !tbaa !4
+    %24 = add nuw nsw i32 %i.06.i, 1
+    %exitcond8.i = icmp eq i32 %24, 16
+    br i1 %exitcond8.i, label %keysched_unit.exit, label %2
+  
+  ; <label>:25                                      ; preds = %0
+    tail call void @br_des_keysched_unit(i32* %skey, i8* %key) #3
+    br label %26
+  
+  ; <label>:26                                      ; preds = %47, %25
+    %i.06.i1 = phi i32 [ 0, %25 ], [ %48, %47 ]
+    %27 = shl i32 %i.06.i1, 1
+    %28 = getelementptr inbounds i32, i32* %skey, i32 %27
+    %29 = load i32, i32* %28, align 4, !tbaa !4
+    %30 = or i32 %27, 1
+    %31 = getelementptr inbounds i32, i32* %skey, i32 %30
+    %32 = load i32, i32* %31, align 4, !tbaa !4
+    br label %33
+  
+  ; <label>:33                                      ; preds = %33, %26
+    %j.05.i2 = phi i32 [ 0, %26 ], [ %46, %33 ]
+    %ur.04.i3 = phi i32 [ 0, %26 ], [ %43, %33 ]
+    %ul.03.i4 = phi i32 [ 0, %26 ], [ %38, %33 ]
+    %xr.02.i5 = phi i32 [ %32, %26 ], [ %45, %33 ]
+    %xl.01.i6 = phi i32 [ %29, %26 ], [ %44, %33 ]
+    %34 = and i32 %xl.01.i6, 1
+    %scevgep11 = getelementptr [28 x i8], [28 x i8]* @PC2left, i32 0, i32 %j.05.i2
+    %35 = load i8, i8* %scevgep11, align 1, !tbaa !1
+    %36 = zext i8 %35 to i32
+    %37 = shl i32 %34, %36
+    %38 = or i32 %37, %ul.03.i4
+    %39 = and i32 %xr.02.i5, 1
+    %scevgep10 = getelementptr [28 x i8], [28 x i8]* @PC2right, i32 0, i32 %j.05.i2
+    %40 = load i8, i8* %scevgep10, align 1, !tbaa !1
+    %41 = zext i8 %40 to i32
+    %42 = shl i32 %39, %41
+    %43 = or i32 %42, %ur.04.i3
+    %44 = lshr i32 %xl.01.i6, 1
+    %45 = lshr i32 %xr.02.i5, 1
+    %46 = add nuw nsw i32 %j.05.i2, 1
+    %exitcond.i7 = icmp eq i32 %46, 28
+    br i1 %exitcond.i7, label %47, label %33
+  
+  ; <label>:47                                      ; preds = %33
+    store i32 %38, i32* %28, align 4, !tbaa !4
+    store i32 %43, i32* %31, align 4, !tbaa !4
+    %48 = add nuw nsw i32 %i.06.i1, 1
+    %exitcond8.i8 = icmp eq i32 %48, 16
+    br i1 %exitcond8.i8, label %keysched_unit.exit9, label %26
+  
+  keysched_unit.exit9:                              ; preds = %47
+    %49 = getelementptr inbounds i32, i32* %skey, i32 32
+    %50 = getelementptr inbounds i8, i8* %key, i32 8
+    tail call void @br_des_keysched_unit(i32* %49, i8* %50) #3
+    br label %51
+  
+  ; <label>:51                                      ; preds = %72, %keysched_unit.exit9
+    %i.06.i10 = phi i32 [ 0, %keysched_unit.exit9 ], [ %73, %72 ]
+    %52 = shl i32 %i.06.i10, 1
+    %53 = getelementptr inbounds i32, i32* %49, i32 %52
+    %54 = load i32, i32* %53, align 4, !tbaa !4
+    %55 = or i32 %52, 1
+    %56 = getelementptr inbounds i32, i32* %49, i32 %55
+    %57 = load i32, i32* %56, align 4, !tbaa !4
+    br label %58
+  
+  ; <label>:58                                      ; preds = %58, %51
+    %j.05.i11 = phi i32 [ 0, %51 ], [ %71, %58 ]
+    %ur.04.i12 = phi i32 [ 0, %51 ], [ %68, %58 ]
+    %ul.03.i13 = phi i32 [ 0, %51 ], [ %63, %58 ]
+    %xr.02.i14 = phi i32 [ %57, %51 ], [ %70, %58 ]
+    %xl.01.i15 = phi i32 [ %54, %51 ], [ %69, %58 ]
+    %59 = and i32 %xl.01.i15, 1
+    %scevgep9 = getelementptr [28 x i8], [28 x i8]* @PC2left, i32 0, i32 %j.05.i11
+    %60 = load i8, i8* %scevgep9, align 1, !tbaa !1
+    %61 = zext i8 %60 to i32
+    %62 = shl i32 %59, %61
+    %63 = or i32 %62, %ul.03.i13
+    %64 = and i32 %xr.02.i14, 1
+    %scevgep8 = getelementptr [28 x i8], [28 x i8]* @PC2right, i32 0, i32 %j.05.i11
+    %65 = load i8, i8* %scevgep8, align 1, !tbaa !1
+    %66 = zext i8 %65 to i32
+    %67 = shl i32 %64, %66
+    %68 = or i32 %67, %ur.04.i12
+    %69 = lshr i32 %xl.01.i15, 1
+    %70 = lshr i32 %xr.02.i14, 1
+    %71 = add nuw nsw i32 %j.05.i11, 1
+    %exitcond.i16 = icmp eq i32 %71, 28
+    br i1 %exitcond.i16, label %72, label %58
+  
+  ; <label>:72                                      ; preds = %58
+    store i32 %63, i32* %53, align 4, !tbaa !4
+    store i32 %68, i32* %56, align 4, !tbaa !4
+    %73 = add nuw nsw i32 %i.06.i10, 1
+    %exitcond8.i17 = icmp eq i32 %73, 16
+    br i1 %exitcond8.i17, label %keysched_unit.exit18, label %51
+  
+  keysched_unit.exit18:                             ; preds = %72
+    tail call void @br_des_rev_skey(i32* nonnull %49) #3
+    %74 = getelementptr inbounds i32, i32* %skey, i32 64
+    %75 = bitcast i32* %74 to i8*
+    %76 = bitcast i32* %skey to i8*
+    tail call void @llvm.memcpy.p0i8.p0i8.i32(i8* %75, i8* %76, i32 128, i32 4, i1 false)
+    br label %keysched_unit.exit
+  
+  ; <label>:77                                      ; preds = %0
+    tail call void @br_des_keysched_unit(i32* %skey, i8* %key) #3
+    br label %78
+  
+  ; <label>:78                                      ; preds = %99, %77
+    %i.06.i19 = phi i32 [ 0, %77 ], [ %100, %99 ]
+    %79 = shl i32 %i.06.i19, 1
+    %80 = getelementptr inbounds i32, i32* %skey, i32 %79
+    %81 = load i32, i32* %80, align 4, !tbaa !4
+    %82 = or i32 %79, 1
+    %83 = getelementptr inbounds i32, i32* %skey, i32 %82
+    %84 = load i32, i32* %83, align 4, !tbaa !4
+    br label %85
+  
+  ; <label>:85                                      ; preds = %85, %78
+    %j.05.i20 = phi i32 [ 0, %78 ], [ %98, %85 ]
+    %ur.04.i21 = phi i32 [ 0, %78 ], [ %95, %85 ]
+    %ul.03.i22 = phi i32 [ 0, %78 ], [ %90, %85 ]
+    %xr.02.i23 = phi i32 [ %84, %78 ], [ %97, %85 ]
+    %xl.01.i24 = phi i32 [ %81, %78 ], [ %96, %85 ]
+    %86 = and i32 %xl.01.i24, 1
+    %scevgep5 = getelementptr [28 x i8], [28 x i8]* @PC2left, i32 0, i32 %j.05.i20
+    %87 = load i8, i8* %scevgep5, align 1, !tbaa !1
+    %88 = zext i8 %87 to i32
+    %89 = shl i32 %86, %88
+    %90 = or i32 %89, %ul.03.i22
+    %91 = and i32 %xr.02.i23, 1
+    %scevgep4 = getelementptr [28 x i8], [28 x i8]* @PC2right, i32 0, i32 %j.05.i20
+    %92 = load i8, i8* %scevgep4, align 1, !tbaa !1
+    %93 = zext i8 %92 to i32
+    %94 = shl i32 %91, %93
+    %95 = or i32 %94, %ur.04.i21
+    %96 = lshr i32 %xl.01.i24, 1
+    %97 = lshr i32 %xr.02.i23, 1
+    %98 = add nuw nsw i32 %j.05.i20, 1
+    %exitcond.i25 = icmp eq i32 %98, 28
+    br i1 %exitcond.i25, label %99, label %85
+  
+  ; <label>:99                                      ; preds = %85
+    store i32 %90, i32* %80, align 4, !tbaa !4
+    store i32 %95, i32* %83, align 4, !tbaa !4
+    %100 = add nuw nsw i32 %i.06.i19, 1
+    %exitcond8.i26 = icmp eq i32 %100, 16
+    br i1 %exitcond8.i26, label %keysched_unit.exit27, label %78
+  
+  keysched_unit.exit27:                             ; preds = %99
+    %101 = getelementptr inbounds i32, i32* %skey, i32 32
+    %102 = getelementptr inbounds i8, i8* %key, i32 8
+    tail call void @br_des_keysched_unit(i32* %101, i8* %102) #3
+    br label %103
+  
+  ; <label>:103                                     ; preds = %124, %keysched_unit.exit27
+    %i.06.i28 = phi i32 [ 0, %keysched_unit.exit27 ], [ %125, %124 ]
+    %104 = shl i32 %i.06.i28, 1
+    %105 = getelementptr inbounds i32, i32* %101, i32 %104
+    %106 = load i32, i32* %105, align 4, !tbaa !4
+    %107 = or i32 %104, 1
+    %108 = getelementptr inbounds i32, i32* %101, i32 %107
+    %109 = load i32, i32* %108, align 4, !tbaa !4
+    br label %110
+  
+  ; <label>:110                                     ; preds = %110, %103
+    %j.05.i29 = phi i32 [ 0, %103 ], [ %123, %110 ]
+    %ur.04.i30 = phi i32 [ 0, %103 ], [ %120, %110 ]
+    %ul.03.i31 = phi i32 [ 0, %103 ], [ %115, %110 ]
+    %xr.02.i32 = phi i32 [ %109, %103 ], [ %122, %110 ]
+    %xl.01.i33 = phi i32 [ %106, %103 ], [ %121, %110 ]
+    %111 = and i32 %xl.01.i33, 1
+    %scevgep3 = getelementptr [28 x i8], [28 x i8]* @PC2left, i32 0, i32 %j.05.i29
+    %112 = load i8, i8* %scevgep3, align 1, !tbaa !1
+    %113 = zext i8 %112 to i32
+    %114 = shl i32 %111, %113
+    %115 = or i32 %114, %ul.03.i31
+    %116 = and i32 %xr.02.i32, 1
+    %scevgep2 = getelementptr [28 x i8], [28 x i8]* @PC2right, i32 0, i32 %j.05.i29
+    %117 = load i8, i8* %scevgep2, align 1, !tbaa !1
+    %118 = zext i8 %117 to i32
+    %119 = shl i32 %116, %118
+    %120 = or i32 %119, %ur.04.i30
+    %121 = lshr i32 %xl.01.i33, 1
+    %122 = lshr i32 %xr.02.i32, 1
+    %123 = add nuw nsw i32 %j.05.i29, 1
+    %exitcond.i34 = icmp eq i32 %123, 28
+    br i1 %exitcond.i34, label %124, label %110
+  
+  ; <label>:124                                     ; preds = %110
+    store i32 %115, i32* %105, align 4, !tbaa !4
+    store i32 %120, i32* %108, align 4, !tbaa !4
+    %125 = add nuw nsw i32 %i.06.i28, 1
+    %exitcond8.i35 = icmp eq i32 %125, 16
+    br i1 %exitcond8.i35, label %keysched_unit.exit36, label %103
+  
+  keysched_unit.exit36:                             ; preds = %124
+    tail call void @br_des_rev_skey(i32* nonnull %101) #3
+    %126 = getelementptr inbounds i32, i32* %skey, i32 64
+    %127 = getelementptr inbounds i8, i8* %key, i32 16
+    tail call void @br_des_keysched_unit(i32* %126, i8* %127) #3
+    br label %128
+  
+  ; <label>:128                                     ; preds = %149, %keysched_unit.exit36
+    %i.06.i37 = phi i32 [ 0, %keysched_unit.exit36 ], [ %150, %149 ]
+    %129 = shl i32 %i.06.i37, 1
+    %130 = getelementptr inbounds i32, i32* %126, i32 %129
+    %131 = load i32, i32* %130, align 4, !tbaa !4
+    %132 = or i32 %129, 1
+    %133 = getelementptr inbounds i32, i32* %126, i32 %132
+    %134 = load i32, i32* %133, align 4, !tbaa !4
+    br label %135
+  
+  ; <label>:135                                     ; preds = %135, %128
+    %j.05.i38 = phi i32 [ 0, %128 ], [ %148, %135 ]
+    %ur.04.i39 = phi i32 [ 0, %128 ], [ %145, %135 ]
+    %ul.03.i40 = phi i32 [ 0, %128 ], [ %140, %135 ]
+    %xr.02.i41 = phi i32 [ %134, %128 ], [ %147, %135 ]
+    %xl.01.i42 = phi i32 [ %131, %128 ], [ %146, %135 ]
+    %136 = and i32 %xl.01.i42, 1
+    %scevgep1 = getelementptr [28 x i8], [28 x i8]* @PC2left, i32 0, i32 %j.05.i38
+    %137 = load i8, i8* %scevgep1, align 1, !tbaa !1
+    %138 = zext i8 %137 to i32
+    %139 = shl i32 %136, %138
+    %140 = or i32 %139, %ul.03.i40
+    %141 = and i32 %xr.02.i41, 1
+    %scevgep = getelementptr [28 x i8], [28 x i8]* @PC2right, i32 0, i32 %j.05.i38
+    %142 = load i8, i8* %scevgep, align 1, !tbaa !1
+    %143 = zext i8 %142 to i32
+    %144 = shl i32 %141, %143
+    %145 = or i32 %144, %ur.04.i39
+    %146 = lshr i32 %xl.01.i42, 1
+    %147 = lshr i32 %xr.02.i41, 1
+    %148 = add nuw nsw i32 %j.05.i38, 1
+    %exitcond.i43 = icmp eq i32 %148, 28
+    br i1 %exitcond.i43, label %149, label %135
+  
+  ; <label>:149                                     ; preds = %135
+    store i32 %140, i32* %130, align 4, !tbaa !4
+    store i32 %145, i32* %133, align 4, !tbaa !4
+    %150 = add nuw nsw i32 %i.06.i37, 1
+    %exitcond8.i44 = icmp eq i32 %150, 16
+    br i1 %exitcond8.i44, label %keysched_unit.exit, label %128
+  
+  keysched_unit.exit:                               ; preds = %23, %149, %keysched_unit.exit18
+    %.0 = phi i32 [ 3, %keysched_unit.exit18 ], [ 3, %149 ], [ 1, %23 ]
+    ret i32 %.0
+  }
+  
+  declare void @br_des_rev_skey(i32*) #2
+  
+  ; Function Attrs: argmemonly nounwind
+  declare void @llvm.memcpy.p0i8.p0i8.i32(i8* nocapture, i8* nocapture readonly, i32, i32, i1) #1
+  
+  declare void @br_des_keysched_unit(i32*, i8*) #2
+  
+  attributes #0 = { nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="true" "no-frame-pointer-elim-non-leaf" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #1 = { argmemonly nounwind "target-cpu"="mips32" }
+  attributes #2 = { "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="true" "no-frame-pointer-elim-non-leaf" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #3 = { nounwind }
+  
+  !llvm.ident = !{!0}
+  
+  !0 = !{!"clang version 3.8.0-2ubuntu4 (tags/RELEASE_380/final)"}
+  !1 = !{!2, !2, i64 0}
+  !2 = !{!"omnipotent char", !3, i64 0}
+  !3 = !{!"Simple C/C++ TBAA"}
+  !4 = !{!5, !5, i64 0}
+  !5 = !{!"int", !2, i64 0}
+
+...
+---
+name:            br_des_tab_keysched
+alignment:       2
+exposesReturnsTwice: false
+hasInlineAsm:    false
+isSSA:           true
+tracksRegLiveness: true
+tracksSubRegLiveness: false
+registers:       
+  - { id: 0, class: gpr32 }
+  - { id: 1, class: gpr32 }
+  - { id: 2, class: gpr32 }
+  - { id: 3, class: gpr32 }
+  - { id: 4, class: gpr32 }
+  - { id: 5, class: gpr32 }
+  - { id: 6, class: gpr32 }
+  - { id: 7, class: gpr32 }
+  - { id: 8, class: gpr32 }
+  - { id: 9, class: gpr32 }
+  - { id: 10, class: gpr32 }
+  - { id: 11, class: gpr32 }
+  - { id: 12, class: gpr32 }
+  - { id: 13, class: gpr32 }
+  - { id: 14, class: gpr32 }
+  - { id: 15, class: gpr32 }
+  - { id: 16, class: gpr32 }
+  - { id: 17, class: gpr32 }
+  - { id: 18, class: gpr32 }
+  - { id: 19, class: gpr32 }
+  - { id: 20, class: gpr32 }
+  - { id: 21, class: gpr32 }
+  - { id: 22, class: gpr32 }
+  - { id: 23, class: gpr32 }
+  - { id: 24, class: gpr32 }
+  - { id: 25, class: gpr32 }
+  - { id: 26, class: gpr32 }
+  - { id: 27, class: gpr32 }
+  - { id: 28, class: gpr32 }
+  - { id: 29, class: gpr32 }
+  - { id: 30, class: gpr32 }
+  - { id: 31, class: gpr32 }
+  - { id: 32, class: gpr32 }
+  - { id: 33, class: gpr32 }
+  - { id: 34, class: gpr32 }
+  - { id: 35, class: gpr32 }
+  - { id: 36, class: gpr32 }
+  - { id: 37, class: gpr32 }
+  - { id: 38, class: gpr32 }
+  - { id: 39, class: gpr32 }
+  - { id: 40, class: gpr32 }
+  - { id: 41, class: gpr32 }
+  - { id: 42, class: gpr32 }
+  - { id: 43, class: gpr32 }
+  - { id: 44, class: gpr32 }
+  - { id: 45, class: gpr32 }
+  - { id: 46, class: gpr32 }
+  - { id: 47, class: gpr32 }
+  - { id: 48, class: gpr32 }
+  - { id: 49, class: gpr32 }
+  - { id: 50, class: gpr32 }
+  - { id: 51, class: gpr32 }
+  - { id: 52, class: gpr32 }
+  - { id: 53, class: gpr32 }
+  - { id: 54, class: gpr32 }
+  - { id: 55, class: gpr32 }
+  - { id: 56, class: gpr32 }
+  - { id: 57, class: gpr32 }
+  - { id: 58, class: gpr32 }
+  - { id: 59, class: gpr32 }
+  - { id: 60, class: gpr32 }
+  - { id: 61, class: gpr32 }
+  - { id: 62, class: gpr32 }
+  - { id: 63, class: gpr32 }
+  - { id: 64, class: gpr32 }
+  - { id: 65, class: gpr32 }
+  - { id: 66, class: gpr32 }
+  - { id: 67, class: gpr32 }
+  - { id: 68, class: gpr32 }
+  - { id: 69, class: gpr32 }
+  - { id: 70, class: gpr32 }
+  - { id: 71, class: gpr32 }
+  - { id: 72, class: gpr32 }
+  - { id: 73, class: gpr32 }
+  - { id: 74, class: gpr32 }
+  - { id: 75, class: gpr32 }
+  - { id: 76, class: gpr32 }
+  - { id: 77, class: gpr32 }
+  - { id: 78, class: gpr32 }
+  - { id: 79, class: gpr32 }
+  - { id: 80, class: gpr32 }
+  - { id: 81, class: gpr32 }
+  - { id: 82, class: gpr32 }
+  - { id: 83, class: gpr32 }
+  - { id: 84, class: gpr32 }
+  - { id: 85, class: gpr32 }
+  - { id: 86, class: gpr32 }
+  - { id: 87, class: gpr32 }
+  - { id: 88, class: gpr32 }
+  - { id: 89, class: gpr32 }
+  - { id: 90, class: gpr32 }
+  - { id: 91, class: gpr32 }
+  - { id: 92, class: gpr32 }
+  - { id: 93, class: gpr32 }
+  - { id: 94, class: gpr32 }
+  - { id: 95, class: gpr32 }
+  - { id: 96, class: gpr32 }
+  - { id: 97, class: gpr32 }
+  - { id: 98, class: gpr32 }
+  - { id: 99, class: gpr32 }
+  - { id: 100, class: gpr32 }
+  - { id: 101, class: gpr32 }
+  - { id: 102, class: gpr32 }
+  - { id: 103, class: gpr32 }
+  - { id: 104, class: gpr32 }
+  - { id: 105, class: gpr32 }
+  - { id: 106, class: gpr32 }
+  - { id: 107, class: gpr32 }
+  - { id: 108, class: gpr32 }
+  - { id: 109, class: gpr32 }
+  - { id: 110, class: gpr32 }
+  - { id: 111, class: gpr32 }
+  - { id: 112, class: gpr32 }
+  - { id: 113, class: gpr32 }
+  - { id: 114, class: gpr32 }
+  - { id: 115, class: gpr32 }
+  - { id: 116, class: gpr32 }
+  - { id: 117, class: gpr32 }
+  - { id: 118, class: gpr32 }
+  - { id: 119, class: gpr32 }
+  - { id: 120, class: gpr32 }
+  - { id: 121, class: gpr32 }
+  - { id: 122, class: gpr32 }
+  - { id: 123, class: gpr32 }
+  - { id: 124, class: gpr32 }
+  - { id: 125, class: gpr32 }
+  - { id: 126, class: gpr32 }
+  - { id: 127, class: gpr32 }
+  - { id: 128, class: gpr32 }
+  - { id: 129, class: gpr32 }
+  - { id: 130, class: gpr32 }
+  - { id: 131, class: gpr32 }
+  - { id: 132, class: gpr32 }
+  - { id: 133, class: gpr32 }
+  - { id: 134, class: gpr32 }
+  - { id: 135, class: gpr32 }
+  - { id: 136, class: gpr32 }
+  - { id: 137, class: gpr32 }
+  - { id: 138, class: gpr32 }
+  - { id: 139, class: gpr32 }
+  - { id: 140, class: gpr32 }
+  - { id: 141, class: gpr32 }
+  - { id: 142, class: gpr32 }
+  - { id: 143, class: gpr32 }
+  - { id: 144, class: gpr32 }
+  - { id: 145, class: gpr32 }
+  - { id: 146, class: gpr32 }
+  - { id: 147, class: gpr32 }
+  - { id: 148, class: gpr32 }
+  - { id: 149, class: gpr32 }
+  - { id: 150, class: gpr32 }
+  - { id: 151, class: gpr32 }
+  - { id: 152, class: gpr32 }
+  - { id: 153, class: gpr32 }
+  - { id: 154, class: gpr32 }
+  - { id: 155, class: gpr32 }
+  - { id: 156, class: gpr32 }
+  - { id: 157, class: gpr32 }
+  - { id: 158, class: gpr32 }
+  - { id: 159, class: gpr32 }
+  - { id: 160, class: gpr32 }
+  - { id: 161, class: gpr32 }
+  - { id: 162, class: gpr32 }
+  - { id: 163, class: gpr32 }
+  - { id: 164, class: gpr32 }
+  - { id: 165, class: gpr32 }
+  - { id: 166, class: gpr32 }
+  - { id: 167, class: gpr32 }
+  - { id: 168, class: gpr32 }
+  - { id: 169, class: gpr32 }
+  - { id: 170, class: gpr32 }
+  - { id: 171, class: gpr32 }
+  - { id: 172, class: gpr32 }
+  - { id: 173, class: gpr32 }
+  - { id: 174, class: gpr32 }
+  - { id: 175, class: gpr32 }
+  - { id: 176, class: gpr32 }
+  - { id: 177, class: gpr32 }
+  - { id: 178, class: gpr32 }
+  - { id: 179, class: gpr32 }
+  - { id: 180, class: gpr32 }
+  - { id: 181, class: gpr32 }
+  - { id: 182, class: gpr32 }
+  - { id: 183, class: gpr32 }
+  - { id: 184, class: gpr32 }
+  - { id: 185, class: gpr32 }
+  - { id: 186, class: gpr32 }
+  - { id: 187, class: gpr32 }
+  - { id: 188, class: gpr32 }
+  - { id: 189, class: gpr32 }
+  - { id: 190, class: gpr32 }
+  - { id: 191, class: gpr32 }
+  - { id: 192, class: gpr32 }
+  - { id: 193, class: gpr32 }
+  - { id: 194, class: gpr32 }
+  - { id: 195, class: gpr32 }
+  - { id: 196, class: gpr32 }
+  - { id: 197, class: gpr32 }
+  - { id: 198, class: gpr32 }
+  - { id: 199, class: gpr32 }
+  - { id: 200, class: gpr32 }
+  - { id: 201, class: gpr32 }
+  - { id: 202, class: gpr32 }
+  - { id: 203, class: gpr32 }
+  - { id: 204, class: gpr32 }
+  - { id: 205, class: gpr32 }
+  - { id: 206, class: gpr32 }
+  - { id: 207, class: gpr32 }
+  - { id: 208, class: gpr32 }
+  - { id: 209, class: gpr32 }
+  - { id: 210, class: gpr32 }
+  - { id: 211, class: gpr32 }
+  - { id: 212, class: gpr32 }
+  - { id: 213, class: gpr32 }
+  - { id: 214, class: gpr32 }
+  - { id: 215, class: gpr32 }
+  - { id: 216, class: gpr32 }
+  - { id: 217, class: gpr32 }
+  - { id: 218, class: gpr32 }
+  - { id: 219, class: gpr32 }
+  - { id: 220, class: gpr32 }
+  - { id: 221, class: gpr32 }
+  - { id: 222, class: gpr32 }
+  - { id: 223, class: gpr32 }
+  - { id: 224, class: gpr32 }
+  - { id: 225, class: gpr32 }
+  - { id: 226, class: gpr32 }
+  - { id: 227, class: gpr32 }
+  - { id: 228, class: gpr32 }
+  - { id: 229, class: gpr32 }
+  - { id: 230, class: gpr32 }
+  - { id: 231, class: gpr32 }
+  - { id: 232, class: gpr32 }
+liveins:         
+  - { reg: '%a0', virtual-reg: '%100' }
+  - { reg: '%a1', virtual-reg: '%101' }
+  - { reg: '%a2', virtual-reg: '%102' }
+  - { reg: '%t9' }
+  - { reg: '%v0' }
+frameInfo:       
+  isFrameAddressTaken: false
+  isReturnAddressTaken: false
+  hasStackMap:     false
+  hasPatchPoint:   false
+  stackSize:       0
+  offsetAdjustment: 0
+  maxAlignment:    1
+  adjustsStack:    false
+  hasCalls:        true
+  maxCallFrameSize: 0
+  hasOpaqueSPAdjustment: false
+  hasVAStart:      false
+  hasMustTailInVarArgFunc: false
+body:             |
+  bb.0 (%ir-block.0, freq 24):
+    successors: %bb.5(33), %bb.27(66)
+    liveins: %a0, %a1, %a2, %t9, %v0
+  
+    %105 = ADDu %v0, %t9
+    %102 = COPY %a2
+    %101 = COPY %a1
+    %100 = COPY %a0
+    %103 = ADDiu %zero, 16
+    BEQ %102, %103, %bb.5, implicit-def dead %at
+    B %bb.27, implicit-def dead %at
+  
+  bb.27 (%ir-block.0, freq 16):
+    successors: %bb.1(50), %bb.14(49)
+  
+    %104 = ADDiu %zero, 8
+    BNE %102, killed %104, %bb.14, implicit-def dead %at
+    B %bb.1, implicit-def dead %at
+  
+  bb.1 (%ir-block.1, freq 8):
+    successors: %bb.2(100)
+  
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %151 = LW %105, target-flags(<unknown>) @br_des_keysched_unit, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @br_des_keysched_unit)
+    %a0 = COPY %100
+    %a1 = COPY %101
+    %gp = COPY %105
+    %t9 = COPY %151
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %gp, implicit-def %sp
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    %150 = ADDiu %zero, 0
+    %155 = LW %105, target-flags(<unknown>) @PC2right, <0x3cbcd30> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %156 = ADDiu %155, target-flags(<unknown>) @PC2right
+    %160 = LW %105, target-flags(<unknown>) @PC2left, <0x3d4b2b0> = !{!"unison-memory-partition", i32 2} :: (load 4 from got)
+    %162 = ADDiu %zero, 28
+    %164 = ADDiu %160, target-flags(<unknown>) @PC2left
+    %169 = ADDiu %zero, 16
+  
+  bb.2 (%ir-block.2, freq 256):
+    successors: %bb.3(100)
+  
+    %0 = PHI %150, %bb.1, %15, %bb.4
+    %153 = SLL %0, 3
+    %1 = ADDu %100, %153
+    %2 = LW %1, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.4, !tbaa !4)
+    %154 = ORi %153, 4
+    %3 = ADDu %100, killed %154
+    %4 = LW %3, 0, <0x3cbcd30> = !{!"unison-memory-partition", i32 1} :: (load 4 from %ir.7, !tbaa !4)
+  
+  bb.3 (%ir-block.9, freq 8192):
+    successors: %bb.4(3), %bb.3(96)
+  
+    %5 = PHI %150, %bb.2, %14, %bb.3
+    %6 = PHI %150, %bb.2, %11, %bb.3
+    %7 = PHI %150, %bb.2, %10, %bb.3
+    %8 = PHI %4, %bb.2, %13, %bb.3
+    %9 = PHI %2, %bb.2, %12, %bb.3
+    %157 = ADDu %156, %5
+    %158 = LBu killed %157, 0, <0x3cbcd30> = !{!"unison-memory-partition", i32 1} :: (load 1 from %ir.scevgep6, !tbaa !1)
+    %14 = ADDiu %5, 1
+    %13 = SRL %8, 1
+    %12 = SRL %9, 1
+    %159 = ANDi %8, 1
+    %161 = ANDi %9, 1
+    %163 = SLLV killed %159, killed %158
+    %11 = OR killed %163, %6
+    %165 = ADDu %164, %5
+    %166 = LBu killed %165, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 1 from %ir.scevgep7, !tbaa !1)
+    %167 = SLLV killed %161, killed %166
+    %10 = OR killed %167, %7
+    BNE %14, %162, %bb.3, implicit-def dead %at
+    B %bb.4, implicit-def dead %at
+  
+  bb.4 (%ir-block.23, freq 256):
+    successors: %bb.26.keysched_unit.exit(3), %bb.2(96)
+  
+    SW %10, %1, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.4, !tbaa !4)
+    SW %11, %3, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.7, !tbaa !4)
+    %15 = ADDiu %0, 1
+    %168 = ADDiu %zero, 1
+    BEQ %15, %169, %bb.26.keysched_unit.exit, implicit-def dead %at
+    B %bb.2, implicit-def dead %at
+  
+  bb.5 (%ir-block.25, freq 8):
+    successors: %bb.6(100)
+  
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %107 = LW %105, target-flags(<unknown>) @br_des_keysched_unit, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @br_des_keysched_unit)
+    %a0 = COPY %100
+    %a1 = COPY %101
+    %gp = COPY %105
+    %t9 = COPY %107
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %gp, implicit-def %sp
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    %106 = ADDiu %zero, 0
+    %111 = LW %105, target-flags(<unknown>) @PC2right, <0x3cbcd30> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %112 = ADDiu %111, target-flags(<unknown>) @PC2right
+    %116 = LW %105, target-flags(<unknown>) @PC2left, <0x3d4b2b0> = !{!"unison-memory-partition", i32 2} :: (load 4 from got)
+    %118 = ADDiu %zero, 28
+    %120 = ADDiu %116, target-flags(<unknown>) @PC2left
+  
+  bb.6 (%ir-block.26, freq 256):
+    successors: %bb.7(100)
+  
+    %16 = PHI %106, %bb.5, %31, %bb.8
+    %109 = SLL %16, 3
+    %17 = ADDu %100, %109
+    %18 = LW %17, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.28, !tbaa !4)
+    %110 = ORi %109, 4
+    %19 = ADDu %100, killed %110
+    %20 = LW %19, 0, <0x3cbcd30> = !{!"unison-memory-partition", i32 1} :: (load 4 from %ir.31, !tbaa !4)
+  
+  bb.7 (%ir-block.33, freq 8192):
+    successors: %bb.8(3), %bb.7(96)
+  
+    %21 = PHI %106, %bb.6, %30, %bb.7
+    %22 = PHI %106, %bb.6, %27, %bb.7
+    %23 = PHI %106, %bb.6, %26, %bb.7
+    %24 = PHI %20, %bb.6, %29, %bb.7
+    %25 = PHI %18, %bb.6, %28, %bb.7
+    %113 = ADDu %112, %21
+    %114 = LBu killed %113, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 1 from %ir.scevgep10, !tbaa !1)
+    %30 = ADDiu %21, 1
+    %29 = SRL %24, 1
+    %28 = SRL %25, 1
+    %115 = ANDi %24, 1
+    %117 = ANDi %25, 1
+    %119 = SLLV killed %115, killed %114
+    %27 = OR killed %119, %22
+    %121 = ADDu %120, %21
+    %122 = LBu killed %121, 0, <0x3cbcd30> = !{!"unison-memory-partition", i32 1} :: (load 1 from %ir.scevgep11, !tbaa !1)
+    %123 = SLLV killed %117, killed %122
+    %26 = OR killed %123, %23
+    BNE %30, %118, %bb.7, implicit-def dead %at
+    B %bb.8, implicit-def dead %at
+  
+  bb.8 (%ir-block.47, freq 256):
+    successors: %bb.9.keysched_unit.exit9(3), %bb.6(96)
+  
+    SW %26, %17, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.28, !tbaa !4)
+    SW %27, %19, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.31, !tbaa !4)
+    %31 = ADDiu %16, 1
+    BNE %31, %103, %bb.6, implicit-def dead %at
+    B %bb.9.keysched_unit.exit9, implicit-def dead %at
+  
+  bb.9.keysched_unit.exit9 (freq 8):
+    successors: %bb.10(100)
+  
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %32 = ADDiu %100, 128
+    %126 = ADDiu %101, 8
+    %127 = LW %105, target-flags(<unknown>) @br_des_keysched_unit, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @br_des_keysched_unit)
+    %a0 = COPY %32
+    %a1 = COPY %126
+    %t9 = COPY %127
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit-def %sp
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    %125 = ADDiu %zero, 0
+    %132 = ADDiu %111, target-flags(<unknown>) @PC2right
+    %138 = ADDiu %zero, 28
+    %140 = ADDiu %116, target-flags(<unknown>) @PC2left
+    %144 = ADDiu %zero, 16
+  
+  bb.10 (%ir-block.51, freq 256):
+    successors: %bb.11(100)
+  
+    %33 = PHI %125, %bb.9.keysched_unit.exit9, %48, %bb.12
+    %129 = SLL %33, 3
+    %34 = ADDu %32, %129
+    %35 = LW %34, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.53, !tbaa !4)
+    %130 = ORi %129, 4
+    %36 = ADDu %32, killed %130
+    %37 = LW %36, 0, <0x3cbcd30> = !{!"unison-memory-partition", i32 1} :: (load 4 from %ir.56, !tbaa !4)
+  
+  bb.11 (%ir-block.58, freq 8192):
+    successors: %bb.12(3), %bb.11(96)
+  
+    %38 = PHI %125, %bb.10, %47, %bb.11
+    %39 = PHI %125, %bb.10, %44, %bb.11
+    %40 = PHI %125, %bb.10, %43, %bb.11
+    %41 = PHI %37, %bb.10, %46, %bb.11
+    %42 = PHI %35, %bb.10, %45, %bb.11
+    %133 = ADDu %132, %38
+    %134 = LBu killed %133, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 1 from %ir.scevgep8, !tbaa !1)
+    %47 = ADDiu %38, 1
+    %46 = SRL %41, 1
+    %45 = SRL %42, 1
+    %135 = ANDi %41, 1
+    %137 = ANDi %42, 1
+    %139 = SLLV killed %135, killed %134
+    %44 = OR killed %139, %39
+    %141 = ADDu %140, %38
+    %142 = LBu killed %141, 0, <0x3cbcd30> = !{!"unison-memory-partition", i32 1} :: (load 1 from %ir.scevgep9, !tbaa !1)
+    %143 = SLLV killed %137, killed %142
+    %43 = OR killed %143, %40
+    BNE %47, %138, %bb.11, implicit-def dead %at
+    B %bb.12, implicit-def dead %at
+  
+  bb.12 (%ir-block.72, freq 256):
+    successors: %bb.13.keysched_unit.exit18(3), %bb.10(96)
+  
+    SW %43, %34, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.53, !tbaa !4)
+    SW %44, %36, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.56, !tbaa !4)
+    %48 = ADDiu %33, 1
+    BNE %48, %144, %bb.10, implicit-def dead %at
+    B %bb.13.keysched_unit.exit18, implicit-def dead %at
+  
+  bb.13.keysched_unit.exit18 (freq 8):
+    successors: %bb.26.keysched_unit.exit(100)
+  
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %146 = LW %105, target-flags(<unknown>) @br_des_rev_skey, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @br_des_rev_skey)
+    %a0 = COPY %32
+    %gp = COPY %105
+    %t9 = COPY %146
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %gp, implicit-def %sp
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %147 = ADDiu %100, 256
+    %148 = LW %105, target-flags(<unknown>) $memcpy, <0x3cbcd30> = !{!"unison-memory-partition", i32 1} :: (load 4 from call-entry $memcpy)
+    %149 = ADDiu %zero, 128
+    %a0 = COPY %147
+    %a1 = COPY %100
+    %a2 = COPY %149
+    %gp = COPY %105
+    %t9 = COPY %148
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %gp, implicit-def %sp
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    %145 = ADDiu %zero, 3
+    B %bb.26.keysched_unit.exit, implicit-def dead %at
+  
+  bb.14 (%ir-block.77, freq 8):
+    successors: %bb.15(100)
+  
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %171 = LW %105, target-flags(<unknown>) @br_des_keysched_unit, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @br_des_keysched_unit)
+    %a0 = COPY %100
+    %a1 = COPY %101
+    %gp = COPY %105
+    %t9 = COPY %171
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %gp, implicit-def %sp
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    %170 = ADDiu %zero, 0
+    %175 = LW %105, target-flags(<unknown>) @PC2right, <0x3cbcd30> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %176 = ADDiu %175, target-flags(<unknown>) @PC2right
+    %180 = LW %105, target-flags(<unknown>) @PC2left, <0x3d4b2b0> = !{!"unison-memory-partition", i32 2} :: (load 4 from got)
+    %182 = ADDiu %zero, 28
+    %184 = ADDiu %180, target-flags(<unknown>) @PC2left
+    %188 = ADDiu %zero, 16
+  
+  bb.15 (%ir-block.78, freq 255):
+    successors: %bb.16(100)
+  
+    %49 = PHI %170, %bb.14, %64, %bb.17
+    %173 = SLL %49, 3
+    %50 = ADDu %100, %173
+    %51 = LW %50, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.80, !tbaa !4)
+    %174 = ORi %173, 4
+    %52 = ADDu %100, killed %174
+    %53 = LW %52, 0, <0x3cbcd30> = !{!"unison-memory-partition", i32 1} :: (load 4 from %ir.83, !tbaa !4)
+  
+  bb.16 (%ir-block.85, freq 8191):
+    successors: %bb.17(3), %bb.16(96)
+  
+    %54 = PHI %170, %bb.15, %63, %bb.16
+    %55 = PHI %170, %bb.15, %60, %bb.16
+    %56 = PHI %170, %bb.15, %59, %bb.16
+    %57 = PHI %53, %bb.15, %62, %bb.16
+    %58 = PHI %51, %bb.15, %61, %bb.16
+    %177 = ADDu %176, %54
+    %178 = LBu killed %177, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 1 from %ir.scevgep4, !tbaa !1)
+    %63 = ADDiu %54, 1
+    %62 = SRL %57, 1
+    %61 = SRL %58, 1
+    %179 = ANDi %57, 1
+    %181 = ANDi %58, 1
+    %183 = SLLV killed %179, killed %178
+    %60 = OR killed %183, %55
+    %185 = ADDu %184, %54
+    %186 = LBu killed %185, 0, <0x3cbcd30> = !{!"unison-memory-partition", i32 1} :: (load 1 from %ir.scevgep5, !tbaa !1)
+    %187 = SLLV killed %181, killed %186
+    %59 = OR killed %187, %56
+    BNE %63, %182, %bb.16, implicit-def dead %at
+    B %bb.17, implicit-def dead %at
+  
+  bb.17 (%ir-block.99, freq 255):
+    successors: %bb.18.keysched_unit.exit27(3), %bb.15(96)
+  
+    SW %59, %50, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.80, !tbaa !4)
+    SW %60, %52, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.83, !tbaa !4)
+    %64 = ADDiu %49, 1
+    BNE %64, %188, %bb.15, implicit-def dead %at
+    B %bb.18.keysched_unit.exit27, implicit-def dead %at
+  
+  bb.18.keysched_unit.exit27 (freq 8):
+    successors: %bb.19(100)
+  
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %65 = ADDiu %100, 128
+    %190 = ADDiu %101, 8
+    %191 = LW %105, target-flags(<unknown>) @br_des_keysched_unit, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @br_des_keysched_unit)
+    %a0 = COPY %65
+    %a1 = COPY %190
+    %t9 = COPY %191
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit-def %sp
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    %189 = ADDiu %zero, 0
+    %196 = ADDiu %175, target-flags(<unknown>) @PC2right
+    %202 = ADDiu %zero, 28
+    %204 = ADDiu %180, target-flags(<unknown>) @PC2left
+    %208 = ADDiu %zero, 16
+  
+  bb.19 (%ir-block.103, freq 255):
+    successors: %bb.20(100)
+  
+    %66 = PHI %189, %bb.18.keysched_unit.exit27, %81, %bb.21
+    %193 = SLL %66, 3
+    %67 = ADDu %65, %193
+    %68 = LW %67, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.105, !tbaa !4)
+    %194 = ORi %193, 4
+    %69 = ADDu %65, killed %194
+    %70 = LW %69, 0, <0x3cbcd30> = !{!"unison-memory-partition", i32 1} :: (load 4 from %ir.108, !tbaa !4)
+  
+  bb.20 (%ir-block.110, freq 8191):
+    successors: %bb.21(3), %bb.20(96)
+  
+    %71 = PHI %189, %bb.19, %80, %bb.20
+    %72 = PHI %189, %bb.19, %77, %bb.20
+    %73 = PHI %189, %bb.19, %76, %bb.20
+    %74 = PHI %70, %bb.19, %79, %bb.20
+    %75 = PHI %68, %bb.19, %78, %bb.20
+    %197 = ADDu %196, %71
+    %198 = LBu killed %197, 0, <0x3cbcd30> = !{!"unison-memory-partition", i32 1} :: (load 1 from %ir.scevgep2, !tbaa !1)
+    %80 = ADDiu %71, 1
+    %79 = SRL %74, 1
+    %78 = SRL %75, 1
+    %199 = ANDi %74, 1
+    %201 = ANDi %75, 1
+    %203 = SLLV killed %199, killed %198
+    %77 = OR killed %203, %72
+    %205 = ADDu %204, %71
+    %206 = LBu killed %205, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 1 from %ir.scevgep3, !tbaa !1)
+    %207 = SLLV killed %201, killed %206
+    %76 = OR killed %207, %73
+    BNE %80, %202, %bb.20, implicit-def dead %at
+    B %bb.21, implicit-def dead %at
+  
+  bb.21 (%ir-block.124, freq 255):
+    successors: %bb.22.keysched_unit.exit36(3), %bb.19(96)
+  
+    SW %76, %67, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.105, !tbaa !4)
+    SW %77, %69, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.108, !tbaa !4)
+    %81 = ADDiu %66, 1
+    BNE %81, %208, %bb.19, implicit-def dead %at
+    B %bb.22.keysched_unit.exit36, implicit-def dead %at
+  
+  bb.22.keysched_unit.exit36 (freq 8):
+    successors: %bb.23(100)
+  
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %210 = LW %105, target-flags(<unknown>) @br_des_rev_skey, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @br_des_rev_skey)
+    %a0 = COPY %65
+    %gp = COPY %105
+    %t9 = COPY %210
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %gp, implicit-def %sp
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %82 = ADDiu %100, 256
+    %211 = ADDiu %101, 16
+    %212 = LW %105, target-flags(<unknown>) @br_des_keysched_unit, <0x3cbcd30> = !{!"unison-memory-partition", i32 1} :: (load 4 from call-entry @br_des_keysched_unit)
+    %a0 = COPY %82
+    %a1 = COPY %211
+    %t9 = COPY %212
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit-def %sp
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    %209 = ADDiu %zero, 0
+    %217 = ADDiu %175, target-flags(<unknown>) @PC2right
+    %223 = ADDiu %zero, 28
+    %225 = ADDiu %180, target-flags(<unknown>) @PC2left
+    %230 = ADDiu %zero, 16
+  
+  bb.23 (%ir-block.128, freq 255):
+    successors: %bb.24(100)
+  
+    %83 = PHI %209, %bb.22.keysched_unit.exit36, %98, %bb.25
+    %214 = SLL %83, 3
+    %84 = ADDu %82, %214
+    %85 = LW %84, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.130, !tbaa !4)
+    %215 = ORi %214, 4
+    %86 = ADDu %82, killed %215
+    %87 = LW %86, 0, <0x3cbcd30> = !{!"unison-memory-partition", i32 1} :: (load 4 from %ir.133, !tbaa !4)
+  
+  bb.24 (%ir-block.135, freq 8191):
+    successors: %bb.25(3), %bb.24(96)
+  
+    %88 = PHI %209, %bb.23, %97, %bb.24
+    %89 = PHI %209, %bb.23, %94, %bb.24
+    %90 = PHI %209, %bb.23, %93, %bb.24
+    %91 = PHI %87, %bb.23, %96, %bb.24
+    %92 = PHI %85, %bb.23, %95, %bb.24
+    %218 = ADDu %217, %88
+    %219 = LBu killed %218, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 1 from %ir.scevgep, !tbaa !1)
+    %97 = ADDiu %88, 1
+    %96 = SRL %91, 1
+    %95 = SRL %92, 1
+    %220 = ANDi %91, 1
+    %222 = ANDi %92, 1
+    %224 = SLLV killed %220, killed %219
+    %94 = OR killed %224, %89
+    %226 = ADDu %225, %88
+    %227 = LBu killed %226, 0, <0x3cbcd30> = !{!"unison-memory-partition", i32 1} :: (load 1 from %ir.scevgep1, !tbaa !1)
+    %228 = SLLV killed %222, killed %227
+    %93 = OR killed %228, %90
+    BNE %97, %223, %bb.24, implicit-def dead %at
+    B %bb.25, implicit-def dead %at
+  
+  bb.25 (%ir-block.149, freq 255):
+    successors: %bb.26.keysched_unit.exit(3), %bb.23(96)
+  
+    SW %93, %84, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.130, !tbaa !4)
+    SW %94, %86, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.133, !tbaa !4)
+    %98 = ADDiu %83, 1
+    %229 = ADDiu %zero, 3
+    BNE %98, %230, %bb.23, implicit-def dead %at
+    B %bb.26.keysched_unit.exit, implicit-def dead %at
+  
+  bb.26.keysched_unit.exit (freq 24):
+    liveouts: %v0
+  
+    %99 = PHI %145, %bb.13.keysched_unit.exit18, %168, %bb.4, %229, %bb.25
+    %v0 = COPY %99
+    RetRA implicit %v0
+
+...
+--- |
+  ; ModuleID = 'des_tab.ll'
+  target datalayout = "E-m:m-p:32:32-i8:8:32-i16:16:32-i64:64-n32-S64"
+  target triple = "mipsel"
+  
+  @S1 = internal unnamed_addr constant [64 x i32] [i32 8421888, i32 0, i32 32768, i32 8421890, i32 8421378, i32 33282, i32 2, i32 32768, i32 512, i32 8421888, i32 8421890, i32 512, i32 8389122, i32 8421378, i32 8388608, i32 2, i32 514, i32 8389120, i32 8389120, i32 33280, i32 33280, i32 8421376, i32 8421376, i32 8389122, i32 32770, i32 8388610, i32 8388610, i32 32770, i32 0, i32 514, i32 33282, i32 8388608, i32 32768, i32 8421890, i32 2, i32 8421376, i32 8421888, i32 8388608, i32 8388608, i32 512, i32 8421378, i32 32768, i32 33280, i32 8388610, i32 512, i32 2, i32 8389122, i32 33282, i32 8421890, i32 32770, i32 8421376, i32 8389122, i32 8388610, i32 514, i32 33282, i32 8421888, i32 514, i32 8389120, i32 8389120, i32 0, i32 32770, i32 33280, i32 0, i32 8421378], align 4
+  @S2 = internal unnamed_addr constant [64 x i32] [i32 1074282512, i32 1073758208, i32 16384, i32 540688, i32 524288, i32 16, i32 1074266128, i32 1073758224, i32 1073741840, i32 1074282512, i32 1074282496, i32 1073741824, i32 1073758208, i32 524288, i32 16, i32 1074266128, i32 540672, i32 524304, i32 1073758224, i32 0, i32 1073741824, i32 16384, i32 540688, i32 1074266112, i32 524304, i32 1073741840, i32 0, i32 540672, i32 16400, i32 1074282496, i32 1074266112, i32 16400, i32 0, i32 540688, i32 1074266128, i32 524288, i32 1073758224, i32 1074266112, i32 1074282496, i32 16384, i32 1074266112, i32 1073758208, i32 16, i32 1074282512, i32 540688, i32 16, i32 16384, i32 1073741824, i32 16400, i32 1074282496, i32 524288, i32 1073741840, i32 524304, i32 1073758224, i32 1073741840, i32 524304, i32 540672, i32 0, i32 1073758208, i32 16400, i32 1073741824, i32 1074266128, i32 1074282512, i32 540672], align 4
+  @S3 = internal unnamed_addr constant [64 x i32] [i32 260, i32 67174656, i32 0, i32 67174404, i32 67109120, i32 0, i32 65796, i32 67109120, i32 65540, i32 67108868, i32 67108868, i32 65536, i32 67174660, i32 65540, i32 67174400, i32 260, i32 67108864, i32 4, i32 67174656, i32 256, i32 65792, i32 67174400, i32 67174404, i32 65796, i32 67109124, i32 65792, i32 65536, i32 67109124, i32 4, i32 67174660, i32 256, i32 67108864, i32 67174656, i32 67108864, i32 65540, i32 260, i32 65536, i32 67174656, i32 67109120, i32 0, i32 256, i32 65540, i32 67174660, i32 67109120, i32 67108868, i32 256, i32 0, i32 67174404, i32 67109124, i32 65536, i32 67108864, i32 67174660, i32 4, i32 65796, i32 65792, i32 67108868, i32 67174400, i32 67109124, i32 260, i32 67174400, i32 65796, i32 4, i32 67174404, i32 65792], align 4
+  @S4 = internal unnamed_addr constant [64 x i32] [i32 -2143285248, i32 -2147479488, i32 -2147479488, i32 64, i32 4198464, i32 -2143289280, i32 -2143289344, i32 -2147479552, i32 0, i32 4198400, i32 4198400, i32 -2143285184, i32 -2147483584, i32 0, i32 4194368, i32 -2143289344, i32 -2147483648, i32 4096, i32 4194304, i32 -2143285248, i32 64, i32 4194304, i32 -2147479552, i32 4160, i32 -2143289280, i32 -2147483648, i32 4160, i32 4194368, i32 4096, i32 4198464, i32 -2143285184, i32 -2147483584, i32 4194368, i32 -2143289344, i32 4198400, i32 -2143285184, i32 -2147483584, i32 0, i32 0, i32 4198400, i32 4160, i32 4194368, i32 -2143289280, i32 -2147483648, i32 -2143285248, i32 -2147479488, i32 -2147479488, i32 64, i32 -2143285184, i32 -2147483584, i32 -2147483648, i32 4096, i32 -2143289344, i32 -2147479552, i32 4198464, i32 -2143289280, i32 -2147479552, i32 4160, i32 4194304, i32 -2143285248, i32 64, i32 4194304, i32 4096, i32 4198464], align 4
+  @S5 = internal unnamed_addr constant [64 x i32] [i32 128, i32 17039488, i32 17039360, i32 553648256, i32 262144, i32 128, i32 536870912, i32 17039360, i32 537133184, i32 262144, i32 16777344, i32 537133184, i32 553648256, i32 553910272, i32 262272, i32 536870912, i32 16777216, i32 537133056, i32 537133056, i32 0, i32 536871040, i32 553910400, i32 553910400, i32 16777344, i32 553910272, i32 536871040, i32 0, i32 553648128, i32 17039488, i32 16777216, i32 553648128, i32 262272, i32 262144, i32 553648256, i32 128, i32 16777216, i32 536870912, i32 17039360, i32 553648256, i32 537133184, i32 16777344, i32 536870912, i32 553910272, i32 17039488, i32 537133184, i32 128, i32 16777216, i32 553910272, i32 553910400, i32 262272, i32 553648128, i32 553910400, i32 17039360, i32 0, i32 537133056, i32 553648128, i32 262272, i32 16777344, i32 536871040, i32 262144, i32 0, i32 537133056, i32 17039488, i32 536871040], align 4
+  @S6 = internal unnamed_addr constant [64 x i32] [i32 268435464, i32 270532608, i32 8192, i32 270540808, i32 270532608, i32 8, i32 270540808, i32 2097152, i32 268443648, i32 2105352, i32 2097152, i32 268435464, i32 2097160, i32 268443648, i32 268435456, i32 8200, i32 0, i32 2097160, i32 268443656, i32 8192, i32 2105344, i32 268443656, i32 8, i32 270532616, i32 270532616, i32 0, i32 2105352, i32 270540800, i32 8200, i32 2105344, i32 270540800, i32 268435456, i32 268443648, i32 8, i32 270532616, i32 2105344, i32 270540808, i32 2097152, i32 8200, i32 268435464, i32 2097152, i32 268443648, i32 268435456, i32 8200, i32 268435464, i32 270540808, i32 2105344, i32 270532608, i32 2105352, i32 270540800, i32 0, i32 270532616, i32 8, i32 8192, i32 270532608, i32 2105352, i32 8192, i32 2097160, i32 268443656, i32 0, i32 270540800, i32 268435456, i32 2097160, i32 268443656], align 4
+  @S7 = internal unnamed_addr constant [64 x i32] [i32 1048576, i32 34603009, i32 33555457, i32 0, i32 1024, i32 33555457, i32 1049601, i32 34604032, i32 34604033, i32 1048576, i32 0, i32 33554433, i32 1, i32 33554432, i32 34603009, i32 1025, i32 33555456, i32 1049601, i32 1048577, i32 33555456, i32 33554433, i32 34603008, i32 34604032, i32 1048577, i32 34603008, i32 1024, i32 1025, i32 34604033, i32 1049600, i32 1, i32 33554432, i32 1049600, i32 33554432, i32 1049600, i32 1048576, i32 33555457, i32 33555457, i32 34603009, i32 34603009, i32 1, i32 1048577, i32 33554432, i32 33555456, i32 1048576, i32 34604032, i32 1025, i32 1049601, i32 34604032, i32 1025, i32 33554433, i32 34604033, i32 34603008, i32 1049600, i32 0, i32 1, i32 34604033, i32 0, i32 1049601, i32 34603008, i32 1024, i32 33554433, i32 33555456, i32 1024, i32 1048577], align 4
+  @S8 = internal unnamed_addr constant [64 x i32] [i32 134219808, i32 2048, i32 131072, i32 134350880, i32 134217728, i32 134219808, i32 32, i32 134217728, i32 131104, i32 134348800, i32 134350880, i32 133120, i32 134350848, i32 133152, i32 2048, i32 32, i32 134348800, i32 134217760, i32 134219776, i32 2080, i32 133120, i32 131104, i32 134348832, i32 134350848, i32 2080, i32 0, i32 0, i32 134348832, i32 134217760, i32 134219776, i32 133152, i32 131072, i32 133152, i32 131072, i32 134350848, i32 2048, i32 32, i32 134348832, i32 2048, i32 133152, i32 134219776, i32 32, i32 134217760, i32 134348800, i32 134348832, i32 134217728, i32 131072, i32 134219808, i32 0, i32 134350880, i32 131104, i32 134217760, i32 134348800, i32 134219776, i32 134219808, i32 0, i32 134350880, i32 133120, i32 133120, i32 2080, i32 2080, i32 131104, i32 134217728, i32 134350848], align 4
+  @PC2left = internal unnamed_addr constant [28 x i8] c"\10\03\07\18\14\0B\18\0D\02\0A\18\16\05\0F\17\01\09\15\0C\18\06\04\0E\12\08\11\00\13", align 1
+  @PC2right = internal unnamed_addr constant [28 x i8] c"\08\12\18\06\16\0F\03\0A\0C\13\05\0E\0B\18\04\17\10\09\18\14\02\18\07\0D\00\15\11\01", align 1
+  
+  ; Function Attrs: nounwind
+  define void @br_des_tab_process_block(i32 signext %num_rounds, i32* nocapture readonly %skey, i8* nocapture %block) #0 {
+    %l = alloca i32, align 4
+    %r = alloca i32, align 4
+    %1 = bitcast i32* %l to i8*
+    call void @llvm.lifetime.start(i64 4, i8* %1) #3
+    %2 = bitcast i32* %r to i8*
+    call void @llvm.lifetime.start(i64 4, i8* %2) #3
+    %3 = load i8, i8* %block, align 1, !tbaa !1
+    %4 = zext i8 %3 to i32
+    %5 = shl nuw i32 %4, 24
+    %6 = getelementptr inbounds i8, i8* %block, i32 1
+    %7 = load i8, i8* %6, align 1, !tbaa !1
+    %8 = zext i8 %7 to i32
+    %9 = shl nuw nsw i32 %8, 16
+    %10 = or i32 %9, %5
+    %11 = getelementptr inbounds i8, i8* %block, i32 2
+    %12 = load i8, i8* %11, align 1, !tbaa !1
+    %13 = zext i8 %12 to i32
+    %14 = shl nuw nsw i32 %13, 8
+    %15 = or i32 %10, %14
+    %16 = getelementptr inbounds i8, i8* %block, i32 3
+    %17 = load i8, i8* %16, align 1, !tbaa !1
+    %18 = zext i8 %17 to i32
+    %19 = or i32 %15, %18
+    store i32 %19, i32* %l, align 4, !tbaa !4
+    %20 = getelementptr inbounds i8, i8* %block, i32 4
+    %21 = load i8, i8* %20, align 1, !tbaa !1
+    %22 = zext i8 %21 to i32
+    %23 = shl nuw i32 %22, 24
+    %24 = getelementptr inbounds i8, i8* %block, i32 5
+    %25 = load i8, i8* %24, align 1, !tbaa !1
+    %26 = zext i8 %25 to i32
+    %27 = shl nuw nsw i32 %26, 16
+    %28 = or i32 %27, %23
+    %29 = getelementptr inbounds i8, i8* %block, i32 6
+    %30 = load i8, i8* %29, align 1, !tbaa !1
+    %31 = zext i8 %30 to i32
+    %32 = shl nuw nsw i32 %31, 8
+    %33 = or i32 %28, %32
+    %34 = getelementptr inbounds i8, i8* %block, i32 7
+    %35 = load i8, i8* %34, align 1, !tbaa !1
+    %36 = zext i8 %35 to i32
+    %37 = or i32 %33, %36
+    store i32 %37, i32* %r, align 4, !tbaa !4
+    call void @br_des_do_IP(i32* nonnull %l, i32* nonnull %r) #3
+    %38 = icmp eq i32 %num_rounds, 0
+    br i1 %38, label %._crit_edge, label %.lr.ph.preheader
+  
+  .lr.ph.preheader:                                 ; preds = %0
+    %.pre = load i32, i32* %l, align 4, !tbaa !4
+    %.pre4 = load i32, i32* %r, align 4, !tbaa !4
+    br label %.lr.ph
+  
+  .lr.ph:                                           ; preds = %process_block_unit.exit, %.lr.ph.preheader
+    %39 = phi i32 [ %r.02.i, %process_block_unit.exit ], [ %.pre4, %.lr.ph.preheader ]
+    %40 = phi i32 [ %101, %process_block_unit.exit ], [ %.pre, %.lr.ph.preheader ]
+    %.03 = phi i32 [ %102, %process_block_unit.exit ], [ %num_rounds, %.lr.ph.preheader ]
+    %.012 = phi i32* [ %103, %process_block_unit.exit ], [ %skey, %.lr.ph.preheader ]
+    br label %41
+  
+  ; <label>:41                                      ; preds = %41, %.lr.ph
+    %lsr.iv = phi i32 [ %lsr.iv.next, %41 ], [ 0, %.lr.ph ]
+    %r.02.i = phi i32 [ %39, %.lr.ph ], [ %101, %41 ]
+    %l.01.i = phi i32 [ %40, %.lr.ph ], [ %r.02.i, %41 ]
+    %42 = bitcast i32* %.012 to i8*
+    %uglygep3 = getelementptr i8, i8* %42, i32 %lsr.iv
+    %uglygep34 = bitcast i8* %uglygep3 to i32*
+    %43 = load i32, i32* %uglygep34, align 4, !tbaa !4
+    %uglygep = getelementptr i8, i8* %42, i32 %lsr.iv
+    %uglygep2 = bitcast i8* %uglygep to i32*
+    %scevgep = getelementptr i32, i32* %uglygep2, i32 1
+    %44 = load i32, i32* %scevgep, align 4, !tbaa !4
+    %45 = shl i32 %r.02.i, 16
+    %46 = lshr i32 %r.02.i, 16
+    %47 = or i32 %45, %46
+    %48 = lshr i32 %47, 11
+    %49 = lshr i32 %43, 18
+    %50 = xor i32 %49, %48
+    %51 = and i32 %50, 63
+    %52 = getelementptr inbounds [64 x i32], [64 x i32]* @S1, i32 0, i32 %51
+    %53 = load i32, i32* %52, align 4, !tbaa !4
+    %54 = lshr i32 %r.02.i, 23
+    %55 = lshr i32 %43, 12
+    %56 = xor i32 %55, %54
+    %57 = and i32 %56, 63
+    %58 = getelementptr inbounds [64 x i32], [64 x i32]* @S2, i32 0, i32 %57
+    %59 = load i32, i32* %58, align 4, !tbaa !4
+    %60 = or i32 %59, %53
+    %61 = lshr i32 %r.02.i, 19
+    %62 = lshr i32 %43, 6
+    %63 = xor i32 %62, %61
+    %64 = and i32 %63, 63
+    %65 = getelementptr inbounds [64 x i32], [64 x i32]* @S3, i32 0, i32 %64
+    %66 = load i32, i32* %65, align 4, !tbaa !4
+    %67 = or i32 %60, %66
+    %68 = lshr i32 %r.02.i, 15
+    %69 = xor i32 %43, %68
+    %70 = and i32 %69, 63
+    %71 = getelementptr inbounds [64 x i32], [64 x i32]* @S4, i32 0, i32 %70
+    %72 = load i32, i32* %71, align 4, !tbaa !4
+    %73 = or i32 %67, %72
+    %74 = lshr i32 %r.02.i, 11
+    %75 = lshr i32 %44, 18
+    %76 = xor i32 %75, %74
+    %77 = and i32 %76, 63
+    %78 = getelementptr inbounds [64 x i32], [64 x i32]* @S5, i32 0, i32 %77
+    %79 = load i32, i32* %78, align 4, !tbaa !4
+    %80 = or i32 %73, %79
+    %81 = lshr i32 %r.02.i, 7
+    %82 = lshr i32 %44, 12
+    %83 = xor i32 %82, %81
+    %84 = and i32 %83, 63
+    %85 = getelementptr inbounds [64 x i32], [64 x i32]* @S6, i32 0, i32 %84
+    %86 = load i32, i32* %85, align 4, !tbaa !4
+    %87 = or i32 %80, %86
+    %88 = lshr i32 %r.02.i, 3
+    %89 = lshr i32 %44, 6
+    %90 = xor i32 %89, %88
+    %91 = and i32 %90, 63
+    %92 = getelementptr inbounds [64 x i32], [64 x i32]* @S7, i32 0, i32 %91
+    %93 = load i32, i32* %92, align 4, !tbaa !4
+    %94 = or i32 %87, %93
+    %95 = lshr i32 %47, 15
+    %96 = xor i32 %44, %95
+    %97 = and i32 %96, 63
+    %98 = getelementptr inbounds [64 x i32], [64 x i32]* @S8, i32 0, i32 %97
+    %99 = load i32, i32* %98, align 4, !tbaa !4
+    %100 = or i32 %94, %99
+    %101 = xor i32 %100, %l.01.i
+    %lsr.iv.next = add nuw nsw i32 %lsr.iv, 8
+    %exitcond.i = icmp eq i32 %lsr.iv.next, 128
+    br i1 %exitcond.i, label %process_block_unit.exit, label %41
+  
+  process_block_unit.exit:                          ; preds = %41
+    %102 = add i32 %.03, -1
+    store i32 %101, i32* %l, align 4, !tbaa !4
+    store i32 %r.02.i, i32* %r, align 4, !tbaa !4
+    %103 = getelementptr inbounds i32, i32* %.012, i32 32
+    %104 = icmp eq i32 %102, 0
+    br i1 %104, label %._crit_edge, label %.lr.ph
+  
+  ._crit_edge:                                      ; preds = %process_block_unit.exit, %0
+    %105 = bitcast i32* %r to i8*
+    %106 = bitcast i32* %l to i8*
+    call void @br_des_do_invIP(i32* nonnull %l, i32* nonnull %r) #3
+    %107 = load i32, i32* %l, align 4, !tbaa !4
+    %108 = lshr i32 %107, 24
+    %109 = trunc i32 %108 to i8
+    store i8 %109, i8* %block, align 1, !tbaa !1
+    %110 = lshr i32 %107, 16
+    %111 = trunc i32 %110 to i8
+    %sunkaddr = ptrtoint i8* %block to i32
+    %sunkaddr5 = add i32 %sunkaddr, 1
+    %sunkaddr6 = inttoptr i32 %sunkaddr5 to i8*
+    store i8 %111, i8* %sunkaddr6, align 1, !tbaa !1
+    %112 = lshr i32 %107, 8
+    %113 = trunc i32 %112 to i8
+    %sunkaddr7 = ptrtoint i8* %block to i32
+    %sunkaddr8 = add i32 %sunkaddr7, 2
+    %sunkaddr9 = inttoptr i32 %sunkaddr8 to i8*
+    store i8 %113, i8* %sunkaddr9, align 1, !tbaa !1
+    %114 = trunc i32 %107 to i8
+    %sunkaddr10 = ptrtoint i8* %block to i32
+    %sunkaddr11 = add i32 %sunkaddr10, 3
+    %sunkaddr12 = inttoptr i32 %sunkaddr11 to i8*
+    store i8 %114, i8* %sunkaddr12, align 1, !tbaa !1
+    %115 = load i32, i32* %r, align 4, !tbaa !4
+    %116 = lshr i32 %115, 24
+    %117 = trunc i32 %116 to i8
+    %sunkaddr13 = ptrtoint i8* %block to i32
+    %sunkaddr14 = add i32 %sunkaddr13, 4
+    %sunkaddr15 = inttoptr i32 %sunkaddr14 to i8*
+    store i8 %117, i8* %sunkaddr15, align 1, !tbaa !1
+    %118 = lshr i32 %115, 16
+    %119 = trunc i32 %118 to i8
+    %sunkaddr16 = ptrtoint i8* %block to i32
+    %sunkaddr17 = add i32 %sunkaddr16, 5
+    %sunkaddr18 = inttoptr i32 %sunkaddr17 to i8*
+    store i8 %119, i8* %sunkaddr18, align 1, !tbaa !1
+    %120 = lshr i32 %115, 8
+    %121 = trunc i32 %120 to i8
+    %sunkaddr19 = ptrtoint i8* %block to i32
+    %sunkaddr20 = add i32 %sunkaddr19, 6
+    %sunkaddr21 = inttoptr i32 %sunkaddr20 to i8*
+    store i8 %121, i8* %sunkaddr21, align 1, !tbaa !1
+    %122 = trunc i32 %115 to i8
+    %sunkaddr22 = ptrtoint i8* %block to i32
+    %sunkaddr23 = add i32 %sunkaddr22, 7
+    %sunkaddr24 = inttoptr i32 %sunkaddr23 to i8*
+    store i8 %122, i8* %sunkaddr24, align 1, !tbaa !1
+    call void @llvm.lifetime.end(i64 4, i8* %105) #3
+    call void @llvm.lifetime.end(i64 4, i8* %106) #3
+    ret void
+  }
+  
+  ; Function Attrs: argmemonly nounwind
+  declare void @llvm.lifetime.start(i64, i8* nocapture) #1
+  
+  declare void @br_des_do_IP(i32*, i32*) #2
+  
+  declare void @br_des_do_invIP(i32*, i32*) #2
+  
+  ; Function Attrs: argmemonly nounwind
+  declare void @llvm.lifetime.end(i64, i8* nocapture) #1
+  
+  ; Function Attrs: nounwind
+  define i32 @br_des_tab_keysched(i32* %skey, i8* %key, i32 signext %key_len) #0 {
+    switch i32 %key_len, label %77 [
+      i32 8, label %1
+      i32 16, label %25
+    ]
+  
+  ; <label>:1                                       ; preds = %0
+    tail call void @br_des_keysched_unit(i32* %skey, i8* %key) #3
+    br label %2
+  
+  ; <label>:2                                       ; preds = %23, %1
+    %i.06.i = phi i32 [ 0, %1 ], [ %24, %23 ]
+    %3 = shl i32 %i.06.i, 1
+    %4 = getelementptr inbounds i32, i32* %skey, i32 %3
+    %5 = load i32, i32* %4, align 4, !tbaa !4
+    %6 = or i32 %3, 1
+    %7 = getelementptr inbounds i32, i32* %skey, i32 %6
+    %8 = load i32, i32* %7, align 4, !tbaa !4
+    br label %9
+  
+  ; <label>:9                                       ; preds = %9, %2
+    %j.05.i = phi i32 [ 0, %2 ], [ %22, %9 ]
+    %ur.04.i = phi i32 [ 0, %2 ], [ %19, %9 ]
+    %ul.03.i = phi i32 [ 0, %2 ], [ %14, %9 ]
+    %xr.02.i = phi i32 [ %8, %2 ], [ %21, %9 ]
+    %xl.01.i = phi i32 [ %5, %2 ], [ %20, %9 ]
+    %10 = and i32 %xl.01.i, 1
+    %scevgep7 = getelementptr [28 x i8], [28 x i8]* @PC2left, i32 0, i32 %j.05.i
+    %11 = load i8, i8* %scevgep7, align 1, !tbaa !1
+    %12 = zext i8 %11 to i32
+    %13 = shl i32 %10, %12
+    %14 = or i32 %13, %ul.03.i
+    %15 = and i32 %xr.02.i, 1
+    %scevgep6 = getelementptr [28 x i8], [28 x i8]* @PC2right, i32 0, i32 %j.05.i
+    %16 = load i8, i8* %scevgep6, align 1, !tbaa !1
+    %17 = zext i8 %16 to i32
+    %18 = shl i32 %15, %17
+    %19 = or i32 %18, %ur.04.i
+    %20 = lshr i32 %xl.01.i, 1
+    %21 = lshr i32 %xr.02.i, 1
+    %22 = add nuw nsw i32 %j.05.i, 1
+    %exitcond.i = icmp eq i32 %22, 28
+    br i1 %exitcond.i, label %23, label %9
+  
+  ; <label>:23                                      ; preds = %9
+    store i32 %14, i32* %4, align 4, !tbaa !4
+    store i32 %19, i32* %7, align 4, !tbaa !4
+    %24 = add nuw nsw i32 %i.06.i, 1
+    %exitcond8.i = icmp eq i32 %24, 16
+    br i1 %exitcond8.i, label %keysched_unit.exit, label %2
+  
+  ; <label>:25                                      ; preds = %0
+    tail call void @br_des_keysched_unit(i32* %skey, i8* %key) #3
+    br label %26
+  
+  ; <label>:26                                      ; preds = %47, %25
+    %i.06.i1 = phi i32 [ 0, %25 ], [ %48, %47 ]
+    %27 = shl i32 %i.06.i1, 1
+    %28 = getelementptr inbounds i32, i32* %skey, i32 %27
+    %29 = load i32, i32* %28, align 4, !tbaa !4
+    %30 = or i32 %27, 1
+    %31 = getelementptr inbounds i32, i32* %skey, i32 %30
+    %32 = load i32, i32* %31, align 4, !tbaa !4
+    br label %33
+  
+  ; <label>:33                                      ; preds = %33, %26
+    %j.05.i2 = phi i32 [ 0, %26 ], [ %46, %33 ]
+    %ur.04.i3 = phi i32 [ 0, %26 ], [ %43, %33 ]
+    %ul.03.i4 = phi i32 [ 0, %26 ], [ %38, %33 ]
+    %xr.02.i5 = phi i32 [ %32, %26 ], [ %45, %33 ]
+    %xl.01.i6 = phi i32 [ %29, %26 ], [ %44, %33 ]
+    %34 = and i32 %xl.01.i6, 1
+    %scevgep11 = getelementptr [28 x i8], [28 x i8]* @PC2left, i32 0, i32 %j.05.i2
+    %35 = load i8, i8* %scevgep11, align 1, !tbaa !1
+    %36 = zext i8 %35 to i32
+    %37 = shl i32 %34, %36
+    %38 = or i32 %37, %ul.03.i4
+    %39 = and i32 %xr.02.i5, 1
+    %scevgep10 = getelementptr [28 x i8], [28 x i8]* @PC2right, i32 0, i32 %j.05.i2
+    %40 = load i8, i8* %scevgep10, align 1, !tbaa !1
+    %41 = zext i8 %40 to i32
+    %42 = shl i32 %39, %41
+    %43 = or i32 %42, %ur.04.i3
+    %44 = lshr i32 %xl.01.i6, 1
+    %45 = lshr i32 %xr.02.i5, 1
+    %46 = add nuw nsw i32 %j.05.i2, 1
+    %exitcond.i7 = icmp eq i32 %46, 28
+    br i1 %exitcond.i7, label %47, label %33
+  
+  ; <label>:47                                      ; preds = %33
+    store i32 %38, i32* %28, align 4, !tbaa !4
+    store i32 %43, i32* %31, align 4, !tbaa !4
+    %48 = add nuw nsw i32 %i.06.i1, 1
+    %exitcond8.i8 = icmp eq i32 %48, 16
+    br i1 %exitcond8.i8, label %keysched_unit.exit9, label %26
+  
+  keysched_unit.exit9:                              ; preds = %47
+    %49 = getelementptr inbounds i32, i32* %skey, i32 32
+    %50 = getelementptr inbounds i8, i8* %key, i32 8
+    tail call void @br_des_keysched_unit(i32* %49, i8* %50) #3
+    br label %51
+  
+  ; <label>:51                                      ; preds = %72, %keysched_unit.exit9
+    %i.06.i10 = phi i32 [ 0, %keysched_unit.exit9 ], [ %73, %72 ]
+    %52 = shl i32 %i.06.i10, 1
+    %53 = getelementptr inbounds i32, i32* %49, i32 %52
+    %54 = load i32, i32* %53, align 4, !tbaa !4
+    %55 = or i32 %52, 1
+    %56 = getelementptr inbounds i32, i32* %49, i32 %55
+    %57 = load i32, i32* %56, align 4, !tbaa !4
+    br label %58
+  
+  ; <label>:58                                      ; preds = %58, %51
+    %j.05.i11 = phi i32 [ 0, %51 ], [ %71, %58 ]
+    %ur.04.i12 = phi i32 [ 0, %51 ], [ %68, %58 ]
+    %ul.03.i13 = phi i32 [ 0, %51 ], [ %63, %58 ]
+    %xr.02.i14 = phi i32 [ %57, %51 ], [ %70, %58 ]
+    %xl.01.i15 = phi i32 [ %54, %51 ], [ %69, %58 ]
+    %59 = and i32 %xl.01.i15, 1
+    %scevgep9 = getelementptr [28 x i8], [28 x i8]* @PC2left, i32 0, i32 %j.05.i11
+    %60 = load i8, i8* %scevgep9, align 1, !tbaa !1
+    %61 = zext i8 %60 to i32
+    %62 = shl i32 %59, %61
+    %63 = or i32 %62, %ul.03.i13
+    %64 = and i32 %xr.02.i14, 1
+    %scevgep8 = getelementptr [28 x i8], [28 x i8]* @PC2right, i32 0, i32 %j.05.i11
+    %65 = load i8, i8* %scevgep8, align 1, !tbaa !1
+    %66 = zext i8 %65 to i32
+    %67 = shl i32 %64, %66
+    %68 = or i32 %67, %ur.04.i12
+    %69 = lshr i32 %xl.01.i15, 1
+    %70 = lshr i32 %xr.02.i14, 1
+    %71 = add nuw nsw i32 %j.05.i11, 1
+    %exitcond.i16 = icmp eq i32 %71, 28
+    br i1 %exitcond.i16, label %72, label %58
+  
+  ; <label>:72                                      ; preds = %58
+    store i32 %63, i32* %53, align 4, !tbaa !4
+    store i32 %68, i32* %56, align 4, !tbaa !4
+    %73 = add nuw nsw i32 %i.06.i10, 1
+    %exitcond8.i17 = icmp eq i32 %73, 16
+    br i1 %exitcond8.i17, label %keysched_unit.exit18, label %51
+  
+  keysched_unit.exit18:                             ; preds = %72
+    tail call void @br_des_rev_skey(i32* nonnull %49) #3
+    %74 = getelementptr inbounds i32, i32* %skey, i32 64
+    %75 = bitcast i32* %74 to i8*
+    %76 = bitcast i32* %skey to i8*
+    tail call void @llvm.memcpy.p0i8.p0i8.i32(i8* %75, i8* %76, i32 128, i32 4, i1 false)
+    br label %keysched_unit.exit
+  
+  ; <label>:77                                      ; preds = %0
+    tail call void @br_des_keysched_unit(i32* %skey, i8* %key) #3
+    br label %78
+  
+  ; <label>:78                                      ; preds = %99, %77
+    %i.06.i19 = phi i32 [ 0, %77 ], [ %100, %99 ]
+    %79 = shl i32 %i.06.i19, 1
+    %80 = getelementptr inbounds i32, i32* %skey, i32 %79
+    %81 = load i32, i32* %80, align 4, !tbaa !4
+    %82 = or i32 %79, 1
+    %83 = getelementptr inbounds i32, i32* %skey, i32 %82
+    %84 = load i32, i32* %83, align 4, !tbaa !4
+    br label %85
+  
+  ; <label>:85                                      ; preds = %85, %78
+    %j.05.i20 = phi i32 [ 0, %78 ], [ %98, %85 ]
+    %ur.04.i21 = phi i32 [ 0, %78 ], [ %95, %85 ]
+    %ul.03.i22 = phi i32 [ 0, %78 ], [ %90, %85 ]
+    %xr.02.i23 = phi i32 [ %84, %78 ], [ %97, %85 ]
+    %xl.01.i24 = phi i32 [ %81, %78 ], [ %96, %85 ]
+    %86 = and i32 %xl.01.i24, 1
+    %scevgep5 = getelementptr [28 x i8], [28 x i8]* @PC2left, i32 0, i32 %j.05.i20
+    %87 = load i8, i8* %scevgep5, align 1, !tbaa !1
+    %88 = zext i8 %87 to i32
+    %89 = shl i32 %86, %88
+    %90 = or i32 %89, %ul.03.i22
+    %91 = and i32 %xr.02.i23, 1
+    %scevgep4 = getelementptr [28 x i8], [28 x i8]* @PC2right, i32 0, i32 %j.05.i20
+    %92 = load i8, i8* %scevgep4, align 1, !tbaa !1
+    %93 = zext i8 %92 to i32
+    %94 = shl i32 %91, %93
+    %95 = or i32 %94, %ur.04.i21
+    %96 = lshr i32 %xl.01.i24, 1
+    %97 = lshr i32 %xr.02.i23, 1
+    %98 = add nuw nsw i32 %j.05.i20, 1
+    %exitcond.i25 = icmp eq i32 %98, 28
+    br i1 %exitcond.i25, label %99, label %85
+  
+  ; <label>:99                                      ; preds = %85
+    store i32 %90, i32* %80, align 4, !tbaa !4
+    store i32 %95, i32* %83, align 4, !tbaa !4
+    %100 = add nuw nsw i32 %i.06.i19, 1
+    %exitcond8.i26 = icmp eq i32 %100, 16
+    br i1 %exitcond8.i26, label %keysched_unit.exit27, label %78
+  
+  keysched_unit.exit27:                             ; preds = %99
+    %101 = getelementptr inbounds i32, i32* %skey, i32 32
+    %102 = getelementptr inbounds i8, i8* %key, i32 8
+    tail call void @br_des_keysched_unit(i32* %101, i8* %102) #3
+    br label %103
+  
+  ; <label>:103                                     ; preds = %124, %keysched_unit.exit27
+    %i.06.i28 = phi i32 [ 0, %keysched_unit.exit27 ], [ %125, %124 ]
+    %104 = shl i32 %i.06.i28, 1
+    %105 = getelementptr inbounds i32, i32* %101, i32 %104
+    %106 = load i32, i32* %105, align 4, !tbaa !4
+    %107 = or i32 %104, 1
+    %108 = getelementptr inbounds i32, i32* %101, i32 %107
+    %109 = load i32, i32* %108, align 4, !tbaa !4
+    br label %110
+  
+  ; <label>:110                                     ; preds = %110, %103
+    %j.05.i29 = phi i32 [ 0, %103 ], [ %123, %110 ]
+    %ur.04.i30 = phi i32 [ 0, %103 ], [ %120, %110 ]
+    %ul.03.i31 = phi i32 [ 0, %103 ], [ %115, %110 ]
+    %xr.02.i32 = phi i32 [ %109, %103 ], [ %122, %110 ]
+    %xl.01.i33 = phi i32 [ %106, %103 ], [ %121, %110 ]
+    %111 = and i32 %xl.01.i33, 1
+    %scevgep3 = getelementptr [28 x i8], [28 x i8]* @PC2left, i32 0, i32 %j.05.i29
+    %112 = load i8, i8* %scevgep3, align 1, !tbaa !1
+    %113 = zext i8 %112 to i32
+    %114 = shl i32 %111, %113
+    %115 = or i32 %114, %ul.03.i31
+    %116 = and i32 %xr.02.i32, 1
+    %scevgep2 = getelementptr [28 x i8], [28 x i8]* @PC2right, i32 0, i32 %j.05.i29
+    %117 = load i8, i8* %scevgep2, align 1, !tbaa !1
+    %118 = zext i8 %117 to i32
+    %119 = shl i32 %116, %118
+    %120 = or i32 %119, %ur.04.i30
+    %121 = lshr i32 %xl.01.i33, 1
+    %122 = lshr i32 %xr.02.i32, 1
+    %123 = add nuw nsw i32 %j.05.i29, 1
+    %exitcond.i34 = icmp eq i32 %123, 28
+    br i1 %exitcond.i34, label %124, label %110
+  
+  ; <label>:124                                     ; preds = %110
+    store i32 %115, i32* %105, align 4, !tbaa !4
+    store i32 %120, i32* %108, align 4, !tbaa !4
+    %125 = add nuw nsw i32 %i.06.i28, 1
+    %exitcond8.i35 = icmp eq i32 %125, 16
+    br i1 %exitcond8.i35, label %keysched_unit.exit36, label %103
+  
+  keysched_unit.exit36:                             ; preds = %124
+    tail call void @br_des_rev_skey(i32* nonnull %101) #3
+    %126 = getelementptr inbounds i32, i32* %skey, i32 64
+    %127 = getelementptr inbounds i8, i8* %key, i32 16
+    tail call void @br_des_keysched_unit(i32* %126, i8* %127) #3
+    br label %128
+  
+  ; <label>:128                                     ; preds = %149, %keysched_unit.exit36
+    %i.06.i37 = phi i32 [ 0, %keysched_unit.exit36 ], [ %150, %149 ]
+    %129 = shl i32 %i.06.i37, 1
+    %130 = getelementptr inbounds i32, i32* %126, i32 %129
+    %131 = load i32, i32* %130, align 4, !tbaa !4
+    %132 = or i32 %129, 1
+    %133 = getelementptr inbounds i32, i32* %126, i32 %132
+    %134 = load i32, i32* %133, align 4, !tbaa !4
+    br label %135
+  
+  ; <label>:135                                     ; preds = %135, %128
+    %j.05.i38 = phi i32 [ 0, %128 ], [ %148, %135 ]
+    %ur.04.i39 = phi i32 [ 0, %128 ], [ %145, %135 ]
+    %ul.03.i40 = phi i32 [ 0, %128 ], [ %140, %135 ]
+    %xr.02.i41 = phi i32 [ %134, %128 ], [ %147, %135 ]
+    %xl.01.i42 = phi i32 [ %131, %128 ], [ %146, %135 ]
+    %136 = and i32 %xl.01.i42, 1
+    %scevgep1 = getelementptr [28 x i8], [28 x i8]* @PC2left, i32 0, i32 %j.05.i38
+    %137 = load i8, i8* %scevgep1, align 1, !tbaa !1
+    %138 = zext i8 %137 to i32
+    %139 = shl i32 %136, %138
+    %140 = or i32 %139, %ul.03.i40
+    %141 = and i32 %xr.02.i41, 1
+    %scevgep = getelementptr [28 x i8], [28 x i8]* @PC2right, i32 0, i32 %j.05.i38
+    %142 = load i8, i8* %scevgep, align 1, !tbaa !1
+    %143 = zext i8 %142 to i32
+    %144 = shl i32 %141, %143
+    %145 = or i32 %144, %ur.04.i39
+    %146 = lshr i32 %xl.01.i42, 1
+    %147 = lshr i32 %xr.02.i41, 1
+    %148 = add nuw nsw i32 %j.05.i38, 1
+    %exitcond.i43 = icmp eq i32 %148, 28
+    br i1 %exitcond.i43, label %149, label %135
+  
+  ; <label>:149                                     ; preds = %135
+    store i32 %140, i32* %130, align 4, !tbaa !4
+    store i32 %145, i32* %133, align 4, !tbaa !4
+    %150 = add nuw nsw i32 %i.06.i37, 1
+    %exitcond8.i44 = icmp eq i32 %150, 16
+    br i1 %exitcond8.i44, label %keysched_unit.exit, label %128
+  
+  keysched_unit.exit:                               ; preds = %23, %149, %keysched_unit.exit18
+    %.0 = phi i32 [ 3, %keysched_unit.exit18 ], [ 3, %149 ], [ 1, %23 ]
+    ret i32 %.0
+  }
+  
+  declare void @br_des_rev_skey(i32*) #2
+  
+  ; Function Attrs: argmemonly nounwind
+  declare void @llvm.memcpy.p0i8.p0i8.i32(i8* nocapture, i8* nocapture readonly, i32, i32, i1) #1
+  
+  declare void @br_des_keysched_unit(i32*, i8*) #2
+  
+  attributes #0 = { nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="true" "no-frame-pointer-elim-non-leaf" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #1 = { argmemonly nounwind "target-cpu"="mips32" }
+  attributes #2 = { "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="true" "no-frame-pointer-elim-non-leaf" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #3 = { nounwind }
+  
+  !llvm.ident = !{!0}
+  
+  !0 = !{!"clang version 3.8.0-2ubuntu4 (tags/RELEASE_380/final)"}
+  !1 = !{!2, !2, i64 0}
+  !2 = !{!"omnipotent char", !3, i64 0}
+  !3 = !{!"Simple C/C++ TBAA"}
+  !4 = !{!5, !5, i64 0}
+  !5 = !{!"int", !2, i64 0}
+
+...
+---
+name:            br_des_tab_process_block
+alignment:       2
+exposesReturnsTwice: false
+hasInlineAsm:    false
+isSSA:           true
+tracksRegLiveness: true
+tracksSubRegLiveness: false
+registers:       
+  - { id: 0, class: gpr32 }
+  - { id: 1, class: gpr32 }
+  - { id: 2, class: gpr32 }
+  - { id: 3, class: gpr32 }
+  - { id: 4, class: gpr32 }
+  - { id: 5, class: gpr32 }
+  - { id: 6, class: gpr32 }
+  - { id: 7, class: gpr32 }
+  - { id: 8, class: gpr32 }
+  - { id: 9, class: gpr32 }
+  - { id: 10, class: gpr32 }
+  - { id: 11, class: gpr32 }
+  - { id: 12, class: gpr32 }
+  - { id: 13, class: gpr32 }
+  - { id: 14, class: gpr32 }
+  - { id: 15, class: gpr32 }
+  - { id: 16, class: gpr32 }
+  - { id: 17, class: gpr32 }
+  - { id: 18, class: gpr32 }
+  - { id: 19, class: gpr32 }
+  - { id: 20, class: gpr32 }
+  - { id: 21, class: gpr32 }
+  - { id: 22, class: gpr32 }
+  - { id: 23, class: gpr32 }
+  - { id: 24, class: gpr32 }
+  - { id: 25, class: gpr32 }
+  - { id: 26, class: gpr32 }
+  - { id: 27, class: gpr32 }
+  - { id: 28, class: gpr32 }
+  - { id: 29, class: gpr32 }
+  - { id: 30, class: gpr32 }
+  - { id: 31, class: gpr32 }
+  - { id: 32, class: gpr32 }
+  - { id: 33, class: gpr32 }
+  - { id: 34, class: gpr32 }
+  - { id: 35, class: gpr32 }
+  - { id: 36, class: gpr32 }
+  - { id: 37, class: gpr32 }
+  - { id: 38, class: gpr32 }
+  - { id: 39, class: gpr32 }
+  - { id: 40, class: gpr32 }
+  - { id: 41, class: gpr32 }
+  - { id: 42, class: gpr32 }
+  - { id: 43, class: gpr32 }
+  - { id: 44, class: gpr32 }
+  - { id: 45, class: gpr32 }
+  - { id: 46, class: gpr32 }
+  - { id: 47, class: gpr32 }
+  - { id: 48, class: gpr32 }
+  - { id: 49, class: gpr32 }
+  - { id: 50, class: gpr32 }
+  - { id: 51, class: gpr32 }
+  - { id: 52, class: gpr32 }
+  - { id: 53, class: gpr32 }
+  - { id: 54, class: gpr32 }
+  - { id: 55, class: gpr32 }
+  - { id: 56, class: gpr32 }
+  - { id: 57, class: gpr32 }
+  - { id: 58, class: gpr32 }
+  - { id: 59, class: gpr32 }
+  - { id: 60, class: gpr32 }
+  - { id: 61, class: gpr32 }
+  - { id: 62, class: gpr32 }
+  - { id: 63, class: gpr32 }
+  - { id: 64, class: gpr32 }
+  - { id: 65, class: gpr32 }
+  - { id: 66, class: gpr32 }
+  - { id: 67, class: gpr32 }
+  - { id: 68, class: gpr32 }
+  - { id: 69, class: gpr32 }
+  - { id: 70, class: gpr32 }
+  - { id: 71, class: gpr32 }
+  - { id: 72, class: gpr32 }
+  - { id: 73, class: gpr32 }
+  - { id: 74, class: gpr32 }
+  - { id: 75, class: gpr32 }
+  - { id: 76, class: gpr32 }
+  - { id: 77, class: gpr32 }
+  - { id: 78, class: gpr32 }
+  - { id: 79, class: gpr32 }
+  - { id: 80, class: gpr32 }
+  - { id: 81, class: gpr32 }
+  - { id: 82, class: gpr32 }
+  - { id: 83, class: gpr32 }
+  - { id: 84, class: gpr32 }
+  - { id: 85, class: gpr32 }
+  - { id: 86, class: gpr32 }
+  - { id: 87, class: gpr32 }
+  - { id: 88, class: gpr32 }
+  - { id: 89, class: gpr32 }
+  - { id: 90, class: gpr32 }
+  - { id: 91, class: gpr32 }
+  - { id: 92, class: gpr32 }
+  - { id: 93, class: gpr32 }
+  - { id: 94, class: gpr32 }
+  - { id: 95, class: gpr32 }
+  - { id: 96, class: gpr32 }
+  - { id: 97, class: gpr32 }
+  - { id: 98, class: gpr32 }
+  - { id: 99, class: gpr32 }
+  - { id: 100, class: gpr32 }
+  - { id: 101, class: gpr32 }
+  - { id: 102, class: gpr32 }
+  - { id: 103, class: gpr32 }
+  - { id: 104, class: gpr32 }
+  - { id: 105, class: gpr32 }
+  - { id: 106, class: gpr32 }
+  - { id: 107, class: gpr32 }
+  - { id: 108, class: gpr32 }
+  - { id: 109, class: gpr32 }
+  - { id: 110, class: gpr32 }
+  - { id: 111, class: gpr32 }
+  - { id: 112, class: gpr32 }
+  - { id: 113, class: gpr32 }
+  - { id: 114, class: gpr32 }
+  - { id: 115, class: gpr32 }
+  - { id: 116, class: gpr32 }
+  - { id: 117, class: gpr32 }
+  - { id: 118, class: gpr32 }
+  - { id: 119, class: gpr32 }
+  - { id: 120, class: gpr32 }
+  - { id: 121, class: gpr32 }
+  - { id: 122, class: gpr32 }
+  - { id: 123, class: gpr32 }
+  - { id: 124, class: gpr32 }
+  - { id: 125, class: gpr32 }
+  - { id: 126, class: gpr32 }
+  - { id: 127, class: gpr32 }
+  - { id: 128, class: gpr32 }
+  - { id: 129, class: gpr32 }
+  - { id: 130, class: gpr32 }
+  - { id: 131, class: gpr32 }
+  - { id: 132, class: gpr32 }
+  - { id: 133, class: gpr32 }
+  - { id: 134, class: gpr32 }
+  - { id: 135, class: gpr32 }
+liveins:         
+  - { reg: '%a0', virtual-reg: '%13' }
+  - { reg: '%a1', virtual-reg: '%14' }
+  - { reg: '%a2', virtual-reg: '%15' }
+  - { reg: '%t9' }
+  - { reg: '%v0' }
+frameInfo:       
+  isFrameAddressTaken: false
+  isReturnAddressTaken: false
+  hasStackMap:     false
+  hasPatchPoint:   false
+  stackSize:       0
+  offsetAdjustment: 0
+  maxAlignment:    4
+  adjustsStack:    false
+  hasCalls:        true
+  maxCallFrameSize: 0
+  hasOpaqueSPAdjustment: false
+  hasVAStart:      false
+  hasMustTailInVarArgFunc: false
+stack:           
+  - { id: 0, name: l, offset: 0, size: 4, alignment: 4 }
+  - { id: 1, name: r, offset: 0, size: 4, alignment: 4 }
+body:             |
+  bb.0 (%ir-block.0, freq 12):
+    successors: %bb.5.._crit_edge(37), %bb.1..lr.ph.preheader(62)
+    liveins: %a0, %a1, %a2, %t9, %v0
+  
+    %16 = ADDu %v0, %t9
+    %15 = COPY %a2
+    %14 = COPY %a1
+    %13 = COPY %a0
+    %17 = LBu %15, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 1 from %ir.block, !tbaa !1)
+    %18 = SLL killed %17, 24
+    %19 = LBu %15, 1, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 1 from %ir.6, !tbaa !1)
+    %20 = SLL killed %19, 16
+    %21 = OR killed %20, killed %18
+    %22 = LBu %15, 2, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 1 from %ir.11, !tbaa !1)
+    %23 = SLL killed %22, 8
+    %24 = LEA_ADDiu %stack.0.l, 0
+    %25 = LEA_ADDiu %stack.1.r, 0
+    %26 = OR killed %21, killed %23
+    %27 = LBu %15, 3, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 1 from %ir.16, !tbaa !1)
+    %28 = OR killed %26, killed %27
+    SW killed %28, %stack.0.l, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.l, !tbaa !4)
+    %29 = LBu %15, 4, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 1 from %ir.20, !tbaa !1)
+    %30 = SLL killed %29, 24
+    %31 = LBu %15, 5, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 1 from %ir.24, !tbaa !1)
+    %32 = SLL killed %31, 16
+    %33 = OR killed %32, killed %30
+    %34 = LBu %15, 6, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 1 from %ir.29, !tbaa !1)
+    %35 = SLL killed %34, 8
+    %36 = OR killed %33, killed %35
+    %37 = LBu %15, 7, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 1 from %ir.34, !tbaa !1)
+    %38 = OR killed %36, killed %37
+    SW killed %38, %stack.1.r, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.r, !tbaa !4)
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %39 = LW %16, target-flags(<unknown>) @br_des_do_IP, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @br_des_do_IP)
+    %a0 = COPY %24
+    %a1 = COPY %25
+    %gp = COPY %16
+    %t9 = COPY %39
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %gp, implicit-def %sp
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    BEQ %13, %zero, %bb.5.._crit_edge, implicit-def dead %at
+    B %bb.1..lr.ph.preheader, implicit-def dead %at
+  
+  bb.1..lr.ph.preheader (freq 8):
+    successors: %bb.2..lr.ph(100)
+  
+    %1 = LW %stack.1.r, 0, <0x3d38680> = !{!"unison-memory-partition", i32 6} :: (load 4 from %ir.r, !tbaa !4)
+    %0 = LW %stack.0.l, 0, <0x3cb7f80> = !{!"unison-memory-partition", i32 7} :: (load 4 from %ir.l, !tbaa !4)
+    %56 = LW %16, target-flags(<unknown>) @S1, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %61 = ADDiu %56, target-flags(<unknown>) @S1
+    %62 = LW %16, target-flags(<unknown>) @S2, <0x3cbcd30> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %66 = LW %16, target-flags(<unknown>) @S6, <0x3d4b2b0> = !{!"unison-memory-partition", i32 2} :: (load 4 from got)
+    %67 = ADDiu %zero, 128
+    %74 = ADDiu %62, target-flags(<unknown>) @S2
+    %75 = LW %16, target-flags(<unknown>) @S3, <0x3cf40e0> = !{!"unison-memory-partition", i32 3} :: (load 4 from got)
+    %76 = LW %16, target-flags(<unknown>) @S4, <0x3d56ef0> = !{!"unison-memory-partition", i32 4} :: (load 4 from got)
+    %77 = LW %16, target-flags(<unknown>) @S7, <0x3d56fc0> = !{!"unison-memory-partition", i32 5} :: (load 4 from got)
+    %78 = LW %16, target-flags(<unknown>) @S5, <0x3d4cfb0> = !{!"unison-memory-partition", i32 8} :: (load 4 from got)
+    %86 = ADDiu %78, target-flags(<unknown>) @S5
+    %90 = ADDiu %77, target-flags(<unknown>) @S7
+    %91 = ADDiu %76, target-flags(<unknown>) @S4
+    %92 = ADDiu %75, target-flags(<unknown>) @S3
+    %108 = LW %16, target-flags(<unknown>) @S8, <0x3d4d0c0> = !{!"unison-memory-partition", i32 9} :: (load 4 from got)
+    %109 = ADDiu %108, target-flags(<unknown>) @S8
+    %117 = ADDiu %66, target-flags(<unknown>) @S6
+  
+  bb.2..lr.ph (freq 255):
+    successors: %bb.3(100)
+  
+    %2 = PHI %1, %bb.1..lr.ph.preheader, %7, %bb.4.process_block_unit.exit
+    %3 = PHI %0, %bb.1..lr.ph.preheader, %9, %bb.4.process_block_unit.exit
+    %4 = PHI %13, %bb.1..lr.ph.preheader, %11, %bb.4.process_block_unit.exit
+    %5 = PHI %14, %bb.1..lr.ph.preheader, %12, %bb.4.process_block_unit.exit
+    %40 = ADDiu %zero, 0
+  
+  bb.3 (%ir-block.41, freq 8191):
+    successors: %bb.4.process_block_unit.exit(3), %bb.3(96)
+  
+    %6 = PHI %40, %bb.2..lr.ph, %10, %bb.3
+    %7 = PHI %2, %bb.2..lr.ph, %9, %bb.3
+    %8 = PHI %3, %bb.2..lr.ph, %7, %bb.3
+    %41 = ADDu %5, %6
+    %42 = LW %41, 4, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.scevgep, !tbaa !4)
+    %43 = LW %41, 0, <0x3cbcd30> = !{!"unison-memory-partition", i32 1} :: (load 4 from %ir.uglygep34, !tbaa !4)
+    %44 = SRL %43, 18
+    %45 = SRL %42, 6
+    %46 = ROTR %7, 16
+    %47 = SRL %46, 11
+    %48 = SRL %7, 3
+    %49 = XOR killed %45, killed %48
+    %50 = SRL %42, 18
+    %51 = SRL %43, 12
+    %52 = XOR killed %44, killed %47
+    %53 = SRL %7, 15
+    %54 = SRL %7, 11
+    %55 = SRL %7, 23
+    %57 = ANDi killed %52, 63
+    %10 = ADDiu %6, 8
+    %58 = XOR killed %51, killed %55
+    %59 = XOR killed %50, killed %54
+    %60 = XOR %43, killed %53
+    %63 = ANDi killed %49, 63
+    %64 = SRL %46, 15
+    %65 = SRL %7, 7
+    %68 = SLL killed %57, 2
+    %69 = ADDu %61, killed %68
+    %70 = LW killed %69, 0, <0x3d4b2b0> = !{!"unison-memory-partition", i32 2} :: (load 4 from %ir.52, !tbaa !4)
+    %71 = ANDi killed %60, 63
+    %72 = ANDi killed %59, 63
+    %73 = ANDi killed %58, 63
+    %79 = SLL killed %73, 2
+    %80 = ADDu %74, killed %79
+    %81 = SRL %43, 6
+    %82 = SRL %7, 19
+    %83 = XOR killed %81, killed %82
+    %84 = LW killed %80, 0, <0x3cf40e0> = !{!"unison-memory-partition", i32 3} :: (load 4 from %ir.58, !tbaa !4)
+    %85 = SLL killed %72, 2
+    %87 = ADDu %86, killed %85
+    %88 = SLL killed %63, 2
+    %89 = SLL killed %71, 2
+    %93 = SRL %42, 12
+    %94 = OR killed %84, killed %70
+    %95 = ANDi killed %83, 63
+    %96 = SLL killed %95, 2
+    %97 = ADDu %92, killed %96
+    %98 = LW killed %97, 0, <0x3d56ef0> = !{!"unison-memory-partition", i32 4} :: (load 4 from %ir.65, !tbaa !4)
+    %99 = OR killed %94, killed %98
+    %100 = ADDu %91, killed %89
+    %101 = LW killed %100, 0, <0x3d56fc0> = !{!"unison-memory-partition", i32 5} :: (load 4 from %ir.71, !tbaa !4)
+    %102 = OR killed %99, killed %101
+    %103 = ADDu %90, killed %88
+    %104 = LW killed %87, 0, <0x3d38680> = !{!"unison-memory-partition", i32 6} :: (load 4 from %ir.78, !tbaa !4)
+    %105 = XOR %42, killed %64
+    %106 = ANDi killed %105, 63
+    %107 = SLL killed %106, 2
+    %110 = ADDu %109, killed %107
+    %111 = LW killed %110, 0, <0x3cb7f80> = !{!"unison-memory-partition", i32 7} :: (load 4 from %ir.98, !tbaa !4)
+    %112 = OR killed %102, killed %104
+    %113 = LW killed %103, 0, <0x3d4cfb0> = !{!"unison-memory-partition", i32 8} :: (load 4 from %ir.92, !tbaa !4)
+    %114 = XOR killed %93, killed %65
+    %115 = ANDi killed %114, 63
+    %116 = SLL killed %115, 2
+    %118 = ADDu %117, killed %116
+    %119 = LW killed %118, 0, <0x3d4d0c0> = !{!"unison-memory-partition", i32 9} :: (load 4 from %ir.85, !tbaa !4)
+    %120 = OR killed %112, killed %119
+    %121 = OR killed %120, killed %113
+    %122 = OR killed %121, killed %111
+    %9 = XOR killed %122, %8
+    BNE %10, %67, %bb.3, implicit-def dead %at
+    B %bb.4.process_block_unit.exit, implicit-def dead %at
+  
+  bb.4.process_block_unit.exit (freq 255):
+    successors: %bb.5.._crit_edge(3), %bb.2..lr.ph(96)
+  
+    SW %9, %stack.0.l, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.l, !tbaa !4)
+    SW %7, %stack.1.r, 0, <0x3cbcd30> = !{!"unison-memory-partition", i32 1} :: (store 4 into %ir.r, !tbaa !4)
+    %12 = ADDiu %5, 128
+    %11 = ADDiu %4, -1
+    BNE %11, %zero, %bb.2..lr.ph, implicit-def dead %at
+    B %bb.5.._crit_edge, implicit-def dead %at
+  
+  bb.5.._crit_edge (freq 12):
+    liveouts:
+  
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %123 = LW %16, target-flags(<unknown>) @br_des_do_invIP, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @br_des_do_invIP)
+    %124 = LEA_ADDiu %stack.0.l, 0
+    %125 = LEA_ADDiu %stack.1.r, 0
+    %a0 = COPY %124
+    %a1 = COPY %125
+    %gp = COPY %16
+    %t9 = COPY %123
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %gp, implicit-def %sp
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    %126 = LW %stack.0.l, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.l, !tbaa !4)
+    %127 = SRL %126, 24
+    SB killed %127, %15, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.block, !tbaa !1)
+    %128 = SRL %126, 16
+    SB killed %128, %15, 1, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.sunkaddr6, !tbaa !1)
+    %129 = SRL %126, 8
+    SB killed %129, %15, 2, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.sunkaddr9, !tbaa !1)
+    SB %126, %15, 3, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.sunkaddr12, !tbaa !1)
+    %130 = LW %stack.1.r, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.r, !tbaa !4)
+    %131 = SRL %130, 24
+    SB killed %131, %15, 4, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.sunkaddr15, !tbaa !1)
+    %132 = SRL %130, 16
+    SB killed %132, %15, 5, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.sunkaddr18, !tbaa !1)
+    %133 = SRL %130, 8
+    SB killed %133, %15, 6, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.sunkaddr21, !tbaa !1)
+    SB %130, %15, 7, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 1 into %ir.sunkaddr24, !tbaa !1)
+    RetRA
+
+...
+---
+name:            br_des_tab_keysched
+alignment:       2
+exposesReturnsTwice: false
+hasInlineAsm:    false
+isSSA:           true
+tracksRegLiveness: true
+tracksSubRegLiveness: false
+registers:       
+  - { id: 0, class: gpr32 }
+  - { id: 1, class: gpr32 }
+  - { id: 2, class: gpr32 }
+  - { id: 3, class: gpr32 }
+  - { id: 4, class: gpr32 }
+  - { id: 5, class: gpr32 }
+  - { id: 6, class: gpr32 }
+  - { id: 7, class: gpr32 }
+  - { id: 8, class: gpr32 }
+  - { id: 9, class: gpr32 }
+  - { id: 10, class: gpr32 }
+  - { id: 11, class: gpr32 }
+  - { id: 12, class: gpr32 }
+  - { id: 13, class: gpr32 }
+  - { id: 14, class: gpr32 }
+  - { id: 15, class: gpr32 }
+  - { id: 16, class: gpr32 }
+  - { id: 17, class: gpr32 }
+  - { id: 18, class: gpr32 }
+  - { id: 19, class: gpr32 }
+  - { id: 20, class: gpr32 }
+  - { id: 21, class: gpr32 }
+  - { id: 22, class: gpr32 }
+  - { id: 23, class: gpr32 }
+  - { id: 24, class: gpr32 }
+  - { id: 25, class: gpr32 }
+  - { id: 26, class: gpr32 }
+  - { id: 27, class: gpr32 }
+  - { id: 28, class: gpr32 }
+  - { id: 29, class: gpr32 }
+  - { id: 30, class: gpr32 }
+  - { id: 31, class: gpr32 }
+  - { id: 32, class: gpr32 }
+  - { id: 33, class: gpr32 }
+  - { id: 34, class: gpr32 }
+  - { id: 35, class: gpr32 }
+  - { id: 36, class: gpr32 }
+  - { id: 37, class: gpr32 }
+  - { id: 38, class: gpr32 }
+  - { id: 39, class: gpr32 }
+  - { id: 40, class: gpr32 }
+  - { id: 41, class: gpr32 }
+  - { id: 42, class: gpr32 }
+  - { id: 43, class: gpr32 }
+  - { id: 44, class: gpr32 }
+  - { id: 45, class: gpr32 }
+  - { id: 46, class: gpr32 }
+  - { id: 47, class: gpr32 }
+  - { id: 48, class: gpr32 }
+  - { id: 49, class: gpr32 }
+  - { id: 50, class: gpr32 }
+  - { id: 51, class: gpr32 }
+  - { id: 52, class: gpr32 }
+  - { id: 53, class: gpr32 }
+  - { id: 54, class: gpr32 }
+  - { id: 55, class: gpr32 }
+  - { id: 56, class: gpr32 }
+  - { id: 57, class: gpr32 }
+  - { id: 58, class: gpr32 }
+  - { id: 59, class: gpr32 }
+  - { id: 60, class: gpr32 }
+  - { id: 61, class: gpr32 }
+  - { id: 62, class: gpr32 }
+  - { id: 63, class: gpr32 }
+  - { id: 64, class: gpr32 }
+  - { id: 65, class: gpr32 }
+  - { id: 66, class: gpr32 }
+  - { id: 67, class: gpr32 }
+  - { id: 68, class: gpr32 }
+  - { id: 69, class: gpr32 }
+  - { id: 70, class: gpr32 }
+  - { id: 71, class: gpr32 }
+  - { id: 72, class: gpr32 }
+  - { id: 73, class: gpr32 }
+  - { id: 74, class: gpr32 }
+  - { id: 75, class: gpr32 }
+  - { id: 76, class: gpr32 }
+  - { id: 77, class: gpr32 }
+  - { id: 78, class: gpr32 }
+  - { id: 79, class: gpr32 }
+  - { id: 80, class: gpr32 }
+  - { id: 81, class: gpr32 }
+  - { id: 82, class: gpr32 }
+  - { id: 83, class: gpr32 }
+  - { id: 84, class: gpr32 }
+  - { id: 85, class: gpr32 }
+  - { id: 86, class: gpr32 }
+  - { id: 87, class: gpr32 }
+  - { id: 88, class: gpr32 }
+  - { id: 89, class: gpr32 }
+  - { id: 90, class: gpr32 }
+  - { id: 91, class: gpr32 }
+  - { id: 92, class: gpr32 }
+  - { id: 93, class: gpr32 }
+  - { id: 94, class: gpr32 }
+  - { id: 95, class: gpr32 }
+  - { id: 96, class: gpr32 }
+  - { id: 97, class: gpr32 }
+  - { id: 98, class: gpr32 }
+  - { id: 99, class: gpr32 }
+  - { id: 100, class: gpr32 }
+  - { id: 101, class: gpr32 }
+  - { id: 102, class: gpr32 }
+  - { id: 103, class: gpr32 }
+  - { id: 104, class: gpr32 }
+  - { id: 105, class: gpr32 }
+  - { id: 106, class: gpr32 }
+  - { id: 107, class: gpr32 }
+  - { id: 108, class: gpr32 }
+  - { id: 109, class: gpr32 }
+  - { id: 110, class: gpr32 }
+  - { id: 111, class: gpr32 }
+  - { id: 112, class: gpr32 }
+  - { id: 113, class: gpr32 }
+  - { id: 114, class: gpr32 }
+  - { id: 115, class: gpr32 }
+  - { id: 116, class: gpr32 }
+  - { id: 117, class: gpr32 }
+  - { id: 118, class: gpr32 }
+  - { id: 119, class: gpr32 }
+  - { id: 120, class: gpr32 }
+  - { id: 121, class: gpr32 }
+  - { id: 122, class: gpr32 }
+  - { id: 123, class: gpr32 }
+  - { id: 124, class: gpr32 }
+  - { id: 125, class: gpr32 }
+  - { id: 126, class: gpr32 }
+  - { id: 127, class: gpr32 }
+  - { id: 128, class: gpr32 }
+  - { id: 129, class: gpr32 }
+  - { id: 130, class: gpr32 }
+  - { id: 131, class: gpr32 }
+  - { id: 132, class: gpr32 }
+  - { id: 133, class: gpr32 }
+  - { id: 134, class: gpr32 }
+  - { id: 135, class: gpr32 }
+  - { id: 136, class: gpr32 }
+  - { id: 137, class: gpr32 }
+  - { id: 138, class: gpr32 }
+  - { id: 139, class: gpr32 }
+  - { id: 140, class: gpr32 }
+  - { id: 141, class: gpr32 }
+  - { id: 142, class: gpr32 }
+  - { id: 143, class: gpr32 }
+  - { id: 144, class: gpr32 }
+  - { id: 145, class: gpr32 }
+  - { id: 146, class: gpr32 }
+  - { id: 147, class: gpr32 }
+  - { id: 148, class: gpr32 }
+  - { id: 149, class: gpr32 }
+  - { id: 150, class: gpr32 }
+  - { id: 151, class: gpr32 }
+  - { id: 152, class: gpr32 }
+  - { id: 153, class: gpr32 }
+  - { id: 154, class: gpr32 }
+  - { id: 155, class: gpr32 }
+  - { id: 156, class: gpr32 }
+  - { id: 157, class: gpr32 }
+  - { id: 158, class: gpr32 }
+  - { id: 159, class: gpr32 }
+  - { id: 160, class: gpr32 }
+  - { id: 161, class: gpr32 }
+  - { id: 162, class: gpr32 }
+  - { id: 163, class: gpr32 }
+  - { id: 164, class: gpr32 }
+  - { id: 165, class: gpr32 }
+  - { id: 166, class: gpr32 }
+  - { id: 167, class: gpr32 }
+  - { id: 168, class: gpr32 }
+  - { id: 169, class: gpr32 }
+  - { id: 170, class: gpr32 }
+  - { id: 171, class: gpr32 }
+  - { id: 172, class: gpr32 }
+  - { id: 173, class: gpr32 }
+  - { id: 174, class: gpr32 }
+  - { id: 175, class: gpr32 }
+  - { id: 176, class: gpr32 }
+  - { id: 177, class: gpr32 }
+  - { id: 178, class: gpr32 }
+  - { id: 179, class: gpr32 }
+  - { id: 180, class: gpr32 }
+  - { id: 181, class: gpr32 }
+  - { id: 182, class: gpr32 }
+  - { id: 183, class: gpr32 }
+  - { id: 184, class: gpr32 }
+  - { id: 185, class: gpr32 }
+  - { id: 186, class: gpr32 }
+  - { id: 187, class: gpr32 }
+  - { id: 188, class: gpr32 }
+  - { id: 189, class: gpr32 }
+  - { id: 190, class: gpr32 }
+  - { id: 191, class: gpr32 }
+  - { id: 192, class: gpr32 }
+  - { id: 193, class: gpr32 }
+  - { id: 194, class: gpr32 }
+  - { id: 195, class: gpr32 }
+  - { id: 196, class: gpr32 }
+  - { id: 197, class: gpr32 }
+  - { id: 198, class: gpr32 }
+  - { id: 199, class: gpr32 }
+  - { id: 200, class: gpr32 }
+  - { id: 201, class: gpr32 }
+  - { id: 202, class: gpr32 }
+  - { id: 203, class: gpr32 }
+  - { id: 204, class: gpr32 }
+  - { id: 205, class: gpr32 }
+  - { id: 206, class: gpr32 }
+  - { id: 207, class: gpr32 }
+  - { id: 208, class: gpr32 }
+  - { id: 209, class: gpr32 }
+  - { id: 210, class: gpr32 }
+  - { id: 211, class: gpr32 }
+  - { id: 212, class: gpr32 }
+  - { id: 213, class: gpr32 }
+  - { id: 214, class: gpr32 }
+  - { id: 215, class: gpr32 }
+  - { id: 216, class: gpr32 }
+  - { id: 217, class: gpr32 }
+  - { id: 218, class: gpr32 }
+  - { id: 219, class: gpr32 }
+  - { id: 220, class: gpr32 }
+  - { id: 221, class: gpr32 }
+  - { id: 222, class: gpr32 }
+  - { id: 223, class: gpr32 }
+  - { id: 224, class: gpr32 }
+  - { id: 225, class: gpr32 }
+  - { id: 226, class: gpr32 }
+  - { id: 227, class: gpr32 }
+  - { id: 228, class: gpr32 }
+  - { id: 229, class: gpr32 }
+  - { id: 230, class: gpr32 }
+  - { id: 231, class: gpr32 }
+  - { id: 232, class: gpr32 }
+liveins:         
+  - { reg: '%a0', virtual-reg: '%100' }
+  - { reg: '%a1', virtual-reg: '%101' }
+  - { reg: '%a2', virtual-reg: '%102' }
+  - { reg: '%t9' }
+  - { reg: '%v0' }
+frameInfo:       
+  isFrameAddressTaken: false
+  isReturnAddressTaken: false
+  hasStackMap:     false
+  hasPatchPoint:   false
+  stackSize:       0
+  offsetAdjustment: 0
+  maxAlignment:    1
+  adjustsStack:    false
+  hasCalls:        true
+  maxCallFrameSize: 0
+  hasOpaqueSPAdjustment: false
+  hasVAStart:      false
+  hasMustTailInVarArgFunc: false
+body:             |
+  bb.0 (%ir-block.0, freq 24):
+    successors: %bb.5(33), %bb.27(66)
+    liveins: %a0, %a1, %a2, %t9, %v0
+  
+    %105 = ADDu %v0, %t9
+    %102 = COPY %a2
+    %101 = COPY %a1
+    %100 = COPY %a0
+    %103 = ADDiu %zero, 16
+    BEQ %102, %103, %bb.5, implicit-def dead %at
+    B %bb.27, implicit-def dead %at
+  
+  bb.27 (%ir-block.0, freq 16):
+    successors: %bb.1(50), %bb.14(49)
+  
+    %104 = ADDiu %zero, 8
+    BNE %102, killed %104, %bb.14, implicit-def dead %at
+    B %bb.1, implicit-def dead %at
+  
+  bb.1 (%ir-block.1, freq 8):
+    successors: %bb.2(100)
+  
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %151 = LW %105, target-flags(<unknown>) @br_des_keysched_unit, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @br_des_keysched_unit)
+    %a0 = COPY %100
+    %a1 = COPY %101
+    %gp = COPY %105
+    %t9 = COPY %151
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %gp, implicit-def %sp
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    %150 = ADDiu %zero, 0
+    %155 = LW %105, target-flags(<unknown>) @PC2right, <0x3cbcd30> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %156 = ADDiu %155, target-flags(<unknown>) @PC2right
+    %160 = LW %105, target-flags(<unknown>) @PC2left, <0x3d4b2b0> = !{!"unison-memory-partition", i32 2} :: (load 4 from got)
+    %162 = ADDiu %zero, 28
+    %164 = ADDiu %160, target-flags(<unknown>) @PC2left
+    %169 = ADDiu %zero, 16
+  
+  bb.2 (%ir-block.2, freq 256):
+    successors: %bb.3(100)
+  
+    %0 = PHI %150, %bb.1, %15, %bb.4
+    %153 = SLL %0, 3
+    %1 = ADDu %100, %153
+    %2 = LW %1, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.4, !tbaa !4)
+    %154 = ORi %153, 4
+    %3 = ADDu %100, killed %154
+    %4 = LW %3, 0, <0x3cbcd30> = !{!"unison-memory-partition", i32 1} :: (load 4 from %ir.7, !tbaa !4)
+  
+  bb.3 (%ir-block.9, freq 8192):
+    successors: %bb.4(3), %bb.3(96)
+  
+    %5 = PHI %150, %bb.2, %14, %bb.3
+    %6 = PHI %150, %bb.2, %11, %bb.3
+    %7 = PHI %150, %bb.2, %10, %bb.3
+    %8 = PHI %4, %bb.2, %13, %bb.3
+    %9 = PHI %2, %bb.2, %12, %bb.3
+    %157 = ADDu %156, %5
+    %158 = LBu killed %157, 0, <0x3cbcd30> = !{!"unison-memory-partition", i32 1} :: (load 1 from %ir.scevgep6, !tbaa !1)
+    %14 = ADDiu %5, 1
+    %13 = SRL %8, 1
+    %12 = SRL %9, 1
+    %159 = ANDi %8, 1
+    %161 = ANDi %9, 1
+    %163 = SLLV killed %159, killed %158
+    %11 = OR killed %163, %6
+    %165 = ADDu %164, %5
+    %166 = LBu killed %165, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 1 from %ir.scevgep7, !tbaa !1)
+    %167 = SLLV killed %161, killed %166
+    %10 = OR killed %167, %7
+    BNE %14, %162, %bb.3, implicit-def dead %at
+    B %bb.4, implicit-def dead %at
+  
+  bb.4 (%ir-block.23, freq 256):
+    successors: %bb.26.keysched_unit.exit(3), %bb.2(96)
+  
+    SW %10, %1, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.4, !tbaa !4)
+    SW %11, %3, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.7, !tbaa !4)
+    %15 = ADDiu %0, 1
+    %168 = ADDiu %zero, 1
+    BEQ %15, %169, %bb.26.keysched_unit.exit, implicit-def dead %at
+    B %bb.2, implicit-def dead %at
+  
+  bb.5 (%ir-block.25, freq 8):
+    successors: %bb.6(100)
+  
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %107 = LW %105, target-flags(<unknown>) @br_des_keysched_unit, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @br_des_keysched_unit)
+    %a0 = COPY %100
+    %a1 = COPY %101
+    %gp = COPY %105
+    %t9 = COPY %107
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %gp, implicit-def %sp
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    %106 = ADDiu %zero, 0
+    %111 = LW %105, target-flags(<unknown>) @PC2right, <0x3cbcd30> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %112 = ADDiu %111, target-flags(<unknown>) @PC2right
+    %116 = LW %105, target-flags(<unknown>) @PC2left, <0x3d4b2b0> = !{!"unison-memory-partition", i32 2} :: (load 4 from got)
+    %118 = ADDiu %zero, 28
+    %120 = ADDiu %116, target-flags(<unknown>) @PC2left
+  
+  bb.6 (%ir-block.26, freq 256):
+    successors: %bb.7(100)
+  
+    %16 = PHI %106, %bb.5, %31, %bb.8
+    %109 = SLL %16, 3
+    %17 = ADDu %100, %109
+    %18 = LW %17, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.28, !tbaa !4)
+    %110 = ORi %109, 4
+    %19 = ADDu %100, killed %110
+    %20 = LW %19, 0, <0x3cbcd30> = !{!"unison-memory-partition", i32 1} :: (load 4 from %ir.31, !tbaa !4)
+  
+  bb.7 (%ir-block.33, freq 8192):
+    successors: %bb.8(3), %bb.7(96)
+  
+    %21 = PHI %106, %bb.6, %30, %bb.7
+    %22 = PHI %106, %bb.6, %27, %bb.7
+    %23 = PHI %106, %bb.6, %26, %bb.7
+    %24 = PHI %20, %bb.6, %29, %bb.7
+    %25 = PHI %18, %bb.6, %28, %bb.7
+    %113 = ADDu %112, %21
+    %114 = LBu killed %113, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 1 from %ir.scevgep10, !tbaa !1)
+    %30 = ADDiu %21, 1
+    %29 = SRL %24, 1
+    %28 = SRL %25, 1
+    %115 = ANDi %24, 1
+    %117 = ANDi %25, 1
+    %119 = SLLV killed %115, killed %114
+    %27 = OR killed %119, %22
+    %121 = ADDu %120, %21
+    %122 = LBu killed %121, 0, <0x3cbcd30> = !{!"unison-memory-partition", i32 1} :: (load 1 from %ir.scevgep11, !tbaa !1)
+    %123 = SLLV killed %117, killed %122
+    %26 = OR killed %123, %23
+    BNE %30, %118, %bb.7, implicit-def dead %at
+    B %bb.8, implicit-def dead %at
+  
+  bb.8 (%ir-block.47, freq 256):
+    successors: %bb.9.keysched_unit.exit9(3), %bb.6(96)
+  
+    SW %26, %17, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.28, !tbaa !4)
+    SW %27, %19, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.31, !tbaa !4)
+    %31 = ADDiu %16, 1
+    BNE %31, %103, %bb.6, implicit-def dead %at
+    B %bb.9.keysched_unit.exit9, implicit-def dead %at
+  
+  bb.9.keysched_unit.exit9 (freq 8):
+    successors: %bb.10(100)
+  
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %32 = ADDiu %100, 128
+    %126 = ADDiu %101, 8
+    %127 = LW %105, target-flags(<unknown>) @br_des_keysched_unit, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @br_des_keysched_unit)
+    %a0 = COPY %32
+    %a1 = COPY %126
+    %t9 = COPY %127
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit-def %sp
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    %125 = ADDiu %zero, 0
+    %132 = ADDiu %111, target-flags(<unknown>) @PC2right
+    %138 = ADDiu %zero, 28
+    %140 = ADDiu %116, target-flags(<unknown>) @PC2left
+    %144 = ADDiu %zero, 16
+  
+  bb.10 (%ir-block.51, freq 256):
+    successors: %bb.11(100)
+  
+    %33 = PHI %125, %bb.9.keysched_unit.exit9, %48, %bb.12
+    %129 = SLL %33, 3
+    %34 = ADDu %32, %129
+    %35 = LW %34, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.53, !tbaa !4)
+    %130 = ORi %129, 4
+    %36 = ADDu %32, killed %130
+    %37 = LW %36, 0, <0x3cbcd30> = !{!"unison-memory-partition", i32 1} :: (load 4 from %ir.56, !tbaa !4)
+  
+  bb.11 (%ir-block.58, freq 8192):
+    successors: %bb.12(3), %bb.11(96)
+  
+    %38 = PHI %125, %bb.10, %47, %bb.11
+    %39 = PHI %125, %bb.10, %44, %bb.11
+    %40 = PHI %125, %bb.10, %43, %bb.11
+    %41 = PHI %37, %bb.10, %46, %bb.11
+    %42 = PHI %35, %bb.10, %45, %bb.11
+    %133 = ADDu %132, %38
+    %134 = LBu killed %133, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 1 from %ir.scevgep8, !tbaa !1)
+    %47 = ADDiu %38, 1
+    %46 = SRL %41, 1
+    %45 = SRL %42, 1
+    %135 = ANDi %41, 1
+    %137 = ANDi %42, 1
+    %139 = SLLV killed %135, killed %134
+    %44 = OR killed %139, %39
+    %141 = ADDu %140, %38
+    %142 = LBu killed %141, 0, <0x3cbcd30> = !{!"unison-memory-partition", i32 1} :: (load 1 from %ir.scevgep9, !tbaa !1)
+    %143 = SLLV killed %137, killed %142
+    %43 = OR killed %143, %40
+    BNE %47, %138, %bb.11, implicit-def dead %at
+    B %bb.12, implicit-def dead %at
+  
+  bb.12 (%ir-block.72, freq 256):
+    successors: %bb.13.keysched_unit.exit18(3), %bb.10(96)
+  
+    SW %43, %34, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.53, !tbaa !4)
+    SW %44, %36, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.56, !tbaa !4)
+    %48 = ADDiu %33, 1
+    BNE %48, %144, %bb.10, implicit-def dead %at
+    B %bb.13.keysched_unit.exit18, implicit-def dead %at
+  
+  bb.13.keysched_unit.exit18 (freq 8):
+    successors: %bb.26.keysched_unit.exit(100)
+  
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %146 = LW %105, target-flags(<unknown>) @br_des_rev_skey, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @br_des_rev_skey)
+    %a0 = COPY %32
+    %gp = COPY %105
+    %t9 = COPY %146
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %gp, implicit-def %sp
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %147 = ADDiu %100, 256
+    %148 = LW %105, target-flags(<unknown>) $memcpy, <0x3cbcd30> = !{!"unison-memory-partition", i32 1} :: (load 4 from call-entry $memcpy)
+    %149 = ADDiu %zero, 128
+    %a0 = COPY %147
+    %a1 = COPY %100
+    %a2 = COPY %149
+    %gp = COPY %105
+    %t9 = COPY %148
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %gp, implicit-def %sp
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    %145 = ADDiu %zero, 3
+    B %bb.26.keysched_unit.exit, implicit-def dead %at
+  
+  bb.14 (%ir-block.77, freq 8):
+    successors: %bb.15(100)
+  
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %171 = LW %105, target-flags(<unknown>) @br_des_keysched_unit, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @br_des_keysched_unit)
+    %a0 = COPY %100
+    %a1 = COPY %101
+    %gp = COPY %105
+    %t9 = COPY %171
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %gp, implicit-def %sp
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    %170 = ADDiu %zero, 0
+    %175 = LW %105, target-flags(<unknown>) @PC2right, <0x3cbcd30> = !{!"unison-memory-partition", i32 1} :: (load 4 from got)
+    %176 = ADDiu %175, target-flags(<unknown>) @PC2right
+    %180 = LW %105, target-flags(<unknown>) @PC2left, <0x3d4b2b0> = !{!"unison-memory-partition", i32 2} :: (load 4 from got)
+    %182 = ADDiu %zero, 28
+    %184 = ADDiu %180, target-flags(<unknown>) @PC2left
+    %188 = ADDiu %zero, 16
+  
+  bb.15 (%ir-block.78, freq 255):
+    successors: %bb.16(100)
+  
+    %49 = PHI %170, %bb.14, %64, %bb.17
+    %173 = SLL %49, 3
+    %50 = ADDu %100, %173
+    %51 = LW %50, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.80, !tbaa !4)
+    %174 = ORi %173, 4
+    %52 = ADDu %100, killed %174
+    %53 = LW %52, 0, <0x3cbcd30> = !{!"unison-memory-partition", i32 1} :: (load 4 from %ir.83, !tbaa !4)
+  
+  bb.16 (%ir-block.85, freq 8191):
+    successors: %bb.17(3), %bb.16(96)
+  
+    %54 = PHI %170, %bb.15, %63, %bb.16
+    %55 = PHI %170, %bb.15, %60, %bb.16
+    %56 = PHI %170, %bb.15, %59, %bb.16
+    %57 = PHI %53, %bb.15, %62, %bb.16
+    %58 = PHI %51, %bb.15, %61, %bb.16
+    %177 = ADDu %176, %54
+    %178 = LBu killed %177, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 1 from %ir.scevgep4, !tbaa !1)
+    %63 = ADDiu %54, 1
+    %62 = SRL %57, 1
+    %61 = SRL %58, 1
+    %179 = ANDi %57, 1
+    %181 = ANDi %58, 1
+    %183 = SLLV killed %179, killed %178
+    %60 = OR killed %183, %55
+    %185 = ADDu %184, %54
+    %186 = LBu killed %185, 0, <0x3cbcd30> = !{!"unison-memory-partition", i32 1} :: (load 1 from %ir.scevgep5, !tbaa !1)
+    %187 = SLLV killed %181, killed %186
+    %59 = OR killed %187, %56
+    BNE %63, %182, %bb.16, implicit-def dead %at
+    B %bb.17, implicit-def dead %at
+  
+  bb.17 (%ir-block.99, freq 255):
+    successors: %bb.18.keysched_unit.exit27(3), %bb.15(96)
+  
+    SW %59, %50, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.80, !tbaa !4)
+    SW %60, %52, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.83, !tbaa !4)
+    %64 = ADDiu %49, 1
+    BNE %64, %188, %bb.15, implicit-def dead %at
+    B %bb.18.keysched_unit.exit27, implicit-def dead %at
+  
+  bb.18.keysched_unit.exit27 (freq 8):
+    successors: %bb.19(100)
+  
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %65 = ADDiu %100, 128
+    %190 = ADDiu %101, 8
+    %191 = LW %105, target-flags(<unknown>) @br_des_keysched_unit, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @br_des_keysched_unit)
+    %a0 = COPY %65
+    %a1 = COPY %190
+    %t9 = COPY %191
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit-def %sp
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    %189 = ADDiu %zero, 0
+    %196 = ADDiu %175, target-flags(<unknown>) @PC2right
+    %202 = ADDiu %zero, 28
+    %204 = ADDiu %180, target-flags(<unknown>) @PC2left
+    %208 = ADDiu %zero, 16
+  
+  bb.19 (%ir-block.103, freq 255):
+    successors: %bb.20(100)
+  
+    %66 = PHI %189, %bb.18.keysched_unit.exit27, %81, %bb.21
+    %193 = SLL %66, 3
+    %67 = ADDu %65, %193
+    %68 = LW %67, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.105, !tbaa !4)
+    %194 = ORi %193, 4
+    %69 = ADDu %65, killed %194
+    %70 = LW %69, 0, <0x3cbcd30> = !{!"unison-memory-partition", i32 1} :: (load 4 from %ir.108, !tbaa !4)
+  
+  bb.20 (%ir-block.110, freq 8191):
+    successors: %bb.21(3), %bb.20(96)
+  
+    %71 = PHI %189, %bb.19, %80, %bb.20
+    %72 = PHI %189, %bb.19, %77, %bb.20
+    %73 = PHI %189, %bb.19, %76, %bb.20
+    %74 = PHI %70, %bb.19, %79, %bb.20
+    %75 = PHI %68, %bb.19, %78, %bb.20
+    %197 = ADDu %196, %71
+    %198 = LBu killed %197, 0, <0x3cbcd30> = !{!"unison-memory-partition", i32 1} :: (load 1 from %ir.scevgep2, !tbaa !1)
+    %80 = ADDiu %71, 1
+    %79 = SRL %74, 1
+    %78 = SRL %75, 1
+    %199 = ANDi %74, 1
+    %201 = ANDi %75, 1
+    %203 = SLLV killed %199, killed %198
+    %77 = OR killed %203, %72
+    %205 = ADDu %204, %71
+    %206 = LBu killed %205, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 1 from %ir.scevgep3, !tbaa !1)
+    %207 = SLLV killed %201, killed %206
+    %76 = OR killed %207, %73
+    BNE %80, %202, %bb.20, implicit-def dead %at
+    B %bb.21, implicit-def dead %at
+  
+  bb.21 (%ir-block.124, freq 255):
+    successors: %bb.22.keysched_unit.exit36(3), %bb.19(96)
+  
+    SW %76, %67, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.105, !tbaa !4)
+    SW %77, %69, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.108, !tbaa !4)
+    %81 = ADDiu %66, 1
+    BNE %81, %208, %bb.19, implicit-def dead %at
+    B %bb.22.keysched_unit.exit36, implicit-def dead %at
+  
+  bb.22.keysched_unit.exit36 (freq 8):
+    successors: %bb.23(100)
+  
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %210 = LW %105, target-flags(<unknown>) @br_des_rev_skey, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 4 from call-entry @br_des_rev_skey)
+    %a0 = COPY %65
+    %gp = COPY %105
+    %t9 = COPY %210
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %gp, implicit-def %sp
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    ADJCALLSTACKDOWN 16, implicit-def dead %sp, implicit %sp
+    %82 = ADDiu %100, 256
+    %211 = ADDiu %101, 16
+    %212 = LW %105, target-flags(<unknown>) @br_des_keysched_unit, <0x3cbcd30> = !{!"unison-memory-partition", i32 1} :: (load 4 from call-entry @br_des_keysched_unit)
+    %a0 = COPY %82
+    %a1 = COPY %211
+    %t9 = COPY %212
+    JALRPseudo killed %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit-def %sp
+    ADJCALLSTACKUP 16, 0, implicit-def dead %sp, implicit %sp
+    %209 = ADDiu %zero, 0
+    %217 = ADDiu %175, target-flags(<unknown>) @PC2right
+    %223 = ADDiu %zero, 28
+    %225 = ADDiu %180, target-flags(<unknown>) @PC2left
+    %230 = ADDiu %zero, 16
+  
+  bb.23 (%ir-block.128, freq 255):
+    successors: %bb.24(100)
+  
+    %83 = PHI %209, %bb.22.keysched_unit.exit36, %98, %bb.25
+    %214 = SLL %83, 3
+    %84 = ADDu %82, %214
+    %85 = LW %84, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 4 from %ir.130, !tbaa !4)
+    %215 = ORi %214, 4
+    %86 = ADDu %82, killed %215
+    %87 = LW %86, 0, <0x3cbcd30> = !{!"unison-memory-partition", i32 1} :: (load 4 from %ir.133, !tbaa !4)
+  
+  bb.24 (%ir-block.135, freq 8191):
+    successors: %bb.25(3), %bb.24(96)
+  
+    %88 = PHI %209, %bb.23, %97, %bb.24
+    %89 = PHI %209, %bb.23, %94, %bb.24
+    %90 = PHI %209, %bb.23, %93, %bb.24
+    %91 = PHI %87, %bb.23, %96, %bb.24
+    %92 = PHI %85, %bb.23, %95, %bb.24
+    %218 = ADDu %217, %88
+    %219 = LBu killed %218, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (load 1 from %ir.scevgep, !tbaa !1)
+    %97 = ADDiu %88, 1
+    %96 = SRL %91, 1
+    %95 = SRL %92, 1
+    %220 = ANDi %91, 1
+    %222 = ANDi %92, 1
+    %224 = SLLV killed %220, killed %219
+    %94 = OR killed %224, %89
+    %226 = ADDu %225, %88
+    %227 = LBu killed %226, 0, <0x3cbcd30> = !{!"unison-memory-partition", i32 1} :: (load 1 from %ir.scevgep1, !tbaa !1)
+    %228 = SLLV killed %222, killed %227
+    %93 = OR killed %228, %90
+    BNE %97, %223, %bb.24, implicit-def dead %at
+    B %bb.25, implicit-def dead %at
+  
+  bb.25 (%ir-block.149, freq 255):
+    successors: %bb.26.keysched_unit.exit(3), %bb.23(96)
+  
+    SW %93, %84, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.130, !tbaa !4)
+    SW %94, %86, 0, <0x3d1c410> = !{!"unison-memory-partition", i32 0} :: (store 4 into %ir.133, !tbaa !4)
+    %98 = ADDiu %83, 1
+    %229 = ADDiu %zero, 3
+    BNE %98, %230, %bb.23, implicit-def dead %at
+    B %bb.26.keysched_unit.exit, implicit-def dead %at
+  
+  bb.26.keysched_unit.exit (freq 24):
+    liveouts: %v0
+  
+    %99 = PHI %145, %bb.13.keysched_unit.exit18, %168, %bb.4, %229, %bb.25
+    %v0 = COPY %99
+    RetRA implicit %v0
+
+...
