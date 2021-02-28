@@ -6,10 +6,10 @@
 #fi
 #=$1
 
-dname=mirfiles/Mips/mediabench/
+dname=mirfiles/Mips/mediabench/less_100
 
-llfiles=(`cut -f 1 -d "|" data/bench.txt`)
-funcs=(`cut -f 2 -d "|" data/bench.txt`)
+llfiles=(`cut -f 1 -d "|" data/bench_less_100.txt`)
+funcs=(`cut -f 2 -d "|" data/bench_less_100.txt`)
 opt=-O2
 
 
