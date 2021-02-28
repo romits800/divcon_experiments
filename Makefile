@@ -28,7 +28,7 @@ PICKLES = rest_divs.pickle max_div_divs.pickle
 
 OUTFILE = hist_gaps_output0.7hamming.csv 
 
-all: run-par aggr merge gadgets results
+all: run-par aggr merge gadgets extract results
 
 run-par: 
 	bash -x ${RUN_SCRIPT}  > ${LOG_FILE} 2>&1 

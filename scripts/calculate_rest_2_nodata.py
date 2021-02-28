@@ -91,7 +91,7 @@ interval_list = range(2,201)
 for benchmark in listdir(pathname):
     print benchmark
     d[benchmark] = dict()
-    pat = re.compile("(agap|lns|metr)div_monolithic_([^_]*)_([^_]*)_%s_([0-9]+)_([0-9]+)_([^0-9]*hamming|levenshtein|hamm_reg_gadget)_([^_]+)_([0-9]+)_([0-9]+)(_.*|).pickle"  %benchmark)
+    pat = re.compile("(agap|lns|metr)div_monolithic_([^_]*)_([^_]*)_%s_([0-9]+)_([0-9]+)_([^0-9]*hamming|levenshtein|reg_gadget|cyc_gadget|cyc_reg_gadget)_([^_]+)_([0-9]+)_([0-9]+)(_.*|).pickle"  %benchmark)
     for pfile in listdir(path.join(pathname,benchmark)):
         if pfile.endswith("pickle"):
             try:

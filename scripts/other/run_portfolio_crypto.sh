@@ -36,7 +36,7 @@ do
     #gecode-solver  -o $input.out.json --verbose $input.ext.json
 
     #echo "/home/romi/didaktoriko/unison/romi_unison/unison/src/solvers/multi_backend/portfolio-solver -o $input.out.json --verbose $input.ext.json"
-    #--global-budget 100
+    #gecode: --global-budget 100
     ${DIVCON_PATH}/src/solvers/multi_backend/portfolio-solver -o $sfile.out.json --verbose $sfile.ext.json
 
     ## Sometimes chuffed does not sto running

@@ -10,6 +10,8 @@ import math
 import cPickle as pickle
 import os
 
+import spec_cpu
+
 pat = re.compile("(lns|agap|metr|k)div_monolithic_([^_]*)_([^_]*)_([a-zA-Z_0-9]*\.[a-zA-Z_0-9]*\.[a-zA-Z_0-9]*)_([0-9]+)_([0-9]+)_([^0-9]+)_(random|clrandom|original|cloriginal)_([0-9]+)_([0-9]+)(_.*|)_result.pickle")
 # div_monolithic_lns_mips_gcc.alias.get_frame_alias_set_10_1000_br_hamming_clrandom_105_0.4_10000_constant.pickle
 pat2 = re.compile("_([01]\.[0-9]+)_([0-9]+)_([a-z]+)")
@@ -17,49 +19,9 @@ pat2 = re.compile("_([01]\.[0-9]+)_([0-9]+)_([a-z]+)")
 filepat = re.compile("divs_[0-9]+_[0-9]$")
 
 
-metrics = ["br_hamming", "levenshtein", "hamming", "diff_br_hamming", "reg_hamming", "hamm_reg_gadget", "reg_gadget", "cyc_gadget"]
+metrics = ["br_hamming", "levenshtein", "hamming", "diff_br_hamming", "reg_hamming", "cyc_reg_gadget", "reg_gadget", "cyc_gadget"]
 rrates = rrates =  ["-", "0.1", "0.2", "0.4", "0.6", "0.7", "0.8", "0.9"]
 
-
-# Sort by number of bblocks and then number of ins
-benchmarks = [
-		"sphinx3.profile.ptmr_init",
-		"gcc.expmed.ceil_log2",
-		"mesa.api.glIndexd",
-		"h264ref.vlc.symbol2uvlc",
-		"gobmk.owl_defendpat.autohelperowl_defendpat421",
-		"mesa.api.glVertex2i",
-		"hmmer.tophits.AllocFancyAli",
-		"gobmk.owl_vital_apat.autohelperowl_vital_apat34",
-		"gobmk.patterns.autohelperpat1088",
-		"gobmk.owl_attackpat.autohelperowl_attackpat68",
-		"gobmk.board.get_last_player",
-		"h264ref.sei.UpdateRandomAccess",
-		"gcc.xexit.xexit",
-		"gcc.jump.unsigned_condition",
-		"sphinx3.glist.glist_tail",
-		"gcc.alias.get_frame_alias_set",
-		"gcc.rtlanal.parms_set"]
-
-# Sort by number of instructions
-#benchmarks = [ "sphinx3.profile.ptmr_init", 
-#		"sphinx3.glist.glist_tail",
-#		"gobmk.board.get_last_player",
-#		"gcc.expmed.ceil_log2",
-#		"mesa.api.glIndexd",
-#		"h264ref.vlc.symbol2uvlc",
-#		"h264ref.sei.UpdateRandomAccess",
-#		"gcc.xexit.xexit",
-#		"gcc.alias.get_frame_alias_set",
-#		"mesa.api.glVertex2i",
-#		"gobmk.owl_defendpat.autohelperowl_defendpat421",
-#		"gcc.jump.unsigned_condition",
-#		"gcc.rtlanal.parms_set",
-#		"hmmer.tophits.AllocFancyAli",
-#		"gobmk.owl_vital_apat.autohelperowl_vital_apat34",
-#		"gobmk.patterns.autohelperpat1088",
-#		"gobmk.owl_attackpat.autohelperowl_attackpat68"]
-#
 
 # Values for histogram (<=) for every field
 # [0,0], (0,5%], (5%,10%], (10%,20%], (20%,40%], (40%,60%], (60%,80%], (80%,100%]
@@ -72,7 +34,7 @@ def print_metric(metric):
     elif metric == "hamming": return "hamm"
     elif metric == "levenshtein": return "lev"
     elif metric == "reg_hamming": return "reg"
-    elif metric == "hamm_reg_gadget": return "hrg"
+    elif metric == "cyc_reg_gadget": return "hrg"
     elif metric == "reg_gadget": return "rg"
     elif metric == "cyc_gadget": return "cg"
     else: return "None"
@@ -177,7 +139,7 @@ for meas in os.listdir(path):
             a = re.match(pat,i)
             islns = True
             try:
-                experiment,method, arch, bench, gap, nodivs, metric, branching, seed, mindist, rest = a.groups()
+                experiment, method, arch, bench, gap, nodivs, metric, branching, seed, mindist, rest = a.groups()
                 # if gap!=agap: continue
 
                 if not d.has_key(gap):
@@ -386,15 +348,16 @@ for ag in d:
             if r not in d[ag][bench]: continue
             # find minimum values to mark
             data = [ (ufloat(*d[ag][bench][r][m][mindist]['res']),m) for m in metrics if d[ag][bench][r].has_key(m) and d[ag][bench][r][m].has_key(mindist)]
-            mind = min(data, key=lambda (res,m): res)
-            minds = filter(lambda (x,m): abs(x- mind[0]) < 0.005, data)
-            _, minms = zip(*minds)
-            data = ["b" + str(bi)] + [ "-" if not d[ag][bench][r].has_key(m) or not d[ag][bench][r][m].has_key(mindist) else formatout(d[ag][bench][r][m][mindist], m in minms) for m in metrics ]
-            cdata = map (lambda x: x.replace("_", "\\_"), data)
-            cdata = map (lambda x: x.replace("%", "\\%"), cdata)
-            cdata = map (lambda x: x.replace("+/-", "$\\pm$"), cdata)
-            f.write(",".join(cdata))
-            f.write("\n")
+            if len(data) > 0:
+                mind = min(data, key=lambda (res,m): res)
+                minds = filter(lambda (x,m): abs(x- mind[0]) < 0.005, data)
+                _, minms = zip(*minds)
+                data = ["b" + str(bi)] + [ "-" if not d[ag][bench][r].has_key(m) or not d[ag][bench][r][m].has_key(mindist) else formatout(d[ag][bench][r][m][mindist], m in minms) for m in metrics ]
+                cdata = map (lambda x: x.replace("_", "\\_"), data)
+                cdata = map (lambda x: x.replace("%", "\\%"), cdata)
+                cdata = map (lambda x: x.replace("+/-", "$\\pm$"), cdata)
+                f.write(",".join(cdata))
+                f.write("\n")
 
 # HIST
 def formatdataout(v):
