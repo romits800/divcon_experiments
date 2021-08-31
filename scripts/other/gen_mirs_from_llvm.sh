@@ -1,15 +1,21 @@
 #! /bin/bash -x
-#if [ $# -lt 2 ] 
-#then
-#   echo "missing argument"
-#   exit 1
-#fi
-#=$1
+echo $#
+if [ $# -lt 1 ] 
+then
+   echo "missing argument"
+   echo "gen_mirs_from_llvm less_100|more_100"
+   exit 1
+fi
+select=$1
 
-dname=mirfiles/Mips/mediabench/less_100
+dname=mirfiles/Mips/mediabench/${select}
 
-llfiles=(`cut -f 1 -d "|" data/bench_less_100.txt`)
-funcs=(`cut -f 2 -d "|" data/bench_less_100.txt`)
+if [ ! -d $dname ]; then
+    mkdir -p $dname
+fi
+
+llfiles=(`cut -f 1 -d "|" data/bench_${select}.txt`)
+funcs=(`cut -f 2 -d "|" data/bench_${select}.txt`)
 opt=-O2
 
 
