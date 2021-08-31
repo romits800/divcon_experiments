@@ -1,0 +1,643 @@
+--- |
+  ; ModuleID = '/home/romi/didaktoriko/unison/unison-experiments/experiments/test-input/c/mediabench/mips_zip/build-mips/mpeg2/mpeg2.systems.ll'
+  target datalayout = "E-m:m-p:32:32-i8:8:32-i16:16:32-i64:64-n32-S64"
+  target triple = "mips--linux-gnu"
+  
+  %struct.layer_data = type { i32, [2048 x i8], i8*, [16 x i8], i32, i8*, i32, i32, [64 x i32], [64 x i32], [64 x i32], [64 x i32], i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, [12 x [64 x i16]] }
+  %struct._IO_FILE = type { i32, i8*, i8*, i8*, i8*, i8*, i8*, i8*, i8*, i8*, i8*, i8*, %struct._IO_marker*, %struct._IO_FILE*, i32, i32, i32, i16, i8, [1 x i8], i8*, i64, i8*, i8*, i8*, i8*, i32, i32, [40 x i8] }
+  %struct._IO_marker = type { %struct._IO_marker*, %struct._IO_FILE*, i32 }
+  
+  @ld = external global %struct.layer_data*, align 4
+  @stderr = external global %struct._IO_FILE*, align 4
+  @.str.1 = private unnamed_addr constant [24 x i8] c"Error in packet header\0A\00", align 1
+  @.str.2 = private unnamed_addr constant [43 x i8] c"Unexpected startcode %08x in system layer\0A\00", align 1
+  @System_Stream_Flag = external global i32, align 4
+  @str = private unnamed_addr constant [18 x i8] c"MPEG-2 PES packet\00"
+  
+  ; Function Attrs: nounwind
+  define void @Next_Packet() #0 {
+    br label %.backedge
+  
+  .backedge:                                        ; preds = %12, %95, %0
+    %1 = tail call i32 @Get_Word() #4
+    %2 = shl i32 %1, 16
+    %3 = tail call i32 @Get_Word() #4
+    %4 = or i32 %2, %3
+    %5 = and i32 %4, -256
+    %6 = icmp eq i32 %5, 256
+    br i1 %6, label %._crit_edge, label %.lr.ph
+  
+  .lr.ph:                                           ; preds = %.backedge, %.lr.ph
+    %code.05 = phi i32 [ %9, %.lr.ph ], [ %4, %.backedge ]
+    %7 = shl i32 %code.05, 8
+    %8 = tail call i32 @Get_Byte() #4
+    %9 = or i32 %8, %7
+    %10 = and i32 %9, -256
+    %11 = icmp eq i32 %10, 256
+    br i1 %11, label %._crit_edge, label %.lr.ph
+  
+  ._crit_edge:                                      ; preds = %.lr.ph, %.backedge
+    %code.0.lcssa = phi i32 [ %4, %.backedge ], [ %9, %.lr.ph ]
+    switch i32 %code.0.lcssa, label %93 [
+      i32 442, label %12
+      i32 480, label %17
+      i32 441, label %.preheader1
+    ]
+  
+  ; <label>:12                                      ; preds = %._crit_edge
+    %13 = load %struct.layer_data*, %struct.layer_data** @ld, align 4, !tbaa !1
+    %14 = getelementptr inbounds %struct.layer_data, %struct.layer_data* %13, i32 0, i32 2
+    %15 = load i8*, i8** %14, align 4, !tbaa !5
+    %16 = getelementptr inbounds i8, i8* %15, i32 8
+    store i8* %16, i8** %14, align 4, !tbaa !5
+    br label %.backedge
+  
+  ; <label>:17                                      ; preds = %._crit_edge
+    %18 = tail call i32 @Get_Word() #4
+    %19 = load %struct.layer_data*, %struct.layer_data** @ld, align 4, !tbaa !1
+    %20 = getelementptr inbounds %struct.layer_data, %struct.layer_data* %19, i32 0, i32 2
+    %21 = load i8*, i8** %20, align 4, !tbaa !5
+    %22 = getelementptr inbounds i8, i8* %21, i32 %18
+    %23 = getelementptr inbounds %struct.layer_data, %struct.layer_data* %19, i32 0, i32 5
+    store i8* %22, i8** %23, align 4, !tbaa !8
+    %24 = tail call i32 @Get_Byte() #4
+    %.mask = and i32 %24, -64
+    %25 = icmp eq i32 %.mask, 128
+    br i1 %25, label %26, label %36
+  
+  ; <label>:26                                      ; preds = %17
+    %27 = load %struct.layer_data*, %struct.layer_data** @ld, align 4, !tbaa !1
+    %28 = getelementptr inbounds %struct.layer_data, %struct.layer_data* %27, i32 0, i32 2
+    %29 = load i8*, i8** %28, align 4, !tbaa !5
+    %30 = getelementptr inbounds i8, i8* %29, i32 1
+    store i8* %30, i8** %28, align 4, !tbaa !5
+    %31 = tail call i32 @Get_Byte() #4
+    %32 = load %struct.layer_data*, %struct.layer_data** @ld, align 4, !tbaa !1
+    %33 = getelementptr inbounds %struct.layer_data, %struct.layer_data* %32, i32 0, i32 2
+    %34 = load i8*, i8** %33, align 4, !tbaa !5
+    %35 = getelementptr inbounds i8, i8* %34, i32 %31
+    store i8* %35, i8** %33, align 4, !tbaa !5
+    %puts = tail call i32 @puts(i8* nonnull getelementptr inbounds ([18 x i8], [18 x i8]* @str, i32 0, i32 0))
+    br label %104
+  
+  ; <label>:36                                      ; preds = %17
+    %37 = icmp eq i32 %24, 255
+    br i1 %37, label %.preheader, label %.loopexit
+  
+  .preheader:                                       ; preds = %36, %.preheader
+    %38 = tail call i32 @Get_Byte() #4
+    %39 = icmp eq i32 %38, 255
+    br i1 %39, label %.preheader, label %.loopexit
+  
+  .loopexit:                                        ; preds = %.preheader, %36
+    %code.1 = phi i32 [ %24, %36 ], [ %38, %.preheader ]
+    %40 = icmp ugt i32 %code.1, 63
+    br i1 %40, label %41, label %52
+  
+  ; <label>:41                                      ; preds = %.loopexit
+    %42 = icmp ugt i32 %code.1, 127
+    br i1 %42, label %43, label %46
+  
+  ; <label>:43                                      ; preds = %41
+    %44 = load %struct._IO_FILE*, %struct._IO_FILE** @stderr, align 4, !tbaa !1
+    %45 = tail call i32 @fwrite(i8* nonnull getelementptr inbounds ([24 x i8], [24 x i8]* @.str.1, i32 0, i32 0), i32 23, i32 1, %struct._IO_FILE* %44) #5
+    tail call void @exit(i32 signext 1) #6
+    unreachable
+  
+  ; <label>:46                                      ; preds = %41
+    %47 = load %struct.layer_data*, %struct.layer_data** @ld, align 4, !tbaa !1
+    %48 = getelementptr inbounds %struct.layer_data, %struct.layer_data* %47, i32 0, i32 2
+    %49 = load i8*, i8** %48, align 4, !tbaa !5
+    %50 = getelementptr inbounds i8, i8* %49, i32 1
+    store i8* %50, i8** %48, align 4, !tbaa !5
+    %51 = tail call i32 @Get_Byte() #4
+    br label %52
+  
+  ; <label>:52                                      ; preds = %46, %.loopexit
+    %code.2 = phi i32 [ %51, %46 ], [ %code.1, %.loopexit ]
+    %53 = icmp ugt i32 %code.2, 47
+    br i1 %53, label %54, label %64
+  
+  ; <label>:54                                      ; preds = %52
+    %55 = icmp ugt i32 %code.2, 63
+    br i1 %55, label %56, label %59
+  
+  ; <label>:56                                      ; preds = %54
+    %57 = load %struct._IO_FILE*, %struct._IO_FILE** @stderr, align 4, !tbaa !1
+    %58 = tail call i32 @fwrite(i8* nonnull getelementptr inbounds ([24 x i8], [24 x i8]* @.str.1, i32 0, i32 0), i32 23, i32 1, %struct._IO_FILE* %57) #5
+    tail call void @exit(i32 signext 1) #6
+    unreachable
+  
+  ; <label>:59                                      ; preds = %54
+    %60 = load %struct.layer_data*, %struct.layer_data** @ld, align 4, !tbaa !1
+    %61 = getelementptr inbounds %struct.layer_data, %struct.layer_data* %60, i32 0, i32 2
+    %62 = load i8*, i8** %61, align 4, !tbaa !5
+    %63 = getelementptr inbounds i8, i8* %62, i32 9
+    store i8* %63, i8** %61, align 4, !tbaa !5
+    br label %104
+  
+  ; <label>:64                                      ; preds = %52
+    %65 = icmp ugt i32 %code.2, 31
+    br i1 %65, label %66, label %71
+  
+  ; <label>:66                                      ; preds = %64
+    %67 = load %struct.layer_data*, %struct.layer_data** @ld, align 4, !tbaa !1
+    %68 = getelementptr inbounds %struct.layer_data, %struct.layer_data* %67, i32 0, i32 2
+    %69 = load i8*, i8** %68, align 4, !tbaa !5
+    %70 = getelementptr inbounds i8, i8* %69, i32 4
+    store i8* %70, i8** %68, align 4, !tbaa !5
+    br label %104
+  
+  ; <label>:71                                      ; preds = %64
+    %72 = icmp eq i32 %code.2, 15
+    br i1 %72, label %104, label %73
+  
+  ; <label>:73                                      ; preds = %71
+    %74 = load %struct._IO_FILE*, %struct._IO_FILE** @stderr, align 4, !tbaa !1
+    %75 = tail call i32 @fwrite(i8* nonnull getelementptr inbounds ([24 x i8], [24 x i8]* @.str.1, i32 0, i32 0), i32 23, i32 1, %struct._IO_FILE* %74) #5
+    tail call void @exit(i32 signext 1) #6
+    unreachable
+  
+  .preheader1:                                      ; preds = %._crit_edge, %.preheader1
+    %l.04 = phi i32 [ %82, %.preheader1 ], [ 0, %._crit_edge ]
+    %76 = load %struct.layer_data*, %struct.layer_data** @ld, align 4, !tbaa !1
+    %77 = bitcast %struct.layer_data* %76 to i8*
+    %uglygep3 = getelementptr i8, i8* %77, i32 %l.04
+    %scevgep4 = getelementptr i8, i8* %uglygep3, i32 4
+    store i8 0, i8* %scevgep4, align 1, !tbaa !9
+    %78 = load %struct.layer_data*, %struct.layer_data** @ld, align 4, !tbaa !1
+    %79 = bitcast %struct.layer_data* %78 to i8*
+    %uglygep5 = getelementptr i8, i8* %79, i32 %l.04
+    %scevgep6 = getelementptr i8, i8* %uglygep5, i32 5
+    store i8 0, i8* %scevgep6, align 1, !tbaa !9
+    %80 = load %struct.layer_data*, %struct.layer_data** @ld, align 4, !tbaa !1
+    %81 = bitcast %struct.layer_data* %80 to i8*
+    %uglygep1 = getelementptr i8, i8* %81, i32 %l.04
+    %scevgep2 = getelementptr i8, i8* %uglygep1, i32 6
+    store i8 1, i8* %scevgep2, align 1, !tbaa !9
+    %82 = add nuw nsw i32 %l.04, 4
+    %83 = load %struct.layer_data*, %struct.layer_data** @ld, align 4, !tbaa !1
+    %84 = bitcast %struct.layer_data* %83 to i8*
+    %uglygep = getelementptr i8, i8* %84, i32 %l.04
+    %scevgep = getelementptr i8, i8* %uglygep, i32 7
+    store i8 -73, i8* %scevgep, align 1, !tbaa !9
+    %85 = icmp slt i32 %82, 2048
+    br i1 %85, label %.preheader1, label %86
+  
+  ; <label>:86                                      ; preds = %.preheader1
+    %87 = load %struct.layer_data*, %struct.layer_data** @ld, align 4, !tbaa !1
+    %88 = getelementptr inbounds %struct.layer_data, %struct.layer_data* %87, i32 0, i32 1, i32 0
+    %89 = getelementptr inbounds %struct.layer_data, %struct.layer_data* %87, i32 0, i32 2
+    store i8* %88, i8** %89, align 4, !tbaa !5
+    %90 = load %struct.layer_data*, %struct.layer_data** @ld, align 4, !tbaa !1
+    %91 = getelementptr inbounds %struct.layer_data, %struct.layer_data* %90, i32 0, i32 1, i32 2048
+    %92 = getelementptr inbounds %struct.layer_data, %struct.layer_data* %90, i32 0, i32 5
+    store i8* %91, i8** %92, align 4, !tbaa !8
+    br label %104
+  
+  ; <label>:93                                      ; preds = %._crit_edge
+    %94 = icmp ugt i32 %code.0.lcssa, 442
+    br i1 %94, label %95, label %101
+  
+  ; <label>:95                                      ; preds = %93
+    %96 = tail call i32 @Get_Word() #4
+    %97 = load %struct.layer_data*, %struct.layer_data** @ld, align 4, !tbaa !1
+    %98 = getelementptr inbounds %struct.layer_data, %struct.layer_data* %97, i32 0, i32 2
+    %99 = load i8*, i8** %98, align 4, !tbaa !5
+    %100 = getelementptr inbounds i8, i8* %99, i32 %96
+    store i8* %100, i8** %98, align 4, !tbaa !5
+    br label %.backedge
+  
+  ; <label>:101                                     ; preds = %93
+    %102 = load %struct._IO_FILE*, %struct._IO_FILE** @stderr, align 4, !tbaa !1
+    %103 = tail call i32 (%struct._IO_FILE*, i8*, ...) @fprintf(%struct._IO_FILE* %102, i8* nonnull getelementptr inbounds ([43 x i8], [43 x i8]* @.str.2, i32 0, i32 0), i32 signext %code.0.lcssa) #5
+    tail call void @exit(i32 signext 1) #6
+    unreachable
+  
+  ; <label>:104                                     ; preds = %86, %71, %66, %59, %26
+    ret void
+  }
+  
+  ; Function Attrs: nounwind
+  define i32 @Get_Long() #0 {
+    %1 = tail call i32 @Get_Word() #4
+    %2 = shl i32 %1, 16
+    %3 = tail call i32 @Get_Word() #4
+    %4 = or i32 %2, %3
+    ret i32 %4
+  }
+  
+  declare i32 @Get_Byte() #1
+  
+  declare i32 @Get_Word() #1
+  
+  ; Function Attrs: nounwind
+  declare i32 @fprintf(%struct._IO_FILE* nocapture, i8* nocapture readonly, ...) #0
+  
+  ; Function Attrs: noreturn nounwind
+  declare void @exit(i32 signext) #2
+  
+  ; Function Attrs: nounwind
+  define void @Flush_Buffer32() #0 {
+    %1 = load %struct.layer_data*, %struct.layer_data** @ld, align 4, !tbaa !1
+    %2 = getelementptr inbounds %struct.layer_data, %struct.layer_data* %1, i32 0, i32 4
+    store i32 0, i32* %2, align 4, !tbaa !10
+    %3 = getelementptr inbounds %struct.layer_data, %struct.layer_data* %1, i32 0, i32 6
+    %4 = load i32, i32* %3, align 4, !tbaa !11
+    %5 = add nsw i32 %4, -32
+    %6 = load i32, i32* @System_Stream_Flag, align 4, !tbaa !12
+    %7 = icmp eq i32 %6, 0
+    br i1 %7, label %.preheader, label %8
+  
+  ; <label>:8                                       ; preds = %0
+    %9 = getelementptr inbounds %struct.layer_data, %struct.layer_data* %1, i32 0, i32 2
+    %10 = load i8*, i8** %9, align 4, !tbaa !5
+    %11 = getelementptr inbounds %struct.layer_data, %struct.layer_data* %1, i32 0, i32 5
+    %12 = load i8*, i8** %11, align 4, !tbaa !8
+    %13 = getelementptr inbounds i8, i8* %12, i32 -4
+    %14 = icmp ult i8* %10, %13
+    br i1 %14, label %.preheader, label %.preheader1
+  
+  .preheader1:                                      ; preds = %8
+    %15 = icmp slt i32 %5, 25
+    br i1 %15, label %.lr.ph5.preheader, label %.loopexit
+  
+  .lr.ph5.preheader:                                ; preds = %.preheader1
+    %16 = sub i32 56, %4
+    %17 = and i32 %16, -8
+    %18 = add i32 %4, %17
+    %19 = add i32 %4, -24
+    br label %.lr.ph5
+  
+  .preheader:                                       ; preds = %8, %0
+    %20 = icmp slt i32 %5, 25
+    br i1 %20, label %.lr.ph.preheader, label %.loopexit
+  
+  .lr.ph.preheader:                                 ; preds = %.preheader
+    %21 = sub i32 56, %4
+    %22 = and i32 %21, -8
+    %23 = add i32 %4, %22
+    br label %.lr.ph
+  
+  .lr.ph5:                                          ; preds = %..lr.ph5_crit_edge, %.lr.ph5.preheader
+    %lsr.iv3 = phi i32 [ %lsr.iv.next4, %..lr.ph5_crit_edge ], [ %16, %.lr.ph5.preheader ]
+    %lsr.iv1 = phi i32 [ %lsr.iv.next2, %..lr.ph5_crit_edge ], [ %19, %.lr.ph5.preheader ]
+    %24 = phi i8* [ %.pre10, %..lr.ph5_crit_edge ], [ %12, %.lr.ph5.preheader ]
+    %25 = phi i8* [ %.pre, %..lr.ph5_crit_edge ], [ %10, %.lr.ph5.preheader ]
+    %26 = icmp ult i8* %25, %24
+    br i1 %26, label %28, label %27
+  
+  ; <label>:27                                      ; preds = %.lr.ph5
+    tail call void @Next_Packet()
+    br label %28
+  
+  ; <label>:28                                      ; preds = %27, %.lr.ph5
+    %29 = tail call i32 @Get_Byte() #4
+    %30 = shl i32 %29, %lsr.iv3
+    %31 = load %struct.layer_data*, %struct.layer_data** @ld, align 4, !tbaa !1
+    %32 = getelementptr inbounds %struct.layer_data, %struct.layer_data* %31, i32 0, i32 4
+    %33 = load i32, i32* %32, align 4, !tbaa !10
+    %34 = or i32 %33, %30
+    store i32 %34, i32* %32, align 4, !tbaa !10
+    %35 = icmp slt i32 %lsr.iv1, 25
+    br i1 %35, label %..lr.ph5_crit_edge, label %.loopexit.loopexit7
+  
+  ..lr.ph5_crit_edge:                               ; preds = %28
+    %.phi.trans.insert = getelementptr inbounds %struct.layer_data, %struct.layer_data* %31, i32 0, i32 2
+    %.pre = load i8*, i8** %.phi.trans.insert, align 4, !tbaa !5
+    %.phi.trans.insert9 = getelementptr inbounds %struct.layer_data, %struct.layer_data* %31, i32 0, i32 5
+    %.pre10 = load i8*, i8** %.phi.trans.insert9, align 4, !tbaa !8
+    %lsr.iv.next2 = add i32 %lsr.iv1, 8
+    %lsr.iv.next4 = add i32 %lsr.iv3, -8
+    br label %.lr.ph5
+  
+  .lr.ph:                                           ; preds = %42, %.lr.ph.preheader
+    %lsr.iv = phi i32 [ %lsr.iv.next, %42 ], [ %21, %.lr.ph.preheader ]
+    %36 = phi %struct.layer_data* [ %50, %42 ], [ %1, %.lr.ph.preheader ]
+    %Incnt.13 = phi i32 [ %54, %42 ], [ %5, %.lr.ph.preheader ]
+    %37 = getelementptr inbounds %struct.layer_data, %struct.layer_data* %36, i32 0, i32 2
+    %38 = load i8*, i8** %37, align 4, !tbaa !5
+    %39 = getelementptr inbounds %struct.layer_data, %struct.layer_data* %36, i32 0, i32 1, i32 2048
+    %40 = icmp ult i8* %38, %39
+    br i1 %40, label %42, label %41
+  
+  ; <label>:41                                      ; preds = %.lr.ph
+    tail call void @Fill_Buffer() #4
+    %.pre11 = load %struct.layer_data*, %struct.layer_data** @ld, align 4, !tbaa !1
+    %.phi.trans.insert12 = getelementptr inbounds %struct.layer_data, %struct.layer_data* %.pre11, i32 0, i32 2
+    %.pre13 = load i8*, i8** %.phi.trans.insert12, align 4, !tbaa !5
+    br label %42
+  
+  ; <label>:42                                      ; preds = %41, %.lr.ph
+    %43 = phi i8* [ %38, %.lr.ph ], [ %.pre13, %41 ]
+    %44 = phi %struct.layer_data* [ %36, %.lr.ph ], [ %.pre11, %41 ]
+    %45 = getelementptr inbounds %struct.layer_data, %struct.layer_data* %44, i32 0, i32 2
+    %46 = getelementptr inbounds i8, i8* %43, i32 1
+    store i8* %46, i8** %45, align 4, !tbaa !5
+    %47 = load i8, i8* %43, align 1, !tbaa !9
+    %48 = zext i8 %47 to i32
+    %49 = shl i32 %48, %lsr.iv
+    %50 = load %struct.layer_data*, %struct.layer_data** @ld, align 4, !tbaa !1
+    %51 = getelementptr inbounds %struct.layer_data, %struct.layer_data* %50, i32 0, i32 4
+    %52 = load i32, i32* %51, align 4, !tbaa !10
+    %53 = or i32 %52, %49
+    store i32 %53, i32* %51, align 4, !tbaa !10
+    %54 = add nsw i32 %Incnt.13, 8
+    %lsr.iv.next = add i32 %lsr.iv, -8
+    %55 = icmp slt i32 %54, 25
+    br i1 %55, label %.lr.ph, label %.loopexit.loopexit
+  
+  .loopexit.loopexit:                               ; preds = %42
+    %56 = add i32 %23, -24
+    br label %.loopexit
+  
+  .loopexit.loopexit7:                              ; preds = %28
+    %57 = add i32 %18, -24
+    br label %.loopexit
+  
+  .loopexit:                                        ; preds = %.loopexit.loopexit7, %.loopexit.loopexit, %.preheader, %.preheader1
+    %58 = phi %struct.layer_data* [ %1, %.preheader ], [ %1, %.preheader1 ], [ %50, %.loopexit.loopexit ], [ %31, %.loopexit.loopexit7 ]
+    %Incnt.2 = phi i32 [ %5, %.preheader ], [ %5, %.preheader1 ], [ %56, %.loopexit.loopexit ], [ %57, %.loopexit.loopexit7 ]
+    %59 = getelementptr inbounds %struct.layer_data, %struct.layer_data* %58, i32 0, i32 6
+    store i32 %Incnt.2, i32* %59, align 4, !tbaa !11
+    ret void
+  }
+  
+  declare void @Fill_Buffer() #1
+  
+  ; Function Attrs: nounwind
+  define i32 @Get_Bits32() #0 {
+    %1 = tail call i32 @Show_Bits(i32 signext 32) #4
+    tail call void @Flush_Buffer32()
+    ret i32 %1
+  }
+  
+  declare i32 @Show_Bits(i32 signext) #1
+  
+  ; Function Attrs: nounwind
+  declare i32 @fwrite(i8* nocapture, i32, i32, %struct._IO_FILE* nocapture) #3
+  
+  ; Function Attrs: nounwind
+  declare i32 @puts(i8* nocapture) #3
+  
+  attributes #0 = { nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #1 = { "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #2 = { noreturn nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #3 = { nounwind "target-cpu"="mips32" }
+  attributes #4 = { nounwind }
+  attributes #5 = { cold }
+  attributes #6 = { noreturn nounwind }
+  
+  !llvm.ident = !{!0}
+  
+  !0 = !{!"clang version 3.8.0 (http://llvm.org/git/clang.git 2d49f0a0ae8366964a93e3b7b26e29679bee7160) (http://llvm.org/git/llvm.git 60bc66b44837125843b58ed3e0fd2e6bb948d839)"}
+  !1 = !{!2, !2, i64 0}
+  !2 = !{!"any pointer", !3, i64 0}
+  !3 = !{!"omnipotent char", !4, i64 0}
+  !4 = !{!"Simple C/C++ TBAA"}
+  !5 = !{!6, !2, i64 2052}
+  !6 = !{!"layer_data", !7, i64 0, !3, i64 4, !2, i64 2052, !3, i64 2056, !7, i64 2072, !2, i64 2076, !7, i64 2080, !7, i64 2084, !3, i64 2088, !3, i64 2344, !3, i64 2600, !3, i64 2856, !7, i64 3112, !7, i64 3116, !7, i64 3120, !7, i64 3124, !7, i64 3128, !7, i64 3132, !7, i64 3136, !7, i64 3140, !7, i64 3144, !7, i64 3148, !7, i64 3152, !7, i64 3156, !3, i64 3160}
+  !7 = !{!"int", !3, i64 0}
+  !8 = !{!6, !2, i64 2076}
+  !9 = !{!3, !3, i64 0}
+  !10 = !{!6, !7, i64 2072}
+  !11 = !{!6, !7, i64 2080}
+  !12 = !{!7, !7, i64 0}
+
+...
+---
+name:            Flush_Buffer32
+alignment:       2
+exposesReturnsTwice: false
+hasInlineAsm:    false
+isSSA:           false
+tracksRegLiveness: false
+tracksSubRegLiveness: false
+liveins:         
+  - { reg: '%t9' }
+  - { reg: '%v0' }
+calleeSavedRegisters: [ '%fp', '%ra', '%d10', '%d11', '%d12', '%d13', '%d14', 
+                        '%d15', '%f20', '%f21', '%f22', '%f23', '%f24', 
+                        '%f25', '%f26', '%f27', '%f28', '%f29', '%f30', 
+                        '%f31', '%s0', '%s1', '%s2', '%s3', '%s4', '%s5', 
+                        '%s6', '%s7' ]
+frameInfo:       
+  isFrameAddressTaken: false
+  isReturnAddressTaken: false
+  hasStackMap:     false
+  hasPatchPoint:   false
+  stackSize:       40
+  offsetAdjustment: 0
+  maxAlignment:    4
+  adjustsStack:    true
+  hasCalls:        true
+  maxCallFrameSize: 16
+  hasOpaqueSPAdjustment: false
+  hasVAStart:      false
+  hasMustTailInVarArgFunc: false
+stack:           
+  - { id: 0, type: spill-slot, offset: -4, size: 4, alignment: 4, callee-saved-register: '%ra' }
+  - { id: 1, type: spill-slot, offset: -8, size: 4, alignment: 4, callee-saved-register: '%s4' }
+  - { id: 2, type: spill-slot, offset: -12, size: 4, alignment: 4, callee-saved-register: '%s3' }
+  - { id: 3, type: spill-slot, offset: -16, size: 4, alignment: 4, callee-saved-register: '%s2' }
+  - { id: 4, type: spill-slot, offset: -20, size: 4, alignment: 4, callee-saved-register: '%s1' }
+  - { id: 5, type: spill-slot, offset: -24, size: 4, alignment: 4, callee-saved-register: '%s0' }
+body:             |
+  bb.0 (%ir-block.0, freq 51):
+    successors: %bb.2..preheader(37), %bb.1(62)
+    liveins: %t9, %ra, %s4, %s3, %s2, %s1, %s0
+  
+    %v0 = LUi target-flags(<unknown>) $_gp_disp
+    %v0 = ADDiu %v0, target-flags(<unknown>) $_gp_disp
+    %sp = ADDiu %sp, -40
+    CFI_INSTRUCTION .cfi_def_cfa_offset 40
+    SW killed %ra, %sp, 36 :: (store 4 into stack)
+    SW killed %s4, %sp, 32 :: (store 4 into stack)
+    SW killed %s3, %sp, 28 :: (store 4 into stack)
+    SW killed %s2, %sp, 24 :: (store 4 into stack)
+    SW killed %s1, %sp, 20 :: (store 4 into stack)
+    SW killed %s0, %sp, 16 :: (store 4 into stack)
+    CFI_INSTRUCTION .cfi_offset %ra_64, -4
+    CFI_INSTRUCTION .cfi_offset %s4_64, -8
+    CFI_INSTRUCTION .cfi_offset %s3_64, -12
+    CFI_INSTRUCTION .cfi_offset %s2_64, -16
+    CFI_INSTRUCTION .cfi_offset %s1_64, -20
+    CFI_INSTRUCTION .cfi_offset %s0_64, -24
+    %s0 = ADDu %v0, %t9
+    %s1 = LW %s0, target-flags(<unknown>) @ld :: (load 4 from got)
+    %v0 = LW %s1, 0 :: (load 4 from @ld, !tbaa !1)
+    SW %zero, %v0, 2072 :: (store 4 into %ir.2, !tbaa !10)
+    %at = LW %s0, target-flags(<unknown>) @System_Stream_Flag :: (load 4 from got)
+    %at = LW killed %at, 0 :: (load 4 from @System_Stream_Flag, !tbaa !12)
+    %a1 = LW %v0, 2080 :: (load 4 from %ir.3, !tbaa !11)
+    BEQ %at, %zero, %bb.2..preheader, implicit-def %at {
+      %s2 = ADDiu %a1, -32
+    }
+  
+  bb.1 (%ir-block.8, freq 32):
+    successors: %bb.2..preheader(50), %bb.8..preheader1(50)
+    liveins: %a1, %s0, %s1, %s2, %v0
+  
+    %a0 = LW %v0, 2052 :: (load 4 from %ir.9, !tbaa !5)
+    %v1 = LW %v0, 2076 :: (load 4 from %ir.11, !tbaa !8)
+    %at = ADDiu %v1, -4
+    %at = SLTu %a0, killed %at
+    BEQ %at, %zero, %bb.8..preheader1, implicit-def %at {
+      NOP
+    }
+  
+  bb.2..preheader (freq 35):
+    successors: %bb.3..lr.ph.preheader(50), %bb.15..loopexit(50)
+    liveins: %a1, %s0, %s1, %s2, %v0
+  
+    %at = SLTi %s2, 25
+    BEQ %at, %zero, %bb.15..loopexit, implicit-def %at {
+      NOP
+    }
+  
+  bb.3..lr.ph.preheader (freq 17):
+    successors: %bb.4..lr.ph(100)
+    liveins: %a1, %s0, %s1, %s2, %v0
+  
+    %at = ADDiu %zero, 56
+    %s3 = SUBu killed %at, %a1
+    %at = ADDiu %zero, -8
+    %at = AND %s3, killed %at
+    %s4 = ADDu killed %a1, killed %at
+  
+  bb.4..lr.ph (freq 563):
+    successors: %bb.6(50), %bb.5(50)
+    liveins: %s0, %s1, %s2, %s3, %s4, %v0
+  
+    %v1 = LW %v0, 2052 :: (load 4 from %ir.37, !tbaa !5)
+    %at = ADDiu %v0, 2052
+    %at = SLTu %v1, killed %at
+    BNE %at, %zero, %bb.6, implicit-def %at {
+      NOP
+    }
+  
+  bb.5 (%ir-block.41, freq 281):
+    successors: %bb.6(100)
+    liveins: %s0, %s1, %s2, %s3, %s4
+  
+    %t9 = LW %s0, target-flags(<unknown>) @Fill_Buffer :: (load 4 from call-entry @Fill_Buffer)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit killed %gp, implicit-def %sp {
+      %gp = OR %s0, %zero
+    }
+    %v0 = LW %s1, 0 :: (load 4 from @ld, !tbaa !1)
+    %v1 = LW %v0, 2052 :: (load 4 from %ir..phi.trans.insert12, !tbaa !5)
+  
+  bb.6 (%ir-block.42, freq 563):
+    successors: %bb.4..lr.ph(96), %bb.7..loopexit.loopexit(3)
+    liveins: %s0, %s1, %s2, %s3, %s4, %v0, %v1
+  
+    %at = ADDiu %v1, 1
+    SW killed %at, killed %v0, 2052 :: (store 4 into %ir.45, !tbaa !5)
+    %at = LBu killed %v1, 0 :: (load 1 from %ir.43, !tbaa !9)
+    %at = SLLV killed %at, %s3
+    %s3 = ADDiu killed %s3, -8
+    %v0 = LW %s1, 0 :: (load 4 from @ld, !tbaa !1)
+    %v1 = LW %v0, 2072 :: (load 4 from %ir.51, !tbaa !10)
+    %s2 = ADDiu killed %s2, 8
+    %a0 = SLTi %s2, 25
+    %at = OR killed %v1, killed %at
+    BNE %a0, %zero, %bb.4..lr.ph, implicit-def %at {
+      SW killed %at, %v0, 2072 :: (store 4 into %ir.51, !tbaa !10)
+    }
+  
+  bb.7..loopexit.loopexit (freq 17):
+    successors: %bb.15..loopexit(100)
+    liveins: %s4, %v0
+  
+    B %bb.15..loopexit, implicit-def dead %at {
+      %s2 = ADDiu killed %s4, -24
+    }
+  
+  bb.8..preheader1 (freq 16):
+    successors: %bb.9..lr.ph5.preheader(50), %bb.15..loopexit(50)
+    liveins: %a0, %a1, %s0, %s1, %s2, %v0, %v1
+  
+    %at = SLTi %s2, 25
+    BEQ %at, %zero, %bb.15..loopexit, implicit-def %at {
+      NOP
+    }
+  
+  bb.9..lr.ph5.preheader (freq 8):
+    successors: %bb.11..lr.ph5(100)
+    liveins: %a0, %a1, %s0, %s1, %v1
+  
+    %at = ADDiu %zero, 56
+    %s2 = SUBu killed %at, %a1
+    %at = ADDiu %zero, -8
+    %at = AND %s2, killed %at
+    %s3 = ADDu %a1, killed %at
+    B %bb.11..lr.ph5, implicit-def %at {
+      %s4 = ADDiu killed %a1, -24
+    }
+  
+  bb.10...lr.ph5_crit_edge (freq 248):
+    successors: %bb.11..lr.ph5(100)
+    liveins: %s0, %s1, %s2, %s3, %s4, %v0
+  
+    %v1 = LW %v0, 2076 :: (load 4 from %ir..phi.trans.insert9, !tbaa !8)
+    %s2 = ADDiu killed %s2, -8
+    %a0 = LW killed %v0, 2052 :: (load 4 from %ir..phi.trans.insert, !tbaa !5)
+    %s4 = ADDiu killed %s4, 8
+  
+  bb.11..lr.ph5 (freq 256):
+    successors: %bb.13(50), %bb.12(50)
+    liveins: %a0, %s0, %s1, %s2, %s3, %s4, %v1
+  
+    %at = SLTu killed %a0, killed %v1
+    BNE %at, %zero, %bb.13, implicit-def %at {
+      NOP
+    }
+  
+  bb.12 (%ir-block.27, freq 128):
+    successors: %bb.13(100)
+    liveins: %s0, %s1, %s2, %s3, %s4
+  
+    %t9 = LW %s0, target-flags(<unknown>) @Next_Packet :: (load 4 from call-entry @Next_Packet)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit killed %gp, implicit-def %sp {
+      %gp = OR %s0, %zero
+    }
+  
+  bb.13 (%ir-block.28, freq 256):
+    successors: %bb.10...lr.ph5_crit_edge(96), %bb.14..loopexit.loopexit7(3)
+    liveins: %s0, %s1, %s2, %s3, %s4
+  
+    %t9 = LW %s0, target-flags(<unknown>) @Get_Byte :: (load 4 from call-entry @Get_Byte)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit killed %gp, implicit-def %sp, implicit-def %v0 {
+      %gp = OR %s0, %zero
+    }
+    %at = SLLV killed %v0, %s2
+    %v0 = LW %s1, 0 :: (load 4 from @ld, !tbaa !1)
+    %v1 = SLTi %s4, 25
+    %a0 = LW %v0, 2072 :: (load 4 from %ir.32, !tbaa !10)
+    %at = OR killed %a0, killed %at
+    BNE %v1, %zero, %bb.10...lr.ph5_crit_edge, implicit-def %at {
+      SW killed %at, %v0, 2072 :: (store 4 into %ir.32, !tbaa !10)
+    }
+  
+  bb.14..loopexit.loopexit7 (freq 8):
+    successors: %bb.15..loopexit(100)
+    liveins: %s3, %v0
+  
+    %s2 = ADDiu killed %s3, -24
+  
+  bb.15..loopexit (freq 51):
+    liveins: %s2, %v0
+    liveouts:
+  
+    SW killed %s2, killed %v0, 2080 :: (store 4 into %ir.59, !tbaa !11)
+    %s0 = LW %sp, 16 :: (load 4 from stack)
+    %s1 = LW %sp, 20 :: (load 4 from stack)
+    %s2 = LW %sp, 24 :: (load 4 from stack)
+    %s3 = LW %sp, 28 :: (load 4 from stack)
+    %s4 = LW %sp, 32 :: (load 4 from stack)
+    %ra = LW %sp, 36 :: (load 4 from stack)
+    PseudoReturn %ra {
+      %sp = ADDiu %sp, 40
+    }
+
+...

@@ -1,0 +1,1982 @@
+--- |
+  ; ModuleID = '/home/romi/didaktoriko/unison/unison-experiments/experiments/test-input/c/mediabench/mips_zip/build-mips/ghostscript/ghostscript.gximage1.ll'
+  target datalayout = "E-m:m-p:32:32-i8:8:32-i16:16:32-i64:64-n32-S64"
+  target triple = "mips--linux-gnu"
+  
+  %struct.gx_image_strategies_s = type { i32 (%struct.gx_image_enum_s*, i8*, i32, i32, i32, %struct.gx_device_s*)* (%struct.gx_image_enum_s*)*, i32 (%struct.gx_image_enum_s*, i8*, i32, i32, i32, %struct.gx_device_s*)* (%struct.gx_image_enum_s*)*, i32 (%struct.gx_image_enum_s*, i8*, i32, i32, i32, %struct.gx_device_s*)* (%struct.gx_image_enum_s*)*, i32 (%struct.gx_image_enum_s*, i8*, i32, i32, i32, %struct.gx_device_s*)* (%struct.gx_image_enum_s*)*, i32 (%struct.gx_image_enum_s*, i8*, i32, i32, i32, %struct.gx_device_s*)* (%struct.gx_image_enum_s*)* }
+  %struct.gx_device_s = type { i32, %struct.gx_device_procs_s*, i8*, %struct.gs_memory_s*, %struct.gs_memory_struct_type_s*, i32, i32, %struct.gx_device_color_info_s, i32, i32, [2 x float], [4 x float], i32, [2 x float], [2 x float], [2 x float], [4 x float], i32, i32, i32, %struct.gx_page_device_procs_s, %struct.gx_device_procs_s }
+  %struct.gs_memory_s = type { %struct.gs_memory_procs_s }
+  %struct.gs_memory_procs_s = type { i8* (%struct.gs_memory_s*, i32, i8*)*, i8* (%struct.gs_memory_s*, i32, i8*)*, i8* (%struct.gs_memory_s*, %struct.gs_memory_struct_type_s*, i8*)*, i8* (%struct.gs_memory_s*, %struct.gs_memory_struct_type_s*, i8*)*, i8* (%struct.gs_memory_s*, i32, i32, i8*)*, i8* (%struct.gs_memory_s*, i32, i32, i8*)*, i8* (%struct.gs_memory_s*, i32, %struct.gs_memory_struct_type_s*, i8*)*, i8* (%struct.gs_memory_s*, i32, %struct.gs_memory_struct_type_s*, i8*)*, i8* (%struct.gs_memory_s*, i8*, i32, i8*)*, i32 (%struct.gs_memory_s*, i8*)*, %struct.gs_memory_struct_type_s* (%struct.gs_memory_s*, i8*)*, void (%struct.gs_memory_s*, i8*, i8*)*, i8* (%struct.gs_memory_s*, i32, i8*)*, i8* (%struct.gs_memory_s*, i32, i8*)*, i8* (%struct.gs_memory_s*, i8*, i32, i32, i8*)*, void (%struct.gs_memory_s*, i8*, i32, i8*)*, void (%struct.gs_memory_s*, %struct.gs_gc_root_s*, %struct.gs_ptr_procs_s*, i8**, i8*)*, void (%struct.gs_memory_s*, %struct.gs_gc_root_s*, i8*)*, void (%struct.gs_memory_s*, %struct.gs_memory_status_s*)*, void (%struct.gs_memory_s*, i32)* }
+  %struct.gs_gc_root_s = type { %struct.gs_gc_root_s*, %struct.gs_ptr_procs_s*, i8** }
+  %struct.gs_ptr_procs_s = type { void (i8*, %struct.gc_state_s*)*, i32 (i8*, %struct.gc_state_s*)*, i8* (i8*, %struct.gc_state_s*)* }
+  %struct.gc_state_s = type opaque
+  %struct.gs_memory_status_s = type { i32, i32 }
+  %struct.gs_memory_struct_type_s = type { i32, i8*, %struct.struct_shared_procs_s*, void (i8*, i32)*, %struct.gs_ptr_procs_s* (i8*, i32, i32, i8**)*, void (i8*, i32, %struct.gc_state_s*)*, void (i8*)* }
+  %struct.struct_shared_procs_s = type opaque
+  %struct.gx_device_color_info_s = type { i32, i32, i16, i16, i16, i16 }
+  %struct.gx_page_device_procs_s = type { i32 (%struct.gx_device_s*, %struct.gs_state_s*)*, i32 (%struct.gx_device_s*, %struct.gs_state_s*)*, i32 (%struct.gx_device_s*, i32, %struct.gs_state_s*)* }
+  %struct.gs_state_s = type opaque
+  %struct.gx_device_procs_s = type { i32 (%struct.gx_device_s*)*, void (%struct.gx_device_s*, %struct.gs_matrix_s*)*, i32 (%struct.gx_device_s*)*, i32 (%struct.gx_device_s*, i32, i32)*, i32 (%struct.gx_device_s*)*, i32 (%struct.gx_device_s*, i16, i16, i16)*, i32 (%struct.gx_device_s*, i32, i16*)*, i32 (%struct.gx_device_s*, i32, i32, i32, i32, i32)*, i32 (%struct.gx_device_s*, %struct.gx_tile_bitmap_s*, i32, i32, i32, i32, i32, i32, i32, i32)*, i32 (%struct.gx_device_s*, i8*, i32, i32, i32, i32, i32, i32, i32, i32, i32)*, i32 (%struct.gx_device_s*, i8*, i32, i32, i32, i32, i32, i32, i32)*, i32 (%struct.gx_device_s*, i32, i32, i32, i32, i32)*, i32 (%struct.gx_device_s*, i32, i8*, i8**)*, i32 (%struct.gx_device_s*, %struct.gs_param_list_s*)*, i32 (%struct.gx_device_s*, %struct.gs_param_list_s*)*, i32 (%struct.gx_device_s*, i16, i16, i16, i16)*, %struct.gx_xfont_procs_s* (%struct.gx_device_s*)*, %struct.gx_device_s* (%struct.gx_device_s*)*, i32 (%struct.gx_device_s*, i16, i16, i16, i16)*, %struct.gx_device_s* (%struct.gx_device_s*)*, i32 (%struct.gx_device_s*, i32)*, i32 (%struct.gx_device_s*, i8*, i32, i32, i32, i32, i32, i32, i32, i32, i32)*, i32 (%struct.gx_device_s*, i32, i32*)*, i32 (%struct.gx_device_s*, i8*, i32, i32, i32, i32*, %struct.gx_tile_bitmap_s*, i32*, i32, i32, i32, i32, i32, i32, i32)*, i32 (%struct.gx_device_s*, %struct.gs_imager_state_s*, %struct.gx_path_s*, %struct.gx_fill_params_s*, %struct.gx_device_color_s*, %struct.gx_clip_path_s*)*, i32 (%struct.gx_device_s*, %struct.gs_imager_state_s*, %struct.gx_path_s*, %struct.gx_stroke_params_s*, %struct.gx_device_color_s*, %struct.gx_clip_path_s*)*, i32 (%struct.gx_device_s*, i8*, i32, i32, i32, i32, i32, i32, i32, %struct.gx_device_color_s*, i32, i32, %struct.gx_clip_path_s*)*, i32 (%struct.gx_device_s*, %struct.gs_fixed_edge_s*, %struct.gs_fixed_edge_s*, i32, i32, i32, %struct.gx_device_color_s*, i32)*, i32 (%struct.gx_device_s*, i32, i32, i32, i32, i32, i32, %struct.gx_device_color_s*, i32)*, i32 (%struct.gx_device_s*, i32, i32, i32, i32, i32, i32, %struct.gx_device_color_s*, i32)*, i32 (%struct.gx_device_s*, i32, i32, i32, i32, %struct.gx_device_color_s*, i32)*, i32 (%struct.gx_device_s*, %struct.gs_imager_state_s*, %struct.gs_image_s*, i32, %struct.gs_int_rect_s*, %struct.gx_device_color_s*, %struct.gx_clip_path_s*, %struct.gs_memory_s*, i8**)*, i32 (%struct.gx_device_s*, i8*, i8**, i32, i32, i32)*, i32 (%struct.gx_device_s*, i8*, i32)*, i32 (%struct.gx_device_s*, %struct.gx_strip_bitmap_s*, i32, i32, i32, i32, i32, i32, i32, i32)*, i32 (%struct.gx_device_s*, i8*, i32, i32, i32, i32*, %struct.gx_strip_bitmap_s*, i32*, i32, i32, i32, i32, i32, i32, i32)*, void (%struct.gx_device_s*, %struct.gs_fixed_rect_s*)* }
+  %struct.gs_matrix_s = type { float, float, float, float, float, float }
+  %struct.gx_tile_bitmap_s = type { i8*, i32, %struct.gs_int_point_s, i32, i16, i16 }
+  %struct.gs_int_point_s = type { i32, i32 }
+  %struct.gs_param_list_s = type opaque
+  %struct.gx_xfont_procs_s = type opaque
+  %struct.gs_imager_state_s = type { %struct.gs_memory_s*, %struct.gx_line_params_s, %struct.gs_matrix_fixed_s, i32, i16, i32, float, %struct.gs_fixed_point_s, i32, i32, %struct.gs_halftone_s*, [2 x %struct.gs_int_point_s], %struct.gx_device_halftone_s*, %struct.gx_ht_cache_s*, %struct.gs_cie_render_s*, %struct.gx_transfer_map_s*, %struct.gx_transfer_map_s*, %union.gx_transfer_s, %union.gx_transfer_s, %struct.gx_cie_joint_caches_s*, %struct.gx_color_map_procs_s*, %struct.gx_pattern_cache_s* }
+  %struct.gx_line_params_s = type { float, i32, i32, float, float, float, float, %struct.gx_dash_params_s }
+  %struct.gx_dash_params_s = type { float*, i32, float, i32, float, i32, i32, float }
+  %struct.gs_matrix_fixed_s = type { float, float, float, float, float, float, i32, i32, i32 }
+  %struct.gs_fixed_point_s = type { i32, i32 }
+  %struct.gs_halftone_s = type { i32, %struct.rc_header_s, %union.anon }
+  %struct.rc_header_s = type { i32, %struct.gs_memory_s*, void (%struct.gs_memory_s*, i8*, i8*)* }
+  %union.anon = type { %struct.gs_colorscreen_halftone_s }
+  %struct.gs_colorscreen_halftone_s = type { %union._css }
+  %union._css = type { [4 x %struct.gs_screen_halftone_s] }
+  %struct.gs_screen_halftone_s = type { float, float, float (double, double)*, float, float }
+  %struct.gx_device_halftone_s = type { %struct.gx_ht_order_s, %struct.rc_header_s, i32, %struct.gx_ht_order_component_s*, i32, [4 x i32], i32, i32 }
+  %struct.gx_ht_order_s = type { %struct.gx_ht_cell_params_s, i16, i16, i16, i16, i16, i16, i32, i32, i32, i32*, %struct.gx_ht_bit_s*, %struct.gx_ht_cache_s*, %struct.gx_transfer_map_s* }
+  %struct.gx_ht_cell_params_s = type { i16, i16, i16, i16, i16, i16, i32, i16, i16, i32, i32, i32 }
+  %struct.gx_ht_bit_s = type { i32, i32 }
+  %struct.gx_ht_order_component_s = type { %struct.gx_ht_order_s, i32 }
+  %struct.gx_ht_cache_s = type { i8*, i32, %struct.gx_ht_tile_s*, i32, %struct.gx_ht_order_s, i32, i32, i32 }
+  %struct.gx_ht_tile_s = type { %struct.gx_strip_bitmap_s, i32, i32 }
+  %struct.gx_strip_bitmap_s = type { i8*, i32, %struct.gs_int_point_s, i32, i16, i16, i16, i16 }
+  %struct.gs_cie_render_s = type opaque
+  %struct.gx_transfer_map_s = type { %struct.rc_header_s, {}*, i32, [256 x i16] }
+  %union.gx_transfer_s = type { [4 x %struct.gx_transfer_map_s*] }
+  %struct.gx_cie_joint_caches_s = type opaque
+  %struct.gx_color_map_procs_s = type { void (i16, %struct.gx_device_color_s*, %struct.gs_imager_state_s*, %struct.gx_device_s*, i32)*, void (i16, i16, i16, %struct.gx_device_color_s*, %struct.gs_imager_state_s*, %struct.gx_device_s*, i32)*, void (i16, i16, i16, i16, %struct.gx_device_color_s*, %struct.gs_imager_state_s*, %struct.gx_device_s*, i32)* }
+  %struct.gx_pattern_cache_s = type opaque
+  %struct.gx_path_s = type { %struct.gs_memory_s*, %struct.gs_fixed_rect_s, %struct.segment_s*, %struct.subpath_s*, %struct.subpath_s*, i32, i32, %struct.gs_fixed_point_s, %struct.gs_point_s, %struct.gs_point_s, i8, i8, i8, i8 }
+  %struct.gs_fixed_rect_s = type { %struct.gs_fixed_point_s, %struct.gs_fixed_point_s }
+  %struct.segment_s = type { %struct.segment_s*, %struct.segment_s*, i16, i16, %struct.gs_fixed_point_s }
+  %struct.subpath_s = type { %struct.segment_s*, %struct.segment_s*, i16, i16, %struct.gs_fixed_point_s, %struct.segment_s*, i32, %struct.line_close_segment, i8 }
+  %struct.line_close_segment = type { %struct.segment_s*, %struct.segment_s*, i16, i16, %struct.gs_fixed_point_s, %struct.subpath_s* }
+  %struct.gs_point_s = type { double, double }
+  %struct.gx_fill_params_s = type opaque
+  %struct.gx_device_color_s = type { %struct.gx_device_color_procs_s*, %union._c, %struct.gs_int_point_s, %struct._mask }
+  %struct.gx_device_color_procs_s = type { i32 (%struct.gx_device_color_s*, %struct.gs_imager_state_s*, %struct.gx_device_s*, i32)*, i32 (%struct.gx_device_color_s*, i32, i32, i32, i32, %struct.gx_device_s*, i32, %struct.gx_rop_source_s*)*, i32 (%struct.gx_device_color_s*, i8*, i32, i32, i32, i32, i32, i32, i32, %struct.gx_device_s*, i32, i32)*, %struct.gs_ptr_procs_s* (i8*, i32, i32, i8**)*, void (i8*, i32, %struct.gc_state_s*)* }
+  %struct.gx_rop_source_s = type { i8*, i32, i32, i32, [2 x i32], i32 }
+  %union._c = type { %struct._col }
+  %struct._col = type { %struct.gx_device_halftone_s*, [4 x i8], [4 x i32], i16 }
+  %struct._mask = type { %struct.gs_client_color_s, i32, %struct.gx_color_tile_s* }
+  %struct.gs_client_color_s = type { %struct.gs_paint_color_s, %struct.gs_pattern_instance_s* }
+  %struct.gs_paint_color_s = type { [4 x float] }
+  %struct.gs_pattern_instance_s = type opaque
+  %struct.gx_color_tile_s = type opaque
+  %struct.gx_clip_path_s = type opaque
+  %struct.gx_stroke_params_s = type opaque
+  %struct.gs_fixed_edge_s = type { %struct.gs_fixed_point_s, %struct.gs_fixed_point_s }
+  %struct.gs_image_s = type { i32, i32, %struct.gs_matrix_s, i32, %struct.gs_color_space_s*, [8 x float], i32, i32, i32, i32 }
+  %struct.gs_color_space_s = type { %struct.gs_color_space_type_s*, %union.anon.1 }
+  %struct.gs_color_space_type_s = type { i32, i32, i32, void (%struct.gs_client_color_s*, %struct.gs_color_space_s*)*, %struct.gs_color_space_s* (%struct.gs_color_space_s*, %struct.gs_imager_state_s*)*, i32 (%struct.gs_client_color_s*, %struct.gs_color_space_s*, i16*, %struct.gs_imager_state_s*)*, i32 (i16*, %struct.gx_device_color_s*, %struct.gs_imager_state_s*, %struct.gx_device_s*, i32)*, i32 (%struct.gs_client_color_s*, %struct.gs_color_space_s*, %struct.gx_device_color_s*, %struct.gs_imager_state_s*, %struct.gx_device_s*, i32)*, i32 (%struct.gs_color_space_s*, %struct.gs_state_s*)*, void (%struct.gs_color_space_s*, %struct.gs_memory_s*, i32)*, void (%struct.gs_client_color_s*, %struct.gs_color_space_s*, %struct.gs_memory_s*, i32)*, %struct.gs_ptr_procs_s* (i8*, i32, i32, i8**)*, void (i8*, i32, %struct.gc_state_s*)* }
+  %union.anon.1 = type { %struct.gs_pattern_params_s }
+  %struct.gs_pattern_params_s = type { i32, %struct.gs_paint_color_space_s }
+  %struct.gs_paint_color_space_s = type { %struct.gs_color_space_type_s*, %union.anon.4 }
+  %union.anon.4 = type { %struct.gs_indexed_params_s }
+  %struct.gs_indexed_params_s = type { %struct.gs_base_color_space_s, i32, %union.anon.3, i32 }
+  %struct.gs_base_color_space_s = type { %struct.gs_color_space_type_s*, %union.anon.2 }
+  %union.anon.2 = type { %struct.gs_cie_defg_s* }
+  %struct.gs_cie_defg_s = type opaque
+  %union.anon.3 = type { %struct.gs_const_string_s }
+  %struct.gs_const_string_s = type { i8*, i32 }
+  %struct.gs_int_rect_s = type { %struct.gs_int_point_s, %struct.gs_int_point_s }
+  %struct.gx_image_enum_s = type { i8, i8, i8, i8, i8, i8, i8, i8, %struct.gs_matrix_s, %struct.r_, %struct.gs_fixed_point_s, %struct.gs_fixed_point_s, i8* (i8*, i32*, i8*, i32, i32, %union.sample_lookup_s*, i32)*, {}*, %struct.gs_imager_state_s*, %struct.gs_color_space_s*, %struct.gs_memory_s*, %struct.gx_device_s*, i8*, i32, i8*, i32, i32, i32, i8, i8, i8, i8, %struct.gs_fixed_rect_s, %struct.gs_fixed_rect_s, i32, i32, i32, i32, %struct.gx_device_clip_s*, %struct.gx_device_rop_texture_s*, %struct.stream_IScale_state_s*, i32, %struct.gs_fixed_point_s, %struct.gs_fixed_point_s, %struct.dd_, i32, i32, %struct.gs_int_point_s, i32, i32, i32, i32, [4 x %struct.sample_map_s], [256 x %struct.gx_image_clue_s] }
+  %struct.r_ = type { i32, i32, i32, i32 }
+  %union.sample_lookup_s = type { [16 x i32], [192 x i8] }
+  %struct.gx_device_clip_s = type { i32, %struct.gx_device_procs_s*, i8*, %struct.gs_memory_s*, %struct.gs_memory_struct_type_s*, i32, i32, %struct.gx_device_color_info_s, i32, i32, [2 x float], [4 x float], i32, [2 x float], [2 x float], [2 x float], [4 x float], i32, i32, i32, %struct.gx_page_device_procs_s, %struct.gx_device_procs_s, %struct.gx_device_s*, %struct.gx_clip_list_s, %struct.gx_clip_rect_s*, %struct.gs_int_point_s }
+  %struct.gx_clip_list_s = type { %struct.gx_clip_rect_s, %struct.gx_clip_rect_s*, %struct.gx_clip_rect_s*, i32, i32 }
+  %struct.gx_clip_rect_s = type { %struct.gx_clip_rect_s*, %struct.gx_clip_rect_s*, i32, i32, i32, i32, i8 }
+  %struct.gx_device_rop_texture_s = type opaque
+  %struct.stream_IScale_state_s = type { %struct.stream_template_s*, %struct.gs_memory_s*, i32 (%struct.stream_state_s*, i8*)*, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, double, double, i8*, i8*, i8*, %struct.CLIST*, %struct.CONTRIB*, i32, i32, i32, i32, i32, i32, %struct.CLIST, i32, [8 x %struct.CONTRIB] }
+  %struct.stream_template_s = type { %struct.gs_memory_struct_type_s*, i32 (%struct.stream_state_s*)*, i32 (%struct.stream_state_s*, %struct.stream_cursor_read_s*, %struct.stream_cursor_write_s*, i32)*, i32, i32, void (%struct.stream_state_s*)*, void (%struct.stream_state_s*)*, i32 (%struct.stream_state_s*)* }
+  %struct.stream_state_s = type { %struct.stream_template_s*, %struct.gs_memory_s*, i32 (%struct.stream_state_s*, i8*)* }
+  %struct.stream_cursor_read_s = type { i8*, i8*, i8* }
+  %struct.stream_cursor_write_s = type { i8*, i8*, i8* }
+  %struct.CONTRIB = type { float }
+  %struct.CLIST = type { i32, i32, i32 }
+  %struct.dd_ = type { %struct.gx_dda_fixed_point_s, %struct.gx_dda_fixed_point_s }
+  %struct.gx_dda_fixed_point_s = type { %struct.gx_dda_fixed_s, %struct.gx_dda_fixed_s }
+  %struct.gx_dda_fixed_s = type { %struct._a, %struct._e }
+  %struct._a = type { i32, i32 }
+  %struct._e = type { i32, i32, i32 }
+  %struct.sample_map_s = type { %union.sample_lookup_s, [16 x float], double, i32 }
+  %struct.gx_image_clue_s = type { %struct.gx_device_color_s, i32 }
+  %struct.gx_device_memory_s = type { i32, %struct.gx_device_procs_s*, i8*, %struct.gs_memory_s*, %struct.gs_memory_struct_type_s*, i32, i32, %struct.gx_device_color_info_s, i32, i32, [2 x float], [4 x float], i32, [2 x float], [2 x float], [2 x float], [4 x float], i32, i32, i32, %struct.gx_page_device_procs_s, %struct.gx_device_procs_s, %struct.gx_device_s*, %struct.gs_matrix_s, i32, i32, i8*, i8**, %struct.gs_memory_s*, %struct.gs_const_string_s, %struct._c24, %struct.gs_log2_scale_point_s, i32, i32, i32, i32, i32, i32 }
+  %struct._c24 = type { i32, i32, i32, i32 }
+  %struct.gs_log2_scale_point_s = type { i32, i32 }
+  
+  @image_strategies = external global %struct.gx_image_strategies_s, align 4
+  @.str = private unnamed_addr constant [11 x i8] c"image line\00", align 1
+  @mem_mono_device = external global %struct.gx_device_memory_s, align 4
+  @gx_dc_procs_pure = external global %struct.gx_device_color_procs_s, align 4
+  @byte_reverse_bits = external global [256 x i8], align 1
+  @byte_bit_run_length_0 = external global [256 x i8], align 1
+  @image_simple_expand.lmasks = internal unnamed_addr constant [9 x i8] c"\FF\7F?\1F\0F\07\03\01\00", align 1
+  @image_simple_expand.rmasks = internal unnamed_addr constant [9 x i8] c"\00\80\C0\E0\F0\F8\FC\FE\FF", align 1
+  
+  ; Function Attrs: norecurse nounwind
+  define void @gs_gximage1_init(%struct.gs_memory_s* nocapture readnone %mem) #0 {
+    store i32 (%struct.gx_image_enum_s*, i8*, i32, i32, i32, %struct.gx_device_s*)* (%struct.gx_image_enum_s*)* @image_strategy_simple, i32 (%struct.gx_image_enum_s*, i8*, i32, i32, i32, %struct.gx_device_s*)* (%struct.gx_image_enum_s*)** getelementptr inbounds (%struct.gx_image_strategies_s, %struct.gx_image_strategies_s* @image_strategies, i32 0, i32 1), align 4, !tbaa !1
+    ret void
+  }
+  
+  ; Function Attrs: nounwind
+  define internal i32 (%struct.gx_image_enum_s*, i8*, i32, i32, i32, %struct.gx_device_s*)* @image_strategy_simple(%struct.gx_image_enum_s* %penum) #1 {
+    %1 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 40, i32 1, i32 0, i32 0, i32 0
+    %2 = load i32, i32* %1, align 4, !tbaa !6
+    %3 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 40, i32 1, i32 1, i32 0, i32 0
+    %4 = load i32, i32* %3, align 4, !tbaa !21
+    %5 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 24
+    %6 = load i8, i8* %5, align 8, !tbaa !22
+    %7 = icmp eq i8 %6, 0
+    br i1 %7, label %8, label %114
+  
+  ; <label>:8                                       ; preds = %0
+    %9 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 3
+    %10 = load i8, i8* %9, align 1, !tbaa !23
+    %11 = icmp eq i8 %10, 1
+    br i1 %11, label %12, label %114
+  
+  ; <label>:12                                      ; preds = %8
+    %13 = bitcast %struct.gx_image_enum_s* %penum to i8*
+    %14 = load i8, i8* %13, align 8, !tbaa !24
+    %15 = icmp eq i8 %14, 1
+    br i1 %15, label %16, label %114
+  
+  ; <label>:16                                      ; preds = %12
+    %17 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 23
+    %18 = load i32, i32* %17, align 4, !tbaa !25
+    switch i32 %18, label %114 [
+      i32 0, label %19
+      i32 1, label %56
+    ]
+  
+  ; <label>:19                                      ; preds = %16
+    %20 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 10, i32 0
+    %21 = load i32, i32* %20, align 8, !tbaa !26
+    %22 = add i32 %2, 2047
+    %23 = add i32 %22, %21
+    %24 = ashr i32 %23, 12
+    %25 = ashr i32 %22, 12
+    %26 = sub nsw i32 %24, %25
+    %27 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 9, i32 2
+    %28 = load i32, i32* %27, align 8, !tbaa !27
+    %29 = icmp eq i32 %26, %28
+    br i1 %29, label %.thread16, label %30
+  
+  ; <label>:30                                      ; preds = %19
+    %31 = icmp slt i32 %26, 0
+    %32 = sub nsw i32 0, %26
+    %33 = select i1 %31, i32 %32, i32 %26
+    %34 = add nsw i32 %33, 31
+    %35 = ashr i32 %34, 5
+    %36 = shl nsw i32 %35, 2
+    %37 = add nsw i32 %36, 4
+    %38 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 31
+    %39 = load i32, i32* %38, align 8, !tbaa !28
+    %40 = icmp eq i32 %39, 0
+    br i1 %40, label %41, label %114
+  
+  ; <label>:41                                      ; preds = %30
+    %42 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 22
+    store i32 %33, i32* %42, align 8, !tbaa !29
+    %43 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 21
+    store i32 %37, i32* %43, align 4, !tbaa !30
+    %44 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 16
+    %45 = load %struct.gs_memory_s*, %struct.gs_memory_s** %44, align 8, !tbaa !31
+    %46 = bitcast %struct.gs_memory_s* %45 to i8* (%struct.gs_memory_s*, i32, i8*)**
+    %47 = load i8* (%struct.gs_memory_s*, i32, i8*)*, i8* (%struct.gs_memory_s*, i32, i8*)** %46, align 4, !tbaa !32
+    %48 = tail call i8* %47(%struct.gs_memory_s* %45, i32 signext %37, i8* nonnull getelementptr inbounds ([11 x i8], [11 x i8]* @.str, i32 0, i32 0)) #4
+    %49 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 20
+    store i8* %48, i8** %49, align 8, !tbaa !35
+    %50 = icmp eq i8* %48, null
+    br i1 %50, label %51, label %.thread16
+  
+  ; <label>:51                                      ; preds = %41
+    %52 = bitcast %struct.gx_image_enum_s* %penum to i8*
+    %53 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 17
+    %54 = load %struct.gx_device_s*, %struct.gx_device_s** %53, align 4, !tbaa !36
+    %55 = tail call i32 @gx_default_end_image(%struct.gx_device_s* %54, i8* nonnull %52, i32 signext 0) #4
+    br label %114
+  
+  ; <label>:56                                      ; preds = %16
+    %57 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 10, i32 1
+    %58 = load i32, i32* %57, align 4, !tbaa !37
+    %59 = add i32 %4, 2048
+    %60 = add i32 %59, %58
+    %61 = ashr i32 %60, 12
+    %62 = ashr i32 %59, 12
+    %63 = sub nsw i32 %61, %62
+    %64 = icmp slt i32 %63, 0
+    %65 = sub nsw i32 0, %63
+    %66 = select i1 %64, i32 %65, i32 %63
+    %67 = add nsw i32 %66, 31
+    %68 = and i32 %67, -32
+    %69 = shl nsw i32 %66, 2
+    %70 = add nsw i32 %69, 28
+    %71 = and i32 %70, -32
+    %72 = add i32 %71, %68
+    %73 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 9, i32 2
+    %74 = load i32, i32* %73, align 8, !tbaa !27
+    %75 = icmp eq i32 %66, %74
+    br i1 %75, label %80, label %76
+  
+  ; <label>:76                                      ; preds = %56
+    %77 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 31
+    %78 = load i32, i32* %77, align 8, !tbaa !28
+    %79 = icmp eq i32 %78, 0
+    br i1 %79, label %80, label %114
+  
+  ; <label>:80                                      ; preds = %76, %56
+    %81 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 22
+    store i32 %66, i32* %81, align 8, !tbaa !29
+    %82 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 21
+    store i32 %72, i32* %82, align 4, !tbaa !30
+    %83 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 16
+    %84 = load %struct.gs_memory_s*, %struct.gs_memory_s** %83, align 8, !tbaa !31
+    %85 = bitcast %struct.gs_memory_s* %84 to i8* (%struct.gs_memory_s*, i32, i8*)**
+    %86 = load i8* (%struct.gs_memory_s*, i32, i8*)*, i8* (%struct.gs_memory_s*, i32, i8*)** %85, align 4, !tbaa !32
+    %87 = tail call i8* %86(%struct.gs_memory_s* %84, i32 signext %72, i8* nonnull getelementptr inbounds ([11 x i8], [11 x i8]* @.str, i32 0, i32 0)) #4
+    %88 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 20
+    store i8* %87, i8** %88, align 8, !tbaa !35
+    %89 = icmp eq i8* %87, null
+    br i1 %89, label %.critedge, label %.critedge13
+  
+  .critedge:                                        ; preds = %80
+    %90 = bitcast %struct.gx_image_enum_s* %penum to i8*
+    %91 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 17
+    %92 = load %struct.gx_device_s*, %struct.gx_device_s** %91, align 4, !tbaa !36
+    %93 = tail call i32 @gx_default_end_image(%struct.gx_device_s* %92, i8* nonnull %90, i32 signext 0) #4
+    br label %114
+  
+  .critedge13:                                      ; preds = %80
+    %94 = add nsw i32 %2, 2048
+    %95 = ashr i32 %94, 12
+    %96 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 41
+    store i32 %95, i32* %96, align 4, !tbaa !38
+    %97 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 42
+    store i32 %95, i32* %97, align 8, !tbaa !39
+    %98 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 8, i32 1
+    %99 = load float, float* %98, align 4, !tbaa !40
+    %100 = fpext float %99 to double
+    %101 = fadd double %100, 0x3F20000000000000
+    %102 = fmul double %101, 4.096000e+03
+    %103 = fptosi double %102 to i32
+    %104 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 33
+    store i32 %103, i32* %104, align 8, !tbaa !41
+    br label %.thread16
+  
+  .thread16:                                        ; preds = %.critedge13, %41, %19
+    %rproc.2 = phi i32 (%struct.gx_image_enum_s*, i8*, i32, i32, i32, %struct.gx_device_s*)* [ @image_render_landscape, %.critedge13 ], [ @image_render_simple, %41 ], [ @image_render_simple, %19 ]
+    %105 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 8, i32 0
+    %106 = load float, float* %105, align 8, !tbaa !42
+    %107 = fpext float %106 to double
+    %108 = fadd double %107, 0x3F20000000000000
+    %109 = fmul double %108, 4.096000e+03
+    %110 = fptosi double %109 to i32
+    %111 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 32
+    store i32 %110, i32* %111, align 4, !tbaa !43
+    %112 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 12
+    store i8* (i8*, i32*, i8*, i32, i32, %union.sample_lookup_s*, i32)* @sample_unpack_copy, i8* (i8*, i32*, i8*, i32, i32, %union.sample_lookup_s*, i32)** %112, align 8, !tbaa !44
+    %113 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 1
+    store i8 8, i8* %113, align 1, !tbaa !45
+    br label %114
+  
+  ; <label>:114                                     ; preds = %.thread16, %.critedge, %76, %51, %30, %16, %12, %8, %0
+    %.4 = phi i32 (%struct.gx_image_enum_s*, i8*, i32, i32, i32, %struct.gx_device_s*)* [ %rproc.2, %.thread16 ], [ null, %12 ], [ null, %8 ], [ null, %0 ], [ null, %.critedge ], [ null, %76 ], [ null, %16 ], [ null, %51 ], [ null, %30 ]
+    ret i32 (%struct.gx_image_enum_s*, i8*, i32, i32, i32, %struct.gx_device_s*)* %.4
+  }
+  
+  declare i32 @gx_default_end_image(%struct.gx_device_s*, i8*, i32 signext) #2
+  
+  ; Function Attrs: nounwind
+  define internal i32 @image_render_simple(%struct.gx_image_enum_s* %penum, i8* %buffer, i32 signext %data_x, i32 signext %w, i32 signext %h, %struct.gx_device_s* %dev) #1 {
+    %1 = getelementptr inbounds %struct.gx_device_s, %struct.gx_device_s* %dev, i32 0, i32 21, i32 9
+    %2 = load i32 (%struct.gx_device_s*, i8*, i32, i32, i32, i32, i32, i32, i32, i32, i32)*, i32 (%struct.gx_device_s*, i8*, i32, i32, i32, i32, i32, i32, i32, i32, i32)** %1, align 4, !tbaa !46
+    %3 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 32
+    %4 = load i32, i32* %3, align 4, !tbaa !43
+    %5 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 40, i32 1, i32 0, i32 0, i32 0
+    %6 = load i32, i32* %5, align 4, !tbaa !6
+    %7 = add nsw i32 %6, 2047
+    %8 = ashr i32 %7, 12
+    %9 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 44
+    %10 = load i32, i32* %9, align 4, !tbaa !52
+    %11 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 45
+    %12 = load i32, i32* %11, align 8, !tbaa !53
+    %13 = icmp eq i32 %h, 0
+    br i1 %13, label %.loopexit, label %14
+  
+  ; <label>:14                                      ; preds = %0
+    %15 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 20
+    %16 = load i8*, i8** %15, align 8, !tbaa !35
+    %17 = icmp eq i8* %16, null
+    br i1 %17, label %18, label %21
+  
+  ; <label>:18                                      ; preds = %14
+    %19 = add i32 %w, 7
+    %20 = lshr i32 %19, 3
+    br label %121
+  
+  ; <label>:21                                      ; preds = %14
+    %22 = load i32 (%struct.gx_device_s*, i8*, i32, i32, i32, i32, i32, i32, i32, i32, i32)*, i32 (%struct.gx_device_s*, i8*, i32, i32, i32, i32, i32, i32, i32, i32, i32)** getelementptr inbounds (%struct.gx_device_memory_s, %struct.gx_device_memory_s* @mem_mono_device, i32 0, i32 21, i32 9), align 4, !tbaa !54
+    %23 = icmp eq i32 (%struct.gx_device_s*, i8*, i32, i32, i32, i32, i32, i32, i32, i32, i32)* %2, %22
+    %24 = icmp sgt i32 %4, 0
+    %or.cond = and i1 %24, %23
+    br i1 %or.cond, label %25, label %113
+  
+  ; <label>:25                                      ; preds = %21
+    %26 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 49, i32 255, i32 0, i32 0
+    %27 = load %struct.gx_device_color_procs_s*, %struct.gx_device_color_procs_s** %26, align 8, !tbaa !59
+    %28 = icmp eq %struct.gx_device_color_procs_s* %27, @gx_dc_procs_pure
+    br i1 %28, label %29, label %113
+  
+  ; <label>:29                                      ; preds = %25
+    %30 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 49, i32 0, i32 0, i32 0
+    %31 = load %struct.gx_device_color_procs_s*, %struct.gx_device_color_procs_s** %30, align 8, !tbaa !59
+    %32 = icmp eq %struct.gx_device_color_procs_s* %31, @gx_dc_procs_pure
+    br i1 %32, label %33, label %113
+  
+  ; <label>:33                                      ; preds = %29
+    %34 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 49, i32 0, i32 0, i32 1
+    %35 = bitcast %union._c* %34 to i32*
+    %36 = load i32, i32* %35, align 4, !tbaa !64
+    %37 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 49, i32 255, i32 0, i32 1
+    %38 = bitcast %union._c* %37 to i32*
+    %39 = load i32, i32* %38, align 4, !tbaa !64
+    %40 = xor i32 %39, %36
+    %41 = icmp eq i32 %40, 1
+    br i1 %41, label %42, label %113
+  
+  ; <label>:42                                      ; preds = %33
+    %43 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 25
+    %44 = load i8, i8* %43, align 1, !tbaa !65
+    %45 = icmp eq i8 %44, 0
+    br i1 %45, label %46, label %113
+  
+  ; <label>:46                                      ; preds = %42
+    %47 = mul i32 %4, %w
+    %48 = add i32 %47, 2047
+    %49 = add i32 %48, %6
+    %50 = lshr i32 %49, 12
+    %51 = add nsw i32 %50, -1
+    %52 = ashr i32 %7, 15
+    %53 = ashr i32 %51, 3
+    %54 = getelementptr inbounds %struct.gx_device_s, %struct.gx_device_s* %dev, i32 1, i32 7, i32 4
+    %55 = bitcast i16* %54 to i8***
+    %56 = load i8**, i8*** %55, align 4, !tbaa !66
+    %57 = getelementptr inbounds i8*, i8** %56, i32 %10
+    %58 = load i8*, i8** %57, align 4, !tbaa !67
+    %59 = and i32 %8, 31
+    %60 = sub nsw i32 %8, %59
+    %61 = add nsw i32 %53, 1
+    %62 = ashr i32 %60, 3
+    %63 = sub nsw i32 %61, %62
+    %64 = sub nsw i32 %50, %8
+    %65 = getelementptr inbounds i8, i8* %58, i32 %52
+    %66 = load i8, i8* %65, align 1, !tbaa !68
+    %67 = zext i8 %66 to i32
+    %68 = getelementptr inbounds i8, i8* %58, i32 %53
+    %69 = load i8, i8* %68, align 1, !tbaa !68
+    %70 = zext i8 %69 to i32
+    %71 = getelementptr inbounds i8, i8* %58, i32 %62
+    %72 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 10, i32 0
+    %73 = load i32, i32* %72, align 8, !tbaa !26
+    %74 = icmp eq i32 %36, 0
+    %75 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 48, i32 0, i32 0, i32 0, i32 0
+    %76 = load i32, i32* %75, align 8, !tbaa !69
+    %77 = icmp eq i32 %76, 0
+    %78 = xor i1 %74, %77
+    %79 = sext i1 %78 to i8
+    tail call fastcc void @image_simple_expand(i8* %71, i32 signext %59, i32 signext %63, i8* %buffer, i32 signext %data_x, i32 signext %w, i32 signext %6, i32 signext %73, i8 zeroext %79)
+    %80 = and i32 %8, 7
+    %81 = icmp eq i32 %80, 0
+    br i1 %81, label %91, label %82
+  
+  ; <label>:82                                      ; preds = %46
+    %83 = lshr i32 65280, %80
+    %84 = and i32 %67, %83
+    %85 = load i8, i8* %65, align 1, !tbaa !68
+    %86 = zext i8 %85 to i32
+    %87 = xor i32 %83, 255
+    %88 = and i32 %86, %87
+    %89 = add nuw nsw i32 %88, %84
+    %90 = trunc i32 %89 to i8
+    store i8 %90, i8* %65, align 1, !tbaa !68
+    br label %91
+  
+  ; <label>:91                                      ; preds = %82, %46
+    %92 = and i32 %50, 7
+    %93 = icmp eq i32 %92, 0
+    br i1 %93, label %103, label %94
+  
+  ; <label>:94                                      ; preds = %91
+    %95 = lshr i32 65280, %92
+    %96 = load i8, i8* %68, align 1, !tbaa !68
+    %97 = zext i8 %96 to i32
+    %98 = and i32 %97, %95
+    %99 = xor i32 %95, 255
+    %100 = and i32 %70, %99
+    %101 = add nuw nsw i32 %98, %100
+    %102 = trunc i32 %101 to i8
+    store i8 %102, i8* %68, align 1, !tbaa !68
+    br label %103
+  
+  ; <label>:103                                     ; preds = %94, %91
+    %104 = icmp slt i32 %12, 2
+    br i1 %104, label %.loopexit, label %.lr.ph20.preheader
+  
+  .lr.ph20.preheader:                               ; preds = %103
+    %105 = icmp slt i32 %4, 0
+    %106 = select i1 %105, i32 %64, i32 0
+    %. = sub nsw i32 %8, %106
+    br label %.lr.ph20
+  
+  ; <label>:107                                     ; preds = %.lr.ph20
+    %108 = icmp slt i32 %112, %12
+    br i1 %108, label %.lr.ph20, label %.loopexit
+  
+  .lr.ph20:                                         ; preds = %107, %.lr.ph20.preheader
+    %dy.018 = phi i32 [ %112, %107 ], [ 1, %.lr.ph20.preheader ]
+    %109 = add i32 %10, %dy.018
+    %110 = tail call i32 %2(%struct.gx_device_s* %dev, i8* %71, i32 signext %59, i32 signext %63, i32 signext 0, i32 signext %., i32 signext %109, i32 signext %64, i32 signext 1, i32 signext 0, i32 signext 1) #4
+    %111 = icmp slt i32 %110, 0
+    %112 = add nuw nsw i32 %dy.018, 1
+    br i1 %111, label %.loopexit, label %107
+  
+  ; <label>:113                                     ; preds = %42, %33, %29, %25, %21
+    %114 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 21
+    %115 = load i32, i32* %114, align 4, !tbaa !30
+    %116 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 22
+    %117 = load i32, i32* %116, align 8, !tbaa !29
+    %118 = and i32 %8, 31
+    %119 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 10, i32 0
+    %120 = load i32, i32* %119, align 8, !tbaa !26
+    tail call fastcc void @image_simple_expand(i8* nonnull %16, i32 signext %118, i32 signext %115, i8* %buffer, i32 signext %data_x, i32 signext %w, i32 signext %6, i32 signext %120, i8 zeroext 0)
+    br label %121
+  
+  ; <label>:121                                     ; preds = %113, %18
+    %line_x.0 = phi i32 [ 0, %18 ], [ %118, %113 ]
+    %line_size.0 = phi i32 [ %20, %18 ], [ %115, %113 ]
+    %line_width.0 = phi i32 [ %w, %18 ], [ %117, %113 ]
+    %line.0 = phi i8* [ %buffer, %18 ], [ %16, %113 ]
+    %122 = icmp slt i32 %4, 0
+    %123 = select i1 %122, i32 %line_width.0, i32 0
+    %.9 = sub i32 %8, %123
+    %124 = icmp sgt i32 %12, 0
+    br i1 %124, label %.lr.ph, label %.loopexit
+  
+  ; <label>:125                                     ; preds = %.lr.ph
+    %126 = icmp slt i32 %130, %12
+    br i1 %126, label %.lr.ph, label %.loopexit
+  
+  .lr.ph:                                           ; preds = %121, %125
+    %dy.114 = phi i32 [ %130, %125 ], [ 0, %121 ]
+    %127 = add i32 %10, %dy.114
+    %128 = tail call fastcc i32 @copy_portrait(%struct.gx_image_enum_s* %penum, i8* %line.0, i32 signext %line_x.0, i32 signext %line_size.0, i32 signext %.9, i32 signext %127, i32 signext %line_width.0, i32 signext 1, %struct.gx_device_s* %dev)
+    %129 = icmp slt i32 %128, 0
+    %130 = add nuw nsw i32 %dy.114, 1
+    br i1 %129, label %.loopexit, label %125
+  
+  .loopexit:                                        ; preds = %107, %.lr.ph20, %125, %.lr.ph, %121, %103, %0
+    %.5 = phi i32 [ 0, %0 ], [ 1, %103 ], [ 1, %121 ], [ 1, %125 ], [ %128, %.lr.ph ], [ 0, %107 ], [ %110, %.lr.ph20 ]
+    ret i32 %.5
+  }
+  
+  ; Function Attrs: nounwind
+  define internal i32 @image_render_landscape(%struct.gx_image_enum_s* %penum, i8* readonly %buffer, i32 signext %data_x, i32 signext %w, i32 signext %h, %struct.gx_device_s* %dev) #1 {
+    %1 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 20
+    %2 = load i8*, i8** %1, align 8, !tbaa !35
+    %3 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 22
+    %4 = load i32, i32* %3, align 8, !tbaa !29
+    %5 = add i32 %4, 31
+    %6 = lshr i32 %5, 5
+    %7 = shl nuw nsw i32 %6, 2
+    %8 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 46
+    %9 = load i32, i32* %8, align 4, !tbaa !70
+    %10 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 47
+    %11 = load i32, i32* %10, align 8, !tbaa !71
+    %12 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 33
+    %13 = load i32, i32* %12, align 8, !tbaa !41
+    %.lobit = lshr i32 %13, 31
+    %14 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 8, i32 2
+    %15 = load float, float* %14, align 8, !tbaa !72
+    %16 = fcmp olt float %15, 0.000000e+00
+    %17 = sub nsw i32 0, %11
+    %xinc.0 = select i1 %16, i32 -1, i32 1
+    %iw.0 = select i1 %16, i32 %17, i32 %11
+    %18 = select i1 %16, i32 %11, i32 0
+    %ix.0 = add nsw i32 %18, %9
+    %19 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 42
+    %20 = load i32, i32* %19, align 8, !tbaa !39
+    %21 = icmp eq i32 %ix.0, %20
+    br i1 %21, label %33, label %22
+  
+  ; <label>:22                                      ; preds = %0
+    %23 = fcmp olt float %15, 0.000000e+00
+    %24 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 41
+    %25 = load i32, i32* %24, align 4, !tbaa !38
+    br i1 %23, label %28, label %26
+  
+  ; <label>:26                                      ; preds = %22
+    %27 = tail call fastcc i32 @copy_landscape(%struct.gx_image_enum_s* nonnull %penum, i32 signext %25, i32 signext %20, i32 signext %.lobit, %struct.gx_device_s* %dev)
+    br label %30
+  
+  ; <label>:28                                      ; preds = %22
+    %29 = tail call fastcc i32 @copy_landscape(%struct.gx_image_enum_s* nonnull %penum, i32 signext %20, i32 signext %25, i32 signext %.lobit, %struct.gx_device_s* %dev)
+    br label %30
+  
+  ; <label>:30                                      ; preds = %28, %26
+    %31 = phi i32 [ %27, %26 ], [ %29, %28 ]
+    %32 = icmp slt i32 %31, 0
+    br i1 %32, label %.loopexit, label %.critedge
+  
+  .critedge:                                        ; preds = %30
+    %sunkaddr = ptrtoint %struct.gx_image_enum_s* %penum to i32
+    %sunkaddr1 = add i32 %sunkaddr, 276
+    %sunkaddr2 = inttoptr i32 %sunkaddr1 to i32*
+    store i32 %ix.0, i32* %sunkaddr2, align 4, !tbaa !38
+    br label %33
+  
+  ; <label>:33                                      ; preds = %.critedge, %0
+    %34 = icmp eq i32 %h, 0
+    br i1 %34, label %65, label %.preheader
+  
+  .preheader:                                       ; preds = %33
+    %35 = icmp eq i32 %iw.0, 0
+    br i1 %35, label %._crit_edge, label %.lr.ph
+  
+  .lr.ph:                                           ; preds = %.preheader
+    %36 = fcmp olt float %15, 0.000000e+00
+    %37 = sext i1 %36 to i32
+    %38 = sub i32 0, %iw.0
+    br label %39
+  
+  ; <label>:39                                      ; preds = %63, %.lr.ph
+    %lsr.iv = phi i32 [ %lsr.iv.next, %63 ], [ %38, %.lr.ph ]
+    %ix.116 = phi i32 [ %ix.0, %.lr.ph ], [ %ix.3, %63 ]
+    %orig_row.014 = phi i8* [ null, %.lr.ph ], [ %orig_row.4, %63 ]
+    %.ix.1 = add nsw i32 %ix.116, %37
+    %40 = and i32 %.ix.1, 7
+    %41 = mul nuw i32 %40, %7
+    %42 = getelementptr inbounds i8, i8* %2, i32 %41
+    %43 = icmp eq i8* %orig_row.014, null
+    br i1 %43, label %44, label %47
+  
+  ; <label>:44                                      ; preds = %39
+    %sunkaddr3 = ptrtoint %struct.gx_image_enum_s* %penum to i32
+    %sunkaddr4 = add i32 %sunkaddr3, 256
+    %sunkaddr5 = inttoptr i32 %sunkaddr4 to i32*
+    %45 = load i32, i32* %sunkaddr5, align 4, !tbaa !21
+    %sunkaddr6 = ptrtoint %struct.gx_image_enum_s* %penum to i32
+    %sunkaddr7 = add i32 %sunkaddr6, 52
+    %sunkaddr8 = inttoptr i32 %sunkaddr7 to i32*
+    %46 = load i32, i32* %sunkaddr8, align 4, !tbaa !37
+    tail call fastcc void @image_simple_expand(i8* %42, i32 signext 0, i32 signext %7, i8* %buffer, i32 signext %data_x, i32 signext %w, i32 signext %45, i32 signext %46, i8 zeroext 0)
+    br label %48
+  
+  ; <label>:47                                      ; preds = %39
+    tail call void @llvm.memcpy.p0i8.p0i8.i32(i8* %42, i8* nonnull %orig_row.014, i32 %7, i32 1, i1 false)
+    br label %48
+  
+  ; <label>:48                                      ; preds = %47, %44
+    %orig_row.1 = phi i8* [ %42, %44 ], [ %orig_row.014, %47 ]
+    %49 = fcmp olt float %15, 0.000000e+00
+    br i1 %49, label %57, label %50
+  
+  ; <label>:50                                      ; preds = %48
+    %51 = add nsw i32 %.ix.1, 1
+    %52 = icmp eq i32 %40, 7
+    br i1 %52, label %53, label %63
+  
+  ; <label>:53                                      ; preds = %50
+    %sunkaddr9 = ptrtoint %struct.gx_image_enum_s* %penum to i32
+    %sunkaddr10 = add i32 %sunkaddr9, 276
+    %sunkaddr11 = inttoptr i32 %sunkaddr10 to i32*
+    %54 = load i32, i32* %sunkaddr11, align 4, !tbaa !38
+    %55 = tail call fastcc i32 @copy_landscape(%struct.gx_image_enum_s* %penum, i32 signext %54, i32 signext %51, i32 signext %.lobit, %struct.gx_device_s* %dev)
+    %56 = icmp slt i32 %55, 0
+    br i1 %56, label %.loopexit, label %.thread
+  
+  .thread:                                          ; preds = %53
+    %sunkaddr12 = ptrtoint %struct.gx_image_enum_s* %penum to i32
+    %sunkaddr13 = add i32 %sunkaddr12, 276
+    %sunkaddr14 = inttoptr i32 %sunkaddr13 to i32*
+    store i32 %51, i32* %sunkaddr14, align 4, !tbaa !38
+    br label %63
+  
+  ; <label>:57                                      ; preds = %48
+    %58 = icmp eq i32 %40, 0
+    br i1 %58, label %59, label %63
+  
+  ; <label>:59                                      ; preds = %57
+    %sunkaddr15 = ptrtoint %struct.gx_image_enum_s* %penum to i32
+    %sunkaddr16 = add i32 %sunkaddr15, 276
+    %sunkaddr17 = inttoptr i32 %sunkaddr16 to i32*
+    %60 = load i32, i32* %sunkaddr17, align 4, !tbaa !38
+    %61 = tail call fastcc i32 @copy_landscape(%struct.gx_image_enum_s* %penum, i32 signext %.ix.1, i32 signext %60, i32 signext %.lobit, %struct.gx_device_s* %dev)
+    %62 = icmp slt i32 %61, 0
+    br i1 %62, label %.loopexit, label %.thread10
+  
+  .thread10:                                        ; preds = %59
+    %sunkaddr18 = ptrtoint %struct.gx_image_enum_s* %penum to i32
+    %sunkaddr19 = add i32 %sunkaddr18, 276
+    %sunkaddr20 = inttoptr i32 %sunkaddr19 to i32*
+    store i32 %.ix.1, i32* %sunkaddr20, align 4, !tbaa !38
+    br label %63
+  
+  ; <label>:63                                      ; preds = %.thread10, %57, %.thread, %50
+    %orig_row.4 = phi i8* [ %orig_row.1, %50 ], [ %orig_row.1, %57 ], [ null, %.thread ], [ null, %.thread10 ]
+    %ix.3 = phi i32 [ %51, %50 ], [ %.ix.1, %57 ], [ %51, %.thread ], [ %.ix.1, %.thread10 ]
+    %lsr.iv.next = add i32 %lsr.iv, %xinc.0
+    %64 = icmp eq i32 %lsr.iv.next, 0
+    br i1 %64, label %._crit_edge, label %39
+  
+  ._crit_edge:                                      ; preds = %63, %.preheader
+    %ix.1.lcssa = phi i32 [ %ix.0, %.preheader ], [ %ix.3, %63 ]
+    %sunkaddr21 = ptrtoint %struct.gx_image_enum_s* %penum to i32
+    %sunkaddr22 = add i32 %sunkaddr21, 280
+    %sunkaddr23 = inttoptr i32 %sunkaddr22 to i32*
+    store i32 %ix.1.lcssa, i32* %sunkaddr23, align 8, !tbaa !39
+    br label %.loopexit
+  
+  ; <label>:65                                      ; preds = %33
+    %66 = fcmp olt float %15, 0.000000e+00
+    %67 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 41
+    %68 = load i32, i32* %67, align 4, !tbaa !38
+    br i1 %66, label %71, label %69
+  
+  ; <label>:69                                      ; preds = %65
+    %70 = tail call fastcc i32 @copy_landscape(%struct.gx_image_enum_s* nonnull %penum, i32 signext %68, i32 signext %ix.0, i32 signext %.lobit, %struct.gx_device_s* %dev)
+    br label %.loopexit
+  
+  ; <label>:71                                      ; preds = %65
+    %72 = tail call fastcc i32 @copy_landscape(%struct.gx_image_enum_s* nonnull %penum, i32 signext %ix.0, i32 signext %68, i32 signext %.lobit, %struct.gx_device_s* %dev)
+    br label %.loopexit
+  
+  .loopexit:                                        ; preds = %53, %59, %71, %69, %._crit_edge, %30
+    %.6 = phi i32 [ 0, %._crit_edge ], [ %31, %30 ], [ %70, %69 ], [ %72, %71 ], [ %61, %59 ], [ %55, %53 ]
+    ret i32 %.6
+  }
+  
+  declare i8* @sample_unpack_copy(i8*, i32*, i8*, i32 signext, i32 signext, %union.sample_lookup_s*, i32 signext) #2
+  
+  ; Function Attrs: norecurse nounwind
+  define internal fastcc void @image_simple_expand(i8* nocapture %line, i32 signext %line_x, i32 signext %raster, i8* readonly %buffer, i32 signext %data_x, i32 signext %w, i32 signext %xcur, i32 signext %x_extent, i8 zeroext %zero) unnamed_addr #0 {
+    %1 = and i32 %data_x, 7
+    %2 = lshr i32 128, %1
+    %3 = lshr i32 255, %1
+    %4 = add i32 %1, %w
+    %5 = ashr i32 %data_x, 3
+    %6 = getelementptr inbounds i8, i8* %buffer, i32 %5
+    %7 = lshr i32 %4, 3
+    %8 = getelementptr inbounds i8, i8* %6, i32 %7
+    %9 = zext i8 %zero to i32
+    %10 = xor i32 %9, 255
+    %11 = icmp eq i32 %w, 0
+    br i1 %11, label %.thread, label %12
+  
+  ; <label>:12                                      ; preds = %0
+    %fold = add i32 %w, %data_x
+    %13 = and i32 %fold, 7
+    %14 = icmp eq i32 %13, 0
+    br i1 %14, label %15, label %17
+  
+  ; <label>:15                                      ; preds = %12
+    %16 = getelementptr inbounds i8, i8* %8, i32 -1
+    br label %21
+  
+  ; <label>:17                                      ; preds = %12
+    %18 = xor i32 %13, 7
+    %19 = shl i32 2, %18
+    %20 = trunc i32 %19 to i8
+    br label %21
+  
+  ; <label>:21                                      ; preds = %17, %15
+    %stop.0 = phi i8* [ %16, %15 ], [ %8, %17 ]
+    %stopbit.0 = phi i8 [ 1, %15 ], [ %20, %17 ]
+    %22 = zext i8 %stopbit.0 to i32
+    %23 = sub nsw i32 0, %22
+    %24 = shl nsw i32 %23, 1
+    %25 = load i8, i8* %stop.0, align 1, !tbaa !68
+    %26 = icmp eq i8* %stop.0, %6
+    %27 = select i1 %26, i32 %3, i32 -1
+    %. = and i32 %24, %27
+    %28 = zext i8 %25 to i32
+    %29 = and i8 %25, %stopbit.0
+    %30 = icmp eq i8 %29, 0
+    br i1 %30, label %64, label %31
+  
+  ; <label>:31                                      ; preds = %21
+    %32 = xor i32 %28, 254
+    %33 = and i32 %32, %.
+    %34 = icmp eq i32 %33, 0
+    br i1 %34, label %.preheader16, label %35
+  
+  ; <label>:35                                      ; preds = %31
+    %36 = add nuw nsw i32 %22, 255
+    %37 = or i32 %28, %36
+    %38 = trunc i32 %37 to i8
+    br label %62
+  
+  .preheader16:                                     ; preds = %31, %40
+    %stop.1 = phi i8* [ %41, %40 ], [ %stop.0, %31 ]
+    %39 = icmp ugt i8* %stop.1, %6
+    br i1 %39, label %40, label %.critedge
+  
+  ; <label>:40                                      ; preds = %.preheader16
+    %41 = getelementptr inbounds i8, i8* %stop.1, i32 -1
+    %scevgep11 = getelementptr i8, i8* %stop.1, i32 -1
+    %42 = load i8, i8* %scevgep11, align 1, !tbaa !68
+    %43 = icmp eq i8 %42, -1
+    br i1 %43, label %.preheader16, label %.critedge
+  
+  .critedge:                                        ; preds = %.preheader16, %40
+    %44 = icmp eq i8* %stop.1, %6
+    br i1 %44, label %54, label %45
+  
+  ; <label>:45                                      ; preds = %.critedge
+    %46 = getelementptr inbounds i8, i8* %6, i32 1
+    %47 = icmp eq i8* %stop.1, %46
+    br i1 %47, label %48, label %59
+  
+  ; <label>:48                                      ; preds = %45
+    %49 = load i8, i8* %6, align 1, !tbaa !68
+    %50 = zext i8 %49 to i32
+    %51 = xor i32 %50, -1
+    %52 = and i32 %3, %51
+    %53 = icmp eq i32 %52, 0
+    br i1 %53, label %54, label %59
+  
+  ; <label>:54                                      ; preds = %48, %.critedge
+    %55 = trunc i32 %10 to i8
+    %56 = ashr i32 %line_x, 3
+    %57 = getelementptr inbounds i8, i8* %line, i32 %56
+    %58 = sub i32 %raster, %56
+    tail call void @llvm.memset.p0i8.i32(i8* %57, i8 %55, i32 %58, i32 1, i1 false)
+    br label %.thread
+  
+  ; <label>:59                                      ; preds = %48, %45
+    %60 = getelementptr inbounds i8, i8* %stop.1, i32 -1
+    %61 = load i8, i8* %60, align 1, !tbaa !68
+    br label %62
+  
+  ; <label>:62                                      ; preds = %59, %35
+    %stop.2 = phi i8* [ %stop.0, %35 ], [ %60, %59 ]
+    %last.0 = phi i8 [ %38, %35 ], [ %61, %59 ]
+    %63 = zext i8 %last.0 to i32
+    br label %94
+  
+  ; <label>:64                                      ; preds = %21
+    %stopmask.0 = trunc i32 %. to i8
+    %65 = and i8 %stopmask.0, %25
+    %66 = icmp eq i8 %65, 0
+    br i1 %66, label %.preheader15, label %67
+  
+  ; <label>:67                                      ; preds = %64
+    %68 = and i32 %28, %23
+    %69 = trunc i32 %68 to i8
+    br label %91
+  
+  .preheader15:                                     ; preds = %64, %71
+    %stop.3 = phi i8* [ %72, %71 ], [ %stop.0, %64 ]
+    %70 = icmp ugt i8* %stop.3, %6
+    br i1 %70, label %71, label %.critedge3
+  
+  ; <label>:71                                      ; preds = %.preheader15
+    %72 = getelementptr inbounds i8, i8* %stop.3, i32 -1
+    %scevgep10 = getelementptr i8, i8* %stop.3, i32 -1
+    %73 = load i8, i8* %scevgep10, align 1, !tbaa !68
+    %74 = icmp eq i8 %73, 0
+    br i1 %74, label %.preheader15, label %.critedge3
+  
+  .critedge3:                                       ; preds = %.preheader15, %71
+    %75 = icmp eq i8* %stop.3, %6
+    br i1 %75, label %84, label %76
+  
+  ; <label>:76                                      ; preds = %.critedge3
+    %77 = getelementptr inbounds i8, i8* %6, i32 1
+    %78 = icmp eq i8* %stop.3, %77
+    br i1 %78, label %79, label %88
+  
+  ; <label>:79                                      ; preds = %76
+    %80 = load i8, i8* %6, align 1, !tbaa !68
+    %81 = zext i8 %80 to i32
+    %82 = and i32 %81, %3
+    %83 = icmp eq i32 %82, 0
+    br i1 %83, label %84, label %88
+  
+  ; <label>:84                                      ; preds = %79, %.critedge3
+    %85 = ashr i32 %line_x, 3
+    %86 = getelementptr inbounds i8, i8* %line, i32 %85
+    %87 = sub i32 %raster, %85
+    tail call void @llvm.memset.p0i8.i32(i8* %86, i8 %zero, i32 %87, i32 1, i1 false)
+    br label %.thread
+  
+  ; <label>:88                                      ; preds = %79, %76
+    %89 = getelementptr inbounds i8, i8* %stop.3, i32 -1
+    %90 = load i8, i8* %89, align 1, !tbaa !68
+    br label %91
+  
+  ; <label>:91                                      ; preds = %88, %67
+    %stop.4 = phi i8* [ %stop.0, %67 ], [ %89, %88 ]
+    %last.1 = phi i8 [ %69, %67 ], [ %90, %88 ]
+    %92 = zext i8 %last.1 to i32
+    %93 = xor i32 %92, 255
+    br label %94
+  
+  ; <label>:94                                      ; preds = %91, %62
+    %.pn87 = phi i32 [ %63, %62 ], [ %93, %91 ]
+    %stop.5 = phi i8* [ %stop.2, %62 ], [ %stop.4, %91 ]
+    %.sink8.in = getelementptr inbounds [256 x i8], [256 x i8]* @byte_reverse_bits, i32 0, i32 %.pn87
+    %.sink8 = load i8, i8* %.sink8.in, align 1, !tbaa !68
+    %95 = zext i8 %.sink8 to i32
+    %.sink.in = getelementptr inbounds [256 x i8], [256 x i8]* @byte_bit_run_length_0, i32 0, i32 %95
+    %.sink = load i8, i8* %.sink.in, align 1, !tbaa !68
+    %96 = zext i8 %.sink to i32
+    %stopx.0 = add nsw i32 %96, -1
+    %97 = icmp eq i8 %.sink, 0
+    %98 = getelementptr inbounds i8, i8* %stop.5, i32 1
+    %.stop.5 = select i1 %97, i8* %98, i8* %stop.5
+    %stopx.0.op = shl i32 1, %stopx.0
+    %99 = trunc i32 %stopx.0.op to i8
+    %100 = select i1 %97, i8 -128, i8 %99
+    %101 = ashr i32 %line_x, 3
+    %102 = getelementptr inbounds i8, i8* %line, i32 %101
+    %103 = sub i32 %raster, %101
+    tail call void @llvm.memset.p0i8.i32(i8* %102, i8 %zero, i32 %103, i32 1, i1 false)
+    %104 = icmp sgt i32 %x_extent, -1
+    %105 = add i32 %xcur, 2047
+    br i1 %104, label %120, label %106
+  
+  ; <label>:106                                     ; preds = %94
+    %107 = add i32 %105, %x_extent
+    %108 = and i32 %107, 4095
+    %109 = sub nsw i32 %108, %x_extent
+    %110 = shl i32 %line_x, 12
+    %111 = add nsw i32 %109, %110
+    %112 = sub nsw i32 0, %x_extent
+    %113 = udiv i32 %112, %w
+    %114 = sub i32 0, %113
+    %115 = urem i32 %112, %w
+    %116 = icmp eq i32 %115, 0
+    br i1 %116, label %126, label %117
+  
+  ; <label>:117                                     ; preds = %106
+    %118 = xor i32 %113, -1
+    %119 = sub i32 %w, %115
+    br label %126
+  
+  ; <label>:120                                     ; preds = %94
+    %121 = and i32 %105, 4095
+    %122 = shl i32 %line_x, 12
+    %123 = or i32 %121, %122
+    %124 = udiv i32 %x_extent, %w
+    %125 = urem i32 %x_extent, %w
+    br label %126
+  
+  ; <label>:126                                     ; preds = %120, %117, %106
+    %127 = phi i32 [ %111, %117 ], [ %111, %106 ], [ %123, %120 ]
+    %xl.sroa.82.0 = phi i32 [ %118, %117 ], [ %114, %106 ], [ %124, %120 ]
+    %xl.sroa.98.0 = phi i32 [ %119, %117 ], [ 0, %106 ], [ %125, %120 ]
+    %128 = trunc i32 %2 to i8
+    %129 = sub i32 %w, %xl.sroa.98.0
+    %130 = icmp ult i32 %xl.sroa.98.0, %129
+    %131 = shl i32 %xl.sroa.98.0, 1
+    %132 = sub i32 %xl.sroa.98.0, %129
+    %133 = add nsw i32 %xl.sroa.82.0, 1
+    %dxx4.sroa.16.0 = select i1 %130, i32 %131, i32 %132
+    %134 = select i1 %130, i32 %xl.sroa.82.0, i32 %133
+    %135 = add nsw i32 %134, %xl.sroa.82.0
+    %136 = icmp ult i32 %dxx4.sroa.16.0, %129
+    %137 = shl i32 %dxx4.sroa.16.0, 1
+    %138 = sub i32 %dxx4.sroa.16.0, %129
+    %dxx4.sroa.16.1 = select i1 %136, i32 %137, i32 %138
+    %139 = zext i1 %136 to i32
+    %factor = shl i32 %135, 1
+    %140 = or i32 %139, %factor
+    %141 = xor i32 %140, 1
+    %142 = icmp ult i32 %dxx4.sroa.16.1, %129
+    %143 = shl i32 %dxx4.sroa.16.1, 1
+    %144 = sub i32 %dxx4.sroa.16.1, %129
+    %145 = add nsw i32 %141, 1
+    %dxx8.sroa.16.0 = select i1 %142, i32 %143, i32 %144
+    %146 = select i1 %142, i32 %141, i32 %145
+    %147 = add nsw i32 %146, %141
+    %148 = icmp ult i32 %dxx8.sroa.16.0, %129
+    %149 = shl i32 %dxx8.sroa.16.0, 1
+    %150 = sub i32 %dxx8.sroa.16.0, %129
+    %151 = add nsw i32 %147, 1
+    %dxx16.sroa.8.0 = select i1 %148, i32 %149, i32 %150
+    %152 = select i1 %148, i32 %147, i32 %151
+    %153 = add nsw i32 %152, %147
+    %154 = icmp ult i32 %dxx16.sroa.8.0, %129
+    %155 = sub i32 0, %129
+    %dxx24.sroa.8.0.p = select i1 %154, i32 %dxx8.sroa.16.0, i32 %155
+    %dxx24.sroa.8.0 = add i32 %dxx24.sroa.8.0.p, %dxx16.sroa.8.0
+    %156 = select i1 %154, i32 %147, i32 %151
+    %157 = add nsw i32 %153, %156
+    %158 = icmp ult i32 %dxx24.sroa.8.0, %129
+    %dxx32.sroa.7.0.p = select i1 %158, i32 %dxx8.sroa.16.0, i32 %155
+    %dxx32.sroa.7.0 = add i32 %dxx32.sroa.7.0.p, %dxx24.sroa.8.0
+    %159 = select i1 %158, i32 %147, i32 %151
+    %160 = add nsw i32 %157, %159
+    %161 = load i8, i8* %6, align 1, !tbaa !68
+    %162 = add nsw i32 %127, %x_extent
+    %163 = sub i32 0, %xl.sroa.98.0
+    %164 = sub i32 0, %dxx4.sroa.16.1
+    %165 = sub i32 0, %dxx8.sroa.16.0
+    %166 = sub i32 0, %dxx32.sroa.7.0
+    %167 = sub i32 0, %dxx24.sroa.8.0
+    %168 = sub i32 0, %dxx16.sroa.8.0
+    %scevgep = getelementptr i8, i8* %line, i32 2
+    %scevgep128 = getelementptr i8, i8* %line, i32 1
+    br label %.critedge5
+  
+  .critedge5:                                       ; preds = %334, %126
+    %psrc.0 = phi i8* [ %6, %126 ], [ %psrc.6, %334 ]
+    %xl.sroa.0.0 = phi i32 [ %127, %126 ], [ %xl.sroa.0.11, %334 ]
+    %xl.sroa.27.0 = phi i32 [ %w, %126 ], [ %xl.sroa.27.22, %334 ]
+    %data.0 = phi i8 [ %161, %126 ], [ %data.4, %334 ]
+    %sbit.0 = phi i8 [ %128, %126 ], [ %sbit.8, %334 ]
+    %169 = zext i8 %data.0 to i32
+    %170 = xor i32 %169, 255
+    %171 = zext i8 %sbit.0 to i32
+    %172 = and i32 %171, %170
+    %173 = icmp eq i32 %172, 0
+    br i1 %173, label %._crit_edge, label %.lr.ph
+  
+  .lr.ph:                                           ; preds = %.critedge5, %.lr.ph
+    %sbit.149 = phi i8 [ %177, %.lr.ph ], [ %sbit.0, %.critedge5 ]
+    %xl.sroa.27.148 = phi i32 [ %xl.sroa.27.2, %.lr.ph ], [ %xl.sroa.27.0, %.critedge5 ]
+    %xl.sroa.0.147 = phi i32 [ %176, %.lr.ph ], [ %xl.sroa.0.0, %.critedge5 ]
+    %174 = icmp ult i32 %xl.sroa.27.148, %xl.sroa.98.0
+    %xl.sroa.27.2.p = select i1 %174, i32 %129, i32 %163
+    %xl.sroa.27.2 = add i32 %xl.sroa.27.2.p, %xl.sroa.27.148
+    %175 = select i1 %174, i32 %133, i32 %xl.sroa.82.0
+    %176 = add nsw i32 %175, %xl.sroa.0.147
+    %177 = lshr i8 %sbit.149, 1
+    %178 = zext i8 %177 to i32
+    %179 = and i32 %178, %170
+    %180 = icmp eq i32 %179, 0
+    br i1 %180, label %._crit_edge, label %.lr.ph
+  
+  ._crit_edge:                                      ; preds = %.lr.ph, %.critedge5
+    %sbit.1.lcssa = phi i8 [ %sbit.0, %.critedge5 ], [ %177, %.lr.ph ]
+    %xl.sroa.27.1.lcssa = phi i32 [ %xl.sroa.27.0, %.critedge5 ], [ %xl.sroa.27.2, %.lr.ph ]
+    %xl.sroa.0.1.lcssa = phi i32 [ %xl.sroa.0.0, %.critedge5 ], [ %176, %.lr.ph ]
+    %181 = icmp eq i8 %sbit.1.lcssa, 0
+    br i1 %181, label %.preheader13, label %.loopexit12
+  
+  .preheader13:                                     ; preds = %._crit_edge
+    %182 = getelementptr inbounds i8, i8* %psrc.0, i32 1
+    %183 = load i8, i8* %182, align 1, !tbaa !68
+    %184 = icmp eq i8 %183, 0
+    br i1 %184, label %.lr.ph55.preheader, label %.loopexit14
+  
+  .lr.ph55.preheader:                               ; preds = %.preheader13
+    %scevgep1 = getelementptr i8, i8* %psrc.0, i32 2
+    br label %.lr.ph55
+  
+  .lr.ph55:                                         ; preds = %207, %.lr.ph55.preheader
+    %lsr.iv = phi i8* [ %scevgep2, %207 ], [ %scevgep1, %.lr.ph55.preheader ]
+    %xl.sroa.27.354 = phi i32 [ %xl.sroa.27.7, %207 ], [ %xl.sroa.27.1.lcssa, %.lr.ph55.preheader ]
+    %xl.sroa.0.253 = phi i32 [ %211, %207 ], [ %xl.sroa.0.1.lcssa, %.lr.ph55.preheader ]
+    %185 = load i8, i8* %lsr.iv, align 1, !tbaa !68
+    %186 = icmp eq i8 %185, 0
+    br i1 %186, label %191, label %187
+  
+  ; <label>:187                                     ; preds = %.lr.ph55
+    %188 = icmp ult i32 %xl.sroa.27.354, %dxx8.sroa.16.0
+    %xl.sroa.27.4.p = select i1 %188, i32 %129, i32 %165
+    %xl.sroa.27.4 = add i32 %xl.sroa.27.4.p, %xl.sroa.27.354
+    %189 = select i1 %188, i32 %151, i32 %147
+    %190 = add nsw i32 %189, %xl.sroa.0.253
+    br label %.loopexit14
+  
+  ; <label>:191                                     ; preds = %.lr.ph55
+    %scevgep8 = getelementptr i8, i8* %lsr.iv, i32 1
+    %192 = load i8, i8* %scevgep8, align 1, !tbaa !68
+    %193 = icmp eq i8 %192, 0
+    %scevgep7 = getelementptr i8, i8* %lsr.iv, i32 1
+    br i1 %193, label %199, label %194
+  
+  ; <label>:194                                     ; preds = %191
+    %195 = icmp ult i32 %xl.sroa.27.354, %dxx16.sroa.8.0
+    %xl.sroa.27.5.p = select i1 %195, i32 %129, i32 %168
+    %xl.sroa.27.5 = add i32 %xl.sroa.27.5.p, %xl.sroa.27.354
+    %196 = zext i1 %195 to i32
+    %197 = add i32 %xl.sroa.0.253, %153
+    %198 = add i32 %197, %196
+    br label %.loopexit14
+  
+  ; <label>:199                                     ; preds = %191
+    %scevgep6 = getelementptr i8, i8* %lsr.iv, i32 2
+    %200 = load i8, i8* %scevgep6, align 1, !tbaa !68
+    %201 = icmp eq i8 %200, 0
+    %scevgep5 = getelementptr i8, i8* %lsr.iv, i32 2
+    br i1 %201, label %207, label %202
+  
+  ; <label>:202                                     ; preds = %199
+    %203 = icmp ult i32 %xl.sroa.27.354, %dxx24.sroa.8.0
+    %xl.sroa.27.6.p = select i1 %203, i32 %129, i32 %167
+    %xl.sroa.27.6 = add i32 %xl.sroa.27.6.p, %xl.sroa.27.354
+    %204 = zext i1 %203 to i32
+    %205 = add i32 %xl.sroa.0.253, %157
+    %206 = add i32 %205, %204
+    br label %.loopexit14
+  
+  ; <label>:207                                     ; preds = %199
+    %208 = icmp ult i32 %xl.sroa.27.354, %dxx32.sroa.7.0
+    %xl.sroa.27.7.p = select i1 %208, i32 %129, i32 %166
+    %xl.sroa.27.7 = add i32 %xl.sroa.27.7.p, %xl.sroa.27.354
+    %209 = zext i1 %208 to i32
+    %210 = add i32 %160, %xl.sroa.0.253
+    %211 = add i32 %210, %209
+    %scevgep4 = getelementptr i8, i8* %lsr.iv, i32 3
+    %212 = load i8, i8* %scevgep4, align 1, !tbaa !68
+    %213 = icmp eq i8 %212, 0
+    %scevgep2 = getelementptr i8, i8* %lsr.iv, i32 4
+    %scevgep3 = getelementptr i8, i8* %scevgep2, i32 -1
+    br i1 %213, label %.lr.ph55, label %.loopexit14
+  
+  .loopexit14:                                      ; preds = %207, %202, %194, %187, %.preheader13
+    %psrc.2 = phi i8* [ %lsr.iv, %187 ], [ %scevgep7, %194 ], [ %scevgep5, %202 ], [ %182, %.preheader13 ], [ %scevgep3, %207 ]
+    %xl.sroa.0.3 = phi i32 [ %190, %187 ], [ %198, %194 ], [ %206, %202 ], [ %xl.sroa.0.1.lcssa, %.preheader13 ], [ %211, %207 ]
+    %xl.sroa.27.8 = phi i32 [ %xl.sroa.27.4, %187 ], [ %xl.sroa.27.5, %194 ], [ %xl.sroa.27.6, %202 ], [ %xl.sroa.27.1.lcssa, %.preheader13 ], [ %xl.sroa.27.7, %207 ]
+    %data.1 = phi i8 [ %185, %187 ], [ %192, %194 ], [ %200, %202 ], [ %183, %.preheader13 ], [ %212, %207 ]
+    %214 = zext i8 %data.1 to i32
+    %215 = icmp ugt i8 %data.1, 15
+    br i1 %215, label %220, label %216
+  
+  ; <label>:216                                     ; preds = %.loopexit14
+    %217 = icmp ult i32 %xl.sroa.27.8, %dxx4.sroa.16.1
+    %xl.sroa.27.9.p = select i1 %217, i32 %129, i32 %164
+    %xl.sroa.27.9 = add i32 %xl.sroa.27.9.p, %xl.sroa.27.8
+    %218 = select i1 %217, i32 %145, i32 %141
+    %219 = add nsw i32 %218, %xl.sroa.0.3
+    br label %220
+  
+  ; <label>:220                                     ; preds = %216, %.loopexit14
+    %xl.sroa.0.4 = phi i32 [ %219, %216 ], [ %xl.sroa.0.3, %.loopexit14 ]
+    %xl.sroa.27.10 = phi i32 [ %xl.sroa.27.9, %216 ], [ %xl.sroa.27.8, %.loopexit14 ]
+    %sbit.2 = phi i8 [ 8, %216 ], [ -128, %.loopexit14 ]
+    %221 = xor i32 %214, 255
+    %222 = zext i8 %sbit.2 to i32
+    %223 = and i32 %222, %221
+    %224 = icmp eq i32 %223, 0
+    br i1 %224, label %.loopexit12, label %.lr.ph64
+  
+  .lr.ph64:                                         ; preds = %220, %.lr.ph64
+    %sbit.362 = phi i8 [ %228, %.lr.ph64 ], [ %sbit.2, %220 ]
+    %xl.sroa.27.1161 = phi i32 [ %xl.sroa.27.12, %.lr.ph64 ], [ %xl.sroa.27.10, %220 ]
+    %xl.sroa.0.560 = phi i32 [ %227, %.lr.ph64 ], [ %xl.sroa.0.4, %220 ]
+    %225 = icmp ult i32 %xl.sroa.27.1161, %xl.sroa.98.0
+    %xl.sroa.27.12.p = select i1 %225, i32 %129, i32 %163
+    %xl.sroa.27.12 = add i32 %xl.sroa.27.12.p, %xl.sroa.27.1161
+    %226 = select i1 %225, i32 %133, i32 %xl.sroa.82.0
+    %227 = add nsw i32 %226, %xl.sroa.0.560
+    %228 = lshr i8 %sbit.362, 1
+    %229 = zext i8 %228 to i32
+    %230 = and i32 %229, %221
+    %231 = icmp eq i32 %230, 0
+    br i1 %231, label %.loopexit12, label %.lr.ph64
+  
+  .loopexit12:                                      ; preds = %.lr.ph64, %220, %._crit_edge
+    %psrc.3 = phi i8* [ %psrc.0, %._crit_edge ], [ %psrc.2, %220 ], [ %psrc.2, %.lr.ph64 ]
+    %xl.sroa.0.6 = phi i32 [ %xl.sroa.0.1.lcssa, %._crit_edge ], [ %xl.sroa.0.4, %220 ], [ %227, %.lr.ph64 ]
+    %xl.sroa.27.13 = phi i32 [ %xl.sroa.27.1.lcssa, %._crit_edge ], [ %xl.sroa.27.10, %220 ], [ %xl.sroa.27.12, %.lr.ph64 ]
+    %data.2.in = phi i32 [ %170, %._crit_edge ], [ %221, %220 ], [ %221, %.lr.ph64 ]
+    %sbit.4 = phi i8 [ %sbit.1.lcssa, %._crit_edge ], [ %sbit.2, %220 ], [ %228, %.lr.ph64 ]
+    %232 = ashr i32 %xl.sroa.0.6, 12
+    %233 = icmp uge i8* %psrc.3, %.stop.5
+    %234 = icmp eq i8 %sbit.4, %100
+    %or.cond = and i1 %233, %234
+    br i1 %or.cond, label %235, label %236
+  
+  ; <label>:235                                     ; preds = %.loopexit12
+    %data.2 = trunc i32 %data.2.in to i8
+    br label %.loopexit10
+  
+  ; <label>:236                                     ; preds = %.loopexit12
+    %237 = xor i32 %data.2.in, 255
+    br label %238
+  
+  ; <label>:238                                     ; preds = %238, %236
+    %xl.sroa.0.7 = phi i32 [ %xl.sroa.0.6, %236 ], [ %241, %238 ]
+    %xl.sroa.27.14 = phi i32 [ %xl.sroa.27.13, %236 ], [ %xl.sroa.27.15, %238 ]
+    %sbit.5 = phi i8 [ %sbit.4, %236 ], [ %242, %238 ]
+    %239 = icmp ult i32 %xl.sroa.27.14, %xl.sroa.98.0
+    %xl.sroa.27.15.p = select i1 %239, i32 %129, i32 %163
+    %xl.sroa.27.15 = add i32 %xl.sroa.27.15.p, %xl.sroa.27.14
+    %240 = select i1 %239, i32 %133, i32 %xl.sroa.82.0
+    %241 = add nsw i32 %240, %xl.sroa.0.7
+    %242 = lshr i8 %sbit.5, 1
+    %243 = zext i8 %242 to i32
+    %244 = and i32 %243, %237
+    %245 = icmp eq i32 %244, 0
+    br i1 %245, label %246, label %238
+  
+  ; <label>:246                                     ; preds = %238
+    %247 = trunc i32 %237 to i8
+    %248 = icmp eq i8 %242, 0
+    br i1 %248, label %.preheader11, label %.loopexit10
+  
+  .preheader11:                                     ; preds = %246
+    %249 = getelementptr inbounds i8, i8* %psrc.3, i32 1
+    %250 = load i8, i8* %249, align 1, !tbaa !68
+    %251 = icmp eq i8 %250, -1
+    br i1 %251, label %.lr.ph70, label %._crit_edge71
+  
+  .lr.ph70:                                         ; preds = %.preheader11, %.lr.ph70
+    %252 = phi i8* [ %256, %.lr.ph70 ], [ %249, %.preheader11 ]
+    %xl.sroa.27.1669 = phi i32 [ %xl.sroa.27.17, %.lr.ph70 ], [ %xl.sroa.27.15, %.preheader11 ]
+    %xl.sroa.0.868 = phi i32 [ %255, %.lr.ph70 ], [ %241, %.preheader11 ]
+    %253 = icmp ult i32 %xl.sroa.27.1669, %dxx8.sroa.16.0
+    %xl.sroa.27.17.p = select i1 %253, i32 %129, i32 %165
+    %xl.sroa.27.17 = add i32 %xl.sroa.27.17.p, %xl.sroa.27.1669
+    %254 = select i1 %253, i32 %151, i32 %147
+    %255 = add nsw i32 %254, %xl.sroa.0.868
+    %256 = getelementptr inbounds i8, i8* %252, i32 1
+    %scevgep9 = getelementptr i8, i8* %252, i32 1
+    %257 = load i8, i8* %scevgep9, align 1, !tbaa !68
+    %258 = icmp eq i8 %257, -1
+    br i1 %258, label %.lr.ph70, label %._crit_edge71
+  
+  ._crit_edge71:                                    ; preds = %.lr.ph70, %.preheader11
+    %.lcssa45 = phi i8 [ %250, %.preheader11 ], [ %257, %.lr.ph70 ]
+    %.lcssa44 = phi i8* [ %249, %.preheader11 ], [ %256, %.lr.ph70 ]
+    %xl.sroa.27.16.lcssa = phi i32 [ %xl.sroa.27.15, %.preheader11 ], [ %xl.sroa.27.17, %.lr.ph70 ]
+    %xl.sroa.0.8.lcssa = phi i32 [ %241, %.preheader11 ], [ %255, %.lr.ph70 ]
+    %259 = icmp ult i8 %.lcssa45, -16
+    br i1 %259, label %.preheader9, label %260
+  
+  ; <label>:260                                     ; preds = %._crit_edge71
+    %261 = icmp ult i32 %xl.sroa.27.16.lcssa, %dxx4.sroa.16.1
+    %xl.sroa.27.18.p = select i1 %261, i32 %129, i32 %164
+    %xl.sroa.27.18 = add i32 %xl.sroa.27.18.p, %xl.sroa.27.16.lcssa
+    %262 = select i1 %261, i32 %145, i32 %141
+    %263 = add nsw i32 %262, %xl.sroa.0.8.lcssa
+    br label %.preheader9
+  
+  .preheader9:                                      ; preds = %260, %._crit_edge71
+    %xl.sroa.0.9.ph = phi i32 [ %xl.sroa.0.8.lcssa, %._crit_edge71 ], [ %263, %260 ]
+    %xl.sroa.27.19.ph = phi i32 [ %xl.sroa.27.16.lcssa, %._crit_edge71 ], [ %xl.sroa.27.18, %260 ]
+    %sbit.6.ph = phi i8 [ -128, %._crit_edge71 ], [ 8, %260 ]
+    %264 = and i8 %sbit.6.ph, %.lcssa45
+    %265 = icmp eq i8 %264, 0
+    br i1 %265, label %.loopexit10, label %.lr.ph79
+  
+  .lr.ph79:                                         ; preds = %.preheader9, %.lr.ph79
+    %sbit.678 = phi i8 [ %269, %.lr.ph79 ], [ %sbit.6.ph, %.preheader9 ]
+    %xl.sroa.27.1977 = phi i32 [ %xl.sroa.27.20, %.lr.ph79 ], [ %xl.sroa.27.19.ph, %.preheader9 ]
+    %xl.sroa.0.976 = phi i32 [ %268, %.lr.ph79 ], [ %xl.sroa.0.9.ph, %.preheader9 ]
+    %266 = icmp ult i32 %xl.sroa.27.1977, %xl.sroa.98.0
+    %xl.sroa.27.20.p = select i1 %266, i32 %129, i32 %163
+    %xl.sroa.27.20 = add i32 %xl.sroa.27.20.p, %xl.sroa.27.1977
+    %267 = select i1 %266, i32 %133, i32 %xl.sroa.82.0
+    %268 = add nsw i32 %267, %xl.sroa.0.976
+    %269 = lshr i8 %sbit.678, 1
+    %270 = and i8 %269, %.lcssa45
+    %271 = icmp eq i8 %270, 0
+    br i1 %271, label %.loopexit10, label %.lr.ph79
+  
+  .loopexit10:                                      ; preds = %.lr.ph79, %.preheader9, %246, %235
+    %psrc.6 = phi i8* [ %psrc.3, %235 ], [ %psrc.3, %246 ], [ %.lcssa44, %.preheader9 ], [ %.lcssa44, %.lr.ph79 ]
+    %xl.sroa.0.11 = phi i32 [ %xl.sroa.0.6, %235 ], [ %241, %246 ], [ %xl.sroa.0.9.ph, %.preheader9 ], [ %268, %.lr.ph79 ]
+    %xl.sroa.27.22 = phi i32 [ %xl.sroa.27.13, %235 ], [ %xl.sroa.27.15, %246 ], [ %xl.sroa.27.19.ph, %.preheader9 ], [ %xl.sroa.27.20, %.lr.ph79 ]
+    %data.4 = phi i8 [ %data.2, %235 ], [ %247, %246 ], [ %.lcssa45, %.preheader9 ], [ %.lcssa45, %.lr.ph79 ]
+    %.pn.in = phi i32 [ %162, %235 ], [ %241, %246 ], [ %xl.sroa.0.9.ph, %.preheader9 ], [ %268, %.lr.ph79 ]
+    %sbit.8 = phi i8 [ %100, %235 ], [ %242, %246 ], [ %sbit.6.ph, %.preheader9 ], [ %269, %.lr.ph79 ]
+    %.pn = ashr i32 %.pn.in, 12
+    %n.0 = sub nsw i32 %.pn, %232
+    %272 = icmp slt i32 %n.0, 0
+    %273 = sub nsw i32 0, %n.0
+    %.pn. = select i1 %272, i32 %.pn, i32 %232
+    %.n.0 = select i1 %272, i32 %273, i32 %n.0
+    %274 = ashr i32 %.pn., 3
+    %275 = getelementptr inbounds i8, i8* %line, i32 %274
+    %276 = and i32 %.pn., 7
+    %277 = add nsw i32 %276, %.n.0
+    %278 = icmp slt i32 %277, 9
+    br i1 %278, label %279, label %291
+  
+  ; <label>:279                                     ; preds = %.loopexit10
+    %280 = getelementptr inbounds [9 x i8], [9 x i8]* @image_simple_expand.lmasks, i32 0, i32 %276
+    %281 = load i8, i8* %280, align 1, !tbaa !68
+    %282 = zext i8 %281 to i32
+    %283 = getelementptr inbounds [9 x i8], [9 x i8]* @image_simple_expand.lmasks, i32 0, i32 %277
+    %284 = load i8, i8* %283, align 1, !tbaa !68
+    %285 = zext i8 %284 to i32
+    %286 = sub nsw i32 %282, %285
+    %287 = load i8, i8* %275, align 1, !tbaa !68
+    %288 = zext i8 %287 to i32
+    %289 = xor i32 %288, %286
+    %290 = trunc i32 %289 to i8
+    store i8 %290, i8* %275, align 1, !tbaa !68
+    br label %334
+  
+  ; <label>:291                                     ; preds = %.loopexit10
+    %292 = add nsw i32 %277, -8
+    %293 = icmp slt i32 %292, 9
+    %294 = getelementptr inbounds [9 x i8], [9 x i8]* @image_simple_expand.lmasks, i32 0, i32 %276
+    %295 = load i8, i8* %294, align 1, !tbaa !68
+    br i1 %293, label %296, label %304
+  
+  ; <label>:296                                     ; preds = %291
+    %297 = load i8, i8* %275, align 1, !tbaa !68
+    %298 = xor i8 %297, %295
+    store i8 %298, i8* %275, align 1, !tbaa !68
+    %299 = getelementptr inbounds [9 x i8], [9 x i8]* @image_simple_expand.rmasks, i32 0, i32 %292
+    %300 = load i8, i8* %299, align 1, !tbaa !68
+    %301 = getelementptr inbounds i8, i8* %275, i32 1
+    %302 = load i8, i8* %301, align 1, !tbaa !68
+    %303 = xor i8 %302, %300
+    store i8 %303, i8* %301, align 1, !tbaa !68
+    br label %334
+  
+  ; <label>:304                                     ; preds = %291
+    %305 = getelementptr inbounds i8, i8* %275, i32 1
+    %306 = load i8, i8* %275, align 1, !tbaa !68
+    %307 = xor i8 %306, %295
+    store i8 %307, i8* %275, align 1, !tbaa !68
+    %308 = icmp sgt i32 %292, 55
+    br i1 %308, label %322, label %.preheader
+  
+  .preheader:                                       ; preds = %304
+    %309 = add nsw i32 %277, -16
+    %310 = icmp sgt i32 %309, -1
+    br i1 %310, label %.lr.ph84.preheader, label %.loopexit
+  
+  .lr.ph84.preheader:                               ; preds = %.preheader
+    %311 = trunc i32 %10 to i8
+    %312 = add nsw i32 %232, -1
+    %313 = sub nsw i32 %312, %.pn
+    %314 = icmp sgt i32 %313, -1
+    %smax = select i1 %314, i32 %313, i32 -1
+    %315 = sub nsw i32 %312, %smax
+    %316 = and i32 %315, 7
+    %317 = add nsw i32 %.n.0, -16
+    %318 = add nsw i32 %317, %316
+    %319 = lshr i32 %318, 3
+    %320 = add nsw i32 %274, %319
+    %scevgep129 = getelementptr i8, i8* %scevgep128, i32 %274
+    %321 = add nuw nsw i32 %319, 1
+    call void @llvm.memset.p0i8.i32(i8* %scevgep129, i8 %311, i32 %321, i32 1, i1 false)
+    br label %.lr.ph84
+  
+  ; <label>:322                                     ; preds = %304
+    %323 = trunc i32 %10 to i8
+    %324 = ashr i32 %292, 3
+    tail call void @llvm.memset.p0i8.i32(i8* %305, i8 %323, i32 %324, i32 1, i1 false)
+    %325 = getelementptr inbounds i8, i8* %305, i32 %324
+    br label %.loopexit
+  
+  .lr.ph84:                                         ; preds = %.lr.ph84, %.lr.ph84.preheader
+    %326 = phi i32 [ %327, %.lr.ph84 ], [ %309, %.lr.ph84.preheader ]
+    %327 = add nsw i32 %326, -8
+    %328 = icmp sgt i32 %327, -1
+    br i1 %328, label %.lr.ph84, label %.loopexit.loopexit
+  
+  .loopexit.loopexit:                               ; preds = %.lr.ph84
+    %scevgep127 = getelementptr i8, i8* %scevgep, i32 %320
+    br label %.loopexit
+  
+  .loopexit:                                        ; preds = %.loopexit.loopexit, %322, %.preheader
+    %n.3 = phi i32 [ %292, %322 ], [ %309, %.preheader ], [ %327, %.loopexit.loopexit ]
+    %bp.1 = phi i8* [ %325, %322 ], [ %305, %.preheader ], [ %scevgep127, %.loopexit.loopexit ]
+    %329 = and i32 %n.3, 7
+    %330 = getelementptr inbounds [9 x i8], [9 x i8]* @image_simple_expand.rmasks, i32 0, i32 %329
+    %331 = load i8, i8* %330, align 1, !tbaa !68
+    %332 = load i8, i8* %bp.1, align 1, !tbaa !68
+    %333 = xor i8 %332, %331
+    store i8 %333, i8* %bp.1, align 1, !tbaa !68
+    br label %334
+  
+  ; <label>:334                                     ; preds = %.loopexit, %296, %279
+    %335 = icmp uge i8* %psrc.6, %.stop.5
+    %336 = icmp eq i8 %sbit.8, %100
+    %or.cond4 = and i1 %335, %336
+    br i1 %or.cond4, label %.thread, label %.critedge5
+  
+  .thread:                                          ; preds = %334, %84, %54, %0
+    ret void
+  }
+  
+  ; Function Attrs: nounwind
+  define internal fastcc i32 @copy_portrait(%struct.gx_image_enum_s* %penum, i8* %data, i32 signext %dx, i32 signext %raster, i32 signext %x, i32 signext %y, i32 signext %w, i32 signext %h, %struct.gx_device_s* %dev) unnamed_addr #1 {
+    %1 = ptrtoint i8* %data to i32
+    %2 = and i32 %1, 3
+    %3 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 48, i32 0, i32 0, i32 0, i32 0
+    %4 = load i32, i32* %3, align 8, !tbaa !69
+    %5 = icmp eq i32 %4, 0
+    %6 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 49, i32 255, i32 0
+    %7 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 49, i32 0, i32 0
+    %pdc0.0 = select i1 %5, %struct.gx_device_color_s* %7, %struct.gx_device_color_s* %6
+    %pdc1.0 = select i1 %5, %struct.gx_device_color_s* %6, %struct.gx_device_color_s* %7
+    %8 = sub nsw i32 0, %2
+    %9 = getelementptr inbounds i8, i8* %data, i32 %8
+    %10 = shl nuw nsw i32 %2, 3
+    %11 = add i32 %10, %dx
+    %12 = bitcast %struct.gx_device_color_s* %pdc0.0 to %struct.gx_device_color_procs_s**
+    %13 = load %struct.gx_device_color_procs_s*, %struct.gx_device_color_procs_s** %12, align 4, !tbaa !59
+    %14 = icmp eq %struct.gx_device_color_procs_s* %13, @gx_dc_procs_pure
+    %15 = bitcast %struct.gx_device_color_s* %pdc1.0 to %struct.gx_device_color_procs_s**
+    %16 = load %struct.gx_device_color_procs_s*, %struct.gx_device_color_procs_s** %15, align 4, !tbaa !59
+    br i1 %14, label %17, label %35
+  
+  ; <label>:17                                      ; preds = %0
+    %18 = icmp eq %struct.gx_device_color_procs_s* %16, @gx_dc_procs_pure
+    br i1 %18, label %19, label %42
+  
+  ; <label>:19                                      ; preds = %17
+    %20 = icmp eq i32 %h, 1
+    %21 = and i32 %raster, 3
+    %22 = icmp eq i32 %21, 0
+    %or.cond = or i1 %22, %20
+    br i1 %or.cond, label %23, label %26
+  
+  ; <label>:23                                      ; preds = %19
+    %24 = getelementptr inbounds %struct.gx_device_s, %struct.gx_device_s* %dev, i32 0, i32 21, i32 9
+    %25 = load i32 (%struct.gx_device_s*, i8*, i32, i32, i32, i32, i32, i32, i32, i32, i32)*, i32 (%struct.gx_device_s*, i8*, i32, i32, i32, i32, i32, i32, i32, i32, i32)** %24, align 4, !tbaa !46
+    br label %26
+  
+  ; <label>:26                                      ; preds = %23, %19
+    %27 = phi i32 (%struct.gx_device_s*, i8*, i32, i32, i32, i32, i32, i32, i32, i32, i32)* [ %25, %23 ], [ @gx_copy_mono_unaligned, %19 ]
+    %28 = getelementptr inbounds %struct.gx_device_color_s, %struct.gx_device_color_s* %pdc0.0, i32 0, i32 1
+    %29 = bitcast %union._c* %28 to i32*
+    %30 = load i32, i32* %29, align 4, !tbaa !64
+    %31 = getelementptr inbounds %struct.gx_device_color_s, %struct.gx_device_color_s* %pdc1.0, i32 0, i32 1
+    %32 = bitcast %union._c* %31 to i32*
+    %33 = load i32, i32* %32, align 4, !tbaa !64
+    %34 = tail call i32 %27(%struct.gx_device_s* %dev, i8* %9, i32 signext %11, i32 signext %raster, i32 signext 0, i32 signext %x, i32 signext %y, i32 signext %w, i32 signext %h, i32 signext %30, i32 signext %33) #4
+    br label %56
+  
+  ; <label>:35                                      ; preds = %0
+    %36 = icmp eq %struct.gx_device_color_procs_s* %16, @gx_dc_procs_pure
+    br i1 %36, label %37, label %.thread3
+  
+  ; <label>:37                                      ; preds = %35
+    %38 = getelementptr inbounds %struct.gx_device_color_s, %struct.gx_device_color_s* %pdc1.0, i32 0, i32 1
+    %39 = bitcast %union._c* %38 to i32*
+    %40 = load i32, i32* %39, align 4, !tbaa !64
+    %41 = icmp eq i32 %40, -1
+    br i1 %41, label %50, label %.thread3
+  
+  ; <label>:42                                      ; preds = %17
+    %43 = getelementptr inbounds %struct.gx_device_color_s, %struct.gx_device_color_s* %pdc0.0, i32 0, i32 1
+    %44 = bitcast %union._c* %43 to i32*
+    %45 = load i32, i32* %44, align 4, !tbaa !64
+    %46 = icmp eq i32 %45, -1
+    br i1 %46, label %50, label %.thread3
+  
+  .thread3:                                         ; preds = %42, %37, %35
+    %47 = getelementptr inbounds %struct.gx_device_color_procs_s, %struct.gx_device_color_procs_s* %13, i32 0, i32 1
+    %48 = load i32 (%struct.gx_device_color_s*, i32, i32, i32, i32, %struct.gx_device_s*, i32, %struct.gx_rop_source_s*)*, i32 (%struct.gx_device_color_s*, i32, i32, i32, i32, %struct.gx_device_s*, i32, %struct.gx_rop_source_s*)** %47, align 4, !tbaa !73
+    %49 = tail call i32 %48(%struct.gx_device_color_s* nonnull %pdc0.0, i32 signext %x, i32 signext %y, i32 signext %w, i32 signext %h, %struct.gx_device_s* %dev, i32 signext 252, %struct.gx_rop_source_s* null) #4
+    %not. = icmp sgt i32 %49, -1
+    br i1 %not., label %50, label %56
+  
+  ; <label>:50                                      ; preds = %.thread3, %42, %37
+    %pdc.0 = phi %struct.gx_device_color_s* [ %pdc0.0, %37 ], [ %pdc1.0, %.thread3 ], [ %pdc1.0, %42 ]
+    %invert.0 = phi i32 [ 1, %37 ], [ 0, %.thread3 ], [ 0, %42 ]
+    %51 = bitcast %struct.gx_device_color_s* %pdc.0 to %struct.gx_device_color_procs_s**
+    %52 = load %struct.gx_device_color_procs_s*, %struct.gx_device_color_procs_s** %51, align 4, !tbaa !59
+    %53 = getelementptr inbounds %struct.gx_device_color_procs_s, %struct.gx_device_color_procs_s* %52, i32 0, i32 2
+    %54 = load i32 (%struct.gx_device_color_s*, i8*, i32, i32, i32, i32, i32, i32, i32, %struct.gx_device_s*, i32, i32)*, i32 (%struct.gx_device_color_s*, i8*, i32, i32, i32, i32, i32, i32, i32, %struct.gx_device_s*, i32, i32)** %53, align 4, !tbaa !75
+    %55 = tail call i32 %54(%struct.gx_device_color_s* %pdc.0, i8* %9, i32 signext %11, i32 signext %raster, i32 signext 0, i32 signext %x, i32 signext %y, i32 signext %w, i32 signext %h, %struct.gx_device_s* %dev, i32 signext 252, i32 signext %invert.0) #4
+    br label %56
+  
+  ; <label>:56                                      ; preds = %50, %.thread3, %26
+    %.2 = phi i32 [ %34, %26 ], [ %55, %50 ], [ %49, %.thread3 ]
+    ret i32 %.2
+  }
+  
+  ; Function Attrs: argmemonly nounwind
+  declare void @llvm.memset.p0i8.i32(i8* nocapture, i8, i32, i32, i1) #3
+  
+  ; Function Attrs: argmemonly nounwind
+  declare void @llvm.memcpy.p0i8.p0i8.i32(i8* nocapture, i8* nocapture readonly, i32, i32, i1) #3
+  
+  declare i32 @gx_copy_mono_unaligned(%struct.gx_device_s*, i8*, i32 signext, i32 signext, i32 signext, i32 signext, i32 signext, i32 signext, i32 signext, i32 signext, i32 signext) #2
+  
+  ; Function Attrs: nounwind
+  define internal fastcc i32 @copy_landscape(%struct.gx_image_enum_s* %penum, i32 signext %x0, i32 signext %x1, i32 signext %y_neg, %struct.gx_device_s* %dev) unnamed_addr #1 {
+    %1 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 20
+    %2 = load i8*, i8** %1, align 8, !tbaa !35
+    %3 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 22
+    %4 = load i32, i32* %3, align 8, !tbaa !29
+    %5 = add i32 %4, 31
+    %6 = lshr i32 %5, 5
+    %7 = shl nuw nsw i32 %6, 2
+    %8 = shl nuw i32 %6, 5
+    %9 = getelementptr inbounds i8, i8* %2, i32 %8
+    %10 = sub nsw i32 %x1, %x0
+    %11 = getelementptr inbounds %struct.gx_image_enum_s, %struct.gx_image_enum_s* %penum, i32 0, i32 40, i32 1, i32 1, i32 0, i32 0
+    %12 = load i32, i32* %11, align 4, !tbaa !21
+    %13 = add nsw i32 %12, 2047
+    %14 = ashr i32 %13, 12
+    %15 = icmp eq i32 %x1, %x0
+    %16 = icmp eq i32 %4, 0
+    %or.cond = or i1 %15, %16
+    br i1 %or.cond, label %34, label %17
+  
+  ; <label>:17                                      ; preds = %0
+    %18 = add i32 %4, -1
+    %19 = lshr i32 %18, 3
+    %20 = add i32 %19, 1
+    %21 = shl i32 %19, 5
+    %22 = add i32 %4, 31
+    %23 = lshr i32 %22, 5
+    %24 = shl i32 %23, 5
+    %25 = add i32 %21, %24
+    %scevgep = getelementptr i8, i8* %2, i32 %25
+    br label %26
+  
+  ; <label>:26                                      ; preds = %26, %17
+    %lsr.iv1 = phi i8* [ %scevgep2, %26 ], [ %scevgep, %17 ]
+    %lsr.iv = phi i32 [ %lsr.iv.next, %26 ], [ %20, %17 ]
+    %scevgep3 = getelementptr i8, i8* %2, i32 %lsr.iv
+    %scevgep4 = getelementptr i8, i8* %scevgep3, i32 -1
+    tail call void @memflip8x8(i8* %scevgep4, i32 signext %7, i8* %lsr.iv1, i32 signext 4) #4
+    %lsr.iv.next = add nsw i32 %lsr.iv, -1
+    %scevgep2 = getelementptr i8, i8* %lsr.iv1, i32 -32
+    %27 = icmp sgt i32 %lsr.iv.next, 0
+    br i1 %27, label %26, label %.loopexit
+  
+  .loopexit:                                        ; preds = %26
+    %28 = icmp slt i32 %10, 0
+    %29 = sub nsw i32 0, %10
+    %x1.x0 = select i1 %28, i32 %x1, i32 %x0
+    %. = select i1 %28, i32 %29, i32 %10
+    %30 = icmp eq i32 %y_neg, 0
+    %31 = select i1 %30, i32 0, i32 %4
+    %y.0 = sub i32 %14, %31
+    %32 = and i32 %x1.x0, 7
+    %33 = tail call fastcc i32 @copy_portrait(%struct.gx_image_enum_s* %penum, i8* %9, i32 signext %32, i32 signext 4, i32 signext %x1.x0, i32 signext %y.0, i32 signext %., i32 signext %4, %struct.gx_device_s* %dev)
+    br label %34
+  
+  ; <label>:34                                      ; preds = %.loopexit, %0
+    %.0 = phi i32 [ %33, %.loopexit ], [ 0, %0 ]
+    ret i32 %.0
+  }
+  
+  declare void @memflip8x8(i8*, i32 signext, i8*, i32 signext) #2
+  
+  attributes #0 = { norecurse nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #1 = { nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #2 = { "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #3 = { argmemonly nounwind "target-cpu"="mips32" }
+  attributes #4 = { nounwind }
+  
+  !llvm.ident = !{!0}
+  
+  !0 = !{!"clang version 3.8.0 (http://llvm.org/git/clang.git 2d49f0a0ae8366964a93e3b7b26e29679bee7160) (http://llvm.org/git/llvm.git 60bc66b44837125843b58ed3e0fd2e6bb948d839)"}
+  !1 = !{!2, !3, i64 4}
+  !2 = !{!"gx_image_strategies_s", !3, i64 0, !3, i64 4, !3, i64 8, !3, i64 12, !3, i64 16}
+  !3 = !{!"any pointer", !4, i64 0}
+  !4 = !{!"omnipotent char", !5, i64 0}
+  !5 = !{!"Simple C/C++ TBAA"}
+  !6 = !{!7, !13, i64 236}
+  !7 = !{!"gx_image_enum_s", !4, i64 0, !4, i64 1, !4, i64 2, !4, i64 3, !4, i64 4, !4, i64 5, !4, i64 6, !4, i64 7, !8, i64 8, !10, i64 32, !12, i64 48, !12, i64 56, !3, i64 64, !3, i64 68, !3, i64 72, !3, i64 76, !3, i64 80, !3, i64 84, !3, i64 88, !11, i64 92, !3, i64 96, !11, i64 100, !11, i64 104, !4, i64 108, !4, i64 112, !4, i64 113, !4, i64 114, !4, i64 115, !14, i64 116, !14, i64 132, !11, i64 148, !13, i64 152, !13, i64 156, !13, i64 160, !3, i64 164, !3, i64 168, !3, i64 172, !11, i64 176, !12, i64 180, !12, i64 188, !15, i64 196, !11, i64 276, !11, i64 280, !20, i64 284, !11, i64 292, !11, i64 296, !11, i64 300, !11, i64 304, !4, i64 312, !4, i64 1656}
+  !8 = !{!"gs_matrix_s", !9, i64 0, !9, i64 4, !9, i64 8, !9, i64 12, !9, i64 16, !9, i64 20}
+  !9 = !{!"float", !4, i64 0}
+  !10 = !{!"r_", !11, i64 0, !11, i64 4, !11, i64 8, !11, i64 12}
+  !11 = !{!"int", !4, i64 0}
+  !12 = !{!"gs_fixed_point_s", !13, i64 0, !13, i64 4}
+  !13 = !{!"long", !4, i64 0}
+  !14 = !{!"gs_fixed_rect_s", !12, i64 0, !12, i64 8}
+  !15 = !{!"dd_", !16, i64 0, !16, i64 40}
+  !16 = !{!"gx_dda_fixed_point_s", !17, i64 0, !17, i64 20}
+  !17 = !{!"gx_dda_fixed_s", !18, i64 0, !19, i64 8}
+  !18 = !{!"_a", !13, i64 0, !11, i64 4}
+  !19 = !{!"_e", !13, i64 0, !11, i64 4, !11, i64 8}
+  !20 = !{!"gs_int_point_s", !11, i64 0, !11, i64 4}
+  !21 = !{!7, !13, i64 256}
+  !22 = !{!7, !4, i64 112}
+  !23 = !{!7, !4, i64 3}
+  !24 = !{!7, !4, i64 0}
+  !25 = !{!7, !4, i64 108}
+  !26 = !{!7, !13, i64 48}
+  !27 = !{!7, !11, i64 40}
+  !28 = !{!7, !13, i64 152}
+  !29 = !{!7, !11, i64 104}
+  !30 = !{!7, !11, i64 100}
+  !31 = !{!7, !3, i64 80}
+  !32 = !{!33, !3, i64 0}
+  !33 = !{!"gs_memory_s", !34, i64 0}
+  !34 = !{!"gs_memory_procs_s", !3, i64 0, !3, i64 4, !3, i64 8, !3, i64 12, !3, i64 16, !3, i64 20, !3, i64 24, !3, i64 28, !3, i64 32, !3, i64 36, !3, i64 40, !3, i64 44, !3, i64 48, !3, i64 52, !3, i64 56, !3, i64 60, !3, i64 64, !3, i64 68, !3, i64 72, !3, i64 76}
+  !35 = !{!7, !3, i64 96}
+  !36 = !{!7, !3, i64 84}
+  !37 = !{!7, !13, i64 52}
+  !38 = !{!7, !11, i64 276}
+  !39 = !{!7, !11, i64 280}
+  !40 = !{!7, !9, i64 12}
+  !41 = !{!7, !13, i64 160}
+  !42 = !{!7, !9, i64 8}
+  !43 = !{!7, !13, i64 156}
+  !44 = !{!7, !3, i64 64}
+  !45 = !{!7, !4, i64 1}
+  !46 = !{!47, !3, i64 180}
+  !47 = !{!"gx_device_s", !11, i64 0, !3, i64 4, !3, i64 8, !3, i64 12, !3, i64 16, !11, i64 20, !11, i64 24, !48, i64 28, !11, i64 44, !11, i64 48, !4, i64 52, !4, i64 60, !11, i64 76, !4, i64 80, !4, i64 88, !4, i64 96, !4, i64 104, !13, i64 120, !13, i64 124, !11, i64 128, !50, i64 132, !51, i64 144}
+  !48 = !{!"gx_device_color_info_s", !11, i64 0, !11, i64 4, !49, i64 8, !49, i64 10, !49, i64 12, !49, i64 14}
+  !49 = !{!"short", !4, i64 0}
+  !50 = !{!"gx_page_device_procs_s", !3, i64 0, !3, i64 4, !3, i64 8}
+  !51 = !{!"gx_device_procs_s", !3, i64 0, !3, i64 4, !3, i64 8, !3, i64 12, !3, i64 16, !3, i64 20, !3, i64 24, !3, i64 28, !3, i64 32, !3, i64 36, !3, i64 40, !3, i64 44, !3, i64 48, !3, i64 52, !3, i64 56, !3, i64 60, !3, i64 64, !3, i64 68, !3, i64 72, !3, i64 76, !3, i64 80, !3, i64 84, !3, i64 88, !3, i64 92, !3, i64 96, !3, i64 100, !3, i64 104, !3, i64 108, !3, i64 112, !3, i64 116, !3, i64 120, !3, i64 124, !3, i64 128, !3, i64 132, !3, i64 136, !3, i64 140, !3, i64 144}
+  !52 = !{!7, !11, i64 292}
+  !53 = !{!7, !11, i64 296}
+  !54 = !{!55, !3, i64 180}
+  !55 = !{!"gx_device_memory_s", !11, i64 0, !3, i64 4, !3, i64 8, !3, i64 12, !3, i64 16, !11, i64 20, !11, i64 24, !48, i64 28, !11, i64 44, !11, i64 48, !4, i64 52, !4, i64 60, !11, i64 76, !4, i64 80, !4, i64 88, !4, i64 96, !4, i64 104, !13, i64 120, !13, i64 124, !11, i64 128, !50, i64 132, !51, i64 144, !3, i64 292, !8, i64 296, !11, i64 320, !11, i64 324, !3, i64 328, !3, i64 332, !3, i64 336, !56, i64 340, !57, i64 348, !58, i64 364, !11, i64 372, !11, i64 376, !11, i64 380, !11, i64 384, !11, i64 388, !13, i64 392}
+  !56 = !{!"gs_const_string_s", !3, i64 0, !11, i64 4}
+  !57 = !{!"_c24", !13, i64 0, !11, i64 4, !11, i64 8, !11, i64 12}
+  !58 = !{!"gs_log2_scale_point_s", !11, i64 0, !11, i64 4}
+  !59 = !{!60, !3, i64 0}
+  !60 = !{!"gx_device_color_s", !3, i64 0, !4, i64 4, !20, i64 32, !61, i64 40}
+  !61 = !{!"_mask", !62, i64 0, !13, i64 20, !3, i64 24}
+  !62 = !{!"gs_client_color_s", !63, i64 0, !3, i64 16}
+  !63 = !{!"gs_paint_color_s", !4, i64 0}
+  !64 = !{!13, !13, i64 0}
+  !65 = !{!7, !4, i64 113}
+  !66 = !{!55, !3, i64 332}
+  !67 = !{!3, !3, i64 0}
+  !68 = !{!4, !4, i64 0}
+  !69 = !{!11, !11, i64 0}
+  !70 = !{!7, !11, i64 300}
+  !71 = !{!7, !11, i64 304}
+  !72 = !{!7, !9, i64 16}
+  !73 = !{!74, !3, i64 4}
+  !74 = !{!"gx_device_color_procs_s", !3, i64 0, !3, i64 4, !3, i64 8, !3, i64 12, !3, i64 16}
+  !75 = !{!74, !3, i64 8}
+
+...
+---
+name:            image_render_landscape
+alignment:       2
+exposesReturnsTwice: false
+hasInlineAsm:    false
+isSSA:           false
+tracksRegLiveness: false
+tracksSubRegLiveness: false
+liveins:         
+  - { reg: '%a0' }
+  - { reg: '%a1' }
+  - { reg: '%a2' }
+  - { reg: '%a3' }
+  - { reg: '%t9' }
+  - { reg: '%v0' }
+calleeSavedRegisters: [ '%fp', '%ra', '%d10', '%d11', '%d12', '%d13', '%d14', 
+                        '%d15', '%f20', '%f21', '%f22', '%f23', '%f24', 
+                        '%f25', '%f26', '%f27', '%f28', '%f29', '%f30', 
+                        '%f31', '%s0', '%s1', '%s2', '%s3', '%s4', '%s5', 
+                        '%s6', '%s7' ]
+frameInfo:       
+  isFrameAddressTaken: false
+  isReturnAddressTaken: false
+  hasStackMap:     false
+  hasPatchPoint:   false
+  stackSize:       104
+  offsetAdjustment: 0
+  maxAlignment:    8
+  adjustsStack:    true
+  hasCalls:        true
+  maxCallFrameSize: 16
+  hasOpaqueSPAdjustment: false
+  hasVAStart:      false
+  hasMustTailInVarArgFunc: false
+fixedStack:      
+  - { id: 0, offset: 20, size: 4, alignment: 4, isImmutable: true, isAliased: false }
+  - { id: 1, offset: 16, size: 4, alignment: 8, isImmutable: true, isAliased: false }
+stack:           
+  - { id: 0, type: spill-slot, offset: -52, size: 4, alignment: 4 }
+  - { id: 1, type: spill-slot, offset: -56, size: 4, alignment: 4 }
+  - { id: 2, type: spill-slot, offset: -60, size: 4, alignment: 4 }
+  - { id: 3, type: spill-slot, offset: -64, size: 4, alignment: 4 }
+  - { id: 4, type: spill-slot, offset: -68, size: 4, alignment: 4 }
+  - { id: 5, type: spill-slot, offset: -72, size: 4, alignment: 4 }
+  - { id: 6, type: spill-slot, offset: -76, size: 4, alignment: 4 }
+  - { id: 7, type: spill-slot, offset: -80, size: 4, alignment: 4 }
+  - { id: 8, type: spill-slot, offset: -84, size: 4, alignment: 4 }
+  - { id: 9, type: spill-slot, offset: -88, size: 4, alignment: 4 }
+  - { id: 10, type: spill-slot, offset: -8, size: 8, alignment: 8, callee-saved-register: '%d10' }
+  - { id: 11, type: spill-slot, offset: -12, size: 4, alignment: 4, callee-saved-register: '%ra' }
+  - { id: 12, type: spill-slot, offset: -16, size: 4, alignment: 4, callee-saved-register: '%fp' }
+  - { id: 13, type: spill-slot, offset: -20, size: 4, alignment: 4, callee-saved-register: '%s7' }
+  - { id: 14, type: spill-slot, offset: -24, size: 4, alignment: 4, callee-saved-register: '%s6' }
+  - { id: 15, type: spill-slot, offset: -28, size: 4, alignment: 4, callee-saved-register: '%s5' }
+  - { id: 16, type: spill-slot, offset: -32, size: 4, alignment: 4, callee-saved-register: '%s4' }
+  - { id: 17, type: spill-slot, offset: -36, size: 4, alignment: 4, callee-saved-register: '%s3' }
+  - { id: 18, type: spill-slot, offset: -40, size: 4, alignment: 4, callee-saved-register: '%s2' }
+  - { id: 19, type: spill-slot, offset: -44, size: 4, alignment: 4, callee-saved-register: '%s1' }
+  - { id: 20, type: spill-slot, offset: -48, size: 4, alignment: 4, callee-saved-register: '%s0' }
+body:             |
+  bb.0 (%ir-block.0, freq 52):
+    successors: %bb.6(50), %bb.1(50)
+    liveins: %a0, %a1, %a2, %a3, %t9, %d10, %ra, %fp, %s7, %s6, %s5, %s4, %s3, %s2, %s1, %s0
+  
+    %v0 = LUi target-flags(<unknown>) $_gp_disp
+    %v0 = ADDiu %v0, target-flags(<unknown>) $_gp_disp
+    %sp = ADDiu %sp, -104
+    CFI_INSTRUCTION .cfi_def_cfa_offset 104
+    SDC1 killed %d10, %sp, 96 :: (store 8 into stack)
+    SW killed %ra, %sp, 92 :: (store 4 into stack)
+    SW killed %fp, %sp, 88 :: (store 4 into stack)
+    SW killed %s7, %sp, 84 :: (store 4 into stack)
+    SW killed %s6, %sp, 80 :: (store 4 into stack)
+    SW killed %s5, %sp, 76 :: (store 4 into stack)
+    SW killed %s4, %sp, 72 :: (store 4 into stack)
+    SW killed %s3, %sp, 68 :: (store 4 into stack)
+    SW killed %s2, %sp, 64 :: (store 4 into stack)
+    SW killed %s1, %sp, 60 :: (store 4 into stack)
+    SW killed %s0, %sp, 56 :: (store 4 into stack)
+    CFI_INSTRUCTION .cfi_offset %d21_64, -8
+    CFI_INSTRUCTION .cfi_offset %d20_64, -4
+    CFI_INSTRUCTION .cfi_offset %ra_64, -12
+    CFI_INSTRUCTION .cfi_offset %fp_64, -16
+    CFI_INSTRUCTION .cfi_offset %s7_64, -20
+    CFI_INSTRUCTION .cfi_offset %s6_64, -24
+    CFI_INSTRUCTION .cfi_offset %s5_64, -28
+    CFI_INSTRUCTION .cfi_offset %s4_64, -32
+    CFI_INSTRUCTION .cfi_offset %s3_64, -36
+    CFI_INSTRUCTION .cfi_offset %s2_64, -40
+    CFI_INSTRUCTION .cfi_offset %s1_64, -44
+    CFI_INSTRUCTION .cfi_offset %s0_64, -48
+    %s2 = ADDu %v0, %t9
+    SW %a3, %sp, 36 :: (store 4 into stack)
+    SW %a2, %sp, 32 :: (store 4 into stack)
+    SW %a1, %sp, 28 :: (store 4 into stack)
+    %s1 = OR %a0, %zero
+    %at = LW %sp, 124 :: (load 4 from stack)
+    SW killed %at, %sp, 44 :: (store 4 into stack)
+    %f20 = LWC1 %s1, 16 :: (load 4 from %ir.14, align 8, !tbaa !72)
+    %s3 = LW %s1, 304 :: (load 4 from %ir.10, align 8, !tbaa !71)
+    %f21 = MTC1 %zero
+    FCMP_S32 %f20, %f21, 4, implicit-def %fcc0
+    %at = OR %s3, %zero
+    %at = MOVF_I %zero, %fcc0, killed %at
+    %v0 = SUBu %zero, %s3
+    %s5 = LW %s1, 104 :: (load 4 from %ir.3, align 8, !tbaa !29)
+    %s3 = MOVT_I killed %v0, killed %fcc0, killed %s3
+    %a2 = LW %s1, 280 :: (load 4 from %ir.19, align 8, !tbaa !39)
+    %v0 = LW %s1, 300 :: (load 4 from %ir.8, !tbaa !70)
+    %a0 = ADDiu %zero, 1
+    %v1 = ADDiu %zero, -1
+    FCMP_S32 %f20, %f21, 4, implicit-def %fcc0
+    %a0 = MOVT_I killed %v1, killed %fcc0, killed %a0
+    SW killed %a0, %sp, 48 :: (store 4 into stack)
+    %s4 = ADDu killed %at, killed %v0
+    %at = LW %s1, 96 :: (load 4 from %ir.1, align 8, !tbaa !35)
+    SW killed %at, %sp, 52 :: (store 4 into stack)
+    %at = LW %s1, 160 :: (load 4 from %ir.12, align 8, !tbaa !41)
+    %at = SRL killed %at, 31
+    BEQ %s4, %a2, %bb.6, implicit-def %at {
+      SW killed %at, %sp, 40 :: (store 4 into stack)
+    }
+  
+  bb.1 (%ir-block.22, freq 26):
+    successors: %bb.2(50), %bb.3(50)
+    liveins: %a2, %f20, %f21, %s1, %s2, %s3, %s4, %s5
+  
+    %v0 = LW %s1, 276 :: (load 4 from %ir.24, !tbaa !38)
+    FCMP_S32 %f20, %f21, 4, implicit-def %fcc0
+    BC1F %fcc0, %bb.3, implicit-def %at {
+      NOP
+    }
+  
+  bb.2 (%ir-block.28, freq 13):
+    successors: %bb.4(100)
+    liveins: %a2, %f20, %f21, %s1, %s2, %s3, %s4, %s5, %v0
+  
+    %at = LW %s2, target-flags(<unknown>) @copy_landscape :: (load 4 from got)
+    %t9 = ADDiu killed %at, target-flags(<unknown>) @copy_landscape
+    %a0 = OR %s1, %zero
+    %a1 = OR killed %a2, %zero
+    %a3 = LW %sp, 40 :: (load 4 from stack)
+    %t0 = LW %sp, 44 :: (load 4 from stack)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %a3, implicit %t0, implicit-def %sp, implicit-def %v0 {
+      %a2 = OR killed %v0, %zero
+    }
+    B %bb.4, implicit-def %at {
+      NOP
+    }
+  
+  bb.3 (%ir-block.26, freq 13):
+    successors: %bb.4(100)
+    liveins: %a2, %f20, %f21, %s1, %s2, %s3, %s4, %s5, %v0
+  
+    %at = LW %s2, target-flags(<unknown>) @copy_landscape :: (load 4 from got)
+    %t9 = ADDiu killed %at, target-flags(<unknown>) @copy_landscape
+    %a0 = OR %s1, %zero
+    %a3 = LW %sp, 40 :: (load 4 from stack)
+    %t0 = LW %sp, 44 :: (load 4 from stack)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %a3, implicit %t0, implicit-def %sp, implicit-def %v0 {
+      %a1 = OR killed %v0, %zero
+    }
+  
+  bb.4 (%ir-block.30, freq 26):
+    successors: %bb.26..loopexit(37), %bb.5..critedge(62)
+    liveins: %f20, %f21, %s1, %s2, %s3, %s4, %s5, %v0
+  
+    BLTZ %v0, %bb.26..loopexit, implicit-def %at {
+      NOP
+    }
+  
+  bb.5..critedge (freq 16):
+    successors: %bb.6(100)
+    liveins: %f20, %f21, %s1, %s2, %s3, %s4, %s5
+  
+    SW %s4, %s1, 276 :: (store 4 into %ir.sunkaddr2, !tbaa !38)
+  
+  bb.6 (%ir-block.33, freq 42):
+    successors: %bb.23(37), %bb.7..preheader(62)
+    liveins: %f20, %f21, %s1, %s2, %s3, %s4, %s5
+  
+    %at = LW %sp, 120 :: (load 4 from stack, align 8)
+    BEQ %at, %zero, %bb.23, implicit-def %at {
+      NOP
+    }
+  
+  bb.7..preheader (freq 26):
+    successors: %bb.22.._crit_edge(37), %bb.8..lr.ph(62)
+    liveins: %f20, %f21, %s1, %s2, %s3, %s4, %s5
+  
+    BEQ %s3, %zero, %bb.22.._crit_edge, implicit-def %at {
+      NOP
+    }
+  
+  bb.8..lr.ph (freq 16):
+    successors: %bb.9(100)
+    liveins: %f20, %f21, %s1, %s2, %s3, %s4, %s5
+  
+    %at = LUi 8191
+    %at = ORi killed %at, 65532
+    %v0 = ADDiu killed %s5, 31
+    %v0 = SRL killed %v0, 3
+    %fp = AND killed %v0, killed %at
+    %s7 = ADDiu %zero, -1
+    %s5 = ADDiu %zero, 0
+    FCMP_S32 %f20, %f21, 4, implicit-def %fcc0
+    %s7 = MOVF_I %zero, killed %fcc0, killed %s7
+    %s3 = SUBu %zero, killed %s3
+    %at = LW %s2, target-flags(<unknown>) @image_simple_expand :: (load 4 from got)
+    %at = ADDiu killed %at, target-flags(<unknown>) @image_simple_expand
+    SW killed %at, %sp, 24 :: (store 4 into stack)
+    %at = LW %s2, target-flags(<unknown>) @copy_landscape :: (load 4 from got)
+    SW %at, %sp, 20 :: (store 4 into stack)
+    %at = ADDiu killed %at, target-flags(<unknown>) @copy_landscape
+    SW killed %at, %sp, 16 :: (store 4 into stack)
+  
+  bb.9 (%ir-block.39, freq 374):
+    successors: %bb.11(37), %bb.10(62)
+    liveins: %fp, %f20, %f21, %s1, %s2, %s3, %s4, %s5, %s7
+  
+    %s4 = ADDu killed %s4, %s7
+    %s0 = ANDi %s4, 7
+    %at = MUL %s0, %fp, implicit-def dead %hi0, implicit-def dead %lo0
+    %v0 = LW %sp, 52 :: (load 4 from stack)
+    BEQ %s5, %zero, %bb.11, implicit-def %at {
+      %s6 = ADDu killed %v0, killed %at
+    }
+  
+  bb.10 (%ir-block.47, freq 234):
+    successors: %bb.12(100)
+    liveins: %fp, %f20, %f21, %s0, %s1, %s2, %s3, %s4, %s5, %s6, %s7
+  
+    %t9 = LW %s2, target-flags(<unknown>) $memcpy :: (load 4 from call-entry $memcpy)
+    %a0 = OR killed %s6, %zero
+    %a1 = OR %s5, %zero
+    %a2 = OR %fp, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %gp, implicit-def %sp {
+      %gp = OR %s2, %zero
+    }
+    B %bb.12, implicit-def %at {
+      %s6 = OR killed %s5, %zero
+    }
+  
+  bb.11 (%ir-block.44, freq 140):
+    successors: %bb.12(100)
+    liveins: %fp, %f20, %f21, %s0, %s1, %s2, %s3, %s4, %s6, %s7
+  
+    %t3 = LW %s1, 52 :: (load 4 from %ir.sunkaddr8, !tbaa !37)
+    %t2 = LW %s1, 256 :: (load 4 from %ir.sunkaddr5, !tbaa !21)
+    %a0 = OR %s6, %zero
+    %a1 = ADDiu %zero, 0
+    %a2 = OR %fp, %zero
+    %a3 = LW %sp, 28 :: (load 4 from stack)
+    %t0 = LW %sp, 32 :: (load 4 from stack)
+    %t1 = LW %sp, 36 :: (load 4 from stack)
+    %t9 = LW %sp, 24 :: (load 4 from stack)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %a3, implicit %t0, implicit %t1, implicit %t2, implicit %t3, implicit %t4, implicit-def %sp {
+      %t4 = ADDiu %zero, 0
+    }
+  
+  bb.12 (%ir-block.48, freq 374):
+    successors: %bb.13(50), %bb.15(50)
+    liveins: %fp, %f20, %f21, %s0, %s1, %s2, %s3, %s4, %s6, %s7
+  
+    FCMP_S32 %f20, %f21, 4, implicit-def %fcc0
+    BC1F %fcc0, %bb.15, implicit-def %at {
+      NOP
+    }
+  
+  bb.13 (%ir-block.57, freq 187):
+    successors: %bb.19(37), %bb.14(62)
+    liveins: %fp, %f20, %f21, %s0, %s1, %s2, %s3, %s4, %s6, %s7
+  
+    BEQ killed %s0, %zero, %bb.19, implicit-def %at {
+      NOP
+    }
+  
+  bb.14 (freq 117):
+    successors: %bb.21(100)
+    liveins: %fp, %f20, %f21, %s1, %s2, %s3, %s4, %s6, %s7
+  
+    B %bb.21, implicit-def %at {
+      %s5 = OR killed %s6, %zero
+    }
+  
+  bb.15 (%ir-block.50, freq 187):
+    successors: %bb.16(50), %bb.18(50)
+    liveins: %fp, %f20, %f21, %s0, %s1, %s2, %s3, %s4, %s6, %s7
+  
+    %at = ADDiu %zero, 7
+    BNE %s0, %at, %bb.18, implicit-def %at {
+      %s4 = ADDiu killed %s4, 1
+    }
+  
+  bb.16 (%ir-block.53, freq 93):
+    successors: %bb.26..loopexit(3), %bb.17..thread(96)
+    liveins: %fp, %f20, %f21, %s1, %s2, %s3, %s4, %s7
+  
+    %a1 = LW %s1, 276 :: (load 4 from %ir.sunkaddr11, !tbaa !38)
+    %at = LW %sp, 20 :: (load 4 from stack)
+    %t9 = ADDiu killed %at, target-flags(<unknown>) @copy_landscape
+    %a0 = OR %s1, %zero
+    %a3 = LW %sp, 40 :: (load 4 from stack)
+    %t0 = LW %sp, 44 :: (load 4 from stack)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %a3, implicit %t0, implicit-def %sp, implicit-def %v0 {
+      %a2 = OR %s4, %zero
+    }
+    BLTZ %v0, %bb.26..loopexit, implicit-def %at {
+      NOP
+    }
+  
+  bb.17..thread (freq 90):
+    successors: %bb.21(100)
+    liveins: %fp, %f20, %f21, %s1, %s2, %s3, %s4, %s7
+  
+    SW %s4, %s1, 276 :: (store 4 into %ir.sunkaddr14, !tbaa !38)
+    B %bb.21, implicit-def dead %at {
+      %s5 = ADDiu %zero, 0
+    }
+  
+  bb.18 (freq 93):
+    successors: %bb.21(100)
+    liveins: %fp, %f20, %f21, %s1, %s2, %s3, %s4, %s6, %s7
+  
+    B %bb.21, implicit-def %at {
+      %s5 = OR killed %s6, %zero
+    }
+  
+  bb.19 (%ir-block.59, freq 70):
+    successors: %bb.26..loopexit(3), %bb.20..thread10(96)
+    liveins: %fp, %f20, %f21, %s1, %s2, %s3, %s4, %s7
+  
+    %a2 = LW %s1, 276 :: (load 4 from %ir.sunkaddr17, !tbaa !38)
+    %a0 = OR %s1, %zero
+    %a3 = LW %sp, 40 :: (load 4 from stack)
+    %t0 = LW %sp, 44 :: (load 4 from stack)
+    %t9 = LW %sp, 16 :: (load 4 from stack)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %a3, implicit %t0, implicit-def %sp, implicit-def %v0 {
+      %a1 = OR %s4, %zero
+    }
+    BLTZ %v0, %bb.26..loopexit, implicit-def %at {
+      NOP
+    }
+  
+  bb.20..thread10 (freq 68):
+    successors: %bb.21(100)
+    liveins: %fp, %f20, %f21, %s1, %s2, %s3, %s4, %s7
+  
+    SW %s4, %s1, 276 :: (store 4 into %ir.sunkaddr20, !tbaa !38)
+    %s5 = ADDiu %zero, 0
+  
+  bb.21 (%ir-block.63, freq 369):
+    successors: %bb.22.._crit_edge(3), %bb.9(96)
+    liveins: %fp, %f20, %f21, %s1, %s2, %s3, %s4, %s5, %s7
+  
+    %at = LW %sp, 48 :: (load 4 from stack)
+    %s3 = ADDu killed %s3, killed %at
+    BNE %s3, %zero, %bb.9, implicit-def %at {
+      NOP
+    }
+  
+  bb.22.._crit_edge (freq 21):
+    successors: %bb.26..loopexit(100)
+    liveins: %s1, %s4
+  
+    SW killed %s4, killed %s1, 280 :: (store 4 into %ir.sunkaddr23, align 8, !tbaa !39)
+    B %bb.26..loopexit, implicit-def dead %at {
+      %v0 = ADDiu %zero, 0
+    }
+  
+  bb.23 (%ir-block.65, freq 15):
+    successors: %bb.24(50), %bb.25(50)
+    liveins: %f20, %f21, %s1, %s2, %s4
+  
+    %v0 = LW %s1, 276 :: (load 4 from %ir.67, !tbaa !38)
+    FCMP_S32 killed %f20, killed %f21, 4, implicit-def %fcc0
+    BC1F %fcc0, %bb.25, implicit-def %at {
+      NOP
+    }
+  
+  bb.24 (%ir-block.71, freq 8):
+    successors: %bb.26..loopexit(100)
+    liveins: %s1, %s2, %s4, %v0
+  
+    %at = LW killed %s2, target-flags(<unknown>) @copy_landscape :: (load 4 from got)
+    %t9 = ADDiu killed %at, target-flags(<unknown>) @copy_landscape
+    %a0 = OR killed %s1, %zero
+    %a1 = OR killed %s4, %zero
+    %a3 = LW %sp, 40 :: (load 4 from stack)
+    %t0 = LW %sp, 44 :: (load 4 from stack)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %a3, implicit %t0, implicit-def %sp, implicit-def %v0 {
+      %a2 = OR killed %v0, %zero
+    }
+    B %bb.26..loopexit, implicit-def %at {
+      NOP
+    }
+  
+  bb.25 (%ir-block.69, freq 8):
+    successors: %bb.26..loopexit(100)
+    liveins: %s1, %s2, %s4, %v0
+  
+    %at = LW killed %s2, target-flags(<unknown>) @copy_landscape :: (load 4 from got)
+    %t9 = ADDiu killed %at, target-flags(<unknown>) @copy_landscape
+    %a0 = OR killed %s1, %zero
+    %a1 = OR killed %v0, %zero
+    %a3 = LW %sp, 40 :: (load 4 from stack)
+    %t0 = LW %sp, 44 :: (load 4 from stack)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %a3, implicit %t0, implicit-def %sp, implicit-def %v0 {
+      %a2 = OR killed %s4, %zero
+    }
+  
+  bb.26..loopexit (freq 52):
+    liveins: %v0
+    liveouts:
+  
+    %s0 = LW %sp, 56 :: (load 4 from stack)
+    %s1 = LW %sp, 60 :: (load 4 from stack)
+    %s2 = LW %sp, 64 :: (load 4 from stack)
+    %s3 = LW %sp, 68 :: (load 4 from stack)
+    %s4 = LW %sp, 72 :: (load 4 from stack)
+    %s5 = LW %sp, 76 :: (load 4 from stack)
+    %s6 = LW %sp, 80 :: (load 4 from stack)
+    %s7 = LW %sp, 84 :: (load 4 from stack)
+    %fp = LW %sp, 88 :: (load 4 from stack)
+    %ra = LW %sp, 92 :: (load 4 from stack)
+    %d10 = LDC1 %sp, 96 :: (load 8 from stack)
+    PseudoReturn %ra {
+      %sp = ADDiu %sp, 104
+    }
+
+...

@@ -1,0 +1,3065 @@
+--- |
+  ; ModuleID = '/home/romi/didaktoriko/unison/unison-experiments/experiments/test-input/c/mediabench/mips_zip/build-mips/mesa/mesa.shapes.ll'
+  target datalayout = "E-m:m-p:32:32-i8:8:32-i16:16:32-i64:64-n32-S64"
+  target triple = "mips--linux-gnu"
+  
+  %struct.model = type { i32, %struct.model*, i32, double* }
+  %struct.GLUquadricObj = type opaque
+  
+  @auxWireIcosahedron.center = internal global [3 x double] zeroinitializer, align 8
+  @auxSolidIcosahedron.center = internal global [3 x double] zeroinitializer, align 8
+  @auxWireOctahedron.center = internal global [3 x double] zeroinitializer, align 8
+  @auxSolidOctahedron.center = internal global [3 x double] zeroinitializer, align 8
+  @auxWireTetrahedron.center = internal global [3 x double] zeroinitializer, align 8
+  @auxSolidTetrahedron.center = internal global [3 x double] zeroinitializer, align 8
+  @auxWireDodecahedron.center = internal global [3 x double] zeroinitializer, align 8
+  @auxSolidDodecahedron.center = internal global [3 x double] zeroinitializer, align 8
+  @lists = internal unnamed_addr global [25 x %struct.model*] zeroinitializer, align 4
+  @drawbox.n = internal global [6 x [3 x double]] [[3 x double] [double -1.000000e+00, double 0.000000e+00, double 0.000000e+00], [3 x double] [double 0.000000e+00, double 1.000000e+00, double 0.000000e+00], [3 x double] [double 1.000000e+00, double 0.000000e+00, double 0.000000e+00], [3 x double] [double 0.000000e+00, double -1.000000e+00, double 0.000000e+00], [3 x double] [double 0.000000e+00, double 0.000000e+00, double 1.000000e+00], [3 x double] [double 0.000000e+00, double 0.000000e+00, double -1.000000e+00]], align 8
+  @drawbox.faces = internal unnamed_addr constant [6 x [4 x i32]] [[4 x i32] [i32 0, i32 1, i32 2, i32 3], [4 x i32] [i32 3, i32 2, i32 6, i32 7], [4 x i32] [i32 7, i32 6, i32 5, i32 4], [4 x i32] [i32 4, i32 5, i32 1, i32 0], [4 x i32] [i32 5, i32 6, i32 2, i32 1], [4 x i32] [i32 7, i32 4, i32 0, i32 3]], align 4
+  @iindex = internal unnamed_addr constant [20 x [3 x i32]] [[3 x i32] [i32 0, i32 4, i32 1], [3 x i32] [i32 0, i32 9, i32 4], [3 x i32] [i32 9, i32 5, i32 4], [3 x i32] [i32 4, i32 5, i32 8], [3 x i32] [i32 4, i32 8, i32 1], [3 x i32] [i32 8, i32 10, i32 1], [3 x i32] [i32 8, i32 3, i32 10], [3 x i32] [i32 5, i32 3, i32 8], [3 x i32] [i32 5, i32 2, i32 3], [3 x i32] [i32 2, i32 7, i32 3], [3 x i32] [i32 7, i32 10, i32 3], [3 x i32] [i32 7, i32 6, i32 10], [3 x i32] [i32 7, i32 11, i32 6], [3 x i32] [i32 11, i32 0, i32 6], [3 x i32] [i32 0, i32 1, i32 6], [3 x i32] [i32 6, i32 1, i32 10], [3 x i32] [i32 9, i32 0, i32 11], [3 x i32] [i32 9, i32 11, i32 2], [3 x i32] [i32 9, i32 2, i32 5], [3 x i32] [i32 7, i32 2, i32 11]], align 4
+  @idata = internal global [12 x [3 x double]] [[3 x double] [double 0xBFE0D2CA0DA1530D, double 0.000000e+00, double 0x3FEB38880B4603E4], [3 x double] [double 0x3FE0D2CA0DA1530D, double 0.000000e+00, double 0x3FEB38880B4603E4], [3 x double] [double 0xBFE0D2CA0DA1530D, double 0.000000e+00, double 0xBFEB38880B4603E4], [3 x double] [double 0x3FE0D2CA0DA1530D, double 0.000000e+00, double 0xBFEB38880B4603E4], [3 x double] [double 0.000000e+00, double 0x3FEB38880B4603E4, double 0x3FE0D2CA0DA1530D], [3 x double] [double 0.000000e+00, double 0x3FEB38880B4603E4, double 0xBFE0D2CA0DA1530D], [3 x double] [double 0.000000e+00, double 0xBFEB38880B4603E4, double 0x3FE0D2CA0DA1530D], [3 x double] [double 0.000000e+00, double 0xBFEB38880B4603E4, double 0xBFE0D2CA0DA1530D], [3 x double] [double 0x3FEB38880B4603E4, double 0x3FE0D2CA0DA1530D, double 0.000000e+00], [3 x double] [double 0xBFEB38880B4603E4, double 0x3FE0D2CA0DA1530D, double 0.000000e+00], [3 x double] [double 0x3FEB38880B4603E4, double 0xBFE0D2CA0DA1530D, double 0.000000e+00], [3 x double] [double 0xBFEB38880B4603E4, double 0xBFE0D2CA0DA1530D, double 0.000000e+00]], align 8
+  @ondex = internal unnamed_addr constant [8 x [3 x i32]] [[3 x i32] [i32 0, i32 4, i32 2], [3 x i32] [i32 1, i32 2, i32 4], [3 x i32] [i32 0, i32 3, i32 4], [3 x i32] [i32 1, i32 4, i32 3], [3 x i32] [i32 0, i32 2, i32 5], [3 x i32] [i32 1, i32 5, i32 2], [3 x i32] [i32 0, i32 5, i32 3], [3 x i32] [i32 1, i32 3, i32 5]], align 4
+  @odata = internal global [6 x [3 x double]] [[3 x double] [double 1.000000e+00, double 0.000000e+00, double 0.000000e+00], [3 x double] [double -1.000000e+00, double 0.000000e+00, double 0.000000e+00], [3 x double] [double 0.000000e+00, double 1.000000e+00, double 0.000000e+00], [3 x double] [double 0.000000e+00, double -1.000000e+00, double 0.000000e+00], [3 x double] [double 0.000000e+00, double 0.000000e+00, double 1.000000e+00], [3 x double] [double 0.000000e+00, double 0.000000e+00, double -1.000000e+00]], align 8
+  @tndex = internal unnamed_addr constant [4 x [3 x i32]] [[3 x i32] [i32 0, i32 1, i32 3], [3 x i32] [i32 2, i32 1, i32 0], [3 x i32] [i32 3, i32 2, i32 0], [3 x i32] [i32 1, i32 2, i32 3]], align 4
+  @tdata = internal global [4 x [3 x double]] [[3 x double] [double 0x3FFBB67AE8584CAA, double 0x3FFBB67AE8584CAA, double 0x3FFBB67AE8584CAA], [3 x double] [double 0x3FFBB67AE8584CAA, double 0xBFFBB67AE8584CAA, double 0xBFFBB67AE8584CAA], [3 x double] [double 0xBFFBB67AE8584CAA, double 0x3FFBB67AE8584CAA, double 0xBFFBB67AE8584CAA], [3 x double] [double 0xBFFBB67AE8584CAA, double 0xBFFBB67AE8584CAA, double 0x3FFBB67AE8584CAA]], align 8
+  @dodecahedron.inited = internal unnamed_addr global i1 false
+  @dodec = internal global [20 x [3 x double]] zeroinitializer, align 8
+  
+  ; Function Attrs: nounwind
+  define void @auxWireSphere(double %radius) #0 {
+    %1 = tail call noalias i8* @malloc(i32 signext 8) #4
+    %2 = bitcast i8* %1 to double*
+    store double %radius, double* %2, align 8, !tbaa !1
+    %endList.02.i = load %struct.model*, %struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 0), align 4, !tbaa !5
+    %3 = icmp eq %struct.model* %endList.02.i, null
+    br i1 %3, label %findList.exit.thread, label %compareParams.exit.i
+  
+  compareParams.exit.i:                             ; preds = %0, %7
+    %endList.03.i = phi %struct.model* [ %endList.0.i, %7 ], [ %endList.02.i, %0 ]
+    %4 = getelementptr inbounds %struct.model, %struct.model* %endList.03.i, i32 0, i32 3
+    %5 = load double*, double** %4, align 4, !tbaa !7
+    %.pre = load double, double* %5, align 8, !tbaa !1
+    %6 = fcmp une double %.pre, %radius
+    br i1 %6, label %7, label %findList.exit
+  
+  ; <label>:7                                       ; preds = %compareParams.exit.i
+    %8 = getelementptr inbounds %struct.model, %struct.model* %endList.03.i, i32 0, i32 1
+    %endList.0.i = load %struct.model*, %struct.model** %8, align 4, !tbaa !5
+    %9 = icmp eq %struct.model* %endList.0.i, null
+    br i1 %9, label %findList.exit.thread, label %compareParams.exit.i
+  
+  findList.exit:                                    ; preds = %compareParams.exit.i
+    %10 = bitcast %struct.model* %endList.03.i to i32*
+    %11 = load i32, i32* %10, align 4, !tbaa !10
+    %12 = icmp eq i32 %11, 0
+    br i1 %12, label %findList.exit.thread, label %24
+  
+  findList.exit.thread:                             ; preds = %7, %findList.exit, %0
+    %13 = tail call noalias i8* @malloc(i32 signext 16) #4
+    %14 = tail call i32 @glGenLists(i32 signext 1) #4
+    %15 = bitcast i8* %13 to i32*
+    store i32 %14, i32* %15, align 4, !tbaa !10
+    %16 = getelementptr inbounds i8, i8* %13, i32 8
+    %17 = bitcast i8* %16 to i32*
+    store i32 1, i32* %17, align 4, !tbaa !11
+    %18 = getelementptr inbounds i8, i8* %13, i32 12
+    %19 = bitcast i8* %18 to i8**
+    store i8* %1, i8** %19, align 4, !tbaa !7
+    %20 = load i32, i32* bitcast ([25 x %struct.model*]* @lists to i32*), align 4, !tbaa !5
+    %21 = getelementptr inbounds i8, i8* %13, i32 4
+    %22 = bitcast i8* %21 to i32*
+    store i32 %20, i32* %22, align 4, !tbaa !12
+    store i8* %13, i8** bitcast ([25 x %struct.model*]* @lists to i8**), align 4, !tbaa !5
+    tail call void @glNewList(i32 signext %14, i32 signext 4865) #4
+    %23 = tail call %struct.GLUquadricObj* @gluNewQuadric() #4
+    tail call void @gluQuadricDrawStyle(%struct.GLUquadricObj* %23, i32 signext 100011) #4
+    tail call void @gluSphere(%struct.GLUquadricObj* %23, double %radius, i32 signext 16, i32 signext 16) #4
+    tail call void @glEndList() #4
+    br label %25
+  
+  ; <label>:24                                      ; preds = %findList.exit
+    tail call void @glCallList(i32 signext %11) #4
+    tail call void @free(i8* %1) #4
+    br label %25
+  
+  ; <label>:25                                      ; preds = %24, %findList.exit.thread
+    ret void
+  }
+  
+  ; Function Attrs: argmemonly nounwind
+  declare void @llvm.lifetime.start(i64, i8* nocapture) #1
+  
+  ; Function Attrs: nounwind
+  declare noalias i8* @malloc(i32 signext) #0
+  
+  ; Function Attrs: norecurse nounwind readonly
+  define i32 @findList(i32 signext %lindex, double* nocapture readonly %paramArray, i32 signext %size) #2 {
+    %1 = getelementptr inbounds [25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 %lindex
+    %endList.02 = load %struct.model*, %struct.model** %1, align 4, !tbaa !5
+    %2 = icmp eq %struct.model* %endList.02, null
+    br i1 %2, label %.loopexit, label %.lr.ph
+  
+  .lr.ph:                                           ; preds = %0
+    br label %3
+  
+  ; <label>:3                                       ; preds = %18, %.lr.ph
+    %endList.03 = phi %struct.model* [ %endList.02, %.lr.ph ], [ %endList.0, %18 ]
+    %4 = icmp sgt i32 %size, 0
+    br i1 %4, label %.lr.ph.i.preheader, label %compareParams.exit.thread
+  
+  .lr.ph.i.preheader:                               ; preds = %3
+    %5 = getelementptr inbounds %struct.model, %struct.model* %endList.03, i32 0, i32 3
+    %6 = load double*, double** %5, align 4, !tbaa !7
+    br label %.lr.ph.i
+  
+  .lr.ph.i:                                         ; preds = %.lr.ph.i, %.lr.ph.i.preheader
+    %lsr.iv = phi i32 [ %lsr.iv.next, %.lr.ph.i ], [ 1, %.lr.ph.i.preheader ]
+    %matches.05.i = phi i32 [ %matches.1.i, %.lr.ph.i ], [ 1, %.lr.ph.i.preheader ]
+    %.03.i = phi double* [ %7, %.lr.ph.i ], [ %6, %.lr.ph.i.preheader ]
+    %.012.i = phi double* [ %9, %.lr.ph.i ], [ %paramArray, %.lr.ph.i.preheader ]
+    %7 = getelementptr inbounds double, double* %.03.i, i32 1
+    %8 = load double, double* %.03.i, align 8, !tbaa !1
+    %9 = getelementptr inbounds double, double* %.012.i, i32 1
+    %10 = load double, double* %.012.i, align 8, !tbaa !1
+    %11 = fcmp une double %8, %10
+    %matches.1.i = select i1 %11, i32 0, i32 %matches.05.i
+    %12 = icmp slt i32 %lsr.iv, %size
+    %13 = icmp ne i32 %matches.1.i, 0
+    %14 = and i1 %12, %13
+    %lsr.iv.next = add nuw i32 %lsr.iv, 1
+    br i1 %14, label %.lr.ph.i, label %compareParams.exit
+  
+  compareParams.exit:                               ; preds = %.lr.ph.i
+    %15 = icmp eq i32 %matches.1.i, 0
+    br i1 %15, label %18, label %compareParams.exit.thread
+  
+  compareParams.exit.thread:                        ; preds = %compareParams.exit, %3
+    %16 = bitcast %struct.model* %endList.03 to i32*
+    %17 = load i32, i32* %16, align 4, !tbaa !10
+    br label %.loopexit
+  
+  ; <label>:18                                      ; preds = %compareParams.exit
+    %19 = getelementptr inbounds %struct.model, %struct.model* %endList.03, i32 0, i32 1
+    %endList.0 = load %struct.model*, %struct.model** %19, align 4, !tbaa !5
+    %20 = icmp eq %struct.model* %endList.0, null
+    br i1 %20, label %.loopexit, label %3
+  
+  .loopexit:                                        ; preds = %18, %compareParams.exit.thread, %0
+    %.0 = phi i32 [ %17, %compareParams.exit.thread ], [ 0, %0 ], [ 0, %18 ]
+    ret i32 %.0
+  }
+  
+  declare void @glNewList(i32 signext, i32 signext) #3
+  
+  ; Function Attrs: nounwind
+  define i32 @makeModelPtr(i32 signext %lindex, double* %sizeArray, i32 signext %count) #0 {
+    %1 = tail call noalias i8* @malloc(i32 signext 16) #4
+    %2 = tail call i32 @glGenLists(i32 signext 1) #4
+    %3 = bitcast i8* %1 to i32*
+    store i32 %2, i32* %3, align 4, !tbaa !10
+    %4 = getelementptr inbounds i8, i8* %1, i32 8
+    %5 = bitcast i8* %4 to i32*
+    store i32 %count, i32* %5, align 4, !tbaa !11
+    %6 = getelementptr inbounds i8, i8* %1, i32 12
+    %7 = bitcast i8* %6 to double**
+    store double* %sizeArray, double** %7, align 4, !tbaa !7
+    %8 = getelementptr inbounds [25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 %lindex
+    %9 = bitcast %struct.model** %8 to i32*
+    %10 = load i32, i32* %9, align 4, !tbaa !5
+    %11 = getelementptr inbounds i8, i8* %1, i32 4
+    %12 = bitcast i8* %11 to i32*
+    store i32 %10, i32* %12, align 4, !tbaa !12
+    %13 = bitcast %struct.model** %8 to i8**
+    store i8* %1, i8** %13, align 4, !tbaa !5
+    ret i32 %2
+  }
+  
+  declare %struct.GLUquadricObj* @gluNewQuadric() #3
+  
+  declare void @gluQuadricDrawStyle(%struct.GLUquadricObj*, i32 signext) #3
+  
+  declare void @gluSphere(%struct.GLUquadricObj*, double, i32 signext, i32 signext) #3
+  
+  declare void @glEndList() #3
+  
+  declare void @glCallList(i32 signext) #3
+  
+  ; Function Attrs: nounwind
+  declare void @free(i8* nocapture) #0
+  
+  ; Function Attrs: argmemonly nounwind
+  declare void @llvm.lifetime.end(i64, i8* nocapture) #1
+  
+  ; Function Attrs: nounwind
+  define void @auxSolidSphere(double %radius) #0 {
+    %1 = tail call noalias i8* @malloc(i32 signext 8) #4
+    %2 = bitcast i8* %1 to double*
+    store double %radius, double* %2, align 8, !tbaa !1
+    %endList.02.i = load %struct.model*, %struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 10), align 4, !tbaa !5
+    %3 = icmp eq %struct.model* %endList.02.i, null
+    br i1 %3, label %findList.exit.thread, label %compareParams.exit.i
+  
+  compareParams.exit.i:                             ; preds = %0, %7
+    %endList.03.i = phi %struct.model* [ %endList.0.i, %7 ], [ %endList.02.i, %0 ]
+    %4 = getelementptr inbounds %struct.model, %struct.model* %endList.03.i, i32 0, i32 3
+    %5 = load double*, double** %4, align 4, !tbaa !7
+    %.pre = load double, double* %5, align 8, !tbaa !1
+    %6 = fcmp une double %.pre, %radius
+    br i1 %6, label %7, label %findList.exit
+  
+  ; <label>:7                                       ; preds = %compareParams.exit.i
+    %8 = getelementptr inbounds %struct.model, %struct.model* %endList.03.i, i32 0, i32 1
+    %endList.0.i = load %struct.model*, %struct.model** %8, align 4, !tbaa !5
+    %9 = icmp eq %struct.model* %endList.0.i, null
+    br i1 %9, label %findList.exit.thread, label %compareParams.exit.i
+  
+  findList.exit:                                    ; preds = %compareParams.exit.i
+    %10 = bitcast %struct.model* %endList.03.i to i32*
+    %11 = load i32, i32* %10, align 4, !tbaa !10
+    %12 = icmp eq i32 %11, 0
+    br i1 %12, label %findList.exit.thread, label %24
+  
+  findList.exit.thread:                             ; preds = %7, %findList.exit, %0
+    %13 = tail call noalias i8* @malloc(i32 signext 16) #4
+    %14 = tail call i32 @glGenLists(i32 signext 1) #4
+    %15 = bitcast i8* %13 to i32*
+    store i32 %14, i32* %15, align 4, !tbaa !10
+    %16 = getelementptr inbounds i8, i8* %13, i32 8
+    %17 = bitcast i8* %16 to i32*
+    store i32 1, i32* %17, align 4, !tbaa !11
+    %18 = getelementptr inbounds i8, i8* %13, i32 12
+    %19 = bitcast i8* %18 to i8**
+    store i8* %1, i8** %19, align 4, !tbaa !7
+    %20 = load i32, i32* bitcast (%struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 10) to i32*), align 4, !tbaa !5
+    %21 = getelementptr inbounds i8, i8* %13, i32 4
+    %22 = bitcast i8* %21 to i32*
+    store i32 %20, i32* %22, align 4, !tbaa !12
+    store i8* %13, i8** bitcast (%struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 10) to i8**), align 4, !tbaa !5
+    tail call void @glNewList(i32 signext %14, i32 signext 4865) #4
+    %23 = tail call %struct.GLUquadricObj* @gluNewQuadric() #4
+    tail call void @gluQuadricDrawStyle(%struct.GLUquadricObj* %23, i32 signext 100012) #4
+    tail call void @gluQuadricNormals(%struct.GLUquadricObj* %23, i32 signext 100000) #4
+    tail call void @gluSphere(%struct.GLUquadricObj* %23, double %radius, i32 signext 16, i32 signext 16) #4
+    tail call void @glEndList() #4
+    br label %25
+  
+  ; <label>:24                                      ; preds = %findList.exit
+    tail call void @glCallList(i32 signext %11) #4
+    tail call void @free(i8* %1) #4
+    br label %25
+  
+  ; <label>:25                                      ; preds = %24, %findList.exit.thread
+    ret void
+  }
+  
+  declare void @gluQuadricNormals(%struct.GLUquadricObj*, i32 signext) #3
+  
+  ; Function Attrs: nounwind
+  define void @auxWireCube(double %size) #0 {
+    %1 = tail call noalias i8* @malloc(i32 signext 8) #4
+    %2 = bitcast i8* %1 to double*
+    store double %size, double* %2, align 8, !tbaa !1
+    %endList.02.i = load %struct.model*, %struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 1), align 4, !tbaa !5
+    %3 = icmp eq %struct.model* %endList.02.i, null
+    br i1 %3, label %findList.exit.thread, label %compareParams.exit.i
+  
+  compareParams.exit.i:                             ; preds = %0, %7
+    %endList.03.i = phi %struct.model* [ %endList.0.i, %7 ], [ %endList.02.i, %0 ]
+    %4 = getelementptr inbounds %struct.model, %struct.model* %endList.03.i, i32 0, i32 3
+    %5 = load double*, double** %4, align 4, !tbaa !7
+    %.pre = load double, double* %5, align 8, !tbaa !1
+    %6 = fcmp une double %.pre, %size
+    br i1 %6, label %7, label %findList.exit
+  
+  ; <label>:7                                       ; preds = %compareParams.exit.i
+    %8 = getelementptr inbounds %struct.model, %struct.model* %endList.03.i, i32 0, i32 1
+    %endList.0.i = load %struct.model*, %struct.model** %8, align 4, !tbaa !5
+    %9 = icmp eq %struct.model* %endList.0.i, null
+    br i1 %9, label %findList.exit.thread, label %compareParams.exit.i
+  
+  findList.exit:                                    ; preds = %compareParams.exit.i
+    %10 = bitcast %struct.model* %endList.03.i to i32*
+    %11 = load i32, i32* %10, align 4, !tbaa !10
+    %12 = icmp eq i32 %11, 0
+    br i1 %12, label %findList.exit.thread, label %25
+  
+  findList.exit.thread:                             ; preds = %7, %findList.exit, %0
+    %13 = tail call noalias i8* @malloc(i32 signext 16) #4
+    %14 = tail call i32 @glGenLists(i32 signext 1) #4
+    %15 = bitcast i8* %13 to i32*
+    store i32 %14, i32* %15, align 4, !tbaa !10
+    %16 = getelementptr inbounds i8, i8* %13, i32 8
+    %17 = bitcast i8* %16 to i32*
+    store i32 1, i32* %17, align 4, !tbaa !11
+    %18 = getelementptr inbounds i8, i8* %13, i32 12
+    %19 = bitcast i8* %18 to i8**
+    store i8* %1, i8** %19, align 4, !tbaa !7
+    %20 = load i32, i32* bitcast (%struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 1) to i32*), align 4, !tbaa !5
+    %21 = getelementptr inbounds i8, i8* %13, i32 4
+    %22 = bitcast i8* %21 to i32*
+    store i32 %20, i32* %22, align 4, !tbaa !12
+    store i8* %13, i8** bitcast (%struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 1) to i8**), align 4, !tbaa !5
+    tail call void @glNewList(i32 signext %14, i32 signext 4865) #4
+    %23 = fmul double %size, -5.000000e-01
+    %24 = fmul double %size, 5.000000e-01
+    tail call fastcc void @drawbox(double %23, double %24, double %23, double %24, double %23, double %24, i32 signext 2)
+    tail call void @glEndList() #4
+    br label %26
+  
+  ; <label>:25                                      ; preds = %findList.exit
+    tail call void @glCallList(i32 signext %11) #4
+    tail call void @free(i8* %1) #4
+    br label %26
+  
+  ; <label>:26                                      ; preds = %25, %findList.exit.thread
+    ret void
+  }
+  
+  ; Function Attrs: nounwind
+  define internal fastcc void @drawbox(double %x0, double %x1, double %y0, double %y1, double %z0, double %z1, i32 signext %type) unnamed_addr #0 {
+    %v = alloca [8 x [3 x double]], align 8
+    %1 = bitcast [8 x [3 x double]]* %v to i8*
+    call void @llvm.lifetime.start(i64 192, i8* %1) #4
+    %2 = fcmp ogt double %x0, %x1
+    %.05 = select i1 %2, double %x0, double %x1
+    %.0 = select i1 %2, double %x1, double %x0
+    %3 = fcmp ogt double %y0, %y1
+    %.04 = select i1 %3, double %y1, double %y0
+    %.03 = select i1 %3, double %y0, double %y1
+    %4 = fcmp ogt double %z0, %z1
+    %.02 = select i1 %4, double %z1, double %z0
+    %.01 = select i1 %4, double %z0, double %z1
+    %5 = getelementptr inbounds [8 x [3 x double]], [8 x [3 x double]]* %v, i32 0, i32 3, i32 0
+    store double %.0, double* %5, align 8, !tbaa !1
+    %6 = getelementptr inbounds [8 x [3 x double]], [8 x [3 x double]]* %v, i32 0, i32 2, i32 0
+    store double %.0, double* %6, align 8, !tbaa !1
+    %7 = getelementptr inbounds [8 x [3 x double]], [8 x [3 x double]]* %v, i32 0, i32 1, i32 0
+    store double %.0, double* %7, align 8, !tbaa !1
+    %8 = bitcast [8 x [3 x double]]* %v to double*
+    store double %.0, double* %8, align 8, !tbaa !1
+    %9 = getelementptr inbounds [8 x [3 x double]], [8 x [3 x double]]* %v, i32 0, i32 7, i32 0
+    store double %.05, double* %9, align 8, !tbaa !1
+    %10 = getelementptr inbounds [8 x [3 x double]], [8 x [3 x double]]* %v, i32 0, i32 6, i32 0
+    store double %.05, double* %10, align 8, !tbaa !1
+    %11 = getelementptr inbounds [8 x [3 x double]], [8 x [3 x double]]* %v, i32 0, i32 5, i32 0
+    store double %.05, double* %11, align 8, !tbaa !1
+    %12 = getelementptr inbounds [8 x [3 x double]], [8 x [3 x double]]* %v, i32 0, i32 4, i32 0
+    store double %.05, double* %12, align 8, !tbaa !1
+    %13 = getelementptr inbounds [8 x [3 x double]], [8 x [3 x double]]* %v, i32 0, i32 5, i32 1
+    store double %.04, double* %13, align 8, !tbaa !1
+    %14 = getelementptr inbounds [8 x [3 x double]], [8 x [3 x double]]* %v, i32 0, i32 4, i32 1
+    store double %.04, double* %14, align 8, !tbaa !1
+    %15 = getelementptr inbounds [8 x [3 x double]], [8 x [3 x double]]* %v, i32 0, i32 1, i32 1
+    store double %.04, double* %15, align 8, !tbaa !1
+    %16 = getelementptr inbounds [8 x [3 x double]], [8 x [3 x double]]* %v, i32 0, i32 0, i32 1
+    store double %.04, double* %16, align 8, !tbaa !1
+    %17 = getelementptr inbounds [8 x [3 x double]], [8 x [3 x double]]* %v, i32 0, i32 7, i32 1
+    store double %.03, double* %17, align 8, !tbaa !1
+    %18 = getelementptr inbounds [8 x [3 x double]], [8 x [3 x double]]* %v, i32 0, i32 6, i32 1
+    store double %.03, double* %18, align 8, !tbaa !1
+    %19 = getelementptr inbounds [8 x [3 x double]], [8 x [3 x double]]* %v, i32 0, i32 3, i32 1
+    store double %.03, double* %19, align 8, !tbaa !1
+    %20 = getelementptr inbounds [8 x [3 x double]], [8 x [3 x double]]* %v, i32 0, i32 2, i32 1
+    store double %.03, double* %20, align 8, !tbaa !1
+    %21 = getelementptr inbounds [8 x [3 x double]], [8 x [3 x double]]* %v, i32 0, i32 7, i32 2
+    store double %.02, double* %21, align 8, !tbaa !1
+    %22 = getelementptr inbounds [8 x [3 x double]], [8 x [3 x double]]* %v, i32 0, i32 4, i32 2
+    store double %.02, double* %22, align 8, !tbaa !1
+    %23 = getelementptr inbounds [8 x [3 x double]], [8 x [3 x double]]* %v, i32 0, i32 3, i32 2
+    store double %.02, double* %23, align 8, !tbaa !1
+    %24 = getelementptr inbounds [8 x [3 x double]], [8 x [3 x double]]* %v, i32 0, i32 0, i32 2
+    store double %.02, double* %24, align 8, !tbaa !1
+    %25 = getelementptr inbounds [8 x [3 x double]], [8 x [3 x double]]* %v, i32 0, i32 6, i32 2
+    store double %.01, double* %25, align 8, !tbaa !1
+    %26 = getelementptr inbounds [8 x [3 x double]], [8 x [3 x double]]* %v, i32 0, i32 5, i32 2
+    store double %.01, double* %26, align 8, !tbaa !1
+    %27 = getelementptr inbounds [8 x [3 x double]], [8 x [3 x double]]* %v, i32 0, i32 2, i32 2
+    store double %.01, double* %27, align 8, !tbaa !1
+    %28 = getelementptr inbounds [8 x [3 x double]], [8 x [3 x double]]* %v, i32 0, i32 1, i32 2
+    store double %.01, double* %28, align 8, !tbaa !1
+    br label %29
+  
+  ; <label>:29                                      ; preds = %29, %0
+    %lsr.iv1 = phi [6 x [4 x i32]]* [ %38, %29 ], [ bitcast (i32* getelementptr inbounds ([6 x [4 x i32]], [6 x [4 x i32]]* @drawbox.faces, i32 0, i32 0, i32 2) to [6 x [4 x i32]]*), %0 ]
+    %lsr.iv = phi i32 [ %lsr.iv.next, %29 ], [ 0, %0 ]
+    %lsr.iv12 = bitcast [6 x [4 x i32]]* %lsr.iv1 to i32*
+    call void @glBegin(i32 signext %type) #4
+    %uglygep11 = getelementptr i8, i8* bitcast ([6 x [3 x double]]* @drawbox.n to i8*), i32 %lsr.iv
+    %uglygep1112 = bitcast i8* %uglygep11 to double*
+    call void @glNormal3dv(double* %uglygep1112) #4
+    %scevgep5 = getelementptr i32, i32* %lsr.iv12, i32 -2
+    %30 = load i32, i32* %scevgep5, align 4, !tbaa !13
+    %31 = getelementptr inbounds [8 x [3 x double]], [8 x [3 x double]]* %v, i32 0, i32 %30, i32 0
+    call void @glVertex3dv(double* %31) #4
+    %uglygep9 = getelementptr i8, i8* bitcast ([6 x [3 x double]]* @drawbox.n to i8*), i32 %lsr.iv
+    %uglygep910 = bitcast i8* %uglygep9 to double*
+    call void @glNormal3dv(double* %uglygep910) #4
+    %scevgep4 = getelementptr i32, i32* %lsr.iv12, i32 -1
+    %32 = load i32, i32* %scevgep4, align 4, !tbaa !13
+    %33 = getelementptr inbounds [8 x [3 x double]], [8 x [3 x double]]* %v, i32 0, i32 %32, i32 0
+    call void @glVertex3dv(double* %33) #4
+    %uglygep7 = getelementptr i8, i8* bitcast ([6 x [3 x double]]* @drawbox.n to i8*), i32 %lsr.iv
+    %uglygep78 = bitcast i8* %uglygep7 to double*
+    call void @glNormal3dv(double* %uglygep78) #4
+    %34 = load i32, i32* %lsr.iv12, align 4, !tbaa !13
+    %35 = getelementptr inbounds [8 x [3 x double]], [8 x [3 x double]]* %v, i32 0, i32 %34, i32 0
+    call void @glVertex3dv(double* %35) #4
+    %uglygep = getelementptr i8, i8* bitcast ([6 x [3 x double]]* @drawbox.n to i8*), i32 %lsr.iv
+    %uglygep6 = bitcast i8* %uglygep to double*
+    call void @glNormal3dv(double* %uglygep6) #4
+    %scevgep3 = getelementptr i32, i32* %lsr.iv12, i32 1
+    %36 = load i32, i32* %scevgep3, align 4, !tbaa !13
+    %37 = getelementptr inbounds [8 x [3 x double]], [8 x [3 x double]]* %v, i32 0, i32 %36, i32 0
+    call void @glVertex3dv(double* %37) #4
+    call void @glEnd() #4
+    %lsr.iv.next = add nuw nsw i32 %lsr.iv, 24
+    %scevgep = getelementptr [6 x [4 x i32]], [6 x [4 x i32]]* %lsr.iv1, i32 0, i32 1, i32 0
+    %38 = bitcast i32* %scevgep to [6 x [4 x i32]]*
+    %exitcond = icmp eq i32 %lsr.iv.next, 144
+    br i1 %exitcond, label %39, label %29
+  
+  ; <label>:39                                      ; preds = %29
+    %40 = bitcast [8 x [3 x double]]* %v to i8*
+    call void @llvm.lifetime.end(i64 192, i8* %40) #4
+    ret void
+  }
+  
+  ; Function Attrs: nounwind
+  define void @auxSolidCube(double %size) #0 {
+    %1 = tail call noalias i8* @malloc(i32 signext 8) #4
+    %2 = bitcast i8* %1 to double*
+    store double %size, double* %2, align 8, !tbaa !1
+    %endList.02.i = load %struct.model*, %struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 11), align 4, !tbaa !5
+    %3 = icmp eq %struct.model* %endList.02.i, null
+    br i1 %3, label %findList.exit.thread, label %compareParams.exit.i
+  
+  compareParams.exit.i:                             ; preds = %0, %7
+    %endList.03.i = phi %struct.model* [ %endList.0.i, %7 ], [ %endList.02.i, %0 ]
+    %4 = getelementptr inbounds %struct.model, %struct.model* %endList.03.i, i32 0, i32 3
+    %5 = load double*, double** %4, align 4, !tbaa !7
+    %.pre = load double, double* %5, align 8, !tbaa !1
+    %6 = fcmp une double %.pre, %size
+    br i1 %6, label %7, label %findList.exit
+  
+  ; <label>:7                                       ; preds = %compareParams.exit.i
+    %8 = getelementptr inbounds %struct.model, %struct.model* %endList.03.i, i32 0, i32 1
+    %endList.0.i = load %struct.model*, %struct.model** %8, align 4, !tbaa !5
+    %9 = icmp eq %struct.model* %endList.0.i, null
+    br i1 %9, label %findList.exit.thread, label %compareParams.exit.i
+  
+  findList.exit:                                    ; preds = %compareParams.exit.i
+    %10 = bitcast %struct.model* %endList.03.i to i32*
+    %11 = load i32, i32* %10, align 4, !tbaa !10
+    %12 = icmp eq i32 %11, 0
+    br i1 %12, label %findList.exit.thread, label %25
+  
+  findList.exit.thread:                             ; preds = %7, %findList.exit, %0
+    %13 = tail call noalias i8* @malloc(i32 signext 16) #4
+    %14 = tail call i32 @glGenLists(i32 signext 1) #4
+    %15 = bitcast i8* %13 to i32*
+    store i32 %14, i32* %15, align 4, !tbaa !10
+    %16 = getelementptr inbounds i8, i8* %13, i32 8
+    %17 = bitcast i8* %16 to i32*
+    store i32 1, i32* %17, align 4, !tbaa !11
+    %18 = getelementptr inbounds i8, i8* %13, i32 12
+    %19 = bitcast i8* %18 to i8**
+    store i8* %1, i8** %19, align 4, !tbaa !7
+    %20 = load i32, i32* bitcast (%struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 11) to i32*), align 4, !tbaa !5
+    %21 = getelementptr inbounds i8, i8* %13, i32 4
+    %22 = bitcast i8* %21 to i32*
+    store i32 %20, i32* %22, align 4, !tbaa !12
+    store i8* %13, i8** bitcast (%struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 11) to i8**), align 4, !tbaa !5
+    tail call void @glNewList(i32 signext %14, i32 signext 4865) #4
+    %23 = fmul double %size, -5.000000e-01
+    %24 = fmul double %size, 5.000000e-01
+    tail call fastcc void @drawbox(double %23, double %24, double %23, double %24, double %23, double %24, i32 signext 7)
+    tail call void @glEndList() #4
+    br label %26
+  
+  ; <label>:25                                      ; preds = %findList.exit
+    tail call void @glCallList(i32 signext %11) #4
+    tail call void @free(i8* %1) #4
+    br label %26
+  
+  ; <label>:26                                      ; preds = %25, %findList.exit.thread
+    ret void
+  }
+  
+  ; Function Attrs: nounwind
+  define void @auxWireBox(double %width, double %height, double %depth) #0 {
+    %1 = tail call noalias i8* @malloc(i32 signext 24) #4
+    %2 = bitcast i8* %1 to double*
+    %3 = getelementptr inbounds i8, i8* %1, i32 8
+    %4 = bitcast i8* %3 to double*
+    store double %width, double* %2, align 8, !tbaa !1
+    %5 = getelementptr inbounds i8, i8* %1, i32 16
+    %6 = bitcast i8* %5 to double*
+    store double %height, double* %4, align 8, !tbaa !1
+    store double %depth, double* %6, align 8, !tbaa !1
+    %endList.02.i = load %struct.model*, %struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 2), align 4, !tbaa !5
+    %7 = icmp eq %struct.model* %endList.02.i, null
+    br i1 %7, label %findList.exit.thread, label %.lr.ph.i
+  
+  .lr.ph.i:                                         ; preds = %0, %18
+    %endList.03.i = phi %struct.model* [ %endList.0.i, %18 ], [ %endList.02.i, %0 ]
+    %8 = getelementptr inbounds %struct.model, %struct.model* %endList.03.i, i32 0, i32 3
+    %9 = load double*, double** %8, align 4, !tbaa !7
+    br label %.lr.ph.i.i
+  
+  .lr.ph.i.i:                                       ; preds = %.lr.ph.i.i, %.lr.ph.i
+    %lsr.iv1 = phi i32 [ %lsr.iv.next2, %.lr.ph.i.i ], [ 0, %.lr.ph.i ]
+    %lsr.iv = phi i32 [ %lsr.iv.next, %.lr.ph.i.i ], [ 1, %.lr.ph.i ]
+    %matches.05.i.i = phi i32 [ %matches.1.i.i, %.lr.ph.i.i ], [ 1, %.lr.ph.i ]
+    %10 = bitcast double* %9 to i8*
+    %uglygep = getelementptr i8, i8* %10, i32 %lsr.iv1
+    %uglygep3 = bitcast i8* %uglygep to double*
+    %11 = load double, double* %uglygep3, align 8, !tbaa !1
+    %scevgep = getelementptr i8, i8* %1, i32 %lsr.iv1
+    %scevgep4 = bitcast i8* %scevgep to double*
+    %12 = load double, double* %scevgep4, align 8, !tbaa !1
+    %13 = fcmp une double %11, %12
+    %matches.1.i.i = select i1 %13, i32 0, i32 %matches.05.i.i
+    %14 = icmp slt i32 %lsr.iv, 3
+    %15 = icmp ne i32 %matches.1.i.i, 0
+    %16 = and i1 %14, %15
+    %lsr.iv.next = add nuw nsw i32 %lsr.iv, 1
+    %lsr.iv.next2 = add nuw nsw i32 %lsr.iv1, 8
+    br i1 %16, label %.lr.ph.i.i, label %compareParams.exit.i
+  
+  compareParams.exit.i:                             ; preds = %.lr.ph.i.i
+    %17 = icmp eq i32 %matches.1.i.i, 0
+    br i1 %17, label %18, label %findList.exit
+  
+  ; <label>:18                                      ; preds = %compareParams.exit.i
+    %19 = getelementptr inbounds %struct.model, %struct.model* %endList.03.i, i32 0, i32 1
+    %endList.0.i = load %struct.model*, %struct.model** %19, align 4, !tbaa !5
+    %20 = icmp eq %struct.model* %endList.0.i, null
+    br i1 %20, label %findList.exit.thread, label %.lr.ph.i
+  
+  findList.exit:                                    ; preds = %compareParams.exit.i
+    %21 = bitcast %struct.model* %endList.03.i to i32*
+    %22 = load i32, i32* %21, align 4, !tbaa !10
+    %23 = icmp eq i32 %22, 0
+    br i1 %23, label %findList.exit.thread, label %40
+  
+  findList.exit.thread:                             ; preds = %18, %findList.exit, %0
+    %24 = tail call noalias i8* @malloc(i32 signext 16) #4
+    %25 = tail call i32 @glGenLists(i32 signext 1) #4
+    %26 = bitcast i8* %24 to i32*
+    store i32 %25, i32* %26, align 4, !tbaa !10
+    %27 = getelementptr inbounds i8, i8* %24, i32 8
+    %28 = bitcast i8* %27 to i32*
+    store i32 3, i32* %28, align 4, !tbaa !11
+    %29 = getelementptr inbounds i8, i8* %24, i32 12
+    %30 = bitcast i8* %29 to i8**
+    store i8* %1, i8** %30, align 4, !tbaa !7
+    %31 = load i32, i32* bitcast (%struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 2) to i32*), align 4, !tbaa !5
+    %32 = getelementptr inbounds i8, i8* %24, i32 4
+    %33 = bitcast i8* %32 to i32*
+    store i32 %31, i32* %33, align 4, !tbaa !12
+    store i8* %24, i8** bitcast (%struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 2) to i8**), align 4, !tbaa !5
+    tail call void @glNewList(i32 signext %25, i32 signext 4865) #4
+    %34 = fmul double %width, -5.000000e-01
+    %35 = fmul double %width, 5.000000e-01
+    %36 = fmul double %height, -5.000000e-01
+    %37 = fmul double %height, 5.000000e-01
+    %38 = fmul double %depth, -5.000000e-01
+    %39 = fmul double %depth, 5.000000e-01
+    tail call fastcc void @drawbox(double %34, double %35, double %36, double %37, double %38, double %39, i32 signext 2)
+    tail call void @glEndList() #4
+    br label %41
+  
+  ; <label>:40                                      ; preds = %findList.exit
+    tail call void @glCallList(i32 signext %22) #4
+    tail call void @free(i8* %1) #4
+    br label %41
+  
+  ; <label>:41                                      ; preds = %40, %findList.exit.thread
+    ret void
+  }
+  
+  ; Function Attrs: nounwind
+  define void @auxSolidBox(double %width, double %height, double %depth) #0 {
+    %1 = tail call noalias i8* @malloc(i32 signext 24) #4
+    %2 = bitcast i8* %1 to double*
+    %3 = getelementptr inbounds i8, i8* %1, i32 8
+    %4 = bitcast i8* %3 to double*
+    store double %width, double* %2, align 8, !tbaa !1
+    %5 = getelementptr inbounds i8, i8* %1, i32 16
+    %6 = bitcast i8* %5 to double*
+    store double %height, double* %4, align 8, !tbaa !1
+    store double %depth, double* %6, align 8, !tbaa !1
+    %endList.02.i = load %struct.model*, %struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 12), align 4, !tbaa !5
+    %7 = icmp eq %struct.model* %endList.02.i, null
+    br i1 %7, label %findList.exit.thread, label %.lr.ph.i
+  
+  .lr.ph.i:                                         ; preds = %0, %18
+    %endList.03.i = phi %struct.model* [ %endList.0.i, %18 ], [ %endList.02.i, %0 ]
+    %8 = getelementptr inbounds %struct.model, %struct.model* %endList.03.i, i32 0, i32 3
+    %9 = load double*, double** %8, align 4, !tbaa !7
+    br label %.lr.ph.i.i
+  
+  .lr.ph.i.i:                                       ; preds = %.lr.ph.i.i, %.lr.ph.i
+    %lsr.iv1 = phi i32 [ %lsr.iv.next2, %.lr.ph.i.i ], [ 0, %.lr.ph.i ]
+    %lsr.iv = phi i32 [ %lsr.iv.next, %.lr.ph.i.i ], [ 1, %.lr.ph.i ]
+    %matches.05.i.i = phi i32 [ %matches.1.i.i, %.lr.ph.i.i ], [ 1, %.lr.ph.i ]
+    %10 = bitcast double* %9 to i8*
+    %uglygep = getelementptr i8, i8* %10, i32 %lsr.iv1
+    %uglygep3 = bitcast i8* %uglygep to double*
+    %11 = load double, double* %uglygep3, align 8, !tbaa !1
+    %scevgep = getelementptr i8, i8* %1, i32 %lsr.iv1
+    %scevgep4 = bitcast i8* %scevgep to double*
+    %12 = load double, double* %scevgep4, align 8, !tbaa !1
+    %13 = fcmp une double %11, %12
+    %matches.1.i.i = select i1 %13, i32 0, i32 %matches.05.i.i
+    %14 = icmp slt i32 %lsr.iv, 3
+    %15 = icmp ne i32 %matches.1.i.i, 0
+    %16 = and i1 %14, %15
+    %lsr.iv.next = add nuw nsw i32 %lsr.iv, 1
+    %lsr.iv.next2 = add nuw nsw i32 %lsr.iv1, 8
+    br i1 %16, label %.lr.ph.i.i, label %compareParams.exit.i
+  
+  compareParams.exit.i:                             ; preds = %.lr.ph.i.i
+    %17 = icmp eq i32 %matches.1.i.i, 0
+    br i1 %17, label %18, label %findList.exit
+  
+  ; <label>:18                                      ; preds = %compareParams.exit.i
+    %19 = getelementptr inbounds %struct.model, %struct.model* %endList.03.i, i32 0, i32 1
+    %endList.0.i = load %struct.model*, %struct.model** %19, align 4, !tbaa !5
+    %20 = icmp eq %struct.model* %endList.0.i, null
+    br i1 %20, label %findList.exit.thread, label %.lr.ph.i
+  
+  findList.exit:                                    ; preds = %compareParams.exit.i
+    %21 = bitcast %struct.model* %endList.03.i to i32*
+    %22 = load i32, i32* %21, align 4, !tbaa !10
+    %23 = icmp eq i32 %22, 0
+    br i1 %23, label %findList.exit.thread, label %40
+  
+  findList.exit.thread:                             ; preds = %18, %findList.exit, %0
+    %24 = tail call noalias i8* @malloc(i32 signext 16) #4
+    %25 = tail call i32 @glGenLists(i32 signext 1) #4
+    %26 = bitcast i8* %24 to i32*
+    store i32 %25, i32* %26, align 4, !tbaa !10
+    %27 = getelementptr inbounds i8, i8* %24, i32 8
+    %28 = bitcast i8* %27 to i32*
+    store i32 3, i32* %28, align 4, !tbaa !11
+    %29 = getelementptr inbounds i8, i8* %24, i32 12
+    %30 = bitcast i8* %29 to i8**
+    store i8* %1, i8** %30, align 4, !tbaa !7
+    %31 = load i32, i32* bitcast (%struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 12) to i32*), align 4, !tbaa !5
+    %32 = getelementptr inbounds i8, i8* %24, i32 4
+    %33 = bitcast i8* %32 to i32*
+    store i32 %31, i32* %33, align 4, !tbaa !12
+    store i8* %24, i8** bitcast (%struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 12) to i8**), align 4, !tbaa !5
+    tail call void @glNewList(i32 signext %25, i32 signext 4865) #4
+    %34 = fmul double %width, -5.000000e-01
+    %35 = fmul double %width, 5.000000e-01
+    %36 = fmul double %height, -5.000000e-01
+    %37 = fmul double %height, 5.000000e-01
+    %38 = fmul double %depth, -5.000000e-01
+    %39 = fmul double %depth, 5.000000e-01
+    tail call fastcc void @drawbox(double %34, double %35, double %36, double %37, double %38, double %39, i32 signext 7)
+    tail call void @glEndList() #4
+    br label %41
+  
+  ; <label>:40                                      ; preds = %findList.exit
+    tail call void @glCallList(i32 signext %22) #4
+    tail call void @free(i8* %1) #4
+    br label %41
+  
+  ; <label>:41                                      ; preds = %40, %findList.exit.thread
+    ret void
+  }
+  
+  ; Function Attrs: nounwind
+  define void @auxWireTorus(double %innerRadius, double %outerRadius) #0 {
+    %1 = tail call noalias i8* @malloc(i32 signext 16) #4
+    %2 = bitcast i8* %1 to double*
+    %3 = getelementptr inbounds i8, i8* %1, i32 8
+    %4 = bitcast i8* %3 to double*
+    store double %innerRadius, double* %2, align 8, !tbaa !1
+    store double %outerRadius, double* %4, align 8, !tbaa !1
+    %endList.02.i = load %struct.model*, %struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 3), align 4, !tbaa !5
+    %5 = icmp eq %struct.model* %endList.02.i, null
+    br i1 %5, label %findList.exit.thread, label %.lr.ph.i
+  
+  .lr.ph.i:                                         ; preds = %0, %16
+    %endList.03.i = phi %struct.model* [ %endList.0.i, %16 ], [ %endList.02.i, %0 ]
+    %6 = getelementptr inbounds %struct.model, %struct.model* %endList.03.i, i32 0, i32 3
+    %7 = load double*, double** %6, align 4, !tbaa !7
+    br label %.lr.ph.i.i
+  
+  .lr.ph.i.i:                                       ; preds = %.lr.ph.i.i, %.lr.ph.i
+    %lsr.iv1 = phi i32 [ %lsr.iv.next2, %.lr.ph.i.i ], [ 0, %.lr.ph.i ]
+    %lsr.iv = phi i32 [ %lsr.iv.next, %.lr.ph.i.i ], [ 1, %.lr.ph.i ]
+    %matches.05.i.i = phi i32 [ %matches.1.i.i, %.lr.ph.i.i ], [ 1, %.lr.ph.i ]
+    %8 = bitcast double* %7 to i8*
+    %uglygep = getelementptr i8, i8* %8, i32 %lsr.iv1
+    %uglygep3 = bitcast i8* %uglygep to double*
+    %9 = load double, double* %uglygep3, align 8, !tbaa !1
+    %scevgep = getelementptr i8, i8* %1, i32 %lsr.iv1
+    %scevgep4 = bitcast i8* %scevgep to double*
+    %10 = load double, double* %scevgep4, align 8, !tbaa !1
+    %11 = fcmp une double %9, %10
+    %matches.1.i.i = select i1 %11, i32 0, i32 %matches.05.i.i
+    %12 = icmp slt i32 %lsr.iv, 2
+    %13 = icmp ne i32 %matches.1.i.i, 0
+    %14 = and i1 %12, %13
+    %lsr.iv.next = add nuw nsw i32 %lsr.iv, 1
+    %lsr.iv.next2 = add nuw nsw i32 %lsr.iv1, 8
+    br i1 %14, label %.lr.ph.i.i, label %compareParams.exit.i
+  
+  compareParams.exit.i:                             ; preds = %.lr.ph.i.i
+    %15 = icmp eq i32 %matches.1.i.i, 0
+    br i1 %15, label %16, label %findList.exit
+  
+  ; <label>:16                                      ; preds = %compareParams.exit.i
+    %17 = getelementptr inbounds %struct.model, %struct.model* %endList.03.i, i32 0, i32 1
+    %endList.0.i = load %struct.model*, %struct.model** %17, align 4, !tbaa !5
+    %18 = icmp eq %struct.model* %endList.0.i, null
+    br i1 %18, label %findList.exit.thread, label %.lr.ph.i
+  
+  findList.exit:                                    ; preds = %compareParams.exit.i
+    %19 = bitcast %struct.model* %endList.03.i to i32*
+    %20 = load i32, i32* %19, align 4, !tbaa !10
+    %21 = icmp eq i32 %20, 0
+    br i1 %21, label %findList.exit.thread, label %32
+  
+  findList.exit.thread:                             ; preds = %16, %findList.exit, %0
+    %22 = tail call noalias i8* @malloc(i32 signext 16) #4
+    %23 = tail call i32 @glGenLists(i32 signext 1) #4
+    %24 = bitcast i8* %22 to i32*
+    store i32 %23, i32* %24, align 4, !tbaa !10
+    %25 = getelementptr inbounds i8, i8* %22, i32 8
+    %26 = bitcast i8* %25 to i32*
+    store i32 2, i32* %26, align 4, !tbaa !11
+    %27 = getelementptr inbounds i8, i8* %22, i32 12
+    %28 = bitcast i8* %27 to i8**
+    store i8* %1, i8** %28, align 4, !tbaa !7
+    %29 = load i32, i32* bitcast (%struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 3) to i32*), align 4, !tbaa !5
+    %30 = getelementptr inbounds i8, i8* %22, i32 4
+    %31 = bitcast i8* %30 to i32*
+    store i32 %29, i32* %31, align 4, !tbaa !12
+    store i8* %22, i8** bitcast (%struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 3) to i8**), align 4, !tbaa !5
+    tail call void @glNewList(i32 signext %23, i32 signext 4865) #4
+    tail call fastcc void @doughnut(double %innerRadius, double %outerRadius, i32 signext 5, i32 signext 10, i32 signext 2)
+    tail call void @glEndList() #4
+    br label %33
+  
+  ; <label>:32                                      ; preds = %findList.exit
+    tail call void @glCallList(i32 signext %20) #4
+    tail call void @free(i8* %1) #4
+    br label %33
+  
+  ; <label>:33                                      ; preds = %32, %findList.exit.thread
+    ret void
+  }
+  
+  ; Function Attrs: nounwind
+  define internal fastcc void @doughnut(double %r, double %R, i32 signext %nsides, i32 signext %rings, i32 signext %type) unnamed_addr #0 {
+    %p0 = alloca [3 x double], align 8
+    %p1 = alloca [3 x double], align 8
+    %p2 = alloca [3 x double], align 8
+    %p3 = alloca [3 x double], align 8
+    %n0 = alloca [3 x double], align 8
+    %n1 = alloca [3 x double], align 8
+    %n2 = alloca [3 x double], align 8
+    %n3 = alloca [3 x double], align 8
+    %1 = bitcast [3 x double]* %p0 to i8*
+    call void @llvm.lifetime.start(i64 24, i8* %1) #4
+    %2 = bitcast [3 x double]* %p1 to i8*
+    call void @llvm.lifetime.start(i64 24, i8* %2) #4
+    %3 = bitcast [3 x double]* %p2 to i8*
+    call void @llvm.lifetime.start(i64 24, i8* %3) #4
+    %4 = bitcast [3 x double]* %p3 to i8*
+    call void @llvm.lifetime.start(i64 24, i8* %4) #4
+    %5 = bitcast [3 x double]* %n0 to i8*
+    call void @llvm.lifetime.start(i64 24, i8* %5) #4
+    %6 = bitcast [3 x double]* %n1 to i8*
+    call void @llvm.lifetime.start(i64 24, i8* %6) #4
+    %7 = bitcast [3 x double]* %n2 to i8*
+    call void @llvm.lifetime.start(i64 24, i8* %7) #4
+    %8 = bitcast [3 x double]* %n3 to i8*
+    call void @llvm.lifetime.start(i64 24, i8* %8) #4
+    %9 = icmp sgt i32 %rings, 0
+    br i1 %9, label %.lr.ph3, label %._crit_edge
+  
+  .lr.ph3:                                          ; preds = %0
+    %10 = sitofp i32 %rings to double
+    %11 = sitofp i32 %nsides to double
+    br label %12
+  
+  .loopexit:                                        ; preds = %.lr.ph, %12
+    %exitcond4 = icmp eq i32 %17, %rings
+    br i1 %exitcond4, label %._crit_edge, label %12
+  
+  ; <label>:12                                      ; preds = %.loopexit, %.lr.ph3
+    %IV.S.1 = phi double [ 0.000000e+00, %.lr.ph3 ], [ %IV.S.next.2, %.loopexit ]
+    %i.02 = phi i32 [ 0, %.lr.ph3 ], [ %17, %.loopexit ]
+    %13 = icmp sgt i32 %nsides, 0
+    %14 = fmul double %IV.S.1, 2.000000e+00
+    %15 = fmul double %14, 0x400921FB54442C46
+    %16 = fdiv double %15, %10
+    %IV.S.next.2 = fadd double %IV.S.1, 1.000000e+00
+    %17 = add nuw nsw i32 %i.02, 1
+    %18 = sitofp i32 %17 to double
+    %19 = fmul double %18, 2.000000e+00
+    %20 = fmul double %19, 0x400921FB54442C46
+    %21 = fdiv double %20, %10
+    br i1 %13, label %.lr.ph, label %.loopexit
+  
+  .lr.ph:                                           ; preds = %12, %.lr.ph
+    %IV.S. = phi double [ %IV.S.next., %.lr.ph ], [ 0.000000e+00, %12 ]
+    %j.01 = phi i32 [ %33, %.lr.ph ], [ 0, %12 ]
+    %22 = bitcast [3 x double]* %n3 to double*
+    %23 = bitcast [3 x double]* %n2 to double*
+    %24 = bitcast [3 x double]* %n1 to double*
+    %25 = bitcast [3 x double]* %n0 to double*
+    %26 = bitcast [3 x double]* %p3 to double*
+    %27 = bitcast [3 x double]* %p2 to double*
+    %28 = bitcast [3 x double]* %p1 to double*
+    %29 = bitcast [3 x double]* %p0 to double*
+    %30 = fmul double %IV.S., 2.000000e+00
+    %31 = fmul double %30, 0x400921FB54442C46
+    %32 = fdiv double %31, %11
+    %IV.S.next. = fadd double %IV.S., 1.000000e+00
+    %33 = add nuw nsw i32 %j.01, 1
+    %34 = sitofp i32 %33 to double
+    %35 = fmul double %34, 2.000000e+00
+    %36 = fmul double %35, 0x400921FB54442C46
+    %37 = fdiv double %36, %11
+    %38 = call double @cos(double %16) #4
+    %39 = call double @cos(double %32) #4
+    %40 = fmul double %39, %r
+    %41 = fadd double %40, %R
+    %42 = fmul double %38, %41
+    store double %42, double* %29, align 8, !tbaa !1
+    %43 = call double @sin(double %16) #4
+    %44 = call double @cos(double %32) #4
+    %45 = fmul double %44, %r
+    %46 = fadd double %45, %R
+    %47 = fmul double %43, %46
+    %48 = fsub double -0.000000e+00, %47
+    %sunkaddr = ptrtoint [3 x double]* %p0 to i32
+    %sunkaddr3 = add i32 %sunkaddr, 8
+    %sunkaddr4 = inttoptr i32 %sunkaddr3 to double*
+    store double %48, double* %sunkaddr4, align 8, !tbaa !1
+    %49 = call double @sin(double %32) #4
+    %50 = fmul double %49, %r
+    %sunkaddr5 = ptrtoint [3 x double]* %p0 to i32
+    %sunkaddr6 = add i32 %sunkaddr5, 16
+    %sunkaddr7 = inttoptr i32 %sunkaddr6 to double*
+    store double %50, double* %sunkaddr7, align 8, !tbaa !1
+    %51 = call double @cos(double %21) #4
+    %52 = call double @cos(double %32) #4
+    %53 = fmul double %52, %r
+    %54 = fadd double %53, %R
+    %55 = fmul double %51, %54
+    store double %55, double* %28, align 8, !tbaa !1
+    %56 = call double @sin(double %21) #4
+    %57 = call double @cos(double %32) #4
+    %58 = fmul double %57, %r
+    %59 = fadd double %58, %R
+    %60 = fmul double %56, %59
+    %61 = fsub double -0.000000e+00, %60
+    %sunkaddr8 = ptrtoint [3 x double]* %p1 to i32
+    %sunkaddr9 = add i32 %sunkaddr8, 8
+    %sunkaddr10 = inttoptr i32 %sunkaddr9 to double*
+    store double %61, double* %sunkaddr10, align 8, !tbaa !1
+    %62 = call double @sin(double %32) #4
+    %63 = fmul double %62, %r
+    %sunkaddr11 = ptrtoint [3 x double]* %p1 to i32
+    %sunkaddr12 = add i32 %sunkaddr11, 16
+    %sunkaddr13 = inttoptr i32 %sunkaddr12 to double*
+    store double %63, double* %sunkaddr13, align 8, !tbaa !1
+    %64 = call double @cos(double %21) #4
+    %65 = call double @cos(double %37) #4
+    %66 = fmul double %65, %r
+    %67 = fadd double %66, %R
+    %68 = fmul double %64, %67
+    store double %68, double* %27, align 8, !tbaa !1
+    %69 = call double @sin(double %21) #4
+    %70 = call double @cos(double %37) #4
+    %71 = fmul double %70, %r
+    %72 = fadd double %71, %R
+    %73 = fmul double %69, %72
+    %74 = fsub double -0.000000e+00, %73
+    %sunkaddr14 = ptrtoint [3 x double]* %p2 to i32
+    %sunkaddr15 = add i32 %sunkaddr14, 8
+    %sunkaddr16 = inttoptr i32 %sunkaddr15 to double*
+    store double %74, double* %sunkaddr16, align 8, !tbaa !1
+    %75 = call double @sin(double %37) #4
+    %76 = fmul double %75, %r
+    %sunkaddr17 = ptrtoint [3 x double]* %p2 to i32
+    %sunkaddr18 = add i32 %sunkaddr17, 16
+    %sunkaddr19 = inttoptr i32 %sunkaddr18 to double*
+    store double %76, double* %sunkaddr19, align 8, !tbaa !1
+    %77 = call double @cos(double %16) #4
+    %78 = call double @cos(double %37) #4
+    %79 = fmul double %78, %r
+    %80 = fadd double %79, %R
+    %81 = fmul double %77, %80
+    store double %81, double* %26, align 8, !tbaa !1
+    %82 = call double @sin(double %16) #4
+    %83 = call double @cos(double %37) #4
+    %84 = fmul double %83, %r
+    %85 = fadd double %84, %R
+    %86 = fmul double %82, %85
+    %87 = fsub double -0.000000e+00, %86
+    %sunkaddr20 = ptrtoint [3 x double]* %p3 to i32
+    %sunkaddr21 = add i32 %sunkaddr20, 8
+    %sunkaddr22 = inttoptr i32 %sunkaddr21 to double*
+    store double %87, double* %sunkaddr22, align 8, !tbaa !1
+    %88 = call double @sin(double %37) #4
+    %89 = fmul double %88, %r
+    %sunkaddr23 = ptrtoint [3 x double]* %p3 to i32
+    %sunkaddr24 = add i32 %sunkaddr23, 16
+    %sunkaddr25 = inttoptr i32 %sunkaddr24 to double*
+    store double %89, double* %sunkaddr25, align 8, !tbaa !1
+    %90 = call double @cos(double %16) #4
+    %91 = call double @cos(double %32) #4
+    %92 = fmul double %90, %91
+    store double %92, double* %25, align 8, !tbaa !1
+    %93 = call double @sin(double %16) #4
+    %94 = call double @cos(double %32) #4
+    %95 = fmul double %93, %94
+    %96 = fsub double -0.000000e+00, %95
+    %sunkaddr26 = ptrtoint [3 x double]* %n0 to i32
+    %sunkaddr27 = add i32 %sunkaddr26, 8
+    %sunkaddr28 = inttoptr i32 %sunkaddr27 to double*
+    store double %96, double* %sunkaddr28, align 8, !tbaa !1
+    %97 = call double @sin(double %32) #4
+    %sunkaddr29 = ptrtoint [3 x double]* %n0 to i32
+    %sunkaddr30 = add i32 %sunkaddr29, 16
+    %sunkaddr31 = inttoptr i32 %sunkaddr30 to double*
+    store double %97, double* %sunkaddr31, align 8, !tbaa !1
+    %98 = call double @cos(double %21) #4
+    %99 = call double @cos(double %32) #4
+    %100 = fmul double %98, %99
+    store double %100, double* %24, align 8, !tbaa !1
+    %101 = call double @sin(double %21) #4
+    %102 = call double @cos(double %32) #4
+    %103 = fmul double %101, %102
+    %104 = fsub double -0.000000e+00, %103
+    %sunkaddr32 = ptrtoint [3 x double]* %n1 to i32
+    %sunkaddr33 = add i32 %sunkaddr32, 8
+    %sunkaddr34 = inttoptr i32 %sunkaddr33 to double*
+    store double %104, double* %sunkaddr34, align 8, !tbaa !1
+    %105 = call double @sin(double %32) #4
+    %sunkaddr35 = ptrtoint [3 x double]* %n1 to i32
+    %sunkaddr36 = add i32 %sunkaddr35, 16
+    %sunkaddr37 = inttoptr i32 %sunkaddr36 to double*
+    store double %105, double* %sunkaddr37, align 8, !tbaa !1
+    %106 = call double @cos(double %21) #4
+    %107 = call double @cos(double %37) #4
+    %108 = fmul double %106, %107
+    store double %108, double* %23, align 8, !tbaa !1
+    %109 = call double @sin(double %21) #4
+    %110 = call double @cos(double %37) #4
+    %111 = fmul double %109, %110
+    %112 = fsub double -0.000000e+00, %111
+    %sunkaddr38 = ptrtoint [3 x double]* %n2 to i32
+    %sunkaddr39 = add i32 %sunkaddr38, 8
+    %sunkaddr40 = inttoptr i32 %sunkaddr39 to double*
+    store double %112, double* %sunkaddr40, align 8, !tbaa !1
+    %113 = call double @sin(double %37) #4
+    %sunkaddr41 = ptrtoint [3 x double]* %n2 to i32
+    %sunkaddr42 = add i32 %sunkaddr41, 16
+    %sunkaddr43 = inttoptr i32 %sunkaddr42 to double*
+    store double %113, double* %sunkaddr43, align 8, !tbaa !1
+    %114 = call double @cos(double %16) #4
+    %115 = call double @cos(double %37) #4
+    %116 = fmul double %114, %115
+    store double %116, double* %22, align 8, !tbaa !1
+    %117 = call double @sin(double %16) #4
+    %118 = call double @cos(double %37) #4
+    %119 = fmul double %117, %118
+    %120 = fsub double -0.000000e+00, %119
+    %sunkaddr44 = ptrtoint [3 x double]* %n3 to i32
+    %sunkaddr45 = add i32 %sunkaddr44, 8
+    %sunkaddr46 = inttoptr i32 %sunkaddr45 to double*
+    store double %120, double* %sunkaddr46, align 8, !tbaa !1
+    %121 = call double @sin(double %37) #4
+    %sunkaddr47 = ptrtoint [3 x double]* %n3 to i32
+    %sunkaddr48 = add i32 %sunkaddr47, 16
+    %sunkaddr49 = inttoptr i32 %sunkaddr48 to double*
+    store double %121, double* %sunkaddr49, align 8, !tbaa !1
+    call void @m_xformpt(double* %29, double* %29, double* %25, double* %25) #4
+    call void @m_xformpt(double* %28, double* %28, double* %24, double* %24) #4
+    call void @m_xformpt(double* %27, double* %27, double* %23, double* %23) #4
+    call void @m_xformpt(double* %26, double* %26, double* %22, double* %22) #4
+    call void @glBegin(i32 signext %type) #4
+    call void @glNormal3dv(double* %22) #4
+    call void @glVertex3dv(double* %26) #4
+    call void @glNormal3dv(double* %23) #4
+    call void @glVertex3dv(double* %27) #4
+    call void @glNormal3dv(double* %24) #4
+    call void @glVertex3dv(double* %28) #4
+    call void @glNormal3dv(double* %25) #4
+    call void @glVertex3dv(double* %29) #4
+    call void @glEnd() #4
+    %exitcond = icmp eq i32 %nsides, %33
+    br i1 %exitcond, label %.loopexit, label %.lr.ph
+  
+  ._crit_edge:                                      ; preds = %.loopexit, %0
+    %122 = bitcast [3 x double]* %n3 to i8*
+    %123 = bitcast [3 x double]* %n2 to i8*
+    %124 = bitcast [3 x double]* %n1 to i8*
+    %125 = bitcast [3 x double]* %n0 to i8*
+    %126 = bitcast [3 x double]* %p3 to i8*
+    %127 = bitcast [3 x double]* %p2 to i8*
+    %128 = bitcast [3 x double]* %p1 to i8*
+    %129 = bitcast [3 x double]* %p0 to i8*
+    call void @llvm.lifetime.end(i64 24, i8* %122) #4
+    call void @llvm.lifetime.end(i64 24, i8* %123) #4
+    call void @llvm.lifetime.end(i64 24, i8* %124) #4
+    call void @llvm.lifetime.end(i64 24, i8* %125) #4
+    call void @llvm.lifetime.end(i64 24, i8* %126) #4
+    call void @llvm.lifetime.end(i64 24, i8* %127) #4
+    call void @llvm.lifetime.end(i64 24, i8* %128) #4
+    call void @llvm.lifetime.end(i64 24, i8* %129) #4
+    ret void
+  }
+  
+  ; Function Attrs: nounwind
+  define void @auxSolidTorus(double %innerRadius, double %outerRadius) #0 {
+    %1 = tail call noalias i8* @malloc(i32 signext 16) #4
+    %2 = bitcast i8* %1 to double*
+    %3 = getelementptr inbounds i8, i8* %1, i32 8
+    %4 = bitcast i8* %3 to double*
+    store double %innerRadius, double* %2, align 8, !tbaa !1
+    store double %outerRadius, double* %4, align 8, !tbaa !1
+    %endList.02.i = load %struct.model*, %struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 13), align 4, !tbaa !5
+    %5 = icmp eq %struct.model* %endList.02.i, null
+    br i1 %5, label %findList.exit.thread, label %.lr.ph.i
+  
+  .lr.ph.i:                                         ; preds = %0, %16
+    %endList.03.i = phi %struct.model* [ %endList.0.i, %16 ], [ %endList.02.i, %0 ]
+    %6 = getelementptr inbounds %struct.model, %struct.model* %endList.03.i, i32 0, i32 3
+    %7 = load double*, double** %6, align 4, !tbaa !7
+    br label %.lr.ph.i.i
+  
+  .lr.ph.i.i:                                       ; preds = %.lr.ph.i.i, %.lr.ph.i
+    %lsr.iv1 = phi i32 [ %lsr.iv.next2, %.lr.ph.i.i ], [ 0, %.lr.ph.i ]
+    %lsr.iv = phi i32 [ %lsr.iv.next, %.lr.ph.i.i ], [ 1, %.lr.ph.i ]
+    %matches.05.i.i = phi i32 [ %matches.1.i.i, %.lr.ph.i.i ], [ 1, %.lr.ph.i ]
+    %8 = bitcast double* %7 to i8*
+    %uglygep = getelementptr i8, i8* %8, i32 %lsr.iv1
+    %uglygep3 = bitcast i8* %uglygep to double*
+    %9 = load double, double* %uglygep3, align 8, !tbaa !1
+    %scevgep = getelementptr i8, i8* %1, i32 %lsr.iv1
+    %scevgep4 = bitcast i8* %scevgep to double*
+    %10 = load double, double* %scevgep4, align 8, !tbaa !1
+    %11 = fcmp une double %9, %10
+    %matches.1.i.i = select i1 %11, i32 0, i32 %matches.05.i.i
+    %12 = icmp slt i32 %lsr.iv, 2
+    %13 = icmp ne i32 %matches.1.i.i, 0
+    %14 = and i1 %12, %13
+    %lsr.iv.next = add nuw nsw i32 %lsr.iv, 1
+    %lsr.iv.next2 = add nuw nsw i32 %lsr.iv1, 8
+    br i1 %14, label %.lr.ph.i.i, label %compareParams.exit.i
+  
+  compareParams.exit.i:                             ; preds = %.lr.ph.i.i
+    %15 = icmp eq i32 %matches.1.i.i, 0
+    br i1 %15, label %16, label %findList.exit
+  
+  ; <label>:16                                      ; preds = %compareParams.exit.i
+    %17 = getelementptr inbounds %struct.model, %struct.model* %endList.03.i, i32 0, i32 1
+    %endList.0.i = load %struct.model*, %struct.model** %17, align 4, !tbaa !5
+    %18 = icmp eq %struct.model* %endList.0.i, null
+    br i1 %18, label %findList.exit.thread, label %.lr.ph.i
+  
+  findList.exit:                                    ; preds = %compareParams.exit.i
+    %19 = bitcast %struct.model* %endList.03.i to i32*
+    %20 = load i32, i32* %19, align 4, !tbaa !10
+    %21 = icmp eq i32 %20, 0
+    br i1 %21, label %findList.exit.thread, label %32
+  
+  findList.exit.thread:                             ; preds = %16, %findList.exit, %0
+    %22 = tail call noalias i8* @malloc(i32 signext 16) #4
+    %23 = tail call i32 @glGenLists(i32 signext 1) #4
+    %24 = bitcast i8* %22 to i32*
+    store i32 %23, i32* %24, align 4, !tbaa !10
+    %25 = getelementptr inbounds i8, i8* %22, i32 8
+    %26 = bitcast i8* %25 to i32*
+    store i32 2, i32* %26, align 4, !tbaa !11
+    %27 = getelementptr inbounds i8, i8* %22, i32 12
+    %28 = bitcast i8* %27 to i8**
+    store i8* %1, i8** %28, align 4, !tbaa !7
+    %29 = load i32, i32* bitcast (%struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 13) to i32*), align 4, !tbaa !5
+    %30 = getelementptr inbounds i8, i8* %22, i32 4
+    %31 = bitcast i8* %30 to i32*
+    store i32 %29, i32* %31, align 4, !tbaa !12
+    store i8* %22, i8** bitcast (%struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 13) to i8**), align 4, !tbaa !5
+    tail call void @glNewList(i32 signext %23, i32 signext 4865) #4
+    tail call fastcc void @doughnut(double %innerRadius, double %outerRadius, i32 signext 8, i32 signext 15, i32 signext 7)
+    tail call void @glEndList() #4
+    br label %33
+  
+  ; <label>:32                                      ; preds = %findList.exit
+    tail call void @glCallList(i32 signext %20) #4
+    tail call void @free(i8* %1) #4
+    br label %33
+  
+  ; <label>:33                                      ; preds = %32, %findList.exit.thread
+    ret void
+  }
+  
+  ; Function Attrs: nounwind
+  define void @auxWireCylinder(double %radius, double %height) #0 {
+    %1 = tail call noalias i8* @malloc(i32 signext 16) #4
+    %2 = bitcast i8* %1 to double*
+    %3 = getelementptr inbounds i8, i8* %1, i32 8
+    %4 = bitcast i8* %3 to double*
+    store double %radius, double* %2, align 8, !tbaa !1
+    store double %height, double* %4, align 8, !tbaa !1
+    %endList.02.i = load %struct.model*, %struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 4), align 4, !tbaa !5
+    %5 = icmp eq %struct.model* %endList.02.i, null
+    br i1 %5, label %findList.exit.thread, label %.lr.ph.i
+  
+  .lr.ph.i:                                         ; preds = %0, %16
+    %endList.03.i = phi %struct.model* [ %endList.0.i, %16 ], [ %endList.02.i, %0 ]
+    %6 = getelementptr inbounds %struct.model, %struct.model* %endList.03.i, i32 0, i32 3
+    %7 = load double*, double** %6, align 4, !tbaa !7
+    br label %.lr.ph.i.i
+  
+  .lr.ph.i.i:                                       ; preds = %.lr.ph.i.i, %.lr.ph.i
+    %lsr.iv1 = phi i32 [ %lsr.iv.next2, %.lr.ph.i.i ], [ 0, %.lr.ph.i ]
+    %lsr.iv = phi i32 [ %lsr.iv.next, %.lr.ph.i.i ], [ 1, %.lr.ph.i ]
+    %matches.05.i.i = phi i32 [ %matches.1.i.i, %.lr.ph.i.i ], [ 1, %.lr.ph.i ]
+    %8 = bitcast double* %7 to i8*
+    %uglygep = getelementptr i8, i8* %8, i32 %lsr.iv1
+    %uglygep3 = bitcast i8* %uglygep to double*
+    %9 = load double, double* %uglygep3, align 8, !tbaa !1
+    %scevgep = getelementptr i8, i8* %1, i32 %lsr.iv1
+    %scevgep4 = bitcast i8* %scevgep to double*
+    %10 = load double, double* %scevgep4, align 8, !tbaa !1
+    %11 = fcmp une double %9, %10
+    %matches.1.i.i = select i1 %11, i32 0, i32 %matches.05.i.i
+    %12 = icmp slt i32 %lsr.iv, 2
+    %13 = icmp ne i32 %matches.1.i.i, 0
+    %14 = and i1 %12, %13
+    %lsr.iv.next = add nuw nsw i32 %lsr.iv, 1
+    %lsr.iv.next2 = add nuw nsw i32 %lsr.iv1, 8
+    br i1 %14, label %.lr.ph.i.i, label %compareParams.exit.i
+  
+  compareParams.exit.i:                             ; preds = %.lr.ph.i.i
+    %15 = icmp eq i32 %matches.1.i.i, 0
+    br i1 %15, label %16, label %findList.exit
+  
+  ; <label>:16                                      ; preds = %compareParams.exit.i
+    %17 = getelementptr inbounds %struct.model, %struct.model* %endList.03.i, i32 0, i32 1
+    %endList.0.i = load %struct.model*, %struct.model** %17, align 4, !tbaa !5
+    %18 = icmp eq %struct.model* %endList.0.i, null
+    br i1 %18, label %findList.exit.thread, label %.lr.ph.i
+  
+  findList.exit:                                    ; preds = %compareParams.exit.i
+    %19 = bitcast %struct.model* %endList.03.i to i32*
+    %20 = load i32, i32* %19, align 4, !tbaa !10
+    %21 = icmp eq i32 %20, 0
+    br i1 %21, label %findList.exit.thread, label %33
+  
+  findList.exit.thread:                             ; preds = %16, %findList.exit, %0
+    %22 = tail call noalias i8* @malloc(i32 signext 16) #4
+    %23 = tail call i32 @glGenLists(i32 signext 1) #4
+    %24 = bitcast i8* %22 to i32*
+    store i32 %23, i32* %24, align 4, !tbaa !10
+    %25 = getelementptr inbounds i8, i8* %22, i32 8
+    %26 = bitcast i8* %25 to i32*
+    store i32 2, i32* %26, align 4, !tbaa !11
+    %27 = getelementptr inbounds i8, i8* %22, i32 12
+    %28 = bitcast i8* %27 to i8**
+    store i8* %1, i8** %28, align 4, !tbaa !7
+    %29 = load i32, i32* bitcast (%struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 4) to i32*), align 4, !tbaa !5
+    %30 = getelementptr inbounds i8, i8* %22, i32 4
+    %31 = bitcast i8* %30 to i32*
+    store i32 %29, i32* %31, align 4, !tbaa !12
+    store i8* %22, i8** bitcast (%struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 4) to i8**), align 4, !tbaa !5
+    tail call void @glNewList(i32 signext %23, i32 signext 4865) #4
+    tail call void @glPushMatrix() #4
+    tail call void @glRotatef(float 9.000000e+01, float 1.000000e+00, float 0.000000e+00, float 0.000000e+00) #4
+    tail call void @glTranslatef(float 0.000000e+00, float 0.000000e+00, float -1.000000e+00) #4
+    %32 = tail call %struct.GLUquadricObj* @gluNewQuadric() #4
+    tail call void @gluQuadricDrawStyle(%struct.GLUquadricObj* %32, i32 signext 100011) #4
+    tail call void @gluCylinder(%struct.GLUquadricObj* %32, double %radius, double %radius, double %height, i32 signext 12, i32 signext 2) #4
+    tail call void @glPopMatrix() #4
+    tail call void @glEndList() #4
+    br label %34
+  
+  ; <label>:33                                      ; preds = %findList.exit
+    tail call void @glCallList(i32 signext %20) #4
+    tail call void @free(i8* %1) #4
+    br label %34
+  
+  ; <label>:34                                      ; preds = %33, %findList.exit.thread
+    ret void
+  }
+  
+  declare void @glPushMatrix() #3
+  
+  declare void @glRotatef(float, float, float, float) #3
+  
+  declare void @glTranslatef(float, float, float) #3
+  
+  declare void @gluCylinder(%struct.GLUquadricObj*, double, double, double, i32 signext, i32 signext) #3
+  
+  declare void @glPopMatrix() #3
+  
+  ; Function Attrs: nounwind
+  define void @auxSolidCylinder(double %radius, double %height) #0 {
+    %1 = tail call noalias i8* @malloc(i32 signext 16) #4
+    %2 = bitcast i8* %1 to double*
+    %3 = getelementptr inbounds i8, i8* %1, i32 8
+    %4 = bitcast i8* %3 to double*
+    store double %radius, double* %2, align 8, !tbaa !1
+    store double %height, double* %4, align 8, !tbaa !1
+    %endList.02.i = load %struct.model*, %struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 14), align 4, !tbaa !5
+    %5 = icmp eq %struct.model* %endList.02.i, null
+    br i1 %5, label %findList.exit.thread, label %.lr.ph.i
+  
+  .lr.ph.i:                                         ; preds = %0, %16
+    %endList.03.i = phi %struct.model* [ %endList.0.i, %16 ], [ %endList.02.i, %0 ]
+    %6 = getelementptr inbounds %struct.model, %struct.model* %endList.03.i, i32 0, i32 3
+    %7 = load double*, double** %6, align 4, !tbaa !7
+    br label %.lr.ph.i.i
+  
+  .lr.ph.i.i:                                       ; preds = %.lr.ph.i.i, %.lr.ph.i
+    %lsr.iv1 = phi i32 [ %lsr.iv.next2, %.lr.ph.i.i ], [ 0, %.lr.ph.i ]
+    %lsr.iv = phi i32 [ %lsr.iv.next, %.lr.ph.i.i ], [ 1, %.lr.ph.i ]
+    %matches.05.i.i = phi i32 [ %matches.1.i.i, %.lr.ph.i.i ], [ 1, %.lr.ph.i ]
+    %8 = bitcast double* %7 to i8*
+    %uglygep = getelementptr i8, i8* %8, i32 %lsr.iv1
+    %uglygep3 = bitcast i8* %uglygep to double*
+    %9 = load double, double* %uglygep3, align 8, !tbaa !1
+    %scevgep = getelementptr i8, i8* %1, i32 %lsr.iv1
+    %scevgep4 = bitcast i8* %scevgep to double*
+    %10 = load double, double* %scevgep4, align 8, !tbaa !1
+    %11 = fcmp une double %9, %10
+    %matches.1.i.i = select i1 %11, i32 0, i32 %matches.05.i.i
+    %12 = icmp slt i32 %lsr.iv, 2
+    %13 = icmp ne i32 %matches.1.i.i, 0
+    %14 = and i1 %12, %13
+    %lsr.iv.next = add nuw nsw i32 %lsr.iv, 1
+    %lsr.iv.next2 = add nuw nsw i32 %lsr.iv1, 8
+    br i1 %14, label %.lr.ph.i.i, label %compareParams.exit.i
+  
+  compareParams.exit.i:                             ; preds = %.lr.ph.i.i
+    %15 = icmp eq i32 %matches.1.i.i, 0
+    br i1 %15, label %16, label %findList.exit
+  
+  ; <label>:16                                      ; preds = %compareParams.exit.i
+    %17 = getelementptr inbounds %struct.model, %struct.model* %endList.03.i, i32 0, i32 1
+    %endList.0.i = load %struct.model*, %struct.model** %17, align 4, !tbaa !5
+    %18 = icmp eq %struct.model* %endList.0.i, null
+    br i1 %18, label %findList.exit.thread, label %.lr.ph.i
+  
+  findList.exit:                                    ; preds = %compareParams.exit.i
+    %19 = bitcast %struct.model* %endList.03.i to i32*
+    %20 = load i32, i32* %19, align 4, !tbaa !10
+    %21 = icmp eq i32 %20, 0
+    br i1 %21, label %findList.exit.thread, label %33
+  
+  findList.exit.thread:                             ; preds = %16, %findList.exit, %0
+    %22 = tail call noalias i8* @malloc(i32 signext 16) #4
+    %23 = tail call i32 @glGenLists(i32 signext 1) #4
+    %24 = bitcast i8* %22 to i32*
+    store i32 %23, i32* %24, align 4, !tbaa !10
+    %25 = getelementptr inbounds i8, i8* %22, i32 8
+    %26 = bitcast i8* %25 to i32*
+    store i32 2, i32* %26, align 4, !tbaa !11
+    %27 = getelementptr inbounds i8, i8* %22, i32 12
+    %28 = bitcast i8* %27 to i8**
+    store i8* %1, i8** %28, align 4, !tbaa !7
+    %29 = load i32, i32* bitcast (%struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 14) to i32*), align 4, !tbaa !5
+    %30 = getelementptr inbounds i8, i8* %22, i32 4
+    %31 = bitcast i8* %30 to i32*
+    store i32 %29, i32* %31, align 4, !tbaa !12
+    store i8* %22, i8** bitcast (%struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 14) to i8**), align 4, !tbaa !5
+    tail call void @glNewList(i32 signext %23, i32 signext 4865) #4
+    tail call void @glPushMatrix() #4
+    tail call void @glRotatef(float 9.000000e+01, float 1.000000e+00, float 0.000000e+00, float 0.000000e+00) #4
+    tail call void @glTranslatef(float 0.000000e+00, float 0.000000e+00, float -1.000000e+00) #4
+    %32 = tail call %struct.GLUquadricObj* @gluNewQuadric() #4
+    tail call void @gluQuadricDrawStyle(%struct.GLUquadricObj* %32, i32 signext 100012) #4
+    tail call void @gluQuadricNormals(%struct.GLUquadricObj* %32, i32 signext 100000) #4
+    tail call void @gluCylinder(%struct.GLUquadricObj* %32, double %radius, double %radius, double %height, i32 signext 12, i32 signext 2) #4
+    tail call void @glPopMatrix() #4
+    tail call void @glEndList() #4
+    br label %34
+  
+  ; <label>:33                                      ; preds = %findList.exit
+    tail call void @glCallList(i32 signext %20) #4
+    tail call void @free(i8* %1) #4
+    br label %34
+  
+  ; <label>:34                                      ; preds = %33, %findList.exit.thread
+    ret void
+  }
+  
+  ; Function Attrs: nounwind
+  define void @auxWireIcosahedron(double %radius) #0 {
+    %1 = tail call noalias i8* @malloc(i32 signext 8) #4
+    %2 = bitcast i8* %1 to double*
+    store double %radius, double* %2, align 8, !tbaa !1
+    %endList.02.i = load %struct.model*, %struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 5), align 4, !tbaa !5
+    %3 = icmp eq %struct.model* %endList.02.i, null
+    br i1 %3, label %findList.exit.thread, label %compareParams.exit.i
+  
+  compareParams.exit.i:                             ; preds = %0, %7
+    %endList.03.i = phi %struct.model* [ %endList.0.i, %7 ], [ %endList.02.i, %0 ]
+    %4 = getelementptr inbounds %struct.model, %struct.model* %endList.03.i, i32 0, i32 3
+    %5 = load double*, double** %4, align 4, !tbaa !7
+    %.pre = load double, double* %5, align 8, !tbaa !1
+    %6 = fcmp une double %.pre, %radius
+    br i1 %6, label %7, label %findList.exit
+  
+  ; <label>:7                                       ; preds = %compareParams.exit.i
+    %8 = getelementptr inbounds %struct.model, %struct.model* %endList.03.i, i32 0, i32 1
+    %endList.0.i = load %struct.model*, %struct.model** %8, align 4, !tbaa !5
+    %9 = icmp eq %struct.model* %endList.0.i, null
+    br i1 %9, label %findList.exit.thread, label %compareParams.exit.i
+  
+  findList.exit:                                    ; preds = %compareParams.exit.i
+    %10 = bitcast %struct.model* %endList.03.i to i32*
+    %11 = load i32, i32* %10, align 4, !tbaa !10
+    %12 = icmp eq i32 %11, 0
+    br i1 %12, label %findList.exit.thread, label %23
+  
+  findList.exit.thread:                             ; preds = %7, %findList.exit, %0
+    %13 = tail call noalias i8* @malloc(i32 signext 16) #4
+    %14 = tail call i32 @glGenLists(i32 signext 1) #4
+    %15 = bitcast i8* %13 to i32*
+    store i32 %14, i32* %15, align 4, !tbaa !10
+    %16 = getelementptr inbounds i8, i8* %13, i32 8
+    %17 = bitcast i8* %16 to i32*
+    store i32 1, i32* %17, align 4, !tbaa !11
+    %18 = getelementptr inbounds i8, i8* %13, i32 12
+    %19 = bitcast i8* %18 to i8**
+    store i8* %1, i8** %19, align 4, !tbaa !7
+    %20 = load i32, i32* bitcast (%struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 5) to i32*), align 4, !tbaa !5
+    %21 = getelementptr inbounds i8, i8* %13, i32 4
+    %22 = bitcast i8* %21 to i32*
+    store i32 %20, i32* %22, align 4, !tbaa !12
+    store i8* %13, i8** bitcast (%struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 5) to i8**), align 4, !tbaa !5
+    tail call void @glNewList(i32 signext %14, i32 signext 4865) #4
+    tail call fastcc void @icosahedron(double* nonnull getelementptr inbounds ([3 x double], [3 x double]* @auxWireIcosahedron.center, i32 0, i32 0), double %radius, i32 signext 2)
+    tail call void @glEndList() #4
+    br label %24
+  
+  ; <label>:23                                      ; preds = %findList.exit
+    tail call void @glCallList(i32 signext %11) #4
+    tail call void @free(i8* %1) #4
+    br label %24
+  
+  ; <label>:24                                      ; preds = %23, %findList.exit.thread
+    ret void
+  }
+  
+  ; Function Attrs: nounwind
+  define internal fastcc void @icosahedron(double* nocapture readonly %p0, double %radius, i32 signext %shadeType) unnamed_addr #0 {
+    tail call fastcc void @drawtriangle(i32 signext 0, i32 signext 0, double* %p0, double %radius, i32 signext %shadeType)
+    tail call fastcc void @drawtriangle(i32 signext 1, i32 signext 0, double* %p0, double %radius, i32 signext %shadeType)
+    tail call fastcc void @drawtriangle(i32 signext 2, i32 signext 0, double* %p0, double %radius, i32 signext %shadeType)
+    tail call fastcc void @drawtriangle(i32 signext 3, i32 signext 0, double* %p0, double %radius, i32 signext %shadeType)
+    tail call fastcc void @drawtriangle(i32 signext 4, i32 signext 0, double* %p0, double %radius, i32 signext %shadeType)
+    tail call fastcc void @drawtriangle(i32 signext 5, i32 signext 0, double* %p0, double %radius, i32 signext %shadeType)
+    tail call fastcc void @drawtriangle(i32 signext 6, i32 signext 0, double* %p0, double %radius, i32 signext %shadeType)
+    tail call fastcc void @drawtriangle(i32 signext 7, i32 signext 0, double* %p0, double %radius, i32 signext %shadeType)
+    tail call fastcc void @drawtriangle(i32 signext 8, i32 signext 0, double* %p0, double %radius, i32 signext %shadeType)
+    tail call fastcc void @drawtriangle(i32 signext 9, i32 signext 0, double* %p0, double %radius, i32 signext %shadeType)
+    tail call fastcc void @drawtriangle(i32 signext 10, i32 signext 0, double* %p0, double %radius, i32 signext %shadeType)
+    tail call fastcc void @drawtriangle(i32 signext 11, i32 signext 0, double* %p0, double %radius, i32 signext %shadeType)
+    tail call fastcc void @drawtriangle(i32 signext 12, i32 signext 0, double* %p0, double %radius, i32 signext %shadeType)
+    tail call fastcc void @drawtriangle(i32 signext 13, i32 signext 0, double* %p0, double %radius, i32 signext %shadeType)
+    tail call fastcc void @drawtriangle(i32 signext 14, i32 signext 0, double* %p0, double %radius, i32 signext %shadeType)
+    tail call fastcc void @drawtriangle(i32 signext 15, i32 signext 0, double* %p0, double %radius, i32 signext %shadeType)
+    tail call fastcc void @drawtriangle(i32 signext 16, i32 signext 0, double* %p0, double %radius, i32 signext %shadeType)
+    tail call fastcc void @drawtriangle(i32 signext 17, i32 signext 0, double* %p0, double %radius, i32 signext %shadeType)
+    tail call fastcc void @drawtriangle(i32 signext 18, i32 signext 0, double* %p0, double %radius, i32 signext %shadeType)
+    tail call fastcc void @drawtriangle(i32 signext 19, i32 signext 0, double* %p0, double %radius, i32 signext %shadeType)
+    ret void
+  }
+  
+  ; Function Attrs: nounwind
+  define void @auxSolidIcosahedron(double %radius) #0 {
+    %1 = tail call noalias i8* @malloc(i32 signext 8) #4
+    %2 = bitcast i8* %1 to double*
+    store double %radius, double* %2, align 8, !tbaa !1
+    %endList.02.i = load %struct.model*, %struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 15), align 4, !tbaa !5
+    %3 = icmp eq %struct.model* %endList.02.i, null
+    br i1 %3, label %findList.exit.thread, label %compareParams.exit.i
+  
+  compareParams.exit.i:                             ; preds = %0, %7
+    %endList.03.i = phi %struct.model* [ %endList.0.i, %7 ], [ %endList.02.i, %0 ]
+    %4 = getelementptr inbounds %struct.model, %struct.model* %endList.03.i, i32 0, i32 3
+    %5 = load double*, double** %4, align 4, !tbaa !7
+    %.pre = load double, double* %5, align 8, !tbaa !1
+    %6 = fcmp une double %.pre, %radius
+    br i1 %6, label %7, label %findList.exit
+  
+  ; <label>:7                                       ; preds = %compareParams.exit.i
+    %8 = getelementptr inbounds %struct.model, %struct.model* %endList.03.i, i32 0, i32 1
+    %endList.0.i = load %struct.model*, %struct.model** %8, align 4, !tbaa !5
+    %9 = icmp eq %struct.model* %endList.0.i, null
+    br i1 %9, label %findList.exit.thread, label %compareParams.exit.i
+  
+  findList.exit:                                    ; preds = %compareParams.exit.i
+    %10 = bitcast %struct.model* %endList.03.i to i32*
+    %11 = load i32, i32* %10, align 4, !tbaa !10
+    %12 = icmp eq i32 %11, 0
+    br i1 %12, label %findList.exit.thread, label %23
+  
+  findList.exit.thread:                             ; preds = %7, %findList.exit, %0
+    %13 = tail call noalias i8* @malloc(i32 signext 16) #4
+    %14 = tail call i32 @glGenLists(i32 signext 1) #4
+    %15 = bitcast i8* %13 to i32*
+    store i32 %14, i32* %15, align 4, !tbaa !10
+    %16 = getelementptr inbounds i8, i8* %13, i32 8
+    %17 = bitcast i8* %16 to i32*
+    store i32 1, i32* %17, align 4, !tbaa !11
+    %18 = getelementptr inbounds i8, i8* %13, i32 12
+    %19 = bitcast i8* %18 to i8**
+    store i8* %1, i8** %19, align 4, !tbaa !7
+    %20 = load i32, i32* bitcast (%struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 15) to i32*), align 4, !tbaa !5
+    %21 = getelementptr inbounds i8, i8* %13, i32 4
+    %22 = bitcast i8* %21 to i32*
+    store i32 %20, i32* %22, align 4, !tbaa !12
+    store i8* %13, i8** bitcast (%struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 15) to i8**), align 4, !tbaa !5
+    tail call void @glNewList(i32 signext %14, i32 signext 4865) #4
+    tail call fastcc void @icosahedron(double* nonnull getelementptr inbounds ([3 x double], [3 x double]* @auxSolidIcosahedron.center, i32 0, i32 0), double %radius, i32 signext 4)
+    tail call void @glEndList() #4
+    br label %24
+  
+  ; <label>:23                                      ; preds = %findList.exit
+    tail call void @glCallList(i32 signext %11) #4
+    tail call void @free(i8* %1) #4
+    br label %24
+  
+  ; <label>:24                                      ; preds = %23, %findList.exit.thread
+    ret void
+  }
+  
+  ; Function Attrs: nounwind
+  define void @auxWireOctahedron(double %radius) #0 {
+    %1 = tail call noalias i8* @malloc(i32 signext 8) #4
+    %2 = bitcast i8* %1 to double*
+    store double %radius, double* %2, align 8, !tbaa !1
+    %endList.02.i = load %struct.model*, %struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 6), align 4, !tbaa !5
+    %3 = icmp eq %struct.model* %endList.02.i, null
+    br i1 %3, label %findList.exit.thread, label %compareParams.exit.i
+  
+  compareParams.exit.i:                             ; preds = %0, %7
+    %endList.03.i = phi %struct.model* [ %endList.0.i, %7 ], [ %endList.02.i, %0 ]
+    %4 = getelementptr inbounds %struct.model, %struct.model* %endList.03.i, i32 0, i32 3
+    %5 = load double*, double** %4, align 4, !tbaa !7
+    %.pre = load double, double* %5, align 8, !tbaa !1
+    %6 = fcmp une double %.pre, %radius
+    br i1 %6, label %7, label %findList.exit
+  
+  ; <label>:7                                       ; preds = %compareParams.exit.i
+    %8 = getelementptr inbounds %struct.model, %struct.model* %endList.03.i, i32 0, i32 1
+    %endList.0.i = load %struct.model*, %struct.model** %8, align 4, !tbaa !5
+    %9 = icmp eq %struct.model* %endList.0.i, null
+    br i1 %9, label %findList.exit.thread, label %compareParams.exit.i
+  
+  findList.exit:                                    ; preds = %compareParams.exit.i
+    %10 = bitcast %struct.model* %endList.03.i to i32*
+    %11 = load i32, i32* %10, align 4, !tbaa !10
+    %12 = icmp eq i32 %11, 0
+    br i1 %12, label %findList.exit.thread, label %23
+  
+  findList.exit.thread:                             ; preds = %7, %findList.exit, %0
+    %13 = tail call noalias i8* @malloc(i32 signext 16) #4
+    %14 = tail call i32 @glGenLists(i32 signext 1) #4
+    %15 = bitcast i8* %13 to i32*
+    store i32 %14, i32* %15, align 4, !tbaa !10
+    %16 = getelementptr inbounds i8, i8* %13, i32 8
+    %17 = bitcast i8* %16 to i32*
+    store i32 1, i32* %17, align 4, !tbaa !11
+    %18 = getelementptr inbounds i8, i8* %13, i32 12
+    %19 = bitcast i8* %18 to i8**
+    store i8* %1, i8** %19, align 4, !tbaa !7
+    %20 = load i32, i32* bitcast (%struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 6) to i32*), align 4, !tbaa !5
+    %21 = getelementptr inbounds i8, i8* %13, i32 4
+    %22 = bitcast i8* %21 to i32*
+    store i32 %20, i32* %22, align 4, !tbaa !12
+    store i8* %13, i8** bitcast (%struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 6) to i8**), align 4, !tbaa !5
+    tail call void @glNewList(i32 signext %14, i32 signext 4865) #4
+    tail call fastcc void @octahedron(double* nonnull getelementptr inbounds ([3 x double], [3 x double]* @auxWireOctahedron.center, i32 0, i32 0), double %radius, i32 signext 2)
+    tail call void @glEndList() #4
+    br label %24
+  
+  ; <label>:23                                      ; preds = %findList.exit
+    tail call void @glCallList(i32 signext %11) #4
+    tail call void @free(i8* %1) #4
+    br label %24
+  
+  ; <label>:24                                      ; preds = %23, %findList.exit.thread
+    ret void
+  }
+  
+  ; Function Attrs: nounwind
+  define internal fastcc void @octahedron(double* nocapture readonly %p0, double %radius, i32 signext %shadeType) unnamed_addr #0 {
+    tail call fastcc void @drawtriangle(i32 signext 0, i32 signext 1, double* %p0, double %radius, i32 signext %shadeType)
+    tail call fastcc void @drawtriangle(i32 signext 1, i32 signext 1, double* %p0, double %radius, i32 signext %shadeType)
+    tail call fastcc void @drawtriangle(i32 signext 2, i32 signext 1, double* %p0, double %radius, i32 signext %shadeType)
+    tail call fastcc void @drawtriangle(i32 signext 3, i32 signext 1, double* %p0, double %radius, i32 signext %shadeType)
+    tail call fastcc void @drawtriangle(i32 signext 4, i32 signext 1, double* %p0, double %radius, i32 signext %shadeType)
+    tail call fastcc void @drawtriangle(i32 signext 5, i32 signext 1, double* %p0, double %radius, i32 signext %shadeType)
+    tail call fastcc void @drawtriangle(i32 signext 6, i32 signext 1, double* %p0, double %radius, i32 signext %shadeType)
+    tail call fastcc void @drawtriangle(i32 signext 7, i32 signext 1, double* %p0, double %radius, i32 signext %shadeType)
+    ret void
+  }
+  
+  ; Function Attrs: nounwind
+  define void @auxSolidOctahedron(double %radius) #0 {
+    %1 = tail call noalias i8* @malloc(i32 signext 8) #4
+    %2 = bitcast i8* %1 to double*
+    store double %radius, double* %2, align 8, !tbaa !1
+    %endList.02.i = load %struct.model*, %struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 16), align 4, !tbaa !5
+    %3 = icmp eq %struct.model* %endList.02.i, null
+    br i1 %3, label %findList.exit.thread, label %compareParams.exit.i
+  
+  compareParams.exit.i:                             ; preds = %0, %7
+    %endList.03.i = phi %struct.model* [ %endList.0.i, %7 ], [ %endList.02.i, %0 ]
+    %4 = getelementptr inbounds %struct.model, %struct.model* %endList.03.i, i32 0, i32 3
+    %5 = load double*, double** %4, align 4, !tbaa !7
+    %.pre = load double, double* %5, align 8, !tbaa !1
+    %6 = fcmp une double %.pre, %radius
+    br i1 %6, label %7, label %findList.exit
+  
+  ; <label>:7                                       ; preds = %compareParams.exit.i
+    %8 = getelementptr inbounds %struct.model, %struct.model* %endList.03.i, i32 0, i32 1
+    %endList.0.i = load %struct.model*, %struct.model** %8, align 4, !tbaa !5
+    %9 = icmp eq %struct.model* %endList.0.i, null
+    br i1 %9, label %findList.exit.thread, label %compareParams.exit.i
+  
+  findList.exit:                                    ; preds = %compareParams.exit.i
+    %10 = bitcast %struct.model* %endList.03.i to i32*
+    %11 = load i32, i32* %10, align 4, !tbaa !10
+    %12 = icmp eq i32 %11, 0
+    br i1 %12, label %findList.exit.thread, label %23
+  
+  findList.exit.thread:                             ; preds = %7, %findList.exit, %0
+    %13 = tail call noalias i8* @malloc(i32 signext 16) #4
+    %14 = tail call i32 @glGenLists(i32 signext 1) #4
+    %15 = bitcast i8* %13 to i32*
+    store i32 %14, i32* %15, align 4, !tbaa !10
+    %16 = getelementptr inbounds i8, i8* %13, i32 8
+    %17 = bitcast i8* %16 to i32*
+    store i32 1, i32* %17, align 4, !tbaa !11
+    %18 = getelementptr inbounds i8, i8* %13, i32 12
+    %19 = bitcast i8* %18 to i8**
+    store i8* %1, i8** %19, align 4, !tbaa !7
+    %20 = load i32, i32* bitcast (%struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 16) to i32*), align 4, !tbaa !5
+    %21 = getelementptr inbounds i8, i8* %13, i32 4
+    %22 = bitcast i8* %21 to i32*
+    store i32 %20, i32* %22, align 4, !tbaa !12
+    store i8* %13, i8** bitcast (%struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 16) to i8**), align 4, !tbaa !5
+    tail call void @glNewList(i32 signext %14, i32 signext 4865) #4
+    tail call fastcc void @octahedron(double* nonnull getelementptr inbounds ([3 x double], [3 x double]* @auxSolidOctahedron.center, i32 0, i32 0), double %radius, i32 signext 4)
+    tail call void @glEndList() #4
+    br label %24
+  
+  ; <label>:23                                      ; preds = %findList.exit
+    tail call void @glCallList(i32 signext %11) #4
+    tail call void @free(i8* %1) #4
+    br label %24
+  
+  ; <label>:24                                      ; preds = %23, %findList.exit.thread
+    ret void
+  }
+  
+  ; Function Attrs: nounwind
+  define void @auxWireTetrahedron(double %radius) #0 {
+    %1 = tail call noalias i8* @malloc(i32 signext 8) #4
+    %2 = bitcast i8* %1 to double*
+    store double %radius, double* %2, align 8, !tbaa !1
+    %endList.02.i = load %struct.model*, %struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 7), align 4, !tbaa !5
+    %3 = icmp eq %struct.model* %endList.02.i, null
+    br i1 %3, label %findList.exit.thread, label %compareParams.exit.i
+  
+  compareParams.exit.i:                             ; preds = %0, %7
+    %endList.03.i = phi %struct.model* [ %endList.0.i, %7 ], [ %endList.02.i, %0 ]
+    %4 = getelementptr inbounds %struct.model, %struct.model* %endList.03.i, i32 0, i32 3
+    %5 = load double*, double** %4, align 4, !tbaa !7
+    %.pre = load double, double* %5, align 8, !tbaa !1
+    %6 = fcmp une double %.pre, %radius
+    br i1 %6, label %7, label %findList.exit
+  
+  ; <label>:7                                       ; preds = %compareParams.exit.i
+    %8 = getelementptr inbounds %struct.model, %struct.model* %endList.03.i, i32 0, i32 1
+    %endList.0.i = load %struct.model*, %struct.model** %8, align 4, !tbaa !5
+    %9 = icmp eq %struct.model* %endList.0.i, null
+    br i1 %9, label %findList.exit.thread, label %compareParams.exit.i
+  
+  findList.exit:                                    ; preds = %compareParams.exit.i
+    %10 = bitcast %struct.model* %endList.03.i to i32*
+    %11 = load i32, i32* %10, align 4, !tbaa !10
+    %12 = icmp eq i32 %11, 0
+    br i1 %12, label %findList.exit.thread, label %23
+  
+  findList.exit.thread:                             ; preds = %7, %findList.exit, %0
+    %13 = tail call noalias i8* @malloc(i32 signext 16) #4
+    %14 = tail call i32 @glGenLists(i32 signext 1) #4
+    %15 = bitcast i8* %13 to i32*
+    store i32 %14, i32* %15, align 4, !tbaa !10
+    %16 = getelementptr inbounds i8, i8* %13, i32 8
+    %17 = bitcast i8* %16 to i32*
+    store i32 1, i32* %17, align 4, !tbaa !11
+    %18 = getelementptr inbounds i8, i8* %13, i32 12
+    %19 = bitcast i8* %18 to i8**
+    store i8* %1, i8** %19, align 4, !tbaa !7
+    %20 = load i32, i32* bitcast (%struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 7) to i32*), align 4, !tbaa !5
+    %21 = getelementptr inbounds i8, i8* %13, i32 4
+    %22 = bitcast i8* %21 to i32*
+    store i32 %20, i32* %22, align 4, !tbaa !12
+    store i8* %13, i8** bitcast (%struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 7) to i8**), align 4, !tbaa !5
+    tail call void @glNewList(i32 signext %14, i32 signext 4865) #4
+    tail call fastcc void @drawtriangle(i32 signext 0, i32 signext 2, double* nonnull getelementptr inbounds ([3 x double], [3 x double]* @auxWireTetrahedron.center, i32 0, i32 0), double %radius, i32 signext 2) #4
+    tail call fastcc void @drawtriangle(i32 signext 1, i32 signext 2, double* nonnull getelementptr inbounds ([3 x double], [3 x double]* @auxWireTetrahedron.center, i32 0, i32 0), double %radius, i32 signext 2) #4
+    tail call fastcc void @drawtriangle(i32 signext 2, i32 signext 2, double* nonnull getelementptr inbounds ([3 x double], [3 x double]* @auxWireTetrahedron.center, i32 0, i32 0), double %radius, i32 signext 2) #4
+    tail call fastcc void @drawtriangle(i32 signext 3, i32 signext 2, double* nonnull getelementptr inbounds ([3 x double], [3 x double]* @auxWireTetrahedron.center, i32 0, i32 0), double %radius, i32 signext 2) #4
+    tail call void @glEndList() #4
+    br label %24
+  
+  ; <label>:23                                      ; preds = %findList.exit
+    tail call void @glCallList(i32 signext %11) #4
+    tail call void @free(i8* %1) #4
+    br label %24
+  
+  ; <label>:24                                      ; preds = %23, %findList.exit.thread
+    ret void
+  }
+  
+  ; Function Attrs: nounwind
+  define void @auxSolidTetrahedron(double %radius) #0 {
+    %1 = tail call noalias i8* @malloc(i32 signext 8) #4
+    %2 = bitcast i8* %1 to double*
+    store double %radius, double* %2, align 8, !tbaa !1
+    %endList.02.i = load %struct.model*, %struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 17), align 4, !tbaa !5
+    %3 = icmp eq %struct.model* %endList.02.i, null
+    br i1 %3, label %findList.exit.thread, label %compareParams.exit.i
+  
+  compareParams.exit.i:                             ; preds = %0, %7
+    %endList.03.i = phi %struct.model* [ %endList.0.i, %7 ], [ %endList.02.i, %0 ]
+    %4 = getelementptr inbounds %struct.model, %struct.model* %endList.03.i, i32 0, i32 3
+    %5 = load double*, double** %4, align 4, !tbaa !7
+    %.pre = load double, double* %5, align 8, !tbaa !1
+    %6 = fcmp une double %.pre, %radius
+    br i1 %6, label %7, label %findList.exit
+  
+  ; <label>:7                                       ; preds = %compareParams.exit.i
+    %8 = getelementptr inbounds %struct.model, %struct.model* %endList.03.i, i32 0, i32 1
+    %endList.0.i = load %struct.model*, %struct.model** %8, align 4, !tbaa !5
+    %9 = icmp eq %struct.model* %endList.0.i, null
+    br i1 %9, label %findList.exit.thread, label %compareParams.exit.i
+  
+  findList.exit:                                    ; preds = %compareParams.exit.i
+    %10 = bitcast %struct.model* %endList.03.i to i32*
+    %11 = load i32, i32* %10, align 4, !tbaa !10
+    %12 = icmp eq i32 %11, 0
+    br i1 %12, label %findList.exit.thread, label %23
+  
+  findList.exit.thread:                             ; preds = %7, %findList.exit, %0
+    %13 = tail call noalias i8* @malloc(i32 signext 16) #4
+    %14 = tail call i32 @glGenLists(i32 signext 1) #4
+    %15 = bitcast i8* %13 to i32*
+    store i32 %14, i32* %15, align 4, !tbaa !10
+    %16 = getelementptr inbounds i8, i8* %13, i32 8
+    %17 = bitcast i8* %16 to i32*
+    store i32 1, i32* %17, align 4, !tbaa !11
+    %18 = getelementptr inbounds i8, i8* %13, i32 12
+    %19 = bitcast i8* %18 to i8**
+    store i8* %1, i8** %19, align 4, !tbaa !7
+    %20 = load i32, i32* bitcast (%struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 17) to i32*), align 4, !tbaa !5
+    %21 = getelementptr inbounds i8, i8* %13, i32 4
+    %22 = bitcast i8* %21 to i32*
+    store i32 %20, i32* %22, align 4, !tbaa !12
+    store i8* %13, i8** bitcast (%struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 17) to i8**), align 4, !tbaa !5
+    tail call void @glNewList(i32 signext %14, i32 signext 4865) #4
+    tail call fastcc void @drawtriangle(i32 signext 0, i32 signext 2, double* nonnull getelementptr inbounds ([3 x double], [3 x double]* @auxSolidTetrahedron.center, i32 0, i32 0), double %radius, i32 signext 4) #4
+    tail call fastcc void @drawtriangle(i32 signext 1, i32 signext 2, double* nonnull getelementptr inbounds ([3 x double], [3 x double]* @auxSolidTetrahedron.center, i32 0, i32 0), double %radius, i32 signext 4) #4
+    tail call fastcc void @drawtriangle(i32 signext 2, i32 signext 2, double* nonnull getelementptr inbounds ([3 x double], [3 x double]* @auxSolidTetrahedron.center, i32 0, i32 0), double %radius, i32 signext 4) #4
+    tail call fastcc void @drawtriangle(i32 signext 3, i32 signext 2, double* nonnull getelementptr inbounds ([3 x double], [3 x double]* @auxSolidTetrahedron.center, i32 0, i32 0), double %radius, i32 signext 4) #4
+    tail call void @glEndList() #4
+    br label %24
+  
+  ; <label>:23                                      ; preds = %findList.exit
+    tail call void @glCallList(i32 signext %11) #4
+    tail call void @free(i8* %1) #4
+    br label %24
+  
+  ; <label>:24                                      ; preds = %23, %findList.exit.thread
+    ret void
+  }
+  
+  ; Function Attrs: nounwind
+  define void @auxWireDodecahedron(double %radius) #0 {
+    %1 = tail call noalias i8* @malloc(i32 signext 8) #4
+    %2 = bitcast i8* %1 to double*
+    store double %radius, double* %2, align 8, !tbaa !1
+    %endList.02.i = load %struct.model*, %struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 8), align 4, !tbaa !5
+    %3 = icmp eq %struct.model* %endList.02.i, null
+    br i1 %3, label %findList.exit.thread, label %compareParams.exit.i
+  
+  compareParams.exit.i:                             ; preds = %0, %7
+    %endList.03.i = phi %struct.model* [ %endList.0.i, %7 ], [ %endList.02.i, %0 ]
+    %4 = getelementptr inbounds %struct.model, %struct.model* %endList.03.i, i32 0, i32 3
+    %5 = load double*, double** %4, align 4, !tbaa !7
+    %.pre = load double, double* %5, align 8, !tbaa !1
+    %6 = fcmp une double %.pre, %radius
+    br i1 %6, label %7, label %findList.exit
+  
+  ; <label>:7                                       ; preds = %compareParams.exit.i
+    %8 = getelementptr inbounds %struct.model, %struct.model* %endList.03.i, i32 0, i32 1
+    %endList.0.i = load %struct.model*, %struct.model** %8, align 4, !tbaa !5
+    %9 = icmp eq %struct.model* %endList.0.i, null
+    br i1 %9, label %findList.exit.thread, label %compareParams.exit.i
+  
+  findList.exit:                                    ; preds = %compareParams.exit.i
+    %10 = bitcast %struct.model* %endList.03.i to i32*
+    %11 = load i32, i32* %10, align 4, !tbaa !10
+    %12 = icmp eq i32 %11, 0
+    br i1 %12, label %findList.exit.thread, label %24
+  
+  findList.exit.thread:                             ; preds = %7, %findList.exit, %0
+    %13 = tail call noalias i8* @malloc(i32 signext 16) #4
+    %14 = tail call i32 @glGenLists(i32 signext 1) #4
+    %15 = bitcast i8* %13 to i32*
+    store i32 %14, i32* %15, align 4, !tbaa !10
+    %16 = getelementptr inbounds i8, i8* %13, i32 8
+    %17 = bitcast i8* %16 to i32*
+    store i32 1, i32* %17, align 4, !tbaa !11
+    %18 = getelementptr inbounds i8, i8* %13, i32 12
+    %19 = bitcast i8* %18 to i8**
+    store i8* %1, i8** %19, align 4, !tbaa !7
+    %20 = load i32, i32* bitcast (%struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 8) to i32*), align 4, !tbaa !5
+    %21 = getelementptr inbounds i8, i8* %13, i32 4
+    %22 = bitcast i8* %21 to i32*
+    store i32 %20, i32* %22, align 4, !tbaa !12
+    store i8* %13, i8** bitcast (%struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 8) to i8**), align 4, !tbaa !5
+    tail call void @glNewList(i32 signext %14, i32 signext 4865) #4
+    %23 = fdiv double %radius, 1.730000e+00
+    tail call fastcc void @dodecahedron(double* nonnull getelementptr inbounds ([3 x double], [3 x double]* @auxWireDodecahedron.center, i32 0, i32 0), double %23, i32 signext 2)
+    tail call void @glEndList() #4
+    br label %25
+  
+  ; <label>:24                                      ; preds = %findList.exit
+    tail call void @glCallList(i32 signext %11) #4
+    tail call void @free(i8* %1) #4
+    br label %25
+  
+  ; <label>:25                                      ; preds = %24, %findList.exit.thread
+    ret void
+  }
+  
+  ; Function Attrs: nounwind
+  define internal fastcc void @dodecahedron(double* nocapture readonly %center, double %sc, i32 signext %type) unnamed_addr #0 {
+    %.b = load i1, i1* @dodecahedron.inited, align 1
+    br i1 %.b, label %2, label %1
+  
+  ; <label>:1                                       ; preds = %0
+    store i1 true, i1* @dodecahedron.inited, align 1
+    store double 0xBFE3C6EF372FE950, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 0, i32 0), align 8, !tbaa !1
+    store double 0.000000e+00, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 0, i32 1), align 8, !tbaa !1
+    store double 0x3FF9E3779B97F4A8, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 0, i32 2), align 8, !tbaa !1
+    store double 0x3FE3C6EF372FE950, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 1, i32 0), align 8, !tbaa !1
+    store double 0.000000e+00, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 1, i32 1), align 8, !tbaa !1
+    store double 0x3FF9E3779B97F4A8, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 1, i32 2), align 8, !tbaa !1
+    store double -1.000000e+00, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 2, i32 0), align 8, !tbaa !1
+    store double -1.000000e+00, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 2, i32 1), align 8, !tbaa !1
+    store double -1.000000e+00, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 2, i32 2), align 8, !tbaa !1
+    store double -1.000000e+00, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 3, i32 0), align 8, !tbaa !1
+    store double -1.000000e+00, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 3, i32 1), align 8, !tbaa !1
+    store double 1.000000e+00, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 3, i32 2), align 8, !tbaa !1
+    store double -1.000000e+00, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 4, i32 0), align 8, !tbaa !1
+    store double 1.000000e+00, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 4, i32 1), align 8, !tbaa !1
+    store double -1.000000e+00, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 4, i32 2), align 8, !tbaa !1
+    store double -1.000000e+00, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 5, i32 0), align 8, !tbaa !1
+    store double 1.000000e+00, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 5, i32 1), align 8, !tbaa !1
+    store double 1.000000e+00, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 5, i32 2), align 8, !tbaa !1
+    store double 1.000000e+00, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 6, i32 0), align 8, !tbaa !1
+    store double -1.000000e+00, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 6, i32 1), align 8, !tbaa !1
+    store double -1.000000e+00, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 6, i32 2), align 8, !tbaa !1
+    store double 1.000000e+00, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 7, i32 0), align 8, !tbaa !1
+    store double -1.000000e+00, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 7, i32 1), align 8, !tbaa !1
+    store double 1.000000e+00, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 7, i32 2), align 8, !tbaa !1
+    store double 1.000000e+00, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 8, i32 0), align 8, !tbaa !1
+    store double 1.000000e+00, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 8, i32 1), align 8, !tbaa !1
+    store double -1.000000e+00, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 8, i32 2), align 8, !tbaa !1
+    store double 1.000000e+00, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 9, i32 0), align 8, !tbaa !1
+    store double 1.000000e+00, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 9, i32 1), align 8, !tbaa !1
+    store double 1.000000e+00, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 9, i32 2), align 8, !tbaa !1
+    store double 0x3FF9E3779B97F4A8, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 10, i32 0), align 8, !tbaa !1
+    store double 0x3FE3C6EF372FE950, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 10, i32 1), align 8, !tbaa !1
+    store double 0.000000e+00, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 10, i32 2), align 8, !tbaa !1
+    store double 0x3FF9E3779B97F4A8, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 11, i32 0), align 8, !tbaa !1
+    store double 0xBFE3C6EF372FE950, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 11, i32 1), align 8, !tbaa !1
+    store double 0.000000e+00, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 11, i32 2), align 8, !tbaa !1
+    store double 0xBFF9E3779B97F4A8, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 12, i32 0), align 8, !tbaa !1
+    store double 0x3FE3C6EF372FE950, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 12, i32 1), align 8, !tbaa !1
+    store double 0.000000e+00, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 12, i32 2), align 8, !tbaa !1
+    store double 0xBFF9E3779B97F4A8, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 13, i32 0), align 8, !tbaa !1
+    store double 0xBFE3C6EF372FE950, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 13, i32 1), align 8, !tbaa !1
+    store double 0.000000e+00, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 13, i32 2), align 8, !tbaa !1
+    store double 0xBFE3C6EF372FE950, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 14, i32 0), align 8, !tbaa !1
+    store double 0.000000e+00, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 14, i32 1), align 8, !tbaa !1
+    store double 0xBFF9E3779B97F4A8, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 14, i32 2), align 8, !tbaa !1
+    store double 0x3FE3C6EF372FE950, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 15, i32 0), align 8, !tbaa !1
+    store double 0.000000e+00, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 15, i32 1), align 8, !tbaa !1
+    store double 0xBFF9E3779B97F4A8, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 15, i32 2), align 8, !tbaa !1
+    store double 0.000000e+00, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 16, i32 0), align 8, !tbaa !1
+    store double 0x3FF9E3779B97F4A8, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 16, i32 1), align 8, !tbaa !1
+    store double 0x3FE3C6EF372FE950, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 16, i32 2), align 8, !tbaa !1
+    store double 0.000000e+00, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 17, i32 0), align 8, !tbaa !1
+    store double 0x3FF9E3779B97F4A8, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 17, i32 1), align 8, !tbaa !1
+    store double 0xBFE3C6EF372FE950, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 17, i32 2), align 8, !tbaa !1
+    store double 0.000000e+00, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 18, i32 0), align 8, !tbaa !1
+    store double 0xBFF9E3779B97F4A8, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 18, i32 1), align 8, !tbaa !1
+    store double 0x3FE3C6EF372FE950, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 18, i32 2), align 8, !tbaa !1
+    store double 0.000000e+00, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 19, i32 0), align 8, !tbaa !1
+    store double 0xBFF9E3779B97F4A8, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 19, i32 1), align 8, !tbaa !1
+    store double 0xBFE3C6EF372FE950, double* getelementptr inbounds ([20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 19, i32 2), align 8, !tbaa !1
+    br label %2
+  
+  ; <label>:2                                       ; preds = %1, %0
+    tail call void @m_pushmatrix() #4
+    %3 = load double, double* %center, align 8, !tbaa !1
+    %4 = getelementptr inbounds double, double* %center, i32 1
+    %5 = load double, double* %4, align 8, !tbaa !1
+    %6 = getelementptr inbounds double, double* %center, i32 2
+    %7 = load double, double* %6, align 8, !tbaa !1
+    tail call void @m_translate(double %3, double %5, double %7) #4
+    tail call void @m_scale(double %sc, double %sc, double %sc) #4
+    tail call fastcc void @pentagon(i32 signext 0, i32 signext 1, i32 signext 9, i32 signext 16, i32 signext 5, i32 signext %type)
+    tail call fastcc void @pentagon(i32 signext 1, i32 signext 0, i32 signext 3, i32 signext 18, i32 signext 7, i32 signext %type)
+    tail call fastcc void @pentagon(i32 signext 1, i32 signext 7, i32 signext 11, i32 signext 10, i32 signext 9, i32 signext %type)
+    tail call fastcc void @pentagon(i32 signext 11, i32 signext 7, i32 signext 18, i32 signext 19, i32 signext 6, i32 signext %type)
+    tail call fastcc void @pentagon(i32 signext 8, i32 signext 17, i32 signext 16, i32 signext 9, i32 signext 10, i32 signext %type)
+    tail call fastcc void @pentagon(i32 signext 2, i32 signext 14, i32 signext 15, i32 signext 6, i32 signext 19, i32 signext %type)
+    tail call fastcc void @pentagon(i32 signext 2, i32 signext 13, i32 signext 12, i32 signext 4, i32 signext 14, i32 signext %type)
+    tail call fastcc void @pentagon(i32 signext 2, i32 signext 19, i32 signext 18, i32 signext 3, i32 signext 13, i32 signext %type)
+    tail call fastcc void @pentagon(i32 signext 3, i32 signext 0, i32 signext 5, i32 signext 12, i32 signext 13, i32 signext %type)
+    tail call fastcc void @pentagon(i32 signext 6, i32 signext 15, i32 signext 8, i32 signext 10, i32 signext 11, i32 signext %type)
+    tail call fastcc void @pentagon(i32 signext 4, i32 signext 17, i32 signext 8, i32 signext 15, i32 signext 14, i32 signext %type)
+    tail call fastcc void @pentagon(i32 signext 4, i32 signext 12, i32 signext 5, i32 signext 16, i32 signext 17, i32 signext %type)
+    tail call void @m_popmatrix() #4
+    ret void
+  }
+  
+  ; Function Attrs: nounwind
+  define void @auxSolidDodecahedron(double %radius) #0 {
+    %1 = tail call noalias i8* @malloc(i32 signext 8) #4
+    %2 = bitcast i8* %1 to double*
+    store double %radius, double* %2, align 8, !tbaa !1
+    %endList.02.i = load %struct.model*, %struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 18), align 4, !tbaa !5
+    %3 = icmp eq %struct.model* %endList.02.i, null
+    br i1 %3, label %findList.exit.thread, label %compareParams.exit.i
+  
+  compareParams.exit.i:                             ; preds = %0, %7
+    %endList.03.i = phi %struct.model* [ %endList.0.i, %7 ], [ %endList.02.i, %0 ]
+    %4 = getelementptr inbounds %struct.model, %struct.model* %endList.03.i, i32 0, i32 3
+    %5 = load double*, double** %4, align 4, !tbaa !7
+    %.pre = load double, double* %5, align 8, !tbaa !1
+    %6 = fcmp une double %.pre, %radius
+    br i1 %6, label %7, label %findList.exit
+  
+  ; <label>:7                                       ; preds = %compareParams.exit.i
+    %8 = getelementptr inbounds %struct.model, %struct.model* %endList.03.i, i32 0, i32 1
+    %endList.0.i = load %struct.model*, %struct.model** %8, align 4, !tbaa !5
+    %9 = icmp eq %struct.model* %endList.0.i, null
+    br i1 %9, label %findList.exit.thread, label %compareParams.exit.i
+  
+  findList.exit:                                    ; preds = %compareParams.exit.i
+    %10 = bitcast %struct.model* %endList.03.i to i32*
+    %11 = load i32, i32* %10, align 4, !tbaa !10
+    %12 = icmp eq i32 %11, 0
+    br i1 %12, label %findList.exit.thread, label %24
+  
+  findList.exit.thread:                             ; preds = %7, %findList.exit, %0
+    %13 = tail call noalias i8* @malloc(i32 signext 16) #4
+    %14 = tail call i32 @glGenLists(i32 signext 1) #4
+    %15 = bitcast i8* %13 to i32*
+    store i32 %14, i32* %15, align 4, !tbaa !10
+    %16 = getelementptr inbounds i8, i8* %13, i32 8
+    %17 = bitcast i8* %16 to i32*
+    store i32 1, i32* %17, align 4, !tbaa !11
+    %18 = getelementptr inbounds i8, i8* %13, i32 12
+    %19 = bitcast i8* %18 to i8**
+    store i8* %1, i8** %19, align 4, !tbaa !7
+    %20 = load i32, i32* bitcast (%struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 18) to i32*), align 4, !tbaa !5
+    %21 = getelementptr inbounds i8, i8* %13, i32 4
+    %22 = bitcast i8* %21 to i32*
+    store i32 %20, i32* %22, align 4, !tbaa !12
+    store i8* %13, i8** bitcast (%struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 18) to i8**), align 4, !tbaa !5
+    tail call void @glNewList(i32 signext %14, i32 signext 4865) #4
+    %23 = fdiv double %radius, 1.730000e+00
+    tail call fastcc void @dodecahedron(double* nonnull getelementptr inbounds ([3 x double], [3 x double]* @auxSolidDodecahedron.center, i32 0, i32 0), double %23, i32 signext 6)
+    tail call void @glEndList() #4
+    br label %25
+  
+  ; <label>:24                                      ; preds = %findList.exit
+    tail call void @glCallList(i32 signext %11) #4
+    tail call void @free(i8* %1) #4
+    br label %25
+  
+  ; <label>:25                                      ; preds = %24, %findList.exit.thread
+    ret void
+  }
+  
+  ; Function Attrs: nounwind
+  define void @auxWireCone(double %base, double %height) #0 {
+    %1 = tail call noalias i8* @malloc(i32 signext 16) #4
+    %2 = bitcast i8* %1 to double*
+    %3 = getelementptr inbounds i8, i8* %1, i32 8
+    %4 = bitcast i8* %3 to double*
+    store double %base, double* %2, align 8, !tbaa !1
+    store double %height, double* %4, align 8, !tbaa !1
+    %endList.02.i = load %struct.model*, %struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 9), align 4, !tbaa !5
+    %5 = icmp eq %struct.model* %endList.02.i, null
+    br i1 %5, label %findList.exit.thread, label %.lr.ph.i
+  
+  .lr.ph.i:                                         ; preds = %0, %16
+    %endList.03.i = phi %struct.model* [ %endList.0.i, %16 ], [ %endList.02.i, %0 ]
+    %6 = getelementptr inbounds %struct.model, %struct.model* %endList.03.i, i32 0, i32 3
+    %7 = load double*, double** %6, align 4, !tbaa !7
+    br label %.lr.ph.i.i
+  
+  .lr.ph.i.i:                                       ; preds = %.lr.ph.i.i, %.lr.ph.i
+    %lsr.iv1 = phi i32 [ %lsr.iv.next2, %.lr.ph.i.i ], [ 0, %.lr.ph.i ]
+    %lsr.iv = phi i32 [ %lsr.iv.next, %.lr.ph.i.i ], [ 1, %.lr.ph.i ]
+    %matches.05.i.i = phi i32 [ %matches.1.i.i, %.lr.ph.i.i ], [ 1, %.lr.ph.i ]
+    %8 = bitcast double* %7 to i8*
+    %uglygep = getelementptr i8, i8* %8, i32 %lsr.iv1
+    %uglygep3 = bitcast i8* %uglygep to double*
+    %9 = load double, double* %uglygep3, align 8, !tbaa !1
+    %scevgep = getelementptr i8, i8* %1, i32 %lsr.iv1
+    %scevgep4 = bitcast i8* %scevgep to double*
+    %10 = load double, double* %scevgep4, align 8, !tbaa !1
+    %11 = fcmp une double %9, %10
+    %matches.1.i.i = select i1 %11, i32 0, i32 %matches.05.i.i
+    %12 = icmp slt i32 %lsr.iv, 2
+    %13 = icmp ne i32 %matches.1.i.i, 0
+    %14 = and i1 %12, %13
+    %lsr.iv.next = add nuw nsw i32 %lsr.iv, 1
+    %lsr.iv.next2 = add nuw nsw i32 %lsr.iv1, 8
+    br i1 %14, label %.lr.ph.i.i, label %compareParams.exit.i
+  
+  compareParams.exit.i:                             ; preds = %.lr.ph.i.i
+    %15 = icmp eq i32 %matches.1.i.i, 0
+    br i1 %15, label %16, label %findList.exit
+  
+  ; <label>:16                                      ; preds = %compareParams.exit.i
+    %17 = getelementptr inbounds %struct.model, %struct.model* %endList.03.i, i32 0, i32 1
+    %endList.0.i = load %struct.model*, %struct.model** %17, align 4, !tbaa !5
+    %18 = icmp eq %struct.model* %endList.0.i, null
+    br i1 %18, label %findList.exit.thread, label %.lr.ph.i
+  
+  findList.exit:                                    ; preds = %compareParams.exit.i
+    %19 = bitcast %struct.model* %endList.03.i to i32*
+    %20 = load i32, i32* %19, align 4, !tbaa !10
+    %21 = icmp eq i32 %20, 0
+    br i1 %21, label %findList.exit.thread, label %33
+  
+  findList.exit.thread:                             ; preds = %16, %findList.exit, %0
+    %22 = tail call noalias i8* @malloc(i32 signext 16) #4
+    %23 = tail call i32 @glGenLists(i32 signext 1) #4
+    %24 = bitcast i8* %22 to i32*
+    store i32 %23, i32* %24, align 4, !tbaa !10
+    %25 = getelementptr inbounds i8, i8* %22, i32 8
+    %26 = bitcast i8* %25 to i32*
+    store i32 2, i32* %26, align 4, !tbaa !11
+    %27 = getelementptr inbounds i8, i8* %22, i32 12
+    %28 = bitcast i8* %27 to i8**
+    store i8* %1, i8** %28, align 4, !tbaa !7
+    %29 = load i32, i32* bitcast (%struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 9) to i32*), align 4, !tbaa !5
+    %30 = getelementptr inbounds i8, i8* %22, i32 4
+    %31 = bitcast i8* %30 to i32*
+    store i32 %29, i32* %31, align 4, !tbaa !12
+    store i8* %22, i8** bitcast (%struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 9) to i8**), align 4, !tbaa !5
+    tail call void @glNewList(i32 signext %23, i32 signext 4865) #4
+    %32 = tail call %struct.GLUquadricObj* @gluNewQuadric() #4
+    tail call void @gluQuadricDrawStyle(%struct.GLUquadricObj* %32, i32 signext 100011) #4
+    tail call void @gluCylinder(%struct.GLUquadricObj* %32, double %base, double 0.000000e+00, double %height, i32 signext 15, i32 signext 10) #4
+    tail call void @glEndList() #4
+    br label %34
+  
+  ; <label>:33                                      ; preds = %findList.exit
+    tail call void @glCallList(i32 signext %20) #4
+    tail call void @free(i8* %1) #4
+    br label %34
+  
+  ; <label>:34                                      ; preds = %33, %findList.exit.thread
+    ret void
+  }
+  
+  ; Function Attrs: nounwind
+  define void @auxSolidCone(double %base, double %height) #0 {
+    %1 = tail call noalias i8* @malloc(i32 signext 16) #4
+    %2 = bitcast i8* %1 to double*
+    %3 = getelementptr inbounds i8, i8* %1, i32 8
+    %4 = bitcast i8* %3 to double*
+    store double %base, double* %2, align 8, !tbaa !1
+    store double %height, double* %4, align 8, !tbaa !1
+    %endList.02.i = load %struct.model*, %struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 9), align 4, !tbaa !5
+    %5 = icmp eq %struct.model* %endList.02.i, null
+    br i1 %5, label %findList.exit.thread, label %.lr.ph.i
+  
+  .lr.ph.i:                                         ; preds = %0, %16
+    %endList.03.i = phi %struct.model* [ %endList.0.i, %16 ], [ %endList.02.i, %0 ]
+    %6 = getelementptr inbounds %struct.model, %struct.model* %endList.03.i, i32 0, i32 3
+    %7 = load double*, double** %6, align 4, !tbaa !7
+    br label %.lr.ph.i.i
+  
+  .lr.ph.i.i:                                       ; preds = %.lr.ph.i.i, %.lr.ph.i
+    %lsr.iv1 = phi i32 [ %lsr.iv.next2, %.lr.ph.i.i ], [ 0, %.lr.ph.i ]
+    %lsr.iv = phi i32 [ %lsr.iv.next, %.lr.ph.i.i ], [ 1, %.lr.ph.i ]
+    %matches.05.i.i = phi i32 [ %matches.1.i.i, %.lr.ph.i.i ], [ 1, %.lr.ph.i ]
+    %8 = bitcast double* %7 to i8*
+    %uglygep = getelementptr i8, i8* %8, i32 %lsr.iv1
+    %uglygep3 = bitcast i8* %uglygep to double*
+    %9 = load double, double* %uglygep3, align 8, !tbaa !1
+    %scevgep = getelementptr i8, i8* %1, i32 %lsr.iv1
+    %scevgep4 = bitcast i8* %scevgep to double*
+    %10 = load double, double* %scevgep4, align 8, !tbaa !1
+    %11 = fcmp une double %9, %10
+    %matches.1.i.i = select i1 %11, i32 0, i32 %matches.05.i.i
+    %12 = icmp slt i32 %lsr.iv, 2
+    %13 = icmp ne i32 %matches.1.i.i, 0
+    %14 = and i1 %12, %13
+    %lsr.iv.next = add nuw nsw i32 %lsr.iv, 1
+    %lsr.iv.next2 = add nuw nsw i32 %lsr.iv1, 8
+    br i1 %14, label %.lr.ph.i.i, label %compareParams.exit.i
+  
+  compareParams.exit.i:                             ; preds = %.lr.ph.i.i
+    %15 = icmp eq i32 %matches.1.i.i, 0
+    br i1 %15, label %16, label %findList.exit
+  
+  ; <label>:16                                      ; preds = %compareParams.exit.i
+    %17 = getelementptr inbounds %struct.model, %struct.model* %endList.03.i, i32 0, i32 1
+    %endList.0.i = load %struct.model*, %struct.model** %17, align 4, !tbaa !5
+    %18 = icmp eq %struct.model* %endList.0.i, null
+    br i1 %18, label %findList.exit.thread, label %.lr.ph.i
+  
+  findList.exit:                                    ; preds = %compareParams.exit.i
+    %19 = bitcast %struct.model* %endList.03.i to i32*
+    %20 = load i32, i32* %19, align 4, !tbaa !10
+    %21 = icmp eq i32 %20, 0
+    br i1 %21, label %findList.exit.thread, label %33
+  
+  findList.exit.thread:                             ; preds = %16, %findList.exit, %0
+    %22 = tail call noalias i8* @malloc(i32 signext 16) #4
+    %23 = tail call i32 @glGenLists(i32 signext 1) #4
+    %24 = bitcast i8* %22 to i32*
+    store i32 %23, i32* %24, align 4, !tbaa !10
+    %25 = getelementptr inbounds i8, i8* %22, i32 8
+    %26 = bitcast i8* %25 to i32*
+    store i32 2, i32* %26, align 4, !tbaa !11
+    %27 = getelementptr inbounds i8, i8* %22, i32 12
+    %28 = bitcast i8* %27 to i8**
+    store i8* %1, i8** %28, align 4, !tbaa !7
+    %29 = load i32, i32* bitcast (%struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 9) to i32*), align 4, !tbaa !5
+    %30 = getelementptr inbounds i8, i8* %22, i32 4
+    %31 = bitcast i8* %30 to i32*
+    store i32 %29, i32* %31, align 4, !tbaa !12
+    store i8* %22, i8** bitcast (%struct.model** getelementptr inbounds ([25 x %struct.model*], [25 x %struct.model*]* @lists, i32 0, i32 9) to i8**), align 4, !tbaa !5
+    tail call void @glNewList(i32 signext %23, i32 signext 4865) #4
+    %32 = tail call %struct.GLUquadricObj* @gluNewQuadric() #4
+    tail call void @gluQuadricDrawStyle(%struct.GLUquadricObj* %32, i32 signext 100012) #4
+    tail call void @gluQuadricNormals(%struct.GLUquadricObj* %32, i32 signext 100000) #4
+    tail call void @gluCylinder(%struct.GLUquadricObj* %32, double %base, double 0.000000e+00, double %height, i32 signext 15, i32 signext 10) #4
+    tail call void @glEndList() #4
+    br label %34
+  
+  ; <label>:33                                      ; preds = %findList.exit
+    tail call void @glCallList(i32 signext %20) #4
+    tail call void @free(i8* %1) #4
+    br label %34
+  
+  ; <label>:34                                      ; preds = %33, %findList.exit.thread
+    ret void
+  }
+  
+  ; Function Attrs: norecurse nounwind readonly
+  define i32 @compareParams(double* nocapture readonly %oneArray, double* nocapture readonly %twoArray, i32 signext %size) #2 {
+    %1 = icmp sgt i32 %size, 0
+    br i1 %1, label %.lr.ph, label %._crit_edge
+  
+  .lr.ph:                                           ; preds = %0, %.lr.ph
+    %lsr.iv = phi i32 [ %lsr.iv.next, %.lr.ph ], [ 1, %0 ]
+    %matches.05 = phi i32 [ %matches.1, %.lr.ph ], [ 1, %0 ]
+    %.03 = phi double* [ %2, %.lr.ph ], [ %oneArray, %0 ]
+    %.012 = phi double* [ %4, %.lr.ph ], [ %twoArray, %0 ]
+    %2 = getelementptr inbounds double, double* %.03, i32 1
+    %3 = load double, double* %.03, align 8, !tbaa !1
+    %4 = getelementptr inbounds double, double* %.012, i32 1
+    %5 = load double, double* %.012, align 8, !tbaa !1
+    %6 = fcmp une double %3, %5
+    %matches.1 = select i1 %6, i32 0, i32 %matches.05
+    %7 = icmp slt i32 %lsr.iv, %size
+    %8 = icmp ne i32 %matches.1, 0
+    %9 = and i1 %7, %8
+    %lsr.iv.next = add nuw i32 %lsr.iv, 1
+    br i1 %9, label %.lr.ph, label %._crit_edge
+  
+  ._crit_edge:                                      ; preds = %.lr.ph, %0
+    %matches.0.lcssa = phi i32 [ 1, %0 ], [ %matches.1, %.lr.ph ]
+    ret i32 %matches.0.lcssa
+  }
+  
+  declare i32 @glGenLists(i32 signext) #3
+  
+  declare void @glBegin(i32 signext) #3
+  
+  declare void @glNormal3dv(double*) #3
+  
+  declare void @glVertex3dv(double*) #3
+  
+  declare void @glEnd() #3
+  
+  ; Function Attrs: nounwind
+  declare double @cos(double) #0
+  
+  ; Function Attrs: nounwind
+  declare double @sin(double) #0
+  
+  declare void @m_xformpt(double*, double*, double*, double*) #3
+  
+  ; Function Attrs: nounwind
+  define internal fastcc void @drawtriangle(i32 signext %i, i32 signext %geomType, double* nocapture readonly %p0, double %radius, i32 signext %shadeType) unnamed_addr #0 {
+    %p1.i.i = alloca [3 x double], align 8
+    %p2.i.i = alloca [3 x double], align 8
+    %p3.i.i = alloca [3 x double], align 8
+    %q0.i.i = alloca [3 x double], align 8
+    %q1.i.i = alloca [3 x double], align 8
+    %n11.i.i = alloca [3 x double], align 8
+    switch i32 %geomType, label %31 [
+      i32 0, label %1
+      i32 1, label %11
+      i32 2, label %21
+    ]
+  
+  ; <label>:1                                       ; preds = %0
+    %2 = getelementptr inbounds [20 x [3 x i32]], [20 x [3 x i32]]* @iindex, i32 0, i32 %i, i32 0
+    %3 = load i32, i32* %2, align 4, !tbaa !13
+    %4 = getelementptr inbounds [12 x [3 x double]], [12 x [3 x double]]* @idata, i32 0, i32 %3, i32 0
+    %5 = getelementptr inbounds [20 x [3 x i32]], [20 x [3 x i32]]* @iindex, i32 0, i32 %i, i32 1
+    %6 = load i32, i32* %5, align 4, !tbaa !13
+    %7 = getelementptr inbounds [12 x [3 x double]], [12 x [3 x double]]* @idata, i32 0, i32 %6, i32 0
+    %8 = getelementptr inbounds [20 x [3 x i32]], [20 x [3 x i32]]* @iindex, i32 0, i32 %i, i32 2
+    %9 = load i32, i32* %8, align 4, !tbaa !13
+    %10 = getelementptr inbounds [12 x [3 x double]], [12 x [3 x double]]* @idata, i32 0, i32 %9, i32 0
+    br label %31
+  
+  ; <label>:11                                      ; preds = %0
+    %12 = getelementptr inbounds [8 x [3 x i32]], [8 x [3 x i32]]* @ondex, i32 0, i32 %i, i32 0
+    %13 = load i32, i32* %12, align 4, !tbaa !13
+    %14 = getelementptr inbounds [6 x [3 x double]], [6 x [3 x double]]* @odata, i32 0, i32 %13, i32 0
+    %15 = getelementptr inbounds [8 x [3 x i32]], [8 x [3 x i32]]* @ondex, i32 0, i32 %i, i32 1
+    %16 = load i32, i32* %15, align 4, !tbaa !13
+    %17 = getelementptr inbounds [6 x [3 x double]], [6 x [3 x double]]* @odata, i32 0, i32 %16, i32 0
+    %18 = getelementptr inbounds [8 x [3 x i32]], [8 x [3 x i32]]* @ondex, i32 0, i32 %i, i32 2
+    %19 = load i32, i32* %18, align 4, !tbaa !13
+    %20 = getelementptr inbounds [6 x [3 x double]], [6 x [3 x double]]* @odata, i32 0, i32 %19, i32 0
+    br label %31
+  
+  ; <label>:21                                      ; preds = %0
+    %22 = getelementptr inbounds [4 x [3 x i32]], [4 x [3 x i32]]* @tndex, i32 0, i32 %i, i32 0
+    %23 = load i32, i32* %22, align 4, !tbaa !13
+    %24 = getelementptr inbounds [4 x [3 x double]], [4 x [3 x double]]* @tdata, i32 0, i32 %23, i32 0
+    %25 = getelementptr inbounds [4 x [3 x i32]], [4 x [3 x i32]]* @tndex, i32 0, i32 %i, i32 1
+    %26 = load i32, i32* %25, align 4, !tbaa !13
+    %27 = getelementptr inbounds [4 x [3 x double]], [4 x [3 x double]]* @tdata, i32 0, i32 %26, i32 0
+    %28 = getelementptr inbounds [4 x [3 x i32]], [4 x [3 x i32]]* @tndex, i32 0, i32 %i, i32 2
+    %29 = load i32, i32* %28, align 4, !tbaa !13
+    %30 = getelementptr inbounds [4 x [3 x double]], [4 x [3 x double]]* @tdata, i32 0, i32 %29, i32 0
+    br label %31
+  
+  ; <label>:31                                      ; preds = %21, %11, %1, %0
+    %x0.0 = phi double* [ undef, %0 ], [ %24, %21 ], [ %14, %11 ], [ %4, %1 ]
+    %x1.0 = phi double* [ undef, %0 ], [ %27, %21 ], [ %17, %11 ], [ %7, %1 ]
+    %x2.0 = phi double* [ undef, %0 ], [ %30, %21 ], [ %20, %11 ], [ %10, %1 ]
+    %32 = load double, double* %x0.0, align 8, !tbaa !1
+    %33 = fmul double %32, 0.000000e+00
+    %34 = load double, double* %x1.0, align 8, !tbaa !1
+    %35 = fmul double %34, 0.000000e+00
+    %36 = fadd double %33, %35
+    %37 = load double, double* %x2.0, align 8, !tbaa !1
+    %38 = fadd double %37, %36
+    %39 = fadd double %32, %35
+    %40 = fmul double %37, 0.000000e+00
+    %41 = fadd double %39, %40
+    %42 = fadd double %33, %34
+    %43 = fadd double %42, %40
+    %44 = getelementptr inbounds double, double* %x0.0, i32 1
+    %45 = load double, double* %44, align 8, !tbaa !1
+    %46 = fmul double %45, 0.000000e+00
+    %47 = getelementptr inbounds double, double* %x1.0, i32 1
+    %48 = load double, double* %47, align 8, !tbaa !1
+    %49 = fmul double %48, 0.000000e+00
+    %50 = fadd double %46, %49
+    %51 = getelementptr inbounds double, double* %x2.0, i32 1
+    %52 = load double, double* %51, align 8, !tbaa !1
+    %53 = fadd double %52, %50
+    %54 = fadd double %45, %49
+    %55 = fmul double %52, 0.000000e+00
+    %56 = fadd double %54, %55
+    %57 = fadd double %46, %48
+    %58 = fadd double %57, %55
+    %59 = getelementptr inbounds double, double* %x0.0, i32 2
+    %60 = load double, double* %59, align 8, !tbaa !1
+    %61 = fmul double %60, 0.000000e+00
+    %62 = getelementptr inbounds double, double* %x1.0, i32 2
+    %63 = load double, double* %62, align 8, !tbaa !1
+    %64 = fmul double %63, 0.000000e+00
+    %65 = fadd double %61, %64
+    %66 = getelementptr inbounds double, double* %x2.0, i32 2
+    %67 = load double, double* %66, align 8, !tbaa !1
+    %68 = fadd double %67, %65
+    %69 = fadd double %60, %64
+    %70 = fmul double %67, 0.000000e+00
+    %71 = fadd double %69, %70
+    %72 = fadd double %61, %63
+    %73 = fadd double %72, %70
+    %74 = fmul double %38, %38
+    %75 = fmul double %53, %53
+    %76 = fadd double %74, %75
+    %77 = fmul double %68, %68
+    %78 = fadd double %76, %77
+    %79 = tail call double @sqrt(double %78) #5
+    %80 = fcmp oeq double %79, %79
+    br i1 %80, label %.split, label %call.sqrt
+  
+  call.sqrt:                                        ; preds = %31
+    %81 = tail call double @sqrt(double %78) #4
+    br label %.split
+  
+  .split:                                           ; preds = %31, %call.sqrt
+    %82 = phi double [ %79, %31 ], [ %81, %call.sqrt ]
+    %83 = fdiv double %38, %82
+    %84 = fdiv double %53, %82
+    %85 = fdiv double %68, %82
+    %86 = fmul double %41, %41
+    %87 = fmul double %56, %56
+    %88 = fadd double %86, %87
+    %89 = fmul double %71, %71
+    %90 = fadd double %88, %89
+    %91 = tail call double @sqrt(double %90) #5
+    %92 = fcmp oeq double %91, %91
+    br i1 %92, label %.split.split, label %call.sqrt1
+  
+  call.sqrt1:                                       ; preds = %.split
+    %93 = tail call double @sqrt(double %90) #4
+    br label %.split.split
+  
+  .split.split:                                     ; preds = %.split, %call.sqrt1
+    %94 = phi double [ %91, %.split ], [ %93, %call.sqrt1 ]
+    %95 = fdiv double %41, %94
+    %96 = fdiv double %56, %94
+    %97 = fdiv double %71, %94
+    %98 = fmul double %43, %43
+    %99 = fmul double %58, %58
+    %100 = fadd double %98, %99
+    %101 = fmul double %73, %73
+    %102 = fadd double %100, %101
+    %103 = tail call double @sqrt(double %102) #5
+    %104 = fcmp oeq double %103, %103
+    br i1 %104, label %.split.split.split, label %call.sqrt2
+  
+  call.sqrt2:                                       ; preds = %.split.split
+    %105 = tail call double @sqrt(double %102) #4
+    br label %.split.split.split
+  
+  .split.split.split:                               ; preds = %.split.split, %call.sqrt2
+    %106 = phi double [ %103, %.split.split ], [ %105, %call.sqrt2 ]
+    %107 = bitcast [3 x double]* %n11.i.i to double*
+    %108 = bitcast [3 x double]* %q1.i.i to double*
+    %109 = bitcast [3 x double]* %q0.i.i to double*
+    %110 = bitcast [3 x double]* %p3.i.i to double*
+    %111 = bitcast [3 x double]* %p2.i.i to double*
+    %112 = bitcast [3 x double]* %p1.i.i to double*
+    %113 = bitcast [3 x double]* %n11.i.i to i8*
+    %114 = bitcast [3 x double]* %q1.i.i to i8*
+    %115 = bitcast [3 x double]* %q0.i.i to i8*
+    %116 = bitcast [3 x double]* %p3.i.i to i8*
+    %117 = bitcast [3 x double]* %p2.i.i to i8*
+    %118 = bitcast [3 x double]* %p1.i.i to i8*
+    %119 = fdiv double %43, %106
+    %120 = fdiv double %58, %106
+    %121 = fdiv double %73, %106
+    call void @llvm.lifetime.start(i64 24, i8* %118) #4
+    call void @llvm.lifetime.start(i64 24, i8* %117) #4
+    call void @llvm.lifetime.start(i64 24, i8* %116) #4
+    call void @llvm.lifetime.start(i64 24, i8* %115) #4
+    call void @llvm.lifetime.start(i64 24, i8* %114) #4
+    call void @llvm.lifetime.start(i64 24, i8* %113) #4
+    %122 = fmul double %95, %radius
+    %123 = load double, double* %p0, align 8, !tbaa !1
+    %124 = fadd double %122, %123
+    store double %124, double* %112, align 8, !tbaa !1
+    %125 = fmul double %83, %radius
+    %126 = fadd double %125, %123
+    store double %126, double* %111, align 8, !tbaa !1
+    %127 = fmul double %119, %radius
+    %128 = fadd double %127, %123
+    store double %128, double* %110, align 8, !tbaa !1
+    %129 = fmul double %96, %radius
+    %sunkaddr = ptrtoint double* %p0 to i32
+    %sunkaddr3 = add i32 %sunkaddr, 8
+    %sunkaddr4 = inttoptr i32 %sunkaddr3 to double*
+    %130 = load double, double* %sunkaddr4, align 8, !tbaa !1
+    %131 = fadd double %129, %130
+    %sunkaddr5 = ptrtoint [3 x double]* %p1.i.i to i32
+    %sunkaddr6 = add i32 %sunkaddr5, 8
+    %sunkaddr7 = inttoptr i32 %sunkaddr6 to double*
+    store double %131, double* %sunkaddr7, align 8, !tbaa !1
+    %132 = fmul double %84, %radius
+    %133 = fadd double %132, %130
+    %sunkaddr8 = ptrtoint [3 x double]* %p2.i.i to i32
+    %sunkaddr9 = add i32 %sunkaddr8, 8
+    %sunkaddr10 = inttoptr i32 %sunkaddr9 to double*
+    store double %133, double* %sunkaddr10, align 8, !tbaa !1
+    %134 = fmul double %120, %radius
+    %135 = fadd double %134, %130
+    %sunkaddr11 = ptrtoint [3 x double]* %p3.i.i to i32
+    %sunkaddr12 = add i32 %sunkaddr11, 8
+    %sunkaddr13 = inttoptr i32 %sunkaddr12 to double*
+    store double %135, double* %sunkaddr13, align 8, !tbaa !1
+    %136 = fmul double %97, %radius
+    %sunkaddr14 = ptrtoint double* %p0 to i32
+    %sunkaddr15 = add i32 %sunkaddr14, 16
+    %sunkaddr16 = inttoptr i32 %sunkaddr15 to double*
+    %137 = load double, double* %sunkaddr16, align 8, !tbaa !1
+    %138 = fadd double %136, %137
+    %sunkaddr17 = ptrtoint [3 x double]* %p1.i.i to i32
+    %sunkaddr18 = add i32 %sunkaddr17, 16
+    %sunkaddr19 = inttoptr i32 %sunkaddr18 to double*
+    store double %138, double* %sunkaddr19, align 8, !tbaa !1
+    %139 = fmul double %85, %radius
+    %140 = fadd double %139, %137
+    %sunkaddr20 = ptrtoint [3 x double]* %p2.i.i to i32
+    %sunkaddr21 = add i32 %sunkaddr20, 16
+    %sunkaddr22 = inttoptr i32 %sunkaddr21 to double*
+    store double %140, double* %sunkaddr22, align 8, !tbaa !1
+    %141 = fmul double %121, %radius
+    %142 = fadd double %141, %137
+    %sunkaddr23 = ptrtoint [3 x double]* %p3.i.i to i32
+    %sunkaddr24 = add i32 %sunkaddr23, 16
+    %sunkaddr25 = inttoptr i32 %sunkaddr24 to double*
+    store double %142, double* %sunkaddr25, align 8, !tbaa !1
+    call void @diff3(double* %112, double* %111, double* %109) #4
+    call void @diff3(double* %111, double* %110, double* %108) #4
+    call void @crossprod(double* %109, double* %108, double* %108) #4
+    call void @normalize(double* %108) #4
+    call void @m_xformpt(double* %112, double* %112, double* %108, double* %107) #4
+    call void @m_xformptonly(double* %111, double* %111) #4
+    call void @m_xformptonly(double* %110, double* %110) #4
+    call void @glBegin(i32 signext %shadeType) #4
+    call void @glNormal3dv(double* %107) #4
+    call void @glVertex3dv(double* %112) #4
+    call void @glVertex3dv(double* %111) #4
+    call void @glVertex3dv(double* %110) #4
+    call void @glEnd() #4
+    call void @llvm.lifetime.end(i64 24, i8* %113) #4
+    call void @llvm.lifetime.end(i64 24, i8* %114) #4
+    call void @llvm.lifetime.end(i64 24, i8* %115) #4
+    call void @llvm.lifetime.end(i64 24, i8* %116) #4
+    call void @llvm.lifetime.end(i64 24, i8* %117) #4
+    call void @llvm.lifetime.end(i64 24, i8* %118) #4
+    ret void
+  }
+  
+  ; Function Attrs: nounwind
+  declare double @sqrt(double) #0
+  
+  declare void @diff3(double*, double*, double*) #3
+  
+  declare void @crossprod(double*, double*, double*) #3
+  
+  declare void @normalize(double*) #3
+  
+  declare void @m_xformptonly(double*, double*) #3
+  
+  declare void @m_pushmatrix() #3
+  
+  declare void @m_translate(double, double, double) #3
+  
+  declare void @m_scale(double, double, double) #3
+  
+  ; Function Attrs: nounwind
+  define internal fastcc void @pentagon(i32 signext %a, i32 signext %b, i32 signext %c, i32 signext %d, i32 signext %e, i32 signext %shadeType) unnamed_addr #0 {
+    %n0 = alloca [3 x double], align 8
+    %d1 = alloca [3 x double], align 8
+    %d2 = alloca [3 x double], align 8
+    %d3 = alloca [3 x double], align 8
+    %d4 = alloca [3 x double], align 8
+    %d5 = alloca [3 x double], align 8
+    %nout = alloca [3 x double], align 8
+    %1 = bitcast [3 x double]* %n0 to i8*
+    call void @llvm.lifetime.start(i64 24, i8* %1) #4
+    %2 = bitcast [3 x double]* %d1 to i8*
+    call void @llvm.lifetime.start(i64 24, i8* %2) #4
+    %3 = bitcast [3 x double]* %d2 to i8*
+    call void @llvm.lifetime.start(i64 24, i8* %3) #4
+    %4 = bitcast [3 x double]* %d3 to i8*
+    call void @llvm.lifetime.start(i64 24, i8* %4) #4
+    %5 = bitcast [3 x double]* %d4 to i8*
+    call void @llvm.lifetime.start(i64 24, i8* %5) #4
+    %6 = bitcast [3 x double]* %d5 to i8*
+    call void @llvm.lifetime.start(i64 24, i8* %6) #4
+    %7 = bitcast [3 x double]* %nout to i8*
+    call void @llvm.lifetime.start(i64 24, i8* %7) #4
+    %8 = getelementptr inbounds [20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 %a, i32 0
+    %9 = getelementptr inbounds [20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 %b, i32 0
+    %10 = bitcast [3 x double]* %d1 to double*
+    call void @diff3(double* %8, double* %9, double* %10) #4
+    %11 = getelementptr inbounds [20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 %c, i32 0
+    %12 = bitcast [3 x double]* %d2 to double*
+    call void @diff3(double* %9, double* %11, double* %12) #4
+    %13 = bitcast [3 x double]* %n0 to double*
+    call void @crossprod(double* %10, double* %12, double* %13) #4
+    call void @normalize(double* %13) #4
+    %14 = bitcast [3 x double]* %nout to double*
+    call void @m_xformpt(double* %8, double* %10, double* %13, double* %14) #4
+    call void @m_xformptonly(double* %9, double* %12) #4
+    %15 = bitcast [3 x double]* %d3 to double*
+    call void @m_xformptonly(double* %11, double* %15) #4
+    %16 = getelementptr inbounds [20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 %d, i32 0
+    %17 = bitcast [3 x double]* %d4 to double*
+    call void @m_xformptonly(double* %16, double* %17) #4
+    %18 = getelementptr inbounds [20 x [3 x double]], [20 x [3 x double]]* @dodec, i32 0, i32 %e, i32 0
+    %19 = bitcast [3 x double]* %d5 to double*
+    call void @m_xformptonly(double* %18, double* %19) #4
+    call void @glBegin(i32 signext %shadeType) #4
+    call void @glNormal3dv(double* %14) #4
+    call void @glVertex3dv(double* %10) #4
+    call void @glVertex3dv(double* %12) #4
+    call void @glVertex3dv(double* %15) #4
+    call void @glVertex3dv(double* %17) #4
+    call void @glVertex3dv(double* %19) #4
+    call void @glEnd() #4
+    call void @llvm.lifetime.end(i64 24, i8* %7) #4
+    call void @llvm.lifetime.end(i64 24, i8* %6) #4
+    call void @llvm.lifetime.end(i64 24, i8* %5) #4
+    call void @llvm.lifetime.end(i64 24, i8* %4) #4
+    call void @llvm.lifetime.end(i64 24, i8* %3) #4
+    call void @llvm.lifetime.end(i64 24, i8* %2) #4
+    call void @llvm.lifetime.end(i64 24, i8* %1) #4
+    ret void
+  }
+  
+  declare void @m_popmatrix() #3
+  
+  attributes #0 = { nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #1 = { argmemonly nounwind "target-cpu"="mips32" }
+  attributes #2 = { norecurse nounwind readonly "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #3 = { "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #4 = { nounwind }
+  attributes #5 = { nounwind readnone }
+  
+  !llvm.ident = !{!0}
+  
+  !0 = !{!"clang version 3.8.0 (http://llvm.org/git/clang.git 2d49f0a0ae8366964a93e3b7b26e29679bee7160) (http://llvm.org/git/llvm.git 60bc66b44837125843b58ed3e0fd2e6bb948d839)"}
+  !1 = !{!2, !2, i64 0}
+  !2 = !{!"double", !3, i64 0}
+  !3 = !{!"omnipotent char", !4, i64 0}
+  !4 = !{!"Simple C/C++ TBAA"}
+  !5 = !{!6, !6, i64 0}
+  !6 = !{!"any pointer", !3, i64 0}
+  !7 = !{!8, !6, i64 12}
+  !8 = !{!"model", !9, i64 0, !6, i64 4, !9, i64 8, !6, i64 12}
+  !9 = !{!"int", !3, i64 0}
+  !10 = !{!8, !9, i64 0}
+  !11 = !{!8, !9, i64 8}
+  !12 = !{!8, !6, i64 4}
+  !13 = !{!9, !9, i64 0}
+
+...
+---
+name:            doughnut
+alignment:       2
+exposesReturnsTwice: false
+hasInlineAsm:    false
+isSSA:           false
+tracksRegLiveness: false
+tracksSubRegLiveness: false
+liveins:         
+  - { reg: '%d0' }
+  - { reg: '%d1' }
+  - { reg: '%a0' }
+  - { reg: '%a1' }
+  - { reg: '%a2' }
+  - { reg: '%t9' }
+  - { reg: '%v0' }
+calleeSavedRegisters: [ '%fp', '%ra', '%d10', '%d11', '%d12', '%d13', '%d14', 
+                        '%d15', '%f20', '%f21', '%f22', '%f23', '%f24', 
+                        '%f25', '%f26', '%f27', '%f28', '%f29', '%f30', 
+                        '%f31', '%s0', '%s1', '%s2', '%s3', '%s4', '%s5', 
+                        '%s6', '%s7' ]
+frameInfo:       
+  isFrameAddressTaken: false
+  isReturnAddressTaken: false
+  hasStackMap:     false
+  hasPatchPoint:   false
+  stackSize:       416
+  offsetAdjustment: 0
+  maxAlignment:    8
+  adjustsStack:    true
+  hasCalls:        true
+  maxCallFrameSize: 16
+  hasOpaqueSPAdjustment: false
+  hasVAStart:      false
+  hasMustTailInVarArgFunc: false
+stack:           
+  - { id: 0, name: p0, offset: -112, size: 24, alignment: 8 }
+  - { id: 1, name: p1, offset: -136, size: 24, alignment: 8 }
+  - { id: 2, name: p2, offset: -160, size: 24, alignment: 8 }
+  - { id: 3, name: p3, offset: -184, size: 24, alignment: 8 }
+  - { id: 4, name: n0, offset: -208, size: 24, alignment: 8 }
+  - { id: 5, name: n1, offset: -232, size: 24, alignment: 8 }
+  - { id: 6, name: n2, offset: -256, size: 24, alignment: 8 }
+  - { id: 7, name: n3, offset: -280, size: 24, alignment: 8 }
+  - { id: 8, type: spill-slot, offset: -288, size: 8, alignment: 8 }
+  - { id: 9, type: spill-slot, offset: -296, size: 8, alignment: 8 }
+  - { id: 10, type: spill-slot, offset: -304, size: 8, alignment: 8 }
+  - { id: 11, type: spill-slot, offset: -308, size: 4, alignment: 4 }
+  - { id: 12, type: spill-slot, offset: -320, size: 8, alignment: 8 }
+  - { id: 13, type: spill-slot, offset: -328, size: 8, alignment: 8 }
+  - { id: 14, type: spill-slot, offset: -332, size: 4, alignment: 4 }
+  - { id: 15, type: spill-slot, offset: -336, size: 4, alignment: 4 }
+  - { id: 16, type: spill-slot, offset: -344, size: 8, alignment: 8 }
+  - { id: 17, type: spill-slot, offset: -352, size: 8, alignment: 8 }
+  - { id: 18, type: spill-slot, offset: -360, size: 8, alignment: 8 }
+  - { id: 19, type: spill-slot, offset: -368, size: 8, alignment: 8 }
+  - { id: 20, type: spill-slot, offset: -372, size: 4, alignment: 4 }
+  - { id: 21, type: spill-slot, offset: -384, size: 8, alignment: 8 }
+  - { id: 22, type: spill-slot, offset: -388, size: 4, alignment: 4 }
+  - { id: 23, type: spill-slot, offset: -392, size: 4, alignment: 4 }
+  - { id: 24, type: spill-slot, offset: -400, size: 8, alignment: 8 }
+  - { id: 25, type: spill-slot, offset: -8, size: 8, alignment: 8, callee-saved-register: '%d15' }
+  - { id: 26, type: spill-slot, offset: -16, size: 8, alignment: 8, callee-saved-register: '%d14' }
+  - { id: 27, type: spill-slot, offset: -24, size: 8, alignment: 8, callee-saved-register: '%d13' }
+  - { id: 28, type: spill-slot, offset: -32, size: 8, alignment: 8, callee-saved-register: '%d12' }
+  - { id: 29, type: spill-slot, offset: -40, size: 8, alignment: 8, callee-saved-register: '%d11' }
+  - { id: 30, type: spill-slot, offset: -48, size: 8, alignment: 8, callee-saved-register: '%d10' }
+  - { id: 31, type: spill-slot, offset: -52, size: 4, alignment: 4, callee-saved-register: '%ra' }
+  - { id: 32, type: spill-slot, offset: -56, size: 4, alignment: 4, callee-saved-register: '%fp' }
+  - { id: 33, type: spill-slot, offset: -60, size: 4, alignment: 4, callee-saved-register: '%s7' }
+  - { id: 34, type: spill-slot, offset: -64, size: 4, alignment: 4, callee-saved-register: '%s6' }
+  - { id: 35, type: spill-slot, offset: -68, size: 4, alignment: 4, callee-saved-register: '%s5' }
+  - { id: 36, type: spill-slot, offset: -72, size: 4, alignment: 4, callee-saved-register: '%s4' }
+  - { id: 37, type: spill-slot, offset: -76, size: 4, alignment: 4, callee-saved-register: '%s3' }
+  - { id: 38, type: spill-slot, offset: -80, size: 4, alignment: 4, callee-saved-register: '%s2' }
+  - { id: 39, type: spill-slot, offset: -84, size: 4, alignment: 4, callee-saved-register: '%s1' }
+  - { id: 40, type: spill-slot, offset: -88, size: 4, alignment: 4, callee-saved-register: '%s0' }
+constants:       
+  - id:              0
+    value:           double 0x400921FB54442C46
+    alignment:       8
+  - id:              1
+    value:           'double 1.000000e+00'
+    alignment:       8
+body:             |
+  bb.0 (%ir-block.0, freq 12):
+    successors: %bb.1..lr.ph3(62), %bb.6.._crit_edge(37)
+    liveins: %a0, %a1, %a2, %d0, %d1, %t9, %d15, %d14, %d13, %d12, %d11, %d10, %ra, %fp, %s7, %s6, %s5, %s4, %s3, %s2, %s1, %s0
+  
+    %v0 = LUi target-flags(<unknown>) $_gp_disp
+    %v0 = ADDiu %v0, target-flags(<unknown>) $_gp_disp
+    %sp = ADDiu %sp, -416
+    CFI_INSTRUCTION .cfi_def_cfa_offset 416
+    SDC1 killed %d15, %sp, 408 :: (store 8 into stack)
+    SDC1 killed %d14, %sp, 400 :: (store 8 into stack)
+    SDC1 killed %d13, %sp, 392 :: (store 8 into stack)
+    SDC1 killed %d12, %sp, 384 :: (store 8 into stack)
+    SDC1 killed %d11, %sp, 376 :: (store 8 into stack)
+    SDC1 killed %d10, %sp, 368 :: (store 8 into stack)
+    SW killed %ra, %sp, 364 :: (store 4 into stack)
+    SW killed %fp, %sp, 360 :: (store 4 into stack)
+    SW killed %s7, %sp, 356 :: (store 4 into stack)
+    SW killed %s6, %sp, 352 :: (store 4 into stack)
+    SW killed %s5, %sp, 348 :: (store 4 into stack)
+    SW killed %s4, %sp, 344 :: (store 4 into stack)
+    SW killed %s3, %sp, 340 :: (store 4 into stack)
+    SW killed %s2, %sp, 336 :: (store 4 into stack)
+    SW killed %s1, %sp, 332 :: (store 4 into stack)
+    SW killed %s0, %sp, 328 :: (store 4 into stack)
+    CFI_INSTRUCTION .cfi_offset %d31_64, -8
+    CFI_INSTRUCTION .cfi_offset %d30_64, -4
+    CFI_INSTRUCTION .cfi_offset %d29_64, -16
+    CFI_INSTRUCTION .cfi_offset %d28_64, -12
+    CFI_INSTRUCTION .cfi_offset %d27_64, -24
+    CFI_INSTRUCTION .cfi_offset %d26_64, -20
+    CFI_INSTRUCTION .cfi_offset %d25_64, -32
+    CFI_INSTRUCTION .cfi_offset %d24_64, -28
+    CFI_INSTRUCTION .cfi_offset %d23_64, -40
+    CFI_INSTRUCTION .cfi_offset %d22_64, -36
+    CFI_INSTRUCTION .cfi_offset %d21_64, -48
+    CFI_INSTRUCTION .cfi_offset %d20_64, -44
+    CFI_INSTRUCTION .cfi_offset %ra_64, -52
+    CFI_INSTRUCTION .cfi_offset %fp_64, -56
+    CFI_INSTRUCTION .cfi_offset %s7_64, -60
+    CFI_INSTRUCTION .cfi_offset %s6_64, -64
+    CFI_INSTRUCTION .cfi_offset %s5_64, -68
+    CFI_INSTRUCTION .cfi_offset %s4_64, -72
+    CFI_INSTRUCTION .cfi_offset %s3_64, -76
+    CFI_INSTRUCTION .cfi_offset %s2_64, -80
+    CFI_INSTRUCTION .cfi_offset %s1_64, -84
+    CFI_INSTRUCTION .cfi_offset %s0_64, -88
+    %s0 = ADDu %v0, %t9
+    SW killed %a2, %sp, 80 :: (store 4 into stack)
+    SW %a0, %sp, 84 :: (store 4 into stack)
+    SDC1 %d1, %sp, 64 :: (store 8 into stack)
+    SDC1 killed %d0, %sp, 72 :: (store 8 into stack)
+    BLEZ %a1, %bb.6.._crit_edge, implicit-def %at {
+      SW %a1, %sp, 24 :: (store 4 into stack)
+    }
+  
+  bb.1..lr.ph3 (freq 8):
+    successors: %bb.2(100)
+    liveins: %a0, %s0
+  
+    %f0 = MTC1 %zero
+    %d0 = MTHC1_D32 %d0, %zero
+    SDC1 killed %d0, %sp, 32 :: (store 8 into stack)
+    %f0 = MTC1 %a0
+    %d0 = CVT_D32_W killed %f0
+    SDC1 killed %d0, %sp, 120 :: (store 8 into stack)
+    %at = LW %sp, 24 :: (load 4 from stack)
+    %f0 = MTC1 killed %at
+    %d0 = CVT_D32_W killed %f0
+    SDC1 killed %d0, %sp, 16 :: (store 8 into stack)
+    %v0 = ADDiu %zero, 0
+    %at = LW %s0, target-flags(<unknown>) %const.0 :: (load 4 from got)
+    %d14 = LDC1 killed %at, target-flags(<unknown>) %const.0 :: (load 8 from constant-pool)
+    SDC1 %d14, %sp, 56 :: (store 8 into stack)
+    %at = LW %s0, target-flags(<unknown>) %const.1 :: (load 4 from got)
+    %d1 = LDC1 killed %at, target-flags(<unknown>) %const.1 :: (load 8 from constant-pool)
+    SDC1 %d1, %sp, 48 :: (store 8 into stack)
+    %s6 = LEA_ADDiu %sp, 304
+    %s7 = LEA_ADDiu %sp, 208
+    %fp = LEA_ADDiu %sp, 280
+    %s2 = LEA_ADDiu %sp, 184
+    %s1 = LEA_ADDiu %sp, 256
+    %s3 = LEA_ADDiu %sp, 160
+    %s5 = LEA_ADDiu %sp, 232
+    %at = LEA_ADDiu %sp, 136
+    SW killed %at, %sp, 44 :: (store 4 into stack)
+  
+  bb.2 (%ir-block.12, freq 255):
+    successors: %bb.3(62), %bb.5..loopexit(37)
+    liveins: %fp, %a0, %d1, %d14, %s0, %s1, %s2, %s3, %s5, %s6, %s7, %v0
+  
+    %v0 = ADDiu killed %v0, 1
+    BLEZ %a0, %bb.5..loopexit, implicit-def dead %at {
+      SW killed %v0, %sp, 28 :: (store 4 into stack)
+    }
+  
+  bb.3 (freq 159):
+    successors: %bb.4..lr.ph(100)
+    liveins: %fp, %d14, %s0, %s1, %s2, %s3, %s5, %s6, %s7
+  
+    %at = LW %sp, 28 :: (load 4 from stack)
+    %f0 = MTC1 killed %at
+    %d0 = CVT_D32_W killed %f0
+    %d0 = FADD_D32 killed %d0, %d0
+    %d1 = LDC1 %sp, 32 :: (load 8 from stack)
+    %d1 = FADD_D32 killed %d1, %d1
+    %d1 = FMUL_D32 killed %d1, %d14
+    %d0 = FMUL_D32 killed %d0, %d14
+    %f6 = MTC1 %zero
+    %d3 = MTHC1_D32 %d3, %zero
+    %d2 = LDC1 %sp, 16 :: (load 8 from stack)
+    %d0 = FDIV_D32 killed %d0, %d2
+    SDC1 killed %d0, %sp, 128 :: (store 8 into stack)
+    %d13 = FDIV_D32 killed %d1, killed %d2
+    SDC1 %d13, %sp, 88 :: (store 8 into stack)
+    %s4 = ADDiu %zero, 0
+  
+  bb.4..lr.ph (freq 5119):
+    successors: %bb.5..loopexit(3), %bb.4..lr.ph(96)
+    liveins: %fp, %d3, %d13, %d14, %s0, %s1, %s2, %s3, %s4, %s5, %s6, %s7
+  
+    SDC1 %d3, %sp, 112 :: (store 8 into stack)
+    %d0 = FADD_D32 killed %d3, %d3
+    %d10 = FMUL_D32 killed %d0, %d14
+    %t9 = LW %s0, target-flags(<unknown>) @cos :: (load 4 from call-entry @cos)
+    %d6 = FMOV_D32 %d13
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %d6, implicit %gp, implicit-def %sp, implicit-def %d0 {
+      %gp = OR %s0, %zero
+    }
+    %d15 = FMOV_D32 %d0
+    %s4 = ADDiu killed %s4, 1
+    SW %s4, %sp, 108 :: (store 4 into stack)
+    %f0 = MTC1 killed %s4
+    %d0 = CVT_D32_W killed %f0
+    %d0 = FADD_D32 killed %d0, %d0
+    %t9 = LW %s0, target-flags(<unknown>) @cos :: (load 4 from call-entry @cos)
+    %d12 = LDC1 %sp, 64 :: (load 8 from stack)
+    %d0 = FMUL_D32 killed %d0, killed %d14
+    SDC1 killed %d0, %sp, 96 :: (store 8 into stack)
+    %d0 = LDC1 %sp, 120 :: (load 8 from stack)
+    %d11 = FDIV_D32 killed %d10, killed %d0
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %d6, implicit-def %sp, implicit-def %d0 {
+      %d6 = FMOV_D32 %d11
+    }
+    %d14 = LDC1 %sp, 72 :: (load 8 from stack)
+    %d0 = MADD_D32 %d12, killed %d0, %d14
+    %d0 = FMUL_D32 killed %d15, killed %d0
+    SDC1 killed %d0, %sp, 304 :: (store 8 into %ir.29, !tbaa !1)
+    %t9 = LW %s0, target-flags(<unknown>) @sin :: (load 4 from call-entry @sin)
+    %d6 = FMOV_D32 killed %d13
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %d6, implicit %gp, implicit-def %sp, implicit-def %d0 {
+      %gp = OR %s0, %zero
+    }
+    %d15 = FMOV_D32 %d0
+    %t9 = LW %s0, target-flags(<unknown>) @cos :: (load 4 from call-entry @cos)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %d6, implicit-def %sp, implicit-def %d0 {
+      %d6 = FMOV_D32 %d11
+    }
+    %d0 = MADD_D32 %d12, killed %d0, %d14
+    %d0 = FMUL_D32 killed %d15, killed %d0
+    %d0 = FNEG_D32 killed %d0
+    SDC1 killed %d0, %sp, 312 :: (store 8 into %ir.sunkaddr4, !tbaa !1)
+    %t9 = LW %s0, target-flags(<unknown>) @sin :: (load 4 from call-entry @sin)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %d6, implicit-def %sp, implicit-def %d0 {
+      %d6 = FMOV_D32 %d11
+    }
+    %d0 = FMUL_D32 killed %d0, %d14
+    SDC1 killed %d0, %sp, 320 :: (store 8 into %ir.sunkaddr7, !tbaa !1)
+    %t9 = LW %s0, target-flags(<unknown>) @cos :: (load 4 from call-entry @cos)
+    %d6 = LDC1 %sp, 128 :: (load 8 from stack)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %d6, implicit-def %sp, implicit-def %d0 {
+      %d10 = FMOV_D32 %d6
+    }
+    %d15 = FMOV_D32 %d0
+    %t9 = LW %s0, target-flags(<unknown>) @cos :: (load 4 from call-entry @cos)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %d6, implicit-def %sp, implicit-def %d0 {
+      %d6 = FMOV_D32 %d11
+    }
+    %d0 = MADD_D32 %d12, killed %d0, %d14
+    %d0 = FMUL_D32 killed %d15, killed %d0
+    SDC1 killed %d0, %sp, 280 :: (store 8 into %ir.28, !tbaa !1)
+    %t9 = LW %s0, target-flags(<unknown>) @sin :: (load 4 from call-entry @sin)
+    %d6 = FMOV_D32 %d10
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %d6, implicit-def %sp, implicit-def %d0 {
+      %d13 = FMOV_D32 killed %d10
+    }
+    %d15 = FMOV_D32 %d0
+    %t9 = LW %s0, target-flags(<unknown>) @cos :: (load 4 from call-entry @cos)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %d6, implicit-def %sp, implicit-def %d0 {
+      %d6 = FMOV_D32 %d11
+    }
+    %d0 = MADD_D32 %d12, killed %d0, %d14
+    %d0 = FMUL_D32 killed %d15, killed %d0
+    %d0 = FNEG_D32 killed %d0
+    SDC1 killed %d0, %sp, 288 :: (store 8 into %ir.sunkaddr10, !tbaa !1)
+    %t9 = LW %s0, target-flags(<unknown>) @sin :: (load 4 from call-entry @sin)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %d6, implicit-def %sp, implicit-def %d0 {
+      %d6 = FMOV_D32 %d11
+    }
+    %d0 = FMUL_D32 killed %d0, %d14
+    SDC1 killed %d0, %sp, 296 :: (store 8 into %ir.sunkaddr13, !tbaa !1)
+    %t9 = LW %s0, target-flags(<unknown>) @cos :: (load 4 from call-entry @cos)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %d6, implicit-def %sp, implicit-def %d0 {
+      %d6 = FMOV_D32 %d13
+    }
+    %d10 = FMOV_D32 %d0
+    %d0 = LDC1 %sp, 120 :: (load 8 from stack)
+    %d1 = LDC1 %sp, 96 :: (load 8 from stack)
+    %d15 = FDIV_D32 killed %d1, killed %d0
+    %t9 = LW %s0, target-flags(<unknown>) @cos :: (load 4 from call-entry @cos)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %d6, implicit-def %sp, implicit-def %d0 {
+      %d6 = FMOV_D32 %d15
+    }
+    %d0 = MADD_D32 %d12, killed %d0, %d14
+    %d0 = FMUL_D32 killed %d10, killed %d0
+    SDC1 killed %d0, %sp, 256 :: (store 8 into %ir.27, !tbaa !1)
+    %t9 = LW %s0, target-flags(<unknown>) @sin :: (load 4 from call-entry @sin)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %d6, implicit-def %sp, implicit-def %d0 {
+      %d6 = FMOV_D32 killed %d13
+    }
+    %d10 = FMOV_D32 %d0
+    %t9 = LW %s0, target-flags(<unknown>) @cos :: (load 4 from call-entry @cos)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %d6, implicit-def %sp, implicit-def %d0 {
+      %d6 = FMOV_D32 %d15
+    }
+    %d0 = MADD_D32 %d12, killed %d0, %d14
+    %d0 = FMUL_D32 killed %d10, killed %d0
+    %d0 = FNEG_D32 killed %d0
+    SDC1 killed %d0, %sp, 264 :: (store 8 into %ir.sunkaddr16, !tbaa !1)
+    %t9 = LW %s0, target-flags(<unknown>) @sin :: (load 4 from call-entry @sin)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %d6, implicit-def %sp, implicit-def %d0 {
+      %d6 = FMOV_D32 %d15
+    }
+    %d0 = FMUL_D32 killed %d0, %d14
+    SDC1 killed %d0, %sp, 272 :: (store 8 into %ir.sunkaddr19, !tbaa !1)
+    %t9 = LW %s0, target-flags(<unknown>) @cos :: (load 4 from call-entry @cos)
+    %d13 = LDC1 %sp, 88 :: (load 8 from stack)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %d6, implicit-def %sp, implicit-def %d0 {
+      %d6 = FMOV_D32 %d13
+    }
+    %d10 = FMOV_D32 %d0
+    %t9 = LW %s0, target-flags(<unknown>) @cos :: (load 4 from call-entry @cos)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %d6, implicit-def %sp, implicit-def %d0 {
+      %d6 = FMOV_D32 %d15
+    }
+    %d0 = MADD_D32 %d12, killed %d0, %d14
+    %d0 = FMUL_D32 killed %d10, killed %d0
+    SDC1 killed %d0, %sp, 232 :: (store 8 into %ir.26, !tbaa !1)
+    %t9 = LW %s0, target-flags(<unknown>) @sin :: (load 4 from call-entry @sin)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %d6, implicit-def %sp, implicit-def %d0 {
+      %d6 = FMOV_D32 %d13
+    }
+    %d10 = FMOV_D32 %d0
+    %t9 = LW %s0, target-flags(<unknown>) @cos :: (load 4 from call-entry @cos)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %d6, implicit-def %sp, implicit-def %d0 {
+      %d6 = FMOV_D32 %d15
+    }
+    %d0 = MADD_D32 killed %d12, killed %d0, %d14
+    %d0 = FMUL_D32 killed %d10, killed %d0
+    %d0 = FNEG_D32 killed %d0
+    SDC1 killed %d0, %sp, 240 :: (store 8 into %ir.sunkaddr22, !tbaa !1)
+    %t9 = LW %s0, target-flags(<unknown>) @sin :: (load 4 from call-entry @sin)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %d6, implicit-def %sp, implicit-def %d0 {
+      %d6 = FMOV_D32 %d15
+    }
+    %d0 = FMUL_D32 killed %d0, killed %d14
+    SDC1 killed %d0, %sp, 248 :: (store 8 into %ir.sunkaddr25, !tbaa !1)
+    %t9 = LW %s0, target-flags(<unknown>) @cos :: (load 4 from call-entry @cos)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %d6, implicit-def %sp, implicit-def %d0 {
+      %d6 = FMOV_D32 %d13
+    }
+    %d10 = FMOV_D32 %d0
+    %t9 = LW %s0, target-flags(<unknown>) @cos :: (load 4 from call-entry @cos)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %d6, implicit-def %sp, implicit-def %d0 {
+      %d6 = FMOV_D32 %d11
+    }
+    %d0 = FMUL_D32 killed %d10, killed %d0
+    SDC1 killed %d0, %sp, 208 :: (store 8 into %ir.25, !tbaa !1)
+    %t9 = LW %s0, target-flags(<unknown>) @sin :: (load 4 from call-entry @sin)
+    %d6 = FMOV_D32 %d13
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %d6, implicit-def %sp, implicit-def %d0 {
+      %d12 = FMOV_D32 killed %d13
+    }
+    %d10 = FMOV_D32 %d0
+    %t9 = LW %s0, target-flags(<unknown>) @cos :: (load 4 from call-entry @cos)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %d6, implicit-def %sp, implicit-def %d0 {
+      %d6 = FMOV_D32 %d11
+    }
+    %d0 = FMUL_D32 killed %d10, killed %d0
+    %d0 = FNEG_D32 killed %d0
+    SDC1 killed %d0, %sp, 216 :: (store 8 into %ir.sunkaddr28, !tbaa !1)
+    %t9 = LW %s0, target-flags(<unknown>) @sin :: (load 4 from call-entry @sin)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %d6, implicit-def %sp, implicit-def %d0 {
+      %d6 = FMOV_D32 %d11
+    }
+    SDC1 killed %d0, %sp, 224 :: (store 8 into %ir.sunkaddr31, !tbaa !1)
+    %t9 = LW %s0, target-flags(<unknown>) @cos :: (load 4 from call-entry @cos)
+    %d13 = LDC1 %sp, 128 :: (load 8 from stack)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %d6, implicit-def %sp, implicit-def %d0 {
+      %d6 = FMOV_D32 %d13
+    }
+    %d10 = FMOV_D32 %d0
+    %t9 = LW %s0, target-flags(<unknown>) @cos :: (load 4 from call-entry @cos)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %d6, implicit-def %sp, implicit-def %d0 {
+      %d6 = FMOV_D32 %d11
+    }
+    %d0 = FMUL_D32 killed %d10, killed %d0
+    SDC1 killed %d0, %sp, 184 :: (store 8 into %ir.24, !tbaa !1)
+    %t9 = LW %s0, target-flags(<unknown>) @sin :: (load 4 from call-entry @sin)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %d6, implicit-def %sp, implicit-def %d0 {
+      %d6 = FMOV_D32 %d13
+    }
+    %d10 = FMOV_D32 %d0
+    %t9 = LW %s0, target-flags(<unknown>) @cos :: (load 4 from call-entry @cos)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %d6, implicit-def %sp, implicit-def %d0 {
+      %d6 = FMOV_D32 %d11
+    }
+    %d0 = FMUL_D32 killed %d10, killed %d0
+    %d0 = FNEG_D32 killed %d0
+    SDC1 killed %d0, %sp, 192 :: (store 8 into %ir.sunkaddr34, !tbaa !1)
+    %t9 = LW %s0, target-flags(<unknown>) @sin :: (load 4 from call-entry @sin)
+    %d14 = LDC1 %sp, 56 :: (load 8 from stack)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %d6, implicit-def %sp, implicit-def %d0 {
+      %d6 = FMOV_D32 killed %d11
+    }
+    SDC1 killed %d0, %sp, 200 :: (store 8 into %ir.sunkaddr37, !tbaa !1)
+    %t9 = LW %s0, target-flags(<unknown>) @cos :: (load 4 from call-entry @cos)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %d6, implicit-def %sp, implicit-def %d0 {
+      %d6 = FMOV_D32 %d13
+    }
+    %d10 = FMOV_D32 %d0
+    %t9 = LW %s0, target-flags(<unknown>) @cos :: (load 4 from call-entry @cos)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %d6, implicit-def %sp, implicit-def %d0 {
+      %d6 = FMOV_D32 %d15
+    }
+    %d0 = FMUL_D32 killed %d10, killed %d0
+    SDC1 killed %d0, %sp, 160 :: (store 8 into %ir.23, !tbaa !1)
+    %t9 = LW %s0, target-flags(<unknown>) @sin :: (load 4 from call-entry @sin)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %d6, implicit-def %sp, implicit-def %d0 {
+      %d6 = FMOV_D32 killed %d13
+    }
+    %d10 = FMOV_D32 %d0
+    %t9 = LW %s0, target-flags(<unknown>) @cos :: (load 4 from call-entry @cos)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %d6, implicit-def %sp, implicit-def %d0 {
+      %d6 = FMOV_D32 %d15
+    }
+    %d0 = FMUL_D32 killed %d10, killed %d0
+    %d0 = FNEG_D32 killed %d0
+    SDC1 killed %d0, %sp, 168 :: (store 8 into %ir.sunkaddr40, !tbaa !1)
+    %t9 = LW %s0, target-flags(<unknown>) @sin :: (load 4 from call-entry @sin)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %d6, implicit-def %sp, implicit-def %d0 {
+      %d6 = FMOV_D32 %d15
+    }
+    SDC1 killed %d0, %sp, 176 :: (store 8 into %ir.sunkaddr43, !tbaa !1)
+    %t9 = LW %s0, target-flags(<unknown>) @cos :: (load 4 from call-entry @cos)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %d6, implicit-def %sp, implicit-def %d0 {
+      %d6 = FMOV_D32 %d12
+    }
+    %d10 = FMOV_D32 %d0
+    %t9 = LW %s0, target-flags(<unknown>) @cos :: (load 4 from call-entry @cos)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %d6, implicit-def %sp, implicit-def %d0 {
+      %d6 = FMOV_D32 %d15
+    }
+    %d0 = FMUL_D32 killed %d10, killed %d0
+    SDC1 killed %d0, %sp, 136 :: (store 8 into %ir.22, !tbaa !1)
+    %t9 = LW %s0, target-flags(<unknown>) @sin :: (load 4 from call-entry @sin)
+    %d13 = FMOV_D32 killed %d12
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %d6, implicit-def %sp, implicit-def %d0 {
+      %d6 = FMOV_D32 %d13
+    }
+    %d10 = FMOV_D32 %d0
+    %t9 = LW %s0, target-flags(<unknown>) @cos :: (load 4 from call-entry @cos)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %d6, implicit-def %sp, implicit-def %d0 {
+      %d6 = FMOV_D32 %d15
+    }
+    %d0 = FMUL_D32 killed %d10, killed %d0
+    %d0 = FNEG_D32 killed %d0
+    SDC1 killed %d0, %sp, 144 :: (store 8 into %ir.sunkaddr46, !tbaa !1)
+    %t9 = LW %s0, target-flags(<unknown>) @sin :: (load 4 from call-entry @sin)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %d6, implicit-def %sp, implicit-def %d0 {
+      %d6 = FMOV_D32 killed %d15
+    }
+    SDC1 killed %d0, %sp, 152 :: (store 8 into %ir.sunkaddr49, !tbaa !1)
+    %t9 = LW %s0, target-flags(<unknown>) @m_xformpt :: (load 4 from call-entry @m_xformpt)
+    %a0 = OR %s6, %zero
+    %a1 = OR %s6, %zero
+    %a2 = OR %s7, %zero
+    %a3 = OR %s7, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %a3, implicit %gp, implicit-def %sp {
+      %gp = OR %s0, %zero
+    }
+    %t9 = LW %s0, target-flags(<unknown>) @m_xformpt :: (load 4 from call-entry @m_xformpt)
+    %a0 = OR %fp, %zero
+    %a1 = OR %fp, %zero
+    %a2 = OR %s2, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %a3, implicit-def %sp {
+      %a3 = OR %s2, %zero
+    }
+    %t9 = LW %s0, target-flags(<unknown>) @m_xformpt :: (load 4 from call-entry @m_xformpt)
+    %a0 = OR %s1, %zero
+    %a1 = OR %s1, %zero
+    %a2 = OR %s3, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %a3, implicit-def %sp {
+      %a3 = OR %s3, %zero
+    }
+    %t9 = LW %s0, target-flags(<unknown>) @m_xformpt :: (load 4 from call-entry @m_xformpt)
+    %a0 = OR %s5, %zero
+    %a1 = OR %s5, %zero
+    %s4 = LW %sp, 44 :: (load 4 from stack)
+    %a2 = OR %s4, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %a3, implicit-def %sp {
+      %a3 = OR %s4, %zero
+    }
+    %t9 = LW %s0, target-flags(<unknown>) @glBegin :: (load 4 from call-entry @glBegin)
+    %a0 = LW %sp, 80 :: (load 4 from stack)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %gp, implicit-def %sp {
+      %gp = OR %s0, %zero
+    }
+    %t9 = LW %s0, target-flags(<unknown>) @glNormal3dv :: (load 4 from call-entry @glNormal3dv)
+    %a0 = OR killed %s4, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %gp, implicit-def %sp {
+      %gp = OR %s0, %zero
+    }
+    %t9 = LW %s0, target-flags(<unknown>) @glVertex3dv :: (load 4 from call-entry @glVertex3dv)
+    %a0 = OR %s5, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %gp, implicit-def %sp {
+      %gp = OR %s0, %zero
+    }
+    %t9 = LW %s0, target-flags(<unknown>) @glNormal3dv :: (load 4 from call-entry @glNormal3dv)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit-def %sp {
+      %a0 = OR %s3, %zero
+    }
+    %t9 = LW %s0, target-flags(<unknown>) @glVertex3dv :: (load 4 from call-entry @glVertex3dv)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit-def %sp {
+      %a0 = OR %s1, %zero
+    }
+    %t9 = LW %s0, target-flags(<unknown>) @glNormal3dv :: (load 4 from call-entry @glNormal3dv)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit-def %sp {
+      %a0 = OR %s2, %zero
+    }
+    %t9 = LW %s0, target-flags(<unknown>) @glVertex3dv :: (load 4 from call-entry @glVertex3dv)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit-def %sp {
+      %a0 = OR %fp, %zero
+    }
+    %t9 = LW %s0, target-flags(<unknown>) @glNormal3dv :: (load 4 from call-entry @glNormal3dv)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit-def %sp {
+      %a0 = OR %s7, %zero
+    }
+    %t9 = LW %s0, target-flags(<unknown>) @glVertex3dv :: (load 4 from call-entry @glVertex3dv)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit-def %sp {
+      %a0 = OR %s6, %zero
+    }
+    %t9 = LW %s0, target-flags(<unknown>) @glEnd :: (load 4 from call-entry @glEnd)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %gp, implicit-def %sp {
+      %gp = OR %s0, %zero
+    }
+    %d3 = LDC1 %sp, 112 :: (load 8 from stack)
+    %d1 = LDC1 %sp, 48 :: (load 8 from stack)
+    %a0 = LW %sp, 84 :: (load 4 from stack)
+    %d3 = FADD_D32 killed %d3, %d1
+    %at = LW %sp, 108 :: (load 4 from stack)
+    BNE %a0, %at, %bb.4..lr.ph, implicit-def %at {
+      %s4 = OR %at, %zero
+    }
+  
+  bb.5..loopexit (freq 255):
+    successors: %bb.6.._crit_edge(3), %bb.2(96)
+    liveins: %fp, %a0, %d1, %d14, %s0, %s1, %s2, %s3, %s5, %s6, %s7
+  
+    %d0 = LDC1 %sp, 32 :: (load 8 from stack)
+    %d0 = FADD_D32 killed %d0, %d1
+    SDC1 killed %d0, %sp, 32 :: (store 8 into stack)
+    %at = LW %sp, 24 :: (load 4 from stack)
+    %v0 = LW %sp, 28 :: (load 4 from stack)
+    BNE %v0, %at, %bb.2, implicit-def %at {
+      NOP
+    }
+  
+  bb.6.._crit_edge (freq 12):
+    liveouts:
+  
+    %s0 = LW %sp, 328 :: (load 4 from stack)
+    %s1 = LW %sp, 332 :: (load 4 from stack)
+    %s2 = LW %sp, 336 :: (load 4 from stack)
+    %s3 = LW %sp, 340 :: (load 4 from stack)
+    %s4 = LW %sp, 344 :: (load 4 from stack)
+    %s5 = LW %sp, 348 :: (load 4 from stack)
+    %s6 = LW %sp, 352 :: (load 4 from stack)
+    %s7 = LW %sp, 356 :: (load 4 from stack)
+    %fp = LW %sp, 360 :: (load 4 from stack)
+    %ra = LW %sp, 364 :: (load 4 from stack)
+    %d10 = LDC1 %sp, 368 :: (load 8 from stack)
+    %d11 = LDC1 %sp, 376 :: (load 8 from stack)
+    %d12 = LDC1 %sp, 384 :: (load 8 from stack)
+    %d13 = LDC1 %sp, 392 :: (load 8 from stack)
+    %d14 = LDC1 %sp, 400 :: (load 8 from stack)
+    %d15 = LDC1 %sp, 408 :: (load 8 from stack)
+    PseudoReturn %ra {
+      %sp = ADDiu %sp, 416
+    }
+
+...

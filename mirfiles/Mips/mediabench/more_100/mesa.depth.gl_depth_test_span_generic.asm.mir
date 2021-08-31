@@ -1,0 +1,3073 @@
+--- |
+  ; ModuleID = '/home/romi/didaktoriko/unison/unison-experiments/experiments/test-input/c/mediabench/mips_zip/build-mips/mesa/mesa.depth.ll'
+  target datalayout = "E-m:m-p:32:32-i8:8:32-i16:16:32-i64:64-n32-S64"
+  target triple = "mips--linux-gnu"
+  
+  %struct.gl_context = type { %struct.gl_shared_state*, %struct.api_function_table, %struct.api_function_table, %struct.api_function_table, %struct.gl_visual*, %struct.gl_frame_buffer*, %struct.dd_function_table, i8*, [16 x float], [16 x float], i8, i32, [32 x [16 x float]], [16 x float], i32, [32 x [16 x float]], [16 x float], i8, i32, [10 x [16 x float]], i32, i8, i8, i32, [16 x %struct.gl_attrib_node*], %struct.gl_accum_attrib, %struct.gl_colorbuffer_attrib, %struct.gl_current_attrib, %struct.gl_depthbuffer_attrib, %struct.gl_eval_attrib, %struct.gl_fog_attrib, %struct.gl_hint_attrib, %struct.gl_light_attrib, %struct.gl_line_attrib, %struct.gl_list_attrib, %struct.gl_pixel_attrib, %struct.gl_point_attrib, %struct.gl_polygon_attrib, [32 x i32], %struct.gl_scissor_attrib, %struct.gl_stencil_attrib, %struct.gl_texture_attrib, %struct.gl_transform_attrib, %struct.gl_viewport_attrib, i32, [16 x %struct.gl_attrib_node*], %struct.gl_array_attrib, %struct.gl_pixelstore_attrib, %struct.gl_pixelstore_attrib, %struct.gl_evaluators, %struct.gl_feedback, %struct.gl_selection, i32, i32, i32, i32, i32, i32, i32, i32, i8, float, float, float, i8, i8, i8, i8, i32, void (%struct.gl_context*, i32, i32)*, void (%struct.gl_context*, i32, i32, i32)*, void (%struct.gl_context*, i32, i32*, i32)*, void (%struct.gl_context*, i32, i32*, i32)*, void (%struct.gl_context*, i32, i32, i32, i32)*, %struct.vertex_buffer*, %struct.pixel_buffer*, i8 }
+  %struct.gl_shared_state = type { i32, [7000 x %union.node*], %struct.gl_texture_object* }
+  %union.node = type opaque
+  %struct.gl_texture_object = type { i32, i32, i32, float, [4 x i32], i32, i32, i32, i32, i32, [11 x %struct.gl_texture_image*], i8, %struct.gl_texture_object* }
+  %struct.gl_texture_image = type { i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i8* }
+  %struct.api_function_table = type { void (%struct.gl_context*, i32, float)*, void (%struct.gl_context*, i32, float)*, i8 (%struct.gl_context*, i32, i32*, i8*)*, void (%struct.gl_context*, i32)*, void (%struct.gl_context*, i32)*, void (%struct.gl_context*, i32, i32)*, void (%struct.gl_context*, i32, i32, float, float, float, float, %struct.gl_image*)*, void (%struct.gl_context*, float, float, float, float)*, void (%struct.gl_context*, i32)*, void (%struct.gl_context*, i32, i32)*, void (%struct.gl_context*, i32)*, void (%struct.gl_context*, i32, i32, i8*)*, void (%struct.gl_context*, i32)*, void (%struct.gl_context*, float, float, float, float)*, void (%struct.gl_context*, float, float, float, float)*, {}*, void (%struct.gl_context*, float)*, void (%struct.gl_context*, i32)*, void (%struct.gl_context*, i32, float*)*, void (%struct.gl_context*, float, float, float, float)*, void (%struct.gl_context*, i8, i8, i8, i8)*, void (%struct.gl_context*, i8, i8, i8, i8)*, void (%struct.gl_context*, i32, i32)*, void (%struct.gl_context*, i32, i32, i32, i8*)*, void (%struct.gl_context*, i32, i32, i32, i32, i32)*, void (%struct.gl_context*, i32, i32, i32, i32, i32, i32, i32)*, void (%struct.gl_context*, i32, i32, i32, i32, i32, i32, i32, i32)*, void (%struct.gl_context*, i32, i32, i32, i32, i32, i32)*, void (%struct.gl_context*, i32, i32, i32, i32, i32, i32, i32, i32)*, void (%struct.gl_context*, i32, i32, i32, i32, i32, i32, i32, i32, i32)*, void (%struct.gl_context*, i32)*, void (%struct.gl_context*, i32, i32)*, void (%struct.gl_context*, i32, i32*)*, void (%struct.gl_context*, i32)*, void (%struct.gl_context*, i8)*, void (%struct.gl_context*, double, double)*, void (%struct.gl_context*, i32)*, void (%struct.gl_context*, i32)*, void (%struct.gl_context*, i32, i32, i32)*, void (%struct.gl_context*, i32)*, void (%struct.gl_context*, i32, i32, i32, i8*)*, void (%struct.gl_context*, i32, i32, i32, i32, i8*)*, void (%struct.gl_context*, i8)*, void (%struct.gl_context*, i32, i8*)*, void (%struct.gl_context*, i32)*, void (%struct.gl_context*, i32)*, void (%struct.gl_context*)*, void (%struct.gl_context*)*, void (%struct.gl_context*, float)*, void (%struct.gl_context*, float, float)*, void (%struct.gl_context*, i32, i32, i32)*, void (%struct.gl_context*, i32, i32, i32, i32, i32)*, void (%struct.gl_context*, i32)*, void (%struct.gl_context*, i32, i32)*, void (%struct.gl_context*, i32, i32, float*)*, void (%struct.gl_context*)*, void (%struct.gl_context*)*, void (%struct.gl_context*, i32, float*)*, void (%struct.gl_context*, i32)*, void (%struct.gl_context*, double, double, double, double, double, double)*, i32 (%struct.gl_context*, i32)*, void (%struct.gl_context*, i32, i32*)*, void (%struct.gl_context*, i32, i8*)*, void (%struct.gl_context*, i32, double*)*, void (%struct.gl_context*, i32, double*)*, i32 (%struct.gl_context*)*, void (%struct.gl_context*, i32, float*)*, void (%struct.gl_context*, i32, i32*)*, i8* (%struct.gl_context*, i32)*, void (%struct.gl_context*, i32, i32, float*)*, void (%struct.gl_context*, i32, i32, i32*)*, void (%struct.gl_context*, i32, i32, double*)*, void (%struct.gl_context*, i32, i32, float*)*, void (%struct.gl_context*, i32, i32, i32*)*, void (%struct.gl_context*, i32, i32, float*)*, void (%struct.gl_context*, i32, i32, i32*)*, void (%struct.gl_context*, i32, float*)*, void (%struct.gl_context*, i32, i32*)*, void (%struct.gl_context*, i32, i16*)*, void (%struct.gl_context*, i32, i8**)*, void (%struct.gl_context*, i8*)*, void (%struct.gl_context*, i32, i32*, float*)*, void (%struct.gl_context*, i32, i32, float*)*, void (%struct.gl_context*, i32, i32, i32*)*, void (%struct.gl_context*, i32, i32, double*)*, void (%struct.gl_context*, i32, i32, float*)*, void (%struct.gl_context*, i32, i32, i32*)*, void (%struct.gl_context*, i32, i32, i32, i32, i8*)*, void (%struct.gl_context*, i32, i32, i32, float*)*, void (%struct.gl_context*, i32, i32, i32, i32*)*, void (%struct.gl_context*, i32, i32, float*)*, void (%struct.gl_context*, i32, i32, i32*)*, void (%struct.gl_context*, i32, i32)*, void (%struct.gl_context*, i32)*, void (%struct.gl_context*, float)*, void (%struct.gl_context*, i32)*, void (%struct.gl_context*, i32, i32, i8*)*, void (%struct.gl_context*)*, void (%struct.gl_context*, i32, i32, i8*)*, i8 (%struct.gl_context*, i32)*, i8 (%struct.gl_context*, i32)*, i8 (%struct.gl_context*, i32)*, void (%struct.gl_context*, i32, float*)*, void (%struct.gl_context*, i32, i32, float*, i32)*, void (%struct.gl_context*, i32, i16)*, void (%struct.gl_context*, float)*, void (%struct.gl_context*, i32)*, void (%struct.gl_context*, float*)*, void (%struct.gl_context*, i32)*, void (%struct.gl_context*, i32)*, void (%struct.gl_context*, i32, float, float, i32, i32, float*, i8)*, void (%struct.gl_context*, i32, float, float, i32, i32, float, float, i32, i32, float*, i8)*, void (%struct.gl_context*, i32, float, float)*, void (%struct.gl_context*, i32, float, float, i32, float, float)*, void (%struct.gl_context*, i32, i32, float*)*, void (%struct.gl_context*, i32)*, void (%struct.gl_context*, float*)*, void (%struct.gl_context*, i32, i32)*, void (%struct.gl_context*, float, float, float)*, void (%struct.gl_context*, float*)*, void (%struct.gl_context*, i32, i32, i8*)*, void (%struct.gl_context*, float)*, void (%struct.gl_context*, i32, i32, float*)*, void (%struct.gl_context*, i32, i32)*, void (%struct.gl_context*, i32, float)*, void (%struct.gl_context*, float, float)*, void (%struct.gl_context*, float)*, void (%struct.gl_context*, i32, i32)*, void (%struct.gl_context*, float, float)*, void (%struct.gl_context*, i8*)*, void (%struct.gl_context*)*, void (%struct.gl_context*)*, void (%struct.gl_context*)*, void (%struct.gl_context*)*, void (%struct.gl_context*, i32)*, void (%struct.gl_context*, i32)*, void (%struct.gl_context*)*, void (%struct.gl_context*, i32)*, void (%struct.gl_context*, float, float, float, float)*, void (%struct.gl_context*, i32)*, void (%struct.gl_context*, i32, i32, i32, i32, i32, i32, i8*)*, void (%struct.gl_context*, float, float, float, float)*, i32 (%struct.gl_context*, i32)*, void (%struct.gl_context*, float, float, float, float)*, void (%struct.gl_context*, float, float, float)*, void (%struct.gl_context*, i32, i32, i32, i32)*, void (%struct.gl_context*, i32, i32*)*, void (%struct.gl_context*, i32)*, void (%struct.gl_context*, i32, i32, i32)*, void (%struct.gl_context*, i32)*, void (%struct.gl_context*, i32, i32, i32)*, void (%struct.gl_context*, float, float, float, float)*, void (%struct.gl_context*, i32, i32, i32, i8*)*, void (%struct.gl_context*, i32, i32, float*)*, void (%struct.gl_context*, i32, i32, float*)*, void (%struct.gl_context*, i32, i32, i32, i32, i32, i32, i32, %struct.gl_image*)*, void (%struct.gl_context*, i32, i32, i32, i32, i32, i32, i32, i32, %struct.gl_image*)*, void (%struct.gl_context*, i32, i32, i32, i32, i32, i32, %struct.gl_image*)*, void (%struct.gl_context*, i32, i32, i32, i32, i32, i32, i32, i32, %struct.gl_image*)*, void (%struct.gl_context*, i32, i32, i32, i32, i32, i32, i32, i32, i32, %struct.gl_image*)*, void (%struct.gl_context*, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, %struct.gl_image*)*, void (%struct.gl_context*, i32, i32, float*)*, void (%struct.gl_context*, float, float, float)*, void (%struct.gl_context*, float, float, float, float)*, void (%struct.gl_context*, i32, i32, i32, i8*)*, void (%struct.gl_context*, i32, i32, i32, i32)*, void (%struct.gl_context*, float, float, float, float)*, void (%struct.gl_context*)* }
+  %struct.gl_image = type { i32, i32, i32, i32, i32, i32, i8*, i8, i32 }
+  %struct.gl_visual = type { i8, i8, float, float, float, float, i8, float, float, float, float, i32, i32, i32, i32, i8, i8 }
+  %struct.gl_frame_buffer = type { %struct.gl_visual*, i32, i32, i16*, i8*, i16*, i8*, i8*, i8*, i32, i32, i32, i32 }
+  %struct.dd_function_table = type { void (%struct.gl_context*)*, void (%struct.gl_context*, i32)*, void (%struct.gl_context*, i8, i8, i8, i8)*, void (%struct.gl_context*, i8, i32, i32, i32, i32)*, void (%struct.gl_context*, i32)*, void (%struct.gl_context*, i8, i8, i8, i8)*, i8 (%struct.gl_context*, i32)*, void (%struct.gl_context*, i32*, i32*)*, void (%struct.gl_context*, i32, i32, i32, i8*, i8*, i8*, i8*, i8*)*, void (%struct.gl_context*, i32, i32, i32, i8*)*, void (%struct.gl_context*, i32, i32*, i32*, i8*, i8*, i8*, i8*, i8*)*, void (%struct.gl_context*, i32, i32*, i32*, i8*)*, void (%struct.gl_context*, i32, i32, i32, i32*, i8*)*, void (%struct.gl_context*, i32, i32, i32, i8*)*, void (%struct.gl_context*, i32, i32*, i32*, i32*, i8*)*, void (%struct.gl_context*, i32, i32*, i32*, i8*)*, void (%struct.gl_context*, i32, i32, i32, i32*)*, void (%struct.gl_context*, i32, i32, i32, i8*, i8*, i8*, i8*)*, void (%struct.gl_context*, i32, i32*, i32*, i32*, i8*)*, void (%struct.gl_context*, i32, i32*, i32*, i8*, i8*, i8*, i8*, i8*)*, void (%struct.gl_context*)*, void (%struct.gl_context*)*, i8 (%struct.gl_context*, i32)*, i8 (%struct.gl_context*, i8, i8, i8, i8)*, i8 (%struct.gl_context*, i32)*, void (%struct.gl_context*, i8)*, void (%struct.gl_context*)*, void (%struct.gl_context*)*, void (%struct.gl_context*)*, i32 (%struct.gl_context*, i32, i32, i32, i16*, i8*)*, void (%struct.gl_context*, i32, i32*, i32*, i16*, i8*)*, void (%struct.gl_context*, i32, i32, i32, float*)*, void (%struct.gl_context*, i32, i32, i32, i16*)*, void (%struct.gl_context*, i32, i32)*, void (%struct.gl_context*, i32, i32, i32)*, void (%struct.gl_context*, i32, i32, i32, i32)*, i8 (%struct.gl_context*, i32, i32, i32, i32, i32, i32, i8, i8*)*, i8 (%struct.gl_context*, i32, i32, float, float, float, float, %struct.gl_image*)*, void (%struct.gl_context*, i32)*, void (%struct.gl_context*)*, void (%struct.gl_context*, i32, float*)*, void (%struct.gl_context*, i32, i32, i32, i32, %struct.gl_texture_image*)*, void (%struct.gl_context*, i32, i32, i32, float*)*, void (%struct.gl_context*, i32, i32)*, void (%struct.gl_context*, i32)* }
+  %struct.gl_accum_attrib = type { [4 x float] }
+  %struct.gl_colorbuffer_attrib = type { i32, [4 x float], i32, i32, i8, i32, i8, i32, float, i8, i8, i32, i32, i32, [4 x float], i32, i8, i8, i8, i8 }
+  %struct.gl_current_attrib = type { [4 x i32], i32, [3 x float], [4 x float], [4 x float], float, [4 x float], i32, [4 x float], i8, i8 }
+  %struct.gl_depthbuffer_attrib = type { i32, float, i8, i8 }
+  %struct.gl_eval_attrib = type { i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i32, float, float, i32, i32, float, float, float, float }
+  %struct.gl_fog_attrib = type { i8, [4 x float], float, float, float, float, i32 }
+  %struct.gl_hint_attrib = type { i32, i32, i32, i32, i32 }
+  %struct.gl_light_attrib = type { [8 x %struct.gl_light], %struct.gl_lightmodel, [2 x %struct.gl_material], i8, i32, i32, i32, i32, i8, %struct.gl_light*, i8, [4 x float] }
+  %struct.gl_light = type { [4 x float], [4 x float], [4 x float], [4 x float], [4 x float], float, float, float, float, float, float, i8, %struct.gl_light*, [3 x float], [3 x float], [3 x float], [512 x [2 x float]], [3 x float], [3 x float], [3 x float], float, float }
+  %struct.gl_lightmodel = type { [4 x float], i8, i8 }
+  %struct.gl_material = type { [4 x float], [4 x float], [4 x float], [4 x float], float, float, float, float, [200 x float] }
+  %struct.gl_line_attrib = type { i8, i8, i16, i32, float }
+  %struct.gl_list_attrib = type { i32 }
+  %struct.gl_pixel_attrib = type { i32, float, float, float, float, float, float, float, float, float, float, i32, i32, i8, i8, float, float, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, [256 x i32], [256 x i32], [256 x float], [256 x float], [256 x float], [256 x float], [256 x float], [256 x float], [256 x float], [256 x float] }
+  %struct.gl_point_attrib = type { i8, float }
+  %struct.gl_polygon_attrib = type { i32, i32, i32, i8, i8, i32, i32, i8, i8, float, float, i8, i8, i8, i8 }
+  %struct.gl_scissor_attrib = type { i8, i32, i32, i32, i32 }
+  %struct.gl_stencil_attrib = type { i8, i32, i32, i32, i32, i8, i8, i8, i8 }
+  %struct.gl_texture_attrib = type { i32, i32, [4 x float], i32, i32, i32, i32, i32, [4 x float], [4 x float], [4 x float], [4 x float], [4 x float], [4 x float], [4 x float], [4 x float], %struct.gl_texture_object*, %struct.gl_texture_object*, %struct.gl_texture_object*, %struct.gl_texture_object*, %struct.gl_texture_object*, %struct.gl_texture_object* }
+  %struct.gl_transform_attrib = type { i32, [6 x [4 x float]], [6 x i8], i8, i8 }
+  %struct.gl_viewport_attrib = type { i32, i32, i32, i32, float, float, float, float, float, float, float, float }
+  %struct.gl_attrib_node = type { i32, i8*, %struct.gl_attrib_node* }
+  %struct.gl_array_attrib = type { i32, i32, i32, i32, i8*, i8, i32, i32, i32, i8*, i8, i32, i32, i32, i32, i8*, i8, i32, i32, i32, i8*, i8, i32, i32, i32, i32, i8*, i8, i32, i32, i8*, i8 }
+  %struct.gl_pixelstore_attrib = type { i32, i32, i32, i32, i32, i32, i8, i8 }
+  %struct.gl_evaluators = type { %struct.gl_1d_map, %struct.gl_1d_map, %struct.gl_1d_map, %struct.gl_1d_map, %struct.gl_1d_map, %struct.gl_1d_map, %struct.gl_1d_map, %struct.gl_1d_map, %struct.gl_1d_map, %struct.gl_2d_map, %struct.gl_2d_map, %struct.gl_2d_map, %struct.gl_2d_map, %struct.gl_2d_map, %struct.gl_2d_map, %struct.gl_2d_map, %struct.gl_2d_map, %struct.gl_2d_map }
+  %struct.gl_1d_map = type { i32, float, float, float*, i8 }
+  %struct.gl_2d_map = type { i32, i32, float, float, float, float, float*, i8 }
+  %struct.gl_feedback = type { i32, i32, float*, i32, i32 }
+  %struct.gl_selection = type { i32*, i32, i32, i32, i32, [64 x i32], i8, float, float }
+  %struct.vertex_buffer = type opaque
+  %struct.pixel_buffer = type opaque
+  
+  @.str = private unnamed_addr constant [13 x i8] c"glClearDepth\00", align 1
+  @.str.1 = private unnamed_addr constant [12 x i8] c"glDepthFunc\00", align 1
+  @.str.2 = private unnamed_addr constant [13 x i8] c"glDepth.Func\00", align 1
+  @.str.3 = private unnamed_addr constant [12 x i8] c"glDepthMask\00", align 1
+  @.str.4 = private unnamed_addr constant [13 x i8] c"glDepthRange\00", align 1
+  @.str.5 = private unnamed_addr constant [31 x i8] c"Couldn't allocate depth buffer\00", align 1
+  
+  ; Function Attrs: nounwind
+  define void @gl_ClearDepth(%struct.gl_context* %ctx, double %depth) #0 {
+    %1 = getelementptr inbounds %struct.gl_context, %struct.gl_context* %ctx, i32 0, i32 55
+    %2 = load i32, i32* %1, align 4, !tbaa !1
+    %3 = icmp eq i32 %2, 6656
+    br i1 %3, label %5, label %4
+  
+  ; <label>:4                                       ; preds = %0
+    tail call void @gl_error(%struct.gl_context* nonnull %ctx, i32 signext 1282, i8* nonnull getelementptr inbounds ([13 x i8], [13 x i8]* @.str, i32 0, i32 0)) #5
+    br label %13
+  
+  ; <label>:5                                       ; preds = %0
+    %6 = fcmp olt double %depth, 0.000000e+00
+    br i1 %6, label %10, label %7
+  
+  ; <label>:7                                       ; preds = %5
+    %8 = fcmp ogt double %depth, 1.000000e+00
+    %9 = select i1 %8, double 1.000000e+00, double %depth
+    %phitmp = fptrunc double %9 to float
+    br label %10
+  
+  ; <label>:10                                      ; preds = %7, %5
+    %11 = phi float [ 0.000000e+00, %5 ], [ %phitmp, %7 ]
+    %12 = getelementptr inbounds %struct.gl_context, %struct.gl_context* %ctx, i32 0, i32 28, i32 1
+    store float %11, float* %12, align 4, !tbaa !37
+    br label %13
+  
+  ; <label>:13                                      ; preds = %10, %4
+    ret void
+  }
+  
+  declare void @gl_error(%struct.gl_context*, i32 signext, i8*) #1
+  
+  ; Function Attrs: nounwind
+  define void @gl_DepthFunc(%struct.gl_context* %ctx, i32 signext %func) #0 {
+    %1 = getelementptr inbounds %struct.gl_context, %struct.gl_context* %ctx, i32 0, i32 55
+    %2 = load i32, i32* %1, align 4, !tbaa !1
+    %3 = icmp eq i32 %2, 6656
+    br i1 %3, label %5, label %4
+  
+  ; <label>:4                                       ; preds = %0
+    tail call void @gl_error(%struct.gl_context* nonnull %ctx, i32 signext 1282, i8* nonnull getelementptr inbounds ([12 x i8], [12 x i8]* @.str.1, i32 0, i32 0)) #5
+    br label %13
+  
+  ; <label>:5                                       ; preds = %0
+    %6 = and i32 %func, -8
+    %switch = icmp eq i32 %6, 512
+    br i1 %switch, label %7, label %12
+  
+  ; <label>:7                                       ; preds = %5
+    %8 = getelementptr inbounds %struct.gl_context, %struct.gl_context* %ctx, i32 0, i32 28, i32 0
+    store i32 %func, i32* %8, align 4, !tbaa !38
+    %9 = getelementptr inbounds %struct.gl_context, %struct.gl_context* %ctx, i32 0, i32 53
+    %10 = load i32, i32* %9, align 4, !tbaa !39
+    %11 = or i32 %10, 2
+    store i32 %11, i32* %9, align 4, !tbaa !39
+    br label %13
+  
+  ; <label>:12                                      ; preds = %5
+    tail call void @gl_error(%struct.gl_context* nonnull %ctx, i32 signext 1280, i8* nonnull getelementptr inbounds ([13 x i8], [13 x i8]* @.str.2, i32 0, i32 0)) #5
+    br label %13
+  
+  ; <label>:13                                      ; preds = %12, %7, %4
+    ret void
+  }
+  
+  ; Function Attrs: nounwind
+  define void @gl_DepthMask(%struct.gl_context* %ctx, i8 zeroext %flag) #0 {
+    %1 = getelementptr inbounds %struct.gl_context, %struct.gl_context* %ctx, i32 0, i32 55
+    %2 = load i32, i32* %1, align 4, !tbaa !1
+    %3 = icmp eq i32 %2, 6656
+    br i1 %3, label %5, label %4
+  
+  ; <label>:4                                       ; preds = %0
+    tail call void @gl_error(%struct.gl_context* nonnull %ctx, i32 signext 1282, i8* nonnull getelementptr inbounds ([12 x i8], [12 x i8]* @.str.3, i32 0, i32 0)) #5
+    br label %10
+  
+  ; <label>:5                                       ; preds = %0
+    %6 = getelementptr inbounds %struct.gl_context, %struct.gl_context* %ctx, i32 0, i32 28, i32 3
+    store i8 %flag, i8* %6, align 1, !tbaa !40
+    %7 = getelementptr inbounds %struct.gl_context, %struct.gl_context* %ctx, i32 0, i32 53
+    %8 = load i32, i32* %7, align 4, !tbaa !39
+    %9 = or i32 %8, 2
+    store i32 %9, i32* %7, align 4, !tbaa !39
+    br label %10
+  
+  ; <label>:10                                      ; preds = %5, %4
+    ret void
+  }
+  
+  ; Function Attrs: nounwind
+  define void @gl_DepthRange(%struct.gl_context* %ctx, double %nearval, double %farval) #0 {
+    %1 = getelementptr inbounds %struct.gl_context, %struct.gl_context* %ctx, i32 0, i32 55
+    %2 = load i32, i32* %1, align 4, !tbaa !1
+    %3 = icmp eq i32 %2, 6656
+    br i1 %3, label %5, label %4
+  
+  ; <label>:4                                       ; preds = %0
+    tail call void @gl_error(%struct.gl_context* nonnull %ctx, i32 signext 1282, i8* nonnull getelementptr inbounds ([13 x i8], [13 x i8]* @.str.4, i32 0, i32 0)) #5
+    br label %31
+  
+  ; <label>:5                                       ; preds = %0
+    %6 = fcmp olt double %nearval, 0.000000e+00
+    br i1 %6, label %10, label %7
+  
+  ; <label>:7                                       ; preds = %5
+    %8 = fcmp ogt double %nearval, 1.000000e+00
+    %9 = select i1 %8, double 1.000000e+00, double %nearval
+    %phitmp = fptrunc double %9 to float
+    br label %10
+  
+  ; <label>:10                                      ; preds = %7, %5
+    %11 = phi float [ 0.000000e+00, %5 ], [ %phitmp, %7 ]
+    %12 = fcmp olt double %farval, 0.000000e+00
+    br i1 %12, label %16, label %13
+  
+  ; <label>:13                                      ; preds = %10
+    %14 = fcmp ogt double %farval, 1.000000e+00
+    %15 = select i1 %14, double 1.000000e+00, double %farval
+    %phitmp1 = fptrunc double %15 to float
+    br label %16
+  
+  ; <label>:16                                      ; preds = %13, %10
+    %17 = phi float [ 0.000000e+00, %10 ], [ %phitmp1, %13 ]
+    %18 = getelementptr inbounds %struct.gl_context, %struct.gl_context* %ctx, i32 0, i32 43, i32 4
+    store float %11, float* %18, align 4, !tbaa !41
+    %19 = getelementptr inbounds %struct.gl_context, %struct.gl_context* %ctx, i32 0, i32 43, i32 5
+    store float %17, float* %19, align 4, !tbaa !42
+    %20 = fsub float %17, %11
+    %21 = fpext float %20 to double
+    %22 = fmul double %21, 5.000000e-01
+    %23 = fmul double %22, 6.553500e+04
+    %24 = fptrunc double %23 to float
+    %25 = getelementptr inbounds %struct.gl_context, %struct.gl_context* %ctx, i32 0, i32 43, i32 8
+    store float %24, float* %25, align 4, !tbaa !43
+    %26 = fpext float %11 to double
+    %27 = fadd double %26, %22
+    %28 = fmul double %27, 6.553500e+04
+    %29 = fptrunc double %28 to float
+    %30 = getelementptr inbounds %struct.gl_context, %struct.gl_context* %ctx, i32 0, i32 43, i32 11
+    store float %29, float* %30, align 4, !tbaa !44
+    br label %31
+  
+  ; <label>:31                                      ; preds = %16, %4
+    ret void
+  }
+  
+  ; Function Attrs: nounwind
+  define i32 @gl_depth_test_span_generic(%struct.gl_context* nocapture readonly %ctx, i32 signext %n, i32 signext %x, i32 signext %y, i16* nocapture readonly %z, i8* nocapture %mask) #0 {
+    %1 = getelementptr inbounds %struct.gl_context, %struct.gl_context* %ctx, i32 0, i32 5
+    %2 = load %struct.gl_frame_buffer*, %struct.gl_frame_buffer** %1, align 4, !tbaa !45
+    %3 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %2, i32 0, i32 3
+    %4 = load i16*, i16** %3, align 4, !tbaa !46
+    %5 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %2, i32 0, i32 1
+    %6 = load i32, i32* %5, align 4, !tbaa !48
+    %7 = mul nsw i32 %6, %y
+    %8 = getelementptr inbounds i16, i16* %4, i32 %7
+    %9 = getelementptr inbounds i16, i16* %8, i32 %x
+    %10 = getelementptr inbounds %struct.gl_context, %struct.gl_context* %ctx, i32 0, i32 28, i32 0
+    %11 = load i32, i32* %10, align 4, !tbaa !38
+    switch i32 %11, label %206 [
+      i32 513, label %13
+      i32 515, label %43
+      i32 518, label %73
+      i32 516, label %103
+      i32 517, label %133
+      i32 514, label %163
+      i32 519, label %193
+      i32 512, label %.preheader25
+    ]
+  
+  .preheader25:                                     ; preds = %0
+    %12 = icmp eq i32 %n, 0
+    br i1 %12, label %.loopexit, label %.lr.ph104.preheader
+  
+  .lr.ph104.preheader:                              ; preds = %.preheader25
+    call void @llvm.memset.p0i8.i32(i8* %mask, i8 0, i32 %n, i32 1, i1 false)
+    br label %.loopexit
+  
+  ; <label>:13                                      ; preds = %0
+    %14 = getelementptr inbounds %struct.gl_context, %struct.gl_context* %ctx, i32 0, i32 28, i32 3
+    %15 = load i8, i8* %14, align 1, !tbaa !40
+    %16 = icmp eq i8 %15, 0
+    br i1 %16, label %.preheader, label %.preheader1
+  
+  .preheader1:                                      ; preds = %13
+    %17 = icmp ne i32 %n, 0
+    br i1 %17, label %.lr.ph35, label %.loopexit
+  
+  .preheader:                                       ; preds = %13
+    %18 = icmp ne i32 %n, 0
+    br i1 %18, label %.lr.ph, label %.loopexit
+  
+  .lr.ph35:                                         ; preds = %.preheader1, %28
+    %lsr.iv4 = phi i16* [ %scevgep5, %28 ], [ %z, %.preheader1 ]
+    %lsr.iv2 = phi i32 [ %lsr.iv.next3, %28 ], [ %n, %.preheader1 ]
+    %passed.034 = phi i32 [ %passed.1, %28 ], [ 0, %.preheader1 ]
+    %m.032 = phi i8* [ %30, %28 ], [ %mask, %.preheader1 ]
+    %zptr.031 = phi i16* [ %29, %28 ], [ %9, %.preheader1 ]
+    %19 = load i8, i8* %m.032, align 1, !tbaa !49
+    %20 = icmp eq i8 %19, 0
+    br i1 %20, label %28, label %21
+  
+  ; <label>:21                                      ; preds = %.lr.ph35
+    %22 = load i16, i16* %lsr.iv4, align 2, !tbaa !50
+    %23 = load i16, i16* %zptr.031, align 2, !tbaa !50
+    %24 = icmp ult i16 %22, %23
+    br i1 %24, label %25, label %27
+  
+  ; <label>:25                                      ; preds = %21
+    store i16 %22, i16* %zptr.031, align 2, !tbaa !50
+    %26 = add i32 %passed.034, 1
+    br label %28
+  
+  ; <label>:27                                      ; preds = %21
+    store i8 0, i8* %m.032, align 1, !tbaa !49
+    br label %28
+  
+  ; <label>:28                                      ; preds = %27, %25, %.lr.ph35
+    %passed.1 = phi i32 [ %26, %25 ], [ %passed.034, %27 ], [ %passed.034, %.lr.ph35 ]
+    %29 = getelementptr inbounds i16, i16* %zptr.031, i32 1
+    %30 = getelementptr inbounds i8, i8* %m.032, i32 1
+    %lsr.iv.next3 = add i32 %lsr.iv2, -1
+    %scevgep5 = getelementptr i16, i16* %lsr.iv4, i32 1
+    %exitcond118 = icmp eq i32 %lsr.iv.next3, 0
+    br i1 %exitcond118, label %.loopexit, label %.lr.ph35
+  
+  .lr.ph:                                           ; preds = %.preheader, %40
+    %lsr.iv1 = phi i16* [ %scevgep, %40 ], [ %z, %.preheader ]
+    %lsr.iv = phi i32 [ %lsr.iv.next, %40 ], [ %n, %.preheader ]
+    %passed.230 = phi i32 [ %passed.3, %40 ], [ 0, %.preheader ]
+    %m.128 = phi i8* [ %42, %40 ], [ %mask, %.preheader ]
+    %zptr.127 = phi i16* [ %41, %40 ], [ %9, %.preheader ]
+    %31 = load i8, i8* %m.128, align 1, !tbaa !49
+    %32 = icmp eq i8 %31, 0
+    br i1 %32, label %40, label %33
+  
+  ; <label>:33                                      ; preds = %.lr.ph
+    %34 = load i16, i16* %lsr.iv1, align 2, !tbaa !50
+    %35 = load i16, i16* %zptr.127, align 2, !tbaa !50
+    %36 = icmp ult i16 %34, %35
+    br i1 %36, label %37, label %39
+  
+  ; <label>:37                                      ; preds = %33
+    %38 = add i32 %passed.230, 1
+    br label %40
+  
+  ; <label>:39                                      ; preds = %33
+    store i8 0, i8* %m.128, align 1, !tbaa !49
+    br label %40
+  
+  ; <label>:40                                      ; preds = %39, %37, %.lr.ph
+    %passed.3 = phi i32 [ %38, %37 ], [ %passed.230, %39 ], [ %passed.230, %.lr.ph ]
+    %41 = getelementptr inbounds i16, i16* %zptr.127, i32 1
+    %42 = getelementptr inbounds i8, i8* %m.128, i32 1
+    %lsr.iv.next = add i32 %lsr.iv, -1
+    %scevgep = getelementptr i16, i16* %lsr.iv1, i32 1
+    %exitcond = icmp eq i32 %lsr.iv.next, 0
+    br i1 %exitcond, label %.loopexit, label %.lr.ph
+  
+  ; <label>:43                                      ; preds = %0
+    %44 = getelementptr inbounds %struct.gl_context, %struct.gl_context* %ctx, i32 0, i32 28, i32 3
+    %45 = load i8, i8* %44, align 1, !tbaa !40
+    %46 = icmp eq i8 %45, 0
+    br i1 %46, label %.preheader3, label %.preheader5
+  
+  .preheader5:                                      ; preds = %43
+    %47 = icmp ne i32 %n, 0
+    br i1 %47, label %.lr.ph47, label %.loopexit
+  
+  .preheader3:                                      ; preds = %43
+    %48 = icmp ne i32 %n, 0
+    br i1 %48, label %.lr.ph41, label %.loopexit
+  
+  .lr.ph47:                                         ; preds = %.preheader5, %58
+    %lsr.iv12 = phi i16* [ %scevgep13, %58 ], [ %z, %.preheader5 ]
+    %lsr.iv10 = phi i32 [ %lsr.iv.next11, %58 ], [ %n, %.preheader5 ]
+    %passed.446 = phi i32 [ %passed.5, %58 ], [ 0, %.preheader5 ]
+    %m.244 = phi i8* [ %60, %58 ], [ %mask, %.preheader5 ]
+    %zptr.243 = phi i16* [ %59, %58 ], [ %9, %.preheader5 ]
+    %49 = load i8, i8* %m.244, align 1, !tbaa !49
+    %50 = icmp eq i8 %49, 0
+    br i1 %50, label %58, label %51
+  
+  ; <label>:51                                      ; preds = %.lr.ph47
+    %52 = load i16, i16* %lsr.iv12, align 2, !tbaa !50
+    %53 = load i16, i16* %zptr.243, align 2, !tbaa !50
+    %54 = icmp ugt i16 %52, %53
+    br i1 %54, label %57, label %55
+  
+  ; <label>:55                                      ; preds = %51
+    store i16 %52, i16* %zptr.243, align 2, !tbaa !50
+    %56 = add i32 %passed.446, 1
+    br label %58
+  
+  ; <label>:57                                      ; preds = %51
+    store i8 0, i8* %m.244, align 1, !tbaa !49
+    br label %58
+  
+  ; <label>:58                                      ; preds = %57, %55, %.lr.ph47
+    %passed.5 = phi i32 [ %56, %55 ], [ %passed.446, %57 ], [ %passed.446, %.lr.ph47 ]
+    %59 = getelementptr inbounds i16, i16* %zptr.243, i32 1
+    %60 = getelementptr inbounds i8, i8* %m.244, i32 1
+    %lsr.iv.next11 = add i32 %lsr.iv10, -1
+    %scevgep13 = getelementptr i16, i16* %lsr.iv12, i32 1
+    %exitcond120 = icmp eq i32 %lsr.iv.next11, 0
+    br i1 %exitcond120, label %.loopexit, label %.lr.ph47
+  
+  .lr.ph41:                                         ; preds = %.preheader3, %70
+    %lsr.iv8 = phi i16* [ %scevgep9, %70 ], [ %z, %.preheader3 ]
+    %lsr.iv6 = phi i32 [ %lsr.iv.next7, %70 ], [ %n, %.preheader3 ]
+    %passed.640 = phi i32 [ %passed.7, %70 ], [ 0, %.preheader3 ]
+    %m.338 = phi i8* [ %72, %70 ], [ %mask, %.preheader3 ]
+    %zptr.337 = phi i16* [ %71, %70 ], [ %9, %.preheader3 ]
+    %61 = load i8, i8* %m.338, align 1, !tbaa !49
+    %62 = icmp eq i8 %61, 0
+    br i1 %62, label %70, label %63
+  
+  ; <label>:63                                      ; preds = %.lr.ph41
+    %64 = load i16, i16* %lsr.iv8, align 2, !tbaa !50
+    %65 = load i16, i16* %zptr.337, align 2, !tbaa !50
+    %66 = icmp ugt i16 %64, %65
+    br i1 %66, label %69, label %67
+  
+  ; <label>:67                                      ; preds = %63
+    %68 = add i32 %passed.640, 1
+    br label %70
+  
+  ; <label>:69                                      ; preds = %63
+    store i8 0, i8* %m.338, align 1, !tbaa !49
+    br label %70
+  
+  ; <label>:70                                      ; preds = %69, %67, %.lr.ph41
+    %passed.7 = phi i32 [ %68, %67 ], [ %passed.640, %69 ], [ %passed.640, %.lr.ph41 ]
+    %71 = getelementptr inbounds i16, i16* %zptr.337, i32 1
+    %72 = getelementptr inbounds i8, i8* %m.338, i32 1
+    %lsr.iv.next7 = add i32 %lsr.iv6, -1
+    %scevgep9 = getelementptr i16, i16* %lsr.iv8, i32 1
+    %exitcond119 = icmp eq i32 %lsr.iv.next7, 0
+    br i1 %exitcond119, label %.loopexit, label %.lr.ph41
+  
+  ; <label>:73                                      ; preds = %0
+    %74 = getelementptr inbounds %struct.gl_context, %struct.gl_context* %ctx, i32 0, i32 28, i32 3
+    %75 = load i8, i8* %74, align 1, !tbaa !40
+    %76 = icmp eq i8 %75, 0
+    br i1 %76, label %.preheader7, label %.preheader9
+  
+  .preheader9:                                      ; preds = %73
+    %77 = icmp ne i32 %n, 0
+    br i1 %77, label %.lr.ph59, label %.loopexit
+  
+  .preheader7:                                      ; preds = %73
+    %78 = icmp ne i32 %n, 0
+    br i1 %78, label %.lr.ph53, label %.loopexit
+  
+  .lr.ph59:                                         ; preds = %.preheader9, %88
+    %lsr.iv20 = phi i16* [ %scevgep21, %88 ], [ %z, %.preheader9 ]
+    %lsr.iv18 = phi i32 [ %lsr.iv.next19, %88 ], [ %n, %.preheader9 ]
+    %passed.858 = phi i32 [ %passed.9, %88 ], [ 0, %.preheader9 ]
+    %m.456 = phi i8* [ %90, %88 ], [ %mask, %.preheader9 ]
+    %zptr.455 = phi i16* [ %89, %88 ], [ %9, %.preheader9 ]
+    %79 = load i8, i8* %m.456, align 1, !tbaa !49
+    %80 = icmp eq i8 %79, 0
+    br i1 %80, label %88, label %81
+  
+  ; <label>:81                                      ; preds = %.lr.ph59
+    %82 = load i16, i16* %lsr.iv20, align 2, !tbaa !50
+    %83 = load i16, i16* %zptr.455, align 2, !tbaa !50
+    %84 = icmp ult i16 %82, %83
+    br i1 %84, label %87, label %85
+  
+  ; <label>:85                                      ; preds = %81
+    store i16 %82, i16* %zptr.455, align 2, !tbaa !50
+    %86 = add i32 %passed.858, 1
+    br label %88
+  
+  ; <label>:87                                      ; preds = %81
+    store i8 0, i8* %m.456, align 1, !tbaa !49
+    br label %88
+  
+  ; <label>:88                                      ; preds = %87, %85, %.lr.ph59
+    %passed.9 = phi i32 [ %86, %85 ], [ %passed.858, %87 ], [ %passed.858, %.lr.ph59 ]
+    %89 = getelementptr inbounds i16, i16* %zptr.455, i32 1
+    %90 = getelementptr inbounds i8, i8* %m.456, i32 1
+    %lsr.iv.next19 = add i32 %lsr.iv18, -1
+    %scevgep21 = getelementptr i16, i16* %lsr.iv20, i32 1
+    %exitcond122 = icmp eq i32 %lsr.iv.next19, 0
+    br i1 %exitcond122, label %.loopexit, label %.lr.ph59
+  
+  .lr.ph53:                                         ; preds = %.preheader7, %100
+    %lsr.iv16 = phi i16* [ %scevgep17, %100 ], [ %z, %.preheader7 ]
+    %lsr.iv14 = phi i32 [ %lsr.iv.next15, %100 ], [ %n, %.preheader7 ]
+    %passed.1052 = phi i32 [ %passed.11, %100 ], [ 0, %.preheader7 ]
+    %m.550 = phi i8* [ %102, %100 ], [ %mask, %.preheader7 ]
+    %zptr.549 = phi i16* [ %101, %100 ], [ %9, %.preheader7 ]
+    %91 = load i8, i8* %m.550, align 1, !tbaa !49
+    %92 = icmp eq i8 %91, 0
+    br i1 %92, label %100, label %93
+  
+  ; <label>:93                                      ; preds = %.lr.ph53
+    %94 = load i16, i16* %lsr.iv16, align 2, !tbaa !50
+    %95 = load i16, i16* %zptr.549, align 2, !tbaa !50
+    %96 = icmp ult i16 %94, %95
+    br i1 %96, label %99, label %97
+  
+  ; <label>:97                                      ; preds = %93
+    %98 = add i32 %passed.1052, 1
+    br label %100
+  
+  ; <label>:99                                      ; preds = %93
+    store i8 0, i8* %m.550, align 1, !tbaa !49
+    br label %100
+  
+  ; <label>:100                                     ; preds = %99, %97, %.lr.ph53
+    %passed.11 = phi i32 [ %98, %97 ], [ %passed.1052, %99 ], [ %passed.1052, %.lr.ph53 ]
+    %101 = getelementptr inbounds i16, i16* %zptr.549, i32 1
+    %102 = getelementptr inbounds i8, i8* %m.550, i32 1
+    %lsr.iv.next15 = add i32 %lsr.iv14, -1
+    %scevgep17 = getelementptr i16, i16* %lsr.iv16, i32 1
+    %exitcond121 = icmp eq i32 %lsr.iv.next15, 0
+    br i1 %exitcond121, label %.loopexit, label %.lr.ph53
+  
+  ; <label>:103                                     ; preds = %0
+    %104 = getelementptr inbounds %struct.gl_context, %struct.gl_context* %ctx, i32 0, i32 28, i32 3
+    %105 = load i8, i8* %104, align 1, !tbaa !40
+    %106 = icmp eq i8 %105, 0
+    br i1 %106, label %.preheader11, label %.preheader13
+  
+  .preheader13:                                     ; preds = %103
+    %107 = icmp ne i32 %n, 0
+    br i1 %107, label %.lr.ph71, label %.loopexit
+  
+  .preheader11:                                     ; preds = %103
+    %108 = icmp ne i32 %n, 0
+    br i1 %108, label %.lr.ph65, label %.loopexit
+  
+  .lr.ph71:                                         ; preds = %.preheader13, %118
+    %lsr.iv28 = phi i16* [ %scevgep29, %118 ], [ %z, %.preheader13 ]
+    %lsr.iv26 = phi i32 [ %lsr.iv.next27, %118 ], [ %n, %.preheader13 ]
+    %passed.1270 = phi i32 [ %passed.13, %118 ], [ 0, %.preheader13 ]
+    %m.668 = phi i8* [ %120, %118 ], [ %mask, %.preheader13 ]
+    %zptr.667 = phi i16* [ %119, %118 ], [ %9, %.preheader13 ]
+    %109 = load i8, i8* %m.668, align 1, !tbaa !49
+    %110 = icmp eq i8 %109, 0
+    br i1 %110, label %118, label %111
+  
+  ; <label>:111                                     ; preds = %.lr.ph71
+    %112 = load i16, i16* %lsr.iv28, align 2, !tbaa !50
+    %113 = load i16, i16* %zptr.667, align 2, !tbaa !50
+    %114 = icmp ugt i16 %112, %113
+    br i1 %114, label %115, label %117
+  
+  ; <label>:115                                     ; preds = %111
+    store i16 %112, i16* %zptr.667, align 2, !tbaa !50
+    %116 = add i32 %passed.1270, 1
+    br label %118
+  
+  ; <label>:117                                     ; preds = %111
+    store i8 0, i8* %m.668, align 1, !tbaa !49
+    br label %118
+  
+  ; <label>:118                                     ; preds = %117, %115, %.lr.ph71
+    %passed.13 = phi i32 [ %116, %115 ], [ %passed.1270, %117 ], [ %passed.1270, %.lr.ph71 ]
+    %119 = getelementptr inbounds i16, i16* %zptr.667, i32 1
+    %120 = getelementptr inbounds i8, i8* %m.668, i32 1
+    %lsr.iv.next27 = add i32 %lsr.iv26, -1
+    %scevgep29 = getelementptr i16, i16* %lsr.iv28, i32 1
+    %exitcond124 = icmp eq i32 %lsr.iv.next27, 0
+    br i1 %exitcond124, label %.loopexit, label %.lr.ph71
+  
+  .lr.ph65:                                         ; preds = %.preheader11, %130
+    %lsr.iv24 = phi i16* [ %scevgep25, %130 ], [ %z, %.preheader11 ]
+    %lsr.iv22 = phi i32 [ %lsr.iv.next23, %130 ], [ %n, %.preheader11 ]
+    %passed.1464 = phi i32 [ %passed.15, %130 ], [ 0, %.preheader11 ]
+    %m.762 = phi i8* [ %132, %130 ], [ %mask, %.preheader11 ]
+    %zptr.761 = phi i16* [ %131, %130 ], [ %9, %.preheader11 ]
+    %121 = load i8, i8* %m.762, align 1, !tbaa !49
+    %122 = icmp eq i8 %121, 0
+    br i1 %122, label %130, label %123
+  
+  ; <label>:123                                     ; preds = %.lr.ph65
+    %124 = load i16, i16* %lsr.iv24, align 2, !tbaa !50
+    %125 = load i16, i16* %zptr.761, align 2, !tbaa !50
+    %126 = icmp ugt i16 %124, %125
+    br i1 %126, label %127, label %129
+  
+  ; <label>:127                                     ; preds = %123
+    %128 = add i32 %passed.1464, 1
+    br label %130
+  
+  ; <label>:129                                     ; preds = %123
+    store i8 0, i8* %m.762, align 1, !tbaa !49
+    br label %130
+  
+  ; <label>:130                                     ; preds = %129, %127, %.lr.ph65
+    %passed.15 = phi i32 [ %128, %127 ], [ %passed.1464, %129 ], [ %passed.1464, %.lr.ph65 ]
+    %131 = getelementptr inbounds i16, i16* %zptr.761, i32 1
+    %132 = getelementptr inbounds i8, i8* %m.762, i32 1
+    %lsr.iv.next23 = add i32 %lsr.iv22, -1
+    %scevgep25 = getelementptr i16, i16* %lsr.iv24, i32 1
+    %exitcond123 = icmp eq i32 %lsr.iv.next23, 0
+    br i1 %exitcond123, label %.loopexit, label %.lr.ph65
+  
+  ; <label>:133                                     ; preds = %0
+    %134 = getelementptr inbounds %struct.gl_context, %struct.gl_context* %ctx, i32 0, i32 28, i32 3
+    %135 = load i8, i8* %134, align 1, !tbaa !40
+    %136 = icmp eq i8 %135, 0
+    br i1 %136, label %.preheader15, label %.preheader17
+  
+  .preheader17:                                     ; preds = %133
+    %137 = icmp ne i32 %n, 0
+    br i1 %137, label %.lr.ph83, label %.loopexit
+  
+  .preheader15:                                     ; preds = %133
+    %138 = icmp ne i32 %n, 0
+    br i1 %138, label %.lr.ph77, label %.loopexit
+  
+  .lr.ph83:                                         ; preds = %.preheader17, %148
+    %lsr.iv36 = phi i16* [ %scevgep37, %148 ], [ %z, %.preheader17 ]
+    %lsr.iv34 = phi i32 [ %lsr.iv.next35, %148 ], [ %n, %.preheader17 ]
+    %passed.1682 = phi i32 [ %passed.17, %148 ], [ 0, %.preheader17 ]
+    %m.880 = phi i8* [ %150, %148 ], [ %mask, %.preheader17 ]
+    %zptr.879 = phi i16* [ %149, %148 ], [ %9, %.preheader17 ]
+    %139 = load i8, i8* %m.880, align 1, !tbaa !49
+    %140 = icmp eq i8 %139, 0
+    br i1 %140, label %148, label %141
+  
+  ; <label>:141                                     ; preds = %.lr.ph83
+    %142 = load i16, i16* %lsr.iv36, align 2, !tbaa !50
+    %143 = load i16, i16* %zptr.879, align 2, !tbaa !50
+    %144 = icmp eq i16 %142, %143
+    br i1 %144, label %147, label %145
+  
+  ; <label>:145                                     ; preds = %141
+    store i16 %142, i16* %zptr.879, align 2, !tbaa !50
+    %146 = add i32 %passed.1682, 1
+    br label %148
+  
+  ; <label>:147                                     ; preds = %141
+    store i8 0, i8* %m.880, align 1, !tbaa !49
+    br label %148
+  
+  ; <label>:148                                     ; preds = %147, %145, %.lr.ph83
+    %passed.17 = phi i32 [ %146, %145 ], [ %passed.1682, %147 ], [ %passed.1682, %.lr.ph83 ]
+    %149 = getelementptr inbounds i16, i16* %zptr.879, i32 1
+    %150 = getelementptr inbounds i8, i8* %m.880, i32 1
+    %lsr.iv.next35 = add i32 %lsr.iv34, -1
+    %scevgep37 = getelementptr i16, i16* %lsr.iv36, i32 1
+    %exitcond126 = icmp eq i32 %lsr.iv.next35, 0
+    br i1 %exitcond126, label %.loopexit, label %.lr.ph83
+  
+  .lr.ph77:                                         ; preds = %.preheader15, %160
+    %lsr.iv32 = phi i16* [ %scevgep33, %160 ], [ %z, %.preheader15 ]
+    %lsr.iv30 = phi i32 [ %lsr.iv.next31, %160 ], [ %n, %.preheader15 ]
+    %passed.1876 = phi i32 [ %passed.19, %160 ], [ 0, %.preheader15 ]
+    %m.974 = phi i8* [ %162, %160 ], [ %mask, %.preheader15 ]
+    %zptr.973 = phi i16* [ %161, %160 ], [ %9, %.preheader15 ]
+    %151 = load i8, i8* %m.974, align 1, !tbaa !49
+    %152 = icmp eq i8 %151, 0
+    br i1 %152, label %160, label %153
+  
+  ; <label>:153                                     ; preds = %.lr.ph77
+    %154 = load i16, i16* %lsr.iv32, align 2, !tbaa !50
+    %155 = load i16, i16* %zptr.973, align 2, !tbaa !50
+    %156 = icmp eq i16 %154, %155
+    br i1 %156, label %159, label %157
+  
+  ; <label>:157                                     ; preds = %153
+    %158 = add i32 %passed.1876, 1
+    br label %160
+  
+  ; <label>:159                                     ; preds = %153
+    store i8 0, i8* %m.974, align 1, !tbaa !49
+    br label %160
+  
+  ; <label>:160                                     ; preds = %159, %157, %.lr.ph77
+    %passed.19 = phi i32 [ %158, %157 ], [ %passed.1876, %159 ], [ %passed.1876, %.lr.ph77 ]
+    %161 = getelementptr inbounds i16, i16* %zptr.973, i32 1
+    %162 = getelementptr inbounds i8, i8* %m.974, i32 1
+    %lsr.iv.next31 = add i32 %lsr.iv30, -1
+    %scevgep33 = getelementptr i16, i16* %lsr.iv32, i32 1
+    %exitcond125 = icmp eq i32 %lsr.iv.next31, 0
+    br i1 %exitcond125, label %.loopexit, label %.lr.ph77
+  
+  ; <label>:163                                     ; preds = %0
+    %164 = getelementptr inbounds %struct.gl_context, %struct.gl_context* %ctx, i32 0, i32 28, i32 3
+    %165 = load i8, i8* %164, align 1, !tbaa !40
+    %166 = icmp eq i8 %165, 0
+    br i1 %166, label %.preheader19, label %.preheader21
+  
+  .preheader21:                                     ; preds = %163
+    %167 = icmp ne i32 %n, 0
+    br i1 %167, label %.lr.ph95, label %.loopexit
+  
+  .preheader19:                                     ; preds = %163
+    %168 = icmp ne i32 %n, 0
+    br i1 %168, label %.lr.ph89, label %.loopexit
+  
+  .lr.ph95:                                         ; preds = %.preheader21, %178
+    %lsr.iv44 = phi i16* [ %scevgep45, %178 ], [ %z, %.preheader21 ]
+    %lsr.iv42 = phi i32 [ %lsr.iv.next43, %178 ], [ %n, %.preheader21 ]
+    %passed.2094 = phi i32 [ %passed.21, %178 ], [ 0, %.preheader21 ]
+    %m.1092 = phi i8* [ %180, %178 ], [ %mask, %.preheader21 ]
+    %zptr.1091 = phi i16* [ %179, %178 ], [ %9, %.preheader21 ]
+    %169 = load i8, i8* %m.1092, align 1, !tbaa !49
+    %170 = icmp eq i8 %169, 0
+    br i1 %170, label %178, label %171
+  
+  ; <label>:171                                     ; preds = %.lr.ph95
+    %172 = load i16, i16* %lsr.iv44, align 2, !tbaa !50
+    %173 = load i16, i16* %zptr.1091, align 2, !tbaa !50
+    %174 = icmp eq i16 %172, %173
+    br i1 %174, label %175, label %177
+  
+  ; <label>:175                                     ; preds = %171
+    store i16 %172, i16* %zptr.1091, align 2, !tbaa !50
+    %176 = add i32 %passed.2094, 1
+    br label %178
+  
+  ; <label>:177                                     ; preds = %171
+    store i8 0, i8* %m.1092, align 1, !tbaa !49
+    br label %178
+  
+  ; <label>:178                                     ; preds = %177, %175, %.lr.ph95
+    %passed.21 = phi i32 [ %176, %175 ], [ %passed.2094, %177 ], [ %passed.2094, %.lr.ph95 ]
+    %179 = getelementptr inbounds i16, i16* %zptr.1091, i32 1
+    %180 = getelementptr inbounds i8, i8* %m.1092, i32 1
+    %lsr.iv.next43 = add i32 %lsr.iv42, -1
+    %scevgep45 = getelementptr i16, i16* %lsr.iv44, i32 1
+    %exitcond128 = icmp eq i32 %lsr.iv.next43, 0
+    br i1 %exitcond128, label %.loopexit, label %.lr.ph95
+  
+  .lr.ph89:                                         ; preds = %.preheader19, %190
+    %lsr.iv40 = phi i16* [ %scevgep41, %190 ], [ %z, %.preheader19 ]
+    %lsr.iv38 = phi i32 [ %lsr.iv.next39, %190 ], [ %n, %.preheader19 ]
+    %passed.2288 = phi i32 [ %passed.23, %190 ], [ 0, %.preheader19 ]
+    %m.1186 = phi i8* [ %192, %190 ], [ %mask, %.preheader19 ]
+    %zptr.1185 = phi i16* [ %191, %190 ], [ %9, %.preheader19 ]
+    %181 = load i8, i8* %m.1186, align 1, !tbaa !49
+    %182 = icmp eq i8 %181, 0
+    br i1 %182, label %190, label %183
+  
+  ; <label>:183                                     ; preds = %.lr.ph89
+    %184 = load i16, i16* %lsr.iv40, align 2, !tbaa !50
+    %185 = load i16, i16* %zptr.1185, align 2, !tbaa !50
+    %186 = icmp eq i16 %184, %185
+    br i1 %186, label %187, label %189
+  
+  ; <label>:187                                     ; preds = %183
+    %188 = add i32 %passed.2288, 1
+    br label %190
+  
+  ; <label>:189                                     ; preds = %183
+    store i8 0, i8* %m.1186, align 1, !tbaa !49
+    br label %190
+  
+  ; <label>:190                                     ; preds = %189, %187, %.lr.ph89
+    %passed.23 = phi i32 [ %188, %187 ], [ %passed.2288, %189 ], [ %passed.2288, %.lr.ph89 ]
+    %191 = getelementptr inbounds i16, i16* %zptr.1185, i32 1
+    %192 = getelementptr inbounds i8, i8* %m.1186, i32 1
+    %lsr.iv.next39 = add i32 %lsr.iv38, -1
+    %scevgep41 = getelementptr i16, i16* %lsr.iv40, i32 1
+    %exitcond127 = icmp eq i32 %lsr.iv.next39, 0
+    br i1 %exitcond127, label %.loopexit, label %.lr.ph89
+  
+  ; <label>:193                                     ; preds = %0
+    %194 = getelementptr inbounds %struct.gl_context, %struct.gl_context* %ctx, i32 0, i32 28, i32 3
+    %195 = load i8, i8* %194, align 1, !tbaa !40
+    %196 = icmp eq i8 %195, 0
+    br i1 %196, label %.loopexit, label %.preheader23
+  
+  .preheader23:                                     ; preds = %193
+    %197 = icmp eq i32 %n, 0
+    br i1 %197, label %.loopexit, label %.lr.ph101
+  
+  .lr.ph101:                                        ; preds = %.preheader23, %203
+    %lsr.iv48 = phi i16* [ %scevgep49, %203 ], [ %z, %.preheader23 ]
+    %lsr.iv46 = phi i32 [ %lsr.iv.next47, %203 ], [ %n, %.preheader23 ]
+    %passed.24100 = phi i32 [ %passed.25, %203 ], [ 0, %.preheader23 ]
+    %m.1298 = phi i8* [ %205, %203 ], [ %mask, %.preheader23 ]
+    %zptr.1297 = phi i16* [ %204, %203 ], [ %9, %.preheader23 ]
+    %198 = load i8, i8* %m.1298, align 1, !tbaa !49
+    %199 = icmp eq i8 %198, 0
+    br i1 %199, label %203, label %200
+  
+  ; <label>:200                                     ; preds = %.lr.ph101
+    %201 = load i16, i16* %lsr.iv48, align 2, !tbaa !50
+    store i16 %201, i16* %zptr.1297, align 2, !tbaa !50
+    %202 = add i32 %passed.24100, 1
+    br label %203
+  
+  ; <label>:203                                     ; preds = %200, %.lr.ph101
+    %passed.25 = phi i32 [ %202, %200 ], [ %passed.24100, %.lr.ph101 ]
+    %204 = getelementptr inbounds i16, i16* %zptr.1297, i32 1
+    %205 = getelementptr inbounds i8, i8* %m.1298, i32 1
+    %lsr.iv.next47 = add i32 %lsr.iv46, -1
+    %scevgep49 = getelementptr i16, i16* %lsr.iv48, i32 1
+    %exitcond129 = icmp eq i32 %lsr.iv.next47, 0
+    br i1 %exitcond129, label %.loopexit, label %.lr.ph101
+  
+  ; <label>:206                                     ; preds = %0
+    tail call void @abort() #6
+    unreachable
+  
+  .loopexit:                                        ; preds = %203, %178, %190, %148, %160, %118, %130, %88, %100, %58, %70, %28, %40, %.preheader23, %193, %.preheader19, %.preheader21, %.preheader15, %.preheader17, %.preheader11, %.preheader13, %.preheader7, %.preheader9, %.preheader3, %.preheader5, %.preheader, %.preheader1, %.lr.ph104.preheader, %.preheader25
+    %passed.26 = phi i32 [ %n, %193 ], [ 0, %.preheader ], [ 0, %.preheader1 ], [ 0, %.preheader3 ], [ 0, %.preheader5 ], [ 0, %.preheader7 ], [ 0, %.preheader9 ], [ 0, %.preheader11 ], [ 0, %.preheader13 ], [ 0, %.preheader15 ], [ 0, %.preheader17 ], [ 0, %.preheader19 ], [ 0, %.preheader21 ], [ 0, %.preheader23 ], [ 0, %.preheader25 ], [ 0, %.lr.ph104.preheader ], [ %passed.3, %40 ], [ %passed.1, %28 ], [ %passed.7, %70 ], [ %passed.5, %58 ], [ %passed.11, %100 ], [ %passed.9, %88 ], [ %passed.15, %130 ], [ %passed.13, %118 ], [ %passed.19, %160 ], [ %passed.17, %148 ], [ %passed.23, %190 ], [ %passed.21, %178 ], [ %passed.25, %203 ]
+    ret i32 %passed.26
+  }
+  
+  ; Function Attrs: noreturn nounwind
+  declare void @abort() #2
+  
+  ; Function Attrs: norecurse nounwind
+  define i32 @gl_depth_test_span_less(%struct.gl_context* nocapture readonly %ctx, i32 signext %n, i32 signext %x, i32 signext %y, i16* nocapture readonly %z, i8* nocapture %mask) #3 {
+    %1 = getelementptr inbounds %struct.gl_context, %struct.gl_context* %ctx, i32 0, i32 5
+    %2 = load %struct.gl_frame_buffer*, %struct.gl_frame_buffer** %1, align 4, !tbaa !45
+    %3 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %2, i32 0, i32 3
+    %4 = load i16*, i16** %3, align 4, !tbaa !46
+    %5 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %2, i32 0, i32 1
+    %6 = load i32, i32* %5, align 4, !tbaa !48
+    %7 = icmp eq i32 %n, 0
+    br i1 %7, label %._crit_edge, label %.lr.ph.preheader
+  
+  .lr.ph.preheader:                                 ; preds = %0
+    %8 = mul i32 %6, %y
+    %9 = add i32 %x, %8
+    %scevgep = getelementptr i16, i16* %4, i32 %9
+    br label %.lr.ph
+  
+  .lr.ph:                                           ; preds = %19, %.lr.ph.preheader
+    %lsr.iv5 = phi i8* [ %scevgep6, %19 ], [ %mask, %.lr.ph.preheader ]
+    %lsr.iv3 = phi i16* [ %scevgep4, %19 ], [ %z, %.lr.ph.preheader ]
+    %lsr.iv1 = phi i16* [ %scevgep2, %19 ], [ %scevgep, %.lr.ph.preheader ]
+    %lsr.iv = phi i32 [ %lsr.iv.next, %19 ], [ %n, %.lr.ph.preheader ]
+    %passed.02 = phi i32 [ %passed.1, %19 ], [ 0, %.lr.ph.preheader ]
+    %10 = load i8, i8* %lsr.iv5, align 1, !tbaa !49
+    %11 = icmp eq i8 %10, 0
+    br i1 %11, label %19, label %12
+  
+  ; <label>:12                                      ; preds = %.lr.ph
+    %13 = load i16, i16* %lsr.iv3, align 2, !tbaa !50
+    %14 = load i16, i16* %lsr.iv1, align 2, !tbaa !50
+    %15 = icmp ult i16 %13, %14
+    br i1 %15, label %16, label %18
+  
+  ; <label>:16                                      ; preds = %12
+    store i16 %13, i16* %lsr.iv1, align 2, !tbaa !50
+    %17 = add i32 %passed.02, 1
+    br label %19
+  
+  ; <label>:18                                      ; preds = %12
+    store i8 0, i8* %lsr.iv5, align 1, !tbaa !49
+    br label %19
+  
+  ; <label>:19                                      ; preds = %18, %16, %.lr.ph
+    %passed.1 = phi i32 [ %17, %16 ], [ %passed.02, %18 ], [ %passed.02, %.lr.ph ]
+    %lsr.iv.next = add i32 %lsr.iv, -1
+    %scevgep2 = getelementptr i16, i16* %lsr.iv1, i32 1
+    %scevgep4 = getelementptr i16, i16* %lsr.iv3, i32 1
+    %scevgep6 = getelementptr i8, i8* %lsr.iv5, i32 1
+    %exitcond = icmp eq i32 %lsr.iv.next, 0
+    br i1 %exitcond, label %._crit_edge, label %.lr.ph
+  
+  ._crit_edge:                                      ; preds = %19, %0
+    %passed.0.lcssa = phi i32 [ 0, %0 ], [ %passed.1, %19 ]
+    ret i32 %passed.0.lcssa
+  }
+  
+  ; Function Attrs: norecurse nounwind
+  define i32 @gl_depth_test_span_greater(%struct.gl_context* nocapture readonly %ctx, i32 signext %n, i32 signext %x, i32 signext %y, i16* nocapture readonly %z, i8* nocapture %mask) #3 {
+    %1 = getelementptr inbounds %struct.gl_context, %struct.gl_context* %ctx, i32 0, i32 5
+    %2 = load %struct.gl_frame_buffer*, %struct.gl_frame_buffer** %1, align 4, !tbaa !45
+    %3 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %2, i32 0, i32 3
+    %4 = load i16*, i16** %3, align 4, !tbaa !46
+    %5 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %2, i32 0, i32 1
+    %6 = load i32, i32* %5, align 4, !tbaa !48
+    %7 = icmp eq i32 %n, 0
+    br i1 %7, label %._crit_edge, label %.lr.ph.preheader
+  
+  .lr.ph.preheader:                                 ; preds = %0
+    %8 = mul i32 %6, %y
+    %9 = add i32 %x, %8
+    %scevgep = getelementptr i16, i16* %4, i32 %9
+    br label %.lr.ph
+  
+  .lr.ph:                                           ; preds = %19, %.lr.ph.preheader
+    %lsr.iv5 = phi i8* [ %scevgep6, %19 ], [ %mask, %.lr.ph.preheader ]
+    %lsr.iv3 = phi i16* [ %scevgep4, %19 ], [ %z, %.lr.ph.preheader ]
+    %lsr.iv1 = phi i16* [ %scevgep2, %19 ], [ %scevgep, %.lr.ph.preheader ]
+    %lsr.iv = phi i32 [ %lsr.iv.next, %19 ], [ %n, %.lr.ph.preheader ]
+    %passed.02 = phi i32 [ %passed.1, %19 ], [ 0, %.lr.ph.preheader ]
+    %10 = load i8, i8* %lsr.iv5, align 1, !tbaa !49
+    %11 = icmp eq i8 %10, 0
+    br i1 %11, label %19, label %12
+  
+  ; <label>:12                                      ; preds = %.lr.ph
+    %13 = load i16, i16* %lsr.iv3, align 2, !tbaa !50
+    %14 = load i16, i16* %lsr.iv1, align 2, !tbaa !50
+    %15 = icmp ugt i16 %13, %14
+    br i1 %15, label %16, label %18
+  
+  ; <label>:16                                      ; preds = %12
+    store i16 %13, i16* %lsr.iv1, align 2, !tbaa !50
+    %17 = add i32 %passed.02, 1
+    br label %19
+  
+  ; <label>:18                                      ; preds = %12
+    store i8 0, i8* %lsr.iv5, align 1, !tbaa !49
+    br label %19
+  
+  ; <label>:19                                      ; preds = %18, %16, %.lr.ph
+    %passed.1 = phi i32 [ %17, %16 ], [ %passed.02, %18 ], [ %passed.02, %.lr.ph ]
+    %lsr.iv.next = add i32 %lsr.iv, -1
+    %scevgep2 = getelementptr i16, i16* %lsr.iv1, i32 1
+    %scevgep4 = getelementptr i16, i16* %lsr.iv3, i32 1
+    %scevgep6 = getelementptr i8, i8* %lsr.iv5, i32 1
+    %exitcond = icmp eq i32 %lsr.iv.next, 0
+    br i1 %exitcond, label %._crit_edge, label %.lr.ph
+  
+  ._crit_edge:                                      ; preds = %19, %0
+    %passed.0.lcssa = phi i32 [ 0, %0 ], [ %passed.1, %19 ]
+    ret i32 %passed.0.lcssa
+  }
+  
+  ; Function Attrs: nounwind
+  define void @gl_depth_test_pixels_generic(%struct.gl_context* readonly %ctx, i32 signext %n, i32* nocapture readonly %x, i32* nocapture readonly %y, i16* nocapture readonly %z, i8* nocapture %mask) #0 {
+    %1 = getelementptr inbounds %struct.gl_context, %struct.gl_context* %ctx, i32 0, i32 28, i32 0
+    %2 = load i32, i32* %1, align 4, !tbaa !38
+    switch i32 %2, label %295 [
+      i32 513, label %4
+      i32 515, label %49
+      i32 518, label %94
+      i32 516, label %139
+      i32 517, label %184
+      i32 514, label %229
+      i32 519, label %274
+      i32 512, label %.preheader25
+    ]
+  
+  .preheader25:                                     ; preds = %0
+    %3 = icmp eq i32 %n, 0
+    br i1 %3, label %.loopexit, label %.lr.ph53.preheader
+  
+  .lr.ph53.preheader:                               ; preds = %.preheader25
+    call void @llvm.memset.p0i8.i32(i8* %mask, i8 0, i32 %n, i32 1, i1 false)
+    br label %.loopexit
+  
+  ; <label>:4                                       ; preds = %0
+    %5 = getelementptr inbounds %struct.gl_context, %struct.gl_context* %ctx, i32 0, i32 28, i32 3
+    %6 = load i8, i8* %5, align 1, !tbaa !40
+    %7 = icmp eq i8 %6, 0
+    br i1 %7, label %.preheader, label %.preheader1
+  
+  .preheader1:                                      ; preds = %4
+    %8 = icmp ne i32 %n, 0
+    br i1 %8, label %.lr.ph29, label %.loopexit
+  
+  .lr.ph29:                                         ; preds = %.preheader1
+    br label %10
+  
+  .preheader:                                       ; preds = %4
+    %9 = icmp ne i32 %n, 0
+    br i1 %9, label %.lr.ph, label %.loopexit
+  
+  .lr.ph:                                           ; preds = %.preheader
+    br label %30
+  
+  ; <label>:10                                      ; preds = %29, %.lr.ph29
+    %lsr.iv16 = phi i8* [ %scevgep17, %29 ], [ %mask, %.lr.ph29 ]
+    %lsr.iv14 = phi i32* [ %scevgep15, %29 ], [ %y, %.lr.ph29 ]
+    %lsr.iv12 = phi i32* [ %scevgep13, %29 ], [ %x, %.lr.ph29 ]
+    %lsr.iv10 = phi i16* [ %scevgep11, %29 ], [ %z, %.lr.ph29 ]
+    %lsr.iv8 = phi i32 [ %lsr.iv.next9, %29 ], [ %n, %.lr.ph29 ]
+    %11 = load i8, i8* %lsr.iv16, align 1, !tbaa !49
+    %12 = icmp eq i8 %11, 0
+    br i1 %12, label %29, label %13
+  
+  ; <label>:13                                      ; preds = %10
+    %sunkaddr = ptrtoint %struct.gl_context* %ctx to i32
+    %sunkaddr128 = add i32 %sunkaddr, 2024
+    %sunkaddr129 = inttoptr i32 %sunkaddr128 to %struct.gl_frame_buffer**
+    %14 = load %struct.gl_frame_buffer*, %struct.gl_frame_buffer** %sunkaddr129, align 4, !tbaa !45
+    %15 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %14, i32 0, i32 3
+    %16 = load i16*, i16** %15, align 4, !tbaa !46
+    %17 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %14, i32 0, i32 1
+    %18 = load i32, i32* %17, align 4, !tbaa !48
+    %19 = load i32, i32* %lsr.iv14, align 4, !tbaa !51
+    %20 = mul nsw i32 %19, %18
+    %21 = getelementptr inbounds i16, i16* %16, i32 %20
+    %22 = load i32, i32* %lsr.iv12, align 4, !tbaa !51
+    %23 = getelementptr inbounds i16, i16* %21, i32 %22
+    %24 = load i16, i16* %lsr.iv10, align 2, !tbaa !50
+    %25 = load i16, i16* %23, align 2, !tbaa !50
+    %26 = icmp ult i16 %24, %25
+    br i1 %26, label %27, label %28
+  
+  ; <label>:27                                      ; preds = %13
+    store i16 %24, i16* %23, align 2, !tbaa !50
+    br label %29
+  
+  ; <label>:28                                      ; preds = %13
+    store i8 0, i8* %lsr.iv16, align 1, !tbaa !49
+    br label %29
+  
+  ; <label>:29                                      ; preds = %28, %27, %10
+    %lsr.iv.next9 = add i32 %lsr.iv8, -1
+    %scevgep11 = getelementptr i16, i16* %lsr.iv10, i32 1
+    %scevgep13 = getelementptr i32, i32* %lsr.iv12, i32 1
+    %scevgep15 = getelementptr i32, i32* %lsr.iv14, i32 1
+    %scevgep17 = getelementptr i8, i8* %lsr.iv16, i32 1
+    %exitcond67 = icmp eq i32 %lsr.iv.next9, 0
+    br i1 %exitcond67, label %.loopexit, label %10
+  
+  ; <label>:30                                      ; preds = %48, %.lr.ph
+    %lsr.iv6 = phi i8* [ %scevgep7, %48 ], [ %mask, %.lr.ph ]
+    %lsr.iv4 = phi i32* [ %scevgep5, %48 ], [ %y, %.lr.ph ]
+    %lsr.iv2 = phi i32* [ %scevgep3, %48 ], [ %x, %.lr.ph ]
+    %lsr.iv1 = phi i16* [ %scevgep, %48 ], [ %z, %.lr.ph ]
+    %lsr.iv = phi i32 [ %lsr.iv.next, %48 ], [ %n, %.lr.ph ]
+    %31 = load i8, i8* %lsr.iv6, align 1, !tbaa !49
+    %32 = icmp eq i8 %31, 0
+    br i1 %32, label %48, label %33
+  
+  ; <label>:33                                      ; preds = %30
+    %sunkaddr130 = ptrtoint %struct.gl_context* %ctx to i32
+    %sunkaddr131 = add i32 %sunkaddr130, 2024
+    %sunkaddr132 = inttoptr i32 %sunkaddr131 to %struct.gl_frame_buffer**
+    %34 = load %struct.gl_frame_buffer*, %struct.gl_frame_buffer** %sunkaddr132, align 4, !tbaa !45
+    %35 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %34, i32 0, i32 3
+    %36 = load i16*, i16** %35, align 4, !tbaa !46
+    %37 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %34, i32 0, i32 1
+    %38 = load i32, i32* %37, align 4, !tbaa !48
+    %39 = load i32, i32* %lsr.iv4, align 4, !tbaa !51
+    %40 = mul nsw i32 %39, %38
+    %41 = getelementptr inbounds i16, i16* %36, i32 %40
+    %42 = load i32, i32* %lsr.iv2, align 4, !tbaa !51
+    %43 = getelementptr inbounds i16, i16* %41, i32 %42
+    %44 = load i16, i16* %lsr.iv1, align 2, !tbaa !50
+    %45 = load i16, i16* %43, align 2, !tbaa !50
+    %46 = icmp ult i16 %44, %45
+    br i1 %46, label %48, label %47
+  
+  ; <label>:47                                      ; preds = %33
+    store i8 0, i8* %lsr.iv6, align 1, !tbaa !49
+    br label %48
+  
+  ; <label>:48                                      ; preds = %47, %33, %30
+    %lsr.iv.next = add i32 %lsr.iv, -1
+    %scevgep = getelementptr i16, i16* %lsr.iv1, i32 1
+    %scevgep3 = getelementptr i32, i32* %lsr.iv2, i32 1
+    %scevgep5 = getelementptr i32, i32* %lsr.iv4, i32 1
+    %scevgep7 = getelementptr i8, i8* %lsr.iv6, i32 1
+    %exitcond = icmp eq i32 %lsr.iv.next, 0
+    br i1 %exitcond, label %.loopexit, label %30
+  
+  ; <label>:49                                      ; preds = %0
+    %50 = getelementptr inbounds %struct.gl_context, %struct.gl_context* %ctx, i32 0, i32 28, i32 3
+    %51 = load i8, i8* %50, align 1, !tbaa !40
+    %52 = icmp eq i8 %51, 0
+    br i1 %52, label %.preheader3, label %.preheader5
+  
+  .preheader5:                                      ; preds = %49
+    %53 = icmp ne i32 %n, 0
+    br i1 %53, label %.lr.ph33, label %.loopexit
+  
+  .lr.ph33:                                         ; preds = %.preheader5
+    br label %55
+  
+  .preheader3:                                      ; preds = %49
+    %54 = icmp ne i32 %n, 0
+    br i1 %54, label %.lr.ph31, label %.loopexit
+  
+  .lr.ph31:                                         ; preds = %.preheader3
+    br label %75
+  
+  ; <label>:55                                      ; preds = %74, %.lr.ph33
+    %lsr.iv36 = phi i8* [ %scevgep37, %74 ], [ %mask, %.lr.ph33 ]
+    %lsr.iv34 = phi i32* [ %scevgep35, %74 ], [ %y, %.lr.ph33 ]
+    %lsr.iv32 = phi i32* [ %scevgep33, %74 ], [ %x, %.lr.ph33 ]
+    %lsr.iv30 = phi i16* [ %scevgep31, %74 ], [ %z, %.lr.ph33 ]
+    %lsr.iv28 = phi i32 [ %lsr.iv.next29, %74 ], [ %n, %.lr.ph33 ]
+    %56 = load i8, i8* %lsr.iv36, align 1, !tbaa !49
+    %57 = icmp eq i8 %56, 0
+    br i1 %57, label %74, label %58
+  
+  ; <label>:58                                      ; preds = %55
+    %sunkaddr133 = ptrtoint %struct.gl_context* %ctx to i32
+    %sunkaddr134 = add i32 %sunkaddr133, 2024
+    %sunkaddr135 = inttoptr i32 %sunkaddr134 to %struct.gl_frame_buffer**
+    %59 = load %struct.gl_frame_buffer*, %struct.gl_frame_buffer** %sunkaddr135, align 4, !tbaa !45
+    %60 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %59, i32 0, i32 3
+    %61 = load i16*, i16** %60, align 4, !tbaa !46
+    %62 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %59, i32 0, i32 1
+    %63 = load i32, i32* %62, align 4, !tbaa !48
+    %64 = load i32, i32* %lsr.iv34, align 4, !tbaa !51
+    %65 = mul nsw i32 %64, %63
+    %66 = getelementptr inbounds i16, i16* %61, i32 %65
+    %67 = load i32, i32* %lsr.iv32, align 4, !tbaa !51
+    %68 = getelementptr inbounds i16, i16* %66, i32 %67
+    %69 = load i16, i16* %lsr.iv30, align 2, !tbaa !50
+    %70 = load i16, i16* %68, align 2, !tbaa !50
+    %71 = icmp ugt i16 %69, %70
+    br i1 %71, label %73, label %72
+  
+  ; <label>:72                                      ; preds = %58
+    store i16 %69, i16* %68, align 2, !tbaa !50
+    br label %74
+  
+  ; <label>:73                                      ; preds = %58
+    store i8 0, i8* %lsr.iv36, align 1, !tbaa !49
+    br label %74
+  
+  ; <label>:74                                      ; preds = %73, %72, %55
+    %lsr.iv.next29 = add i32 %lsr.iv28, -1
+    %scevgep31 = getelementptr i16, i16* %lsr.iv30, i32 1
+    %scevgep33 = getelementptr i32, i32* %lsr.iv32, i32 1
+    %scevgep35 = getelementptr i32, i32* %lsr.iv34, i32 1
+    %scevgep37 = getelementptr i8, i8* %lsr.iv36, i32 1
+    %exitcond69 = icmp eq i32 %lsr.iv.next29, 0
+    br i1 %exitcond69, label %.loopexit, label %55
+  
+  ; <label>:75                                      ; preds = %93, %.lr.ph31
+    %lsr.iv26 = phi i8* [ %scevgep27, %93 ], [ %mask, %.lr.ph31 ]
+    %lsr.iv24 = phi i32* [ %scevgep25, %93 ], [ %y, %.lr.ph31 ]
+    %lsr.iv22 = phi i32* [ %scevgep23, %93 ], [ %x, %.lr.ph31 ]
+    %lsr.iv20 = phi i16* [ %scevgep21, %93 ], [ %z, %.lr.ph31 ]
+    %lsr.iv18 = phi i32 [ %lsr.iv.next19, %93 ], [ %n, %.lr.ph31 ]
+    %76 = load i8, i8* %lsr.iv26, align 1, !tbaa !49
+    %77 = icmp eq i8 %76, 0
+    br i1 %77, label %93, label %78
+  
+  ; <label>:78                                      ; preds = %75
+    %sunkaddr136 = ptrtoint %struct.gl_context* %ctx to i32
+    %sunkaddr137 = add i32 %sunkaddr136, 2024
+    %sunkaddr138 = inttoptr i32 %sunkaddr137 to %struct.gl_frame_buffer**
+    %79 = load %struct.gl_frame_buffer*, %struct.gl_frame_buffer** %sunkaddr138, align 4, !tbaa !45
+    %80 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %79, i32 0, i32 3
+    %81 = load i16*, i16** %80, align 4, !tbaa !46
+    %82 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %79, i32 0, i32 1
+    %83 = load i32, i32* %82, align 4, !tbaa !48
+    %84 = load i32, i32* %lsr.iv24, align 4, !tbaa !51
+    %85 = mul nsw i32 %84, %83
+    %86 = getelementptr inbounds i16, i16* %81, i32 %85
+    %87 = load i32, i32* %lsr.iv22, align 4, !tbaa !51
+    %88 = getelementptr inbounds i16, i16* %86, i32 %87
+    %89 = load i16, i16* %lsr.iv20, align 2, !tbaa !50
+    %90 = load i16, i16* %88, align 2, !tbaa !50
+    %91 = icmp ugt i16 %89, %90
+    br i1 %91, label %92, label %93
+  
+  ; <label>:92                                      ; preds = %78
+    store i8 0, i8* %lsr.iv26, align 1, !tbaa !49
+    br label %93
+  
+  ; <label>:93                                      ; preds = %92, %78, %75
+    %lsr.iv.next19 = add i32 %lsr.iv18, -1
+    %scevgep21 = getelementptr i16, i16* %lsr.iv20, i32 1
+    %scevgep23 = getelementptr i32, i32* %lsr.iv22, i32 1
+    %scevgep25 = getelementptr i32, i32* %lsr.iv24, i32 1
+    %scevgep27 = getelementptr i8, i8* %lsr.iv26, i32 1
+    %exitcond68 = icmp eq i32 %lsr.iv.next19, 0
+    br i1 %exitcond68, label %.loopexit, label %75
+  
+  ; <label>:94                                      ; preds = %0
+    %95 = getelementptr inbounds %struct.gl_context, %struct.gl_context* %ctx, i32 0, i32 28, i32 3
+    %96 = load i8, i8* %95, align 1, !tbaa !40
+    %97 = icmp eq i8 %96, 0
+    br i1 %97, label %.preheader7, label %.preheader9
+  
+  .preheader9:                                      ; preds = %94
+    %98 = icmp ne i32 %n, 0
+    br i1 %98, label %.lr.ph37, label %.loopexit
+  
+  .lr.ph37:                                         ; preds = %.preheader9
+    br label %100
+  
+  .preheader7:                                      ; preds = %94
+    %99 = icmp ne i32 %n, 0
+    br i1 %99, label %.lr.ph35, label %.loopexit
+  
+  .lr.ph35:                                         ; preds = %.preheader7
+    br label %120
+  
+  ; <label>:100                                     ; preds = %119, %.lr.ph37
+    %lsr.iv56 = phi i8* [ %scevgep57, %119 ], [ %mask, %.lr.ph37 ]
+    %lsr.iv54 = phi i32* [ %scevgep55, %119 ], [ %y, %.lr.ph37 ]
+    %lsr.iv52 = phi i32* [ %scevgep53, %119 ], [ %x, %.lr.ph37 ]
+    %lsr.iv50 = phi i16* [ %scevgep51, %119 ], [ %z, %.lr.ph37 ]
+    %lsr.iv48 = phi i32 [ %lsr.iv.next49, %119 ], [ %n, %.lr.ph37 ]
+    %101 = load i8, i8* %lsr.iv56, align 1, !tbaa !49
+    %102 = icmp eq i8 %101, 0
+    br i1 %102, label %119, label %103
+  
+  ; <label>:103                                     ; preds = %100
+    %sunkaddr139 = ptrtoint %struct.gl_context* %ctx to i32
+    %sunkaddr140 = add i32 %sunkaddr139, 2024
+    %sunkaddr141 = inttoptr i32 %sunkaddr140 to %struct.gl_frame_buffer**
+    %104 = load %struct.gl_frame_buffer*, %struct.gl_frame_buffer** %sunkaddr141, align 4, !tbaa !45
+    %105 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %104, i32 0, i32 3
+    %106 = load i16*, i16** %105, align 4, !tbaa !46
+    %107 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %104, i32 0, i32 1
+    %108 = load i32, i32* %107, align 4, !tbaa !48
+    %109 = load i32, i32* %lsr.iv54, align 4, !tbaa !51
+    %110 = mul nsw i32 %109, %108
+    %111 = getelementptr inbounds i16, i16* %106, i32 %110
+    %112 = load i32, i32* %lsr.iv52, align 4, !tbaa !51
+    %113 = getelementptr inbounds i16, i16* %111, i32 %112
+    %114 = load i16, i16* %lsr.iv50, align 2, !tbaa !50
+    %115 = load i16, i16* %113, align 2, !tbaa !50
+    %116 = icmp ult i16 %114, %115
+    br i1 %116, label %118, label %117
+  
+  ; <label>:117                                     ; preds = %103
+    store i16 %114, i16* %113, align 2, !tbaa !50
+    br label %119
+  
+  ; <label>:118                                     ; preds = %103
+    store i8 0, i8* %lsr.iv56, align 1, !tbaa !49
+    br label %119
+  
+  ; <label>:119                                     ; preds = %118, %117, %100
+    %lsr.iv.next49 = add i32 %lsr.iv48, -1
+    %scevgep51 = getelementptr i16, i16* %lsr.iv50, i32 1
+    %scevgep53 = getelementptr i32, i32* %lsr.iv52, i32 1
+    %scevgep55 = getelementptr i32, i32* %lsr.iv54, i32 1
+    %scevgep57 = getelementptr i8, i8* %lsr.iv56, i32 1
+    %exitcond71 = icmp eq i32 %lsr.iv.next49, 0
+    br i1 %exitcond71, label %.loopexit, label %100
+  
+  ; <label>:120                                     ; preds = %138, %.lr.ph35
+    %lsr.iv46 = phi i8* [ %scevgep47, %138 ], [ %mask, %.lr.ph35 ]
+    %lsr.iv44 = phi i32* [ %scevgep45, %138 ], [ %y, %.lr.ph35 ]
+    %lsr.iv42 = phi i32* [ %scevgep43, %138 ], [ %x, %.lr.ph35 ]
+    %lsr.iv40 = phi i16* [ %scevgep41, %138 ], [ %z, %.lr.ph35 ]
+    %lsr.iv38 = phi i32 [ %lsr.iv.next39, %138 ], [ %n, %.lr.ph35 ]
+    %121 = load i8, i8* %lsr.iv46, align 1, !tbaa !49
+    %122 = icmp eq i8 %121, 0
+    br i1 %122, label %138, label %123
+  
+  ; <label>:123                                     ; preds = %120
+    %sunkaddr142 = ptrtoint %struct.gl_context* %ctx to i32
+    %sunkaddr143 = add i32 %sunkaddr142, 2024
+    %sunkaddr144 = inttoptr i32 %sunkaddr143 to %struct.gl_frame_buffer**
+    %124 = load %struct.gl_frame_buffer*, %struct.gl_frame_buffer** %sunkaddr144, align 4, !tbaa !45
+    %125 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %124, i32 0, i32 3
+    %126 = load i16*, i16** %125, align 4, !tbaa !46
+    %127 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %124, i32 0, i32 1
+    %128 = load i32, i32* %127, align 4, !tbaa !48
+    %129 = load i32, i32* %lsr.iv44, align 4, !tbaa !51
+    %130 = mul nsw i32 %129, %128
+    %131 = getelementptr inbounds i16, i16* %126, i32 %130
+    %132 = load i32, i32* %lsr.iv42, align 4, !tbaa !51
+    %133 = getelementptr inbounds i16, i16* %131, i32 %132
+    %134 = load i16, i16* %lsr.iv40, align 2, !tbaa !50
+    %135 = load i16, i16* %133, align 2, !tbaa !50
+    %136 = icmp ult i16 %134, %135
+    br i1 %136, label %137, label %138
+  
+  ; <label>:137                                     ; preds = %123
+    store i8 0, i8* %lsr.iv46, align 1, !tbaa !49
+    br label %138
+  
+  ; <label>:138                                     ; preds = %137, %123, %120
+    %lsr.iv.next39 = add i32 %lsr.iv38, -1
+    %scevgep41 = getelementptr i16, i16* %lsr.iv40, i32 1
+    %scevgep43 = getelementptr i32, i32* %lsr.iv42, i32 1
+    %scevgep45 = getelementptr i32, i32* %lsr.iv44, i32 1
+    %scevgep47 = getelementptr i8, i8* %lsr.iv46, i32 1
+    %exitcond70 = icmp eq i32 %lsr.iv.next39, 0
+    br i1 %exitcond70, label %.loopexit, label %120
+  
+  ; <label>:139                                     ; preds = %0
+    %140 = getelementptr inbounds %struct.gl_context, %struct.gl_context* %ctx, i32 0, i32 28, i32 3
+    %141 = load i8, i8* %140, align 1, !tbaa !40
+    %142 = icmp eq i8 %141, 0
+    br i1 %142, label %.preheader11, label %.preheader13
+  
+  .preheader13:                                     ; preds = %139
+    %143 = icmp ne i32 %n, 0
+    br i1 %143, label %.lr.ph41, label %.loopexit
+  
+  .lr.ph41:                                         ; preds = %.preheader13
+    br label %145
+  
+  .preheader11:                                     ; preds = %139
+    %144 = icmp ne i32 %n, 0
+    br i1 %144, label %.lr.ph39, label %.loopexit
+  
+  .lr.ph39:                                         ; preds = %.preheader11
+    br label %165
+  
+  ; <label>:145                                     ; preds = %164, %.lr.ph41
+    %lsr.iv76 = phi i8* [ %scevgep77, %164 ], [ %mask, %.lr.ph41 ]
+    %lsr.iv74 = phi i32* [ %scevgep75, %164 ], [ %y, %.lr.ph41 ]
+    %lsr.iv72 = phi i32* [ %scevgep73, %164 ], [ %x, %.lr.ph41 ]
+    %lsr.iv70 = phi i16* [ %scevgep71, %164 ], [ %z, %.lr.ph41 ]
+    %lsr.iv68 = phi i32 [ %lsr.iv.next69, %164 ], [ %n, %.lr.ph41 ]
+    %146 = load i8, i8* %lsr.iv76, align 1, !tbaa !49
+    %147 = icmp eq i8 %146, 0
+    br i1 %147, label %164, label %148
+  
+  ; <label>:148                                     ; preds = %145
+    %sunkaddr145 = ptrtoint %struct.gl_context* %ctx to i32
+    %sunkaddr146 = add i32 %sunkaddr145, 2024
+    %sunkaddr147 = inttoptr i32 %sunkaddr146 to %struct.gl_frame_buffer**
+    %149 = load %struct.gl_frame_buffer*, %struct.gl_frame_buffer** %sunkaddr147, align 4, !tbaa !45
+    %150 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %149, i32 0, i32 3
+    %151 = load i16*, i16** %150, align 4, !tbaa !46
+    %152 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %149, i32 0, i32 1
+    %153 = load i32, i32* %152, align 4, !tbaa !48
+    %154 = load i32, i32* %lsr.iv74, align 4, !tbaa !51
+    %155 = mul nsw i32 %154, %153
+    %156 = getelementptr inbounds i16, i16* %151, i32 %155
+    %157 = load i32, i32* %lsr.iv72, align 4, !tbaa !51
+    %158 = getelementptr inbounds i16, i16* %156, i32 %157
+    %159 = load i16, i16* %lsr.iv70, align 2, !tbaa !50
+    %160 = load i16, i16* %158, align 2, !tbaa !50
+    %161 = icmp ugt i16 %159, %160
+    br i1 %161, label %162, label %163
+  
+  ; <label>:162                                     ; preds = %148
+    store i16 %159, i16* %158, align 2, !tbaa !50
+    br label %164
+  
+  ; <label>:163                                     ; preds = %148
+    store i8 0, i8* %lsr.iv76, align 1, !tbaa !49
+    br label %164
+  
+  ; <label>:164                                     ; preds = %163, %162, %145
+    %lsr.iv.next69 = add i32 %lsr.iv68, -1
+    %scevgep71 = getelementptr i16, i16* %lsr.iv70, i32 1
+    %scevgep73 = getelementptr i32, i32* %lsr.iv72, i32 1
+    %scevgep75 = getelementptr i32, i32* %lsr.iv74, i32 1
+    %scevgep77 = getelementptr i8, i8* %lsr.iv76, i32 1
+    %exitcond73 = icmp eq i32 %lsr.iv.next69, 0
+    br i1 %exitcond73, label %.loopexit, label %145
+  
+  ; <label>:165                                     ; preds = %183, %.lr.ph39
+    %lsr.iv66 = phi i8* [ %scevgep67, %183 ], [ %mask, %.lr.ph39 ]
+    %lsr.iv64 = phi i32* [ %scevgep65, %183 ], [ %y, %.lr.ph39 ]
+    %lsr.iv62 = phi i32* [ %scevgep63, %183 ], [ %x, %.lr.ph39 ]
+    %lsr.iv60 = phi i16* [ %scevgep61, %183 ], [ %z, %.lr.ph39 ]
+    %lsr.iv58 = phi i32 [ %lsr.iv.next59, %183 ], [ %n, %.lr.ph39 ]
+    %166 = load i8, i8* %lsr.iv66, align 1, !tbaa !49
+    %167 = icmp eq i8 %166, 0
+    br i1 %167, label %183, label %168
+  
+  ; <label>:168                                     ; preds = %165
+    %sunkaddr148 = ptrtoint %struct.gl_context* %ctx to i32
+    %sunkaddr149 = add i32 %sunkaddr148, 2024
+    %sunkaddr150 = inttoptr i32 %sunkaddr149 to %struct.gl_frame_buffer**
+    %169 = load %struct.gl_frame_buffer*, %struct.gl_frame_buffer** %sunkaddr150, align 4, !tbaa !45
+    %170 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %169, i32 0, i32 3
+    %171 = load i16*, i16** %170, align 4, !tbaa !46
+    %172 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %169, i32 0, i32 1
+    %173 = load i32, i32* %172, align 4, !tbaa !48
+    %174 = load i32, i32* %lsr.iv64, align 4, !tbaa !51
+    %175 = mul nsw i32 %174, %173
+    %176 = getelementptr inbounds i16, i16* %171, i32 %175
+    %177 = load i32, i32* %lsr.iv62, align 4, !tbaa !51
+    %178 = getelementptr inbounds i16, i16* %176, i32 %177
+    %179 = load i16, i16* %lsr.iv60, align 2, !tbaa !50
+    %180 = load i16, i16* %178, align 2, !tbaa !50
+    %181 = icmp ugt i16 %179, %180
+    br i1 %181, label %183, label %182
+  
+  ; <label>:182                                     ; preds = %168
+    store i8 0, i8* %lsr.iv66, align 1, !tbaa !49
+    br label %183
+  
+  ; <label>:183                                     ; preds = %182, %168, %165
+    %lsr.iv.next59 = add i32 %lsr.iv58, -1
+    %scevgep61 = getelementptr i16, i16* %lsr.iv60, i32 1
+    %scevgep63 = getelementptr i32, i32* %lsr.iv62, i32 1
+    %scevgep65 = getelementptr i32, i32* %lsr.iv64, i32 1
+    %scevgep67 = getelementptr i8, i8* %lsr.iv66, i32 1
+    %exitcond72 = icmp eq i32 %lsr.iv.next59, 0
+    br i1 %exitcond72, label %.loopexit, label %165
+  
+  ; <label>:184                                     ; preds = %0
+    %185 = getelementptr inbounds %struct.gl_context, %struct.gl_context* %ctx, i32 0, i32 28, i32 3
+    %186 = load i8, i8* %185, align 1, !tbaa !40
+    %187 = icmp eq i8 %186, 0
+    br i1 %187, label %.preheader15, label %.preheader17
+  
+  .preheader17:                                     ; preds = %184
+    %188 = icmp ne i32 %n, 0
+    br i1 %188, label %.lr.ph45, label %.loopexit
+  
+  .lr.ph45:                                         ; preds = %.preheader17
+    br label %190
+  
+  .preheader15:                                     ; preds = %184
+    %189 = icmp ne i32 %n, 0
+    br i1 %189, label %.lr.ph43, label %.loopexit
+  
+  .lr.ph43:                                         ; preds = %.preheader15
+    br label %210
+  
+  ; <label>:190                                     ; preds = %209, %.lr.ph45
+    %lsr.iv96 = phi i8* [ %scevgep97, %209 ], [ %mask, %.lr.ph45 ]
+    %lsr.iv94 = phi i32* [ %scevgep95, %209 ], [ %y, %.lr.ph45 ]
+    %lsr.iv92 = phi i32* [ %scevgep93, %209 ], [ %x, %.lr.ph45 ]
+    %lsr.iv90 = phi i16* [ %scevgep91, %209 ], [ %z, %.lr.ph45 ]
+    %lsr.iv88 = phi i32 [ %lsr.iv.next89, %209 ], [ %n, %.lr.ph45 ]
+    %191 = load i8, i8* %lsr.iv96, align 1, !tbaa !49
+    %192 = icmp eq i8 %191, 0
+    br i1 %192, label %209, label %193
+  
+  ; <label>:193                                     ; preds = %190
+    %sunkaddr151 = ptrtoint %struct.gl_context* %ctx to i32
+    %sunkaddr152 = add i32 %sunkaddr151, 2024
+    %sunkaddr153 = inttoptr i32 %sunkaddr152 to %struct.gl_frame_buffer**
+    %194 = load %struct.gl_frame_buffer*, %struct.gl_frame_buffer** %sunkaddr153, align 4, !tbaa !45
+    %195 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %194, i32 0, i32 3
+    %196 = load i16*, i16** %195, align 4, !tbaa !46
+    %197 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %194, i32 0, i32 1
+    %198 = load i32, i32* %197, align 4, !tbaa !48
+    %199 = load i32, i32* %lsr.iv94, align 4, !tbaa !51
+    %200 = mul nsw i32 %199, %198
+    %201 = getelementptr inbounds i16, i16* %196, i32 %200
+    %202 = load i32, i32* %lsr.iv92, align 4, !tbaa !51
+    %203 = getelementptr inbounds i16, i16* %201, i32 %202
+    %204 = load i16, i16* %lsr.iv90, align 2, !tbaa !50
+    %205 = load i16, i16* %203, align 2, !tbaa !50
+    %206 = icmp eq i16 %204, %205
+    br i1 %206, label %208, label %207
+  
+  ; <label>:207                                     ; preds = %193
+    store i16 %204, i16* %203, align 2, !tbaa !50
+    br label %209
+  
+  ; <label>:208                                     ; preds = %193
+    store i8 0, i8* %lsr.iv96, align 1, !tbaa !49
+    br label %209
+  
+  ; <label>:209                                     ; preds = %208, %207, %190
+    %lsr.iv.next89 = add i32 %lsr.iv88, -1
+    %scevgep91 = getelementptr i16, i16* %lsr.iv90, i32 1
+    %scevgep93 = getelementptr i32, i32* %lsr.iv92, i32 1
+    %scevgep95 = getelementptr i32, i32* %lsr.iv94, i32 1
+    %scevgep97 = getelementptr i8, i8* %lsr.iv96, i32 1
+    %exitcond75 = icmp eq i32 %lsr.iv.next89, 0
+    br i1 %exitcond75, label %.loopexit, label %190
+  
+  ; <label>:210                                     ; preds = %228, %.lr.ph43
+    %lsr.iv86 = phi i8* [ %scevgep87, %228 ], [ %mask, %.lr.ph43 ]
+    %lsr.iv84 = phi i32* [ %scevgep85, %228 ], [ %y, %.lr.ph43 ]
+    %lsr.iv82 = phi i32* [ %scevgep83, %228 ], [ %x, %.lr.ph43 ]
+    %lsr.iv80 = phi i16* [ %scevgep81, %228 ], [ %z, %.lr.ph43 ]
+    %lsr.iv78 = phi i32 [ %lsr.iv.next79, %228 ], [ %n, %.lr.ph43 ]
+    %211 = load i8, i8* %lsr.iv86, align 1, !tbaa !49
+    %212 = icmp eq i8 %211, 0
+    br i1 %212, label %228, label %213
+  
+  ; <label>:213                                     ; preds = %210
+    %sunkaddr154 = ptrtoint %struct.gl_context* %ctx to i32
+    %sunkaddr155 = add i32 %sunkaddr154, 2024
+    %sunkaddr156 = inttoptr i32 %sunkaddr155 to %struct.gl_frame_buffer**
+    %214 = load %struct.gl_frame_buffer*, %struct.gl_frame_buffer** %sunkaddr156, align 4, !tbaa !45
+    %215 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %214, i32 0, i32 3
+    %216 = load i16*, i16** %215, align 4, !tbaa !46
+    %217 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %214, i32 0, i32 1
+    %218 = load i32, i32* %217, align 4, !tbaa !48
+    %219 = load i32, i32* %lsr.iv84, align 4, !tbaa !51
+    %220 = mul nsw i32 %219, %218
+    %221 = getelementptr inbounds i16, i16* %216, i32 %220
+    %222 = load i32, i32* %lsr.iv82, align 4, !tbaa !51
+    %223 = getelementptr inbounds i16, i16* %221, i32 %222
+    %224 = load i16, i16* %lsr.iv80, align 2, !tbaa !50
+    %225 = load i16, i16* %223, align 2, !tbaa !50
+    %226 = icmp eq i16 %224, %225
+    br i1 %226, label %227, label %228
+  
+  ; <label>:227                                     ; preds = %213
+    store i8 0, i8* %lsr.iv86, align 1, !tbaa !49
+    br label %228
+  
+  ; <label>:228                                     ; preds = %227, %213, %210
+    %lsr.iv.next79 = add i32 %lsr.iv78, -1
+    %scevgep81 = getelementptr i16, i16* %lsr.iv80, i32 1
+    %scevgep83 = getelementptr i32, i32* %lsr.iv82, i32 1
+    %scevgep85 = getelementptr i32, i32* %lsr.iv84, i32 1
+    %scevgep87 = getelementptr i8, i8* %lsr.iv86, i32 1
+    %exitcond74 = icmp eq i32 %lsr.iv.next79, 0
+    br i1 %exitcond74, label %.loopexit, label %210
+  
+  ; <label>:229                                     ; preds = %0
+    %230 = getelementptr inbounds %struct.gl_context, %struct.gl_context* %ctx, i32 0, i32 28, i32 3
+    %231 = load i8, i8* %230, align 1, !tbaa !40
+    %232 = icmp eq i8 %231, 0
+    br i1 %232, label %.preheader19, label %.preheader21
+  
+  .preheader21:                                     ; preds = %229
+    %233 = icmp ne i32 %n, 0
+    br i1 %233, label %.lr.ph49, label %.loopexit
+  
+  .lr.ph49:                                         ; preds = %.preheader21
+    br label %235
+  
+  .preheader19:                                     ; preds = %229
+    %234 = icmp ne i32 %n, 0
+    br i1 %234, label %.lr.ph47, label %.loopexit
+  
+  .lr.ph47:                                         ; preds = %.preheader19
+    br label %255
+  
+  ; <label>:235                                     ; preds = %254, %.lr.ph49
+    %lsr.iv116 = phi i8* [ %scevgep117, %254 ], [ %mask, %.lr.ph49 ]
+    %lsr.iv114 = phi i32* [ %scevgep115, %254 ], [ %y, %.lr.ph49 ]
+    %lsr.iv112 = phi i32* [ %scevgep113, %254 ], [ %x, %.lr.ph49 ]
+    %lsr.iv110 = phi i16* [ %scevgep111, %254 ], [ %z, %.lr.ph49 ]
+    %lsr.iv108 = phi i32 [ %lsr.iv.next109, %254 ], [ %n, %.lr.ph49 ]
+    %236 = load i8, i8* %lsr.iv116, align 1, !tbaa !49
+    %237 = icmp eq i8 %236, 0
+    br i1 %237, label %254, label %238
+  
+  ; <label>:238                                     ; preds = %235
+    %sunkaddr157 = ptrtoint %struct.gl_context* %ctx to i32
+    %sunkaddr158 = add i32 %sunkaddr157, 2024
+    %sunkaddr159 = inttoptr i32 %sunkaddr158 to %struct.gl_frame_buffer**
+    %239 = load %struct.gl_frame_buffer*, %struct.gl_frame_buffer** %sunkaddr159, align 4, !tbaa !45
+    %240 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %239, i32 0, i32 3
+    %241 = load i16*, i16** %240, align 4, !tbaa !46
+    %242 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %239, i32 0, i32 1
+    %243 = load i32, i32* %242, align 4, !tbaa !48
+    %244 = load i32, i32* %lsr.iv114, align 4, !tbaa !51
+    %245 = mul nsw i32 %244, %243
+    %246 = getelementptr inbounds i16, i16* %241, i32 %245
+    %247 = load i32, i32* %lsr.iv112, align 4, !tbaa !51
+    %248 = getelementptr inbounds i16, i16* %246, i32 %247
+    %249 = load i16, i16* %lsr.iv110, align 2, !tbaa !50
+    %250 = load i16, i16* %248, align 2, !tbaa !50
+    %251 = icmp eq i16 %249, %250
+    br i1 %251, label %252, label %253
+  
+  ; <label>:252                                     ; preds = %238
+    store i16 %249, i16* %248, align 2, !tbaa !50
+    br label %254
+  
+  ; <label>:253                                     ; preds = %238
+    store i8 0, i8* %lsr.iv116, align 1, !tbaa !49
+    br label %254
+  
+  ; <label>:254                                     ; preds = %253, %252, %235
+    %lsr.iv.next109 = add i32 %lsr.iv108, -1
+    %scevgep111 = getelementptr i16, i16* %lsr.iv110, i32 1
+    %scevgep113 = getelementptr i32, i32* %lsr.iv112, i32 1
+    %scevgep115 = getelementptr i32, i32* %lsr.iv114, i32 1
+    %scevgep117 = getelementptr i8, i8* %lsr.iv116, i32 1
+    %exitcond77 = icmp eq i32 %lsr.iv.next109, 0
+    br i1 %exitcond77, label %.loopexit, label %235
+  
+  ; <label>:255                                     ; preds = %273, %.lr.ph47
+    %lsr.iv106 = phi i8* [ %scevgep107, %273 ], [ %mask, %.lr.ph47 ]
+    %lsr.iv104 = phi i32* [ %scevgep105, %273 ], [ %y, %.lr.ph47 ]
+    %lsr.iv102 = phi i32* [ %scevgep103, %273 ], [ %x, %.lr.ph47 ]
+    %lsr.iv100 = phi i16* [ %scevgep101, %273 ], [ %z, %.lr.ph47 ]
+    %lsr.iv98 = phi i32 [ %lsr.iv.next99, %273 ], [ %n, %.lr.ph47 ]
+    %256 = load i8, i8* %lsr.iv106, align 1, !tbaa !49
+    %257 = icmp eq i8 %256, 0
+    br i1 %257, label %273, label %258
+  
+  ; <label>:258                                     ; preds = %255
+    %sunkaddr160 = ptrtoint %struct.gl_context* %ctx to i32
+    %sunkaddr161 = add i32 %sunkaddr160, 2024
+    %sunkaddr162 = inttoptr i32 %sunkaddr161 to %struct.gl_frame_buffer**
+    %259 = load %struct.gl_frame_buffer*, %struct.gl_frame_buffer** %sunkaddr162, align 4, !tbaa !45
+    %260 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %259, i32 0, i32 3
+    %261 = load i16*, i16** %260, align 4, !tbaa !46
+    %262 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %259, i32 0, i32 1
+    %263 = load i32, i32* %262, align 4, !tbaa !48
+    %264 = load i32, i32* %lsr.iv104, align 4, !tbaa !51
+    %265 = mul nsw i32 %264, %263
+    %266 = getelementptr inbounds i16, i16* %261, i32 %265
+    %267 = load i32, i32* %lsr.iv102, align 4, !tbaa !51
+    %268 = getelementptr inbounds i16, i16* %266, i32 %267
+    %269 = load i16, i16* %lsr.iv100, align 2, !tbaa !50
+    %270 = load i16, i16* %268, align 2, !tbaa !50
+    %271 = icmp eq i16 %269, %270
+    br i1 %271, label %273, label %272
+  
+  ; <label>:272                                     ; preds = %258
+    store i8 0, i8* %lsr.iv106, align 1, !tbaa !49
+    br label %273
+  
+  ; <label>:273                                     ; preds = %272, %258, %255
+    %lsr.iv.next99 = add i32 %lsr.iv98, -1
+    %scevgep101 = getelementptr i16, i16* %lsr.iv100, i32 1
+    %scevgep103 = getelementptr i32, i32* %lsr.iv102, i32 1
+    %scevgep105 = getelementptr i32, i32* %lsr.iv104, i32 1
+    %scevgep107 = getelementptr i8, i8* %lsr.iv106, i32 1
+    %exitcond76 = icmp eq i32 %lsr.iv.next99, 0
+    br i1 %exitcond76, label %.loopexit, label %255
+  
+  ; <label>:274                                     ; preds = %0
+    %275 = getelementptr inbounds %struct.gl_context, %struct.gl_context* %ctx, i32 0, i32 28, i32 3
+    %276 = load i8, i8* %275, align 1, !tbaa !40
+    %277 = icmp ne i8 %276, 0
+    %278 = icmp ne i32 %n, 0
+    %or.cond = and i1 %277, %278
+    br i1 %or.cond, label %.lr.ph51, label %.loopexit
+  
+  .lr.ph51:                                         ; preds = %274
+    br label %279
+  
+  ; <label>:279                                     ; preds = %294, %.lr.ph51
+    %lsr.iv126 = phi i8* [ %scevgep127, %294 ], [ %mask, %.lr.ph51 ]
+    %lsr.iv124 = phi i32* [ %scevgep125, %294 ], [ %y, %.lr.ph51 ]
+    %lsr.iv122 = phi i32* [ %scevgep123, %294 ], [ %x, %.lr.ph51 ]
+    %lsr.iv120 = phi i16* [ %scevgep121, %294 ], [ %z, %.lr.ph51 ]
+    %lsr.iv118 = phi i32 [ %lsr.iv.next119, %294 ], [ %n, %.lr.ph51 ]
+    %280 = load i8, i8* %lsr.iv126, align 1, !tbaa !49
+    %281 = icmp eq i8 %280, 0
+    br i1 %281, label %294, label %282
+  
+  ; <label>:282                                     ; preds = %279
+    %sunkaddr163 = ptrtoint %struct.gl_context* %ctx to i32
+    %sunkaddr164 = add i32 %sunkaddr163, 2024
+    %sunkaddr165 = inttoptr i32 %sunkaddr164 to %struct.gl_frame_buffer**
+    %283 = load %struct.gl_frame_buffer*, %struct.gl_frame_buffer** %sunkaddr165, align 4, !tbaa !45
+    %284 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %283, i32 0, i32 3
+    %285 = load i16*, i16** %284, align 4, !tbaa !46
+    %286 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %283, i32 0, i32 1
+    %287 = load i32, i32* %286, align 4, !tbaa !48
+    %288 = load i32, i32* %lsr.iv124, align 4, !tbaa !51
+    %289 = mul nsw i32 %288, %287
+    %290 = getelementptr inbounds i16, i16* %285, i32 %289
+    %291 = load i32, i32* %lsr.iv122, align 4, !tbaa !51
+    %292 = getelementptr inbounds i16, i16* %290, i32 %291
+    %293 = load i16, i16* %lsr.iv120, align 2, !tbaa !50
+    store i16 %293, i16* %292, align 2, !tbaa !50
+    br label %294
+  
+  ; <label>:294                                     ; preds = %282, %279
+    %lsr.iv.next119 = add i32 %lsr.iv118, -1
+    %scevgep121 = getelementptr i16, i16* %lsr.iv120, i32 1
+    %scevgep123 = getelementptr i32, i32* %lsr.iv122, i32 1
+    %scevgep125 = getelementptr i32, i32* %lsr.iv124, i32 1
+    %scevgep127 = getelementptr i8, i8* %lsr.iv126, i32 1
+    %exitcond78 = icmp eq i32 %lsr.iv.next119, 0
+    br i1 %exitcond78, label %.loopexit, label %279
+  
+  ; <label>:295                                     ; preds = %0
+    tail call void @abort() #6
+    unreachable
+  
+  .loopexit:                                        ; preds = %294, %254, %273, %209, %228, %164, %183, %119, %138, %74, %93, %29, %48, %274, %.preheader19, %.preheader21, %.preheader15, %.preheader17, %.preheader11, %.preheader13, %.preheader7, %.preheader9, %.preheader3, %.preheader5, %.preheader, %.preheader1, %.lr.ph53.preheader, %.preheader25
+    ret void
+  }
+  
+  ; Function Attrs: norecurse nounwind
+  define void @gl_depth_test_pixels_less(%struct.gl_context* nocapture readonly %ctx, i32 signext %n, i32* nocapture readonly %x, i32* nocapture readonly %y, i16* nocapture readonly %z, i8* nocapture %mask) #3 {
+    %1 = icmp eq i32 %n, 0
+    br i1 %1, label %._crit_edge, label %.lr.ph
+  
+  .lr.ph:                                           ; preds = %0
+    br label %2
+  
+  ; <label>:2                                       ; preds = %21, %.lr.ph
+    %lsr.iv6 = phi i8* [ %scevgep7, %21 ], [ %mask, %.lr.ph ]
+    %lsr.iv4 = phi i32* [ %scevgep5, %21 ], [ %y, %.lr.ph ]
+    %lsr.iv2 = phi i32* [ %scevgep3, %21 ], [ %x, %.lr.ph ]
+    %lsr.iv1 = phi i16* [ %scevgep, %21 ], [ %z, %.lr.ph ]
+    %lsr.iv = phi i32 [ %lsr.iv.next, %21 ], [ %n, %.lr.ph ]
+    %3 = load i8, i8* %lsr.iv6, align 1, !tbaa !49
+    %4 = icmp eq i8 %3, 0
+    br i1 %4, label %21, label %5
+  
+  ; <label>:5                                       ; preds = %2
+    %sunkaddr = ptrtoint %struct.gl_context* %ctx to i32
+    %sunkaddr8 = add i32 %sunkaddr, 2024
+    %sunkaddr9 = inttoptr i32 %sunkaddr8 to %struct.gl_frame_buffer**
+    %6 = load %struct.gl_frame_buffer*, %struct.gl_frame_buffer** %sunkaddr9, align 4, !tbaa !45
+    %7 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %6, i32 0, i32 3
+    %8 = load i16*, i16** %7, align 4, !tbaa !46
+    %9 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %6, i32 0, i32 1
+    %10 = load i32, i32* %9, align 4, !tbaa !48
+    %11 = load i32, i32* %lsr.iv4, align 4, !tbaa !51
+    %12 = mul nsw i32 %11, %10
+    %13 = getelementptr inbounds i16, i16* %8, i32 %12
+    %14 = load i32, i32* %lsr.iv2, align 4, !tbaa !51
+    %15 = getelementptr inbounds i16, i16* %13, i32 %14
+    %16 = load i16, i16* %lsr.iv1, align 2, !tbaa !50
+    %17 = load i16, i16* %15, align 2, !tbaa !50
+    %18 = icmp ult i16 %16, %17
+    br i1 %18, label %19, label %20
+  
+  ; <label>:19                                      ; preds = %5
+    store i16 %16, i16* %15, align 2, !tbaa !50
+    br label %21
+  
+  ; <label>:20                                      ; preds = %5
+    store i8 0, i8* %lsr.iv6, align 1, !tbaa !49
+    br label %21
+  
+  ; <label>:21                                      ; preds = %20, %19, %2
+    %lsr.iv.next = add i32 %lsr.iv, -1
+    %scevgep = getelementptr i16, i16* %lsr.iv1, i32 1
+    %scevgep3 = getelementptr i32, i32* %lsr.iv2, i32 1
+    %scevgep5 = getelementptr i32, i32* %lsr.iv4, i32 1
+    %scevgep7 = getelementptr i8, i8* %lsr.iv6, i32 1
+    %exitcond = icmp eq i32 %lsr.iv.next, 0
+    br i1 %exitcond, label %._crit_edge, label %2
+  
+  ._crit_edge:                                      ; preds = %21, %0
+    ret void
+  }
+  
+  ; Function Attrs: norecurse nounwind
+  define void @gl_depth_test_pixels_greater(%struct.gl_context* nocapture readonly %ctx, i32 signext %n, i32* nocapture readonly %x, i32* nocapture readonly %y, i16* nocapture readonly %z, i8* nocapture %mask) #3 {
+    %1 = icmp eq i32 %n, 0
+    br i1 %1, label %._crit_edge, label %.lr.ph
+  
+  .lr.ph:                                           ; preds = %0
+    br label %2
+  
+  ; <label>:2                                       ; preds = %21, %.lr.ph
+    %lsr.iv6 = phi i8* [ %scevgep7, %21 ], [ %mask, %.lr.ph ]
+    %lsr.iv4 = phi i32* [ %scevgep5, %21 ], [ %y, %.lr.ph ]
+    %lsr.iv2 = phi i32* [ %scevgep3, %21 ], [ %x, %.lr.ph ]
+    %lsr.iv1 = phi i16* [ %scevgep, %21 ], [ %z, %.lr.ph ]
+    %lsr.iv = phi i32 [ %lsr.iv.next, %21 ], [ %n, %.lr.ph ]
+    %3 = load i8, i8* %lsr.iv6, align 1, !tbaa !49
+    %4 = icmp eq i8 %3, 0
+    br i1 %4, label %21, label %5
+  
+  ; <label>:5                                       ; preds = %2
+    %sunkaddr = ptrtoint %struct.gl_context* %ctx to i32
+    %sunkaddr8 = add i32 %sunkaddr, 2024
+    %sunkaddr9 = inttoptr i32 %sunkaddr8 to %struct.gl_frame_buffer**
+    %6 = load %struct.gl_frame_buffer*, %struct.gl_frame_buffer** %sunkaddr9, align 4, !tbaa !45
+    %7 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %6, i32 0, i32 3
+    %8 = load i16*, i16** %7, align 4, !tbaa !46
+    %9 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %6, i32 0, i32 1
+    %10 = load i32, i32* %9, align 4, !tbaa !48
+    %11 = load i32, i32* %lsr.iv4, align 4, !tbaa !51
+    %12 = mul nsw i32 %11, %10
+    %13 = getelementptr inbounds i16, i16* %8, i32 %12
+    %14 = load i32, i32* %lsr.iv2, align 4, !tbaa !51
+    %15 = getelementptr inbounds i16, i16* %13, i32 %14
+    %16 = load i16, i16* %lsr.iv1, align 2, !tbaa !50
+    %17 = load i16, i16* %15, align 2, !tbaa !50
+    %18 = icmp ugt i16 %16, %17
+    br i1 %18, label %19, label %20
+  
+  ; <label>:19                                      ; preds = %5
+    store i16 %16, i16* %15, align 2, !tbaa !50
+    br label %21
+  
+  ; <label>:20                                      ; preds = %5
+    store i8 0, i8* %lsr.iv6, align 1, !tbaa !49
+    br label %21
+  
+  ; <label>:21                                      ; preds = %20, %19, %2
+    %lsr.iv.next = add i32 %lsr.iv, -1
+    %scevgep = getelementptr i16, i16* %lsr.iv1, i32 1
+    %scevgep3 = getelementptr i32, i32* %lsr.iv2, i32 1
+    %scevgep5 = getelementptr i32, i32* %lsr.iv4, i32 1
+    %scevgep7 = getelementptr i8, i8* %lsr.iv6, i32 1
+    %exitcond = icmp eq i32 %lsr.iv.next, 0
+    br i1 %exitcond, label %._crit_edge, label %2
+  
+  ._crit_edge:                                      ; preds = %21, %0
+    ret void
+  }
+  
+  ; Function Attrs: norecurse nounwind
+  define void @gl_read_depth_span_float(%struct.gl_context* nocapture readonly %ctx, i32 signext %n, i32 signext %x, i32 signext %y, float* nocapture %depth) #3 {
+    %1 = getelementptr inbounds %struct.gl_context, %struct.gl_context* %ctx, i32 0, i32 5
+    %2 = load %struct.gl_frame_buffer*, %struct.gl_frame_buffer** %1, align 4, !tbaa !45
+    %3 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %2, i32 0, i32 3
+    %4 = load i16*, i16** %3, align 4, !tbaa !46
+    %5 = icmp eq i16* %4, null
+    br i1 %5, label %.preheader, label %9
+  
+  .preheader:                                       ; preds = %0
+    %6 = icmp eq i32 %n, 0
+    br i1 %6, label %.loopexit, label %.lr.ph.preheader
+  
+  .lr.ph.preheader:                                 ; preds = %.preheader
+    %7 = bitcast float* %depth to i8*
+    %8 = shl i32 %n, 2
+    call void @llvm.memset.p0i8.i32(i8* %7, i8 0, i32 %8, i32 4, i1 false)
+    br label %.loopexit
+  
+  ; <label>:9                                       ; preds = %0
+    %10 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %2, i32 0, i32 1
+    %11 = load i32, i32* %10, align 4, !tbaa !48
+    %12 = icmp eq i32 %n, 0
+    br i1 %12, label %.loopexit, label %.lr.ph4.preheader
+  
+  .lr.ph4.preheader:                                ; preds = %9
+    %13 = mul i32 %11, %y
+    %14 = add i32 %x, %13
+    %scevgep2 = getelementptr i16, i16* %4, i32 %14
+    br label %.lr.ph4
+  
+  .lr.ph4:                                          ; preds = %.lr.ph4, %.lr.ph4.preheader
+    %lsr.iv3 = phi i16* [ %scevgep4, %.lr.ph4 ], [ %scevgep2, %.lr.ph4.preheader ]
+    %lsr.iv1 = phi float* [ %scevgep, %.lr.ph4 ], [ %depth, %.lr.ph4.preheader ]
+    %lsr.iv = phi i32 [ %lsr.iv.next, %.lr.ph4 ], [ %n, %.lr.ph4.preheader ]
+    %15 = load i16, i16* %lsr.iv3, align 2, !tbaa !50
+    %16 = uitofp i16 %15 to float
+    %17 = fmul float %16, 0x3EF0001000000000
+    store float %17, float* %lsr.iv1, align 4, !tbaa !52
+    %lsr.iv.next = add i32 %lsr.iv, -1
+    %scevgep = getelementptr float, float* %lsr.iv1, i32 1
+    %scevgep4 = getelementptr i16, i16* %lsr.iv3, i32 1
+    %exitcond6 = icmp eq i32 %lsr.iv.next, 0
+    br i1 %exitcond6, label %.loopexit, label %.lr.ph4
+  
+  .loopexit:                                        ; preds = %.lr.ph4, %9, %.lr.ph.preheader, %.preheader
+    ret void
+  }
+  
+  ; Function Attrs: norecurse nounwind
+  define void @gl_read_depth_span_int(%struct.gl_context* nocapture readonly %ctx, i32 signext %n, i32 signext %x, i32 signext %y, i16* nocapture %depth) #3 {
+    %1 = getelementptr inbounds %struct.gl_context, %struct.gl_context* %ctx, i32 0, i32 5
+    %2 = load %struct.gl_frame_buffer*, %struct.gl_frame_buffer** %1, align 4, !tbaa !45
+    %3 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %2, i32 0, i32 3
+    %4 = load i16*, i16** %3, align 4, !tbaa !46
+    %5 = icmp eq i16* %4, null
+    br i1 %5, label %.preheader, label %9
+  
+  .preheader:                                       ; preds = %0
+    %6 = icmp eq i32 %n, 0
+    br i1 %6, label %.loopexit, label %.lr.ph.preheader
+  
+  .lr.ph.preheader:                                 ; preds = %.preheader
+    %7 = bitcast i16* %depth to i8*
+    %8 = shl i32 %n, 1
+    call void @llvm.memset.p0i8.i32(i8* %7, i8 0, i32 %8, i32 2, i1 false)
+    br label %.loopexit
+  
+  ; <label>:9                                       ; preds = %0
+    %10 = bitcast i16* %depth to i8*
+    %11 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %2, i32 0, i32 1
+    %12 = load i32, i32* %11, align 4, !tbaa !48
+    %13 = mul nsw i32 %12, %y
+    %14 = getelementptr inbounds i16, i16* %4, i32 %13
+    %15 = getelementptr inbounds i16, i16* %14, i32 %x
+    %16 = bitcast i16* %15 to i8*
+    %17 = shl i32 %n, 1
+    tail call void @llvm.memcpy.p0i8.p0i8.i32(i8* %10, i8* %16, i32 %17, i32 1, i1 false)
+    br label %.loopexit
+  
+  .loopexit:                                        ; preds = %9, %.lr.ph.preheader, %.preheader
+    ret void
+  }
+  
+  ; Function Attrs: argmemonly nounwind
+  declare void @llvm.memcpy.p0i8.p0i8.i32(i8* nocapture, i8* nocapture readonly, i32, i32, i1) #4
+  
+  ; Function Attrs: nounwind
+  define void @gl_alloc_depth_buffer(%struct.gl_context* %ctx) #0 {
+    %1 = getelementptr inbounds %struct.gl_context, %struct.gl_context* %ctx, i32 0, i32 5
+    %2 = load %struct.gl_frame_buffer*, %struct.gl_frame_buffer** %1, align 4, !tbaa !45
+    %3 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %2, i32 0, i32 3
+    %4 = load i16*, i16** %3, align 4, !tbaa !46
+    %5 = icmp eq i16* %4, null
+    br i1 %5, label %10, label %6
+  
+  ; <label>:6                                       ; preds = %0
+    %7 = bitcast i16* %4 to i8*
+    tail call void @free(i8* %7) #5
+    %sunkaddr = ptrtoint %struct.gl_context* %ctx to i32
+    %sunkaddr1 = add i32 %sunkaddr, 2024
+    %sunkaddr2 = inttoptr i32 %sunkaddr1 to %struct.gl_frame_buffer**
+    %8 = load %struct.gl_frame_buffer*, %struct.gl_frame_buffer** %sunkaddr2, align 4, !tbaa !45
+    %9 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %8, i32 0, i32 3
+    store i16* null, i16** %9, align 4, !tbaa !46
+    br label %10
+  
+  ; <label>:10                                      ; preds = %6, %0
+    %11 = phi %struct.gl_frame_buffer* [ %2, %0 ], [ %8, %6 ]
+    %12 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %11, i32 0, i32 1
+    %13 = load i32, i32* %12, align 4, !tbaa !48
+    %14 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %11, i32 0, i32 2
+    %15 = load i32, i32* %14, align 4, !tbaa !53
+    %16 = shl i32 %13, 1
+    %17 = mul i32 %16, %15
+    %18 = tail call noalias i8* @malloc(i32 signext %17) #5
+    %19 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %11, i32 0, i32 3
+    %20 = bitcast i16** %19 to i8**
+    store i8* %18, i8** %20, align 4, !tbaa !46
+    %21 = icmp eq i8* %18, null
+    br i1 %21, label %22, label %24
+  
+  ; <label>:22                                      ; preds = %10
+    %23 = getelementptr inbounds %struct.gl_context, %struct.gl_context* %ctx, i32 0, i32 28, i32 2
+    store i8 0, i8* %23, align 4, !tbaa !54
+    tail call void @gl_error(%struct.gl_context* nonnull %ctx, i32 signext 1285, i8* nonnull getelementptr inbounds ([31 x i8], [31 x i8]* @.str.5, i32 0, i32 0)) #5
+    br label %24
+  
+  ; <label>:24                                      ; preds = %22, %10
+    ret void
+  }
+  
+  ; Function Attrs: nounwind
+  declare void @free(i8* nocapture) #0
+  
+  ; Function Attrs: nounwind
+  declare noalias i8* @malloc(i32 signext) #0
+  
+  ; Function Attrs: norecurse nounwind
+  define void @gl_clear_depth_buffer(%struct.gl_context* nocapture readonly %ctx) #3 {
+    %1 = getelementptr inbounds %struct.gl_context, %struct.gl_context* %ctx, i32 0, i32 28, i32 1
+    %2 = load float, float* %1, align 4, !tbaa !37
+    %3 = fmul float %2, 6.553500e+04
+    %4 = fptoui float %3 to i16
+    %5 = getelementptr inbounds %struct.gl_context, %struct.gl_context* %ctx, i32 0, i32 4
+    %6 = load %struct.gl_visual*, %struct.gl_visual** %5, align 4, !tbaa !55
+    %7 = getelementptr inbounds %struct.gl_visual, %struct.gl_visual* %6, i32 0, i32 13
+    %8 = load i32, i32* %7, align 4, !tbaa !56
+    %9 = icmp eq i32 %8, 0
+    br i1 %9, label %.loopexit, label %10
+  
+  ; <label>:10                                      ; preds = %0
+    %11 = getelementptr inbounds %struct.gl_context, %struct.gl_context* %ctx, i32 0, i32 5
+    %12 = load %struct.gl_frame_buffer*, %struct.gl_frame_buffer** %11, align 4, !tbaa !45
+    %13 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %12, i32 0, i32 3
+    %14 = load i16*, i16** %13, align 4, !tbaa !46
+    %15 = icmp eq i16* %14, null
+    br i1 %15, label %.loopexit, label %16
+  
+  ; <label>:16                                      ; preds = %10
+    %17 = getelementptr inbounds %struct.gl_context, %struct.gl_context* %ctx, i32 0, i32 39, i32 0
+    %18 = load i8, i8* %17, align 4, !tbaa !58
+    %19 = icmp eq i8 %18, 0
+    br i1 %19, label %38, label %20
+  
+  ; <label>:20                                      ; preds = %16
+    %21 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %12, i32 0, i32 11
+    %22 = load i32, i32* %21, align 4, !tbaa !59
+    %23 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %12, i32 0, i32 12
+    %24 = load i32, i32* %23, align 4, !tbaa !60
+    %25 = icmp sgt i32 %22, %24
+    br i1 %25, label %.loopexit, label %.lr.ph11
+  
+  .lr.ph11:                                         ; preds = %20
+    %.phi.trans.insert = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %12, i32 0, i32 1
+    %.pre = load i32, i32* %.phi.trans.insert, align 4, !tbaa !48
+    %.phi.trans.insert14 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %12, i32 0, i32 9
+    %.pre15 = load i32, i32* %.phi.trans.insert14, align 4, !tbaa !61
+    %.phi.trans.insert16 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %12, i32 0, i32 10
+    %.pre17 = load i32, i32* %.phi.trans.insert16, align 4, !tbaa !62
+    %26 = add i32 %.pre15, -1
+    %27 = sub i32 %26, %.pre17
+    br label %28
+  
+  ; <label>:28                                      ; preds = %35, %.lr.ph11
+    %y.010 = phi i32 [ %22, %.lr.ph11 ], [ %36, %35 ]
+    %29 = mul nsw i32 %.pre, %y.010
+    %30 = getelementptr inbounds i16, i16* %14, i32 %29
+    %31 = getelementptr inbounds i16, i16* %30, i32 %.pre15
+    br label %32
+  
+  ; <label>:32                                      ; preds = %32, %28
+    %lsr.iv17 = phi i32 [ %lsr.iv.next18, %32 ], [ %27, %28 ]
+    %d.0 = phi i16* [ %31, %28 ], [ %33, %32 ]
+    %33 = getelementptr inbounds i16, i16* %d.0, i32 1
+    store i16 %4, i16* %d.0, align 2, !tbaa !50
+    %lsr.iv.next18 = add i32 %lsr.iv17, 1
+    %34 = icmp eq i32 %lsr.iv.next18, 0
+    br i1 %34, label %35, label %32
+  
+  ; <label>:35                                      ; preds = %32
+    %36 = add nsw i32 %y.010, 1
+    %37 = icmp slt i32 %y.010, %24
+    br i1 %37, label %28, label %.loopexit
+  
+  ; <label>:38                                      ; preds = %16
+    %39 = zext i16 %4 to i32
+    %40 = and i32 %39, 255
+    %41 = lshr i32 %39, 8
+    %42 = icmp eq i32 %40, %41
+    br i1 %42, label %43, label %52
+  
+  ; <label>:43                                      ; preds = %38
+    %44 = bitcast i16* %14 to i8*
+    %45 = trunc i16 %4 to i8
+    %46 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %12, i32 0, i32 1
+    %47 = load i32, i32* %46, align 4, !tbaa !48
+    %48 = shl i32 %47, 1
+    %49 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %12, i32 0, i32 2
+    %50 = load i32, i32* %49, align 4, !tbaa !53
+    %51 = mul nsw i32 %48, %50
+    tail call void @llvm.memset.p0i8.i32(i8* %44, i8 %45, i32 %51, i32 1, i1 false)
+    br label %.loopexit
+  
+  ; <label>:52                                      ; preds = %38
+    %53 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %12, i32 0, i32 1
+    %54 = load i32, i32* %53, align 4, !tbaa !48
+    %55 = getelementptr inbounds %struct.gl_frame_buffer, %struct.gl_frame_buffer* %12, i32 0, i32 2
+    %56 = load i32, i32* %55, align 4, !tbaa !53
+    %57 = mul i32 %56, %54
+    %58 = icmp sgt i32 %57, 15
+    br i1 %58, label %.lr.ph8.preheader, label %.preheader
+  
+  .lr.ph8.preheader:                                ; preds = %52
+    %59 = add i32 %57, -16
+    %60 = and i32 %59, -16
+    %61 = add i32 %60, 16
+    br label %.lr.ph8
+  
+  .preheader.loopexit:                              ; preds = %.lr.ph8
+    %62 = sub i32 %59, %60
+    %scevgep = getelementptr i16, i16* %14, i32 %61
+    br label %.preheader
+  
+  .preheader:                                       ; preds = %.preheader.loopexit, %52
+    %n2.0.lcssa = phi i32 [ %57, %52 ], [ %62, %.preheader.loopexit ]
+    %d1.0.lcssa = phi i16* [ %14, %52 ], [ %scevgep, %.preheader.loopexit ]
+    %63 = icmp sgt i32 %n2.0.lcssa, 0
+    br i1 %63, label %.lr.ph.preheader, label %.loopexit
+  
+  .lr.ph.preheader:                                 ; preds = %.preheader
+    %64 = add i32 %n2.0.lcssa, 1
+    br label %.lr.ph
+  
+  .lr.ph8:                                          ; preds = %.lr.ph8, %.lr.ph8.preheader
+    %n2.07 = phi i32 [ %65, %.lr.ph8 ], [ %57, %.lr.ph8.preheader ]
+    %d1.06 = phi i16* [ %scevgep16, %.lr.ph8 ], [ %14, %.lr.ph8.preheader ]
+    store i16 %4, i16* %d1.06, align 2, !tbaa !50
+    %scevgep1 = getelementptr i16, i16* %d1.06, i32 1
+    store i16 %4, i16* %scevgep1, align 2, !tbaa !50
+    %scevgep2 = getelementptr i16, i16* %d1.06, i32 2
+    store i16 %4, i16* %scevgep2, align 2, !tbaa !50
+    %scevgep3 = getelementptr i16, i16* %d1.06, i32 3
+    store i16 %4, i16* %scevgep3, align 2, !tbaa !50
+    %scevgep4 = getelementptr i16, i16* %d1.06, i32 4
+    store i16 %4, i16* %scevgep4, align 2, !tbaa !50
+    %scevgep5 = getelementptr i16, i16* %d1.06, i32 5
+    store i16 %4, i16* %scevgep5, align 2, !tbaa !50
+    %scevgep6 = getelementptr i16, i16* %d1.06, i32 6
+    store i16 %4, i16* %scevgep6, align 2, !tbaa !50
+    %scevgep7 = getelementptr i16, i16* %d1.06, i32 7
+    store i16 %4, i16* %scevgep7, align 2, !tbaa !50
+    %scevgep8 = getelementptr i16, i16* %d1.06, i32 8
+    store i16 %4, i16* %scevgep8, align 2, !tbaa !50
+    %scevgep9 = getelementptr i16, i16* %d1.06, i32 9
+    store i16 %4, i16* %scevgep9, align 2, !tbaa !50
+    %scevgep10 = getelementptr i16, i16* %d1.06, i32 10
+    store i16 %4, i16* %scevgep10, align 2, !tbaa !50
+    %scevgep11 = getelementptr i16, i16* %d1.06, i32 11
+    store i16 %4, i16* %scevgep11, align 2, !tbaa !50
+    %scevgep12 = getelementptr i16, i16* %d1.06, i32 12
+    store i16 %4, i16* %scevgep12, align 2, !tbaa !50
+    %scevgep13 = getelementptr i16, i16* %d1.06, i32 13
+    store i16 %4, i16* %scevgep13, align 2, !tbaa !50
+    %scevgep14 = getelementptr i16, i16* %d1.06, i32 14
+    store i16 %4, i16* %scevgep14, align 2, !tbaa !50
+    %scevgep15 = getelementptr i16, i16* %d1.06, i32 15
+    store i16 %4, i16* %scevgep15, align 2, !tbaa !50
+    %65 = add nsw i32 %n2.07, -16
+    %66 = icmp sgt i32 %65, 15
+    %scevgep16 = getelementptr i16, i16* %d1.06, i32 16
+    br i1 %66, label %.lr.ph8, label %.preheader.loopexit
+  
+  .lr.ph:                                           ; preds = %.lr.ph, %.lr.ph.preheader
+    %lsr.iv = phi i32 [ %lsr.iv.next, %.lr.ph ], [ %64, %.lr.ph.preheader ]
+    %d1.14 = phi i16* [ %67, %.lr.ph ], [ %d1.0.lcssa, %.lr.ph.preheader ]
+    %67 = getelementptr inbounds i16, i16* %d1.14, i32 1
+    store i16 %4, i16* %d1.14, align 2, !tbaa !50
+    %lsr.iv.next = add i32 %lsr.iv, -1
+    %68 = icmp sgt i32 %lsr.iv.next, 1
+    br i1 %68, label %.lr.ph, label %.loopexit
+  
+  .loopexit:                                        ; preds = %35, %.lr.ph, %.preheader, %43, %20, %10, %0
+    ret void
+  }
+  
+  ; Function Attrs: argmemonly nounwind
+  declare void @llvm.memset.p0i8.i32(i8* nocapture, i8, i32, i32, i1) #4
+  
+  attributes #0 = { nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #1 = { "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #2 = { noreturn nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #3 = { norecurse nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #4 = { argmemonly nounwind "target-cpu"="mips32" }
+  attributes #5 = { nounwind }
+  attributes #6 = { noreturn nounwind }
+  
+  !llvm.ident = !{!0}
+  
+  !0 = !{!"clang version 3.8.0 (http://llvm.org/git/clang.git 2d49f0a0ae8366964a93e3b7b26e29679bee7160) (http://llvm.org/git/llvm.git 60bc66b44837125843b58ed3e0fd2e6bb948d839)"}
+  !1 = !{!2, !4, i64 55744}
+  !2 = !{!"gl_context", !3, i64 0, !6, i64 4, !6, i64 676, !6, i64 1348, !3, i64 2020, !3, i64 2024, !7, i64 2028, !3, i64 2208, !4, i64 2212, !4, i64 2276, !4, i64 2340, !8, i64 2344, !4, i64 2348, !4, i64 4396, !8, i64 4460, !4, i64 4464, !4, i64 6512, !4, i64 6576, !8, i64 6580, !4, i64 6584, !8, i64 7224, !4, i64 7228, !4, i64 7229, !8, i64 7232, !4, i64 7236, !9, i64 7300, !10, i64 7316, !12, i64 7404, !13, i64 7512, !14, i64 7524, !15, i64 7580, !16, i64 7620, !17, i64 7640, !19, i64 43772, !21, i64 43784, !22, i64 43788, !23, i64 54132, !24, i64 54140, !4, i64 54180, !25, i64 54308, !26, i64 54328, !27, i64 54352, !28, i64 54548, !29, i64 54656, !8, i64 54704, !4, i64 54708, !30, i64 54772, !31, i64 54900, !31, i64 54928, !32, i64 54956, !35, i64 55424, !36, i64 55444, !4, i64 55732, !8, i64 55736, !4, i64 55740, !4, i64 55744, !8, i64 55748, !8, i64 55752, !8, i64 55756, !8, i64 55760, !4, i64 55764, !11, i64 55768, !11, i64 55772, !11, i64 55776, !4, i64 55780, !4, i64 55781, !4, i64 55782, !4, i64 55783, !8, i64 55784, !3, i64 55788, !3, i64 55792, !3, i64 55796, !3, i64 55800, !3, i64 55804, !3, i64 55808, !3, i64 55812, !4, i64 55816}
+  !3 = !{!"any pointer", !4, i64 0}
+  !4 = !{!"omnipotent char", !5, i64 0}
+  !5 = !{!"Simple C/C++ TBAA"}
+  !6 = !{!"api_function_table", !3, i64 0, !3, i64 4, !3, i64 8, !3, i64 12, !3, i64 16, !3, i64 20, !3, i64 24, !3, i64 28, !3, i64 32, !3, i64 36, !3, i64 40, !3, i64 44, !3, i64 48, !3, i64 52, !3, i64 56, !3, i64 60, !3, i64 64, !3, i64 68, !3, i64 72, !3, i64 76, !3, i64 80, !3, i64 84, !3, i64 88, !3, i64 92, !3, i64 96, !3, i64 100, !3, i64 104, !3, i64 108, !3, i64 112, !3, i64 116, !3, i64 120, !3, i64 124, !3, i64 128, !3, i64 132, !3, i64 136, !3, i64 140, !3, i64 144, !3, i64 148, !3, i64 152, !3, i64 156, !3, i64 160, !3, i64 164, !3, i64 168, !3, i64 172, !3, i64 176, !3, i64 180, !3, i64 184, !3, i64 188, !3, i64 192, !3, i64 196, !3, i64 200, !3, i64 204, !3, i64 208, !3, i64 212, !3, i64 216, !3, i64 220, !3, i64 224, !3, i64 228, !3, i64 232, !3, i64 236, !3, i64 240, !3, i64 244, !3, i64 248, !3, i64 252, !3, i64 256, !3, i64 260, !3, i64 264, !3, i64 268, !3, i64 272, !3, i64 276, !3, i64 280, !3, i64 284, !3, i64 288, !3, i64 292, !3, i64 296, !3, i64 300, !3, i64 304, !3, i64 308, !3, i64 312, !3, i64 316, !3, i64 320, !3, i64 324, !3, i64 328, !3, i64 332, !3, i64 336, !3, i64 340, !3, i64 344, !3, i64 348, !3, i64 352, !3, i64 356, !3, i64 360, !3, i64 364, !3, i64 368, !3, i64 372, !3, i64 376, !3, i64 380, !3, i64 384, !3, i64 388, !3, i64 392, !3, i64 396, !3, i64 400, !3, i64 404, !3, i64 408, !3, i64 412, !3, i64 416, !3, i64 420, !3, i64 424, !3, i64 428, !3, i64 432, !3, i64 436, !3, i64 440, !3, i64 444, !3, i64 448, !3, i64 452, !3, i64 456, !3, i64 460, !3, i64 464, !3, i64 468, !3, i64 472, !3, i64 476, !3, i64 480, !3, i64 484, !3, i64 488, !3, i64 492, !3, i64 496, !3, i64 500, !3, i64 504, !3, i64 508, !3, i64 512, !3, i64 516, !3, i64 520, !3, i64 524, !3, i64 528, !3, i64 532, !3, i64 536, !3, i64 540, !3, i64 544, !3, i64 548, !3, i64 552, !3, i64 556, !3, i64 560, !3, i64 564, !3, i64 568, !3, i64 572, !3, i64 576, !3, i64 580, !3, i64 584, !3, i64 588, !3, i64 592, !3, i64 596, !3, i64 600, !3, i64 604, !3, i64 608, !3, i64 612, !3, i64 616, !3, i64 620, !3, i64 624, !3, i64 628, !3, i64 632, !3, i64 636, !3, i64 640, !3, i64 644, !3, i64 648, !3, i64 652, !3, i64 656, !3, i64 660, !3, i64 664, !3, i64 668}
+  !7 = !{!"dd_function_table", !3, i64 0, !3, i64 4, !3, i64 8, !3, i64 12, !3, i64 16, !3, i64 20, !3, i64 24, !3, i64 28, !3, i64 32, !3, i64 36, !3, i64 40, !3, i64 44, !3, i64 48, !3, i64 52, !3, i64 56, !3, i64 60, !3, i64 64, !3, i64 68, !3, i64 72, !3, i64 76, !3, i64 80, !3, i64 84, !3, i64 88, !3, i64 92, !3, i64 96, !3, i64 100, !3, i64 104, !3, i64 108, !3, i64 112, !3, i64 116, !3, i64 120, !3, i64 124, !3, i64 128, !3, i64 132, !3, i64 136, !3, i64 140, !3, i64 144, !3, i64 148, !3, i64 152, !3, i64 156, !3, i64 160, !3, i64 164, !3, i64 168, !3, i64 172, !3, i64 176}
+  !8 = !{!"int", !4, i64 0}
+  !9 = !{!"gl_accum_attrib", !4, i64 0}
+  !10 = !{!"gl_colorbuffer_attrib", !8, i64 0, !4, i64 4, !8, i64 20, !8, i64 24, !4, i64 28, !4, i64 32, !4, i64 36, !4, i64 40, !11, i64 44, !4, i64 48, !4, i64 49, !4, i64 52, !4, i64 56, !4, i64 60, !4, i64 64, !4, i64 80, !4, i64 84, !4, i64 85, !4, i64 86, !4, i64 87}
+  !11 = !{!"float", !4, i64 0}
+  !12 = !{!"gl_current_attrib", !4, i64 0, !8, i64 16, !4, i64 20, !4, i64 32, !4, i64 48, !11, i64 64, !4, i64 68, !8, i64 84, !4, i64 88, !4, i64 104, !4, i64 105}
+  !13 = !{!"gl_depthbuffer_attrib", !4, i64 0, !11, i64 4, !4, i64 8, !4, i64 9}
+  !14 = !{!"gl_eval_attrib", !4, i64 0, !4, i64 1, !4, i64 2, !4, i64 3, !4, i64 4, !4, i64 5, !4, i64 6, !4, i64 7, !4, i64 8, !4, i64 9, !4, i64 10, !4, i64 11, !4, i64 12, !4, i64 13, !4, i64 14, !4, i64 15, !4, i64 16, !4, i64 17, !4, i64 18, !8, i64 20, !11, i64 24, !11, i64 28, !8, i64 32, !8, i64 36, !11, i64 40, !11, i64 44, !11, i64 48, !11, i64 52}
+  !15 = !{!"gl_fog_attrib", !4, i64 0, !4, i64 4, !11, i64 20, !11, i64 24, !11, i64 28, !11, i64 32, !4, i64 36}
+  !16 = !{!"gl_hint_attrib", !4, i64 0, !4, i64 4, !4, i64 8, !4, i64 12, !4, i64 16}
+  !17 = !{!"gl_light_attrib", !4, i64 0, !18, i64 34304, !4, i64 34324, !4, i64 36084, !4, i64 36088, !4, i64 36092, !4, i64 36096, !8, i64 36100, !4, i64 36104, !3, i64 36108, !4, i64 36112, !4, i64 36116}
+  !18 = !{!"gl_lightmodel", !4, i64 0, !4, i64 16, !4, i64 17}
+  !19 = !{!"gl_line_attrib", !4, i64 0, !4, i64 1, !20, i64 2, !8, i64 4, !11, i64 8}
+  !20 = !{!"short", !4, i64 0}
+  !21 = !{!"gl_list_attrib", !8, i64 0}
+  !22 = !{!"gl_pixel_attrib", !4, i64 0, !11, i64 4, !11, i64 8, !11, i64 12, !11, i64 16, !11, i64 20, !11, i64 24, !11, i64 28, !11, i64 32, !11, i64 36, !11, i64 40, !8, i64 44, !8, i64 48, !4, i64 52, !4, i64 53, !11, i64 56, !11, i64 60, !8, i64 64, !8, i64 68, !8, i64 72, !8, i64 76, !8, i64 80, !8, i64 84, !8, i64 88, !8, i64 92, !8, i64 96, !8, i64 100, !4, i64 104, !4, i64 1128, !4, i64 2152, !4, i64 3176, !4, i64 4200, !4, i64 5224, !4, i64 6248, !4, i64 7272, !4, i64 8296, !4, i64 9320}
+  !23 = !{!"gl_point_attrib", !4, i64 0, !11, i64 4}
+  !24 = !{!"gl_polygon_attrib", !4, i64 0, !4, i64 4, !4, i64 8, !4, i64 12, !4, i64 13, !4, i64 16, !8, i64 20, !4, i64 24, !4, i64 25, !11, i64 28, !11, i64 32, !4, i64 36, !4, i64 37, !4, i64 38, !4, i64 39}
+  !25 = !{!"gl_scissor_attrib", !4, i64 0, !8, i64 4, !8, i64 8, !8, i64 12, !8, i64 16}
+  !26 = !{!"gl_stencil_attrib", !4, i64 0, !4, i64 4, !4, i64 8, !4, i64 12, !4, i64 16, !4, i64 20, !4, i64 21, !4, i64 22, !4, i64 23}
+  !27 = !{!"gl_texture_attrib", !8, i64 0, !4, i64 4, !4, i64 8, !8, i64 24, !4, i64 28, !4, i64 32, !4, i64 36, !4, i64 40, !4, i64 44, !4, i64 60, !4, i64 76, !4, i64 92, !4, i64 108, !4, i64 124, !4, i64 140, !4, i64 156, !3, i64 172, !3, i64 176, !3, i64 180, !3, i64 184, !3, i64 188, !3, i64 192}
+  !28 = !{!"gl_transform_attrib", !4, i64 0, !4, i64 4, !4, i64 100, !4, i64 106, !4, i64 107}
+  !29 = !{!"gl_viewport_attrib", !8, i64 0, !8, i64 4, !8, i64 8, !8, i64 12, !11, i64 16, !11, i64 20, !11, i64 24, !11, i64 28, !11, i64 32, !11, i64 36, !11, i64 40, !11, i64 44}
+  !30 = !{!"gl_array_attrib", !8, i64 0, !4, i64 4, !8, i64 8, !8, i64 12, !3, i64 16, !4, i64 20, !4, i64 24, !8, i64 28, !8, i64 32, !3, i64 36, !4, i64 40, !8, i64 44, !4, i64 48, !8, i64 52, !8, i64 56, !3, i64 60, !4, i64 64, !4, i64 68, !8, i64 72, !8, i64 76, !3, i64 80, !4, i64 84, !8, i64 88, !4, i64 92, !8, i64 96, !8, i64 100, !3, i64 104, !4, i64 108, !8, i64 112, !8, i64 116, !3, i64 120, !4, i64 124}
+  !31 = !{!"gl_pixelstore_attrib", !8, i64 0, !8, i64 4, !8, i64 8, !8, i64 12, !8, i64 16, !8, i64 20, !4, i64 24, !4, i64 25}
+  !32 = !{!"gl_evaluators", !33, i64 0, !33, i64 20, !33, i64 40, !33, i64 60, !33, i64 80, !33, i64 100, !33, i64 120, !33, i64 140, !33, i64 160, !34, i64 180, !34, i64 212, !34, i64 244, !34, i64 276, !34, i64 308, !34, i64 340, !34, i64 372, !34, i64 404, !34, i64 436}
+  !33 = !{!"gl_1d_map", !8, i64 0, !11, i64 4, !11, i64 8, !3, i64 12, !4, i64 16}
+  !34 = !{!"gl_2d_map", !8, i64 0, !8, i64 4, !11, i64 8, !11, i64 12, !11, i64 16, !11, i64 20, !3, i64 24, !4, i64 28}
+  !35 = !{!"gl_feedback", !4, i64 0, !8, i64 4, !3, i64 8, !8, i64 12, !8, i64 16}
+  !36 = !{!"gl_selection", !3, i64 0, !8, i64 4, !8, i64 8, !8, i64 12, !8, i64 16, !4, i64 20, !4, i64 276, !11, i64 280, !11, i64 284}
+  !37 = !{!2, !11, i64 7516}
+  !38 = !{!2, !4, i64 7512}
+  !39 = !{!2, !8, i64 55736}
+  !40 = !{!2, !4, i64 7521}
+  !41 = !{!2, !11, i64 54672}
+  !42 = !{!2, !11, i64 54676}
+  !43 = !{!2, !11, i64 54688}
+  !44 = !{!2, !11, i64 54700}
+  !45 = !{!2, !3, i64 2024}
+  !46 = !{!47, !3, i64 12}
+  !47 = !{!"gl_frame_buffer", !3, i64 0, !8, i64 4, !8, i64 8, !3, i64 12, !3, i64 16, !3, i64 20, !3, i64 24, !3, i64 28, !3, i64 32, !8, i64 36, !8, i64 40, !8, i64 44, !8, i64 48}
+  !48 = !{!47, !8, i64 4}
+  !49 = !{!4, !4, i64 0}
+  !50 = !{!20, !20, i64 0}
+  !51 = !{!8, !8, i64 0}
+  !52 = !{!11, !11, i64 0}
+  !53 = !{!47, !8, i64 8}
+  !54 = !{!2, !4, i64 7520}
+  !55 = !{!2, !3, i64 2020}
+  !56 = !{!57, !8, i64 48}
+  !57 = !{!"gl_visual", !4, i64 0, !4, i64 1, !11, i64 4, !11, i64 8, !11, i64 12, !11, i64 16, !4, i64 20, !11, i64 24, !11, i64 28, !11, i64 32, !11, i64 36, !8, i64 40, !8, i64 44, !8, i64 48, !8, i64 52, !4, i64 56, !4, i64 57}
+  !58 = !{!2, !4, i64 54308}
+  !59 = !{!47, !8, i64 44}
+  !60 = !{!47, !8, i64 48}
+  !61 = !{!47, !8, i64 36}
+  !62 = !{!47, !8, i64 40}
+
+...
+---
+name:            gl_depth_test_span_generic
+alignment:       2
+exposesReturnsTwice: false
+hasInlineAsm:    false
+isSSA:           false
+tracksRegLiveness: false
+tracksSubRegLiveness: false
+liveins:         
+  - { reg: '%a0' }
+  - { reg: '%a1' }
+  - { reg: '%a2' }
+  - { reg: '%a3' }
+  - { reg: '%t9' }
+  - { reg: '%v0' }
+calleeSavedRegisters: [ '%fp', '%ra', '%d10', '%d11', '%d12', '%d13', '%d14', 
+                        '%d15', '%f20', '%f21', '%f22', '%f23', '%f24', 
+                        '%f25', '%f26', '%f27', '%f28', '%f29', '%f30', 
+                        '%f31', '%s0', '%s1', '%s2', '%s3', '%s4', '%s5', 
+                        '%s6', '%s7' ]
+frameInfo:       
+  isFrameAddressTaken: false
+  isReturnAddressTaken: false
+  hasStackMap:     false
+  hasPatchPoint:   false
+  stackSize:       24
+  offsetAdjustment: 0
+  maxAlignment:    4
+  adjustsStack:    true
+  hasCalls:        true
+  maxCallFrameSize: 16
+  hasOpaqueSPAdjustment: false
+  hasVAStart:      false
+  hasMustTailInVarArgFunc: false
+fixedStack:      
+  - { id: 0, offset: 20, size: 4, alignment: 4, isImmutable: true, isAliased: false }
+  - { id: 1, offset: 16, size: 4, alignment: 8, isImmutable: true, isAliased: false }
+stack:           
+  - { id: 0, type: spill-slot, offset: -4, size: 4, alignment: 4, callee-saved-register: '%ra' }
+  - { id: 1, type: spill-slot, offset: -8, size: 4, alignment: 4, callee-saved-register: '%s0' }
+jumpTable:       
+  kind:            gp-rel32-block-address
+  entries:         
+    - id:              0
+      blocks:          [ '%bb.2..preheader25', '%bb.28', '%bb.4', '%bb.12', 
+                         '%bb.20', '%bb.36', '%bb.44', '%bb.52' ]
+body:             |
+  bb.0 (%ir-block.0, freq 8388607):
+    successors: %bb.102(0), %bb.1(99)
+    liveins: %a0, %a1, %a2, %a3, %t9, %ra, %s0
+  
+    %v0 = LUi target-flags(<unknown>) $_gp_disp
+    %v0 = ADDiu %v0, target-flags(<unknown>) $_gp_disp
+    %sp = ADDiu %sp, -24
+    CFI_INSTRUCTION .cfi_def_cfa_offset 24
+    SW killed %ra, %sp, 20 :: (store 4 into stack)
+    SW killed %s0, %sp, 16 :: (store 4 into stack)
+    CFI_INSTRUCTION .cfi_offset %ra_64, -4
+    CFI_INSTRUCTION .cfi_offset %s0_64, -8
+    %gp = ADDu %v0, %t9
+    %v1 = OR %a0, %zero
+    %at = LW %v1, 7512 :: (load 4 from %ir.10, !tbaa !38)
+    %t0 = ADDiu killed %at, -512
+    %at = SLTiu %t0, 8
+    BEQ killed %at, %zero, %bb.102, implicit-def dead %at {
+      %v0 = OR %a1, %zero
+    }
+  
+  bb.1 (%ir-block.0, freq 8388599):
+    successors: %bb.2..preheader25(12), %bb.28(12), %bb.4(12), %bb.12(12), %bb.20(12), %bb.36(12), %bb.44(12), %bb.52(12)
+    liveins: %gp, %a2, %a3, %t0, %v0, %v1
+  
+    %a0 = LW %sp, 44 :: (load 4 from stack)
+    %a1 = LW %sp, 40 :: (load 4 from stack, align 8)
+    %at = LW %v1, 2024 :: (load 4 from %ir.1, !tbaa !45)
+    %t1 = LW %at, 4 :: (load 4 from %ir.5, !tbaa !48)
+    %a3 = MUL killed %t1, killed %a3, implicit-def dead %hi0, implicit-def dead %lo0
+    %at = LW killed %at, 12 :: (load 4 from %ir.3, !tbaa !46)
+    %a2 = SLL killed %a2, 1
+    %a3 = SLL killed %a3, 1
+    %at = ADDu killed %at, killed %a3
+    %a2 = ADDu killed %at, killed %a2
+    %at = SLL killed %t0, 2
+    %a3 = LW %gp, target-flags(<unknown>) %jump-table.0 :: (load 4 from got)
+    %at = ADDu killed %at, killed %a3
+    %at = LW killed %at, target-flags(<unknown>) %jump-table.0 :: (load 4 from jump-table)
+    %at = ADDu killed %at, %gp
+    PseudoIndirectBranch killed %at {
+      NOP
+    }
+  
+  bb.2..preheader25 (freq 1048574):
+    successors: %bb.101..loopexit(37), %bb.3..lr.ph104.preheader(62)
+    liveins: %gp, %a0, %v0
+  
+    BEQ %v0, %zero, %bb.101..loopexit, implicit-def %at {
+      %s0 = ADDiu %zero, 0
+    }
+  
+  bb.3..lr.ph104.preheader (freq 655359):
+    successors: %bb.101..loopexit(100)
+    liveins: %gp, %a0, %v0
+  
+    %t9 = LW %gp, target-flags(<unknown>) $memset :: (load 4 from call-entry $memset)
+    %s0 = ADDiu %zero, 0
+    %a1 = ADDiu %zero, 0
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %gp, implicit-def %sp {
+      %a2 = OR killed %v0, %zero
+    }
+    B %bb.101..loopexit, implicit-def dead %at {
+      NOP
+    }
+  
+  bb.4 (%ir-block.163, freq 1048575):
+    successors: %bb.58..preheader19(37), %bb.5..preheader21(62)
+    liveins: %a0, %a1, %a2, %v0, %v1
+  
+    %at = LBu killed %v1, 7521 :: (load 1 from %ir.164, !tbaa !40)
+    BEQ %at, %zero, %bb.58..preheader19, implicit-def %at {
+      NOP
+    }
+  
+  bb.5..preheader21 (freq 655359):
+    successors: %bb.6..lr.ph95(62), %bb.101..loopexit(37)
+    liveins: %a0, %a1, %a2, %v0
+  
+    BEQ %v0, %zero, %bb.101..loopexit, implicit-def %at {
+      %s0 = ADDiu %zero, 0
+    }
+  
+  bb.6..lr.ph95 (freq 819199):
+    successors: %bb.10(37), %bb.7(62)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    %at = LBu %a0, 0 :: (load 1 from %ir.m.1092, !tbaa !49)
+    BEQ %at, %zero, %bb.10, implicit-def %at {
+      NOP
+    }
+  
+  bb.7 (%ir-block.171, freq 511999):
+    successors: %bb.8(50), %bb.9(50)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    %v1 = LHu %a1, 0 :: (load 2 from %ir.lsr.iv44, !tbaa !50)
+    %at = LHu %a2, 0 :: (load 2 from %ir.zptr.1091, !tbaa !50)
+    BNE %v1, %at, %bb.9, implicit-def %at {
+      NOP
+    }
+  
+  bb.8 (%ir-block.175, freq 255999):
+    successors: %bb.10(100)
+    liveins: %a0, %a1, %a2, %s0, %v0, %v1
+  
+    SH killed %v1, %a2, 0 :: (store 2 into %ir.zptr.1091, !tbaa !50)
+    B %bb.10, implicit-def dead %at {
+      %s0 = ADDiu killed %s0, 1
+    }
+  
+  bb.9 (%ir-block.177, freq 255999):
+    successors: %bb.10(100)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    SB killed %zero, %a0, 0 :: (store 1 into %ir.m.1092, !tbaa !49)
+  
+  bb.10 (%ir-block.178, freq 819199):
+    successors: %bb.11(50), %bb.6..lr.ph95(50)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    %a1 = ADDiu killed %a1, 2
+    %v0 = ADDiu killed %v0, -1
+    %a0 = ADDiu killed %a0, 1
+    BNE %v0, %zero, %bb.6..lr.ph95, implicit-def %at {
+      %a2 = ADDiu killed %a2, 2
+    }
+  
+  bb.11 (%ir-block.178, freq 409599):
+    successors: %bb.101..loopexit(100)
+  
+    B %bb.101..loopexit, implicit-def %at {
+      NOP
+    }
+  
+  bb.12 (%ir-block.43, freq 1048575):
+    successors: %bb.65..preheader3(37), %bb.13..preheader5(62)
+    liveins: %a0, %a1, %a2, %v0, %v1
+  
+    %at = LBu killed %v1, 7521 :: (load 1 from %ir.44, !tbaa !40)
+    BEQ %at, %zero, %bb.65..preheader3, implicit-def %at {
+      NOP
+    }
+  
+  bb.13..preheader5 (freq 655359):
+    successors: %bb.14..lr.ph47(62), %bb.101..loopexit(37)
+    liveins: %a0, %a1, %a2, %v0
+  
+    BEQ %v0, %zero, %bb.101..loopexit, implicit-def %at {
+      %s0 = ADDiu %zero, 0
+    }
+  
+  bb.14..lr.ph47 (freq 819199):
+    successors: %bb.18(37), %bb.15(62)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    %at = LBu %a0, 0 :: (load 1 from %ir.m.244, !tbaa !49)
+    BEQ %at, %zero, %bb.18, implicit-def %at {
+      NOP
+    }
+  
+  bb.15 (%ir-block.51, freq 511999):
+    successors: %bb.16(50), %bb.17(50)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    %v1 = LHu %a1, 0 :: (load 2 from %ir.lsr.iv12, !tbaa !50)
+    %at = LHu %a2, 0 :: (load 2 from %ir.zptr.243, !tbaa !50)
+    %at = SLTu killed %at, %v1
+    BEQ %at, %zero, %bb.17, implicit-def %at {
+      NOP
+    }
+  
+  bb.16 (%ir-block.57, freq 255999):
+    successors: %bb.18(100)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    B %bb.18, implicit-def %at {
+      SB killed %zero, %a0, 0 :: (store 1 into %ir.m.244, !tbaa !49)
+    }
+  
+  bb.17 (%ir-block.55, freq 255999):
+    successors: %bb.18(100)
+    liveins: %a0, %a1, %a2, %s0, %v0, %v1
+  
+    SH killed %v1, %a2, 0 :: (store 2 into %ir.zptr.243, !tbaa !50)
+    %s0 = ADDiu killed %s0, 1
+  
+  bb.18 (%ir-block.58, freq 819199):
+    successors: %bb.19(50), %bb.14..lr.ph47(50)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    %a1 = ADDiu killed %a1, 2
+    %v0 = ADDiu killed %v0, -1
+    %a0 = ADDiu killed %a0, 1
+    BNE %v0, %zero, %bb.14..lr.ph47, implicit-def %at {
+      %a2 = ADDiu killed %a2, 2
+    }
+  
+  bb.19 (%ir-block.58, freq 409599):
+    successors: %bb.101..loopexit(100)
+  
+    B %bb.101..loopexit, implicit-def %at {
+      NOP
+    }
+  
+  bb.20 (%ir-block.103, freq 1048575):
+    successors: %bb.72..preheader11(37), %bb.21..preheader13(62)
+    liveins: %a0, %a1, %a2, %v0, %v1
+  
+    %at = LBu killed %v1, 7521 :: (load 1 from %ir.104, !tbaa !40)
+    BEQ %at, %zero, %bb.72..preheader11, implicit-def %at {
+      NOP
+    }
+  
+  bb.21..preheader13 (freq 655359):
+    successors: %bb.22..lr.ph71(62), %bb.101..loopexit(37)
+    liveins: %a0, %a1, %a2, %v0
+  
+    BEQ %v0, %zero, %bb.101..loopexit, implicit-def %at {
+      %s0 = ADDiu %zero, 0
+    }
+  
+  bb.22..lr.ph71 (freq 819199):
+    successors: %bb.26(37), %bb.23(62)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    %at = LBu %a0, 0 :: (load 1 from %ir.m.668, !tbaa !49)
+    BEQ %at, %zero, %bb.26, implicit-def %at {
+      NOP
+    }
+  
+  bb.23 (%ir-block.111, freq 511999):
+    successors: %bb.24(50), %bb.25(50)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    %v1 = LHu %a1, 0 :: (load 2 from %ir.lsr.iv28, !tbaa !50)
+    %at = LHu %a2, 0 :: (load 2 from %ir.zptr.667, !tbaa !50)
+    %at = SLTu killed %at, %v1
+    BEQ %at, %zero, %bb.25, implicit-def %at {
+      NOP
+    }
+  
+  bb.24 (%ir-block.115, freq 255999):
+    successors: %bb.26(100)
+    liveins: %a0, %a1, %a2, %s0, %v0, %v1
+  
+    SH killed %v1, %a2, 0 :: (store 2 into %ir.zptr.667, !tbaa !50)
+    B %bb.26, implicit-def dead %at {
+      %s0 = ADDiu killed %s0, 1
+    }
+  
+  bb.25 (%ir-block.117, freq 255999):
+    successors: %bb.26(100)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    SB killed %zero, %a0, 0 :: (store 1 into %ir.m.668, !tbaa !49)
+  
+  bb.26 (%ir-block.118, freq 819199):
+    successors: %bb.27(50), %bb.22..lr.ph71(50)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    %a1 = ADDiu killed %a1, 2
+    %v0 = ADDiu killed %v0, -1
+    %a0 = ADDiu killed %a0, 1
+    BNE %v0, %zero, %bb.22..lr.ph71, implicit-def %at {
+      %a2 = ADDiu killed %a2, 2
+    }
+  
+  bb.27 (%ir-block.118, freq 409599):
+    successors: %bb.101..loopexit(100)
+  
+    B %bb.101..loopexit, implicit-def %at {
+      NOP
+    }
+  
+  bb.28 (%ir-block.13, freq 1048574):
+    successors: %bb.79..preheader(37), %bb.29..preheader1(62)
+    liveins: %a0, %a1, %a2, %v0, %v1
+  
+    %at = LBu killed %v1, 7521 :: (load 1 from %ir.14, !tbaa !40)
+    BEQ %at, %zero, %bb.79..preheader, implicit-def %at {
+      NOP
+    }
+  
+  bb.29..preheader1 (freq 655359):
+    successors: %bb.30..lr.ph35(62), %bb.101..loopexit(37)
+    liveins: %a0, %a1, %a2, %v0
+  
+    BEQ %v0, %zero, %bb.101..loopexit, implicit-def %at {
+      %s0 = ADDiu %zero, 0
+    }
+  
+  bb.30..lr.ph35 (freq 819199):
+    successors: %bb.34(37), %bb.31(62)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    %at = LBu %a0, 0 :: (load 1 from %ir.m.032, !tbaa !49)
+    BEQ %at, %zero, %bb.34, implicit-def %at {
+      NOP
+    }
+  
+  bb.31 (%ir-block.21, freq 511999):
+    successors: %bb.32(50), %bb.33(50)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    %at = LHu %a2, 0 :: (load 2 from %ir.zptr.031, !tbaa !50)
+    %v1 = LHu %a1, 0 :: (load 2 from %ir.lsr.iv4, !tbaa !50)
+    %at = SLTu %v1, killed %at
+    BEQ %at, %zero, %bb.33, implicit-def %at {
+      NOP
+    }
+  
+  bb.32 (%ir-block.25, freq 255999):
+    successors: %bb.34(100)
+    liveins: %a0, %a1, %a2, %s0, %v0, %v1
+  
+    SH killed %v1, %a2, 0 :: (store 2 into %ir.zptr.031, !tbaa !50)
+    B %bb.34, implicit-def dead %at {
+      %s0 = ADDiu killed %s0, 1
+    }
+  
+  bb.33 (%ir-block.27, freq 255999):
+    successors: %bb.34(100)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    SB killed %zero, %a0, 0 :: (store 1 into %ir.m.032, !tbaa !49)
+  
+  bb.34 (%ir-block.28, freq 819199):
+    successors: %bb.35(50), %bb.30..lr.ph35(50)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    %a1 = ADDiu killed %a1, 2
+    %v0 = ADDiu killed %v0, -1
+    %a0 = ADDiu killed %a0, 1
+    BNE %v0, %zero, %bb.30..lr.ph35, implicit-def %at {
+      %a2 = ADDiu killed %a2, 2
+    }
+  
+  bb.35 (%ir-block.28, freq 409599):
+    successors: %bb.101..loopexit(100)
+  
+    B %bb.101..loopexit, implicit-def %at {
+      NOP
+    }
+  
+  bb.36 (%ir-block.133, freq 1048574):
+    successors: %bb.86..preheader15(37), %bb.37..preheader17(62)
+    liveins: %a0, %a1, %a2, %v0, %v1
+  
+    %at = LBu killed %v1, 7521 :: (load 1 from %ir.134, !tbaa !40)
+    BEQ %at, %zero, %bb.86..preheader15, implicit-def %at {
+      NOP
+    }
+  
+  bb.37..preheader17 (freq 655359):
+    successors: %bb.38..lr.ph83(62), %bb.101..loopexit(37)
+    liveins: %a0, %a1, %a2, %v0
+  
+    BEQ %v0, %zero, %bb.101..loopexit, implicit-def %at {
+      %s0 = ADDiu %zero, 0
+    }
+  
+  bb.38..lr.ph83 (freq 819199):
+    successors: %bb.42(37), %bb.39(62)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    %at = LBu %a0, 0 :: (load 1 from %ir.m.880, !tbaa !49)
+    BEQ %at, %zero, %bb.42, implicit-def %at {
+      NOP
+    }
+  
+  bb.39 (%ir-block.141, freq 511999):
+    successors: %bb.40(50), %bb.41(50)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    %v1 = LHu %a1, 0 :: (load 2 from %ir.lsr.iv36, !tbaa !50)
+    %at = LHu %a2, 0 :: (load 2 from %ir.zptr.879, !tbaa !50)
+    BNE %v1, %at, %bb.41, implicit-def %at {
+      NOP
+    }
+  
+  bb.40 (%ir-block.147, freq 255999):
+    successors: %bb.42(100)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    B %bb.42, implicit-def %at {
+      SB killed %zero, %a0, 0 :: (store 1 into %ir.m.880, !tbaa !49)
+    }
+  
+  bb.41 (%ir-block.145, freq 255999):
+    successors: %bb.42(100)
+    liveins: %a0, %a1, %a2, %s0, %v0, %v1
+  
+    SH killed %v1, %a2, 0 :: (store 2 into %ir.zptr.879, !tbaa !50)
+    %s0 = ADDiu killed %s0, 1
+  
+  bb.42 (%ir-block.148, freq 819199):
+    successors: %bb.43(50), %bb.38..lr.ph83(50)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    %a1 = ADDiu killed %a1, 2
+    %v0 = ADDiu killed %v0, -1
+    %a0 = ADDiu killed %a0, 1
+    BNE %v0, %zero, %bb.38..lr.ph83, implicit-def %at {
+      %a2 = ADDiu killed %a2, 2
+    }
+  
+  bb.43 (%ir-block.148, freq 409599):
+    successors: %bb.101..loopexit(100)
+  
+    B %bb.101..loopexit, implicit-def %at {
+      NOP
+    }
+  
+  bb.44 (%ir-block.73, freq 1048574):
+    successors: %bb.93..preheader7(37), %bb.45..preheader9(62)
+    liveins: %a0, %a1, %a2, %v0, %v1
+  
+    %at = LBu killed %v1, 7521 :: (load 1 from %ir.74, !tbaa !40)
+    BEQ %at, %zero, %bb.93..preheader7, implicit-def %at {
+      NOP
+    }
+  
+  bb.45..preheader9 (freq 655359):
+    successors: %bb.46..lr.ph59(62), %bb.101..loopexit(37)
+    liveins: %a0, %a1, %a2, %v0
+  
+    BEQ %v0, %zero, %bb.101..loopexit, implicit-def %at {
+      %s0 = ADDiu %zero, 0
+    }
+  
+  bb.46..lr.ph59 (freq 819199):
+    successors: %bb.50(37), %bb.47(62)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    %at = LBu %a0, 0 :: (load 1 from %ir.m.456, !tbaa !49)
+    BEQ %at, %zero, %bb.50, implicit-def %at {
+      NOP
+    }
+  
+  bb.47 (%ir-block.81, freq 511999):
+    successors: %bb.48(50), %bb.49(50)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    %at = LHu %a2, 0 :: (load 2 from %ir.zptr.455, !tbaa !50)
+    %v1 = LHu %a1, 0 :: (load 2 from %ir.lsr.iv20, !tbaa !50)
+    %at = SLTu %v1, killed %at
+    BEQ %at, %zero, %bb.49, implicit-def %at {
+      NOP
+    }
+  
+  bb.48 (%ir-block.87, freq 255999):
+    successors: %bb.50(100)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    B %bb.50, implicit-def %at {
+      SB killed %zero, %a0, 0 :: (store 1 into %ir.m.456, !tbaa !49)
+    }
+  
+  bb.49 (%ir-block.85, freq 255999):
+    successors: %bb.50(100)
+    liveins: %a0, %a1, %a2, %s0, %v0, %v1
+  
+    SH killed %v1, %a2, 0 :: (store 2 into %ir.zptr.455, !tbaa !50)
+    %s0 = ADDiu killed %s0, 1
+  
+  bb.50 (%ir-block.88, freq 819199):
+    successors: %bb.51(50), %bb.46..lr.ph59(50)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    %a1 = ADDiu killed %a1, 2
+    %v0 = ADDiu killed %v0, -1
+    %a0 = ADDiu killed %a0, 1
+    BNE %v0, %zero, %bb.46..lr.ph59, implicit-def %at {
+      %a2 = ADDiu killed %a2, 2
+    }
+  
+  bb.51 (%ir-block.88, freq 409599):
+    successors: %bb.101..loopexit(100)
+  
+    B %bb.101..loopexit, implicit-def %at {
+      NOP
+    }
+  
+  bb.52 (%ir-block.193, freq 1048574):
+    successors: %bb.100(37), %bb.53..preheader23(62)
+    liveins: %a0, %a1, %a2, %v0, %v1
+  
+    %at = LBu killed %v1, 7521 :: (load 1 from %ir.194, !tbaa !40)
+    BEQ %at, %zero, %bb.100, implicit-def %at {
+      NOP
+    }
+  
+  bb.53..preheader23 (freq 655359):
+    successors: %bb.101..loopexit(37), %bb.54..lr.ph101(62)
+    liveins: %a0, %a1, %a2, %v0
+  
+    BEQ %v0, %zero, %bb.101..loopexit, implicit-def %at {
+      %s0 = ADDiu %zero, 0
+    }
+  
+  bb.54..lr.ph101 (freq 819199):
+    successors: %bb.56(37), %bb.55(62)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    %at = LBu %a0, 0 :: (load 1 from %ir.m.1298, !tbaa !49)
+    BEQ %at, %zero, %bb.56, implicit-def %at {
+      NOP
+    }
+  
+  bb.55 (%ir-block.200, freq 511999):
+    successors: %bb.56(100)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    %at = LHu %a1, 0 :: (load 2 from %ir.lsr.iv48, !tbaa !50)
+    SH killed %at, %a2, 0 :: (store 2 into %ir.zptr.1297, !tbaa !50)
+    %s0 = ADDiu killed %s0, 1
+  
+  bb.56 (%ir-block.203, freq 819199):
+    successors: %bb.57(50), %bb.54..lr.ph101(50)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    %a1 = ADDiu killed %a1, 2
+    %v0 = ADDiu killed %v0, -1
+    %a0 = ADDiu killed %a0, 1
+    BNE %v0, %zero, %bb.54..lr.ph101, implicit-def %at {
+      %a2 = ADDiu killed %a2, 2
+    }
+  
+  bb.57 (%ir-block.203, freq 409599):
+    successors: %bb.101..loopexit(100)
+  
+    B %bb.101..loopexit, implicit-def %at {
+      NOP
+    }
+  
+  bb.58..preheader19 (freq 393215):
+    successors: %bb.59..lr.ph89(62), %bb.101..loopexit(37)
+    liveins: %a0, %a1, %a2, %v0
+  
+    BEQ %v0, %zero, %bb.101..loopexit, implicit-def %at {
+      %s0 = ADDiu %zero, 0
+    }
+  
+  bb.59..lr.ph89 (freq 491519):
+    successors: %bb.63(37), %bb.60(62)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    %at = LBu %a0, 0 :: (load 1 from %ir.m.1186, !tbaa !49)
+    BEQ %at, %zero, %bb.63, implicit-def %at {
+      NOP
+    }
+  
+  bb.60 (%ir-block.183, freq 307199):
+    successors: %bb.61(50), %bb.62(50)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    %at = LHu %a2, 0 :: (load 2 from %ir.zptr.1185, !tbaa !50)
+    %v1 = LHu %a1, 0 :: (load 2 from %ir.lsr.iv40, !tbaa !50)
+    BNE %v1, %at, %bb.62, implicit-def %at {
+      NOP
+    }
+  
+  bb.61 (%ir-block.187, freq 153599):
+    successors: %bb.63(100)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    B %bb.63, implicit-def dead %at {
+      %s0 = ADDiu killed %s0, 1
+    }
+  
+  bb.62 (%ir-block.189, freq 153599):
+    successors: %bb.63(100)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    SB killed %zero, %a0, 0 :: (store 1 into %ir.m.1186, !tbaa !49)
+  
+  bb.63 (%ir-block.190, freq 491519):
+    successors: %bb.64(50), %bb.59..lr.ph89(50)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    %a1 = ADDiu killed %a1, 2
+    %v0 = ADDiu killed %v0, -1
+    %a0 = ADDiu killed %a0, 1
+    BNE %v0, %zero, %bb.59..lr.ph89, implicit-def %at {
+      %a2 = ADDiu killed %a2, 2
+    }
+  
+  bb.64 (%ir-block.190, freq 245759):
+    successors: %bb.101..loopexit(100)
+  
+    B %bb.101..loopexit, implicit-def %at {
+      NOP
+    }
+  
+  bb.65..preheader3 (freq 393215):
+    successors: %bb.66..lr.ph41(62), %bb.101..loopexit(37)
+    liveins: %a0, %a1, %a2, %v0
+  
+    BEQ %v0, %zero, %bb.101..loopexit, implicit-def %at {
+      %s0 = ADDiu %zero, 0
+    }
+  
+  bb.66..lr.ph41 (freq 491519):
+    successors: %bb.70(37), %bb.67(62)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    %at = LBu %a0, 0 :: (load 1 from %ir.m.338, !tbaa !49)
+    BEQ %at, %zero, %bb.70, implicit-def %at {
+      NOP
+    }
+  
+  bb.67 (%ir-block.63, freq 307199):
+    successors: %bb.68(50), %bb.69(50)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    %at = LHu %a1, 0 :: (load 2 from %ir.lsr.iv8, !tbaa !50)
+    %v1 = LHu %a2, 0 :: (load 2 from %ir.zptr.337, !tbaa !50)
+    %at = SLTu killed %v1, killed %at
+    BEQ %at, %zero, %bb.69, implicit-def %at {
+      NOP
+    }
+  
+  bb.68 (%ir-block.69, freq 153599):
+    successors: %bb.70(100)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    B %bb.70, implicit-def %at {
+      SB killed %zero, %a0, 0 :: (store 1 into %ir.m.338, !tbaa !49)
+    }
+  
+  bb.69 (%ir-block.67, freq 153599):
+    successors: %bb.70(100)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    %s0 = ADDiu killed %s0, 1
+  
+  bb.70 (%ir-block.70, freq 491519):
+    successors: %bb.71(50), %bb.66..lr.ph41(50)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    %a1 = ADDiu killed %a1, 2
+    %v0 = ADDiu killed %v0, -1
+    %a0 = ADDiu killed %a0, 1
+    BNE %v0, %zero, %bb.66..lr.ph41, implicit-def %at {
+      %a2 = ADDiu killed %a2, 2
+    }
+  
+  bb.71 (%ir-block.70, freq 245759):
+    successors: %bb.101..loopexit(100)
+  
+    B %bb.101..loopexit, implicit-def %at {
+      NOP
+    }
+  
+  bb.72..preheader11 (freq 393215):
+    successors: %bb.73..lr.ph65(62), %bb.101..loopexit(37)
+    liveins: %a0, %a1, %a2, %v0
+  
+    BEQ %v0, %zero, %bb.101..loopexit, implicit-def %at {
+      %s0 = ADDiu %zero, 0
+    }
+  
+  bb.73..lr.ph65 (freq 491519):
+    successors: %bb.77(37), %bb.74(62)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    %at = LBu %a0, 0 :: (load 1 from %ir.m.762, !tbaa !49)
+    BEQ %at, %zero, %bb.77, implicit-def %at {
+      NOP
+    }
+  
+  bb.74 (%ir-block.123, freq 307199):
+    successors: %bb.75(50), %bb.76(50)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    %at = LHu %a1, 0 :: (load 2 from %ir.lsr.iv24, !tbaa !50)
+    %v1 = LHu %a2, 0 :: (load 2 from %ir.zptr.761, !tbaa !50)
+    %at = SLTu killed %v1, killed %at
+    BEQ %at, %zero, %bb.76, implicit-def %at {
+      NOP
+    }
+  
+  bb.75 (%ir-block.127, freq 153599):
+    successors: %bb.77(100)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    B %bb.77, implicit-def dead %at {
+      %s0 = ADDiu killed %s0, 1
+    }
+  
+  bb.76 (%ir-block.129, freq 153599):
+    successors: %bb.77(100)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    SB killed %zero, %a0, 0 :: (store 1 into %ir.m.762, !tbaa !49)
+  
+  bb.77 (%ir-block.130, freq 491519):
+    successors: %bb.78(50), %bb.73..lr.ph65(50)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    %a1 = ADDiu killed %a1, 2
+    %v0 = ADDiu killed %v0, -1
+    %a0 = ADDiu killed %a0, 1
+    BNE %v0, %zero, %bb.73..lr.ph65, implicit-def %at {
+      %a2 = ADDiu killed %a2, 2
+    }
+  
+  bb.78 (%ir-block.130, freq 245759):
+    successors: %bb.101..loopexit(100)
+  
+    B %bb.101..loopexit, implicit-def %at {
+      NOP
+    }
+  
+  bb.79..preheader (freq 393215):
+    successors: %bb.80..lr.ph(62), %bb.101..loopexit(37)
+    liveins: %a0, %a1, %a2, %v0
+  
+    BEQ %v0, %zero, %bb.101..loopexit, implicit-def %at {
+      %s0 = ADDiu %zero, 0
+    }
+  
+  bb.80..lr.ph (freq 491519):
+    successors: %bb.84(37), %bb.81(62)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    %at = LBu %a0, 0 :: (load 1 from %ir.m.128, !tbaa !49)
+    BEQ %at, %zero, %bb.84, implicit-def %at {
+      NOP
+    }
+  
+  bb.81 (%ir-block.33, freq 307199):
+    successors: %bb.82(50), %bb.83(50)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    %at = LHu %a2, 0 :: (load 2 from %ir.zptr.127, !tbaa !50)
+    %v1 = LHu %a1, 0 :: (load 2 from %ir.lsr.iv1, !tbaa !50)
+    %at = SLTu killed %v1, killed %at
+    BEQ %at, %zero, %bb.83, implicit-def %at {
+      NOP
+    }
+  
+  bb.82 (%ir-block.37, freq 153599):
+    successors: %bb.84(100)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    B %bb.84, implicit-def dead %at {
+      %s0 = ADDiu killed %s0, 1
+    }
+  
+  bb.83 (%ir-block.39, freq 153599):
+    successors: %bb.84(100)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    SB killed %zero, %a0, 0 :: (store 1 into %ir.m.128, !tbaa !49)
+  
+  bb.84 (%ir-block.40, freq 491519):
+    successors: %bb.85(50), %bb.80..lr.ph(50)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    %a1 = ADDiu killed %a1, 2
+    %v0 = ADDiu killed %v0, -1
+    %a0 = ADDiu killed %a0, 1
+    BNE %v0, %zero, %bb.80..lr.ph, implicit-def %at {
+      %a2 = ADDiu killed %a2, 2
+    }
+  
+  bb.85 (%ir-block.40, freq 245759):
+    successors: %bb.101..loopexit(100)
+  
+    B %bb.101..loopexit, implicit-def %at {
+      NOP
+    }
+  
+  bb.86..preheader15 (freq 393215):
+    successors: %bb.87..lr.ph77(62), %bb.101..loopexit(37)
+    liveins: %a0, %a1, %a2, %v0
+  
+    BEQ %v0, %zero, %bb.101..loopexit, implicit-def %at {
+      %s0 = ADDiu %zero, 0
+    }
+  
+  bb.87..lr.ph77 (freq 491519):
+    successors: %bb.91(37), %bb.88(62)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    %at = LBu %a0, 0 :: (load 1 from %ir.m.974, !tbaa !49)
+    BEQ %at, %zero, %bb.91, implicit-def %at {
+      NOP
+    }
+  
+  bb.88 (%ir-block.153, freq 307199):
+    successors: %bb.89(50), %bb.90(50)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    %at = LHu %a2, 0 :: (load 2 from %ir.zptr.973, !tbaa !50)
+    %v1 = LHu %a1, 0 :: (load 2 from %ir.lsr.iv32, !tbaa !50)
+    BNE %v1, %at, %bb.90, implicit-def %at {
+      NOP
+    }
+  
+  bb.89 (%ir-block.159, freq 153599):
+    successors: %bb.91(100)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    B %bb.91, implicit-def %at {
+      SB killed %zero, %a0, 0 :: (store 1 into %ir.m.974, !tbaa !49)
+    }
+  
+  bb.90 (%ir-block.157, freq 153599):
+    successors: %bb.91(100)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    %s0 = ADDiu killed %s0, 1
+  
+  bb.91 (%ir-block.160, freq 491519):
+    successors: %bb.92(50), %bb.87..lr.ph77(50)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    %a1 = ADDiu killed %a1, 2
+    %v0 = ADDiu killed %v0, -1
+    %a0 = ADDiu killed %a0, 1
+    BNE %v0, %zero, %bb.87..lr.ph77, implicit-def %at {
+      %a2 = ADDiu killed %a2, 2
+    }
+  
+  bb.92 (%ir-block.160, freq 245759):
+    successors: %bb.101..loopexit(100)
+  
+    B %bb.101..loopexit, implicit-def %at {
+      NOP
+    }
+  
+  bb.93..preheader7 (freq 393215):
+    successors: %bb.94..lr.ph53(62), %bb.101..loopexit(37)
+    liveins: %a0, %a1, %a2, %v0
+  
+    BEQ %v0, %zero, %bb.101..loopexit, implicit-def %at {
+      %s0 = ADDiu %zero, 0
+    }
+  
+  bb.94..lr.ph53 (freq 491519):
+    successors: %bb.98(37), %bb.95(62)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    %at = LBu %a0, 0 :: (load 1 from %ir.m.550, !tbaa !49)
+    BEQ %at, %zero, %bb.98, implicit-def %at {
+      NOP
+    }
+  
+  bb.95 (%ir-block.93, freq 307199):
+    successors: %bb.96(50), %bb.97(50)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    %at = LHu %a2, 0 :: (load 2 from %ir.zptr.549, !tbaa !50)
+    %v1 = LHu %a1, 0 :: (load 2 from %ir.lsr.iv16, !tbaa !50)
+    %at = SLTu killed %v1, killed %at
+    BEQ %at, %zero, %bb.97, implicit-def %at {
+      NOP
+    }
+  
+  bb.96 (%ir-block.99, freq 153599):
+    successors: %bb.98(100)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    B %bb.98, implicit-def %at {
+      SB killed %zero, %a0, 0 :: (store 1 into %ir.m.550, !tbaa !49)
+    }
+  
+  bb.97 (%ir-block.97, freq 153599):
+    successors: %bb.98(100)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    %s0 = ADDiu killed %s0, 1
+  
+  bb.98 (%ir-block.100, freq 491519):
+    successors: %bb.99(50), %bb.94..lr.ph53(50)
+    liveins: %a0, %a1, %a2, %s0, %v0
+  
+    %a1 = ADDiu killed %a1, 2
+    %v0 = ADDiu killed %v0, -1
+    %a0 = ADDiu killed %a0, 1
+    BNE %v0, %zero, %bb.94..lr.ph53, implicit-def %at {
+      %a2 = ADDiu killed %a2, 2
+    }
+  
+  bb.99 (%ir-block.100, freq 245759):
+    successors: %bb.101..loopexit(100)
+  
+    B %bb.101..loopexit, implicit-def %at {
+      NOP
+    }
+  
+  bb.100 (freq 393215):
+    successors: %bb.101..loopexit(100)
+    liveins: %v0
+  
+    %s0 = OR killed %v0, %zero
+  
+  bb.101..loopexit (freq 8388599):
+    liveins: %s0
+    liveouts:
+  
+    %v0 = OR killed %s0, %zero
+    %s0 = LW %sp, 16 :: (load 4 from stack)
+    %ra = LW %sp, 20 :: (load 4 from stack)
+    PseudoReturn %ra {
+      %sp = ADDiu %sp, 24
+    }
+  
+  bb.102 (%ir-block.206, freq 8):
+    liveins: %gp
+    exit
+  
+    %t9 = LW %gp, target-flags(<unknown>) @abort :: (load 4 from call-entry @abort)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %gp, implicit-def %sp {
+      NOP
+    }
+
+...

@@ -1,0 +1,3054 @@
+--- |
+  ; ModuleID = '/home/romi/didaktoriko/unison/unison-experiments/experiments/test-input/c/mediabench/mips_zip/build-mips/ghostscript/ghostscript.idict.ll'
+  target datalayout = "E-m:m-p:32:32-i8:8:32-i16:16:32-i64:64-n32-S64"
+  target triple = "mips--linux-gnu"
+  
+  %struct.gs_dual_memory_s = type { %struct.gs_ref_memory_s*, %union.vm_spaces_s, i32, i32, i32 (%struct.gs_dual_memory_s*, i32)*, i32, i32 }
+  %struct.gs_ref_memory_s = type opaque
+  %union.vm_spaces_s = type { [4 x %struct.gs_ref_memory_s*] }
+  %struct.ref_stack_s = type { %struct.ref_s*, %struct.ref_s*, %struct.ref_s*, %struct.ref_s, i32, i32, %struct.ref_s, i32, i32, i32, i32, i32, %struct.ref_s, i32, i32, i32, %struct.gs_ref_memory_s* }
+  %struct.ref_s = type { %struct.tas_s, %union.v }
+  %struct.tas_s = type { i16, i16 }
+  %union.v = type { i32 }
+  %struct.dict_s = type { %struct.ref_s, %struct.ref_s, %struct.ref_s, %struct.ref_s }
+  %struct.name_s = type { i16, i16, i8*, %struct.ref_s* }
+  
+  @dict_max_size = global i32 65534, align 4
+  @dict_auto_expand = global i32 0, align 4
+  @dict_default_pack = global i32 1, align 4
+  @gs_imemory = external global %struct.gs_dual_memory_s, align 4
+  @.str = private unnamed_addr constant [12 x i8] c"dict_create\00", align 1
+  @.str.1 = private unnamed_addr constant [18 x i8] c"dict_unpack(keys)\00", align 1
+  @.str.2 = private unnamed_addr constant [22 x i8] c"dict_unpack(old keys)\00", align 1
+  @d_stack = external global %struct.ref_stack_s, align 4
+  @min_dstack_size = external global i32, align 4
+  @.str.3 = private unnamed_addr constant [14 x i8] c"dict_put(key)\00", align 1
+  @.str.4 = private unnamed_addr constant [16 x i8] c"dict_put(count)\00", align 1
+  @ref_systemdict = external global %struct.ref_s, align 4
+  @.str.5 = private unnamed_addr constant [16 x i8] c"dict_put(value)\00", align 1
+  @.str.6 = private unnamed_addr constant [16 x i8] c"dict_undef(key)\00", align 1
+  @.str.7 = private unnamed_addr constant [18 x i8] c"dict_undef(count)\00", align 1
+  @.str.8 = private unnamed_addr constant [18 x i8] c"dict_undef(value)\00", align 1
+  @dtop_keys = common global i16* null, align 4
+  @dtop_npairs = common global i32 0, align 4
+  @dtop_values = common global %struct.ref_s* null, align 4
+  @no_packed_keys = internal global [2 x i16] [i16 24577, i16 24576], align 2
+  @dsspace = common global i32 0, align 4
+  @.str.9 = private unnamed_addr constant [20 x i8] c"dict_resize(values)\00", align 1
+  @.str.10 = private unnamed_addr constant [24 x i8] c"dict_resize(old values)\00", align 1
+  @.str.11 = private unnamed_addr constant [18 x i8] c"dict_resize(keys)\00", align 1
+  @.str.12 = private unnamed_addr constant [22 x i8] c"dict_resize(old keys)\00", align 1
+  @.str.13 = private unnamed_addr constant [23 x i8] c"dict_resize(maxlength)\00", align 1
+  @.str.14 = private unnamed_addr constant [20 x i8] c"dict_put(maxlength)\00", align 1
+  @.str.15 = private unnamed_addr constant [20 x i8] c"dict_create(values)\00", align 1
+  @.str.16 = private unnamed_addr constant [25 x i8] c"dict_create(packed keys)\00", align 1
+  @.str.17 = private unnamed_addr constant [26 x i8] c"dict create unpacked keys\00", align 1
+  
+  ; Function Attrs: norecurse nounwind readonly
+  define i32 @dict_round_size_small(i32 signext %rsize) #0 {
+    %1 = load i32, i32* @dict_max_size, align 4, !tbaa !1
+    %2 = icmp ult i32 %1, %rsize
+    %3 = select i1 %2, i32 0, i32 %rsize
+    ret i32 %3
+  }
+  
+  ; Function Attrs: norecurse nounwind readonly
+  define i32 @dict_round_size_large(i32 signext %rsize) #0 {
+    %1 = icmp ugt i32 %rsize, 32768
+    br i1 %1, label %5, label %.preheader
+  
+  .preheader:                                       ; preds = %0
+    %2 = add i32 %rsize, -1
+    %3 = and i32 %2, %rsize
+    %4 = icmp eq i32 %3, 0
+    br i1 %4, label %._crit_edge, label %.lr.ph
+  
+  ; <label>:5                                       ; preds = %0
+    %6 = load i32, i32* @dict_max_size, align 4, !tbaa !1
+    %7 = icmp ult i32 %6, %rsize
+    %8 = select i1 %7, i32 0, i32 %rsize
+    br label %17
+  
+  .lr.ph:                                           ; preds = %.preheader, %.lr.ph
+    %9 = phi i32 [ %10, %.lr.ph ], [ %2, %.preheader ]
+    %.02 = phi i32 [ %11, %.lr.ph ], [ %rsize, %.preheader ]
+    %10 = or i32 %9, %.02
+    %11 = add i32 %10, 1
+    %12 = and i32 %10, %11
+    %13 = icmp eq i32 %12, 0
+    br i1 %13, label %._crit_edge, label %.lr.ph
+  
+  ._crit_edge:                                      ; preds = %.lr.ph, %.preheader
+    %.0.lcssa = phi i32 [ %rsize, %.preheader ], [ %11, %.lr.ph ]
+    %14 = load i32, i32* @dict_max_size, align 4, !tbaa !1
+    %15 = icmp ule i32 %.0.lcssa, %14
+    %16 = select i1 %15, i32 %.0.lcssa, i32 32768
+    br label %17
+  
+  ; <label>:17                                      ; preds = %._crit_edge, %5
+    %.01 = phi i32 [ %8, %5 ], [ %16, %._crit_edge ]
+    ret i32 %.01
+  }
+  
+  ; Function Attrs: nounwind
+  define i32 @dict_create(i32 signext %size, %struct.ref_s* nocapture %pdref) #1 {
+    %arr = alloca %struct.ref_s, align 4
+    %dref = alloca i64, align 8
+    %1 = bitcast %struct.ref_s* %arr to i8*
+    call void @llvm.lifetime.start(i64 8, i8* %1) #6
+    %2 = load %struct.gs_ref_memory_s*, %struct.gs_ref_memory_s** getelementptr inbounds (%struct.gs_dual_memory_s, %struct.gs_dual_memory_s* @gs_imemory, i32 0, i32 0), align 4, !tbaa !5
+    %3 = call i32 @gs_alloc_ref_array(%struct.gs_ref_memory_s* %2, %struct.ref_s* nonnull %arr, i32 signext 112, i32 signext 4, i8* getelementptr inbounds ([12 x i8], [12 x i8]* @.str, i32 0, i32 0)) #6
+    %4 = bitcast i64* %dref to i8*
+    call void @llvm.lifetime.start(i64 8, i8* %4) #6
+    %5 = icmp slt i32 %3, 0
+    br i1 %5, label %27, label %6
+  
+  ; <label>:6                                       ; preds = %0
+    %7 = bitcast i64* %dref to %struct.ref_s*
+    %8 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %arr, i32 0, i32 1, i32 0
+    %9 = load i32, i32* %8, align 4, !tbaa !8
+    %10 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %7, i32 0, i32 1, i32 0
+    store i32 %9, i32* %10, align 4, !tbaa !8
+    %11 = bitcast %struct.ref_s* %arr to i16*
+    %12 = load i16, i16* %11, align 4, !tbaa !9
+    %13 = zext i16 %12 to i32
+    %14 = and i32 %13, 12
+    %15 = load i32, i32* getelementptr inbounds (%struct.gs_dual_memory_s, %struct.gs_dual_memory_s* @gs_imemory, i32 0, i32 6), align 4, !tbaa !13
+    %16 = or i32 %15, %14
+    %17 = or i32 %16, 112
+    %18 = add i32 %17, 512
+    %19 = trunc i32 %18 to i16
+    %20 = bitcast i64* %dref to i16*
+    store i16 %19, i16* %20, align 8, !tbaa !9
+    %21 = load i32, i32* @dict_default_pack, align 4, !tbaa !1
+    %22 = call fastcc i32 @dict_create_contents(i32 signext %size, %struct.ref_s* nonnull %7, i32 signext %21)
+    %23 = icmp slt i32 %22, 0
+    br i1 %23, label %27, label %24
+  
+  ; <label>:24                                      ; preds = %6
+    %25 = bitcast %struct.ref_s* %pdref to i64*
+    %26 = load i64, i64* %dref, align 8
+    store i64 %26, i64* %25, align 4
+    br label %27
+  
+  ; <label>:27                                      ; preds = %24, %6, %0
+    %.0 = phi i32 [ 0, %24 ], [ %3, %0 ], [ %22, %6 ]
+    %28 = bitcast i64* %dref to i8*
+    %29 = bitcast %struct.ref_s* %arr to i8*
+    call void @llvm.lifetime.end(i64 8, i8* %28) #6
+    call void @llvm.lifetime.end(i64 8, i8* %29) #6
+    ret i32 %.0
+  }
+  
+  ; Function Attrs: argmemonly nounwind
+  declare void @llvm.lifetime.start(i64, i8* nocapture) #2
+  
+  declare i32 @gs_alloc_ref_array(%struct.gs_ref_memory_s*, %struct.ref_s*, i32 signext, i32 signext, i8*) #3
+  
+  ; Function Attrs: nounwind
+  define internal fastcc i32 @dict_create_contents(i32 signext %size, %struct.ref_s* nocapture readonly %pdref, i32 signext %pack) unnamed_addr #1 {
+    %arr = alloca %struct.ref_s, align 4
+    %1 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %pdref, i32 0, i32 1
+    %2 = bitcast %union.v* %1 to %struct.dict_s**
+    %3 = load %struct.dict_s*, %struct.dict_s** %2, align 4, !tbaa !8
+    %4 = icmp eq i32 %size, 0
+    %5 = select i1 %4, i32 1, i32 %size
+    %6 = icmp ugt i32 %5, 32768
+    br i1 %6, label %10, label %.preheader.i
+  
+  .preheader.i:                                     ; preds = %0
+    %7 = add i32 %5, -1
+    %8 = and i32 %7, %5
+    %9 = icmp eq i32 %8, 0
+    br i1 %9, label %._crit_edge.i, label %.lr.ph.i
+  
+  ; <label>:10                                      ; preds = %0
+    %11 = load i32, i32* @dict_max_size, align 4, !tbaa !1
+    %12 = icmp ult i32 %11, %5
+    %13 = select i1 %12, i32 0, i32 %5
+    br label %dict_round_size_large.exit
+  
+  .lr.ph.i:                                         ; preds = %.preheader.i, %.lr.ph.i
+    %14 = phi i32 [ %15, %.lr.ph.i ], [ %7, %.preheader.i ]
+    %.02.i = phi i32 [ %16, %.lr.ph.i ], [ %5, %.preheader.i ]
+    %15 = or i32 %.02.i, %14
+    %16 = add i32 %15, 1
+    %17 = and i32 %16, %15
+    %18 = icmp eq i32 %17, 0
+    br i1 %18, label %._crit_edge.i, label %.lr.ph.i
+  
+  ._crit_edge.i:                                    ; preds = %.lr.ph.i, %.preheader.i
+    %.0.lcssa.i = phi i32 [ %5, %.preheader.i ], [ %16, %.lr.ph.i ]
+    %19 = load i32, i32* @dict_max_size, align 4, !tbaa !1
+    %20 = icmp ule i32 %.0.lcssa.i, %19
+    %21 = select i1 %20, i32 %.0.lcssa.i, i32 32768
+    br label %dict_round_size_large.exit
+  
+  dict_round_size_large.exit:                       ; preds = %._crit_edge.i, %10
+    %.01.i = phi i32 [ %13, %10 ], [ %21, %._crit_edge.i ]
+    %22 = add i32 %.01.i, -1
+    %23 = icmp ugt i32 %22, 65533
+    br i1 %23, label %84, label %24
+  
+  ; <label>:24                                      ; preds = %dict_round_size_large.exit
+    %25 = add i32 %.01.i, 1
+    %26 = load %struct.gs_ref_memory_s*, %struct.gs_ref_memory_s** getelementptr inbounds (%struct.gs_dual_memory_s, %struct.gs_dual_memory_s* @gs_imemory, i32 0, i32 0), align 4, !tbaa !5
+    %27 = bitcast %struct.dict_s* %3 to %struct.ref_s*
+    %28 = tail call i32 @gs_alloc_ref_array(%struct.gs_ref_memory_s* %26, %struct.ref_s* %27, i32 signext 112, i32 signext %25, i8* nonnull getelementptr inbounds ([20 x i8], [20 x i8]* @.str.15, i32 0, i32 0)) #6
+    %29 = icmp slt i32 %28, 0
+    br i1 %29, label %84, label %30
+  
+  ; <label>:30                                      ; preds = %24
+    %31 = load i32, i32* getelementptr inbounds (%struct.gs_dual_memory_s, %struct.gs_dual_memory_s* @gs_imemory, i32 0, i32 6), align 4, !tbaa !13
+    %32 = bitcast %struct.dict_s* %3 to i16*
+    %33 = load i16, i16* %32, align 4, !tbaa !9
+    %34 = zext i16 %33 to i32
+    %35 = or i32 %34, %31
+    %36 = trunc i32 %35 to i16
+    store i16 %36, i16* %32, align 4, !tbaa !9
+    %37 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %3, i32 0, i32 0, i32 1
+    %38 = bitcast %union.v* %37 to %struct.ref_s**
+    %39 = load %struct.ref_s*, %struct.ref_s** %38, align 4, !tbaa !8
+    tail call void @refset_null(%struct.ref_s* %39, i32 signext %25) #6
+    %40 = icmp eq i32 %pack, 0
+    br i1 %40, label %74, label %41
+  
+  ; <label>:41                                      ; preds = %30
+    %42 = add i32 %.01.i, 4
+    %43 = lshr i32 %42, 2
+    %44 = bitcast %struct.ref_s* %arr to i8*
+    call void @llvm.lifetime.start(i64 8, i8* %44) #6
+    %45 = load %struct.gs_ref_memory_s*, %struct.gs_ref_memory_s** getelementptr inbounds (%struct.gs_dual_memory_s, %struct.gs_dual_memory_s* @gs_imemory, i32 0, i32 0), align 4, !tbaa !5
+    %46 = call i32 @gs_alloc_ref_array(%struct.gs_ref_memory_s* %45, %struct.ref_s* nonnull %arr, i32 signext 112, i32 signext %43, i8* nonnull getelementptr inbounds ([25 x i8], [25 x i8]* @.str.16, i32 0, i32 0)) #6
+    %47 = icmp slt i32 %46, 0
+    br i1 %47, label %72, label %48
+  
+  ; <label>:48                                      ; preds = %41
+    %49 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %arr, i32 0, i32 1
+    %50 = bitcast %union.v* %49 to i16**
+    %51 = load i16*, i16** %50, align 4, !tbaa !8
+    %52 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %3, i32 0, i32 1, i32 1
+    %53 = bitcast %union.v* %52 to i16**
+    store i16* %51, i16** %53, align 4, !tbaa !8
+    %54 = bitcast %struct.ref_s* %arr to i16*
+    %55 = load i16, i16* %54, align 4, !tbaa !9
+    %56 = zext i16 %55 to i32
+    %57 = and i32 %56, 12
+    %58 = load i32, i32* getelementptr inbounds (%struct.gs_dual_memory_s, %struct.gs_dual_memory_s* @gs_imemory, i32 0, i32 6), align 4, !tbaa !13
+    %59 = or i32 %58, %57
+    %60 = or i32 %59, 112
+    %61 = add i32 %60, 1536
+    %62 = trunc i32 %61 to i16
+    %63 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %3, i32 0, i32 1, i32 0, i32 0
+    store i16 %62, i16* %63, align 4, !tbaa !9
+    %64 = trunc i32 %25 to i16
+    %65 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %3, i32 0, i32 1, i32 0, i32 1
+    store i16 %64, i16* %65, align 2, !tbaa !14
+    %66 = icmp eq i32 %25, 0
+    br i1 %66, label %.critedge8, label %.critedge
+  
+  .critedge:                                        ; preds = %48, %.critedge
+    %lsr.iv = phi i32 [ %lsr.iv.next, %.critedge ], [ 1, %48 ]
+    %pzp.010 = phi i16* [ %67, %.critedge ], [ %51, %48 ]
+    store i16 24576, i16* %pzp.010, align 2, !tbaa !15
+    %67 = getelementptr inbounds i16, i16* %pzp.010, i32 1
+    %68 = icmp uge i32 %lsr.iv, %25
+    %69 = and i32 %lsr.iv, 3
+    %70 = icmp eq i32 %69, 0
+    %or.cond = and i1 %68, %70
+    %lsr.iv.next = add i32 %lsr.iv, 1
+    br i1 %or.cond, label %.critedge8, label %.critedge
+  
+  .critedge8:                                       ; preds = %.critedge, %48
+    %71 = bitcast %struct.ref_s* %arr to i8*
+    store i16 24577, i16* %51, align 2, !tbaa !15
+    call void @llvm.lifetime.end(i64 8, i8* %71) #6
+    br label %76
+  
+  ; <label>:72                                      ; preds = %41
+    %73 = bitcast %struct.ref_s* %arr to i8*
+    call void @llvm.lifetime.end(i64 8, i8* %73) #6
+    br label %84
+  
+  ; <label>:74                                      ; preds = %30
+    %75 = tail call fastcc i32 @dict_create_unpacked_keys(i32 signext %25, %struct.ref_s* %pdref)
+    %not. = icmp sgt i32 %75, -1
+    br i1 %not., label %._crit_edge, label %84
+  
+  ._crit_edge:                                      ; preds = %74
+    %.pre = load i32, i32* getelementptr inbounds (%struct.gs_dual_memory_s, %struct.gs_dual_memory_s* @gs_imemory, i32 0, i32 6), align 4, !tbaa !13
+    br label %76
+  
+  ; <label>:76                                      ; preds = %._crit_edge, %.critedge8
+    %77 = phi i32 [ %.pre, %._crit_edge ], [ %58, %.critedge8 ]
+    %78 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %3, i32 0, i32 2, i32 1, i32 0
+    store i32 0, i32* %78, align 4, !tbaa !16
+    %79 = add i32 %77, 2816
+    %80 = trunc i32 %79 to i16
+    %81 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %3, i32 0, i32 2, i32 0, i32 0
+    store i16 %80, i16* %81, align 4, !tbaa !9
+    %82 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %3, i32 0, i32 3, i32 1, i32 0
+    store i32 %size, i32* %82, align 4, !tbaa !16
+    %83 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %3, i32 0, i32 3, i32 0, i32 0
+    store i16 %80, i16* %83, align 4, !tbaa !9
+    br label %84
+  
+  ; <label>:84                                      ; preds = %76, %74, %72, %24, %dict_round_size_large.exit
+    %.2 = phi i32 [ 0, %76 ], [ %46, %72 ], [ %75, %74 ], [ -13, %dict_round_size_large.exit ], [ %28, %24 ]
+    ret i32 %.2
+  }
+  
+  ; Function Attrs: argmemonly nounwind
+  declare void @llvm.lifetime.end(i64, i8* nocapture) #2
+  
+  ; Function Attrs: nounwind
+  define i32 @dict_unpack(%struct.ref_s* %pdref) #1 {
+    %old_keys = alloca i64, align 8
+    %1 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %pdref, i32 0, i32 1
+    %2 = bitcast %union.v* %1 to %struct.dict_s**
+    %3 = load %struct.dict_s*, %struct.dict_s** %2, align 4, !tbaa !8
+    %4 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %3, i32 0, i32 1
+    %5 = bitcast %struct.ref_s* %4 to i8*
+    %6 = load i8, i8* %5, align 4, !tbaa !18
+    %7 = icmp eq i8 %6, 6
+    br i1 %7, label %8, label %99
+  
+  ; <label>:8                                       ; preds = %0
+    %9 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %3, i32 0, i32 0, i32 0, i32 1
+    %10 = load i16, i16* %9, align 2, !tbaa !14
+    %11 = zext i16 %10 to i32
+    %12 = zext i16 %10 to i32
+    %13 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %3, i32 0, i32 1, i32 1
+    %14 = bitcast %union.v* %13 to i16**
+    %15 = load i16*, i16** %14, align 4, !tbaa !8
+    %16 = bitcast i64* %old_keys to i8*
+    call void @llvm.lifetime.start(i64 8, i8* %16) #6
+    %sunkaddr = ptrtoint %struct.dict_s* %3 to i32
+    %sunkaddr2 = add i32 %sunkaddr, 8
+    %sunkaddr3 = inttoptr i32 %sunkaddr2 to i64*
+    %17 = load i64, i64* %sunkaddr3, align 4
+    store i64 %17, i64* %old_keys, align 8
+    %tmp = lshr i64 %17, 48
+    %trunc = trunc i64 %tmp to i16
+    %18 = trunc i64 %tmp to i32
+    %19 = load i32, i32* getelementptr inbounds (%struct.gs_dual_memory_s, %struct.gs_dual_memory_s* @gs_imemory, i32 0, i32 5), align 4, !tbaa !19
+    %20 = and i32 %18, %19
+    %21 = icmp eq i32 %20, 0
+    br i1 %21, label %22, label %25
+  
+  ; <label>:22                                      ; preds = %8
+    %23 = bitcast %struct.ref_s* %4 to i16*
+    %24 = tail call i32 @alloc_save_change(%struct.gs_dual_memory_s* nonnull @gs_imemory, %struct.ref_s* nonnull %pdref, i16* %23, i8* nonnull getelementptr inbounds ([18 x i8], [18 x i8]* @.str.1, i32 0, i32 0)) #6
+    br label %25
+  
+  ; <label>:25                                      ; preds = %22, %8
+    %26 = tail call fastcc i32 @dict_create_unpacked_keys(i32 signext %12, %struct.ref_s* nonnull %pdref)
+    %27 = icmp slt i32 %26, 0
+    br i1 %27, label %95, label %28
+  
+  ; <label>:28                                      ; preds = %25
+    %29 = icmp eq i16 %10, 0
+    br i1 %29, label %._crit_edge, label %.lr.ph.preheader
+  
+  .lr.ph.preheader:                                 ; preds = %28
+    %sunkaddr4 = ptrtoint %struct.dict_s* %3 to i32
+    %sunkaddr5 = add i32 %sunkaddr4, 12
+    %sunkaddr6 = inttoptr i32 %sunkaddr5 to %struct.ref_s**
+    %30 = load %struct.ref_s*, %struct.ref_s** %sunkaddr6, align 4, !tbaa !8
+    %31 = sub i32 0, %11
+    br label %.lr.ph
+  
+  .lr.ph:                                           ; preds = %49, %.lr.ph.preheader
+    %lsr.iv = phi i32 [ %lsr.iv.next, %49 ], [ %31, %.lr.ph.preheader ]
+    %nkp.03 = phi %struct.ref_s* [ %51, %49 ], [ %30, %.lr.ph.preheader ]
+    %okp.02 = phi i16* [ %50, %49 ], [ %15, %.lr.ph.preheader ]
+    %32 = load i16, i16* %okp.02, align 2, !tbaa !15
+    %33 = icmp ugt i16 %32, -16385
+    br i1 %33, label %34, label %41
+  
+  ; <label>:34                                      ; preds = %.lr.ph
+    %35 = bitcast %struct.ref_s* %nkp.03 to i16*
+    tail call void @packed_get(i16* nonnull %okp.02, %struct.ref_s* %nkp.03) #6
+    %36 = load i32, i32* getelementptr inbounds (%struct.gs_dual_memory_s, %struct.gs_dual_memory_s* @gs_imemory, i32 0, i32 6), align 4, !tbaa !13
+    %37 = load i16, i16* %35, align 4, !tbaa !9
+    %38 = zext i16 %37 to i32
+    %39 = or i32 %38, %36
+    %40 = trunc i32 %39 to i16
+    store i16 %40, i16* %35, align 4, !tbaa !9
+    br label %49
+  
+  ; <label>:41                                      ; preds = %.lr.ph
+    %42 = icmp eq i16 %32, 24577
+    br i1 %42, label %43, label %49
+  
+  ; <label>:43                                      ; preds = %41
+    %44 = bitcast %struct.ref_s* %nkp.03 to i16*
+    %45 = load i16, i16* %44, align 4, !tbaa !9
+    %46 = zext i16 %45 to i32
+    %47 = or i32 %46, 128
+    %48 = trunc i32 %47 to i16
+    store i16 %48, i16* %44, align 4, !tbaa !9
+    br label %49
+  
+  ; <label>:49                                      ; preds = %43, %41, %34
+    %50 = getelementptr inbounds i16, i16* %okp.02, i32 1
+    %51 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %nkp.03, i32 1
+    %lsr.iv.next = add i32 %lsr.iv, 1
+    %52 = icmp eq i32 %lsr.iv.next, 0
+    br i1 %52, label %._crit_edge.loopexit, label %.lr.ph
+  
+  ._crit_edge.loopexit:                             ; preds = %49
+    %53 = bitcast i64* %old_keys to i16*
+    %.pre = load i16, i16* %53, align 8, !tbaa !9
+    br label %._crit_edge
+  
+  ._crit_edge:                                      ; preds = %._crit_edge.loopexit, %28
+    %54 = phi i16 [ %.pre, %._crit_edge.loopexit ], [ %trunc, %28 ]
+    %55 = zext i16 %54 to i32
+    %56 = load i32, i32* getelementptr inbounds (%struct.gs_dual_memory_s, %struct.gs_dual_memory_s* @gs_imemory, i32 0, i32 5), align 4, !tbaa !19
+    %57 = and i32 %55, %56
+    %58 = icmp eq i32 %57, 0
+    br i1 %58, label %62, label %59
+  
+  ; <label>:59                                      ; preds = %._crit_edge
+    %60 = bitcast i64* %old_keys to %struct.ref_s*
+    %61 = load %struct.gs_ref_memory_s*, %struct.gs_ref_memory_s** getelementptr inbounds (%struct.gs_dual_memory_s, %struct.gs_dual_memory_s* @gs_imemory, i32 0, i32 0), align 4, !tbaa !5
+    call void @gs_free_ref_array(%struct.gs_ref_memory_s* %61, %struct.ref_s* nonnull %60, i8* nonnull getelementptr inbounds ([22 x i8], [22 x i8]* @.str.2, i32 0, i32 0)) #6
+    br label %62
+  
+  ; <label>:62                                      ; preds = %59, %._crit_edge
+    %63 = load %struct.ref_s*, %struct.ref_s** getelementptr inbounds (%struct.ref_stack_s, %struct.ref_stack_s* @d_stack, i32 0, i32 0), align 4, !tbaa !20
+    %64 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %63, i32 0, i32 1
+    %65 = bitcast %union.v* %64 to %struct.dict_s**
+    %66 = load %struct.dict_s*, %struct.dict_s** %65, align 4, !tbaa !8
+    %67 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %66, i32 0, i32 1
+    %68 = bitcast %struct.ref_s* %67 to i8*
+    %69 = load i8, i8* %68, align 4, !tbaa !18
+    %70 = icmp eq i8 %69, 6
+    br i1 %70, label %71, label %83
+  
+  ; <label>:71                                      ; preds = %62
+    %72 = bitcast %struct.dict_s* %66 to i32*
+    %73 = load i32, i32* %72, align 4
+    %74 = and i32 %73, 2097152
+    %75 = icmp eq i32 %74, 0
+    br i1 %75, label %83, label %76
+  
+  ; <label>:76                                      ; preds = %71
+    %77 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %66, i32 0, i32 1, i32 1, i32 0
+    %78 = load i32, i32* %77, align 4, !tbaa !8
+    store i32 %78, i32* bitcast (i16** @dtop_keys to i32*), align 4, !tbaa !8
+    %79 = and i32 %73, 65535
+    %80 = add nsw i32 %79, -1
+    store i32 %80, i32* @dtop_npairs, align 4, !tbaa !1
+    %81 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %66, i32 0, i32 0, i32 1, i32 0
+    %82 = load i32, i32* %81, align 4, !tbaa !8
+    store i32 %82, i32* bitcast (%struct.ref_s** @dtop_values to i32*), align 4, !tbaa !8
+    br label %84
+  
+  ; <label>:83                                      ; preds = %71, %62
+    store i16* getelementptr inbounds ([2 x i16], [2 x i16]* @no_packed_keys, i32 0, i32 0), i16** @dtop_keys, align 4, !tbaa !8
+    store i32 1, i32* @dtop_npairs, align 4, !tbaa !1
+    br label %84
+  
+  ; <label>:84                                      ; preds = %83, %76
+    %sunkaddr7 = ptrtoint %struct.ref_s* %63 to i32
+    %sunkaddr8 = add i32 %sunkaddr7, 4
+    %sunkaddr9 = inttoptr i32 %sunkaddr8 to %struct.dict_s**
+    %85 = load %struct.dict_s*, %struct.dict_s** %sunkaddr9, align 4, !tbaa !8
+    %86 = bitcast %struct.dict_s* %85 to i16*
+    %87 = load i16, i16* %86, align 4, !tbaa !9
+    %88 = and i16 %87, 16
+    %89 = icmp eq i16 %88, 0
+    br i1 %89, label %97, label %90
+  
+  ; <label>:90                                      ; preds = %84
+    %91 = bitcast %struct.ref_s* %63 to i16*
+    %92 = load i16, i16* %91, align 4, !tbaa !9
+    %93 = zext i16 %92 to i32
+    %94 = and i32 %93, 12
+    br label %97
+  
+  ; <label>:95                                      ; preds = %25
+    %96 = bitcast i64* %old_keys to i8*
+    call void @llvm.lifetime.end(i64 8, i8* %96) #6
+    br label %99
+  
+  ; <label>:97                                      ; preds = %90, %84
+    %storemerge.i = phi i32 [ %94, %90 ], [ -1, %84 ]
+    %98 = bitcast i64* %old_keys to i8*
+    store i32 %storemerge.i, i32* @dsspace, align 4, !tbaa !1
+    call void @llvm.lifetime.end(i64 8, i8* nonnull %98) #6
+    br label %99
+  
+  ; <label>:99                                      ; preds = %97, %95, %0
+    %100 = phi i32 [ 0, %97 ], [ %26, %95 ], [ 0, %0 ]
+    ret i32 %100
+  }
+  
+  declare i32 @alloc_save_change(%struct.gs_dual_memory_s*, %struct.ref_s*, i16*, i8*) #3
+  
+  ; Function Attrs: nounwind
+  define internal fastcc i32 @dict_create_unpacked_keys(i32 signext %asize, %struct.ref_s* nocapture readonly %pdref) unnamed_addr #1 {
+    %1 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %pdref, i32 0, i32 1
+    %2 = bitcast %union.v* %1 to %struct.dict_s**
+    %3 = load %struct.dict_s*, %struct.dict_s** %2, align 4, !tbaa !8
+    %4 = load i32, i32* getelementptr inbounds (%struct.gs_dual_memory_s, %struct.gs_dual_memory_s* @gs_imemory, i32 0, i32 2), align 4, !tbaa !22
+    %5 = bitcast %struct.ref_s* %pdref to i16*
+    %6 = load i16, i16* %5, align 4, !tbaa !9
+    %7 = zext i16 %6 to i32
+    %8 = and i32 %7, 12
+    tail call void @ialloc_set_space(%struct.gs_dual_memory_s* nonnull @gs_imemory, i32 signext %8) #6
+    %9 = load %struct.gs_ref_memory_s*, %struct.gs_ref_memory_s** getelementptr inbounds (%struct.gs_dual_memory_s, %struct.gs_dual_memory_s* @gs_imemory, i32 0, i32 0), align 4, !tbaa !5
+    %10 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %3, i32 0, i32 1
+    %11 = tail call i32 @gs_alloc_ref_array(%struct.gs_ref_memory_s* %9, %struct.ref_s* %10, i32 signext 112, i32 signext %asize, i8* getelementptr inbounds ([26 x i8], [26 x i8]* @.str.17, i32 0, i32 0)) #6
+    %12 = icmp sgt i32 %11, -1
+    br i1 %12, label %13, label %27
+  
+  ; <label>:13                                      ; preds = %0
+    %14 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %3, i32 0, i32 1, i32 1
+    %15 = bitcast %union.v* %14 to %struct.ref_s**
+    %16 = load %struct.ref_s*, %struct.ref_s** %15, align 4, !tbaa !8
+    %17 = load i32, i32* getelementptr inbounds (%struct.gs_dual_memory_s, %struct.gs_dual_memory_s* @gs_imemory, i32 0, i32 6), align 4, !tbaa !13
+    %sunkaddr = ptrtoint %struct.dict_s* %3 to i32
+    %sunkaddr1 = add i32 %sunkaddr, 8
+    %sunkaddr2 = inttoptr i32 %sunkaddr1 to i16*
+    %18 = load i16, i16* %sunkaddr2, align 4, !tbaa !9
+    %19 = zext i16 %18 to i32
+    %20 = or i32 %19, %17
+    %21 = trunc i32 %20 to i16
+    store i16 %21, i16* %sunkaddr2, align 4, !tbaa !9
+    tail call void @refset_null(%struct.ref_s* %16, i32 signext %asize) #6
+    %22 = bitcast %struct.ref_s* %16 to i16*
+    %23 = load i16, i16* %22, align 4, !tbaa !9
+    %24 = zext i16 %23 to i32
+    %25 = or i32 %24, 128
+    %26 = trunc i32 %25 to i16
+    store i16 %26, i16* %22, align 4, !tbaa !9
+    br label %27
+  
+  ; <label>:27                                      ; preds = %13, %0
+    tail call void @ialloc_set_space(%struct.gs_dual_memory_s* nonnull @gs_imemory, i32 signext %4) #6
+    ret i32 %11
+  }
+  
+  declare void @packed_get(i16*, %struct.ref_s*) #3
+  
+  declare void @gs_free_ref_array(%struct.gs_ref_memory_s*, %struct.ref_s*, i8*) #3
+  
+  ; Function Attrs: norecurse nounwind
+  define void @dict_set_top() #4 {
+    %1 = load %struct.ref_s*, %struct.ref_s** getelementptr inbounds (%struct.ref_stack_s, %struct.ref_stack_s* @d_stack, i32 0, i32 0), align 4, !tbaa !20
+    %2 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %1, i32 0, i32 1
+    %3 = bitcast %union.v* %2 to %struct.dict_s**
+    %4 = load %struct.dict_s*, %struct.dict_s** %3, align 4, !tbaa !8
+    %5 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %4, i32 0, i32 1
+    %6 = bitcast %struct.ref_s* %5 to i8*
+    %7 = load i8, i8* %6, align 4, !tbaa !18
+    %8 = icmp eq i8 %7, 6
+    br i1 %8, label %9, label %21
+  
+  ; <label>:9                                       ; preds = %0
+    %10 = bitcast %struct.dict_s* %4 to i32*
+    %11 = load i32, i32* %10, align 4
+    %12 = and i32 %11, 2097152
+    %13 = icmp eq i32 %12, 0
+    br i1 %13, label %21, label %14
+  
+  ; <label>:14                                      ; preds = %9
+    %15 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %4, i32 0, i32 1, i32 1, i32 0
+    %16 = load i32, i32* %15, align 4, !tbaa !8
+    store i32 %16, i32* bitcast (i16** @dtop_keys to i32*), align 4, !tbaa !8
+    %17 = and i32 %11, 65535
+    %18 = add nsw i32 %17, -1
+    store i32 %18, i32* @dtop_npairs, align 4, !tbaa !1
+    %19 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %4, i32 0, i32 0, i32 1, i32 0
+    %20 = load i32, i32* %19, align 4, !tbaa !8
+    store i32 %20, i32* bitcast (%struct.ref_s** @dtop_values to i32*), align 4, !tbaa !8
+    br label %22
+  
+  ; <label>:21                                      ; preds = %9, %0
+    store i16* getelementptr inbounds ([2 x i16], [2 x i16]* @no_packed_keys, i32 0, i32 0), i16** @dtop_keys, align 4, !tbaa !8
+    store i32 1, i32* @dtop_npairs, align 4, !tbaa !1
+    br label %22
+  
+  ; <label>:22                                      ; preds = %21, %14
+    %sunkaddr = ptrtoint %struct.ref_s* %1 to i32
+    %sunkaddr1 = add i32 %sunkaddr, 4
+    %sunkaddr2 = inttoptr i32 %sunkaddr1 to %struct.dict_s**
+    %23 = load %struct.dict_s*, %struct.dict_s** %sunkaddr2, align 4, !tbaa !8
+    %24 = bitcast %struct.dict_s* %23 to i16*
+    %25 = load i16, i16* %24, align 4, !tbaa !9
+    %26 = and i16 %25, 16
+    %27 = icmp eq i16 %26, 0
+    br i1 %27, label %33, label %28
+  
+  ; <label>:28                                      ; preds = %22
+    %29 = bitcast %struct.ref_s* %1 to i16*
+    %30 = load i16, i16* %29, align 4, !tbaa !9
+    %31 = zext i16 %30 to i32
+    %32 = and i32 %31, 12
+    br label %33
+  
+  ; <label>:33                                      ; preds = %28, %22
+    %storemerge = phi i32 [ %32, %28 ], [ -1, %22 ]
+    store i32 %storemerge, i32* @dsspace, align 4, !tbaa !1
+    ret void
+  }
+  
+  ; Function Attrs: nounwind
+  define i32 @dict_find(%struct.ref_s* nocapture readonly %pdref, %struct.ref_s* %pkey, %struct.ref_s** nocapture %ppvalue) #1 {
+    %nref = alloca %struct.ref_s, align 4
+    %1 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %pdref, i32 0, i32 1
+    %2 = bitcast %union.v* %1 to %struct.dict_s**
+    %3 = load %struct.dict_s*, %struct.dict_s** %2, align 4, !tbaa !8
+    %4 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %3, i32 0, i32 0, i32 0, i32 1
+    %5 = load i16, i16* %4, align 2, !tbaa !14
+    %6 = zext i16 %5 to i32
+    %7 = zext i16 %5 to i32
+    %8 = add nsw i32 %7, -1
+    %9 = bitcast %struct.ref_s* %pkey to i32*
+    %10 = load i32, i32* %9, align 4
+    %11 = lshr i32 %10, 24
+    switch i32 %11, label %38 [
+      i32 13, label %12
+      i32 18, label %17
+      i32 11, label %34
+      i32 14, label %219
+    ]
+  
+  ; <label>:12                                      ; preds = %0
+    %13 = and i32 %10, 65535
+    br label %14
+  
+  ; <label>:14                                      ; preds = %29, %12
+    %nidx.0 = phi i32 [ %33, %29 ], [ %13, %12 ]
+    %15 = icmp ult i32 %nidx.0, 4096
+    %16 = add nuw nsw i32 %nidx.0, 49152
+    %.op = and i32 %16, 65535
+    %phitmp = select i1 %15, i32 %.op, i32 0
+    br label %43
+  
+  ; <label>:17                                      ; preds = %0
+    %18 = bitcast %struct.ref_s* %nref to i8*
+    call void @llvm.lifetime.start(i64 8, i8* %18) #6
+    %19 = and i32 %10, 2097152
+    %20 = icmp eq i32 %19, 0
+    br i1 %20, label %.thread, label %21
+  
+  ; <label>:21                                      ; preds = %17
+    %22 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %pkey, i32 0, i32 1
+    %23 = bitcast %union.v* %22 to i8**
+    %24 = load i8*, i8** %23, align 4, !tbaa !8
+    %25 = and i32 %10, 65535
+    %26 = call i32 @name_ref(i8* %24, i32 signext %25, %struct.ref_s* nonnull %nref, i32 signext 1) #6
+    %27 = icmp slt i32 %26, 0
+    br i1 %27, label %.thread, label %29
+  
+  .thread:                                          ; preds = %21, %17
+    %.0.ph = phi i32 [ %26, %21 ], [ -7, %17 ]
+    %28 = bitcast %struct.ref_s* %nref to i8*
+    call void @llvm.lifetime.end(i64 8, i8* %28) #6
+    br label %219
+  
+  ; <label>:29                                      ; preds = %21
+    %30 = bitcast %struct.ref_s* %nref to i8*
+    %31 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %nref, i32 0, i32 0, i32 1
+    %32 = load i16, i16* %31, align 2, !tbaa !14
+    %33 = zext i16 %32 to i32
+    call void @llvm.lifetime.end(i64 8, i8* %30) #6
+    br label %14
+  
+  ; <label>:34                                      ; preds = %0
+    %35 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %pkey, i32 0, i32 1, i32 0
+    %36 = load i32, i32* %35, align 4, !tbaa !16
+    %37 = mul i32 %36, 30503
+    br label %43
+  
+  ; <label>:38                                      ; preds = %0
+    %39 = bitcast %struct.ref_s* %pkey to i16*
+    %40 = load i16, i16* %39, align 4, !tbaa !9
+    %41 = icmp ugt i16 %40, 5375
+    %.op5 = mul nuw nsw i32 %11, 99
+    %42 = select i1 %41, i32 1485, i32 %.op5
+    br label %43
+  
+  ; <label>:43                                      ; preds = %38, %34, %14
+    %hash.0 = phi i32 [ %42, %38 ], [ %37, %34 ], [ %nidx.0, %14 ]
+    %ktype.0 = phi i32 [ -1, %38 ], [ -1, %34 ], [ 13, %14 ]
+    %kpack.0 = phi i32 [ 0, %38 ], [ 0, %34 ], [ %phitmp, %14 ]
+    %nidx.2 = phi i32 [ 0, %38 ], [ 0, %34 ], [ %nidx.0, %14 ]
+    %44 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %3, i32 0, i32 1
+    %45 = bitcast %struct.ref_s* %44 to i8*
+    %46 = load i8, i8* %45, align 4, !tbaa !18
+    %47 = icmp eq i8 %46, 6
+    br i1 %47, label %48, label %148
+  
+  ; <label>:48                                      ; preds = %43
+    %sunkaddr = ptrtoint %struct.dict_s* %3 to i32
+    %sunkaddr24 = add i32 %sunkaddr, 12
+    %sunkaddr25 = inttoptr i32 %sunkaddr24 to i16**
+    %49 = load i16*, i16** %sunkaddr25, align 4, !tbaa !8
+    %50 = icmp ugt i32 %8, 32768
+    br i1 %50, label %51, label %53
+  
+  ; <label>:51                                      ; preds = %48
+    %52 = urem i32 %hash.0, %8
+    br label %56
+  
+  ; <label>:53                                      ; preds = %48
+    %54 = add nsw i32 %7, -2
+    %55 = and i32 %hash.0, %54
+    br label %56
+  
+  ; <label>:56                                      ; preds = %53, %51
+    %57 = phi i32 [ %52, %51 ], [ %55, %53 ]
+    %58 = getelementptr inbounds i16, i16* %49, i32 %57
+    %59 = getelementptr inbounds i16, i16* %58, i32 1
+    %60 = load i16, i16* %59, align 2, !tbaa !15
+    %61 = zext i16 %60 to i32
+    %62 = icmp eq i32 %61, %kpack.0
+    br i1 %62, label %._crit_edge41, label %.lr.ph40.preheader
+  
+  .lr.ph40.preheader:                               ; preds = %56
+    %63 = shl i32 %57, 1
+    br label %.lr.ph40
+  
+  ._crit_edge41:                                    ; preds = %82, %56
+    %kp.0.lcssa = phi i16* [ %59, %56 ], [ %scevgep18, %82 ]
+    %64 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %3, i32 0, i32 0, i32 1
+    %65 = bitcast %union.v* %64 to %struct.ref_s**
+    %66 = load %struct.ref_s*, %struct.ref_s** %65, align 4, !tbaa !8
+    %67 = ptrtoint i16* %kp.0.lcssa to i32
+    %68 = ptrtoint i16* %49 to i32
+    %69 = sub i32 %67, %68
+    %70 = ashr exact i32 %69, 1
+    %71 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %66, i32 %70
+    store %struct.ref_s* %71, %struct.ref_s** %ppvalue, align 4, !tbaa !8
+    br label %219
+  
+  .lr.ph40:                                         ; preds = %82, %.lr.ph40.preheader
+    %lsr.iv9 = phi i32 [ %lsr.iv.next10, %82 ], [ %63, %.lr.ph40.preheader ]
+    %72 = phi i16 [ %84, %82 ], [ %60, %.lr.ph40.preheader ]
+    %pslot.037 = phi i16* [ %pslot.1, %82 ], [ null, %.lr.ph40.preheader ]
+    %73 = bitcast i16* %49 to i8*
+    %uglygep11 = getelementptr i8, i8* %73, i32 %lsr.iv9
+    %uglygep1112 = bitcast i8* %uglygep11 to i16*
+    %scevgep13 = getelementptr i16, i16* %uglygep1112, i32 1
+    %74 = icmp ugt i16 %72, -16385
+    br i1 %74, label %82, label %75
+  
+  ; <label>:75                                      ; preds = %.lr.ph40
+    %76 = icmp eq i16 %72, 24576
+    br i1 %76, label %.loopexit, label %77
+  
+  ; <label>:77                                      ; preds = %75
+    %78 = inttoptr i32 %lsr.iv9 to i16*
+    %79 = icmp eq i16* %78, inttoptr (i32 -2 to i16*)
+    br i1 %79, label %87, label %80
+  
+  ; <label>:80                                      ; preds = %77
+    %81 = icmp eq i16* %pslot.037, null
+    %kp.0.pslot.0 = select i1 %81, i16* %scevgep13, i16* %pslot.037
+    br label %82
+  
+  ; <label>:82                                      ; preds = %80, %.lr.ph40
+    %pslot.1 = phi i16* [ %pslot.037, %.lr.ph40 ], [ %kp.0.pslot.0, %80 ]
+    %83 = bitcast i16* %49 to i8*
+    %uglygep14 = getelementptr i8, i8* %83, i32 %lsr.iv9
+    %uglygep1415 = bitcast i8* %uglygep14 to i16*
+    %84 = load i16, i16* %uglygep1415, align 2, !tbaa !15
+    %85 = zext i16 %84 to i32
+    %86 = icmp eq i32 %85, %kpack.0
+    %lsr.iv.next10 = add i32 %lsr.iv9, -2
+    %uglygep16 = getelementptr i8, i8* %83, i32 %lsr.iv.next10
+    %uglygep1617 = bitcast i8* %uglygep16 to i16*
+    %scevgep18 = getelementptr i16, i16* %uglygep1617, i32 1
+    br i1 %86, label %._crit_edge41, label %.lr.ph40
+  
+  ; <label>:87                                      ; preds = %77
+    %88 = getelementptr inbounds i16, i16* %49, i32 %8
+    %89 = load i16, i16* %88, align 2, !tbaa !15
+    %90 = zext i16 %89 to i32
+    %91 = icmp eq i32 %90, %kpack.0
+    br i1 %91, label %._crit_edge, label %.lr.ph.preheader
+  
+  .lr.ph.preheader:                                 ; preds = %87
+    %92 = shl i32 %6, 1
+    br label %.lr.ph
+  
+  ._crit_edge:                                      ; preds = %111, %87
+    %kp.1.lcssa = phi i16* [ %88, %87 ], [ %scevgep7, %111 ]
+    %93 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %3, i32 0, i32 0, i32 1
+    %94 = bitcast %union.v* %93 to %struct.ref_s**
+    %95 = load %struct.ref_s*, %struct.ref_s** %94, align 4, !tbaa !8
+    %96 = ptrtoint i16* %kp.1.lcssa to i32
+    %97 = ptrtoint i16* %49 to i32
+    %98 = sub i32 %96, %97
+    %99 = ashr exact i32 %98, 1
+    %100 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %95, i32 %99
+    store %struct.ref_s* %100, %struct.ref_s** %ppvalue, align 4, !tbaa !8
+    br label %219
+  
+  .lr.ph:                                           ; preds = %111, %.lr.ph.preheader
+    %lsr.iv = phi i32 [ %lsr.iv.next, %111 ], [ %92, %.lr.ph.preheader ]
+    %101 = phi i16 [ %113, %111 ], [ %89, %.lr.ph.preheader ]
+    %pslot.235 = phi i16* [ %pslot.3, %111 ], [ %pslot.037, %.lr.ph.preheader ]
+    %102 = bitcast i16* %49 to i8*
+    %uglygep = getelementptr i8, i8* %102, i32 %lsr.iv
+    %uglygep1 = bitcast i8* %uglygep to i16*
+    %scevgep = getelementptr i16, i16* %uglygep1, i32 -1
+    %103 = icmp ugt i16 %101, -16385
+    br i1 %103, label %111, label %104
+  
+  ; <label>:104                                     ; preds = %.lr.ph
+    %105 = icmp eq i16 %101, 24576
+    br i1 %105, label %.loopexit, label %106
+  
+  ; <label>:106                                     ; preds = %104
+    %107 = inttoptr i32 %lsr.iv to i16*
+    %108 = icmp eq i16* %107, inttoptr (i32 2 to i16*)
+    br i1 %108, label %116, label %109
+  
+  ; <label>:109                                     ; preds = %106
+    %110 = icmp eq i16* %pslot.235, null
+    %kp.1.pslot.2 = select i1 %110, i16* %scevgep, i16* %pslot.235
+    br label %111
+  
+  ; <label>:111                                     ; preds = %109, %.lr.ph
+    %pslot.3 = phi i16* [ %pslot.235, %.lr.ph ], [ %kp.1.pslot.2, %109 ]
+    %112 = bitcast i16* %49 to i8*
+    %uglygep2 = getelementptr i8, i8* %112, i32 %lsr.iv
+    %uglygep23 = bitcast i8* %uglygep2 to i16*
+    %scevgep4 = getelementptr i16, i16* %uglygep23, i32 -2
+    %113 = load i16, i16* %scevgep4, align 2, !tbaa !15
+    %114 = zext i16 %113 to i32
+    %115 = icmp eq i32 %114, %kpack.0
+    %lsr.iv.next = add i32 %lsr.iv, -2
+    %uglygep5 = getelementptr i8, i8* %112, i32 %lsr.iv.next
+    %uglygep56 = bitcast i8* %uglygep5 to i16*
+    %scevgep7 = getelementptr i16, i16* %uglygep56, i32 -1
+    br i1 %115, label %._crit_edge, label %.lr.ph
+  
+  ; <label>:116                                     ; preds = %106
+    %117 = icmp eq i16* %pslot.235, null
+    br i1 %117, label %219, label %118
+  
+  ; <label>:118                                     ; preds = %116
+    %119 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %3, i32 0, i32 2, i32 1, i32 0
+    %120 = load i32, i32* %119, align 4, !tbaa !16
+    %121 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %3, i32 0, i32 3, i32 1, i32 0
+    %122 = load i32, i32* %121, align 4, !tbaa !16
+    %123 = icmp eq i32 %120, %122
+    br i1 %123, label %219, label %124
+  
+  ; <label>:124                                     ; preds = %118
+    %125 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %3, i32 0, i32 0, i32 1
+    %126 = bitcast %union.v* %125 to %struct.ref_s**
+    %127 = load %struct.ref_s*, %struct.ref_s** %126, align 4, !tbaa !8
+    %128 = ptrtoint i16* %pslot.235 to i32
+    %129 = ptrtoint i16* %49 to i32
+    %130 = sub i32 %128, %129
+    %131 = ashr exact i32 %130, 1
+    %132 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %127, i32 %131
+    store %struct.ref_s* %132, %struct.ref_s** %ppvalue, align 4, !tbaa !8
+    br label %219
+  
+  .loopexit:                                        ; preds = %75, %104
+    %pslot.4 = phi i16* [ %pslot.235, %104 ], [ %pslot.037, %75 ]
+    %kp.2 = phi i16* [ %scevgep, %104 ], [ %scevgep13, %75 ]
+    %133 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %3, i32 0, i32 2, i32 1, i32 0
+    %134 = load i32, i32* %133, align 4, !tbaa !16
+    %135 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %3, i32 0, i32 3, i32 1, i32 0
+    %136 = load i32, i32* %135, align 4, !tbaa !16
+    %137 = icmp eq i32 %134, %136
+    br i1 %137, label %219, label %138
+  
+  ; <label>:138                                     ; preds = %.loopexit
+    %139 = icmp eq i16* %pslot.4, null
+    %kp.2.pslot.4 = select i1 %139, i16* %kp.2, i16* %pslot.4
+    %140 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %3, i32 0, i32 0, i32 1
+    %141 = bitcast %union.v* %140 to %struct.ref_s**
+    %142 = load %struct.ref_s*, %struct.ref_s** %141, align 4, !tbaa !8
+    %143 = ptrtoint i16* %kp.2.pslot.4 to i32
+    %144 = ptrtoint i16* %49 to i32
+    %145 = sub i32 %143, %144
+    %146 = ashr exact i32 %145, 1
+    %147 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %142, i32 %146
+    store %struct.ref_s* %147, %struct.ref_s** %ppvalue, align 4, !tbaa !8
+    br label %219
+  
+  ; <label>:148                                     ; preds = %43
+    %sunkaddr26 = ptrtoint %struct.dict_s* %3 to i32
+    %sunkaddr27 = add i32 %sunkaddr26, 12
+    %sunkaddr28 = inttoptr i32 %sunkaddr27 to %struct.ref_s**
+    %149 = load %struct.ref_s*, %struct.ref_s** %sunkaddr28, align 4, !tbaa !8
+    %150 = icmp ugt i32 %8, 32768
+    br i1 %150, label %151, label %153
+  
+  ; <label>:151                                     ; preds = %148
+    %152 = urem i32 %hash.0, %8
+    br label %156
+  
+  ; <label>:153                                     ; preds = %148
+    %154 = add nsw i32 %7, -2
+    %155 = and i32 %hash.0, %154
+    br label %156
+  
+  ; <label>:156                                     ; preds = %153, %151
+    %157 = phi i32 [ %152, %151 ], [ %155, %153 ]
+    %158 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %149, i32 %157
+    %159 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %158, i32 2
+    %160 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %149, i32 %7
+    br label %.outer
+  
+  .outer:                                           ; preds = %189, %156
+    %kp2.0.ph = phi %struct.ref_s* [ %lsr.iv21, %189 ], [ %159, %156 ]
+    %pslot3.0.ph = phi %struct.ref_s* [ %.pslot3.0, %189 ], [ null, %156 ]
+    %wrap.0.ph = phi i32 [ %wrap.0.ph10, %189 ], [ 0, %156 ]
+    br label %.outer8
+  
+  .outer8:                                          ; preds = %180, %.outer
+    %kp2.0.ph9 = phi %struct.ref_s* [ %kp2.0.ph, %.outer ], [ %160, %180 ]
+    %wrap.0.ph10 = phi i32 [ %wrap.0.ph, %.outer ], [ 1, %180 ]
+    %scevgep20 = getelementptr %struct.ref_s, %struct.ref_s* %kp2.0.ph9, i32 -1
+    br label %.backedge
+  
+  .backedge:                                        ; preds = %.backedge.backedge, %.outer8
+    %lsr.iv21 = phi %struct.ref_s* [ %scevgep22, %.backedge.backedge ], [ %scevgep20, %.outer8 ]
+    %lsr.iv2123 = bitcast %struct.ref_s* %lsr.iv21 to i32*
+    %161 = load i32, i32* %lsr.iv2123, align 4
+    %162 = lshr i32 %161, 24
+    %163 = icmp eq i32 %162, %ktype.0
+    br i1 %163, label %164, label %176
+  
+  ; <label>:164                                     ; preds = %.backedge
+    %165 = and i32 %161, 65535
+    %166 = icmp eq i32 %165, %nidx.2
+    br i1 %166, label %167, label %.backedge.backedge
+  
+  .backedge.backedge:                               ; preds = %191, %164
+    %scevgep22 = getelementptr %struct.ref_s, %struct.ref_s* %lsr.iv21, i32 -1
+    br label %.backedge
+  
+  ; <label>:167                                     ; preds = %164
+    %168 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %3, i32 0, i32 0, i32 1
+    %169 = bitcast %union.v* %168 to %struct.ref_s**
+    %170 = load %struct.ref_s*, %struct.ref_s** %169, align 4, !tbaa !8
+    %171 = ptrtoint %struct.ref_s* %lsr.iv21 to i32
+    %172 = ptrtoint %struct.ref_s* %149 to i32
+    %173 = sub i32 %171, %172
+    %174 = ashr exact i32 %173, 3
+    %175 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %170, i32 %174
+    store %struct.ref_s* %175, %struct.ref_s** %ppvalue, align 4, !tbaa !8
+    br label %219
+  
+  ; <label>:176                                     ; preds = %.backedge
+    %177 = icmp eq i32 %162, 14
+    br i1 %177, label %178, label %191
+  
+  ; <label>:178                                     ; preds = %176
+    %179 = icmp eq %struct.ref_s* %lsr.iv21, %149
+    br i1 %179, label %180, label %184
+  
+  ; <label>:180                                     ; preds = %178
+    %181 = icmp eq i32 %wrap.0.ph10, 0
+    br i1 %181, label %.outer8, label %182
+  
+  ; <label>:182                                     ; preds = %180
+    %183 = icmp eq %struct.ref_s* %pslot3.0.ph, null
+    br i1 %183, label %219, label %.loopexit7
+  
+  ; <label>:184                                     ; preds = %178
+    %185 = bitcast %struct.ref_s* %lsr.iv21 to i16*
+    %186 = load i16, i16* %185, align 4, !tbaa !9
+    %187 = and i16 %186, 128
+    %188 = icmp eq i16 %187, 0
+    br i1 %188, label %.loopexit7, label %189
+  
+  ; <label>:189                                     ; preds = %184
+    %190 = icmp eq %struct.ref_s* %pslot3.0.ph, null
+    %.pslot3.0 = select i1 %190, %struct.ref_s* %lsr.iv21, %struct.ref_s* %pslot3.0.ph
+    br label %.outer
+  
+  ; <label>:191                                     ; preds = %176
+    %192 = call i32 @obj_eq(%struct.ref_s* %lsr.iv21, %struct.ref_s* %pkey) #6
+    %193 = icmp eq i32 %192, 0
+    br i1 %193, label %.backedge.backedge, label %194
+  
+  ; <label>:194                                     ; preds = %191
+    %195 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %3, i32 0, i32 0, i32 1
+    %196 = bitcast %union.v* %195 to %struct.ref_s**
+    %197 = load %struct.ref_s*, %struct.ref_s** %196, align 4, !tbaa !8
+    %198 = ptrtoint %struct.ref_s* %lsr.iv21 to i32
+    %199 = ptrtoint %struct.ref_s* %149 to i32
+    %200 = sub i32 %198, %199
+    %201 = ashr exact i32 %200, 3
+    %202 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %197, i32 %201
+    store %struct.ref_s* %202, %struct.ref_s** %ppvalue, align 4, !tbaa !8
+    br label %219
+  
+  .loopexit7:                                       ; preds = %184, %182
+    %.lcssa5559 = phi %struct.ref_s* [ %149, %182 ], [ %lsr.iv21, %184 ]
+    %203 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %3, i32 0, i32 2, i32 1, i32 0
+    %204 = load i32, i32* %203, align 4, !tbaa !16
+    %205 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %3, i32 0, i32 3, i32 1, i32 0
+    %206 = load i32, i32* %205, align 4, !tbaa !16
+    %207 = icmp eq i32 %204, %206
+    br i1 %207, label %219, label %208
+  
+  ; <label>:208                                     ; preds = %.loopexit7
+    %209 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %3, i32 0, i32 0, i32 1
+    %210 = bitcast %union.v* %209 to %struct.ref_s**
+    %211 = load %struct.ref_s*, %struct.ref_s** %210, align 4, !tbaa !8
+    %212 = icmp ne %struct.ref_s* %pslot3.0.ph, null
+    %213 = select i1 %212, %struct.ref_s* %pslot3.0.ph, %struct.ref_s* %.lcssa5559
+    %214 = ptrtoint %struct.ref_s* %213 to i32
+    %215 = ptrtoint %struct.ref_s* %149 to i32
+    %216 = sub i32 %214, %215
+    %217 = ashr exact i32 %216, 3
+    %218 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %211, i32 %217
+    store %struct.ref_s* %218, %struct.ref_s** %ppvalue, align 4, !tbaa !8
+    br label %219
+  
+  ; <label>:219                                     ; preds = %208, %.loopexit7, %194, %182, %167, %138, %.loopexit, %124, %118, %116, %._crit_edge, %._crit_edge41, %.thread, %0
+    %.3 = phi i32 [ -20, %0 ], [ 1, %._crit_edge41 ], [ 0, %138 ], [ 1, %._crit_edge ], [ 0, %124 ], [ -2, %118 ], [ -2, %116 ], [ -2, %.loopexit ], [ 1, %167 ], [ 0, %208 ], [ 1, %194 ], [ -2, %182 ], [ -2, %.loopexit7 ], [ %.0.ph, %.thread ]
+    ret i32 %.3
+  }
+  
+  declare i32 @name_ref(i8*, i32 signext, %struct.ref_s*, i32 signext) #3
+  
+  declare i32 @obj_eq(%struct.ref_s*, %struct.ref_s*) #3
+  
+  ; Function Attrs: nounwind
+  define i32 @dict_find_string(%struct.ref_s* nocapture readonly %pdref, i8* %kstr, %struct.ref_s** nocapture %ppvalue) #1 {
+    %kname = alloca %struct.ref_s, align 4
+    %1 = bitcast %struct.ref_s* %kname to i8*
+    call void @llvm.lifetime.start(i64 8, i8* %1) #6
+    %2 = tail call i32 @strlen(i8* %kstr) #7
+    %3 = call i32 @name_ref(i8* %kstr, i32 signext %2, %struct.ref_s* nonnull %kname, i32 signext -1) #6
+    %4 = icmp slt i32 %3, 0
+    br i1 %4, label %7, label %5
+  
+  ; <label>:5                                       ; preds = %0
+    %6 = call i32 @dict_find(%struct.ref_s* %pdref, %struct.ref_s* nonnull %kname, %struct.ref_s** %ppvalue)
+    br label %7
+  
+  ; <label>:7                                       ; preds = %5, %0
+    %.0 = phi i32 [ %6, %5 ], [ %3, %0 ]
+    %8 = bitcast %struct.ref_s* %kname to i8*
+    call void @llvm.lifetime.end(i64 8, i8* %8) #6
+    ret i32 %.0
+  }
+  
+  ; Function Attrs: nounwind readonly
+  declare i32 @strlen(i8* nocapture) #5
+  
+  ; Function Attrs: nounwind
+  define i32 @dict_is_permanent_on_dstack(%struct.ref_s* nocapture readonly %pdref) #1 {
+    %1 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %pdref, i32 0, i32 1
+    %2 = bitcast %union.v* %1 to %struct.dict_s**
+    %3 = load %struct.dict_s*, %struct.dict_s** %2, align 4, !tbaa !8
+    %4 = load i32, i32* getelementptr inbounds (%struct.ref_stack_s, %struct.ref_stack_s* @d_stack, i32 0, i32 4), align 4, !tbaa !23
+    %5 = icmp eq i32 %4, 0
+    br i1 %5, label %.preheader, label %15
+  
+  .preheader:                                       ; preds = %0
+    %6 = load i32, i32* @min_dstack_size, align 4, !tbaa !1
+    %7 = icmp eq i32 %6, 0
+    br i1 %7, label %.critedge, label %.lr.ph
+  
+  .lr.ph:                                           ; preds = %.preheader
+    %8 = load %struct.ref_s*, %struct.ref_s** getelementptr inbounds (%struct.ref_stack_s, %struct.ref_stack_s* @d_stack, i32 0, i32 1), align 4
+    %scevgep = getelementptr %struct.ref_s, %struct.ref_s* %8, i32 0, i32 1, i32 0
+    %scevgep1 = bitcast i32* %scevgep to %struct.ref_s*
+    br label %11
+  
+  ; <label>:9                                       ; preds = %11
+    %scevgep2 = getelementptr %struct.ref_s, %struct.ref_s* %lsr.iv, i32 1
+    %10 = icmp ult i32 %14, %6
+    br i1 %10, label %11, label %.critedge
+  
+  ; <label>:11                                      ; preds = %9, %.lr.ph
+    %lsr.iv = phi %struct.ref_s* [ %scevgep2, %9 ], [ %scevgep1, %.lr.ph ]
+    %i.04 = phi i32 [ 0, %.lr.ph ], [ %14, %9 ]
+    %lsr.iv3 = bitcast %struct.ref_s* %lsr.iv to %struct.dict_s**
+    %12 = load %struct.dict_s*, %struct.dict_s** %lsr.iv3, align 4, !tbaa !8
+    %13 = icmp eq %struct.dict_s* %12, %3
+    %14 = add nuw nsw i32 %i.04, 1
+    br i1 %13, label %.critedge, label %9
+  
+  ; <label>:15                                      ; preds = %0
+    %16 = tail call i32 @ref_stack_count(%struct.ref_stack_s* nonnull @d_stack) #6
+    %17 = load i32, i32* @min_dstack_size, align 4, !tbaa !1
+    %18 = sub i32 %16, %17
+    %19 = icmp ult i32 %18, %16
+    br i1 %19, label %.lr.ph8, label %.critedge
+  
+  ; <label>:20                                      ; preds = %.lr.ph8
+    %21 = icmp ult i32 %27, %16
+    br i1 %21, label %.lr.ph8, label %.critedge
+  
+  .lr.ph8:                                          ; preds = %15, %20
+    %i.17 = phi i32 [ %27, %20 ], [ %18, %15 ]
+    %22 = tail call %struct.ref_s* @ref_stack_index(%struct.ref_stack_s* nonnull @d_stack, i32 signext %i.17) #6
+    %23 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %22, i32 0, i32 1
+    %24 = bitcast %union.v* %23 to %struct.dict_s**
+    %25 = load %struct.dict_s*, %struct.dict_s** %24, align 4, !tbaa !8
+    %26 = icmp eq %struct.dict_s* %25, %3
+    %27 = add nuw nsw i32 %i.17, 1
+    br i1 %26, label %.critedge, label %20
+  
+  .critedge:                                        ; preds = %20, %.lr.ph8, %9, %11, %15, %.preheader
+    %.1 = phi i32 [ 0, %.preheader ], [ 0, %15 ], [ 1, %11 ], [ 0, %9 ], [ 0, %20 ], [ 1, %.lr.ph8 ]
+    ret i32 %.1
+  }
+  
+  declare i32 @ref_stack_count(%struct.ref_stack_s*) #3
+  
+  declare %struct.ref_s* @ref_stack_index(%struct.ref_stack_s*, i32 signext) #3
+  
+  ; Function Attrs: nounwind
+  define %struct.ref_s* @dict_find_name_by_index(i32 signext %nidx) #1 {
+    %key = alloca %struct.ref_s, align 4
+    %pvalue = alloca %struct.ref_s*, align 4
+    %1 = load %struct.ref_s*, %struct.ref_s** getelementptr inbounds (%struct.ref_stack_s, %struct.ref_stack_s* @d_stack, i32 0, i32 0), align 4, !tbaa !20
+    %2 = icmp ult i32 %nidx, 4096
+    %3 = add i32 %nidx, 49152
+    %4 = and i32 %3, 65535
+    %5 = select i1 %2, i32 %4, i32 0
+    %6 = load %struct.ref_s*, %struct.ref_s** getelementptr inbounds (%struct.ref_stack_s, %struct.ref_stack_s* @d_stack, i32 0, i32 1), align 4
+    br label %7
+  
+  ; <label>:7                                       ; preds = %.thread, %0
+    %pdref.0 = phi %struct.ref_s* [ %1, %0 ], [ %121, %.thread ]
+    %8 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %pdref.0, i32 0, i32 1
+    %9 = bitcast %union.v* %8 to %struct.dict_s**
+    %10 = load %struct.dict_s*, %struct.dict_s** %9, align 4, !tbaa !8
+    %11 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %10, i32 0, i32 0, i32 0, i32 1
+    %12 = load i16, i16* %11, align 2, !tbaa !14
+    %13 = zext i16 %12 to i32
+    %14 = zext i16 %12 to i32
+    %15 = zext i16 %12 to i32
+    %16 = add nsw i32 %15, -1
+    %17 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %10, i32 0, i32 1
+    %18 = bitcast %struct.ref_s* %17 to i8*
+    %19 = load i8, i8* %18, align 4, !tbaa !18
+    %20 = icmp eq i8 %19, 6
+    br i1 %20, label %21, label %82
+  
+  ; <label>:21                                      ; preds = %7
+    %sunkaddr = ptrtoint %struct.dict_s* %10 to i32
+    %sunkaddr31 = add i32 %sunkaddr, 12
+    %sunkaddr32 = inttoptr i32 %sunkaddr31 to i16**
+    %22 = load i16*, i16** %sunkaddr32, align 4, !tbaa !8
+    %23 = icmp ugt i32 %16, 32768
+    br i1 %23, label %24, label %26
+  
+  ; <label>:24                                      ; preds = %21
+    %25 = urem i32 %nidx, %16
+    br label %29
+  
+  ; <label>:26                                      ; preds = %21
+    %27 = add nsw i32 %15, -2
+    %28 = and i32 %27, %nidx
+    br label %29
+  
+  ; <label>:29                                      ; preds = %26, %24
+    %30 = phi i32 [ %25, %24 ], [ %28, %26 ]
+    %31 = getelementptr inbounds i16, i16* %22, i32 %30
+    %32 = getelementptr inbounds i16, i16* %31, i32 1
+    %33 = load i16, i16* %32, align 2, !tbaa !15
+    %34 = zext i16 %33 to i32
+    %35 = icmp eq i32 %34, %5
+    br i1 %35, label %._crit_edge42, label %.lr.ph41.preheader
+  
+  .lr.ph41.preheader:                               ; preds = %29
+    %36 = shl i32 %30, 1
+    br label %.lr.ph41
+  
+  ._crit_edge42:                                    ; preds = %29, %52
+    %kp.0.lcssa = phi i16* [ %scevgep, %52 ], [ %32, %29 ]
+    %37 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %10, i32 0, i32 0, i32 1
+    %38 = bitcast %union.v* %37 to %struct.ref_s**
+    %39 = load %struct.ref_s*, %struct.ref_s** %38, align 4, !tbaa !8
+    %40 = ptrtoint i16* %kp.0.lcssa to i32
+    %41 = ptrtoint i16* %22 to i32
+    %42 = sub i32 %40, %41
+    %43 = ashr exact i32 %42, 1
+    %44 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %39, i32 %43
+    br label %.thread19
+  
+  .lr.ph41:                                         ; preds = %52, %.lr.ph41.preheader
+    %lsr.iv15 = phi i32 [ %lsr.iv.next16, %52 ], [ %36, %.lr.ph41.preheader ]
+    %45 = phi i16 [ %54, %52 ], [ %33, %.lr.ph41.preheader ]
+    %46 = icmp ugt i16 %45, -16385
+    br i1 %46, label %52, label %47
+  
+  ; <label>:47                                      ; preds = %.lr.ph41
+    %48 = icmp eq i16 %45, 24576
+    br i1 %48, label %.thread, label %49
+  
+  ; <label>:49                                      ; preds = %47
+    %50 = inttoptr i32 %lsr.iv15 to i16*
+    %51 = icmp eq i16* %50, inttoptr (i32 -2 to i16*)
+    br i1 %51, label %57, label %52
+  
+  ; <label>:52                                      ; preds = %49, %.lr.ph41
+    %53 = bitcast i16* %22 to i8*
+    %uglygep17 = getelementptr i8, i8* %53, i32 %lsr.iv15
+    %uglygep1718 = bitcast i8* %uglygep17 to i16*
+    %54 = load i16, i16* %uglygep1718, align 2, !tbaa !15
+    %55 = zext i16 %54 to i32
+    %56 = icmp eq i32 %55, %5
+    %lsr.iv.next16 = add i32 %lsr.iv15, -2
+    %uglygep19 = getelementptr i8, i8* %53, i32 %lsr.iv.next16
+    %uglygep1920 = bitcast i8* %uglygep19 to i16*
+    %scevgep = getelementptr i16, i16* %uglygep1920, i32 1
+    br i1 %56, label %._crit_edge42, label %.lr.ph41
+  
+  ; <label>:57                                      ; preds = %49
+    %58 = getelementptr inbounds i16, i16* %22, i32 %16
+    %59 = load i16, i16* %58, align 2, !tbaa !15
+    %60 = zext i16 %59 to i32
+    %61 = icmp eq i32 %60, %5
+    br i1 %61, label %._crit_edge52, label %.lr.ph51.preheader
+  
+  .lr.ph51.preheader:                               ; preds = %57
+    %62 = shl i32 %14, 1
+    br label %.lr.ph51
+  
+  ._crit_edge52:                                    ; preds = %57, %77
+    %kp.1.lcssa = phi i16* [ %scevgep29, %77 ], [ %58, %57 ]
+    %63 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %10, i32 0, i32 0, i32 1
+    %64 = bitcast %union.v* %63 to %struct.ref_s**
+    %65 = load %struct.ref_s*, %struct.ref_s** %64, align 4, !tbaa !8
+    %66 = ptrtoint i16* %kp.1.lcssa to i32
+    %67 = ptrtoint i16* %22 to i32
+    %68 = sub i32 %66, %67
+    %69 = ashr exact i32 %68, 1
+    %70 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %65, i32 %69
+    br label %.thread19
+  
+  .lr.ph51:                                         ; preds = %77, %.lr.ph51.preheader
+    %lsr.iv22 = phi i32 [ %lsr.iv.next23, %77 ], [ %62, %.lr.ph51.preheader ]
+    %71 = phi i16 [ %79, %77 ], [ %59, %.lr.ph51.preheader ]
+    %72 = icmp ugt i16 %71, -16385
+    br i1 %72, label %77, label %73
+  
+  ; <label>:73                                      ; preds = %.lr.ph51
+    %74 = inttoptr i32 %lsr.iv22 to i16*
+    %75 = icmp eq i16 %71, 24576
+    %76 = icmp eq i16* %74, inttoptr (i32 2 to i16*)
+    %or.cond = or i1 %76, %75
+    br i1 %or.cond, label %.thread, label %77
+  
+  ; <label>:77                                      ; preds = %73, %.lr.ph51
+    %78 = bitcast i16* %22 to i8*
+    %uglygep24 = getelementptr i8, i8* %78, i32 %lsr.iv22
+    %uglygep2425 = bitcast i8* %uglygep24 to i16*
+    %scevgep26 = getelementptr i16, i16* %uglygep2425, i32 -2
+    %79 = load i16, i16* %scevgep26, align 2, !tbaa !15
+    %80 = zext i16 %79 to i32
+    %81 = icmp eq i32 %80, %5
+    %lsr.iv.next23 = add i32 %lsr.iv22, -2
+    %uglygep27 = getelementptr i8, i8* %78, i32 %lsr.iv.next23
+    %uglygep2728 = bitcast i8* %uglygep27 to i16*
+    %scevgep29 = getelementptr i16, i16* %uglygep2728, i32 -1
+    br i1 %81, label %._crit_edge52, label %.lr.ph51
+  
+  ; <label>:82                                      ; preds = %7
+    %sunkaddr33 = ptrtoint %struct.dict_s* %10 to i32
+    %sunkaddr34 = add i32 %sunkaddr33, 12
+    %sunkaddr35 = inttoptr i32 %sunkaddr34 to %struct.ref_s**
+    %83 = load %struct.ref_s*, %struct.ref_s** %sunkaddr35, align 4, !tbaa !8
+    %84 = icmp ugt i32 %16, 32768
+    br i1 %84, label %85, label %87
+  
+  ; <label>:85                                      ; preds = %82
+    %86 = urem i32 %nidx, %16
+    br label %.outer
+  
+  ; <label>:87                                      ; preds = %82
+    %88 = add nsw i32 %15, -2
+    %89 = and i32 %88, %nidx
+    br label %.outer
+  
+  .outer:                                           ; preds = %85, %87
+    %90 = phi i32 [ %86, %85 ], [ %89, %87 ]
+    %91 = shl i32 %90, 3
+    %92 = add i32 %91, 8
+    br label %.backedge
+  
+  .backedge:                                        ; preds = %.backedge.backedge, %.outer
+    %lsr.iv = phi i32 [ %lsr.iv.next, %.backedge.backedge ], [ %92, %.outer ]
+    %93 = bitcast %struct.ref_s* %83 to i8*
+    %uglygep = getelementptr i8, i8* %93, i32 %lsr.iv
+    %uglygep5 = bitcast i8* %uglygep to i32*
+    %94 = load i32, i32* %uglygep5, align 4
+    %95 = lshr i32 %94, 24
+    %96 = trunc i32 %95 to i8
+    %97 = zext i8 %96 to i32
+    switch i32 %97, label %.backedge.backedge [
+      i32 13, label %98
+      i32 14, label %102
+    ]
+  
+  ; <label>:98                                      ; preds = %.backedge
+    %99 = bitcast i8* %uglygep to %struct.ref_s*
+    %100 = and i32 %94, 65535
+    %101 = icmp eq i32 %100, %nidx
+    br i1 %101, label %112, label %.backedge.backedge
+  
+  ; <label>:102                                     ; preds = %.backedge
+    %103 = bitcast %struct.ref_s* %83 to i8*
+    %uglygep3 = getelementptr i8, i8* %103, i32 %lsr.iv
+    %uglygep34 = bitcast i8* %uglygep3 to i16*
+    %104 = load i16, i16* %uglygep34, align 4, !tbaa !9
+    %105 = and i16 %104, 128
+    %106 = icmp eq i16 %105, 0
+    br i1 %106, label %.thread, label %107
+  
+  ; <label>:107                                     ; preds = %102
+    %108 = inttoptr i32 %lsr.iv to %struct.ref_s*
+    %109 = icmp eq %struct.ref_s* %108, null
+    br i1 %109, label %.outer.1162, label %.backedge.backedge
+  
+  .backedge.backedge:                               ; preds = %107, %98, %.backedge
+    %lsr.iv.next = add i32 %lsr.iv, -8
+    br label %.backedge
+  
+  .outer.1162:                                      ; preds = %107
+    %110 = shl i32 %13, 3
+    %111 = add i32 %110, -8
+    br label %.backedge.1
+  
+  ; <label>:112                                     ; preds = %162, %98
+    %.lcssa143 = phi %struct.ref_s* [ %99, %98 ], [ %163, %162 ]
+    %113 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %10, i32 0, i32 0, i32 1
+    %114 = bitcast %union.v* %113 to %struct.ref_s**
+    %115 = load %struct.ref_s*, %struct.ref_s** %114, align 4, !tbaa !8
+    %116 = ptrtoint %struct.ref_s* %.lcssa143 to i32
+    %117 = ptrtoint %struct.ref_s* %83 to i32
+    %118 = sub i32 %116, %117
+    %119 = ashr exact i32 %118, 3
+    %120 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %115, i32 %119
+    br label %.thread19
+  
+  .thread:                                          ; preds = %159, %47, %73, %102, %154
+    %121 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %pdref.0, i32 -1
+    %122 = icmp ugt %struct.ref_s* %pdref.0, %6
+    br i1 %122, label %7, label %123
+  
+  ; <label>:123                                     ; preds = %.thread
+    %124 = load i32, i32* getelementptr inbounds (%struct.ref_stack_s, %struct.ref_stack_s* @d_stack, i32 0, i32 4), align 4, !tbaa !23
+    %125 = icmp eq i32 %124, 0
+    br i1 %125, label %.thread19, label %126
+  
+  ; <label>:126                                     ; preds = %123
+    %127 = ptrtoint %struct.ref_s* %6 to i32
+    %128 = bitcast %struct.ref_s* %key to i8*
+    call void @llvm.lifetime.start(i64 8, i8* %128) #6
+    %129 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %1, i32 1
+    %130 = ptrtoint %struct.ref_s* %129 to i32
+    %131 = sub i32 %130, %127
+    %132 = ashr exact i32 %131, 3
+    %133 = tail call i32 @ref_stack_count(%struct.ref_stack_s* nonnull @d_stack) #6
+    %134 = bitcast %struct.ref_s** %pvalue to i8*
+    call void @llvm.lifetime.start(i64 4, i8* %134) #6
+    call void @name_index_ref(i32 signext %nidx, %struct.ref_s* nonnull %key) #6
+    %135 = icmp ult i32 %132, %133
+    br i1 %135, label %.lr.ph, label %._crit_edge
+  
+  ; <label>:136                                     ; preds = %.lr.ph
+    %137 = icmp ult i32 %141, %133
+    br i1 %137, label %.lr.ph, label %._crit_edge
+  
+  .lr.ph:                                           ; preds = %126, %136
+    %i.038 = phi i32 [ %141, %136 ], [ %132, %126 ]
+    %138 = call %struct.ref_s* @ref_stack_index(%struct.ref_stack_s* nonnull @d_stack, i32 signext %i.038) #6
+    %139 = call i32 @dict_find(%struct.ref_s* %138, %struct.ref_s* nonnull %key, %struct.ref_s** nonnull %pvalue)
+    %140 = icmp sgt i32 %139, 0
+    %141 = add nuw i32 %i.038, 1
+    br i1 %140, label %142, label %136
+  
+  ; <label>:142                                     ; preds = %.lr.ph
+    %143 = bitcast %struct.ref_s** %pvalue to i8*
+    %144 = bitcast %struct.ref_s* %key to i8*
+    %145 = load %struct.ref_s*, %struct.ref_s** %pvalue, align 4, !tbaa !8
+    call void @llvm.lifetime.end(i64 4, i8* %143) #6
+    call void @llvm.lifetime.end(i64 8, i8* %144) #6
+    br label %.thread19
+  
+  ._crit_edge:                                      ; preds = %136, %126
+    %146 = bitcast %struct.ref_s** %pvalue to i8*
+    %147 = bitcast %struct.ref_s* %key to i8*
+    call void @llvm.lifetime.end(i64 4, i8* %146) #6
+    call void @llvm.lifetime.end(i64 8, i8* %147) #6
+    br label %.thread19
+  
+  .thread19:                                        ; preds = %._crit_edge, %142, %123, %112, %._crit_edge52, %._crit_edge42
+    %148 = phi %struct.ref_s* [ null, %._crit_edge ], [ %145, %142 ], [ null, %123 ], [ %70, %._crit_edge52 ], [ %44, %._crit_edge42 ], [ %120, %112 ]
+    ret %struct.ref_s* %148
+  
+  .backedge.1:                                      ; preds = %.backedge.backedge.1, %.outer.1162
+    %lsr.iv6 = phi i32 [ %lsr.iv.next7, %.backedge.backedge.1 ], [ %111, %.outer.1162 ]
+    %149 = bitcast %struct.ref_s* %83 to i8*
+    %uglygep13 = getelementptr i8, i8* %149, i32 %lsr.iv6
+    %uglygep11 = getelementptr i8, i8* %149, i32 %lsr.iv6
+    %uglygep1112 = bitcast i8* %uglygep11 to i32*
+    %150 = load i32, i32* %uglygep1112, align 4
+    %151 = lshr i32 %150, 24
+    %152 = trunc i32 %151 to i8
+    %153 = zext i8 %152 to i32
+    switch i32 %153, label %.backedge.backedge.1 [
+      i32 13, label %162
+      i32 14, label %154
+    ]
+  
+  ; <label>:154                                     ; preds = %.backedge.1
+    %155 = bitcast %struct.ref_s* %83 to i8*
+    %uglygep9 = getelementptr i8, i8* %155, i32 %lsr.iv6
+    %uglygep910 = bitcast i8* %uglygep9 to i16*
+    %156 = load i16, i16* %uglygep910, align 4, !tbaa !9
+    %157 = and i16 %156, 128
+    %158 = icmp eq i16 %157, 0
+    br i1 %158, label %.thread, label %159
+  
+  ; <label>:159                                     ; preds = %154
+    %160 = inttoptr i32 %lsr.iv6 to %struct.ref_s*
+    %161 = icmp eq %struct.ref_s* %160, null
+    br i1 %161, label %.thread, label %.backedge.backedge.1
+  
+  ; <label>:162                                     ; preds = %.backedge.1
+    %163 = bitcast i8* %uglygep13 to %struct.ref_s*
+    %164 = and i32 %150, 65535
+    %165 = icmp eq i32 %164, %nidx
+    br i1 %165, label %112, label %.backedge.backedge.1
+  
+  .backedge.backedge.1:                             ; preds = %162, %159, %.backedge.1
+    %lsr.iv.next7 = add i32 %lsr.iv6, -8
+    br label %.backedge.1
+  }
+  
+  declare void @name_index_ref(i32 signext, %struct.ref_s*) #3
+  
+  ; Function Attrs: nounwind
+  define i32 @dict_put(%struct.ref_s* %pdref, %struct.ref_s* %pkey, %struct.ref_s* nocapture readonly %pvalue) #1 {
+    %pvslot = alloca %struct.ref_s*, align 4
+    %kname = alloca %struct.ref_s, align 4
+    %1 = bitcast %struct.ref_s** %pvslot to i8*
+    call void @llvm.lifetime.start(i64 4, i8* %1) #6
+    %2 = bitcast %struct.ref_s* %pvalue to i16*
+    %3 = load i16, i16* %2, align 4, !tbaa !9
+    %4 = zext i16 %3 to i32
+    %5 = and i32 %4, 12
+    %6 = bitcast %struct.ref_s* %pdref to i16*
+    %7 = load i16, i16* %6, align 4, !tbaa !9
+    %8 = zext i16 %7 to i32
+    %9 = and i32 %8, 12
+    %10 = icmp ugt i32 %5, %9
+    br i1 %10, label %.loopexit33, label %.preheader
+  
+  .preheader:                                       ; preds = %0
+    br label %11
+  
+  ; <label>:11                                      ; preds = %168, %.preheader
+    %.09 = phi %struct.ref_s* [ %.312, %168 ], [ %pkey, %.preheader ]
+    %.0 = phi i32 [ %.7, %168 ], [ undef, %.preheader ]
+    %12 = call i32 @dict_find(%struct.ref_s* %pdref, %struct.ref_s* %.09, %struct.ref_s** nonnull %pvslot)
+    %13 = icmp slt i32 %12, 1
+    br i1 %13, label %14, label %.loopexit.loopexit
+  
+  ; <label>:14                                      ; preds = %11
+    %15 = bitcast %struct.ref_s* %kname to i8*
+    %sunkaddr = ptrtoint %struct.ref_s* %pdref to i32
+    %sunkaddr4 = add i32 %sunkaddr, 4
+    %sunkaddr5 = inttoptr i32 %sunkaddr4 to %struct.dict_s**
+    %16 = load %struct.dict_s*, %struct.dict_s** %sunkaddr5, align 4, !tbaa !8
+    call void @llvm.lifetime.start(i64 8, i8* %15) #6
+    switch i32 %12, label %.thread27 [
+      i32 0, label %25
+      i32 -2, label %17
+    ]
+  
+  ; <label>:17                                      ; preds = %14
+    %18 = load i32, i32* @dict_auto_expand, align 4, !tbaa !1
+    %19 = icmp eq i32 %18, 0
+    br i1 %19, label %.thread27, label %20
+  
+  ; <label>:20                                      ; preds = %17
+    %21 = call i32 @dict_grow(%struct.ref_s* nonnull %pdref)
+    %22 = icmp slt i32 %21, 0
+    %23 = ashr i32 %21, 31
+    %24 = add nsw i32 %23, 2
+    %..0 = select i1 %22, i32 %21, i32 %.0
+    br label %168
+  
+  ; <label>:25                                      ; preds = %14
+    %26 = bitcast %struct.ref_s** %pvslot to i32*
+    %27 = load i32, i32* %26, align 4, !tbaa !8
+    %28 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %16, i32 0, i32 0, i32 1, i32 0
+    %29 = load i32, i32* %28, align 4, !tbaa !8
+    %30 = bitcast %struct.ref_s* %.09 to i8*
+    %31 = load i8, i8* %30, align 4, !tbaa !18
+    %32 = icmp eq i8 %31, 18
+    br i1 %32, label %33, label %41
+  
+  ; <label>:33                                      ; preds = %25
+    %34 = bitcast %struct.ref_s* %.09 to i16*
+    %35 = load i16, i16* %34, align 4, !tbaa !9
+    %36 = and i16 %35, 32
+    %37 = icmp eq i16 %36, 0
+    br i1 %37, label %.thread27, label %38
+  
+  ; <label>:38                                      ; preds = %33
+    %39 = call i32 @name_from_string(%struct.ref_s* nonnull %.09, %struct.ref_s* nonnull %kname) #6
+    %40 = icmp slt i32 %39, 0
+    br i1 %40, label %.thread27, label %41
+  
+  ; <label>:41                                      ; preds = %38, %25
+    %.211 = phi %struct.ref_s* [ %.09, %25 ], [ %kname, %38 ]
+    %42 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %16, i32 0, i32 1
+    %43 = bitcast %struct.ref_s* %42 to i8*
+    %44 = load i8, i8* %43, align 4, !tbaa !18
+    %45 = icmp eq i8 %44, 6
+    br i1 %45, label %46, label %77
+  
+  ; <label>:46                                      ; preds = %41
+    %47 = bitcast %struct.ref_s* %.211 to i32*
+    %48 = load i32, i32* %47, align 4
+    %.mask = and i32 %48, -16777216
+    %49 = icmp ne i32 %.mask, 218103808
+    %50 = trunc i32 %48 to i16
+    %51 = icmp ugt i16 %50, 4095
+    %or.cond = or i1 %49, %51
+    br i1 %or.cond, label %72, label %52
+  
+  ; <label>:52                                      ; preds = %46
+    %53 = trunc i32 %48 to i16
+    %54 = sub i32 %27, %29
+    %55 = ashr exact i32 %54, 3
+    %56 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %16, i32 0, i32 1, i32 1
+    %57 = bitcast %union.v* %56 to i16**
+    %58 = load i16*, i16** %57, align 4, !tbaa !8
+    %59 = getelementptr inbounds i16, i16* %58, i32 %55
+    %sunkaddr6 = ptrtoint %struct.dict_s* %16 to i32
+    %sunkaddr7 = add i32 %sunkaddr6, 8
+    %sunkaddr8 = inttoptr i32 %sunkaddr7 to i16*
+    %60 = load i16, i16* %sunkaddr8, align 4, !tbaa !9
+    %61 = zext i16 %60 to i32
+    %62 = load i32, i32* getelementptr inbounds (%struct.gs_dual_memory_s, %struct.gs_dual_memory_s* @gs_imemory, i32 0, i32 5), align 4, !tbaa !19
+    %63 = and i32 %61, %62
+    %64 = icmp eq i32 %63, 0
+    br i1 %64, label %65, label %.thread22
+  
+  ; <label>:65                                      ; preds = %52
+    %66 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %.211, i32 0, i32 0, i32 1
+    %67 = call i32 @alloc_save_change(%struct.gs_dual_memory_s* nonnull @gs_imemory, %struct.ref_s* nonnull %42, i16* %59, i8* nonnull getelementptr inbounds ([14 x i8], [14 x i8]* @.str.3, i32 0, i32 0)) #6
+    %.pre = load i16, i16* %66, align 2, !tbaa !14
+    br label %.thread22
+  
+  .thread22:                                        ; preds = %65, %52
+    %68 = phi i16 [ %53, %52 ], [ %.pre, %65 ]
+    %69 = zext i16 %68 to i32
+    %70 = add nuw nsw i32 %69, 49152
+    %71 = trunc i32 %70 to i16
+    store i16 %71, i16* %59, align 2, !tbaa !15
+    br label %.loopexit32
+  
+  ; <label>:72                                      ; preds = %46
+    %73 = call i32 @dict_unpack(%struct.ref_s* %pdref)
+    %74 = icmp slt i32 %73, 0
+    %75 = ashr i32 %73, 31
+    %76 = add nsw i32 %75, 2
+    %..2 = select i1 %74, i32 %73, i32 %.0
+    %cond7 = icmp eq i32 %76, 0
+    br i1 %cond7, label %.loopexit32, label %168
+  
+  ; <label>:77                                      ; preds = %41
+    %78 = bitcast %struct.ref_s* %pdref to i16*
+    %79 = sub i32 %27, %29
+    %80 = ashr exact i32 %79, 3
+    %81 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %16, i32 0, i32 1, i32 1
+    %82 = bitcast %union.v* %81 to %struct.ref_s**
+    %83 = load %struct.ref_s*, %struct.ref_s** %82, align 4, !tbaa !8
+    %84 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %83, i32 %80
+    %85 = bitcast %struct.ref_s* %.211 to i16*
+    %86 = load i16, i16* %85, align 4, !tbaa !9
+    %87 = zext i16 %86 to i32
+    %88 = and i32 %87, 12
+    %89 = load i16, i16* %78, align 4, !tbaa !9
+    %90 = zext i16 %89 to i32
+    %91 = and i32 %90, 12
+    %92 = icmp ugt i32 %88, %91
+    br i1 %92, label %.thread27, label %93
+  
+  ; <label>:93                                      ; preds = %77
+    %94 = bitcast %struct.ref_s* %84 to i16*
+    %95 = load i16, i16* %94, align 4, !tbaa !9
+    %96 = zext i16 %95 to i32
+    %97 = load i32, i32* getelementptr inbounds (%struct.gs_dual_memory_s, %struct.gs_dual_memory_s* @gs_imemory, i32 0, i32 5), align 4, !tbaa !19
+    %98 = and i32 %96, %97
+    %99 = icmp eq i32 %98, 0
+    br i1 %99, label %100, label %.thread24
+  
+  ; <label>:100                                     ; preds = %93
+    %101 = bitcast %struct.ref_s* %84 to i16*
+    %102 = call i32 @alloc_save_change(%struct.gs_dual_memory_s* nonnull @gs_imemory, %struct.ref_s* nonnull %42, i16* %101, i8* nonnull getelementptr inbounds ([14 x i8], [14 x i8]* @.str.3, i32 0, i32 0)) #6
+    br label %.thread24
+  
+  .thread24:                                        ; preds = %100, %93
+    %103 = bitcast %struct.ref_s* %84 to i16*
+    %104 = bitcast %struct.ref_s* %.211 to i64*
+    %105 = bitcast %struct.ref_s* %84 to i64*
+    %106 = load i64, i64* %104, align 4
+    store i64 %106, i64* %105, align 4
+    %107 = load i32, i32* getelementptr inbounds (%struct.gs_dual_memory_s, %struct.gs_dual_memory_s* @gs_imemory, i32 0, i32 6), align 4, !tbaa !13
+    %tmp = lshr i64 %106, 48
+    %trunc = trunc i64 %tmp to i32
+    %108 = or i32 %trunc, %107
+    %109 = trunc i32 %108 to i16
+    store i16 %109, i16* %103, align 4, !tbaa !9
+    br label %.loopexit32
+  
+  .loopexit32:                                      ; preds = %72, %.thread24, %.thread22
+    %110 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %16, i32 0, i32 2, i32 0, i32 0
+    %111 = load i16, i16* %110, align 4, !tbaa !9
+    %112 = zext i16 %111 to i32
+    %113 = load i32, i32* getelementptr inbounds (%struct.gs_dual_memory_s, %struct.gs_dual_memory_s* @gs_imemory, i32 0, i32 5), align 4, !tbaa !19
+    %114 = and i32 %112, %113
+    %115 = icmp eq i32 %114, 0
+    br i1 %115, label %116, label %118
+  
+  ; <label>:116                                     ; preds = %.loopexit32
+    %117 = call i32 @alloc_save_change(%struct.gs_dual_memory_s* nonnull @gs_imemory, %struct.ref_s* %pdref, i16* %110, i8* nonnull getelementptr inbounds ([16 x i8], [16 x i8]* @.str.4, i32 0, i32 0)) #6
+    br label %118
+  
+  ; <label>:118                                     ; preds = %116, %.loopexit32
+    %119 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %16, i32 0, i32 2, i32 1, i32 0
+    %120 = load i32, i32* %119, align 4, !tbaa !16
+    %121 = add nsw i32 %120, 1
+    store i32 %121, i32* %119, align 4, !tbaa !16
+    %122 = bitcast %struct.ref_s* %.211 to i8*
+    %123 = load i8, i8* %122, align 4, !tbaa !18
+    %124 = icmp eq i8 %123, 13
+    br i1 %124, label %125, label %.thread29
+  
+  ; <label>:125                                     ; preds = %118
+    %126 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %.211, i32 0, i32 1
+    %127 = bitcast %union.v* %126 to %struct.name_s**
+    %128 = load %struct.name_s*, %struct.name_s** %127, align 4, !tbaa !8
+    %129 = getelementptr inbounds %struct.name_s, %struct.name_s* %128, i32 0, i32 3
+    %130 = load %struct.ref_s*, %struct.ref_s** %129, align 4, !tbaa !24
+    %131 = icmp eq %struct.ref_s* %130, null
+    br i1 %131, label %132, label %dict_is_permanent_on_dstack.exit.thread
+  
+  ; <label>:132                                     ; preds = %125
+    %133 = load %struct.dict_s*, %struct.dict_s** bitcast (%union.v* getelementptr inbounds (%struct.ref_s, %struct.ref_s* @ref_systemdict, i32 0, i32 1) to %struct.dict_s**), align 4, !tbaa !8
+    %134 = icmp eq %struct.dict_s* %16, %133
+    br i1 %134, label %dict_is_permanent_on_dstack.exit, label %135
+  
+  ; <label>:135                                     ; preds = %132
+    %sunkaddr9 = ptrtoint %struct.ref_s* %pdref to i32
+    %sunkaddr10 = add i32 %sunkaddr9, 4
+    %sunkaddr11 = inttoptr i32 %sunkaddr10 to %struct.dict_s**
+    %136 = load %struct.dict_s*, %struct.dict_s** %sunkaddr11, align 4, !tbaa !8
+    %137 = load i32, i32* getelementptr inbounds (%struct.ref_stack_s, %struct.ref_stack_s* @d_stack, i32 0, i32 4), align 4, !tbaa !23
+    %138 = icmp eq i32 %137, 0
+    br i1 %138, label %.preheader.i, label %148
+  
+  .preheader.i:                                     ; preds = %135
+    %139 = load i32, i32* @min_dstack_size, align 4, !tbaa !1
+    %140 = icmp eq i32 %139, 0
+    br i1 %140, label %dict_is_permanent_on_dstack.exit.thread, label %.lr.ph.i
+  
+  .lr.ph.i:                                         ; preds = %.preheader.i
+    %141 = load %struct.ref_s*, %struct.ref_s** getelementptr inbounds (%struct.ref_stack_s, %struct.ref_stack_s* @d_stack, i32 0, i32 1), align 4
+    %scevgep = getelementptr %struct.ref_s, %struct.ref_s* %141, i32 0, i32 1, i32 0
+    %scevgep1 = bitcast i32* %scevgep to %struct.ref_s*
+    br label %144
+  
+  ; <label>:142                                     ; preds = %144
+    %scevgep2 = getelementptr %struct.ref_s, %struct.ref_s* %lsr.iv, i32 1
+    %143 = icmp ult i32 %147, %139
+    br i1 %143, label %144, label %dict_is_permanent_on_dstack.exit.thread
+  
+  ; <label>:144                                     ; preds = %142, %.lr.ph.i
+    %lsr.iv = phi %struct.ref_s* [ %scevgep2, %142 ], [ %scevgep1, %.lr.ph.i ]
+    %i.04.i = phi i32 [ 0, %.lr.ph.i ], [ %147, %142 ]
+    %lsr.iv3 = bitcast %struct.ref_s* %lsr.iv to %struct.dict_s**
+    %145 = load %struct.dict_s*, %struct.dict_s** %lsr.iv3, align 4, !tbaa !8
+    %146 = icmp eq %struct.dict_s* %145, %136
+    %147 = add nuw nsw i32 %i.04.i, 1
+    br i1 %146, label %dict_is_permanent_on_dstack.exit, label %142
+  
+  ; <label>:148                                     ; preds = %135
+    %149 = call i32 @ref_stack_count(%struct.ref_stack_s* nonnull @d_stack) #6
+    %150 = load i32, i32* @min_dstack_size, align 4, !tbaa !1
+    %151 = sub i32 %149, %150
+    %152 = icmp ult i32 %151, %149
+    br i1 %152, label %.lr.ph8.i, label %dict_is_permanent_on_dstack.exit.thread
+  
+  ; <label>:153                                     ; preds = %.lr.ph8.i
+    %154 = icmp ult i32 %160, %149
+    br i1 %154, label %.lr.ph8.i, label %dict_is_permanent_on_dstack.exit.thread
+  
+  .lr.ph8.i:                                        ; preds = %148, %153
+    %i.17.i = phi i32 [ %160, %153 ], [ %151, %148 ]
+    %155 = call %struct.ref_s* @ref_stack_index(%struct.ref_stack_s* nonnull @d_stack, i32 signext %i.17.i) #6
+    %156 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %155, i32 0, i32 1
+    %157 = bitcast %union.v* %156 to %struct.dict_s**
+    %158 = load %struct.dict_s*, %struct.dict_s** %157, align 4, !tbaa !8
+    %159 = icmp eq %struct.dict_s* %158, %136
+    %160 = add nuw nsw i32 %i.17.i, 1
+    br i1 %159, label %dict_is_permanent_on_dstack.exit, label %153
+  
+  dict_is_permanent_on_dstack.exit:                 ; preds = %.lr.ph8.i, %144, %132
+    %161 = inttoptr i32 %27 to %struct.ref_s*
+    %162 = call i32 @alloc_save_level(%struct.gs_dual_memory_s* nonnull @gs_imemory) #6
+    %163 = icmp eq i32 %162, 0
+    %. = select i1 %163, %struct.ref_s* %161, %struct.ref_s* inttoptr (i32 1 to %struct.ref_s*)
+    br label %dict_is_permanent_on_dstack.exit.thread
+  
+  dict_is_permanent_on_dstack.exit.thread:          ; preds = %153, %142, %dict_is_permanent_on_dstack.exit, %148, %.preheader.i, %125
+    %storemerge = phi %struct.ref_s* [ inttoptr (i32 1 to %struct.ref_s*), %125 ], [ inttoptr (i32 1 to %struct.ref_s*), %.preheader.i ], [ inttoptr (i32 1 to %struct.ref_s*), %148 ], [ %., %dict_is_permanent_on_dstack.exit ], [ inttoptr (i32 1 to %struct.ref_s*), %142 ], [ inttoptr (i32 1 to %struct.ref_s*), %153 ]
+    %sunkaddr12 = ptrtoint %struct.name_s* %128 to i32
+    %sunkaddr13 = add i32 %sunkaddr12, 8
+    %sunkaddr14 = inttoptr i32 %sunkaddr13 to %struct.ref_s**
+    store %struct.ref_s* %storemerge, %struct.ref_s** %sunkaddr14, align 4, !tbaa !24
+    br label %.thread29
+  
+  .thread27:                                        ; preds = %14, %17, %33, %38, %77
+    %.7.ph = phi i32 [ -7, %77 ], [ %39, %38 ], [ -7, %33 ], [ -2, %17 ], [ %12, %14 ]
+    %164 = bitcast %struct.ref_s* %kname to i8*
+    call void @llvm.lifetime.end(i64 8, i8* %164) #6
+    br label %.loopexit33
+  
+  .thread29:                                        ; preds = %dict_is_permanent_on_dstack.exit.thread, %118
+    %165 = inttoptr i32 %27 to i64*
+    %166 = inttoptr i32 %27 to %struct.ref_s*
+    %167 = bitcast %struct.ref_s* %kname to i8*
+    call void @llvm.lifetime.end(i64 8, i8* %167) #6
+    br label %.loopexit
+  
+  ; <label>:168                                     ; preds = %72, %20
+    %.417 = phi i32 [ %76, %72 ], [ %24, %20 ]
+    %.312 = phi %struct.ref_s* [ %.211, %72 ], [ %.09, %20 ]
+    %.7 = phi i32 [ %..2, %72 ], [ %..0, %20 ]
+    %169 = bitcast %struct.ref_s* %kname to i8*
+    call void @llvm.lifetime.end(i64 8, i8* %169) #6
+    switch i32 %.417, label %.loopexit33 [
+      i32 0, label %.loopexit.loopexit
+      i32 2, label %11
+    ]
+  
+  .loopexit.loopexit:                               ; preds = %168, %11
+    %.pre84 = load %struct.ref_s*, %struct.ref_s** %pvslot, align 4, !tbaa !8
+    %170 = bitcast %struct.ref_s* %.pre84 to i64*
+    br label %.loopexit
+  
+  .loopexit:                                        ; preds = %.loopexit.loopexit, %.thread29
+    %171 = phi i64* [ %165, %.thread29 ], [ %170, %.loopexit.loopexit ]
+    %172 = phi %struct.ref_s* [ %166, %.thread29 ], [ %.pre84, %.loopexit.loopexit ]
+    %rcode.2 = phi i32 [ 1, %.thread29 ], [ 0, %.loopexit.loopexit ]
+    %173 = bitcast %struct.ref_s* %172 to i16*
+    %174 = load i16, i16* %173, align 4, !tbaa !9
+    %175 = zext i16 %174 to i32
+    %176 = load i32, i32* getelementptr inbounds (%struct.gs_dual_memory_s, %struct.gs_dual_memory_s* @gs_imemory, i32 0, i32 5), align 4, !tbaa !19
+    %177 = and i32 %175, %176
+    %178 = icmp eq i32 %177, 0
+    br i1 %178, label %179, label %184
+  
+  ; <label>:179                                     ; preds = %.loopexit
+    %180 = bitcast %struct.ref_s* %172 to i16*
+    %sunkaddr15 = ptrtoint %struct.ref_s* %pdref to i32
+    %sunkaddr16 = add i32 %sunkaddr15, 4
+    %sunkaddr17 = inttoptr i32 %sunkaddr16 to %struct.dict_s**
+    %181 = load %struct.dict_s*, %struct.dict_s** %sunkaddr17, align 4, !tbaa !8
+    %182 = bitcast %struct.dict_s* %181 to %struct.ref_s*
+    %183 = call i32 @alloc_save_change(%struct.gs_dual_memory_s* nonnull @gs_imemory, %struct.ref_s* %182, i16* %180, i8* nonnull getelementptr inbounds ([16 x i8], [16 x i8]* @.str.5, i32 0, i32 0)) #6
+    br label %184
+  
+  ; <label>:184                                     ; preds = %179, %.loopexit
+    %185 = bitcast %struct.ref_s* %pvalue to i64*
+    %186 = load i64, i64* %185, align 4
+    store i64 %186, i64* %171, align 4
+    %187 = load i32, i32* getelementptr inbounds (%struct.gs_dual_memory_s, %struct.gs_dual_memory_s* @gs_imemory, i32 0, i32 6), align 4, !tbaa !13
+    %188 = bitcast i64* %171 to i16*
+    %tmp85 = lshr i64 %186, 48
+    %trunc86 = trunc i64 %tmp85 to i32
+    %189 = or i32 %trunc86, %187
+    %190 = trunc i32 %189 to i16
+    store i16 %190, i16* %188, align 4, !tbaa !9
+    br label %.loopexit33
+  
+  .loopexit33:                                      ; preds = %168, %184, %.thread27, %0
+    %.8 = phi i32 [ %rcode.2, %184 ], [ -7, %0 ], [ %.7.ph, %.thread27 ], [ %.7, %168 ]
+    %191 = bitcast %struct.ref_s** %pvslot to i8*
+    call void @llvm.lifetime.end(i64 4, i8* %191) #6
+    ret i32 %.8
+  }
+  
+  ; Function Attrs: nounwind
+  define i32 @dict_grow(%struct.ref_s* %pdref) #1 {
+    %1 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %pdref, i32 0, i32 1
+    %2 = bitcast %union.v* %1 to %struct.dict_s**
+    %3 = load %struct.dict_s*, %struct.dict_s** %2, align 4, !tbaa !8
+    %4 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %3, i32 0, i32 3, i32 1, i32 0
+    %5 = load i32, i32* %4, align 4, !tbaa !16
+    %6 = mul i32 %5, 3
+    %7 = lshr i32 %6, 1
+    %8 = add nuw i32 %7, 2
+    %9 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %3, i32 0, i32 0, i32 0, i32 1
+    %10 = load i16, i16* %9, align 2, !tbaa !14
+    %11 = zext i16 %10 to i32
+    %12 = add nsw i32 %11, -1
+    %13 = icmp ugt i32 %8, %12
+    br i1 %13, label %14, label %32
+  
+  ; <label>:14                                      ; preds = %0
+    %15 = tail call i32 @dict_resize(%struct.ref_s* nonnull %pdref, i32 signext %8)
+    %16 = icmp sgt i32 %15, -1
+    br i1 %16, label %.thread, label %17
+  
+  ; <label>:17                                      ; preds = %14
+    %sunkaddr = ptrtoint %struct.dict_s* %3 to i32
+    %sunkaddr1 = add i32 %sunkaddr, 2
+    %sunkaddr2 = inttoptr i32 %sunkaddr1 to i16*
+    %18 = load i16, i16* %sunkaddr2, align 2, !tbaa !14
+    %19 = zext i16 %18 to i32
+    %20 = add nsw i32 %19, -1
+    %21 = load i32, i32* @dict_max_size, align 4, !tbaa !1
+    %22 = icmp ult i32 %20, %21
+    br i1 %22, label %23, label %26
+  
+  ; <label>:23                                      ; preds = %17
+    %24 = tail call i32 @dict_resize(%struct.ref_s* nonnull %pdref, i32 signext %21)
+    %25 = icmp sgt i32 %24, -1
+    br i1 %25, label %.thread, label %._crit_edge
+  
+  ._crit_edge:                                      ; preds = %23
+    %sunkaddr3 = ptrtoint %struct.dict_s* %3 to i32
+    %sunkaddr4 = add i32 %sunkaddr3, 2
+    %sunkaddr5 = inttoptr i32 %sunkaddr4 to i16*
+    %.pre = load i16, i16* %sunkaddr5, align 2, !tbaa !14
+    br label %26
+  
+  ; <label>:26                                      ; preds = %._crit_edge, %17
+    %27 = phi i16 [ %.pre, %._crit_edge ], [ %18, %17 ]
+    %code.0 = phi i32 [ %24, %._crit_edge ], [ %15, %17 ]
+    %28 = zext i16 %27 to i32
+    %29 = add nsw i32 %28, -1
+    %sunkaddr6 = ptrtoint %struct.dict_s* %3 to i32
+    %sunkaddr7 = add i32 %sunkaddr6, 28
+    %sunkaddr8 = inttoptr i32 %sunkaddr7 to i32*
+    %30 = load i32, i32* %sunkaddr8, align 4, !tbaa !16
+    %31 = icmp eq i32 %29, %30
+    br i1 %31, label %.thread, label %32
+  
+  ; <label>:32                                      ; preds = %26, %0
+    %new_size.1 = phi i32 [ %29, %26 ], [ %8, %0 ]
+    %33 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %3, i32 0, i32 3, i32 0, i32 0
+    %34 = load i16, i16* %33, align 4, !tbaa !9
+    %35 = zext i16 %34 to i32
+    %36 = load i32, i32* getelementptr inbounds (%struct.gs_dual_memory_s, %struct.gs_dual_memory_s* @gs_imemory, i32 0, i32 5), align 4, !tbaa !19
+    %37 = and i32 %35, %36
+    %38 = icmp eq i32 %37, 0
+    br i1 %38, label %39, label %41
+  
+  ; <label>:39                                      ; preds = %32
+    %40 = tail call i32 @alloc_save_change(%struct.gs_dual_memory_s* nonnull @gs_imemory, %struct.ref_s* nonnull %pdref, i16* %33, i8* nonnull getelementptr inbounds ([20 x i8], [20 x i8]* @.str.14, i32 0, i32 0)) #6
+    br label %41
+  
+  ; <label>:41                                      ; preds = %39, %32
+    %sunkaddr9 = ptrtoint %struct.dict_s* %3 to i32
+    %sunkaddr10 = add i32 %sunkaddr9, 28
+    %sunkaddr11 = inttoptr i32 %sunkaddr10 to i32*
+    store i32 %new_size.1, i32* %sunkaddr11, align 4, !tbaa !16
+    br label %.thread
+  
+  .thread:                                          ; preds = %41, %26, %23, %14
+    %.1 = phi i32 [ 0, %41 ], [ %code.0, %26 ], [ %24, %23 ], [ %15, %14 ]
+    ret i32 %.1
+  }
+  
+  declare i32 @name_from_string(%struct.ref_s*, %struct.ref_s*) #3
+  
+  declare i32 @alloc_save_level(%struct.gs_dual_memory_s*) #3
+  
+  ; Function Attrs: nounwind
+  define i32 @dict_put_string(%struct.ref_s* %pdref, i8* %kstr, %struct.ref_s* nocapture readonly %pvalue) #1 {
+    %kname = alloca %struct.ref_s, align 4
+    %1 = bitcast %struct.ref_s* %kname to i8*
+    call void @llvm.lifetime.start(i64 8, i8* %1) #6
+    %2 = tail call i32 @strlen(i8* %kstr) #7
+    %3 = call i32 @name_ref(i8* %kstr, i32 signext %2, %struct.ref_s* nonnull %kname, i32 signext 0) #6
+    %4 = icmp slt i32 %3, 0
+    br i1 %4, label %7, label %5
+  
+  ; <label>:5                                       ; preds = %0
+    %6 = call i32 @dict_put(%struct.ref_s* %pdref, %struct.ref_s* nonnull %kname, %struct.ref_s* %pvalue)
+    br label %7
+  
+  ; <label>:7                                       ; preds = %5, %0
+    %.0 = phi i32 [ %6, %5 ], [ %3, %0 ]
+    %8 = bitcast %struct.ref_s* %kname to i8*
+    call void @llvm.lifetime.end(i64 8, i8* %8) #6
+    ret i32 %.0
+  }
+  
+  ; Function Attrs: nounwind
+  define i32 @dict_undef(%struct.ref_s* %pdref, %struct.ref_s* %pkey) #1 {
+    %pvslot = alloca %struct.ref_s*, align 4
+    %1 = bitcast %struct.ref_s** %pvslot to i8*
+    call void @llvm.lifetime.start(i64 4, i8* %1) #6
+    %2 = call i32 @dict_find(%struct.ref_s* %pdref, %struct.ref_s* %pkey, %struct.ref_s** nonnull %pvslot)
+    %3 = icmp slt i32 %2, 1
+    br i1 %3, label %109, label %4
+  
+  ; <label>:4                                       ; preds = %0
+    %5 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %pdref, i32 0, i32 1
+    %6 = bitcast %union.v* %5 to %struct.dict_s**
+    %7 = load %struct.dict_s*, %struct.dict_s** %6, align 4, !tbaa !8
+    %8 = bitcast %struct.ref_s** %pvslot to i32*
+    %9 = load i32, i32* %8, align 4, !tbaa !8
+    %10 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %7, i32 0, i32 0, i32 1, i32 0
+    %11 = load i32, i32* %10, align 4, !tbaa !8
+    %12 = sub i32 %9, %11
+    %13 = ashr exact i32 %12, 3
+    %14 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %7, i32 0, i32 1
+    %15 = bitcast %struct.ref_s* %14 to i8*
+    %16 = load i8, i8* %15, align 4, !tbaa !18
+    %17 = icmp eq i8 %16, 6
+    br i1 %17, label %18, label %34
+  
+  ; <label>:18                                      ; preds = %4
+    %19 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %7, i32 0, i32 1, i32 1
+    %20 = bitcast %union.v* %19 to i16**
+    %21 = load i16*, i16** %20, align 4, !tbaa !8
+    %22 = getelementptr inbounds i16, i16* %21, i32 %13
+    %sunkaddr = ptrtoint %struct.dict_s* %7 to i32
+    %sunkaddr1 = add i32 %sunkaddr, 8
+    %sunkaddr2 = inttoptr i32 %sunkaddr1 to i16*
+    %23 = load i16, i16* %sunkaddr2, align 4, !tbaa !9
+    %24 = zext i16 %23 to i32
+    %25 = load i32, i32* getelementptr inbounds (%struct.gs_dual_memory_s, %struct.gs_dual_memory_s* @gs_imemory, i32 0, i32 5), align 4, !tbaa !19
+    %26 = and i32 %24, %25
+    %27 = icmp eq i32 %26, 0
+    br i1 %27, label %28, label %30
+  
+  ; <label>:28                                      ; preds = %18
+    %29 = tail call i32 @alloc_save_change(%struct.gs_dual_memory_s* nonnull @gs_imemory, %struct.ref_s* nonnull %14, i16* %22, i8* nonnull getelementptr inbounds ([16 x i8], [16 x i8]* @.str.6, i32 0, i32 0)) #6
+    br label %30
+  
+  ; <label>:30                                      ; preds = %28, %18
+    %31 = getelementptr inbounds i16, i16* %22, i32 -1
+    %32 = load i16, i16* %31, align 2, !tbaa !15
+    %33 = icmp eq i16 %32, 24576
+    %. = select i1 %33, i16 24576, i16 24577
+    store i16 %., i16* %22, align 2, !tbaa !15
+    br label %65
+  
+  ; <label>:34                                      ; preds = %4
+    %35 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %7, i32 0, i32 1, i32 1
+    %36 = bitcast %union.v* %35 to %struct.ref_s**
+    %37 = load %struct.ref_s*, %struct.ref_s** %36, align 4, !tbaa !8
+    %38 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %37, i32 %13
+    %39 = bitcast %struct.ref_s* %38 to i16*
+    %40 = load i16, i16* %39, align 4, !tbaa !9
+    %41 = zext i16 %40 to i32
+    %42 = load i32, i32* getelementptr inbounds (%struct.gs_dual_memory_s, %struct.gs_dual_memory_s* @gs_imemory, i32 0, i32 5), align 4, !tbaa !19
+    %43 = and i32 %41, %42
+    %44 = icmp eq i32 %43, 0
+    br i1 %44, label %45, label %48
+  
+  ; <label>:45                                      ; preds = %34
+    %46 = bitcast %struct.ref_s* %38 to i16*
+    %47 = tail call i32 @alloc_save_change(%struct.gs_dual_memory_s* nonnull @gs_imemory, %struct.ref_s* nonnull %14, i16* %46, i8* nonnull getelementptr inbounds ([16 x i8], [16 x i8]* @.str.6, i32 0, i32 0)) #6
+    br label %48
+  
+  ; <label>:48                                      ; preds = %45, %34
+    %49 = bitcast %struct.ref_s* %38 to i16*
+    %50 = load i32, i32* getelementptr inbounds (%struct.gs_dual_memory_s, %struct.gs_dual_memory_s* @gs_imemory, i32 0, i32 6), align 4, !tbaa !13
+    %51 = add i32 %50, 3584
+    %52 = trunc i32 %51 to i16
+    store i16 %52, i16* %49, align 4, !tbaa !9
+    %53 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %38, i32 -1
+    %54 = bitcast %struct.ref_s* %53 to i8*
+    %55 = load i8, i8* %54, align 4, !tbaa !18
+    %56 = icmp eq i8 %55, 14
+    br i1 %56, label %57, label %61
+  
+  ; <label>:57                                      ; preds = %48
+    %sunkaddr3 = ptrtoint %struct.ref_s* %38 to i32
+    %sunkaddr4 = add i32 %sunkaddr3, -8
+    %sunkaddr5 = inttoptr i32 %sunkaddr4 to i16*
+    %58 = load i16, i16* %sunkaddr5, align 4, !tbaa !9
+    %59 = and i16 %58, 128
+    %60 = icmp eq i16 %59, 0
+    br i1 %60, label %65, label %61
+  
+  ; <label>:61                                      ; preds = %57, %48
+    %62 = bitcast %struct.ref_s* %38 to i16*
+    %63 = or i32 %51, 128
+    %64 = trunc i32 %63 to i16
+    store i16 %64, i16* %62, align 4, !tbaa !9
+    br label %65
+  
+  ; <label>:65                                      ; preds = %61, %57, %30
+    %66 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %7, i32 0, i32 2, i32 0, i32 0
+    %67 = load i16, i16* %66, align 4, !tbaa !9
+    %68 = zext i16 %67 to i32
+    %69 = load i32, i32* getelementptr inbounds (%struct.gs_dual_memory_s, %struct.gs_dual_memory_s* @gs_imemory, i32 0, i32 5), align 4, !tbaa !19
+    %70 = and i32 %68, %69
+    %71 = icmp eq i32 %70, 0
+    br i1 %71, label %72, label %74
+  
+  ; <label>:72                                      ; preds = %65
+    %73 = tail call i32 @alloc_save_change(%struct.gs_dual_memory_s* nonnull @gs_imemory, %struct.ref_s* %pdref, i16* %66, i8* nonnull getelementptr inbounds ([18 x i8], [18 x i8]* @.str.7, i32 0, i32 0)) #6
+    br label %74
+  
+  ; <label>:74                                      ; preds = %72, %65
+    %75 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %7, i32 0, i32 2, i32 1, i32 0
+    %76 = load i32, i32* %75, align 4, !tbaa !16
+    %77 = add nsw i32 %76, -1
+    store i32 %77, i32* %75, align 4, !tbaa !16
+    %78 = bitcast %struct.ref_s* %pkey to i8*
+    %79 = load i8, i8* %78, align 4, !tbaa !18
+    %80 = icmp eq i8 %79, 13
+    br i1 %80, label %81, label %90
+  
+  ; <label>:81                                      ; preds = %74
+    %82 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %pkey, i32 0, i32 1
+    %83 = bitcast %union.v* %82 to %struct.name_s**
+    %84 = load %struct.name_s*, %struct.name_s** %83, align 4, !tbaa !8
+    %85 = getelementptr inbounds %struct.name_s, %struct.name_s* %84, i32 0, i32 3
+    %86 = bitcast %struct.ref_s** %85 to i32*
+    %87 = load i32, i32* %86, align 4, !tbaa !24
+    %88 = icmp ugt i32 %87, 1
+    br i1 %88, label %89, label %90
+  
+  ; <label>:89                                      ; preds = %81
+    %sunkaddr6 = ptrtoint %struct.name_s* %84 to i32
+    %sunkaddr7 = add i32 %sunkaddr6, 8
+    %sunkaddr8 = inttoptr i32 %sunkaddr7 to %struct.ref_s**
+    store %struct.ref_s* null, %struct.ref_s** %sunkaddr8, align 4, !tbaa !24
+    br label %90
+  
+  ; <label>:90                                      ; preds = %89, %81, %74
+    %91 = inttoptr i32 %9 to %struct.ref_s*
+    %92 = bitcast %struct.ref_s* %91 to i16*
+    %93 = load i16, i16* %92, align 4, !tbaa !9
+    %94 = zext i16 %93 to i32
+    %95 = load i32, i32* getelementptr inbounds (%struct.gs_dual_memory_s, %struct.gs_dual_memory_s* @gs_imemory, i32 0, i32 5), align 4, !tbaa !19
+    %96 = and i32 %94, %95
+    %97 = icmp eq i32 %96, 0
+    br i1 %97, label %98, label %103
+  
+  ; <label>:98                                      ; preds = %90
+    %99 = inttoptr i32 %9 to %struct.ref_s*
+    %100 = bitcast %struct.ref_s* %99 to i16*
+    %101 = bitcast %struct.dict_s* %7 to %struct.ref_s*
+    %102 = tail call i32 @alloc_save_change(%struct.gs_dual_memory_s* nonnull @gs_imemory, %struct.ref_s* %101, i16* %100, i8* nonnull getelementptr inbounds ([18 x i8], [18 x i8]* @.str.8, i32 0, i32 0)) #6
+    br label %103
+  
+  ; <label>:103                                     ; preds = %98, %90
+    %104 = inttoptr i32 %9 to %struct.ref_s*
+    %105 = bitcast %struct.ref_s* %104 to i16*
+    %106 = load i32, i32* getelementptr inbounds (%struct.gs_dual_memory_s, %struct.gs_dual_memory_s* @gs_imemory, i32 0, i32 6), align 4, !tbaa !13
+    %107 = add i32 %106, 3584
+    %108 = trunc i32 %107 to i16
+    store i16 %108, i16* %105, align 4, !tbaa !9
+    br label %109
+  
+  ; <label>:109                                     ; preds = %103, %0
+    %.0 = phi i32 [ 0, %103 ], [ -21, %0 ]
+    %110 = bitcast %struct.ref_s** %pvslot to i8*
+    call void @llvm.lifetime.end(i64 4, i8* %110) #6
+    ret i32 %.0
+  }
+  
+  ; Function Attrs: norecurse nounwind readonly
+  define i32 @dict_length(%struct.ref_s* nocapture readonly %pdref) #0 {
+    %1 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %pdref, i32 0, i32 1
+    %2 = bitcast %union.v* %1 to %struct.dict_s**
+    %3 = load %struct.dict_s*, %struct.dict_s** %2, align 4, !tbaa !8
+    %4 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %3, i32 0, i32 2, i32 1, i32 0
+    %5 = load i32, i32* %4, align 4, !tbaa !16
+    ret i32 %5
+  }
+  
+  ; Function Attrs: norecurse nounwind readonly
+  define i32 @dict_maxlength(%struct.ref_s* nocapture readonly %pdref) #0 {
+    %1 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %pdref, i32 0, i32 1
+    %2 = bitcast %union.v* %1 to %struct.dict_s**
+    %3 = load %struct.dict_s*, %struct.dict_s** %2, align 4, !tbaa !8
+    %4 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %3, i32 0, i32 3, i32 1, i32 0
+    %5 = load i32, i32* %4, align 4, !tbaa !16
+    ret i32 %5
+  }
+  
+  ; Function Attrs: norecurse nounwind readonly
+  define i32 @dict_max_index(%struct.ref_s* nocapture readonly %pdref) #0 {
+    %1 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %pdref, i32 0, i32 1
+    %2 = bitcast %union.v* %1 to %struct.dict_s**
+    %3 = load %struct.dict_s*, %struct.dict_s** %2, align 4, !tbaa !8
+    %4 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %3, i32 0, i32 0, i32 0, i32 1
+    %5 = load i16, i16* %4, align 2, !tbaa !14
+    %6 = zext i16 %5 to i32
+    %7 = add nsw i32 %6, -2
+    ret i32 %7
+  }
+  
+  ; Function Attrs: nounwind
+  define i32 @dict_copy_entries(%struct.ref_s* nocapture readonly %pdrfrom, %struct.ref_s* %pdrto, i32 signext %new_only) #1 {
+    %elt = alloca [2 x %struct.ref_s], align 4
+    %pvslot = alloca %struct.ref_s*, align 4
+    %1 = bitcast %struct.ref_s* %pdrto to i16*
+    %2 = load i16, i16* %1, align 4, !tbaa !9
+    %3 = zext i16 %2 to i32
+    %4 = and i32 %3, 12
+    %5 = bitcast [2 x %struct.ref_s]* %elt to i8*
+    call void @llvm.lifetime.start(i64 16, i8* %5) #6
+    %6 = bitcast %struct.ref_s** %pvslot to i8*
+    call void @llvm.lifetime.start(i64 4, i8* %6) #6
+    %7 = icmp eq i32 %4, 12
+    br i1 %7, label %.dict_next.exit.thread_crit_edge, label %8
+  
+  .dict_next.exit.thread_crit_edge:                 ; preds = %0
+    %.pre299 = bitcast [2 x %struct.ref_s]* %elt to %struct.ref_s*
+    %.pre31 = getelementptr inbounds [2 x %struct.ref_s], [2 x %struct.ref_s]* %elt, i32 0, i32 1
+    br label %dict_next.exit.thread
+  
+  ; <label>:8                                       ; preds = %0
+    %sunkaddr = ptrtoint %struct.ref_s* %pdrfrom to i32
+    %sunkaddr10 = add i32 %sunkaddr, 4
+    %sunkaddr11 = inttoptr i32 %sunkaddr10 to %struct.dict_s**
+    %9 = load %struct.dict_s*, %struct.dict_s** %sunkaddr11, align 4, !tbaa !8
+    %10 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %9, i32 0, i32 0, i32 0, i32 1
+    %11 = load i16, i16* %10, align 2, !tbaa !14
+    %12 = zext i16 %11 to i32
+    %13 = getelementptr inbounds [2 x %struct.ref_s], [2 x %struct.ref_s]* %elt, i32 0, i32 1
+    br label %.backedge9
+  
+  .backedge9:                                       ; preds = %.backedge9.backedge, %8
+    %14 = phi %struct.dict_s* [ %9, %8 ], [ %.pre, %.backedge9.backedge ]
+    %index.0 = phi i32 [ %12, %8 ], [ %.lcssa64, %.backedge9.backedge ]
+    %15 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %14, i32 0, i32 0, i32 1
+    %16 = bitcast %union.v* %15 to %struct.ref_s**
+    %17 = load %struct.ref_s*, %struct.ref_s** %16, align 4, !tbaa !8
+    %18 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %14, i32 0, i32 1
+    %scevgep5 = getelementptr %struct.ref_s, %struct.ref_s* %17, i32 -1
+    %scevgep6 = getelementptr %struct.ref_s, %struct.ref_s* %scevgep5, i32 %index.0
+    br label %19
+  
+  ; <label>:19                                      ; preds = %29, %.backedge9
+    %lsr.iv7 = phi %struct.ref_s* [ %scevgep8, %29 ], [ %scevgep6, %.backedge9 ]
+    %.01.i = phi i32 [ %index.0, %.backedge9 ], [ %21, %29 ]
+    %20 = bitcast [2 x %struct.ref_s]* %elt to %struct.ref_s*
+    %21 = add nsw i32 %.01.i, -1
+    %22 = icmp sgt i32 %.01.i, 0
+    br i1 %22, label %23, label %dict_next.exit.thread
+  
+  ; <label>:23                                      ; preds = %19
+    %24 = bitcast [2 x %struct.ref_s]* %elt to %struct.ref_s*
+    %25 = bitcast [2 x %struct.ref_s]* %elt to i8*
+    %26 = call i32 @array_get(%struct.ref_s* %18, i32 signext %21, %struct.ref_s* %24) #6
+    %27 = load i8, i8* %25, align 4, !tbaa !18
+    %28 = icmp eq i8 %27, 13
+    br i1 %28, label %split4, label %29
+  
+  ; <label>:29                                      ; preds = %23
+    %30 = bitcast %struct.ref_s* %18 to i8*
+    %31 = load i8, i8* %30, align 4, !tbaa !18
+    %32 = icmp eq i8 %31, 6
+    %33 = icmp eq i8 %27, 14
+    %or.cond.i = or i1 %33, %32
+    %scevgep8 = getelementptr %struct.ref_s, %struct.ref_s* %lsr.iv7, i32 -1
+    br i1 %or.cond.i, label %19, label %._crit_edge3
+  
+  split4:                                           ; preds = %23
+    %34 = add i32 %.01.i, -1
+    br label %36
+  
+  ._crit_edge3:                                     ; preds = %29
+    %35 = add i32 %.01.i, -1
+    br label %36
+  
+  ; <label>:36                                      ; preds = %split4, %._crit_edge3
+    %.lcssa64 = phi i32 [ %35, %._crit_edge3 ], [ %34, %split4 ]
+    %37 = icmp eq i32 %new_only, 0
+    %38 = bitcast %struct.ref_s* %lsr.iv7 to i64*
+    %39 = load i64, i64* %38, align 4
+    %sunkaddr12 = ptrtoint [2 x %struct.ref_s]* %elt to i32
+    %sunkaddr13 = add i32 %sunkaddr12, 8
+    %sunkaddr14 = inttoptr i32 %sunkaddr13 to i64*
+    store i64 %39, i64* %sunkaddr14, align 4
+    br i1 %37, label %44, label %40
+  
+  ; <label>:40                                      ; preds = %36
+    %41 = bitcast [2 x %struct.ref_s]* %elt to %struct.ref_s*
+    %42 = call i32 @dict_find(%struct.ref_s* %pdrto, %struct.ref_s* nonnull %41, %struct.ref_s** nonnull %pvslot)
+    %43 = icmp slt i32 %42, 1
+    br i1 %43, label %44, label %.backedge9.backedge
+  
+  ; <label>:44                                      ; preds = %40, %36
+    %45 = bitcast [2 x %struct.ref_s]* %elt to i16*
+    %46 = load i16, i16* %45, align 4, !tbaa !9
+    %47 = zext i16 %46 to i32
+    %48 = and i32 %47, 12
+    %49 = icmp ugt i32 %48, %4
+    br i1 %49, label %dict_next.exit5.thread, label %50
+  
+  ; <label>:50                                      ; preds = %44
+    %sunkaddr15 = ptrtoint [2 x %struct.ref_s]* %elt to i32
+    %sunkaddr16 = add i32 %sunkaddr15, 8
+    %sunkaddr17 = inttoptr i32 %sunkaddr16 to i16*
+    %51 = load i16, i16* %sunkaddr17, align 4, !tbaa !9
+    %52 = zext i16 %51 to i32
+    %53 = and i32 %52, 12
+    %54 = icmp ugt i32 %53, %4
+    br i1 %54, label %dict_next.exit5.thread, label %.backedge9.backedge
+  
+  .backedge9.backedge:                              ; preds = %50, %40
+    %sunkaddr18 = ptrtoint %struct.ref_s* %pdrfrom to i32
+    %sunkaddr19 = add i32 %sunkaddr18, 4
+    %sunkaddr20 = inttoptr i32 %sunkaddr19 to %struct.dict_s**
+    %.pre = load %struct.dict_s*, %struct.dict_s** %sunkaddr20, align 4, !tbaa !8
+    br label %.backedge9
+  
+  dict_next.exit.thread:                            ; preds = %19, %.dict_next.exit.thread_crit_edge
+    %.pre-phi32 = phi %struct.ref_s* [ %.pre31, %.dict_next.exit.thread_crit_edge ], [ %13, %19 ]
+    %.pre-phi30 = phi %struct.ref_s* [ %.pre299, %.dict_next.exit.thread_crit_edge ], [ %20, %19 ]
+    %sunkaddr21 = ptrtoint %struct.ref_s* %pdrfrom to i32
+    %sunkaddr22 = add i32 %sunkaddr21, 4
+    %sunkaddr23 = inttoptr i32 %sunkaddr22 to %struct.dict_s**
+    %55 = load %struct.dict_s*, %struct.dict_s** %sunkaddr23, align 4, !tbaa !8
+    %56 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %55, i32 0, i32 0, i32 0, i32 1
+    %57 = load i16, i16* %56, align 2, !tbaa !14
+    %58 = zext i16 %57 to i32
+    br label %.backedge
+  
+  .backedge:                                        ; preds = %.backedge.backedge, %dict_next.exit.thread
+    %59 = phi %struct.dict_s* [ %55, %dict_next.exit.thread ], [ %.pre25, %.backedge.backedge ]
+    %index.1 = phi i32 [ %58, %dict_next.exit.thread ], [ %.lcssa60, %.backedge.backedge ]
+    %60 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %59, i32 0, i32 0, i32 1
+    %61 = bitcast %union.v* %60 to %struct.ref_s**
+    %62 = load %struct.ref_s*, %struct.ref_s** %61, align 4, !tbaa !8
+    %63 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %59, i32 0, i32 1
+    %scevgep = getelementptr %struct.ref_s, %struct.ref_s* %62, i32 -1
+    %scevgep1 = getelementptr %struct.ref_s, %struct.ref_s* %scevgep, i32 %index.1
+    br label %64
+  
+  ; <label>:64                                      ; preds = %72, %.backedge
+    %lsr.iv = phi %struct.ref_s* [ %scevgep2, %72 ], [ %scevgep1, %.backedge ]
+    %.01.i1 = phi i32 [ %index.1, %.backedge ], [ %65, %72 ]
+    %65 = add nsw i32 %.01.i1, -1
+    %66 = icmp sgt i32 %.01.i1, 0
+    br i1 %66, label %67, label %dict_next.exit5.thread
+  
+  ; <label>:67                                      ; preds = %64
+    %68 = bitcast [2 x %struct.ref_s]* %elt to i8*
+    %69 = call i32 @array_get(%struct.ref_s* %63, i32 signext %65, %struct.ref_s* %.pre-phi30) #6
+    %70 = load i8, i8* %68, align 4, !tbaa !18
+    %71 = icmp eq i8 %70, 13
+    br i1 %71, label %split, label %72
+  
+  ; <label>:72                                      ; preds = %67
+    %73 = bitcast %struct.ref_s* %63 to i8*
+    %74 = load i8, i8* %73, align 4, !tbaa !18
+    %75 = icmp eq i8 %74, 6
+    %76 = icmp eq i8 %70, 14
+    %or.cond.i3 = or i1 %76, %75
+    %scevgep2 = getelementptr %struct.ref_s, %struct.ref_s* %lsr.iv, i32 -1
+    br i1 %or.cond.i3, label %64, label %._crit_edge
+  
+  split:                                            ; preds = %67
+    %77 = add i32 %.01.i1, -1
+    br label %79
+  
+  ._crit_edge:                                      ; preds = %72
+    %78 = add i32 %.01.i1, -1
+    br label %79
+  
+  ; <label>:79                                      ; preds = %split, %._crit_edge
+    %.lcssa60 = phi i32 [ %78, %._crit_edge ], [ %77, %split ]
+    %80 = icmp eq i32 %new_only, 0
+    %81 = bitcast %struct.ref_s* %lsr.iv to i64*
+    %82 = load i64, i64* %81, align 4
+    %sunkaddr24 = ptrtoint [2 x %struct.ref_s]* %elt to i32
+    %sunkaddr25 = add i32 %sunkaddr24, 8
+    %sunkaddr26 = inttoptr i32 %sunkaddr25 to i64*
+    store i64 %82, i64* %sunkaddr26, align 4
+    br i1 %80, label %86, label %83
+  
+  ; <label>:83                                      ; preds = %79
+    %84 = call i32 @dict_find(%struct.ref_s* %pdrto, %struct.ref_s* nonnull %.pre-phi30, %struct.ref_s** nonnull %pvslot)
+    %85 = icmp sgt i32 %84, 0
+    br i1 %85, label %.backedge.backedge, label %86
+  
+  .backedge.backedge:                               ; preds = %86, %83
+    %sunkaddr27 = ptrtoint %struct.ref_s* %pdrfrom to i32
+    %sunkaddr28 = add i32 %sunkaddr27, 4
+    %sunkaddr29 = inttoptr i32 %sunkaddr28 to %struct.dict_s**
+    %.pre25 = load %struct.dict_s*, %struct.dict_s** %sunkaddr29, align 4, !tbaa !8
+    br label %.backedge
+  
+  ; <label>:86                                      ; preds = %83, %79
+    %87 = call i32 @dict_put(%struct.ref_s* %pdrto, %struct.ref_s* nonnull %.pre-phi30, %struct.ref_s* %.pre-phi32)
+    %88 = icmp slt i32 %87, 0
+    br i1 %88, label %dict_next.exit5.thread, label %.backedge.backedge
+  
+  dict_next.exit5.thread:                           ; preds = %44, %50, %86, %64
+    %.0 = phi i32 [ 0, %64 ], [ %87, %86 ], [ -7, %50 ], [ -7, %44 ]
+    %89 = bitcast %struct.ref_s** %pvslot to i8*
+    %90 = bitcast [2 x %struct.ref_s]* %elt to i8*
+    call void @llvm.lifetime.end(i64 4, i8* %89) #6
+    call void @llvm.lifetime.end(i64 16, i8* %90) #6
+    ret i32 %.0
+  }
+  
+  ; Function Attrs: norecurse nounwind readonly
+  define i32 @dict_first(%struct.ref_s* nocapture readonly %pdref) #0 {
+    %1 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %pdref, i32 0, i32 1
+    %2 = bitcast %union.v* %1 to %struct.dict_s**
+    %3 = load %struct.dict_s*, %struct.dict_s** %2, align 4, !tbaa !8
+    %4 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %3, i32 0, i32 0, i32 0, i32 1
+    %5 = load i16, i16* %4, align 2, !tbaa !14
+    %6 = zext i16 %5 to i32
+    ret i32 %6
+  }
+  
+  ; Function Attrs: nounwind
+  define i32 @dict_next(%struct.ref_s* nocapture readonly %pdref, i32 signext %index, %struct.ref_s* %eltp) #1 {
+    %1 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %pdref, i32 0, i32 1
+    %2 = bitcast %union.v* %1 to %struct.dict_s**
+    %3 = load %struct.dict_s*, %struct.dict_s** %2, align 4, !tbaa !8
+    %4 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %3, i32 0, i32 0, i32 1
+    %5 = bitcast %union.v* %4 to %struct.ref_s**
+    %6 = load %struct.ref_s*, %struct.ref_s** %5, align 4, !tbaa !8
+    %7 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %3, i32 0, i32 1
+    %8 = add i32 %index, -1
+    %scevgep = getelementptr %struct.ref_s, %struct.ref_s* %6, i32 %8
+    br label %9
+  
+  ; <label>:9                                       ; preds = %17, %0
+    %lsr.iv = phi %struct.ref_s* [ %scevgep1, %17 ], [ %scevgep, %0 ]
+    %.01 = phi i32 [ %index, %0 ], [ %10, %17 ]
+    %10 = add nsw i32 %.01, -1
+    %11 = icmp sgt i32 %.01, 0
+    br i1 %11, label %12, label %.loopexit
+  
+  ; <label>:12                                      ; preds = %9
+    %13 = bitcast %struct.ref_s* %eltp to i8*
+    %14 = tail call i32 @array_get(%struct.ref_s* %7, i32 signext %10, %struct.ref_s* %eltp) #6
+    %15 = load i8, i8* %13, align 4, !tbaa !18
+    %16 = icmp eq i8 %15, 13
+    br i1 %16, label %split, label %17
+  
+  ; <label>:17                                      ; preds = %12
+    %18 = bitcast %struct.ref_s* %7 to i8*
+    %19 = load i8, i8* %18, align 4, !tbaa !18
+    %20 = icmp eq i8 %19, 6
+    %21 = icmp eq i8 %15, 14
+    %or.cond = or i1 %21, %20
+    %scevgep1 = getelementptr %struct.ref_s, %struct.ref_s* %lsr.iv, i32 -1
+    br i1 %or.cond, label %9, label %._crit_edge
+  
+  split:                                            ; preds = %12
+    %22 = add i32 %.01, -1
+    br label %24
+  
+  ._crit_edge:                                      ; preds = %17
+    %23 = add i32 %.01, -1
+    br label %24
+  
+  ; <label>:24                                      ; preds = %split, %._crit_edge
+    %.lcssa13 = phi i32 [ %23, %._crit_edge ], [ %22, %split ]
+    %25 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %eltp, i32 1
+    %26 = bitcast %struct.ref_s* %lsr.iv to i64*
+    %27 = bitcast %struct.ref_s* %25 to i64*
+    %28 = load i64, i64* %26, align 4
+    store i64 %28, i64* %27, align 4
+    br label %.loopexit
+  
+  .loopexit:                                        ; preds = %9, %24
+    %.0 = phi i32 [ %.lcssa13, %24 ], [ -1, %9 ]
+    ret i32 %.0
+  }
+  
+  ; Function Attrs: nounwind
+  define i32 @dict_resize(%struct.ref_s* %pdref, i32 signext %new_size) #1 {
+    %dnew = alloca %struct.dict_s, align 8
+    %drto = alloca %struct.ref_s, align 4
+    %1 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %pdref, i32 0, i32 1
+    %2 = bitcast %union.v* %1 to %struct.dict_s**
+    %3 = load %struct.dict_s*, %struct.dict_s** %2, align 4, !tbaa !8
+    %4 = bitcast %struct.dict_s* %dnew to i8*
+    call void @llvm.lifetime.start(i64 32, i8* %4) #6
+    %5 = bitcast %struct.ref_s* %drto to i8*
+    call void @llvm.lifetime.start(i64 8, i8* %5) #6
+    %6 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %3, i32 0, i32 2, i32 1, i32 0
+    %7 = load i32, i32* %6, align 4, !tbaa !16
+    %8 = icmp ugt i32 %7, %new_size
+    br i1 %8, label %9, label %12
+  
+  ; <label>:9                                       ; preds = %0
+    %10 = load i32, i32* @dict_auto_expand, align 4, !tbaa !1
+    %11 = icmp eq i32 %10, 0
+    br i1 %11, label %115, label %12
+  
+  ; <label>:12                                      ; preds = %9, %0
+    %.01 = phi i32 [ %new_size, %0 ], [ %7, %9 ]
+    %13 = load i32, i32* getelementptr inbounds (%struct.gs_dual_memory_s, %struct.gs_dual_memory_s* @gs_imemory, i32 0, i32 2), align 4, !tbaa !22
+    %14 = bitcast %struct.ref_s* %pdref to i16*
+    %15 = load i16, i16* %14, align 4, !tbaa !9
+    %16 = zext i16 %15 to i32
+    %17 = and i32 %16, 12
+    tail call void @ialloc_set_space(%struct.gs_dual_memory_s* nonnull @gs_imemory, i32 signext %17) #6
+    %18 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %drto, i32 0, i32 1
+    %19 = bitcast %union.v* %18 to %struct.dict_s**
+    store %struct.dict_s* %dnew, %struct.dict_s** %19, align 4, !tbaa !8
+    %20 = load i16, i16* %14, align 4, !tbaa !9
+    %21 = zext i16 %20 to i32
+    %22 = and i32 %21, 12
+    %23 = load i32, i32* getelementptr inbounds (%struct.gs_dual_memory_s, %struct.gs_dual_memory_s* @gs_imemory, i32 0, i32 6), align 4, !tbaa !13
+    %24 = or i32 %23, %22
+    %25 = or i32 %24, 112
+    %26 = add i32 %25, 512
+    %27 = trunc i32 %26 to i16
+    %28 = bitcast %struct.ref_s* %drto to i16*
+    store i16 %27, i16* %28, align 4, !tbaa !9
+    %29 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %3, i32 0, i32 1
+    %30 = bitcast %struct.ref_s* %29 to i8*
+    %31 = load i8, i8* %30, align 4, !tbaa !18
+    %32 = icmp eq i8 %31, 6
+    %33 = zext i1 %32 to i32
+    %34 = call fastcc i32 @dict_create_contents(i32 signext %.01, %struct.ref_s* nonnull %drto, i32 signext %33)
+    %35 = icmp slt i32 %34, 0
+    br i1 %35, label %36, label %37
+  
+  ; <label>:36                                      ; preds = %12
+    call void @ialloc_set_space(%struct.gs_dual_memory_s* nonnull @gs_imemory, i32 signext %13) #6
+    br label %115
+  
+  ; <label>:37                                      ; preds = %12
+    %38 = bitcast %struct.ref_s* %drto to i16*
+    %39 = or i32 %26, 12
+    %40 = trunc i32 %39 to i16
+    store i16 %40, i16* %38, align 4, !tbaa !9
+    %41 = call i32 @dict_copy_entries(%struct.ref_s* nonnull %pdref, %struct.ref_s* nonnull %drto, i32 signext 0)
+    %42 = bitcast %struct.dict_s* %3 to i16*
+    %43 = load i16, i16* %42, align 4, !tbaa !9
+    %44 = zext i16 %43 to i32
+    %45 = load i32, i32* getelementptr inbounds (%struct.gs_dual_memory_s, %struct.gs_dual_memory_s* @gs_imemory, i32 0, i32 5), align 4, !tbaa !19
+    %46 = and i32 %44, %45
+    %47 = icmp eq i32 %46, 0
+    br i1 %47, label %48, label %51
+  
+  ; <label>:48                                      ; preds = %37
+    %49 = bitcast %struct.dict_s* %3 to i16*
+    %50 = call i32 @alloc_save_change(%struct.gs_dual_memory_s* nonnull @gs_imemory, %struct.ref_s* nonnull %pdref, i16* %49, i8* nonnull getelementptr inbounds ([20 x i8], [20 x i8]* @.str.9, i32 0, i32 0)) #6
+    br label %54
+  
+  ; <label>:51                                      ; preds = %37
+    %52 = bitcast %struct.dict_s* %3 to %struct.ref_s*
+    %53 = load %struct.gs_ref_memory_s*, %struct.gs_ref_memory_s** getelementptr inbounds (%struct.gs_dual_memory_s, %struct.gs_dual_memory_s* @gs_imemory, i32 0, i32 0), align 4, !tbaa !5
+    call void @gs_free_ref_array(%struct.gs_ref_memory_s* %53, %struct.ref_s* %52, i8* nonnull getelementptr inbounds ([24 x i8], [24 x i8]* @.str.10, i32 0, i32 0)) #6
+    br label %54
+  
+  ; <label>:54                                      ; preds = %51, %48
+    %55 = bitcast %struct.ref_s* %29 to i16*
+    %56 = load i16, i16* %55, align 4, !tbaa !9
+    %57 = zext i16 %56 to i32
+    %58 = load i32, i32* getelementptr inbounds (%struct.gs_dual_memory_s, %struct.gs_dual_memory_s* @gs_imemory, i32 0, i32 5), align 4, !tbaa !19
+    %59 = and i32 %57, %58
+    %60 = icmp eq i32 %59, 0
+    br i1 %60, label %61, label %64
+  
+  ; <label>:61                                      ; preds = %54
+    %62 = bitcast %struct.ref_s* %29 to i16*
+    %63 = call i32 @alloc_save_change(%struct.gs_dual_memory_s* nonnull @gs_imemory, %struct.ref_s* nonnull %pdref, i16* nonnull %62, i8* nonnull getelementptr inbounds ([18 x i8], [18 x i8]* @.str.11, i32 0, i32 0)) #6
+    br label %66
+  
+  ; <label>:64                                      ; preds = %54
+    %65 = load %struct.gs_ref_memory_s*, %struct.gs_ref_memory_s** getelementptr inbounds (%struct.gs_dual_memory_s, %struct.gs_dual_memory_s* @gs_imemory, i32 0, i32 0), align 4, !tbaa !5
+    call void @gs_free_ref_array(%struct.gs_ref_memory_s* %65, %struct.ref_s* nonnull %29, i8* nonnull getelementptr inbounds ([22 x i8], [22 x i8]* @.str.12, i32 0, i32 0)) #6
+    br label %66
+  
+  ; <label>:66                                      ; preds = %64, %61
+    %67 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %dnew, i32 0, i32 1
+    %68 = bitcast %struct.ref_s* %67 to i64*
+    %69 = load i64, i64* %68, align 8
+    %sunkaddr = ptrtoint %struct.dict_s* %3 to i32
+    %sunkaddr1 = add i32 %sunkaddr, 8
+    %sunkaddr2 = inttoptr i32 %sunkaddr1 to i64*
+    store i64 %69, i64* %sunkaddr2, align 4
+    %70 = bitcast %struct.dict_s* %dnew to i64*
+    %71 = bitcast %struct.dict_s* %3 to i64*
+    %72 = load i64, i64* %70, align 8
+    store i64 %72, i64* %71, align 4
+    %73 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %3, i32 0, i32 3, i32 0, i32 0
+    %74 = load i16, i16* %73, align 4, !tbaa !9
+    %75 = zext i16 %74 to i32
+    %76 = load i32, i32* getelementptr inbounds (%struct.gs_dual_memory_s, %struct.gs_dual_memory_s* @gs_imemory, i32 0, i32 5), align 4, !tbaa !19
+    %77 = and i32 %75, %76
+    %78 = icmp eq i32 %77, 0
+    br i1 %78, label %79, label %81
+  
+  ; <label>:79                                      ; preds = %66
+    %80 = call i32 @alloc_save_change(%struct.gs_dual_memory_s* nonnull @gs_imemory, %struct.ref_s* nonnull %pdref, i16* %73, i8* nonnull getelementptr inbounds ([23 x i8], [23 x i8]* @.str.13, i32 0, i32 0)) #6
+    br label %81
+  
+  ; <label>:81                                      ; preds = %79, %66
+    %82 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %3, i32 0, i32 3, i32 1, i32 0
+    store i32 %.01, i32* %82, align 4, !tbaa !16
+    call void @ialloc_set_space(%struct.gs_dual_memory_s* nonnull @gs_imemory, i32 signext %13) #6
+    %83 = load %struct.ref_s*, %struct.ref_s** getelementptr inbounds (%struct.ref_stack_s, %struct.ref_stack_s* @d_stack, i32 0, i32 0), align 4, !tbaa !20
+    %84 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %83, i32 0, i32 1
+    %85 = bitcast %union.v* %84 to %struct.dict_s**
+    %86 = load %struct.dict_s*, %struct.dict_s** %85, align 4, !tbaa !8
+    %87 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %86, i32 0, i32 1
+    %88 = bitcast %struct.ref_s* %87 to i8*
+    %89 = load i8, i8* %88, align 4, !tbaa !18
+    %90 = icmp eq i8 %89, 6
+    br i1 %90, label %91, label %103
+  
+  ; <label>:91                                      ; preds = %81
+    %92 = bitcast %struct.dict_s* %86 to i32*
+    %93 = load i32, i32* %92, align 4
+    %94 = and i32 %93, 2097152
+    %95 = icmp eq i32 %94, 0
+    br i1 %95, label %103, label %96
+  
+  ; <label>:96                                      ; preds = %91
+    %97 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %86, i32 0, i32 1, i32 1, i32 0
+    %98 = load i32, i32* %97, align 4, !tbaa !8
+    store i32 %98, i32* bitcast (i16** @dtop_keys to i32*), align 4, !tbaa !8
+    %99 = and i32 %93, 65535
+    %100 = add nsw i32 %99, -1
+    store i32 %100, i32* @dtop_npairs, align 4, !tbaa !1
+    %101 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %86, i32 0, i32 0, i32 1, i32 0
+    %102 = load i32, i32* %101, align 4, !tbaa !8
+    store i32 %102, i32* bitcast (%struct.ref_s** @dtop_values to i32*), align 4, !tbaa !8
+    br label %104
+  
+  ; <label>:103                                     ; preds = %91, %81
+    store i16* getelementptr inbounds ([2 x i16], [2 x i16]* @no_packed_keys, i32 0, i32 0), i16** @dtop_keys, align 4, !tbaa !8
+    store i32 1, i32* @dtop_npairs, align 4, !tbaa !1
+    br label %104
+  
+  ; <label>:104                                     ; preds = %103, %96
+    %sunkaddr3 = ptrtoint %struct.ref_s* %83 to i32
+    %sunkaddr4 = add i32 %sunkaddr3, 4
+    %sunkaddr5 = inttoptr i32 %sunkaddr4 to %struct.dict_s**
+    %105 = load %struct.dict_s*, %struct.dict_s** %sunkaddr5, align 4, !tbaa !8
+    %106 = bitcast %struct.dict_s* %105 to i16*
+    %107 = load i16, i16* %106, align 4, !tbaa !9
+    %108 = and i16 %107, 16
+    %109 = icmp eq i16 %108, 0
+    br i1 %109, label %dict_set_top.exit, label %110
+  
+  ; <label>:110                                     ; preds = %104
+    %111 = bitcast %struct.ref_s* %83 to i16*
+    %112 = load i16, i16* %111, align 4, !tbaa !9
+    %113 = zext i16 %112 to i32
+    %114 = and i32 %113, 12
+    br label %dict_set_top.exit
+  
+  dict_set_top.exit:                                ; preds = %110, %104
+    %storemerge.i = phi i32 [ %114, %110 ], [ -1, %104 ]
+    store i32 %storemerge.i, i32* @dsspace, align 4, !tbaa !1
+    br label %115
+  
+  ; <label>:115                                     ; preds = %dict_set_top.exit, %36, %9
+    %.0 = phi i32 [ %34, %36 ], [ 0, %dict_set_top.exit ], [ -2, %9 ]
+    %116 = bitcast %struct.ref_s* %drto to i8*
+    %117 = bitcast %struct.dict_s* %dnew to i8*
+    call void @llvm.lifetime.end(i64 8, i8* %116) #6
+    call void @llvm.lifetime.end(i64 32, i8* %117) #6
+    ret i32 %.0
+  }
+  
+  declare void @ialloc_set_space(%struct.gs_dual_memory_s*, i32 signext) #3
+  
+  declare i32 @array_get(%struct.ref_s*, i32 signext, %struct.ref_s*) #3
+  
+  ; Function Attrs: norecurse nounwind readonly
+  define i32 @dict_value_index(%struct.ref_s* nocapture readonly %pdref, %struct.ref_s* %pvalue) #0 {
+    %1 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %pdref, i32 0, i32 1
+    %2 = bitcast %union.v* %1 to %struct.dict_s**
+    %3 = load %struct.dict_s*, %struct.dict_s** %2, align 4, !tbaa !8
+    %4 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %3, i32 0, i32 0, i32 1, i32 0
+    %5 = load i32, i32* %4, align 4, !tbaa !8
+    %6 = ptrtoint %struct.ref_s* %pvalue to i32
+    %7 = sub i32 %6, %5
+    %8 = ashr exact i32 %7, 3
+    %9 = add nsw i32 %8, -1
+    ret i32 %9
+  }
+  
+  ; Function Attrs: nounwind
+  define i32 @dict_index_entry(%struct.ref_s* nocapture readonly %pdref, i32 signext %index, %struct.ref_s* %eltp) #1 {
+    %1 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %pdref, i32 0, i32 1
+    %2 = bitcast %union.v* %1 to %struct.dict_s**
+    %3 = load %struct.dict_s*, %struct.dict_s** %2, align 4, !tbaa !8
+    %4 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %3, i32 0, i32 1
+    %5 = add nsw i32 %index, 1
+    %6 = tail call i32 @array_get(%struct.ref_s* %4, i32 signext %5, %struct.ref_s* %eltp) #6
+    %7 = bitcast %struct.ref_s* %eltp to i8*
+    %8 = load i8, i8* %7, align 4, !tbaa !18
+    %9 = icmp eq i8 %8, 13
+    br i1 %9, label %15, label %10
+  
+  ; <label>:10                                      ; preds = %0
+    %11 = bitcast %struct.ref_s* %4 to i8*
+    %12 = load i8, i8* %11, align 4, !tbaa !18
+    %13 = icmp eq i8 %12, 6
+    %14 = icmp eq i8 %8, 14
+    %or.cond = or i1 %14, %13
+    br i1 %or.cond, label %24, label %15
+  
+  ; <label>:15                                      ; preds = %10, %0
+    %16 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %eltp, i32 1
+    %17 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %3, i32 0, i32 0, i32 1
+    %18 = bitcast %union.v* %17 to %struct.ref_s**
+    %19 = load %struct.ref_s*, %struct.ref_s** %18, align 4, !tbaa !8
+    %20 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %19, i32 %5
+    %21 = bitcast %struct.ref_s* %20 to i64*
+    %22 = bitcast %struct.ref_s* %16 to i64*
+    %23 = load i64, i64* %21, align 4
+    store i64 %23, i64* %22, align 4
+    br label %24
+  
+  ; <label>:24                                      ; preds = %15, %10
+    %.0 = phi i32 [ 0, %15 ], [ -21, %10 ]
+    ret i32 %.0
+  }
+  
+  ; Function Attrs: nounwind
+  define void @dstack_gc_cleanup() #1 {
+    %key = alloca %struct.ref_s, align 4
+    %1 = tail call i32 @ref_stack_count(%struct.ref_stack_s* nonnull @d_stack) #6
+    %2 = load i32, i32* @min_dstack_size, align 4, !tbaa !1
+    %3 = icmp eq i32 %2, 0
+    br i1 %3, label %._crit_edge, label %.lr.ph4
+  
+  .lr.ph4:                                          ; preds = %0
+    br label %4
+  
+  ; <label>:4                                       ; preds = %.loopexit, %.lr.ph4
+    %dsi.03 = phi i32 [ %2, %.lr.ph4 ], [ %37, %.loopexit ]
+    %5 = sub i32 %1, %dsi.03
+    %6 = call %struct.ref_s* @ref_stack_index(%struct.ref_stack_s* nonnull @d_stack, i32 signext %5) #6
+    %7 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %6, i32 0, i32 1
+    %8 = bitcast %union.v* %7 to %struct.dict_s**
+    %9 = load %struct.dict_s*, %struct.dict_s** %8, align 4, !tbaa !8
+    %10 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %9, i32 0, i32 0, i32 0, i32 1
+    %11 = load i16, i16* %10, align 2, !tbaa !14
+    %12 = zext i16 %11 to i32
+    %13 = icmp eq i16 %11, 0
+    br i1 %13, label %.loopexit, label %.lr.ph
+  
+  .lr.ph:                                           ; preds = %4
+    %14 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %9, i32 0, i32 0, i32 1
+    %15 = bitcast %union.v* %14 to %struct.ref_s**
+    %16 = load %struct.ref_s*, %struct.ref_s** %15, align 4, !tbaa !8
+    %17 = getelementptr inbounds %struct.dict_s, %struct.dict_s* %9, i32 0, i32 1
+    br label %18
+  
+  ; <label>:18                                      ; preds = %31, %.lr.ph
+    %i.02 = phi i32 [ 0, %.lr.ph ], [ %33, %31 ]
+    %pvalue.01 = phi %struct.ref_s* [ %16, %.lr.ph ], [ %34, %31 ]
+    %19 = bitcast %struct.ref_s* %key to i8*
+    call void @llvm.lifetime.start(i64 8, i8* %19) #6
+    %20 = call i32 @array_get(%struct.ref_s* %17, i32 signext %i.02, %struct.ref_s* nonnull %key) #6
+    %21 = load i8, i8* %19, align 4, !tbaa !18
+    %22 = icmp eq i8 %21, 13
+    br i1 %22, label %23, label %31
+  
+  ; <label>:23                                      ; preds = %18
+    %sunkaddr = ptrtoint %struct.ref_s* %key to i32
+    %sunkaddr1 = add i32 %sunkaddr, 4
+    %sunkaddr2 = inttoptr i32 %sunkaddr1 to %struct.name_s**
+    %24 = load %struct.name_s*, %struct.name_s** %sunkaddr2, align 4, !tbaa !8
+    %25 = getelementptr inbounds %struct.name_s, %struct.name_s* %24, i32 0, i32 3
+    %26 = load %struct.ref_s*, %struct.ref_s** %25, align 4, !tbaa !24
+    %27 = icmp ugt %struct.ref_s* %26, inttoptr (i32 1 to %struct.ref_s*)
+    br i1 %27, label %28, label %31
+  
+  ; <label>:28                                      ; preds = %23
+    %29 = icmp eq %struct.ref_s* %pvalue.01, %26
+    br i1 %29, label %.critedge, label %30
+  
+  ; <label>:30                                      ; preds = %28
+    %sunkaddr3 = ptrtoint %struct.name_s* %24 to i32
+    %sunkaddr4 = add i32 %sunkaddr3, 8
+    %sunkaddr5 = inttoptr i32 %sunkaddr4 to %struct.ref_s**
+    store %struct.ref_s* %pvalue.01, %struct.ref_s** %sunkaddr5, align 4, !tbaa !24
+    br label %31
+  
+  ; <label>:31                                      ; preds = %30, %23, %18
+    %32 = bitcast %struct.ref_s* %key to i8*
+    call void @llvm.lifetime.end(i64 8, i8* nonnull %32) #6
+    %33 = add nuw nsw i32 %i.02, 1
+    %34 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %pvalue.01, i32 1
+    %35 = icmp ult i32 %33, %12
+    br i1 %35, label %18, label %.loopexit
+  
+  .critedge:                                        ; preds = %28
+    %36 = bitcast %struct.ref_s* %key to i8*
+    call void @llvm.lifetime.end(i64 8, i8* nonnull %36) #6
+    br label %.loopexit
+  
+  .loopexit:                                        ; preds = %31, %.critedge, %4
+    %37 = add i32 %dsi.03, -1
+    %38 = icmp eq i32 %37, 0
+    br i1 %38, label %._crit_edge, label %4
+  
+  ._crit_edge:                                      ; preds = %.loopexit, %0
+    ret void
+  }
+  
+  declare void @refset_null(%struct.ref_s*, i32 signext) #3
+  
+  attributes #0 = { norecurse nounwind readonly "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #1 = { nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #2 = { argmemonly nounwind "target-cpu"="mips32" }
+  attributes #3 = { "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #4 = { norecurse nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #5 = { nounwind readonly "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #6 = { nounwind }
+  attributes #7 = { nounwind readonly }
+  
+  !llvm.ident = !{!0}
+  
+  !0 = !{!"clang version 3.8.0 (http://llvm.org/git/clang.git 2d49f0a0ae8366964a93e3b7b26e29679bee7160) (http://llvm.org/git/llvm.git 60bc66b44837125843b58ed3e0fd2e6bb948d839)"}
+  !1 = !{!2, !2, i64 0}
+  !2 = !{!"int", !3, i64 0}
+  !3 = !{!"omnipotent char", !4, i64 0}
+  !4 = !{!"Simple C/C++ TBAA"}
+  !5 = !{!6, !7, i64 0}
+  !6 = !{!"gs_dual_memory_s", !7, i64 0, !3, i64 4, !2, i64 20, !2, i64 24, !7, i64 28, !2, i64 32, !2, i64 36}
+  !7 = !{!"any pointer", !3, i64 0}
+  !8 = !{!7, !7, i64 0}
+  !9 = !{!10, !12, i64 0}
+  !10 = !{!"ref_s", !11, i64 0, !3, i64 4}
+  !11 = !{!"tas_s", !12, i64 0, !12, i64 2}
+  !12 = !{!"short", !3, i64 0}
+  !13 = !{!6, !2, i64 36}
+  !14 = !{!10, !12, i64 2}
+  !15 = !{!12, !12, i64 0}
+  !16 = !{!17, !17, i64 0}
+  !17 = !{!"long", !3, i64 0}
+  !18 = !{!3, !3, i64 0}
+  !19 = !{!6, !2, i64 32}
+  !20 = !{!21, !7, i64 0}
+  !21 = !{!"ref_stack_s", !7, i64 0, !7, i64 4, !7, i64 8, !10, i64 12, !2, i64 20, !2, i64 24, !10, i64 28, !2, i64 36, !2, i64 40, !2, i64 44, !2, i64 48, !2, i64 52, !10, i64 56, !2, i64 64, !2, i64 68, !2, i64 72, !7, i64 76}
+  !22 = !{!6, !2, i64 20}
+  !23 = !{!21, !2, i64 20}
+  !24 = !{!25, !7, i64 8}
+  !25 = !{!"name_s", !12, i64 0, !2, i64 2, !2, i64 2, !2, i64 2, !7, i64 4, !7, i64 8}
+
+...
+---
+name:            dict_undef
+alignment:       2
+exposesReturnsTwice: false
+hasInlineAsm:    false
+isSSA:           false
+tracksRegLiveness: false
+tracksSubRegLiveness: false
+liveins:         
+  - { reg: '%a0' }
+  - { reg: '%a1' }
+  - { reg: '%t9' }
+  - { reg: '%v0' }
+calleeSavedRegisters: [ '%fp', '%ra', '%d10', '%d11', '%d12', '%d13', '%d14', 
+                        '%d15', '%f20', '%f21', '%f22', '%f23', '%f24', 
+                        '%f25', '%f26', '%f27', '%f28', '%f29', '%f30', 
+                        '%f31', '%s0', '%s1', '%s2', '%s3', '%s4', '%s5', 
+                        '%s6', '%s7' ]
+frameInfo:       
+  isFrameAddressTaken: false
+  isReturnAddressTaken: false
+  hasStackMap:     false
+  hasPatchPoint:   false
+  stackSize:       56
+  offsetAdjustment: 0
+  maxAlignment:    4
+  adjustsStack:    true
+  hasCalls:        true
+  maxCallFrameSize: 16
+  hasOpaqueSPAdjustment: false
+  hasVAStart:      false
+  hasMustTailInVarArgFunc: false
+stack:           
+  - { id: 0, name: pvslot, offset: -36, size: 4, alignment: 4 }
+  - { id: 1, type: spill-slot, offset: -4, size: 4, alignment: 4, callee-saved-register: '%ra' }
+  - { id: 2, type: spill-slot, offset: -8, size: 4, alignment: 4, callee-saved-register: '%s6' }
+  - { id: 3, type: spill-slot, offset: -12, size: 4, alignment: 4, callee-saved-register: '%s5' }
+  - { id: 4, type: spill-slot, offset: -16, size: 4, alignment: 4, callee-saved-register: '%s4' }
+  - { id: 5, type: spill-slot, offset: -20, size: 4, alignment: 4, callee-saved-register: '%s3' }
+  - { id: 6, type: spill-slot, offset: -24, size: 4, alignment: 4, callee-saved-register: '%s2' }
+  - { id: 7, type: spill-slot, offset: -28, size: 4, alignment: 4, callee-saved-register: '%s1' }
+  - { id: 8, type: spill-slot, offset: -32, size: 4, alignment: 4, callee-saved-register: '%s0' }
+body:             |
+  bb.0 (%ir-block.0, freq 68):
+    successors: %bb.18(37), %bb.1(62)
+    liveins: %a0, %a1, %t9, %ra, %s6, %s5, %s4, %s3, %s2, %s1, %s0
+  
+    %v0 = LUi target-flags(<unknown>) $_gp_disp
+    %v0 = ADDiu %v0, target-flags(<unknown>) $_gp_disp
+    %sp = ADDiu %sp, -56
+    CFI_INSTRUCTION .cfi_def_cfa_offset 56
+    SW killed %ra, %sp, 52 :: (store 4 into stack)
+    SW killed %s6, %sp, 48 :: (store 4 into stack)
+    SW killed %s5, %sp, 44 :: (store 4 into stack)
+    SW killed %s4, %sp, 40 :: (store 4 into stack)
+    SW killed %s3, %sp, 36 :: (store 4 into stack)
+    SW killed %s2, %sp, 32 :: (store 4 into stack)
+    SW killed %s1, %sp, 28 :: (store 4 into stack)
+    SW killed %s0, %sp, 24 :: (store 4 into stack)
+    CFI_INSTRUCTION .cfi_offset %ra_64, -4
+    CFI_INSTRUCTION .cfi_offset %s6_64, -8
+    CFI_INSTRUCTION .cfi_offset %s5_64, -12
+    CFI_INSTRUCTION .cfi_offset %s4_64, -16
+    CFI_INSTRUCTION .cfi_offset %s3_64, -20
+    CFI_INSTRUCTION .cfi_offset %s2_64, -24
+    CFI_INSTRUCTION .cfi_offset %s1_64, -28
+    CFI_INSTRUCTION .cfi_offset %s0_64, -32
+    %s0 = ADDu %v0, %t9
+    %s3 = OR %a1, %zero
+    %s4 = OR %a0, %zero
+    %t9 = LW %s0, target-flags(<unknown>) @dict_find :: (load 4 from call-entry @dict_find)
+    %a2 = LEA_ADDiu %sp, 20
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit killed %gp, implicit-def %sp, implicit-def %v0 {
+      %gp = OR %s0, %zero
+    }
+    %at = OR %v0, %zero
+    BLEZ %at, %bb.18, implicit-def %at {
+      %v0 = ADDiu %zero, -21
+    }
+  
+  bb.1 (%ir-block.4, freq 42):
+    successors: %bb.2(50), %bb.5(50)
+    liveins: %s0, %s3, %s4
+  
+    %s2 = LW %s4, 4 :: (load 4 from %ir.6, !tbaa !8)
+    %at = LW %s2, 4 :: (load 4 from %ir.10, !tbaa !8)
+    %s1 = LW %sp, 20 :: (load 4 from %ir.8, !tbaa !8)
+    %at = SUBu %s1, killed %at
+    %a1 = ADDiu %s2, 8
+    %v1 = LBu %s2, 8 :: (load 1 from %ir.15, align 4, !tbaa !18)
+    %a0 = ADDiu %zero, 6
+    BNE %v1, %a0, %bb.5, implicit-def %at {
+      %v0 = SRA killed %at, 3
+    }
+  
+  bb.2 (%ir-block.18, freq 21):
+    successors: %bb.3(37), %bb.4(62)
+    liveins: %a1, %s0, %s1, %s2, %s3, %s4, %v0
+  
+    %at = LW %s2, 12 :: (load 4 from %ir.20, !tbaa !8)
+    %v0 = SLL killed %v0, 1
+    %s5 = ADDu killed %at, killed %v0
+    %at = LHu %s2, 8 :: (load 2 from %ir.sunkaddr2, align 4, !tbaa !9)
+    %a0 = LW %s0, target-flags(<unknown>) @gs_imemory :: (load 4 from got)
+    %v0 = LW %a0, 32 :: (load 4 from `i32* getelementptr inbounds (%struct.gs_dual_memory_s, %struct.gs_dual_memory_s* @gs_imemory, i32 0, i32 5)`, !tbaa !19)
+    %at = AND killed %at, killed %v0
+    BNE %at, %zero, %bb.4, implicit-def %at {
+      NOP
+    }
+  
+  bb.3 (%ir-block.28, freq 8):
+    successors: %bb.4(100)
+    liveins: %a0, %a1, %s0, %s1, %s2, %s3, %s4, %s5
+  
+    %at = LW %s0, target-flags(<unknown>) @.str.6 :: (load 4 from got)
+    %a3 = ADDiu killed %at, target-flags(<unknown>) @.str.6
+    %t9 = LW %s0, target-flags(<unknown>) @alloc_save_change :: (load 4 from call-entry @alloc_save_change)
+    %a2 = OR %s5, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %a3, implicit killed %gp, implicit-def %sp, implicit-def dead %v0 {
+      %gp = OR %s0, %zero
+    }
+  
+  bb.4 (%ir-block.30, freq 21):
+    successors: %bb.10(100)
+    liveins: %s0, %s1, %s2, %s3, %s4, %s5
+  
+    %at = LHu %s5, -2 :: (load 2 from %ir.31, !tbaa !15)
+    %v0 = ADDiu %zero, 24576
+    %at = XOR killed %at, killed %v0
+    %at = SLTu %zero, killed %at
+    %at = ORi killed %at, 24576
+    B %bb.10, implicit-def dead %at {
+      SH killed %at, killed %s5, 0 :: (store 2 into %ir.22, !tbaa !15)
+    }
+  
+  bb.5 (%ir-block.34, freq 21):
+    successors: %bb.6(37), %bb.7(62)
+    liveins: %a1, %s0, %s1, %s2, %s3, %s4, %v0
+  
+    %at = LW %s2, 12 :: (load 4 from %ir.36, !tbaa !8)
+    %v0 = SLL killed %v0, 3
+    %s5 = ADDu killed %at, killed %v0
+    %at = LHu %s5, 0 :: (load 2 from %ir.39, align 4, !tbaa !9)
+    %s6 = LW %s0, target-flags(<unknown>) @gs_imemory :: (load 4 from got)
+    %v0 = LW %s6, 32 :: (load 4 from `i32* getelementptr inbounds (%struct.gs_dual_memory_s, %struct.gs_dual_memory_s* @gs_imemory, i32 0, i32 5)`, !tbaa !19)
+    %at = AND killed %at, killed %v0
+    BNE %at, %zero, %bb.7, implicit-def %at {
+      NOP
+    }
+  
+  bb.6 (%ir-block.45, freq 8):
+    successors: %bb.7(100)
+    liveins: %a1, %s0, %s1, %s2, %s3, %s4, %s5, %s6
+  
+    %at = LW %s0, target-flags(<unknown>) @.str.6 :: (load 4 from got)
+    %a3 = ADDiu killed %at, target-flags(<unknown>) @.str.6
+    %t9 = LW %s0, target-flags(<unknown>) @alloc_save_change :: (load 4 from call-entry @alloc_save_change)
+    %a0 = OR %s6, %zero
+    %a2 = OR %s5, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %a3, implicit killed %gp, implicit-def %sp, implicit-def dead %v0 {
+      %gp = OR %s0, %zero
+    }
+  
+  bb.7 (%ir-block.48, freq 21):
+    successors: %bb.8(50), %bb.9(50)
+    liveins: %s0, %s1, %s2, %s3, %s4, %s5, %s6
+  
+    %at = LW killed %s6, 36 :: (load 4 from `i32* getelementptr inbounds (%struct.gs_dual_memory_s, %struct.gs_dual_memory_s* @gs_imemory, i32 0, i32 6)`, !tbaa !13)
+    %v0 = ADDiu killed %at, 3584
+    %at = ADDiu %zero, 14
+    SH %v0, %s5, 0 :: (store 2 into %ir.49, align 4, !tbaa !9)
+    %v1 = LBu %s5, -8 :: (load 1 from %ir.54, align 4, !tbaa !18)
+    BNE %v1, %at, %bb.9, implicit-def %at {
+      NOP
+    }
+  
+  bb.8 (%ir-block.57, freq 10):
+    successors: %bb.10(50), %bb.9(50)
+    liveins: %s0, %s1, %s2, %s3, %s4, %s5, %v0
+  
+    %at = LBu %s5, -7 :: (load 1 from %ir.sunkaddr5 + 1)
+    %at = ANDi killed %at, 128
+    BEQ %at, %zero, %bb.10, implicit-def %at {
+      NOP
+    }
+  
+  bb.9 (%ir-block.61, freq 16):
+    successors: %bb.10(100)
+    liveins: %s0, %s1, %s2, %s3, %s4, %s5, %v0
+  
+    %at = ORi killed %v0, 128
+    SH killed %at, killed %s5, 0 :: (store 2 into %ir.62, align 4, !tbaa !9)
+  
+  bb.10 (%ir-block.65, freq 42):
+    successors: %bb.11(37), %bb.12(62)
+    liveins: %s0, %s1, %s2, %s3, %s4
+  
+    %at = LHu %s2, 16 :: (load 2 from %ir.66, align 4, !tbaa !9)
+    %s5 = LW %s0, target-flags(<unknown>) @gs_imemory :: (load 4 from got)
+    %v0 = LW %s5, 32 :: (load 4 from `i32* getelementptr inbounds (%struct.gs_dual_memory_s, %struct.gs_dual_memory_s* @gs_imemory, i32 0, i32 5)`, !tbaa !19)
+    %at = AND killed %at, killed %v0
+    BNE %at, %zero, %bb.12, implicit-def %at {
+      NOP
+    }
+  
+  bb.11 (%ir-block.72, freq 16):
+    successors: %bb.12(100)
+    liveins: %s0, %s1, %s2, %s3, %s4, %s5
+  
+    %a2 = ADDiu %s2, 16
+    %at = LW %s0, target-flags(<unknown>) @.str.7 :: (load 4 from got)
+    %a3 = ADDiu killed %at, target-flags(<unknown>) @.str.7
+    %t9 = LW %s0, target-flags(<unknown>) @alloc_save_change :: (load 4 from call-entry @alloc_save_change)
+    %a0 = OR %s5, %zero
+    %a1 = OR killed %s4, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %a3, implicit killed %gp, implicit-def %sp, implicit-def dead %v0 {
+      %gp = OR %s0, %zero
+    }
+  
+  bb.12 (%ir-block.74, freq 42):
+    successors: %bb.13(50), %bb.15(50)
+    liveins: %s0, %s1, %s2, %s3, %s5
+  
+    %at = LW %s2, 20 :: (load 4 from %ir.75, !tbaa !16)
+    %at = ADDiu killed %at, -1
+    SW killed %at, %s2, 20 :: (store 4 into %ir.75, !tbaa !16)
+    %at = LBu %s3, 0 :: (load 1 from %ir.78, align 4, !tbaa !18)
+    %v0 = ADDiu %zero, 13
+    BNE %at, %v0, %bb.15, implicit-def %at {
+      NOP
+    }
+  
+  bb.13 (%ir-block.81, freq 21):
+    successors: %bb.14(50), %bb.15(50)
+    liveins: %s0, %s1, %s2, %s3, %s5
+  
+    %v0 = LW killed %s3, 4 :: (load 4 from %ir.83, !tbaa !8)
+    %at = LW %v0, 8 :: (load 4 from %ir.86, !tbaa !24)
+    %at = SLTiu killed %at, 2
+    BNE %at, %zero, %bb.15, implicit-def %at {
+      NOP
+    }
+  
+  bb.14 (%ir-block.89, freq 10):
+    successors: %bb.15(100)
+    liveins: %s0, %s1, %s2, %s5, %v0
+  
+    SW %zero, killed %v0, 8 :: (store 4 into %ir.sunkaddr8, !tbaa !24)
+  
+  bb.15 (%ir-block.90, freq 42):
+    successors: %bb.16(37), %bb.17(62)
+    liveins: %s0, %s1, %s2, %s5
+  
+    %at = LHu %s1, 0 :: (load 2 from %ir.92, align 4, !tbaa !9)
+    %v0 = LW %s5, 32 :: (load 4 from `i32* getelementptr inbounds (%struct.gs_dual_memory_s, %struct.gs_dual_memory_s* @gs_imemory, i32 0, i32 5)`, !tbaa !19)
+    %at = AND killed %at, killed %v0
+    BNE %at, %zero, %bb.17, implicit-def %at {
+      NOP
+    }
+  
+  bb.16 (%ir-block.98, freq 16):
+    successors: %bb.17(100)
+    liveins: %s0, %s1, %s2, %s5
+  
+    %at = LW %s0, target-flags(<unknown>) @.str.8 :: (load 4 from got)
+    %a3 = ADDiu killed %at, target-flags(<unknown>) @.str.8
+    %t9 = LW %s0, target-flags(<unknown>) @alloc_save_change :: (load 4 from call-entry @alloc_save_change)
+    %a0 = OR %s5, %zero
+    %a1 = OR killed %s2, %zero
+    %a2 = OR %s1, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %a3, implicit killed %gp, implicit-def %sp, implicit-def dead %v0 {
+      %gp = OR killed %s0, %zero
+    }
+  
+  bb.17 (%ir-block.103, freq 42):
+    successors: %bb.18(100)
+    liveins: %s1, %s5
+  
+    %at = LW killed %s5, 36 :: (load 4 from `i32* getelementptr inbounds (%struct.gs_dual_memory_s, %struct.gs_dual_memory_s* @gs_imemory, i32 0, i32 6)`, !tbaa !13)
+    %at = ADDiu killed %at, 3584
+    %v0 = ADDiu %zero, 0
+    SH killed %at, killed %s1, 0 :: (store 2 into %ir.105, align 4, !tbaa !9)
+  
+  bb.18 (%ir-block.109, freq 68):
+    liveins: %v0
+    liveouts:
+  
+    %s0 = LW %sp, 24 :: (load 4 from stack)
+    %s1 = LW %sp, 28 :: (load 4 from stack)
+    %s2 = LW %sp, 32 :: (load 4 from stack)
+    %s3 = LW %sp, 36 :: (load 4 from stack)
+    %s4 = LW %sp, 40 :: (load 4 from stack)
+    %s5 = LW %sp, 44 :: (load 4 from stack)
+    %s6 = LW %sp, 48 :: (load 4 from stack)
+    %ra = LW %sp, 52 :: (load 4 from stack)
+    PseudoReturn %ra {
+      %sp = ADDiu %sp, 56
+    }
+
+...

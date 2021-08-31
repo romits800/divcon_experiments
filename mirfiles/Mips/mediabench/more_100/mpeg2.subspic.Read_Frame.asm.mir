@@ -1,0 +1,1280 @@
+--- |
+  ; ModuleID = '/home/romi/didaktoriko/unison/unison-experiments/experiments/test-input/c/mediabench/mips_zip/build-mips/mpeg2/mpeg2.subspic.ll'
+  target datalayout = "E-m:m-p:32:32-i8:8:32-i16:16:32-i64:64-n32-S64"
+  target triple = "mips--linux-gnu"
+  
+  %struct._IO_FILE = type { i32, i8*, i8*, i8*, i8*, i8*, i8*, i8*, i8*, i8*, i8*, i8*, %struct._IO_marker*, %struct._IO_FILE*, i32, i32, i32, i16, i8, [1 x i8], i8*, i64, i8*, i8*, i8*, i8*, i32, i32, [40 x i8] }
+  %struct._IO_marker = type { %struct._IO_marker*, %struct._IO_FILE*, i32 }
+  
+  @Substitute_Frame_Buffer.previous_temporal_reference = internal unnamed_addr global i32 0, align 4
+  @Substitute_Frame_Buffer.previous_anchor_temporal_reference = internal unnamed_addr global i32 0, align 4
+  @Substitute_Frame_Buffer.previous_picture_coding_type = internal unnamed_addr global i32 0, align 4
+  @Substitute_Frame_Buffer.bgate = internal unnamed_addr global i1 false
+  @Second_Field = external global i32, align 4
+  @picture_structure = external global i32, align 4
+  @picture_coding_type = external global i32, align 4
+  @Substitute_Picture_Filename = external global i8*, align 4
+  @forward_reference_frame = external global [3 x i8*], align 4
+  @temporal_reference = external global i32, align 4
+  @backward_reference_frame = external global [3 x i8*], align 4
+  @current_frame = external global [3 x i8*], align 4
+  @.str = private unnamed_addr constant [40 x i8] c"ERROR: framenum (%d) is less than zero\0A\00", align 1
+  @Big_Picture_Flag = external global i32, align 4
+  @substitute_frame = external global [3 x i8*], align 4
+  @Coded_Picture_Width = external global i32, align 4
+  @Coded_Picture_Height = external global i32, align 4
+  @Chroma_Width = external global i32, align 4
+  @Chroma_Height = external global i32, align 4
+  @.str.2 = private unnamed_addr constant [3 x i8] c"rb\00", align 1
+  @Error_Text = external global [256 x i8], align 1
+  @.str.3 = private unnamed_addr constant [18 x i8] c"Couldn't open %s\0A\00", align 1
+  @chroma_format = external global i32, align 4
+  @.str.4 = private unnamed_addr constant [42 x i8] c"ERROR: chroma_format (%d) not recognized\0A\00", align 1
+  @.str.5 = private unnamed_addr constant [5 x i8] c"%s.Y\00", align 1
+  @.str.6 = private unnamed_addr constant [5 x i8] c"%s.U\00", align 1
+  @.str.7 = private unnamed_addr constant [5 x i8] c"%s.V\00", align 1
+  @.str.9 = private unnamed_addr constant [49 x i8] c"was able to read only %d bytes of %d of file %s\0A\00", align 1
+  @str = private unnamed_addr constant [31 x i8] c"was unable to substitute frame\00"
+  
+  ; Function Attrs: nounwind
+  define void @Substitute_Frame_Buffer(i32 signext %bitstream_framenum, i32 signext %sequence_framenum) #0 {
+    %1 = load i32, i32* @Second_Field, align 4
+    %2 = or i32 %1, %sequence_framenum
+    %3 = icmp eq i32 %2, 0
+    br i1 %3, label %37, label %4
+  
+  ; <label>:4                                       ; preds = %0
+    %5 = icmp ne i32 %1, 0
+    %6 = load i32, i32* @picture_structure, align 4, !tbaa !1
+    %7 = icmp ne i32 %6, 3
+    %or.cond3 = and i1 %5, %7
+    %8 = load i32, i32* @picture_coding_type, align 4
+    br i1 %or.cond3, label %24, label %9
+  
+  ; <label>:9                                       ; preds = %4
+    %10 = icmp eq i32 %8, 2
+    br i1 %10, label %11, label %14
+  
+  ; <label>:11                                      ; preds = %9
+    %12 = add nsw i32 %bitstream_framenum, -1
+    %13 = load i8*, i8** @Substitute_Picture_Filename, align 4, !tbaa !5
+    tail call fastcc void @Read_Frame(i8* %13, i8** nonnull getelementptr inbounds ([3 x i8*], [3 x i8*]* @forward_reference_frame, i32 0, i32 0), i32 signext %12)
+    br label %37
+  
+  ; <label>:14                                      ; preds = %9
+    %15 = icmp eq i32 %8, 3
+    %.b = load i1, i1* @Substitute_Frame_Buffer.bgate, align 1
+    %16 = xor i1 %.b, true
+    %or.cond5 = and i1 %15, %16
+    br i1 %or.cond5, label %17, label %37
+  
+  ; <label>:17                                      ; preds = %14
+    %18 = load i32, i32* @Substitute_Frame_Buffer.previous_temporal_reference, align 4, !tbaa !1
+    %19 = load i32, i32* @temporal_reference, align 4, !tbaa !1
+    %20 = add i32 %bitstream_framenum, -1
+    %21 = add i32 %20, %18
+    %22 = sub i32 %21, %19
+    %23 = load i8*, i8** @Substitute_Picture_Filename, align 4, !tbaa !5
+    tail call fastcc void @Read_Frame(i8* %23, i8** nonnull getelementptr inbounds ([3 x i8*], [3 x i8*]* @backward_reference_frame, i32 0, i32 0), i32 signext %22)
+    br label %37
+  
+  ; <label>:24                                      ; preds = %4
+    %25 = icmp eq i32 %8, 2
+    br i1 %25, label %26, label %37
+  
+  ; <label>:26                                      ; preds = %24
+    %27 = load i32, i32* @Substitute_Frame_Buffer.previous_picture_coding_type, align 4, !tbaa !1
+    %28 = icmp eq i32 %27, 1
+    br i1 %28, label %35, label %29
+  
+  ; <label>:29                                      ; preds = %26
+    %30 = load i32, i32* @temporal_reference, align 4, !tbaa !1
+    %31 = load i32, i32* @Substitute_Frame_Buffer.previous_anchor_temporal_reference, align 4, !tbaa !1
+    %32 = add i32 %bitstream_framenum, -1
+    %33 = add i32 %32, %30
+    %34 = sub i32 %33, %31
+    br label %35
+  
+  ; <label>:35                                      ; preds = %29, %26
+    %substitute_display_framenum.0 = phi i32 [ %34, %29 ], [ %bitstream_framenum, %26 ]
+    %36 = load i8*, i8** @Substitute_Picture_Filename, align 4, !tbaa !5
+    tail call fastcc void @Read_Frame(i8* %36, i8** nonnull getelementptr inbounds ([3 x i8*], [3 x i8*]* @current_frame, i32 0, i32 0), i32 signext %substitute_display_framenum.0)
+    br label %37
+  
+  ; <label>:37                                      ; preds = %35, %24, %17, %14, %11, %0
+    %38 = load i32, i32* @picture_coding_type, align 4, !tbaa !1
+    %39 = icmp eq i32 %38, 3
+    store i1 %39, i1* @Substitute_Frame_Buffer.bgate, align 1
+    %40 = load i32, i32* @picture_structure, align 4, !tbaa !1
+    %41 = icmp ne i32 %40, 3
+    %42 = load i32, i32* @Second_Field, align 4
+    %43 = icmp ne i32 %42, 0
+    %or.cond11 = and i1 %41, %43
+    br i1 %or.cond11, label %46, label %44
+  
+  ; <label>:44                                      ; preds = %37
+    %45 = load i32, i32* @temporal_reference, align 4, !tbaa !1
+    store i32 %45, i32* @Substitute_Frame_Buffer.previous_temporal_reference, align 4, !tbaa !1
+    br label %46
+  
+  ; <label>:46                                      ; preds = %44, %37
+    %47 = icmp ne i32 %42, 0
+    %48 = icmp eq i32 %38, 3
+    %.not = xor i1 %48, true
+    %49 = icmp eq i32 %40, 3
+    %or.cond13 = or i1 %49, %47
+    %or.cond = and i1 %or.cond13, %.not
+    br i1 %or.cond, label %50, label %52
+  
+  ; <label>:50                                      ; preds = %46
+    %51 = load i32, i32* @temporal_reference, align 4, !tbaa !1
+    store i32 %51, i32* @Substitute_Frame_Buffer.previous_anchor_temporal_reference, align 4, !tbaa !1
+    br label %52
+  
+  ; <label>:52                                      ; preds = %50, %46
+    store i32 %38, i32* @Substitute_Frame_Buffer.previous_picture_coding_type, align 4, !tbaa !1
+    ret void
+  }
+  
+  ; Function Attrs: argmemonly nounwind
+  declare void @llvm.lifetime.start(i64, i8* nocapture) #1
+  
+  ; Function Attrs: nounwind
+  define internal fastcc void @Read_Frame(i8* %fname, i8** nocapture readonly %frame, i32 signext %framenum) unnamed_addr #0 {
+    %outname.i = alloca [256 x i8], align 1
+    %name.i = alloca [256 x i8], align 1
+    %1 = icmp slt i32 %framenum, 0
+    br i1 %1, label %2, label %4
+  
+  ; <label>:2                                       ; preds = %0
+    %3 = tail call i32 (i8*, ...) @printf(i8* nonnull getelementptr inbounds ([40 x i8], [40 x i8]* @.str, i32 0, i32 0), i32 signext %framenum)
+    br label %4
+  
+  ; <label>:4                                       ; preds = %2, %0
+    %5 = load i32, i32* @Big_Picture_Flag, align 4, !tbaa !1
+    %6 = icmp eq i32 %5, 0
+    br i1 %6, label %.critedge, label %7
+  
+  ; <label>:7                                       ; preds = %4
+    %8 = tail call %struct._IO_FILE* @fopen(i8* %fname, i8* nonnull getelementptr inbounds ([3 x i8], [3 x i8]* @.str.2, i32 0, i32 0)) #4
+    %9 = icmp eq %struct._IO_FILE* %8, null
+    br i1 %9, label %102, label %10
+  
+  ; <label>:10                                      ; preds = %7
+    %11 = load i32, i32* @Coded_Picture_Width, align 4, !tbaa !1
+    %12 = load i32, i32* @Coded_Picture_Height, align 4, !tbaa !1
+    %13 = mul nsw i32 %12, %11
+    %14 = load i32, i32* @chroma_format, align 4, !tbaa !1
+    switch i32 %14, label %22 [
+      i32 3, label %15
+      i32 2, label %17
+      i32 1, label %19
+    ]
+  
+  ; <label>:15                                      ; preds = %10
+    %16 = mul nsw i32 %13, 3
+    br label %24
+  
+  ; <label>:17                                      ; preds = %10
+    %18 = shl nsw i32 %13, 1
+    br label %24
+  
+  ; <label>:19                                      ; preds = %10
+    %20 = mul nsw i32 %13, 3
+    %21 = ashr i32 %20, 1
+    br label %24
+  
+  ; <label>:22                                      ; preds = %10
+    %23 = tail call i32 (i8*, ...) @printf(i8* nonnull getelementptr inbounds ([42 x i8], [42 x i8]* @.str.4, i32 0, i32 0), i32 signext %14) #4
+    br label %24
+  
+  ; <label>:24                                      ; preds = %22, %19, %17, %15
+    %size.0.i = phi i32 [ %16, %15 ], [ %18, %17 ], [ %21, %19 ], [ %13, %22 ]
+    %25 = mul nsw i32 %size.0.i, %framenum
+    %26 = tail call i32 @fseek(%struct._IO_FILE* nonnull %8, i32 signext %25, i32 signext 0) #4
+    %27 = load i32, i32* @Coded_Picture_Height, align 4, !tbaa !1
+    %28 = icmp sgt i32 %27, 0
+    br i1 %28, label %.lr.ph7.i, label %.preheader1.i
+  
+  .preheader1.i:                                    ; preds = %.lr.ph7.i, %24
+    %29 = load i32, i32* @Chroma_Height, align 4, !tbaa !1
+    %30 = icmp sgt i32 %29, 0
+    br i1 %30, label %.lr.ph4.i, label %Extract_Components.exit
+  
+  .lr.ph7.i:                                        ; preds = %24, %.lr.ph7.i
+    %line.05.i = phi i32 [ %36, %.lr.ph7.i ], [ 0, %24 ]
+    %31 = load i8*, i8** getelementptr inbounds ([3 x i8*], [3 x i8*]* @substitute_frame, i32 0, i32 0), align 4, !tbaa !5
+    %32 = load i32, i32* @Coded_Picture_Width, align 4, !tbaa !1
+    %33 = mul nsw i32 %32, %line.05.i
+    %34 = getelementptr inbounds i8, i8* %31, i32 %33
+    %35 = tail call i32 @fread(i8* %34, i32 signext 1, i32 signext %32, %struct._IO_FILE* nonnull %8) #4
+    %36 = add nuw nsw i32 %line.05.i, 1
+    %37 = load i32, i32* @Coded_Picture_Height, align 4, !tbaa !1
+    %38 = icmp slt i32 %36, %37
+    br i1 %38, label %.lr.ph7.i, label %.preheader1.i
+  
+  .preheader.i:                                     ; preds = %.lr.ph4.i
+    %39 = icmp sgt i32 %46, 0
+    br i1 %39, label %.lr.ph.i, label %Extract_Components.exit
+  
+  .lr.ph4.i:                                        ; preds = %.preheader1.i, %.lr.ph4.i
+    %line.13.i = phi i32 [ %45, %.lr.ph4.i ], [ 0, %.preheader1.i ]
+    %40 = load i8*, i8** getelementptr inbounds ([3 x i8*], [3 x i8*]* @substitute_frame, i32 0, i32 1), align 4, !tbaa !5
+    %41 = load i32, i32* @Chroma_Width, align 4, !tbaa !1
+    %42 = mul nsw i32 %41, %line.13.i
+    %43 = getelementptr inbounds i8, i8* %40, i32 %42
+    %44 = tail call i32 @fread(i8* %43, i32 signext 1, i32 signext %41, %struct._IO_FILE* nonnull %8) #4
+    %45 = add nuw nsw i32 %line.13.i, 1
+    %46 = load i32, i32* @Chroma_Height, align 4, !tbaa !1
+    %47 = icmp slt i32 %45, %46
+    br i1 %47, label %.lr.ph4.i, label %.preheader.i
+  
+  .lr.ph.i:                                         ; preds = %.preheader.i, %.lr.ph.i
+    %line.22.i = phi i32 [ %53, %.lr.ph.i ], [ 0, %.preheader.i ]
+    %48 = load i8*, i8** getelementptr inbounds ([3 x i8*], [3 x i8*]* @substitute_frame, i32 0, i32 2), align 4, !tbaa !5
+    %49 = load i32, i32* @Chroma_Width, align 4, !tbaa !1
+    %50 = mul nsw i32 %49, %line.22.i
+    %51 = getelementptr inbounds i8, i8* %48, i32 %50
+    %52 = tail call i32 @fread(i8* %51, i32 signext 1, i32 signext %49, %struct._IO_FILE* nonnull %8) #4
+    %53 = add nuw nsw i32 %line.22.i, 1
+    %54 = load i32, i32* @Chroma_Height, align 4, !tbaa !1
+    %55 = icmp slt i32 %53, %54
+    br i1 %55, label %.lr.ph.i, label %Extract_Components.exit
+  
+  Extract_Components.exit:                          ; preds = %.lr.ph.i, %.preheader.i, %.preheader1.i
+    %56 = tail call i32 @fclose(%struct._IO_FILE* nonnull %8) #4
+    br label %104
+  
+  .critedge:                                        ; preds = %4
+    %57 = bitcast [256 x i8]* %outname.i to i8*
+    call void @llvm.lifetime.start(i64 256, i8* %57) #4
+    %58 = bitcast [256 x i8]* %name.i to i8*
+    call void @llvm.lifetime.start(i64 256, i8* %58) #4
+    %59 = call i32 (i8*, i8*, ...) @sprintf(i8* %57, i8* %fname, i32 signext %framenum) #4
+    %60 = call i32 (i8*, i8*, ...) @sprintf(i8* %58, i8* nonnull getelementptr inbounds ([5 x i8], [5 x i8]* @.str.5, i32 0, i32 0), i8* %57) #4
+    %61 = load i8*, i8** getelementptr inbounds ([3 x i8*], [3 x i8*]* @substitute_frame, i32 0, i32 0), align 4, !tbaa !5
+    %62 = load i32, i32* @Coded_Picture_Width, align 4, !tbaa !1
+    %63 = load i32, i32* @Coded_Picture_Height, align 4, !tbaa !1
+    %64 = mul nsw i32 %63, %62
+    %65 = call i32 (i8*, i32, ...) @open(i8* %58, i32 signext 0) #4
+    %66 = call i32 bitcast (i32 (...)* @read to i32 (i32, i8*, i32)*)(i32 signext %65, i8* %61, i32 signext %64) #4
+    %67 = icmp eq i32 %66, %64
+    br i1 %67, label %Read_Component.exit.i, label %68
+  
+  ; <label>:68                                      ; preds = %.critedge
+    %69 = bitcast [256 x i8]* %name.i to i8*
+    %70 = call i32 (i8*, ...) @printf(i8* nonnull getelementptr inbounds ([49 x i8], [49 x i8]* @.str.9, i32 0, i32 0), i32 signext %66, i32 signext %64, i8* %69) #4
+    br label %Read_Component.exit.i
+  
+  Read_Component.exit.i:                            ; preds = %68, %.critedge
+    %71 = bitcast [256 x i8]* %name.i to i8*
+    %72 = bitcast [256 x i8]* %outname.i to i8*
+    %73 = call i32 bitcast (i32 (...)* @close to i32 (i32)*)(i32 signext %65) #4
+    %74 = call i32 (i8*, i8*, ...) @sprintf(i8* %71, i8* nonnull getelementptr inbounds ([5 x i8], [5 x i8]* @.str.6, i32 0, i32 0), i8* %72) #4
+    %75 = load i8*, i8** getelementptr inbounds ([3 x i8*], [3 x i8*]* @substitute_frame, i32 0, i32 1), align 4, !tbaa !5
+    %76 = load i32, i32* @Chroma_Width, align 4, !tbaa !1
+    %77 = load i32, i32* @Chroma_Height, align 4, !tbaa !1
+    %78 = mul nsw i32 %77, %76
+    %79 = call i32 (i8*, i32, ...) @open(i8* %71, i32 signext 0) #4
+    %80 = call i32 bitcast (i32 (...)* @read to i32 (i32, i8*, i32)*)(i32 signext %79, i8* %75, i32 signext %78) #4
+    %81 = icmp eq i32 %80, %78
+    br i1 %81, label %Read_Component.exit1.i, label %82
+  
+  ; <label>:82                                      ; preds = %Read_Component.exit.i
+    %83 = bitcast [256 x i8]* %name.i to i8*
+    %84 = call i32 (i8*, ...) @printf(i8* nonnull getelementptr inbounds ([49 x i8], [49 x i8]* @.str.9, i32 0, i32 0), i32 signext %80, i32 signext %78, i8* %83) #4
+    br label %Read_Component.exit1.i
+  
+  Read_Component.exit1.i:                           ; preds = %82, %Read_Component.exit.i
+    %85 = bitcast [256 x i8]* %name.i to i8*
+    %86 = bitcast [256 x i8]* %outname.i to i8*
+    %87 = call i32 bitcast (i32 (...)* @close to i32 (i32)*)(i32 signext %79) #4
+    %88 = call i32 (i8*, i8*, ...) @sprintf(i8* %85, i8* nonnull getelementptr inbounds ([5 x i8], [5 x i8]* @.str.7, i32 0, i32 0), i8* %86) #4
+    %89 = load i8*, i8** getelementptr inbounds ([3 x i8*], [3 x i8*]* @substitute_frame, i32 0, i32 2), align 4, !tbaa !5
+    %90 = load i32, i32* @Chroma_Width, align 4, !tbaa !1
+    %91 = load i32, i32* @Chroma_Height, align 4, !tbaa !1
+    %92 = mul nsw i32 %91, %90
+    %93 = call i32 (i8*, i32, ...) @open(i8* %85, i32 signext 0) #4
+    %94 = call i32 bitcast (i32 (...)* @read to i32 (i32, i8*, i32)*)(i32 signext %93, i8* %89, i32 signext %92) #4
+    %95 = icmp eq i32 %94, %92
+    br i1 %95, label %Read_Components.exit, label %96
+  
+  ; <label>:96                                      ; preds = %Read_Component.exit1.i
+    %97 = bitcast [256 x i8]* %name.i to i8*
+    %98 = call i32 (i8*, ...) @printf(i8* nonnull getelementptr inbounds ([49 x i8], [49 x i8]* @.str.9, i32 0, i32 0), i32 signext %94, i32 signext %92, i8* %97) #4
+    br label %Read_Components.exit
+  
+  Read_Components.exit:                             ; preds = %96, %Read_Component.exit1.i
+    %99 = bitcast [256 x i8]* %name.i to i8*
+    %100 = bitcast [256 x i8]* %outname.i to i8*
+    %101 = call i32 bitcast (i32 (...)* @close to i32 (i32)*)(i32 signext %93) #4
+    call void @llvm.lifetime.end(i64 256, i8* %99) #4
+    call void @llvm.lifetime.end(i64 256, i8* %100) #4
+    br label %104
+  
+  ; <label>:102                                     ; preds = %7
+    %103 = tail call i32 (i8*, i8*, ...) @sprintf(i8* nonnull getelementptr inbounds ([256 x i8], [256 x i8]* @Error_Text, i32 0, i32 0), i8* nonnull getelementptr inbounds ([18 x i8], [18 x i8]* @.str.3, i32 0, i32 0), i8* %fname) #4
+    %puts = tail call i32 @puts(i8* nonnull getelementptr inbounds ([31 x i8], [31 x i8]* @str, i32 0, i32 0))
+    br label %104
+  
+  ; <label>:104                                     ; preds = %102, %Read_Components.exit, %Extract_Components.exit
+    %105 = load i32, i32* @Second_Field, align 4, !tbaa !1
+    %106 = icmp ne i32 %105, 0
+    %107 = load i32, i32* @picture_coding_type, align 4
+    %108 = icmp eq i32 %107, 2
+    %or.cond = and i1 %106, %108
+    br i1 %or.cond, label %109, label %113
+  
+  ; <label>:109                                     ; preds = %104
+    %110 = load i32, i32* @picture_structure, align 4, !tbaa !1
+    %111 = icmp eq i32 %110, 1
+    %112 = zext i1 %111 to i32
+    %phitmp = icmp eq i32 %110, 3
+    br label %113
+  
+  ; <label>:113                                     ; preds = %109, %104
+    %parity.0 = phi i32 [ %112, %109 ], [ 0, %104 ]
+    %field_mode.0 = phi i1 [ %phitmp, %109 ], [ true, %104 ]
+    %114 = load i8*, i8** getelementptr inbounds ([3 x i8*], [3 x i8*]* @substitute_frame, i32 0, i32 0), align 4, !tbaa !5
+    %115 = load i8*, i8** %frame, align 4, !tbaa !5
+    %116 = load i32, i32* @Coded_Picture_Width, align 4, !tbaa !1
+    %117 = load i32, i32* @Coded_Picture_Height, align 4, !tbaa !1
+    %incr.0.i = select i1 %field_mode.0, i32 1, i32 2
+    %118 = icmp sgt i32 %117, 0
+    br i1 %118, label %.preheader.lr.ph.i, label %Copy_Frame.exit
+  
+  .preheader.lr.ph.i:                               ; preds = %113
+    %119 = icmp eq i32 %parity.0, 0
+    %width..i = select i1 %119, i32 %116, i32 0
+    %s.0.i = select i1 %field_mode.0, i32 0, i32 %width..i
+    %120 = mul i32 %incr.0.i, %116
+    %scevgep31 = getelementptr i8, i8* %114, i32 %s.0.i
+    br label %.preheader.i2
+  
+  .preheader.i2:                                    ; preds = %._crit_edge.i4, %.preheader.lr.ph.i
+    %lsr.iv32 = phi i8* [ %127, %._crit_edge.i4 ], [ %scevgep31, %.preheader.lr.ph.i ]
+    %lsr.iv26 = phi i8* [ %126, %._crit_edge.i4 ], [ %115, %.preheader.lr.ph.i ]
+    %row.02.i = phi i32 [ 0, %.preheader.lr.ph.i ], [ %125, %._crit_edge.i4 ]
+    %121 = icmp sgt i32 %116, 0
+    br i1 %121, label %.lr.ph.i3, label %._crit_edge.i4
+  
+  .lr.ph.i3:                                        ; preds = %.preheader.i2, %.lr.ph.i3
+    %lsr.iv35 = phi i8* [ %scevgep36, %.lr.ph.i3 ], [ %lsr.iv32, %.preheader.i2 ]
+    %lsr.iv29 = phi i8* [ %scevgep30, %.lr.ph.i3 ], [ %lsr.iv26, %.preheader.i2 ]
+    %lsr.iv24 = phi i32 [ %lsr.iv.next25, %.lr.ph.i3 ], [ %116, %.preheader.i2 ]
+    %122 = load i8, i8* %lsr.iv35, align 1, !tbaa !7
+    store i8 %122, i8* %lsr.iv29, align 1, !tbaa !7
+    %lsr.iv.next25 = add i32 %lsr.iv24, -1
+    %scevgep30 = getelementptr i8, i8* %lsr.iv29, i32 1
+    %scevgep36 = getelementptr i8, i8* %lsr.iv35, i32 1
+    %exitcond.i = icmp eq i32 %lsr.iv.next25, 0
+    br i1 %exitcond.i, label %._crit_edge.i4, label %.lr.ph.i3
+  
+  ._crit_edge.i4:                                   ; preds = %.lr.ph.i3, %.preheader.i2
+    %123 = bitcast i8* %lsr.iv26 to i1*
+    %124 = bitcast i8* %lsr.iv32 to i1*
+    %125 = add nsw i32 %row.02.i, %incr.0.i
+    %scevgep28 = getelementptr i1, i1* %123, i32 %120
+    %126 = bitcast i1* %scevgep28 to i8*
+    %scevgep34 = getelementptr i1, i1* %124, i32 %120
+    %127 = bitcast i1* %scevgep34 to i8*
+    %128 = icmp slt i32 %125, %117
+    br i1 %128, label %.preheader.i2, label %Copy_Frame.exit
+  
+  Copy_Frame.exit:                                  ; preds = %._crit_edge.i4, %113
+    %129 = load i8*, i8** getelementptr inbounds ([3 x i8*], [3 x i8*]* @substitute_frame, i32 0, i32 1), align 4, !tbaa !5
+    %130 = getelementptr inbounds i8*, i8** %frame, i32 1
+    %131 = load i8*, i8** %130, align 4, !tbaa !5
+    %132 = load i32, i32* @Chroma_Width, align 4, !tbaa !1
+    %133 = load i32, i32* @Chroma_Height, align 4, !tbaa !1
+    %134 = icmp sgt i32 %133, 0
+    br i1 %134, label %.preheader.lr.ph.i8, label %Copy_Frame.exit30
+  
+  .preheader.lr.ph.i8:                              ; preds = %Copy_Frame.exit
+    %135 = icmp eq i32 %parity.0, 0
+    %width..i6 = select i1 %135, i32 %132, i32 0
+    %s.0.i7 = select i1 %field_mode.0, i32 0, i32 %width..i6
+    %136 = mul i32 %incr.0.i, %132
+    %scevgep18 = getelementptr i8, i8* %129, i32 %s.0.i7
+    br label %.preheader.i12
+  
+  .preheader.i12:                                   ; preds = %._crit_edge.i16, %.preheader.lr.ph.i8
+    %lsr.iv19 = phi i8* [ %143, %._crit_edge.i16 ], [ %scevgep18, %.preheader.lr.ph.i8 ]
+    %lsr.iv13 = phi i8* [ %142, %._crit_edge.i16 ], [ %131, %.preheader.lr.ph.i8 ]
+    %row.02.i11 = phi i32 [ 0, %.preheader.lr.ph.i8 ], [ %141, %._crit_edge.i16 ]
+    %137 = icmp sgt i32 %132, 0
+    br i1 %137, label %.lr.ph.i15, label %._crit_edge.i16
+  
+  .lr.ph.i15:                                       ; preds = %.preheader.i12, %.lr.ph.i15
+    %lsr.iv22 = phi i8* [ %scevgep23, %.lr.ph.i15 ], [ %lsr.iv19, %.preheader.i12 ]
+    %lsr.iv16 = phi i8* [ %scevgep17, %.lr.ph.i15 ], [ %lsr.iv13, %.preheader.i12 ]
+    %lsr.iv11 = phi i32 [ %lsr.iv.next12, %.lr.ph.i15 ], [ %132, %.preheader.i12 ]
+    %138 = load i8, i8* %lsr.iv22, align 1, !tbaa !7
+    store i8 %138, i8* %lsr.iv16, align 1, !tbaa !7
+    %lsr.iv.next12 = add i32 %lsr.iv11, -1
+    %scevgep17 = getelementptr i8, i8* %lsr.iv16, i32 1
+    %scevgep23 = getelementptr i8, i8* %lsr.iv22, i32 1
+    %exitcond.i14 = icmp eq i32 %lsr.iv.next12, 0
+    br i1 %exitcond.i14, label %._crit_edge.i16, label %.lr.ph.i15
+  
+  ._crit_edge.i16:                                  ; preds = %.lr.ph.i15, %.preheader.i12
+    %139 = bitcast i8* %lsr.iv13 to i1*
+    %140 = bitcast i8* %lsr.iv19 to i1*
+    %141 = add nsw i32 %row.02.i11, %incr.0.i
+    %scevgep15 = getelementptr i1, i1* %139, i32 %136
+    %142 = bitcast i1* %scevgep15 to i8*
+    %scevgep21 = getelementptr i1, i1* %140, i32 %136
+    %143 = bitcast i1* %scevgep21 to i8*
+    %144 = icmp slt i32 %141, %133
+    br i1 %144, label %.preheader.i12, label %Copy_Frame.exit17
+  
+  Copy_Frame.exit17:                                ; preds = %._crit_edge.i16
+    %.pr = load i32, i32* @Chroma_Height, align 4, !tbaa !1
+    %145 = load i8*, i8** getelementptr inbounds ([3 x i8*], [3 x i8*]* @substitute_frame, i32 0, i32 2), align 4, !tbaa !5
+    %146 = getelementptr inbounds i8*, i8** %frame, i32 2
+    %147 = load i8*, i8** %146, align 4, !tbaa !5
+    %148 = load i32, i32* @Chroma_Width, align 4, !tbaa !1
+    %149 = icmp sgt i32 %.pr, 0
+    br i1 %149, label %.preheader.lr.ph.i21, label %Copy_Frame.exit30
+  
+  .preheader.lr.ph.i21:                             ; preds = %Copy_Frame.exit17
+    %150 = icmp eq i32 %parity.0, 0
+    %width..i19 = select i1 %150, i32 %148, i32 0
+    %s.0.i20 = select i1 %field_mode.0, i32 0, i32 %width..i19
+    %151 = mul i32 %incr.0.i, %148
+    %scevgep5 = getelementptr i8, i8* %145, i32 %s.0.i20
+    br label %.preheader.i25
+  
+  .preheader.i25:                                   ; preds = %._crit_edge.i29, %.preheader.lr.ph.i21
+    %lsr.iv6 = phi i8* [ %158, %._crit_edge.i29 ], [ %scevgep5, %.preheader.lr.ph.i21 ]
+    %lsr.iv1 = phi i8* [ %157, %._crit_edge.i29 ], [ %147, %.preheader.lr.ph.i21 ]
+    %row.02.i24 = phi i32 [ 0, %.preheader.lr.ph.i21 ], [ %156, %._crit_edge.i29 ]
+    %152 = icmp sgt i32 %148, 0
+    br i1 %152, label %.lr.ph.i28, label %._crit_edge.i29
+  
+  .lr.ph.i28:                                       ; preds = %.preheader.i25, %.lr.ph.i28
+    %lsr.iv9 = phi i8* [ %scevgep10, %.lr.ph.i28 ], [ %lsr.iv6, %.preheader.i25 ]
+    %lsr.iv3 = phi i8* [ %scevgep4, %.lr.ph.i28 ], [ %lsr.iv1, %.preheader.i25 ]
+    %lsr.iv = phi i32 [ %lsr.iv.next, %.lr.ph.i28 ], [ %148, %.preheader.i25 ]
+    %153 = load i8, i8* %lsr.iv9, align 1, !tbaa !7
+    store i8 %153, i8* %lsr.iv3, align 1, !tbaa !7
+    %lsr.iv.next = add i32 %lsr.iv, -1
+    %scevgep4 = getelementptr i8, i8* %lsr.iv3, i32 1
+    %scevgep10 = getelementptr i8, i8* %lsr.iv9, i32 1
+    %exitcond.i27 = icmp eq i32 %lsr.iv.next, 0
+    br i1 %exitcond.i27, label %._crit_edge.i29, label %.lr.ph.i28
+  
+  ._crit_edge.i29:                                  ; preds = %.lr.ph.i28, %.preheader.i25
+    %154 = bitcast i8* %lsr.iv1 to i1*
+    %155 = bitcast i8* %lsr.iv6 to i1*
+    %156 = add nsw i32 %row.02.i24, %incr.0.i
+    %scevgep = getelementptr i1, i1* %154, i32 %151
+    %157 = bitcast i1* %scevgep to i8*
+    %scevgep8 = getelementptr i1, i1* %155, i32 %151
+    %158 = bitcast i1* %scevgep8 to i8*
+    %159 = icmp slt i32 %156, %.pr
+    br i1 %159, label %.preheader.i25, label %Copy_Frame.exit30
+  
+  Copy_Frame.exit30:                                ; preds = %._crit_edge.i29, %Copy_Frame.exit17, %Copy_Frame.exit
+    ret void
+  }
+  
+  ; Function Attrs: argmemonly nounwind
+  declare void @llvm.lifetime.end(i64, i8* nocapture) #1
+  
+  ; Function Attrs: nounwind
+  declare i32 @printf(i8* nocapture readonly, ...) #0
+  
+  ; Function Attrs: nounwind
+  declare noalias %struct._IO_FILE* @fopen(i8* nocapture readonly, i8* nocapture readonly) #0
+  
+  ; Function Attrs: nounwind
+  declare i32 @sprintf(i8* nocapture, i8* nocapture readonly, ...) #0
+  
+  ; Function Attrs: nounwind
+  declare i32 @fseek(%struct._IO_FILE* nocapture, i32 signext, i32 signext) #0
+  
+  ; Function Attrs: nounwind
+  declare i32 @fread(i8* nocapture, i32 signext, i32 signext, %struct._IO_FILE* nocapture) #0
+  
+  ; Function Attrs: nounwind
+  declare i32 @fclose(%struct._IO_FILE* nocapture) #0
+  
+  declare i32 @open(i8* nocapture readonly, i32 signext, ...) #2
+  
+  declare i32 @read(...) #2
+  
+  declare i32 @close(...) #2
+  
+  ; Function Attrs: nounwind
+  declare i32 @puts(i8* nocapture) #3
+  
+  attributes #0 = { nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #1 = { argmemonly nounwind "target-cpu"="mips32" }
+  attributes #2 = { "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #3 = { nounwind "target-cpu"="mips32" }
+  attributes #4 = { nounwind }
+  
+  !llvm.ident = !{!0}
+  
+  !0 = !{!"clang version 3.8.0 (http://llvm.org/git/clang.git 2d49f0a0ae8366964a93e3b7b26e29679bee7160) (http://llvm.org/git/llvm.git 60bc66b44837125843b58ed3e0fd2e6bb948d839)"}
+  !1 = !{!2, !2, i64 0}
+  !2 = !{!"int", !3, i64 0}
+  !3 = !{!"omnipotent char", !4, i64 0}
+  !4 = !{!"Simple C/C++ TBAA"}
+  !5 = !{!6, !6, i64 0}
+  !6 = !{!"any pointer", !3, i64 0}
+  !7 = !{!3, !3, i64 0}
+
+...
+---
+name:            Read_Frame
+alignment:       2
+exposesReturnsTwice: false
+hasInlineAsm:    false
+isSSA:           false
+tracksRegLiveness: false
+tracksSubRegLiveness: false
+liveins:         
+  - { reg: '%a0' }
+  - { reg: '%a1' }
+  - { reg: '%a2' }
+  - { reg: '%t9' }
+  - { reg: '%v0' }
+calleeSavedRegisters: [ '%fp', '%ra', '%d10', '%d11', '%d12', '%d13', '%d14', 
+                        '%d15', '%f20', '%f21', '%f22', '%f23', '%f24', 
+                        '%f25', '%f26', '%f27', '%f28', '%f29', '%f30', 
+                        '%f31', '%s0', '%s1', '%s2', '%s3', '%s4', '%s5', 
+                        '%s6', '%s7' ]
+frameInfo:       
+  isFrameAddressTaken: false
+  isReturnAddressTaken: false
+  hasStackMap:     false
+  hasPatchPoint:   false
+  stackSize:       568
+  offsetAdjustment: 0
+  maxAlignment:    4
+  adjustsStack:    true
+  hasCalls:        true
+  maxCallFrameSize: 16
+  hasOpaqueSPAdjustment: false
+  hasVAStart:      false
+  hasMustTailInVarArgFunc: false
+stack:           
+  - { id: 0, name: outname.i, offset: -296, size: 256, alignment: 4 }
+  - { id: 1, name: name.i, offset: -552, size: 256, alignment: 4 }
+  - { id: 2, type: spill-slot, offset: -4, size: 4, alignment: 4, callee-saved-register: '%ra' }
+  - { id: 3, type: spill-slot, offset: -8, size: 4, alignment: 4, callee-saved-register: '%fp' }
+  - { id: 4, type: spill-slot, offset: -12, size: 4, alignment: 4, callee-saved-register: '%s7' }
+  - { id: 5, type: spill-slot, offset: -16, size: 4, alignment: 4, callee-saved-register: '%s6' }
+  - { id: 6, type: spill-slot, offset: -20, size: 4, alignment: 4, callee-saved-register: '%s5' }
+  - { id: 7, type: spill-slot, offset: -24, size: 4, alignment: 4, callee-saved-register: '%s4' }
+  - { id: 8, type: spill-slot, offset: -28, size: 4, alignment: 4, callee-saved-register: '%s3' }
+  - { id: 9, type: spill-slot, offset: -32, size: 4, alignment: 4, callee-saved-register: '%s2' }
+  - { id: 10, type: spill-slot, offset: -36, size: 4, alignment: 4, callee-saved-register: '%s1' }
+  - { id: 11, type: spill-slot, offset: -40, size: 4, alignment: 4, callee-saved-register: '%s0' }
+body:             |
+  bb.0 (%ir-block.0, freq 81):
+    successors: %bb.1(37), %bb.2(62)
+    liveins: %a0, %a1, %a2, %t9, %ra, %fp, %s7, %s6, %s5, %s4, %s3, %s2, %s1, %s0
+  
+    %v0 = LUi target-flags(<unknown>) $_gp_disp
+    %v0 = ADDiu %v0, target-flags(<unknown>) $_gp_disp
+    %sp = ADDiu %sp, -568
+    CFI_INSTRUCTION .cfi_def_cfa_offset 568
+    SW killed %ra, %sp, 564 :: (store 4 into stack)
+    SW killed %fp, %sp, 560 :: (store 4 into stack)
+    SW killed %s7, %sp, 556 :: (store 4 into stack)
+    SW killed %s6, %sp, 552 :: (store 4 into stack)
+    SW killed %s5, %sp, 548 :: (store 4 into stack)
+    SW killed %s4, %sp, 544 :: (store 4 into stack)
+    SW killed %s3, %sp, 540 :: (store 4 into stack)
+    SW killed %s2, %sp, 536 :: (store 4 into stack)
+    SW killed %s1, %sp, 532 :: (store 4 into stack)
+    SW killed %s0, %sp, 528 :: (store 4 into stack)
+    CFI_INSTRUCTION .cfi_offset %ra_64, -4
+    CFI_INSTRUCTION .cfi_offset %fp_64, -8
+    CFI_INSTRUCTION .cfi_offset %s7_64, -12
+    CFI_INSTRUCTION .cfi_offset %s6_64, -16
+    CFI_INSTRUCTION .cfi_offset %s5_64, -20
+    CFI_INSTRUCTION .cfi_offset %s4_64, -24
+    CFI_INSTRUCTION .cfi_offset %s3_64, -28
+    CFI_INSTRUCTION .cfi_offset %s2_64, -32
+    CFI_INSTRUCTION .cfi_offset %s1_64, -36
+    CFI_INSTRUCTION .cfi_offset %s0_64, -40
+    %s1 = ADDu %v0, %t9
+    %s3 = OR %a2, %zero
+    %s0 = OR %a1, %zero
+    BGEZ %s3, %bb.2, implicit-def %at {
+      %s4 = OR %a0, %zero
+    }
+  
+  bb.1 (%ir-block.2, freq 30):
+    successors: %bb.2(100)
+    liveins: %s0, %s1, %s3, %s4
+  
+    %at = LW %s1, target-flags(<unknown>) @.str :: (load 4 from got)
+    %a0 = ADDiu killed %at, target-flags(<unknown>) @.str
+    %t9 = LW %s1, target-flags(<unknown>) @printf :: (load 4 from call-entry @printf)
+    %a1 = OR %s3, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit killed %gp, implicit-def %sp, implicit-def dead %v0 {
+      %gp = OR %s1, %zero
+    }
+  
+  bb.2 (%ir-block.4, freq 81):
+    successors: %bb.8..critedge(37), %bb.3(62)
+    liveins: %s0, %s1, %s3, %s4
+  
+    %at = LW %s1, target-flags(<unknown>) @Big_Picture_Flag :: (load 4 from got)
+    %at = LW killed %at, 0 :: (load 4 from @Big_Picture_Flag, !tbaa !1)
+    BEQ %at, %zero, %bb.8..critedge, implicit-def %at {
+      NOP
+    }
+  
+  bb.3 (%ir-block.7, freq 51):
+    successors: %bb.15(37), %bb.4(62)
+    liveins: %s0, %s1, %s3, %s4
+  
+    %at = LW %s1, target-flags(<unknown>) @.str.2 :: (load 4 from got)
+    %a1 = ADDiu killed %at, target-flags(<unknown>) @.str.2
+    %t9 = LW %s1, target-flags(<unknown>) @fopen :: (load 4 from call-entry @fopen)
+    %a0 = OR %s4, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit killed %gp, implicit-def %sp, implicit-def %v0 {
+      %gp = OR %s1, %zero
+    }
+    %s2 = OR %v0, %zero
+    BEQ %s2, %zero, %bb.15, implicit-def %at {
+      NOP
+    }
+  
+  bb.4 (%ir-block.10, freq 32):
+    successors: %bb.16(25), %bb.5(75)
+    liveins: %s0, %s1, %s2, %s3
+  
+    %s4 = LW %s1, target-flags(<unknown>) @Coded_Picture_Width :: (load 4 from got)
+    %at = LW %s4, 0 :: (load 4 from @Coded_Picture_Width, !tbaa !1)
+    %s5 = LW %s1, target-flags(<unknown>) @Coded_Picture_Height :: (load 4 from got)
+    %v0 = LW %s5, 0 :: (load 4 from @Coded_Picture_Height, !tbaa !1)
+    %s6 = MUL killed %v0, killed %at, implicit-def dead %hi0, implicit-def dead %lo0
+    %at = LW %s1, target-flags(<unknown>) @chroma_format :: (load 4 from got)
+    %a1 = LW killed %at, 0 :: (load 4 from @chroma_format, !tbaa !1)
+    %at = ADDiu %zero, 1
+    BEQ %a1, %at, %bb.16, implicit-def %at {
+      NOP
+    }
+  
+  bb.5 (%ir-block.10, freq 24):
+    successors: %bb.17(33), %bb.6(66)
+    liveins: %a1, %s0, %s1, %s2, %s3, %s4, %s5, %s6
+  
+    %at = ADDiu %zero, 2
+    BEQ %a1, %at, %bb.17, implicit-def %at {
+      NOP
+    }
+  
+  bb.6 (%ir-block.10, freq 15):
+    successors: %bb.7(50), %bb.18(50)
+    liveins: %a1, %s0, %s1, %s2, %s3, %s4, %s5, %s6
+  
+    %at = ADDiu %zero, 3
+    BNE %a1, %at, %bb.18, implicit-def %at {
+      NOP
+    }
+  
+  bb.7 (%ir-block.15, freq 8):
+    successors: %bb.19(100)
+    liveins: %s0, %s1, %s2, %s3, %s4, %s5, %s6
+  
+    %at = SLL %s6, 1
+    B %bb.19, implicit-def dead %at {
+      %s6 = ADDu killed %at, killed %s6
+    }
+  
+  bb.8..critedge (freq 30):
+    successors: %bb.10.Read_Component.exit.i(50), %bb.9(50)
+    liveins: %s0, %s1, %s3, %s4
+  
+    %t9 = LW %s1, target-flags(<unknown>) @sprintf :: (load 4 from call-entry @sprintf)
+    %s2 = LEA_ADDiu %sp, 272
+    %a0 = OR %s2, %zero
+    %a1 = OR killed %s4, %zero
+    %a2 = OR killed %s3, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit killed %gp, implicit-def %sp, implicit-def dead %v0 {
+      %gp = OR %s1, %zero
+    }
+    %at = LW %s1, target-flags(<unknown>) @.str.5 :: (load 4 from got)
+    %a1 = ADDiu killed %at, target-flags(<unknown>) @.str.5
+    %s3 = LEA_ADDiu %sp, 16
+    %t9 = LW %s1, target-flags(<unknown>) @sprintf :: (load 4 from call-entry @sprintf)
+    %a0 = OR %s3, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit-def %sp, implicit-def dead %v0 {
+      %a2 = OR killed %s2, %zero
+    }
+    %at = LW %s1, target-flags(<unknown>) @Coded_Picture_Width :: (load 4 from got)
+    %v0 = LW %s1, target-flags(<unknown>) @Coded_Picture_Height :: (load 4 from got)
+    %s5 = LW %s1, target-flags(<unknown>) @substitute_frame :: (load 4 from got)
+    %s4 = LW %s5, 0 :: (load 4 from `i8** getelementptr inbounds ([3 x i8*], [3 x i8*]* @substitute_frame, i32 0, i32 0)`, !tbaa !5)
+    %s6 = LW killed %v0, 0 :: (load 4 from @Coded_Picture_Height, !tbaa !1)
+    %s7 = LW killed %at, 0 :: (load 4 from @Coded_Picture_Width, !tbaa !1)
+    %t9 = LW %s1, target-flags(<unknown>) @open :: (load 4 from call-entry @open)
+    %a0 = OR killed %s3, %zero
+    %a1 = ADDiu %zero, 0
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit killed %gp, implicit-def %sp, implicit-def %v0 {
+      %gp = OR %s1, %zero
+    }
+    %s2 = OR %v0, %zero
+    %s3 = MUL killed %s6, killed %s7, implicit-def dead %hi0, implicit-def dead %lo0
+    %t9 = LW %s1, target-flags(<unknown>) @read :: (load 4 from call-entry @read)
+    %a0 = OR %s2, %zero
+    %a1 = OR killed %s4, %zero
+    %a2 = OR %s3, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit killed %gp, implicit-def %sp, implicit-def %v0 {
+      %gp = OR %s1, %zero
+    }
+    BEQ %v0, %s3, %bb.10.Read_Component.exit.i, implicit-def %at {
+      NOP
+    }
+  
+  bb.9 (%ir-block.68, freq 15):
+    successors: %bb.10.Read_Component.exit.i(100)
+    liveins: %s0, %s1, %s2, %s3, %s5, %v0
+  
+    %at = LW %s1, target-flags(<unknown>) @.str.9 :: (load 4 from got)
+    %a0 = ADDiu killed %at, target-flags(<unknown>) @.str.9
+    %t9 = LW %s1, target-flags(<unknown>) @printf :: (load 4 from call-entry @printf)
+    %a3 = LEA_ADDiu %sp, 16
+    %a1 = OR killed %v0, %zero
+    %a2 = OR killed %s3, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %a3, implicit killed %gp, implicit-def %sp, implicit-def dead %v0 {
+      %gp = OR %s1, %zero
+    }
+  
+  bb.10.Read_Component.exit.i (freq 30):
+    successors: %bb.12.Read_Component.exit1.i(50), %bb.11(50)
+    liveins: %s0, %s1, %s2, %s5
+  
+    %t9 = LW %s1, target-flags(<unknown>) @close :: (load 4 from call-entry @close)
+    %a0 = OR killed %s2, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit killed %gp, implicit-def %sp, implicit-def dead %v0 {
+      %gp = OR %s1, %zero
+    }
+    %at = LW %s1, target-flags(<unknown>) @.str.6 :: (load 4 from got)
+    %a1 = ADDiu killed %at, target-flags(<unknown>) @.str.6
+    %t9 = LW %s1, target-flags(<unknown>) @sprintf :: (load 4 from call-entry @sprintf)
+    %s2 = LEA_ADDiu %sp, 16
+    %a2 = LEA_ADDiu %sp, 272
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit-def %sp, implicit-def dead %v0 {
+      %a0 = OR %s2, %zero
+    }
+    %s6 = LW %s1, target-flags(<unknown>) @Chroma_Width :: (load 4 from got)
+    %s7 = LW %s1, target-flags(<unknown>) @Chroma_Height :: (load 4 from got)
+    %s4 = LW %s5, 4 :: (load 4 from `i8** getelementptr inbounds ([3 x i8*], [3 x i8*]* @substitute_frame, i32 0, i32 1)`, !tbaa !5)
+    %s3 = LW %s7, 0 :: (load 4 from @Chroma_Height, !tbaa !1)
+    %fp = LW %s6, 0 :: (load 4 from @Chroma_Width, !tbaa !1)
+    %t9 = LW %s1, target-flags(<unknown>) @open :: (load 4 from call-entry @open)
+    %a0 = OR killed %s2, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit-def %sp, implicit-def %v0 {
+      %a1 = ADDiu %zero, 0
+    }
+    %s2 = OR %v0, %zero
+    %s3 = MUL killed %s3, killed %fp, implicit-def dead %hi0, implicit-def dead %lo0
+    %t9 = LW %s1, target-flags(<unknown>) @read :: (load 4 from call-entry @read)
+    %a0 = OR %s2, %zero
+    %a1 = OR killed %s4, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit-def %sp, implicit-def %v0 {
+      %a2 = OR %s3, %zero
+    }
+    BEQ %v0, %s3, %bb.12.Read_Component.exit1.i, implicit-def %at {
+      NOP
+    }
+  
+  bb.11 (%ir-block.82, freq 15):
+    successors: %bb.12.Read_Component.exit1.i(100)
+    liveins: %s0, %s1, %s2, %s3, %s5, %s6, %s7, %v0
+  
+    %at = LW %s1, target-flags(<unknown>) @.str.9 :: (load 4 from got)
+    %a0 = ADDiu killed %at, target-flags(<unknown>) @.str.9
+    %t9 = LW %s1, target-flags(<unknown>) @printf :: (load 4 from call-entry @printf)
+    %a3 = LEA_ADDiu %sp, 16
+    %a1 = OR killed %v0, %zero
+    %a2 = OR killed %s3, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %a3, implicit killed %gp, implicit-def %sp, implicit-def dead %v0 {
+      %gp = OR %s1, %zero
+    }
+  
+  bb.12.Read_Component.exit1.i (freq 30):
+    successors: %bb.14.Read_Components.exit(50), %bb.13(50)
+    liveins: %s0, %s1, %s2, %s5, %s6, %s7
+  
+    %t9 = LW %s1, target-flags(<unknown>) @close :: (load 4 from call-entry @close)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit-def %sp, implicit-def dead %v0 {
+      %a0 = OR killed %s2, %zero
+    }
+    %at = LW %s1, target-flags(<unknown>) @.str.7 :: (load 4 from got)
+    %a1 = ADDiu killed %at, target-flags(<unknown>) @.str.7
+    %t9 = LW %s1, target-flags(<unknown>) @sprintf :: (load 4 from call-entry @sprintf)
+    %s2 = LEA_ADDiu %sp, 16
+    %a2 = LEA_ADDiu %sp, 272
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit-def %sp, implicit-def dead %v0 {
+      %a0 = OR %s2, %zero
+    }
+    %s4 = LW killed %s5, 8 :: (load 4 from `i8** getelementptr inbounds ([3 x i8*], [3 x i8*]* @substitute_frame, i32 0, i32 2)`, !tbaa !5)
+    %s3 = LW killed %s7, 0 :: (load 4 from @Chroma_Height, !tbaa !1)
+    %s5 = LW killed %s6, 0 :: (load 4 from @Chroma_Width, !tbaa !1)
+    %t9 = LW %s1, target-flags(<unknown>) @open :: (load 4 from call-entry @open)
+    %a0 = OR killed %s2, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit-def %sp, implicit-def %v0 {
+      %a1 = ADDiu %zero, 0
+    }
+    %s2 = OR %v0, %zero
+    %s3 = MUL killed %s3, killed %s5, implicit-def dead %hi0, implicit-def dead %lo0
+    %t9 = LW %s1, target-flags(<unknown>) @read :: (load 4 from call-entry @read)
+    %a0 = OR %s2, %zero
+    %a1 = OR killed %s4, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit-def %sp, implicit-def %v0 {
+      %a2 = OR %s3, %zero
+    }
+    BEQ %v0, %s3, %bb.14.Read_Components.exit, implicit-def %at {
+      NOP
+    }
+  
+  bb.13 (%ir-block.96, freq 15):
+    successors: %bb.14.Read_Components.exit(100)
+    liveins: %s0, %s1, %s2, %s3, %v0
+  
+    %at = LW %s1, target-flags(<unknown>) @.str.9 :: (load 4 from got)
+    %a0 = ADDiu killed %at, target-flags(<unknown>) @.str.9
+    %t9 = LW %s1, target-flags(<unknown>) @printf :: (load 4 from call-entry @printf)
+    %a3 = LEA_ADDiu %sp, 16
+    %a1 = OR killed %v0, %zero
+    %a2 = OR killed %s3, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %a3, implicit killed %gp, implicit-def %sp, implicit-def dead %v0 {
+      %gp = OR %s1, %zero
+    }
+  
+  bb.14.Read_Components.exit (freq 30):
+    successors: %bb.29(100)
+    liveins: %s0, %s1, %s2
+  
+    %t9 = LW %s1, target-flags(<unknown>) @close :: (load 4 from call-entry @close)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit-def %sp, implicit-def dead %v0 {
+      %a0 = OR killed %s2, %zero
+    }
+    B %bb.29, implicit-def dead %at {
+      NOP
+    }
+  
+  bb.15 (%ir-block.102, freq 19):
+    successors: %bb.29(100)
+    liveins: %s0, %s1, %s4
+  
+    %at = LW %s1, target-flags(<unknown>) @.str.3 :: (load 4 from got)
+    %a1 = ADDiu killed %at, target-flags(<unknown>) @.str.3
+    %a0 = LW %s1, target-flags(<unknown>) @Error_Text :: (load 4 from got)
+    %t9 = LW %s1, target-flags(<unknown>) @sprintf :: (load 4 from call-entry @sprintf)
+    %a2 = OR killed %s4, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit killed %gp, implicit-def %sp, implicit-def dead %v0 {
+      %gp = OR %s1, %zero
+    }
+    %at = LW %s1, target-flags(<unknown>) @str :: (load 4 from got)
+    %a0 = ADDiu killed %at, target-flags(<unknown>) @str
+    %t9 = LW %s1, target-flags(<unknown>) @puts :: (load 4 from call-entry @puts)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit killed %gp, implicit-def %sp, implicit-def dead %v0 {
+      %gp = OR %s1, %zero
+    }
+    B %bb.29, implicit-def %at {
+      NOP
+    }
+  
+  bb.16 (%ir-block.19, freq 8):
+    successors: %bb.19(100)
+    liveins: %s0, %s1, %s2, %s3, %s4, %s5, %s6
+  
+    %at = SLL %s6, 1
+    %at = ADDu killed %at, killed %s6
+    B %bb.19, implicit-def dead %at {
+      %s6 = SRA killed %at, 1
+    }
+  
+  bb.17 (%ir-block.17, freq 8):
+    successors: %bb.19(100)
+    liveins: %s0, %s1, %s2, %s3, %s4, %s5, %s6
+  
+    B %bb.19, implicit-def dead %at {
+      %s6 = SLL killed %s6, 1
+    }
+  
+  bb.18 (%ir-block.22, freq 7):
+    successors: %bb.19(100)
+    liveins: %a1, %s0, %s1, %s2, %s3, %s4, %s5, %s6
+  
+    %at = LW %s1, target-flags(<unknown>) @.str.4 :: (load 4 from got)
+    %a0 = ADDiu killed %at, target-flags(<unknown>) @.str.4
+    %t9 = LW %s1, target-flags(<unknown>) @printf :: (load 4 from call-entry @printf)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit killed %gp, implicit-def %sp, implicit-def dead %v0 {
+      %gp = OR %s1, %zero
+    }
+  
+  bb.19 (%ir-block.24, freq 32):
+    successors: %bb.20(62), %bb.22..preheader1.i(37)
+    liveins: %s0, %s1, %s2, %s3, %s4, %s5, %s6
+  
+    %a1 = MUL killed %s6, killed %s3, implicit-def dead %hi0, implicit-def dead %lo0
+    %t9 = LW %s1, target-flags(<unknown>) @fseek :: (load 4 from call-entry @fseek)
+    %s3 = ADDiu %zero, 0
+    %a0 = OR %s2, %zero
+    %a2 = ADDiu %zero, 0
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit killed %gp, implicit-def %sp, implicit-def dead %v0 {
+      %gp = OR %s1, %zero
+    }
+    %at = LW %s5, 0 :: (load 4 from @Coded_Picture_Height, !tbaa !1)
+    BLEZ killed %at, %bb.22..preheader1.i, implicit-def dead %at {
+      NOP
+    }
+  
+  bb.20 (freq 20):
+    successors: %bb.21..lr.ph7.i(100)
+    liveins: %s0, %s1, %s2, %s3, %s4, %s5
+  
+    %s6 = LW %s1, target-flags(<unknown>) @substitute_frame :: (load 4 from got)
+  
+  bb.21..lr.ph7.i (freq 640):
+    successors: %bb.21..lr.ph7.i(96), %bb.22..preheader1.i(3)
+    liveins: %s0, %s1, %s2, %s3, %s4, %s5, %s6
+  
+    %a2 = LW %s4, 0 :: (load 4 from @Coded_Picture_Width, !tbaa !1)
+    %at = MUL %a2, %s3, implicit-def dead %hi0, implicit-def dead %lo0
+    %v0 = LW %s6, 0 :: (load 4 from `i8** getelementptr inbounds ([3 x i8*], [3 x i8*]* @substitute_frame, i32 0, i32 0)`, !tbaa !5)
+    %t9 = LW %s1, target-flags(<unknown>) @fread :: (load 4 from call-entry @fread)
+    %a0 = ADDu killed %v0, killed %at
+    %a1 = ADDiu %zero, 1
+    %a3 = OR %s2, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %a3, implicit killed %gp, implicit-def %sp, implicit-def dead %v0 {
+      %gp = OR %s1, %zero
+    }
+    %s3 = ADDiu killed %s3, 1
+    %at = LW %s5, 0 :: (load 4 from @Coded_Picture_Height, !tbaa !1)
+    %at = SLT %s3, killed %at
+    BNE %at, %zero, %bb.21..lr.ph7.i, implicit-def %at {
+      NOP
+    }
+  
+  bb.22..preheader1.i (freq 32):
+    successors: %bb.23(62), %bb.28.Extract_Components.exit(37)
+    liveins: %s0, %s1, %s2
+  
+    %s3 = LW %s1, target-flags(<unknown>) @Chroma_Height :: (load 4 from got)
+    %at = LW %s3, 0 :: (load 4 from @Chroma_Height, !tbaa !1)
+    BLEZ killed %at, %bb.28.Extract_Components.exit, implicit-def dead %at {
+      NOP
+    }
+  
+  bb.23 (freq 20):
+    successors: %bb.24..lr.ph4.i(100)
+    liveins: %s0, %s1, %s2, %s3
+  
+    %s6 = ADDiu %zero, 0
+    %s4 = LW %s1, target-flags(<unknown>) @Chroma_Width :: (load 4 from got)
+    %s5 = LW %s1, target-flags(<unknown>) @substitute_frame :: (load 4 from got)
+  
+  bb.24..lr.ph4.i (freq 640):
+    successors: %bb.24..lr.ph4.i(96), %bb.25..preheader.i(3)
+    liveins: %s0, %s1, %s2, %s3, %s4, %s5, %s6
+  
+    %a2 = LW %s4, 0 :: (load 4 from @Chroma_Width, !tbaa !1)
+    %at = MUL %a2, %s6, implicit-def dead %hi0, implicit-def dead %lo0
+    %v0 = LW %s5, 4 :: (load 4 from `i8** getelementptr inbounds ([3 x i8*], [3 x i8*]* @substitute_frame, i32 0, i32 1)`, !tbaa !5)
+    %t9 = LW %s1, target-flags(<unknown>) @fread :: (load 4 from call-entry @fread)
+    %a0 = ADDu killed %v0, killed %at
+    %a1 = ADDiu %zero, 1
+    %a3 = OR %s2, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %a3, implicit killed %gp, implicit-def %sp, implicit-def dead %v0 {
+      %gp = OR %s1, %zero
+    }
+    %s6 = ADDiu killed %s6, 1
+    %v0 = LW %s3, 0 :: (load 4 from @Chroma_Height, !tbaa !1)
+    %at = SLT %s6, %v0
+    BNE %at, %zero, %bb.24..lr.ph4.i, implicit-def %at {
+      NOP
+    }
+  
+  bb.25..preheader.i (freq 20):
+    successors: %bb.26(62), %bb.28.Extract_Components.exit(37)
+    liveins: %s0, %s1, %s2, %s3, %s4, %s5, %v0
+  
+    BLEZ killed %v0, %bb.28.Extract_Components.exit, implicit-def dead %at {
+      NOP
+    }
+  
+  bb.26 (freq 12):
+    successors: %bb.27..lr.ph.i(100)
+    liveins: %s0, %s1, %s2, %s3, %s4, %s5
+  
+    %s6 = ADDiu %zero, 0
+  
+  bb.27..lr.ph.i (freq 400):
+    successors: %bb.27..lr.ph.i(96), %bb.28.Extract_Components.exit(3)
+    liveins: %s0, %s1, %s2, %s3, %s4, %s5, %s6
+  
+    %a2 = LW %s4, 0 :: (load 4 from @Chroma_Width, !tbaa !1)
+    %at = MUL %a2, %s6, implicit-def dead %hi0, implicit-def dead %lo0
+    %v0 = LW %s5, 8 :: (load 4 from `i8** getelementptr inbounds ([3 x i8*], [3 x i8*]* @substitute_frame, i32 0, i32 2)`, !tbaa !5)
+    %t9 = LW %s1, target-flags(<unknown>) @fread :: (load 4 from call-entry @fread)
+    %a0 = ADDu killed %v0, killed %at
+    %a1 = ADDiu %zero, 1
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %a3, implicit-def %sp, implicit-def dead %v0 {
+      %a3 = OR %s2, %zero
+    }
+    %s6 = ADDiu killed %s6, 1
+    %at = LW %s3, 0 :: (load 4 from @Chroma_Height, !tbaa !1)
+    %at = SLT %s6, killed %at
+    BNE %at, %zero, %bb.27..lr.ph.i, implicit-def %at {
+      NOP
+    }
+  
+  bb.28.Extract_Components.exit (freq 32):
+    successors: %bb.29(100)
+    liveins: %s0, %s1, %s2
+  
+    %t9 = LW %s1, target-flags(<unknown>) @fclose :: (load 4 from call-entry @fclose)
+    %a0 = OR killed %s2, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit killed %gp, implicit-def %sp, implicit-def dead %v0 {
+      %gp = OR %s1, %zero
+    }
+  
+  bb.29 (%ir-block.104, freq 81):
+    successors: %bb.30(75), %bb.32(25)
+    liveins: %s0, %s1
+  
+    %at = LW %s1, target-flags(<unknown>) @Second_Field :: (load 4 from got)
+    %at = LW killed %at, 0 :: (load 4 from @Second_Field, !tbaa !1)
+    %a1 = ADDiu %zero, 1
+    BEQ %at, %zero, %bb.32, implicit-def %at {
+      %v1 = ADDiu %zero, 0
+    }
+  
+  bb.30 (%ir-block.104, freq 61):
+    successors: %bb.31(66), %bb.33(33)
+    liveins: %a1, %s0, %s1, %v1
+  
+    %at = LW %s1, target-flags(<unknown>) @picture_coding_type :: (load 4 from got)
+    %at = LW killed %at, 0 :: (load 4 from @picture_coding_type)
+    %v0 = ADDiu %zero, 2
+    BNE %at, %v0, %bb.33, implicit-def %at {
+      %a0 = ADDiu %zero, 1
+    }
+  
+  bb.31 (%ir-block.109, freq 40):
+    successors: %bb.33(100)
+    liveins: %a1, %s0, %s1
+  
+    %at = LW %s1, target-flags(<unknown>) @picture_structure :: (load 4 from got)
+    %at = LW killed %at, 0 :: (load 4 from @picture_structure, !tbaa !1)
+    %v0 = ADDiu %zero, 3
+    %v0 = XOR %at, killed %v0
+    %v1 = ADDiu %zero, 1
+    %a0 = SLTiu killed %v0, 1
+    %at = XOR killed %at, killed %v1
+    B %bb.33, implicit-def %at {
+      %v1 = SLTiu killed %at, 1
+    }
+  
+  bb.32 (freq 20):
+    successors: %bb.33(100)
+    liveins: %a1, %s0, %s1, %v1
+  
+    %a0 = ADDiu %zero, 1
+  
+  bb.33 (%ir-block.113, freq 81):
+    successors: %bb.34..preheader.lr.ph.i(62), %bb.38.Copy_Frame.exit(37)
+    liveins: %a0, %a1, %s0, %s1, %v1
+  
+    %at = LW %s1, target-flags(<unknown>) @Coded_Picture_Height :: (load 4 from got)
+    %v0 = ADDiu %zero, 2
+    %v0 = MOVN_I_I killed %a1, %a0, killed %v0
+    %a2 = LW killed %at, 0 :: (load 4 from @Coded_Picture_Height, !tbaa !1)
+    %a1 = LW %s1, target-flags(<unknown>) @substitute_frame :: (load 4 from got)
+    BLEZ %a2, %bb.38.Copy_Frame.exit, implicit-def %at {
+      NOP
+    }
+  
+  bb.34..preheader.lr.ph.i (freq 51):
+    successors: %bb.35..preheader.i2(100)
+    liveins: %a0, %a1, %a2, %s0, %s1, %v0, %v1
+  
+    %a3 = LW %s0, 0 :: (load 4 from %ir.frame, !tbaa !5)
+    %at = LW %s1, target-flags(<unknown>) @Coded_Picture_Width :: (load 4 from got)
+    %t0 = LW killed %at, 0 :: (load 4 from @Coded_Picture_Width, !tbaa !1)
+    %at = LW %a1, 0 :: (load 4 from `i8** getelementptr inbounds ([3 x i8*], [3 x i8*]* @substitute_frame, i32 0, i32 0)`, !tbaa !5)
+    %t1 = MUL %v0, %t0, implicit-def dead %hi0, implicit-def dead %lo0
+    %t2 = ADDiu %zero, 0
+    %t3 = OR %t0, %zero
+    %t3 = MOVN_I_I %zero, %v1, killed %t3
+    %t3 = MOVN_I_I %zero, %a0, killed %t3
+    %t3 = ADDu killed %at, killed %t3
+  
+  bb.35..preheader.i2 (freq 1638):
+    successors: %bb.36..lr.ph.i3(62), %bb.37.._crit_edge.i4(37)
+    liveins: %a0, %a1, %a2, %a3, %s0, %s1, %t0, %t1, %t2, %t3, %v0, %v1
+  
+    %t4 = OR %t3, %zero
+    %t5 = OR %a3, %zero
+    BLEZ %t0, %bb.37.._crit_edge.i4, implicit-def %at {
+      %t6 = OR %t0, %zero
+    }
+  
+  bb.36..lr.ph.i3 (freq 32768):
+    successors: %bb.37.._crit_edge.i4(3), %bb.36..lr.ph.i3(96)
+    liveins: %a0, %a1, %a2, %a3, %s0, %s1, %t0, %t1, %t2, %t3, %t4, %t5, %t6, %v0, %v1
+  
+    %at = LBu %t4, 0 :: (load 1 from %ir.lsr.iv35, !tbaa !7)
+    SB killed %at, %t5, 0 :: (store 1 into %ir.lsr.iv29, !tbaa !7)
+    %t4 = ADDiu killed %t4, 1
+    %t6 = ADDiu killed %t6, -1
+    BNE %t6, %zero, %bb.36..lr.ph.i3, implicit-def %at {
+      %t5 = ADDiu killed %t5, 1
+    }
+  
+  bb.37.._crit_edge.i4 (freq 1638):
+    successors: %bb.35..preheader.i2(96), %bb.38.Copy_Frame.exit(3)
+    liveins: %a0, %a1, %a2, %a3, %s0, %s1, %t0, %t1, %t2, %t3, %v0, %v1
+  
+    %t3 = ADDu killed %t3, %t1
+    %t2 = ADDu killed %t2, %v0
+    %at = SLT %t2, %a2
+    BNE %at, %zero, %bb.35..preheader.i2, implicit-def %at {
+      %a3 = ADDu killed %a3, %t1
+    }
+  
+  bb.38.Copy_Frame.exit (freq 81):
+    successors: %bb.39..preheader.lr.ph.i8(62), %bb.48.Copy_Frame.exit30(37)
+    liveins: %a0, %a1, %s0, %s1, %v0, %v1
+  
+    %a2 = LW %s1, target-flags(<unknown>) @Chroma_Height :: (load 4 from got)
+    %t0 = LW %a2, 0 :: (load 4 from @Chroma_Height, !tbaa !1)
+    BLEZ %t0, %bb.48.Copy_Frame.exit30, implicit-def %at {
+      NOP
+    }
+  
+  bb.39..preheader.lr.ph.i8 (freq 51):
+    successors: %bb.40..preheader.i12(100)
+    liveins: %a0, %a1, %a2, %s0, %s1, %t0, %v0, %v1
+  
+    %t1 = LW %s0, 4 :: (load 4 from %ir.130, !tbaa !5)
+    %a3 = LW killed %s1, target-flags(<unknown>) @Chroma_Width :: (load 4 from got)
+    %t2 = LW %a3, 0 :: (load 4 from @Chroma_Width, !tbaa !1)
+    %at = LW %a1, 4 :: (load 4 from `i8** getelementptr inbounds ([3 x i8*], [3 x i8*]* @substitute_frame, i32 0, i32 1)`, !tbaa !5)
+    %t3 = MUL %v0, %t2, implicit-def dead %hi0, implicit-def dead %lo0
+    %t4 = ADDiu %zero, 0
+    %t5 = OR %t2, %zero
+    %t5 = MOVN_I_I %zero, %v1, killed %t5
+    %t5 = MOVN_I_I %zero, %a0, killed %t5
+    %t5 = ADDu killed %at, killed %t5
+  
+  bb.40..preheader.i12 (freq 1638):
+    successors: %bb.41..lr.ph.i15(62), %bb.42.._crit_edge.i16(37)
+    liveins: %a0, %a1, %a2, %a3, %s0, %t0, %t1, %t2, %t3, %t4, %t5, %v0, %v1
+  
+    %t6 = OR %t5, %zero
+    %t7 = OR %t1, %zero
+    BLEZ %t2, %bb.42.._crit_edge.i16, implicit-def %at {
+      %t8 = OR %t2, %zero
+    }
+  
+  bb.41..lr.ph.i15 (freq 32768):
+    successors: %bb.42.._crit_edge.i16(3), %bb.41..lr.ph.i15(96)
+    liveins: %a0, %a1, %a2, %a3, %s0, %t0, %t1, %t2, %t3, %t4, %t5, %t6, %t7, %t8, %v0, %v1
+  
+    %at = LBu %t6, 0 :: (load 1 from %ir.lsr.iv22, !tbaa !7)
+    SB killed %at, %t7, 0 :: (store 1 into %ir.lsr.iv16, !tbaa !7)
+    %t6 = ADDiu killed %t6, 1
+    %t8 = ADDiu killed %t8, -1
+    BNE %t8, %zero, %bb.41..lr.ph.i15, implicit-def %at {
+      %t7 = ADDiu killed %t7, 1
+    }
+  
+  bb.42.._crit_edge.i16 (freq 1638):
+    successors: %bb.40..preheader.i12(96), %bb.43.Copy_Frame.exit17(3)
+    liveins: %a0, %a1, %a2, %a3, %s0, %t0, %t1, %t2, %t3, %t4, %t5, %v0, %v1
+  
+    %t5 = ADDu killed %t5, %t3
+    %t4 = ADDu killed %t4, %v0
+    %at = SLT %t4, %t0
+    BNE %at, %zero, %bb.40..preheader.i12, implicit-def %at {
+      %t1 = ADDu killed %t1, %t3
+    }
+  
+  bb.43.Copy_Frame.exit17 (freq 51):
+    successors: %bb.44..preheader.lr.ph.i21(62), %bb.48.Copy_Frame.exit30(37)
+    liveins: %a0, %a1, %a2, %a3, %s0, %v0, %v1
+  
+    %a2 = LW killed %a2, 0 :: (load 4 from @Chroma_Height, !tbaa !1)
+    BLEZ %a2, %bb.48.Copy_Frame.exit30, implicit-def %at {
+      NOP
+    }
+  
+  bb.44..preheader.lr.ph.i21 (freq 32):
+    successors: %bb.45..preheader.i25(100)
+    liveins: %a0, %a1, %a2, %a3, %s0, %v0, %v1
+  
+    %t0 = LW killed %s0, 8 :: (load 4 from %ir.146, !tbaa !5)
+    %a3 = LW killed %a3, 0 :: (load 4 from @Chroma_Width, !tbaa !1)
+    %at = LW killed %a1, 8 :: (load 4 from `i8** getelementptr inbounds ([3 x i8*], [3 x i8*]* @substitute_frame, i32 0, i32 2)`, !tbaa !5)
+    %a1 = MUL %v0, %a3, implicit-def dead %hi0, implicit-def dead %lo0
+    %t1 = ADDiu %zero, 0
+    %t2 = OR %a3, %zero
+    %t2 = MOVN_I_I %zero, killed %v1, killed %t2
+    %t2 = MOVN_I_I %zero, killed %a0, killed %t2
+    %v1 = ADDu killed %at, killed %t2
+  
+  bb.45..preheader.i25 (freq 1024):
+    successors: %bb.46..lr.ph.i28(62), %bb.47.._crit_edge.i29(37)
+    liveins: %a1, %a2, %a3, %t0, %t1, %v0, %v1
+  
+    %a0 = OR %v1, %zero
+    %t2 = OR %t0, %zero
+    BLEZ %a3, %bb.47.._crit_edge.i29, implicit-def %at {
+      %t3 = OR %a3, %zero
+    }
+  
+  bb.46..lr.ph.i28 (freq 20480):
+    successors: %bb.47.._crit_edge.i29(3), %bb.46..lr.ph.i28(96)
+    liveins: %a0, %a1, %a2, %a3, %t0, %t1, %t2, %t3, %v0, %v1
+  
+    %at = LBu %a0, 0 :: (load 1 from %ir.lsr.iv9, !tbaa !7)
+    SB killed %at, %t2, 0 :: (store 1 into %ir.lsr.iv3, !tbaa !7)
+    %a0 = ADDiu killed %a0, 1
+    %t3 = ADDiu killed %t3, -1
+    BNE %t3, %zero, %bb.46..lr.ph.i28, implicit-def %at {
+      %t2 = ADDiu killed %t2, 1
+    }
+  
+  bb.47.._crit_edge.i29 (freq 1024):
+    successors: %bb.45..preheader.i25(96), %bb.48.Copy_Frame.exit30(3)
+    liveins: %a1, %a2, %a3, %t0, %t1, %v0, %v1
+  
+    %v1 = ADDu killed %v1, %a1
+    %t1 = ADDu killed %t1, %v0
+    %at = SLT %t1, %a2
+    BNE %at, %zero, %bb.45..preheader.i25, implicit-def %at {
+      %t0 = ADDu killed %t0, %a1
+    }
+  
+  bb.48.Copy_Frame.exit30 (freq 81):
+    liveouts:
+  
+    %s0 = LW %sp, 528 :: (load 4 from stack)
+    %s1 = LW %sp, 532 :: (load 4 from stack)
+    %s2 = LW %sp, 536 :: (load 4 from stack)
+    %s3 = LW %sp, 540 :: (load 4 from stack)
+    %s4 = LW %sp, 544 :: (load 4 from stack)
+    %s5 = LW %sp, 548 :: (load 4 from stack)
+    %s6 = LW %sp, 552 :: (load 4 from stack)
+    %s7 = LW %sp, 556 :: (load 4 from stack)
+    %fp = LW %sp, 560 :: (load 4 from stack)
+    %ra = LW %sp, 564 :: (load 4 from stack)
+    PseudoReturn %ra {
+      %sp = ADDiu %sp, 568
+    }
+
+...

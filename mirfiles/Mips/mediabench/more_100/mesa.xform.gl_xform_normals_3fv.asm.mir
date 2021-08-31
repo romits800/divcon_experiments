@@ -1,0 +1,1034 @@
+--- |
+  ; ModuleID = '/home/romi/didaktoriko/unison/unison-experiments/experiments/test-input/c/mediabench/mips_zip/build-mips/mesa/mesa.xform.ll'
+  target datalayout = "E-m:m-p:32:32-i8:8:32-i16:16:32-i64:64-n32-S64"
+  target triple = "mips--linux-gnu"
+  
+  ; Function Attrs: norecurse nounwind
+  define void @gl_xform_points_4fv(i32 signext %n, [4 x float]* nocapture %q, float* nocapture readonly %m, [4 x float]* nocapture readonly %p) #0 {
+    %1 = load float, float* %m, align 4, !tbaa !1
+    %2 = getelementptr inbounds float, float* %m, i32 4
+    %3 = load float, float* %2, align 4, !tbaa !1
+    %4 = getelementptr inbounds float, float* %m, i32 8
+    %5 = load float, float* %4, align 4, !tbaa !1
+    %6 = getelementptr inbounds float, float* %m, i32 12
+    %7 = load float, float* %6, align 4, !tbaa !1
+    %8 = getelementptr inbounds float, float* %m, i32 1
+    %9 = load float, float* %8, align 4, !tbaa !1
+    %10 = getelementptr inbounds float, float* %m, i32 5
+    %11 = load float, float* %10, align 4, !tbaa !1
+    %12 = getelementptr inbounds float, float* %m, i32 9
+    %13 = load float, float* %12, align 4, !tbaa !1
+    %14 = getelementptr inbounds float, float* %m, i32 13
+    %15 = load float, float* %14, align 4, !tbaa !1
+    %16 = fcmp oeq float %7, 0.000000e+00
+    %17 = fcmp oeq float %15, 0.000000e+00
+    %or.cond = and i1 %16, %17
+    br i1 %or.cond, label %.preheader22, label %.preheader24
+  
+  .preheader24:                                     ; preds = %0
+    %18 = icmp ne i32 %n, 0
+    br i1 %18, label %.lr.ph32.preheader, label %.loopexit23
+  
+  .lr.ph32.preheader:                               ; preds = %.preheader24
+    %scevgep48 = getelementptr [4 x float], [4 x float]* %q, i32 0, i32 1
+    %scevgep4849 = bitcast float* %scevgep48 to [4 x float]*
+    %scevgep54 = getelementptr [4 x float], [4 x float]* %p, i32 0, i32 2
+    %scevgep5455 = bitcast float* %scevgep54 to [4 x float]*
+    br label %.lr.ph32
+  
+  .preheader22:                                     ; preds = %0
+    %19 = icmp ne i32 %n, 0
+    br i1 %19, label %.lr.ph30.preheader, label %.loopexit23
+  
+  .lr.ph30.preheader:                               ; preds = %.preheader22
+    %scevgep33 = getelementptr [4 x float], [4 x float]* %q, i32 0, i32 1
+    %scevgep3334 = bitcast float* %scevgep33 to [4 x float]*
+    %scevgep39 = getelementptr [4 x float], [4 x float]* %p, i32 0, i32 2
+    %scevgep3940 = bitcast float* %scevgep39 to [4 x float]*
+    br label %.lr.ph30
+  
+  .lr.ph30:                                         ; preds = %.lr.ph30, %.lr.ph30.preheader
+    %lsr.iv41 = phi [4 x float]* [ %34, %.lr.ph30 ], [ %scevgep3940, %.lr.ph30.preheader ]
+    %lsr.iv35 = phi [4 x float]* [ %33, %.lr.ph30 ], [ %scevgep3334, %.lr.ph30.preheader ]
+    %lsr.iv31 = phi i32 [ %lsr.iv.next32, %.lr.ph30 ], [ %n, %.lr.ph30.preheader ]
+    %lsr.iv4143 = bitcast [4 x float]* %lsr.iv41 to float*
+    %lsr.iv3537 = bitcast [4 x float]* %lsr.iv35 to float*
+    %scevgep45 = getelementptr float, float* %lsr.iv4143, i32 -2
+    %20 = load float, float* %scevgep45, align 4, !tbaa !1
+    %scevgep44 = getelementptr float, float* %lsr.iv4143, i32 -1
+    %21 = load float, float* %scevgep44, align 4, !tbaa !1
+    %22 = load float, float* %lsr.iv4143, align 4, !tbaa !1
+    %23 = fmul float %1, %20
+    %24 = fmul float %3, %21
+    %25 = fadd float %23, %24
+    %26 = fmul float %5, %22
+    %27 = fadd float %25, %26
+    %scevgep38 = getelementptr float, float* %lsr.iv3537, i32 -1
+    store float %27, float* %scevgep38, align 4, !tbaa !1
+    %28 = fmul float %9, %20
+    %29 = fmul float %11, %21
+    %30 = fadd float %28, %29
+    %31 = fmul float %13, %22
+    %32 = fadd float %30, %31
+    store float %32, float* %lsr.iv3537, align 4, !tbaa !1
+    %lsr.iv.next32 = add i32 %lsr.iv31, -1
+    %scevgep36 = getelementptr [4 x float], [4 x float]* %lsr.iv35, i32 1, i32 0
+    %33 = bitcast float* %scevgep36 to [4 x float]*
+    %scevgep42 = getelementptr [4 x float], [4 x float]* %lsr.iv41, i32 1, i32 0
+    %34 = bitcast float* %scevgep42 to [4 x float]*
+    %exitcond36 = icmp eq i32 %lsr.iv.next32, 0
+    br i1 %exitcond36, label %.loopexit23, label %.lr.ph30
+  
+  .lr.ph32:                                         ; preds = %.lr.ph32, %.lr.ph32.preheader
+    %lsr.iv56 = phi [4 x float]* [ %54, %.lr.ph32 ], [ %scevgep5455, %.lr.ph32.preheader ]
+    %lsr.iv50 = phi [4 x float]* [ %53, %.lr.ph32 ], [ %scevgep4849, %.lr.ph32.preheader ]
+    %lsr.iv46 = phi i32 [ %lsr.iv.next47, %.lr.ph32 ], [ %n, %.lr.ph32.preheader ]
+    %lsr.iv5658 = bitcast [4 x float]* %lsr.iv56 to float*
+    %lsr.iv5052 = bitcast [4 x float]* %lsr.iv50 to float*
+    %scevgep61 = getelementptr float, float* %lsr.iv5658, i32 -2
+    %35 = load float, float* %scevgep61, align 4, !tbaa !1
+    %scevgep60 = getelementptr float, float* %lsr.iv5658, i32 -1
+    %36 = load float, float* %scevgep60, align 4, !tbaa !1
+    %37 = load float, float* %lsr.iv5658, align 4, !tbaa !1
+    %scevgep59 = getelementptr float, float* %lsr.iv5658, i32 1
+    %38 = load float, float* %scevgep59, align 4, !tbaa !1
+    %39 = fmul float %1, %35
+    %40 = fmul float %3, %36
+    %41 = fadd float %39, %40
+    %42 = fmul float %5, %37
+    %43 = fadd float %41, %42
+    %44 = fmul float %7, %38
+    %45 = fadd float %43, %44
+    %scevgep53 = getelementptr float, float* %lsr.iv5052, i32 -1
+    store float %45, float* %scevgep53, align 4, !tbaa !1
+    %46 = fmul float %9, %35
+    %47 = fmul float %11, %36
+    %48 = fadd float %46, %47
+    %49 = fmul float %13, %37
+    %50 = fadd float %48, %49
+    %51 = fmul float %15, %38
+    %52 = fadd float %50, %51
+    store float %52, float* %lsr.iv5052, align 4, !tbaa !1
+    %lsr.iv.next47 = add i32 %lsr.iv46, -1
+    %scevgep51 = getelementptr [4 x float], [4 x float]* %lsr.iv50, i32 1, i32 0
+    %53 = bitcast float* %scevgep51 to [4 x float]*
+    %scevgep57 = getelementptr [4 x float], [4 x float]* %lsr.iv56, i32 1, i32 0
+    %54 = bitcast float* %scevgep57 to [4 x float]*
+    %exitcond37 = icmp eq i32 %lsr.iv.next47, 0
+    br i1 %exitcond37, label %.loopexit23, label %.lr.ph32
+  
+  .loopexit23:                                      ; preds = %.lr.ph32, %.lr.ph30, %.preheader22, %.preheader24
+    %55 = getelementptr inbounds float, float* %m, i32 2
+    %56 = load float, float* %55, align 4, !tbaa !1
+    %57 = getelementptr inbounds float, float* %m, i32 6
+    %58 = load float, float* %57, align 4, !tbaa !1
+    %59 = getelementptr inbounds float, float* %m, i32 10
+    %60 = load float, float* %59, align 4, !tbaa !1
+    %61 = getelementptr inbounds float, float* %m, i32 14
+    %62 = load float, float* %61, align 4, !tbaa !1
+    %63 = getelementptr inbounds float, float* %m, i32 3
+    %64 = load float, float* %63, align 4, !tbaa !1
+    %65 = getelementptr inbounds float, float* %m, i32 7
+    %66 = load float, float* %65, align 4, !tbaa !1
+    %67 = getelementptr inbounds float, float* %m, i32 11
+    %68 = load float, float* %67, align 4, !tbaa !1
+    %69 = getelementptr inbounds float, float* %m, i32 15
+    %70 = load float, float* %69, align 4, !tbaa !1
+    %71 = fcmp oeq float %64, 0.000000e+00
+    %72 = fcmp oeq float %66, 0.000000e+00
+    %or.cond15 = and i1 %71, %72
+    %73 = fcmp oeq float %68, 0.000000e+00
+    %or.cond17 = and i1 %or.cond15, %73
+    %74 = fcmp oeq float %70, 1.000000e+00
+    %or.cond19 = and i1 %or.cond17, %74
+    br i1 %or.cond19, label %.preheader, label %.preheader20
+  
+  .preheader20:                                     ; preds = %.loopexit23
+    %75 = icmp ne i32 %n, 0
+    br i1 %75, label %.lr.ph28.preheader, label %.loopexit
+  
+  .lr.ph28.preheader:                               ; preds = %.preheader20
+    %scevgep16 = getelementptr [4 x float], [4 x float]* %q, i32 0, i32 3
+    %scevgep1617 = bitcast float* %scevgep16 to [4 x float]*
+    %scevgep22 = getelementptr [4 x float], [4 x float]* %p, i32 0, i32 2
+    %scevgep2223 = bitcast float* %scevgep22 to [4 x float]*
+    br label %.lr.ph28
+  
+  .preheader:                                       ; preds = %.loopexit23
+    %76 = icmp ne i32 %n, 0
+    br i1 %76, label %.lr.ph.preheader, label %.loopexit
+  
+  .lr.ph.preheader:                                 ; preds = %.preheader
+    %scevgep = getelementptr [4 x float], [4 x float]* %q, i32 0, i32 3
+    %scevgep1 = bitcast float* %scevgep to [4 x float]*
+    %scevgep6 = getelementptr [4 x float], [4 x float]* %p, i32 0, i32 2
+    %scevgep67 = bitcast float* %scevgep6 to [4 x float]*
+    br label %.lr.ph
+  
+  .lr.ph:                                           ; preds = %.lr.ph, %.lr.ph.preheader
+    %lsr.iv8 = phi [4 x float]* [ %89, %.lr.ph ], [ %scevgep67, %.lr.ph.preheader ]
+    %lsr.iv2 = phi [4 x float]* [ %88, %.lr.ph ], [ %scevgep1, %.lr.ph.preheader ]
+    %lsr.iv = phi i32 [ %lsr.iv.next, %.lr.ph ], [ %n, %.lr.ph.preheader ]
+    %lsr.iv810 = bitcast [4 x float]* %lsr.iv8 to float*
+    %lsr.iv24 = bitcast [4 x float]* %lsr.iv2 to float*
+    %scevgep13 = getelementptr float, float* %lsr.iv810, i32 -2
+    %77 = load float, float* %scevgep13, align 4, !tbaa !1
+    %scevgep12 = getelementptr float, float* %lsr.iv810, i32 -1
+    %78 = load float, float* %scevgep12, align 4, !tbaa !1
+    %79 = load float, float* %lsr.iv810, align 4, !tbaa !1
+    %scevgep11 = getelementptr float, float* %lsr.iv810, i32 1
+    %80 = load float, float* %scevgep11, align 4, !tbaa !1
+    %81 = fmul float %56, %77
+    %82 = fmul float %58, %78
+    %83 = fadd float %81, %82
+    %84 = fmul float %60, %79
+    %85 = fadd float %83, %84
+    %86 = fmul float %62, %80
+    %87 = fadd float %85, %86
+    %scevgep5 = getelementptr float, float* %lsr.iv24, i32 -1
+    store float %87, float* %scevgep5, align 4, !tbaa !1
+    store float %80, float* %lsr.iv24, align 4, !tbaa !1
+    %lsr.iv.next = add i32 %lsr.iv, -1
+    %scevgep3 = getelementptr [4 x float], [4 x float]* %lsr.iv2, i32 1, i32 0
+    %88 = bitcast float* %scevgep3 to [4 x float]*
+    %scevgep9 = getelementptr [4 x float], [4 x float]* %lsr.iv8, i32 1, i32 0
+    %89 = bitcast float* %scevgep9 to [4 x float]*
+    %exitcond = icmp eq i32 %lsr.iv.next, 0
+    br i1 %exitcond, label %.loopexit, label %.lr.ph
+  
+  .lr.ph28:                                         ; preds = %.lr.ph28, %.lr.ph28.preheader
+    %lsr.iv25 = phi [4 x float]* [ %109, %.lr.ph28 ], [ %scevgep2223, %.lr.ph28.preheader ]
+    %lsr.iv18 = phi [4 x float]* [ %108, %.lr.ph28 ], [ %scevgep1617, %.lr.ph28.preheader ]
+    %lsr.iv14 = phi i32 [ %lsr.iv.next15, %.lr.ph28 ], [ %n, %.lr.ph28.preheader ]
+    %lsr.iv2527 = bitcast [4 x float]* %lsr.iv25 to float*
+    %lsr.iv1820 = bitcast [4 x float]* %lsr.iv18 to float*
+    %scevgep30 = getelementptr float, float* %lsr.iv2527, i32 -2
+    %90 = load float, float* %scevgep30, align 4, !tbaa !1
+    %scevgep29 = getelementptr float, float* %lsr.iv2527, i32 -1
+    %91 = load float, float* %scevgep29, align 4, !tbaa !1
+    %92 = load float, float* %lsr.iv2527, align 4, !tbaa !1
+    %scevgep28 = getelementptr float, float* %lsr.iv2527, i32 1
+    %93 = load float, float* %scevgep28, align 4, !tbaa !1
+    %94 = fmul float %56, %90
+    %95 = fmul float %58, %91
+    %96 = fadd float %94, %95
+    %97 = fmul float %60, %92
+    %98 = fadd float %96, %97
+    %99 = fmul float %62, %93
+    %100 = fadd float %98, %99
+    %scevgep21 = getelementptr float, float* %lsr.iv1820, i32 -1
+    store float %100, float* %scevgep21, align 4, !tbaa !1
+    %101 = fmul float %64, %90
+    %102 = fmul float %66, %91
+    %103 = fadd float %101, %102
+    %104 = fmul float %68, %92
+    %105 = fadd float %103, %104
+    %106 = fmul float %70, %93
+    %107 = fadd float %105, %106
+    store float %107, float* %lsr.iv1820, align 4, !tbaa !1
+    %lsr.iv.next15 = add i32 %lsr.iv14, -1
+    %scevgep19 = getelementptr [4 x float], [4 x float]* %lsr.iv18, i32 1, i32 0
+    %108 = bitcast float* %scevgep19 to [4 x float]*
+    %scevgep26 = getelementptr [4 x float], [4 x float]* %lsr.iv25, i32 1, i32 0
+    %109 = bitcast float* %scevgep26 to [4 x float]*
+    %exitcond35 = icmp eq i32 %lsr.iv.next15, 0
+    br i1 %exitcond35, label %.loopexit, label %.lr.ph28
+  
+  .loopexit:                                        ; preds = %.lr.ph28, %.lr.ph, %.preheader, %.preheader20
+    ret void
+  }
+  
+  ; Function Attrs: norecurse nounwind
+  define void @gl_xform_points_3fv(i32 signext %n, [4 x float]* nocapture %q, float* nocapture readonly %m, [3 x float]* nocapture readonly %p) #0 {
+    %1 = load float, float* %m, align 4, !tbaa !1
+    %2 = getelementptr inbounds float, float* %m, i32 4
+    %3 = load float, float* %2, align 4, !tbaa !1
+    %4 = getelementptr inbounds float, float* %m, i32 8
+    %5 = load float, float* %4, align 4, !tbaa !1
+    %6 = getelementptr inbounds float, float* %m, i32 12
+    %7 = load float, float* %6, align 4, !tbaa !1
+    %8 = getelementptr inbounds float, float* %m, i32 1
+    %9 = load float, float* %8, align 4, !tbaa !1
+    %10 = getelementptr inbounds float, float* %m, i32 5
+    %11 = load float, float* %10, align 4, !tbaa !1
+    %12 = getelementptr inbounds float, float* %m, i32 9
+    %13 = load float, float* %12, align 4, !tbaa !1
+    %14 = getelementptr inbounds float, float* %m, i32 13
+    %15 = load float, float* %14, align 4, !tbaa !1
+    %16 = icmp eq i32 %n, 0
+    br i1 %16, label %._crit_edge, label %.lr.ph19.preheader
+  
+  .lr.ph19.preheader:                               ; preds = %0
+    %scevgep30 = getelementptr [4 x float], [4 x float]* %q, i32 0, i32 1
+    %scevgep3031 = bitcast float* %scevgep30 to [4 x float]*
+    %scevgep36 = getelementptr [3 x float], [3 x float]* %p, i32 0, i32 2
+    %scevgep3637 = bitcast float* %scevgep36 to [3 x float]*
+    br label %.lr.ph19
+  
+  .lr.ph19:                                         ; preds = %.lr.ph19, %.lr.ph19.preheader
+    %lsr.iv38 = phi [3 x float]* [ %33, %.lr.ph19 ], [ %scevgep3637, %.lr.ph19.preheader ]
+    %lsr.iv32 = phi [4 x float]* [ %32, %.lr.ph19 ], [ %scevgep3031, %.lr.ph19.preheader ]
+    %lsr.iv28 = phi i32 [ %lsr.iv.next29, %.lr.ph19 ], [ %n, %.lr.ph19.preheader ]
+    %lsr.iv3840 = bitcast [3 x float]* %lsr.iv38 to float*
+    %lsr.iv3234 = bitcast [4 x float]* %lsr.iv32 to float*
+    %scevgep42 = getelementptr float, float* %lsr.iv3840, i32 -2
+    %17 = load float, float* %scevgep42, align 4, !tbaa !1
+    %scevgep41 = getelementptr float, float* %lsr.iv3840, i32 -1
+    %18 = load float, float* %scevgep41, align 4, !tbaa !1
+    %19 = load float, float* %lsr.iv3840, align 4, !tbaa !1
+    %20 = fmul float %1, %17
+    %21 = fmul float %3, %18
+    %22 = fadd float %20, %21
+    %23 = fmul float %5, %19
+    %24 = fadd float %22, %23
+    %25 = fadd float %7, %24
+    %scevgep35 = getelementptr float, float* %lsr.iv3234, i32 -1
+    store float %25, float* %scevgep35, align 4, !tbaa !1
+    %26 = fmul float %9, %17
+    %27 = fmul float %11, %18
+    %28 = fadd float %26, %27
+    %29 = fmul float %13, %19
+    %30 = fadd float %28, %29
+    %31 = fadd float %15, %30
+    store float %31, float* %lsr.iv3234, align 4, !tbaa !1
+    %lsr.iv.next29 = add i32 %lsr.iv28, -1
+    %scevgep33 = getelementptr [4 x float], [4 x float]* %lsr.iv32, i32 1, i32 0
+    %32 = bitcast float* %scevgep33 to [4 x float]*
+    %scevgep39 = getelementptr [3 x float], [3 x float]* %lsr.iv38, i32 1, i32 0
+    %33 = bitcast float* %scevgep39 to [3 x float]*
+    %exitcond22 = icmp eq i32 %lsr.iv.next29, 0
+    br i1 %exitcond22, label %._crit_edge, label %.lr.ph19
+  
+  ._crit_edge:                                      ; preds = %.lr.ph19, %0
+    %34 = getelementptr inbounds float, float* %m, i32 2
+    %35 = load float, float* %34, align 4, !tbaa !1
+    %36 = getelementptr inbounds float, float* %m, i32 6
+    %37 = load float, float* %36, align 4, !tbaa !1
+    %38 = getelementptr inbounds float, float* %m, i32 10
+    %39 = load float, float* %38, align 4, !tbaa !1
+    %40 = getelementptr inbounds float, float* %m, i32 14
+    %41 = load float, float* %40, align 4, !tbaa !1
+    %42 = getelementptr inbounds float, float* %m, i32 3
+    %43 = load float, float* %42, align 4, !tbaa !1
+    %44 = getelementptr inbounds float, float* %m, i32 7
+    %45 = load float, float* %44, align 4, !tbaa !1
+    %46 = getelementptr inbounds float, float* %m, i32 11
+    %47 = load float, float* %46, align 4, !tbaa !1
+    %48 = getelementptr inbounds float, float* %m, i32 15
+    %49 = load float, float* %48, align 4, !tbaa !1
+    %50 = fcmp oeq float %43, 0.000000e+00
+    %51 = fcmp oeq float %45, 0.000000e+00
+    %or.cond = and i1 %50, %51
+    %52 = fcmp oeq float %47, 0.000000e+00
+    %or.cond10 = and i1 %or.cond, %52
+    %53 = fcmp oeq float %49, 1.000000e+00
+    %or.cond12 = and i1 %or.cond10, %53
+    br i1 %or.cond12, label %.preheader, label %.preheader13
+  
+  .preheader13:                                     ; preds = %._crit_edge
+    %54 = icmp ne i32 %n, 0
+    br i1 %54, label %.lr.ph17.preheader, label %.loopexit
+  
+  .lr.ph17.preheader:                               ; preds = %.preheader13
+    %scevgep15 = getelementptr [4 x float], [4 x float]* %q, i32 0, i32 3
+    %scevgep1516 = bitcast float* %scevgep15 to [4 x float]*
+    %scevgep21 = getelementptr [3 x float], [3 x float]* %p, i32 0, i32 2
+    %scevgep2122 = bitcast float* %scevgep21 to [3 x float]*
+    br label %.lr.ph17
+  
+  .preheader:                                       ; preds = %._crit_edge
+    %55 = icmp ne i32 %n, 0
+    br i1 %55, label %.lr.ph.preheader, label %.loopexit
+  
+  .lr.ph.preheader:                                 ; preds = %.preheader
+    %scevgep = getelementptr [4 x float], [4 x float]* %q, i32 0, i32 3
+    %scevgep1 = bitcast float* %scevgep to [4 x float]*
+    %scevgep6 = getelementptr [3 x float], [3 x float]* %p, i32 0, i32 2
+    %scevgep67 = bitcast float* %scevgep6 to [3 x float]*
+    br label %.lr.ph
+  
+  .lr.ph:                                           ; preds = %.lr.ph, %.lr.ph.preheader
+    %lsr.iv8 = phi [3 x float]* [ %66, %.lr.ph ], [ %scevgep67, %.lr.ph.preheader ]
+    %lsr.iv2 = phi [4 x float]* [ %65, %.lr.ph ], [ %scevgep1, %.lr.ph.preheader ]
+    %lsr.iv = phi i32 [ %lsr.iv.next, %.lr.ph ], [ %n, %.lr.ph.preheader ]
+    %lsr.iv810 = bitcast [3 x float]* %lsr.iv8 to float*
+    %lsr.iv24 = bitcast [4 x float]* %lsr.iv2 to float*
+    %scevgep12 = getelementptr float, float* %lsr.iv810, i32 -2
+    %56 = load float, float* %scevgep12, align 4, !tbaa !1
+    %scevgep11 = getelementptr float, float* %lsr.iv810, i32 -1
+    %57 = load float, float* %scevgep11, align 4, !tbaa !1
+    %58 = load float, float* %lsr.iv810, align 4, !tbaa !1
+    %59 = fmul float %35, %56
+    %60 = fmul float %37, %57
+    %61 = fadd float %59, %60
+    %62 = fmul float %39, %58
+    %63 = fadd float %61, %62
+    %64 = fadd float %41, %63
+    %scevgep5 = getelementptr float, float* %lsr.iv24, i32 -1
+    store float %64, float* %scevgep5, align 4, !tbaa !1
+    store float 1.000000e+00, float* %lsr.iv24, align 4, !tbaa !1
+    %lsr.iv.next = add i32 %lsr.iv, -1
+    %scevgep3 = getelementptr [4 x float], [4 x float]* %lsr.iv2, i32 1, i32 0
+    %65 = bitcast float* %scevgep3 to [4 x float]*
+    %scevgep9 = getelementptr [3 x float], [3 x float]* %lsr.iv8, i32 1, i32 0
+    %66 = bitcast float* %scevgep9 to [3 x float]*
+    %exitcond = icmp eq i32 %lsr.iv.next, 0
+    br i1 %exitcond, label %.loopexit, label %.lr.ph
+  
+  .lr.ph17:                                         ; preds = %.lr.ph17, %.lr.ph17.preheader
+    %lsr.iv23 = phi [3 x float]* [ %83, %.lr.ph17 ], [ %scevgep2122, %.lr.ph17.preheader ]
+    %lsr.iv17 = phi [4 x float]* [ %82, %.lr.ph17 ], [ %scevgep1516, %.lr.ph17.preheader ]
+    %lsr.iv13 = phi i32 [ %lsr.iv.next14, %.lr.ph17 ], [ %n, %.lr.ph17.preheader ]
+    %lsr.iv2325 = bitcast [3 x float]* %lsr.iv23 to float*
+    %lsr.iv1719 = bitcast [4 x float]* %lsr.iv17 to float*
+    %scevgep27 = getelementptr float, float* %lsr.iv2325, i32 -2
+    %67 = load float, float* %scevgep27, align 4, !tbaa !1
+    %scevgep26 = getelementptr float, float* %lsr.iv2325, i32 -1
+    %68 = load float, float* %scevgep26, align 4, !tbaa !1
+    %69 = load float, float* %lsr.iv2325, align 4, !tbaa !1
+    %70 = fmul float %35, %67
+    %71 = fmul float %37, %68
+    %72 = fadd float %70, %71
+    %73 = fmul float %39, %69
+    %74 = fadd float %72, %73
+    %75 = fadd float %41, %74
+    %scevgep20 = getelementptr float, float* %lsr.iv1719, i32 -1
+    store float %75, float* %scevgep20, align 4, !tbaa !1
+    %76 = fmul float %43, %67
+    %77 = fmul float %45, %68
+    %78 = fadd float %76, %77
+    %79 = fmul float %47, %69
+    %80 = fadd float %78, %79
+    %81 = fadd float %49, %80
+    store float %81, float* %lsr.iv1719, align 4, !tbaa !1
+    %lsr.iv.next14 = add i32 %lsr.iv13, -1
+    %scevgep18 = getelementptr [4 x float], [4 x float]* %lsr.iv17, i32 1, i32 0
+    %82 = bitcast float* %scevgep18 to [4 x float]*
+    %scevgep24 = getelementptr [3 x float], [3 x float]* %lsr.iv23, i32 1, i32 0
+    %83 = bitcast float* %scevgep24 to [3 x float]*
+    %exitcond21 = icmp eq i32 %lsr.iv.next14, 0
+    br i1 %exitcond21, label %.loopexit, label %.lr.ph17
+  
+  .loopexit:                                        ; preds = %.lr.ph17, %.lr.ph, %.preheader, %.preheader13
+    ret void
+  }
+  
+  ; Function Attrs: nounwind
+  define void @gl_xform_normals_3fv(i32 signext %n, [3 x float]* nocapture %v, float* nocapture readonly %m, [3 x float]* nocapture readonly %u, i8 zeroext %normalize) #1 {
+    %1 = icmp eq i8 %normalize, 0
+    %2 = load float, float* %m, align 4, !tbaa !1
+    %3 = getelementptr inbounds float, float* %m, i32 4
+    %4 = load float, float* %3, align 4, !tbaa !1
+    %5 = getelementptr inbounds float, float* %m, i32 8
+    %6 = load float, float* %5, align 4, !tbaa !1
+    %7 = getelementptr inbounds float, float* %m, i32 1
+    %8 = load float, float* %7, align 4, !tbaa !1
+    %9 = getelementptr inbounds float, float* %m, i32 5
+    %10 = load float, float* %9, align 4, !tbaa !1
+    %11 = getelementptr inbounds float, float* %m, i32 9
+    %12 = load float, float* %11, align 4, !tbaa !1
+    %13 = getelementptr inbounds float, float* %m, i32 2
+    %14 = load float, float* %13, align 4, !tbaa !1
+    %15 = getelementptr inbounds float, float* %m, i32 6
+    %16 = load float, float* %15, align 4, !tbaa !1
+    %17 = getelementptr inbounds float, float* %m, i32 10
+    %18 = load float, float* %17, align 4, !tbaa !1
+    br i1 %1, label %.preheader, label %.preheader14
+  
+  .preheader14:                                     ; preds = %0
+    %19 = icmp ne i32 %n, 0
+    br i1 %19, label %.lr.ph18.preheader, label %.loopexit
+  
+  .lr.ph18.preheader:                               ; preds = %.preheader14
+    %scevgep16 = getelementptr [3 x float], [3 x float]* %v, i32 0, i32 2
+    %scevgep1617 = bitcast float* %scevgep16 to [3 x float]*
+    %scevgep23 = getelementptr [3 x float], [3 x float]* %u, i32 0, i32 2
+    %scevgep2324 = bitcast float* %scevgep23 to [3 x float]*
+    br label %.lr.ph18
+  
+  .preheader:                                       ; preds = %0
+    %20 = icmp ne i32 %n, 0
+    br i1 %20, label %.lr.ph.preheader, label %.loopexit
+  
+  .lr.ph.preheader:                                 ; preds = %.preheader
+    %scevgep = getelementptr [3 x float], [3 x float]* %v, i32 0, i32 2
+    %scevgep1 = bitcast float* %scevgep to [3 x float]*
+    %scevgep7 = getelementptr [3 x float], [3 x float]* %u, i32 0, i32 2
+    %scevgep78 = bitcast float* %scevgep7 to [3 x float]*
+    br label %.lr.ph
+  
+  .lr.ph18:                                         ; preds = %.lr.ph18.split, %.lr.ph18.preheader
+    %lsr.iv25 = phi [3 x float]* [ %62, %.lr.ph18.split ], [ %scevgep2324, %.lr.ph18.preheader ]
+    %lsr.iv18 = phi [3 x float]* [ %61, %.lr.ph18.split ], [ %scevgep1617, %.lr.ph18.preheader ]
+    %lsr.iv14 = phi i32 [ %lsr.iv.next15, %.lr.ph18.split ], [ %n, %.lr.ph18.preheader ]
+    %lsr.iv2527 = bitcast [3 x float]* %lsr.iv25 to float*
+    %scevgep29 = getelementptr float, float* %lsr.iv2527, i32 -2
+    %21 = load float, float* %scevgep29, align 4, !tbaa !1
+    %scevgep28 = getelementptr float, float* %lsr.iv2527, i32 -1
+    %22 = load float, float* %scevgep28, align 4, !tbaa !1
+    %23 = load float, float* %lsr.iv2527, align 4, !tbaa !1
+    %24 = fmul float %2, %21
+    %25 = fmul float %8, %22
+    %26 = fadd float %24, %25
+    %27 = fmul float %14, %23
+    %28 = fadd float %26, %27
+    %29 = fpext float %28 to double
+    %30 = fmul float %4, %21
+    %31 = fmul float %10, %22
+    %32 = fadd float %30, %31
+    %33 = fmul float %16, %23
+    %34 = fadd float %32, %33
+    %35 = fpext float %34 to double
+    %36 = fmul float %6, %21
+    %37 = fmul float %12, %22
+    %38 = fadd float %36, %37
+    %39 = fmul float %18, %23
+    %40 = fadd float %38, %39
+    %41 = fpext float %40 to double
+    %42 = fmul double %29, %29
+    %43 = fmul double %35, %35
+    %44 = fadd double %42, %43
+    %45 = fmul double %41, %41
+    %46 = fadd double %45, %44
+    %47 = tail call double @sqrt(double %46) #2
+    %48 = fcmp oeq double %47, %47
+    br i1 %48, label %.lr.ph18.split, label %call.sqrt
+  
+  call.sqrt:                                        ; preds = %.lr.ph18
+    %49 = tail call double @sqrt(double %46) #3
+    br label %.lr.ph18.split
+  
+  .lr.ph18.split:                                   ; preds = %.lr.ph18, %call.sqrt
+    %50 = phi double [ %47, %.lr.ph18 ], [ %49, %call.sqrt ]
+    %51 = bitcast [3 x float]* %lsr.iv18 to float*
+    %52 = fcmp ogt double %50, 1.000000e-30
+    %53 = fdiv double 1.000000e+00, %50
+    %54 = select i1 %52, double %53, double 1.000000e+00
+    %55 = fmul double %29, %54
+    %56 = fptrunc double %55 to float
+    %scevgep22 = getelementptr float, float* %51, i32 -2
+    store float %56, float* %scevgep22, align 4, !tbaa !1
+    %57 = fmul double %35, %54
+    %58 = fptrunc double %57 to float
+    %scevgep21 = getelementptr float, float* %51, i32 -1
+    store float %58, float* %scevgep21, align 4, !tbaa !1
+    %59 = fmul double %41, %54
+    %60 = fptrunc double %59 to float
+    store float %60, float* %51, align 4, !tbaa !1
+    %lsr.iv.next15 = add i32 %lsr.iv14, -1
+    %scevgep19 = getelementptr [3 x float], [3 x float]* %lsr.iv18, i32 1, i32 0
+    %61 = bitcast float* %scevgep19 to [3 x float]*
+    %scevgep26 = getelementptr [3 x float], [3 x float]* %lsr.iv25, i32 1, i32 0
+    %62 = bitcast float* %scevgep26 to [3 x float]*
+    %exitcond20 = icmp eq i32 %lsr.iv.next15, 0
+    br i1 %exitcond20, label %.loopexit, label %.lr.ph18
+  
+  .lr.ph:                                           ; preds = %.lr.ph, %.lr.ph.preheader
+    %lsr.iv9 = phi [3 x float]* [ %82, %.lr.ph ], [ %scevgep78, %.lr.ph.preheader ]
+    %lsr.iv2 = phi [3 x float]* [ %81, %.lr.ph ], [ %scevgep1, %.lr.ph.preheader ]
+    %lsr.iv = phi i32 [ %lsr.iv.next, %.lr.ph ], [ %n, %.lr.ph.preheader ]
+    %lsr.iv911 = bitcast [3 x float]* %lsr.iv9 to float*
+    %lsr.iv24 = bitcast [3 x float]* %lsr.iv2 to float*
+    %scevgep13 = getelementptr float, float* %lsr.iv911, i32 -2
+    %63 = load float, float* %scevgep13, align 4, !tbaa !1
+    %scevgep12 = getelementptr float, float* %lsr.iv911, i32 -1
+    %64 = load float, float* %scevgep12, align 4, !tbaa !1
+    %65 = load float, float* %lsr.iv911, align 4, !tbaa !1
+    %66 = fmul float %2, %63
+    %67 = fmul float %8, %64
+    %68 = fadd float %66, %67
+    %69 = fmul float %14, %65
+    %70 = fadd float %68, %69
+    %scevgep6 = getelementptr float, float* %lsr.iv24, i32 -2
+    store float %70, float* %scevgep6, align 4, !tbaa !1
+    %71 = fmul float %4, %63
+    %72 = fmul float %10, %64
+    %73 = fadd float %71, %72
+    %74 = fmul float %16, %65
+    %75 = fadd float %73, %74
+    %scevgep5 = getelementptr float, float* %lsr.iv24, i32 -1
+    store float %75, float* %scevgep5, align 4, !tbaa !1
+    %76 = fmul float %6, %63
+    %77 = fmul float %12, %64
+    %78 = fadd float %76, %77
+    %79 = fmul float %18, %65
+    %80 = fadd float %78, %79
+    store float %80, float* %lsr.iv24, align 4, !tbaa !1
+    %lsr.iv.next = add i32 %lsr.iv, -1
+    %scevgep3 = getelementptr [3 x float], [3 x float]* %lsr.iv2, i32 1, i32 0
+    %81 = bitcast float* %scevgep3 to [3 x float]*
+    %scevgep10 = getelementptr [3 x float], [3 x float]* %lsr.iv9, i32 1, i32 0
+    %82 = bitcast float* %scevgep10 to [3 x float]*
+    %exitcond = icmp eq i32 %lsr.iv.next, 0
+    br i1 %exitcond, label %.loopexit, label %.lr.ph
+  
+  .loopexit:                                        ; preds = %.lr.ph18.split, %.lr.ph, %.preheader, %.preheader14
+    ret void
+  }
+  
+  ; Function Attrs: nounwind
+  declare double @sqrt(double) #1
+  
+  ; Function Attrs: norecurse nounwind
+  define void @gl_transform_vector(float* nocapture %u, float* nocapture readonly %v, float* nocapture readonly %m) #0 {
+    %1 = load float, float* %v, align 4, !tbaa !1
+    %2 = getelementptr inbounds float, float* %v, i32 1
+    %3 = load float, float* %2, align 4, !tbaa !1
+    %4 = getelementptr inbounds float, float* %v, i32 2
+    %5 = load float, float* %4, align 4, !tbaa !1
+    %6 = getelementptr inbounds float, float* %v, i32 3
+    %7 = load float, float* %6, align 4, !tbaa !1
+    %8 = load float, float* %m, align 4, !tbaa !1
+    %9 = fmul float %1, %8
+    %10 = getelementptr inbounds float, float* %m, i32 1
+    %11 = load float, float* %10, align 4, !tbaa !1
+    %12 = fmul float %3, %11
+    %13 = fadd float %9, %12
+    %14 = getelementptr inbounds float, float* %m, i32 2
+    %15 = load float, float* %14, align 4, !tbaa !1
+    %16 = fmul float %5, %15
+    %17 = fadd float %13, %16
+    %18 = getelementptr inbounds float, float* %m, i32 3
+    %19 = load float, float* %18, align 4, !tbaa !1
+    %20 = fmul float %7, %19
+    %21 = fadd float %17, %20
+    store float %21, float* %u, align 4, !tbaa !1
+    %22 = getelementptr inbounds float, float* %m, i32 4
+    %23 = load float, float* %22, align 4, !tbaa !1
+    %24 = fmul float %1, %23
+    %25 = getelementptr inbounds float, float* %m, i32 5
+    %26 = load float, float* %25, align 4, !tbaa !1
+    %27 = fmul float %3, %26
+    %28 = fadd float %24, %27
+    %29 = getelementptr inbounds float, float* %m, i32 6
+    %30 = load float, float* %29, align 4, !tbaa !1
+    %31 = fmul float %5, %30
+    %32 = fadd float %28, %31
+    %33 = getelementptr inbounds float, float* %m, i32 7
+    %34 = load float, float* %33, align 4, !tbaa !1
+    %35 = fmul float %7, %34
+    %36 = fadd float %32, %35
+    %37 = getelementptr inbounds float, float* %u, i32 1
+    store float %36, float* %37, align 4, !tbaa !1
+    %38 = getelementptr inbounds float, float* %m, i32 8
+    %39 = load float, float* %38, align 4, !tbaa !1
+    %40 = fmul float %1, %39
+    %41 = getelementptr inbounds float, float* %m, i32 9
+    %42 = load float, float* %41, align 4, !tbaa !1
+    %43 = fmul float %3, %42
+    %44 = fadd float %40, %43
+    %45 = getelementptr inbounds float, float* %m, i32 10
+    %46 = load float, float* %45, align 4, !tbaa !1
+    %47 = fmul float %5, %46
+    %48 = fadd float %44, %47
+    %49 = getelementptr inbounds float, float* %m, i32 11
+    %50 = load float, float* %49, align 4, !tbaa !1
+    %51 = fmul float %7, %50
+    %52 = fadd float %48, %51
+    %53 = getelementptr inbounds float, float* %u, i32 2
+    store float %52, float* %53, align 4, !tbaa !1
+    %54 = getelementptr inbounds float, float* %m, i32 12
+    %55 = load float, float* %54, align 4, !tbaa !1
+    %56 = fmul float %1, %55
+    %57 = getelementptr inbounds float, float* %m, i32 13
+    %58 = load float, float* %57, align 4, !tbaa !1
+    %59 = fmul float %3, %58
+    %60 = fadd float %56, %59
+    %61 = getelementptr inbounds float, float* %m, i32 14
+    %62 = load float, float* %61, align 4, !tbaa !1
+    %63 = fmul float %5, %62
+    %64 = fadd float %60, %63
+    %65 = getelementptr inbounds float, float* %m, i32 15
+    %66 = load float, float* %65, align 4, !tbaa !1
+    %67 = fmul float %7, %66
+    %68 = fadd float %64, %67
+    %69 = getelementptr inbounds float, float* %u, i32 3
+    store float %68, float* %69, align 4, !tbaa !1
+    ret void
+  }
+  
+  ; Function Attrs: norecurse nounwind
+  define void @gl_xform_texcoords_4fv(i32 signext %n, [4 x float]* nocapture %tc, float* nocapture readonly %m) #0 {
+    %1 = load float, float* %m, align 4, !tbaa !1
+    %2 = getelementptr inbounds float, float* %m, i32 4
+    %3 = load float, float* %2, align 4, !tbaa !1
+    %4 = getelementptr inbounds float, float* %m, i32 8
+    %5 = load float, float* %4, align 4, !tbaa !1
+    %6 = getelementptr inbounds float, float* %m, i32 12
+    %7 = load float, float* %6, align 4, !tbaa !1
+    %8 = getelementptr inbounds float, float* %m, i32 1
+    %9 = load float, float* %8, align 4, !tbaa !1
+    %10 = getelementptr inbounds float, float* %m, i32 5
+    %11 = load float, float* %10, align 4, !tbaa !1
+    %12 = getelementptr inbounds float, float* %m, i32 9
+    %13 = load float, float* %12, align 4, !tbaa !1
+    %14 = getelementptr inbounds float, float* %m, i32 13
+    %15 = load float, float* %14, align 4, !tbaa !1
+    %16 = getelementptr inbounds float, float* %m, i32 2
+    %17 = load float, float* %16, align 4, !tbaa !1
+    %18 = getelementptr inbounds float, float* %m, i32 6
+    %19 = load float, float* %18, align 4, !tbaa !1
+    %20 = getelementptr inbounds float, float* %m, i32 10
+    %21 = load float, float* %20, align 4, !tbaa !1
+    %22 = getelementptr inbounds float, float* %m, i32 14
+    %23 = load float, float* %22, align 4, !tbaa !1
+    %24 = getelementptr inbounds float, float* %m, i32 3
+    %25 = load float, float* %24, align 4, !tbaa !1
+    %26 = getelementptr inbounds float, float* %m, i32 7
+    %27 = load float, float* %26, align 4, !tbaa !1
+    %28 = getelementptr inbounds float, float* %m, i32 11
+    %29 = load float, float* %28, align 4, !tbaa !1
+    %30 = getelementptr inbounds float, float* %m, i32 15
+    %31 = load float, float* %30, align 4, !tbaa !1
+    %32 = icmp eq i32 %n, 0
+    br i1 %32, label %._crit_edge, label %.lr.ph.preheader
+  
+  .lr.ph.preheader:                                 ; preds = %0
+    %scevgep = getelementptr [4 x float], [4 x float]* %tc, i32 0, i32 2
+    %scevgep1 = bitcast float* %scevgep to [4 x float]*
+    br label %.lr.ph
+  
+  .lr.ph:                                           ; preds = %.lr.ph, %.lr.ph.preheader
+    %lsr.iv2 = phi [4 x float]* [ %65, %.lr.ph ], [ %scevgep1, %.lr.ph.preheader ]
+    %lsr.iv = phi i32 [ %lsr.iv.next, %.lr.ph ], [ %n, %.lr.ph.preheader ]
+    %lsr.iv24 = bitcast [4 x float]* %lsr.iv2 to float*
+    %scevgep10 = getelementptr float, float* %lsr.iv24, i32 -2
+    %33 = load float, float* %scevgep10, align 4, !tbaa !1
+    %scevgep8 = getelementptr float, float* %lsr.iv24, i32 -1
+    %34 = load float, float* %scevgep8, align 4, !tbaa !1
+    %35 = load float, float* %lsr.iv24, align 4, !tbaa !1
+    %scevgep6 = getelementptr float, float* %lsr.iv24, i32 1
+    %36 = load float, float* %scevgep6, align 4, !tbaa !1
+    %37 = fmul float %1, %33
+    %38 = fmul float %3, %34
+    %39 = fadd float %37, %38
+    %40 = fmul float %5, %35
+    %41 = fadd float %39, %40
+    %42 = fmul float %7, %36
+    %43 = fadd float %41, %42
+    %scevgep9 = getelementptr float, float* %lsr.iv24, i32 -2
+    store float %43, float* %scevgep9, align 4, !tbaa !1
+    %44 = fmul float %9, %33
+    %45 = fmul float %11, %34
+    %46 = fadd float %44, %45
+    %47 = fmul float %13, %35
+    %48 = fadd float %46, %47
+    %49 = fmul float %15, %36
+    %50 = fadd float %48, %49
+    %scevgep7 = getelementptr float, float* %lsr.iv24, i32 -1
+    store float %50, float* %scevgep7, align 4, !tbaa !1
+    %51 = fmul float %17, %33
+    %52 = fmul float %19, %34
+    %53 = fadd float %51, %52
+    %54 = fmul float %21, %35
+    %55 = fadd float %53, %54
+    %56 = fmul float %23, %36
+    %57 = fadd float %55, %56
+    store float %57, float* %lsr.iv24, align 4, !tbaa !1
+    %58 = fmul float %25, %33
+    %59 = fmul float %27, %34
+    %60 = fadd float %58, %59
+    %61 = fmul float %29, %35
+    %62 = fadd float %60, %61
+    %63 = fmul float %31, %36
+    %64 = fadd float %62, %63
+    %scevgep5 = getelementptr float, float* %lsr.iv24, i32 1
+    store float %64, float* %scevgep5, align 4, !tbaa !1
+    %lsr.iv.next = add i32 %lsr.iv, -1
+    %scevgep3 = getelementptr [4 x float], [4 x float]* %lsr.iv2, i32 1, i32 0
+    %65 = bitcast float* %scevgep3 to [4 x float]*
+    %exitcond = icmp eq i32 %lsr.iv.next, 0
+    br i1 %exitcond, label %._crit_edge, label %.lr.ph
+  
+  ._crit_edge:                                      ; preds = %.lr.ph, %0
+    ret void
+  }
+  
+  attributes #0 = { norecurse nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #1 = { nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #2 = { nounwind readnone }
+  attributes #3 = { nounwind }
+  
+  !llvm.ident = !{!0}
+  
+  !0 = !{!"clang version 3.8.0 (http://llvm.org/git/clang.git 2d49f0a0ae8366964a93e3b7b26e29679bee7160) (http://llvm.org/git/llvm.git 60bc66b44837125843b58ed3e0fd2e6bb948d839)"}
+  !1 = !{!2, !2, i64 0}
+  !2 = !{!"float", !3, i64 0}
+  !3 = !{!"omnipotent char", !4, i64 0}
+  !4 = !{!"Simple C/C++ TBAA"}
+
+...
+---
+name:            gl_xform_normals_3fv
+alignment:       2
+exposesReturnsTwice: false
+hasInlineAsm:    false
+isSSA:           false
+tracksRegLiveness: false
+tracksSubRegLiveness: false
+liveins:         
+  - { reg: '%a0' }
+  - { reg: '%a1' }
+  - { reg: '%a2' }
+  - { reg: '%a3' }
+  - { reg: '%t9' }
+  - { reg: '%v0' }
+calleeSavedRegisters: [ '%fp', '%ra', '%d10', '%d11', '%d12', '%d13', '%d14', 
+                        '%d15', '%f20', '%f21', '%f22', '%f23', '%f24', 
+                        '%f25', '%f26', '%f27', '%f28', '%f29', '%f30', 
+                        '%f31', '%s0', '%s1', '%s2', '%s3', '%s4', '%s5', 
+                        '%s6', '%s7' ]
+frameInfo:       
+  isFrameAddressTaken: false
+  isReturnAddressTaken: false
+  hasStackMap:     false
+  hasPatchPoint:   false
+  stackSize:       112
+  offsetAdjustment: 0
+  maxAlignment:    8
+  adjustsStack:    true
+  hasCalls:        true
+  maxCallFrameSize: 16
+  hasOpaqueSPAdjustment: false
+  hasVAStart:      false
+  hasMustTailInVarArgFunc: false
+fixedStack:      
+  - { id: 0, offset: 16, size: 4, alignment: 8, isImmutable: true, isAliased: false }
+stack:           
+  - { id: 0, type: spill-slot, offset: -72, size: 4, alignment: 4 }
+  - { id: 1, type: spill-slot, offset: -76, size: 4, alignment: 4 }
+  - { id: 2, type: spill-slot, offset: -80, size: 4, alignment: 4 }
+  - { id: 3, type: spill-slot, offset: -88, size: 8, alignment: 8 }
+  - { id: 4, type: spill-slot, offset: -96, size: 8, alignment: 8 }
+  - { id: 5, type: spill-slot, offset: -8, size: 8, alignment: 8, callee-saved-register: '%d15' }
+  - { id: 6, type: spill-slot, offset: -16, size: 8, alignment: 8, callee-saved-register: '%d14' }
+  - { id: 7, type: spill-slot, offset: -24, size: 8, alignment: 8, callee-saved-register: '%d13' }
+  - { id: 8, type: spill-slot, offset: -32, size: 8, alignment: 8, callee-saved-register: '%d12' }
+  - { id: 9, type: spill-slot, offset: -40, size: 8, alignment: 8, callee-saved-register: '%d11' }
+  - { id: 10, type: spill-slot, offset: -48, size: 8, alignment: 8, callee-saved-register: '%d10' }
+  - { id: 11, type: spill-slot, offset: -52, size: 4, alignment: 4, callee-saved-register: '%ra' }
+  - { id: 12, type: spill-slot, offset: -56, size: 4, alignment: 4, callee-saved-register: '%s3' }
+  - { id: 13, type: spill-slot, offset: -60, size: 4, alignment: 4, callee-saved-register: '%s2' }
+  - { id: 14, type: spill-slot, offset: -64, size: 4, alignment: 4, callee-saved-register: '%s1' }
+  - { id: 15, type: spill-slot, offset: -68, size: 4, alignment: 4, callee-saved-register: '%s0' }
+constants:       
+  - id:              0
+    value:           'double 1.000000e+00'
+    alignment:       8
+  - id:              1
+    value:           double 1.000000e-30
+    alignment:       8
+body:             |
+  bb.0 (%ir-block.0, freq 34):
+    successors: %bb.7..preheader(37), %bb.1..preheader14(62)
+    liveins: %a0, %a1, %a2, %a3, %t9, %d15, %d14, %d13, %d12, %d11, %d10, %ra, %s3, %s2, %s1, %s0
+  
+    %v0 = LUi target-flags(<unknown>) $_gp_disp
+    %v0 = ADDiu %v0, target-flags(<unknown>) $_gp_disp
+    %sp = ADDiu %sp, -112
+    CFI_INSTRUCTION .cfi_def_cfa_offset 112
+    SDC1 killed %d15, %sp, 104 :: (store 8 into stack)
+    SDC1 killed %d14, %sp, 96 :: (store 8 into stack)
+    SDC1 killed %d13, %sp, 88 :: (store 8 into stack)
+    SDC1 killed %d12, %sp, 80 :: (store 8 into stack)
+    SDC1 killed %d11, %sp, 72 :: (store 8 into stack)
+    SDC1 killed %d10, %sp, 64 :: (store 8 into stack)
+    SW killed %ra, %sp, 60 :: (store 4 into stack)
+    SW killed %s3, %sp, 56 :: (store 4 into stack)
+    SW killed %s2, %sp, 52 :: (store 4 into stack)
+    SW killed %s1, %sp, 48 :: (store 4 into stack)
+    SW killed %s0, %sp, 44 :: (store 4 into stack)
+    CFI_INSTRUCTION .cfi_offset %d31_64, -8
+    CFI_INSTRUCTION .cfi_offset %d30_64, -4
+    CFI_INSTRUCTION .cfi_offset %d29_64, -16
+    CFI_INSTRUCTION .cfi_offset %d28_64, -12
+    CFI_INSTRUCTION .cfi_offset %d27_64, -24
+    CFI_INSTRUCTION .cfi_offset %d26_64, -20
+    CFI_INSTRUCTION .cfi_offset %d25_64, -32
+    CFI_INSTRUCTION .cfi_offset %d24_64, -28
+    CFI_INSTRUCTION .cfi_offset %d23_64, -40
+    CFI_INSTRUCTION .cfi_offset %d22_64, -36
+    CFI_INSTRUCTION .cfi_offset %d21_64, -48
+    CFI_INSTRUCTION .cfi_offset %d20_64, -44
+    CFI_INSTRUCTION .cfi_offset %ra_64, -52
+    CFI_INSTRUCTION .cfi_offset %s3_64, -56
+    CFI_INSTRUCTION .cfi_offset %s2_64, -60
+    CFI_INSTRUCTION .cfi_offset %s1_64, -64
+    CFI_INSTRUCTION .cfi_offset %s0_64, -68
+    %s1 = ADDu %v0, %t9
+    %s0 = OR %a0, %zero
+    %at = LW %sp, 128 :: (load 4 from stack, align 8)
+    %f29 = LWC1 %a2, 40 :: (load 4 from %ir.17, !tbaa !1)
+    %f7 = LWC1 %a2, 24 :: (load 4 from %ir.15, !tbaa !1)
+    %f8 = LWC1 %a2, 8 :: (load 4 from %ir.13, !tbaa !1)
+    %f28 = LWC1 %a2, 36 :: (load 4 from %ir.11, !tbaa !1)
+    %f30 = LWC1 %a2, 20 :: (load 4 from %ir.9, !tbaa !1)
+    %f14 = LWC1 %a2, 4 :: (load 4 from %ir.7, !tbaa !1)
+    SWC1 %f14, %sp, 40 :: (store 4 into stack)
+    %f31 = LWC1 %a2, 32 :: (load 4 from %ir.5, !tbaa !1)
+    %f15 = LWC1 %a2, 16 :: (load 4 from %ir.3, !tbaa !1)
+    SWC1 %f15, %sp, 36 :: (store 4 into stack)
+    %f16 = LWC1 killed %a2, 0 :: (load 4 from %ir.m, !tbaa !1)
+    BEQ %at, %zero, %bb.7..preheader, implicit-def %at {
+      SWC1 %f16, %sp, 32 :: (store 4 into stack)
+    }
+  
+  bb.1..preheader14 (freq 21):
+    successors: %bb.2..lr.ph18.preheader(62), %bb.10..loopexit(37)
+    liveins: %a1, %a3, %f7, %f8, %f14, %f15, %f16, %f28, %f29, %f30, %f31, %s0, %s1
+  
+    BEQ %s0, %zero, %bb.10..loopexit, implicit-def %at {
+      NOP
+    }
+  
+  bb.2..lr.ph18.preheader (freq 13):
+    successors: %bb.3..lr.ph18(100)
+    liveins: %a1, %a3, %f7, %f8, %f14, %f15, %f16, %f28, %f29, %f30, %f31, %s0, %s1
+  
+    %s2 = ADDiu killed %a3, 8
+    %s3 = ADDiu killed %a1, 8
+    %at = LW %s1, target-flags(<unknown>) %const.0 :: (load 4 from got)
+    %d9 = LDC1 killed %at, target-flags(<unknown>) %const.0 :: (load 8 from constant-pool)
+    SDC1 %d9, %sp, 24 :: (store 8 into stack)
+    %at = LW %s1, target-flags(<unknown>) %const.1 :: (load 4 from got)
+    %d13 = LDC1 killed %at, target-flags(<unknown>) %const.1 :: (load 8 from constant-pool)
+    SDC1 %d13, %sp, 16 :: (store 8 into stack)
+  
+  bb.3..lr.ph18 (freq 26):
+    successors: %bb.5..lr.ph18.split(62), %bb.4.call.sqrt(37)
+    liveins: %d9, %d13, %f7, %f8, %f14, %f15, %f16, %f28, %f29, %f30, %f31, %s0, %s1, %s2, %s3
+  
+    %f0 = LWC1 %s2, -4 :: (load 4 from %ir.scevgep28, !tbaa !1)
+    %f1 = FMUL_S %f14, %f0
+    %f2 = FMUL_S %f30, %f0
+    %f0 = FMUL_S %f28, killed %f0
+    %f3 = LWC1 %s2, -8 :: (load 4 from %ir.scevgep29, !tbaa !1)
+    %f4 = LWC1 %s2, 0 :: (load 4 from %ir.lsr.iv2527, !tbaa !1)
+    %f0 = MADD_S killed %f0, %f31, %f3
+    %f2 = MADD_S killed %f2, %f15, %f3
+    %f1 = MADD_S killed %f1, %f16, killed %f3
+    %f1 = MADD_S killed %f1, %f8, %f4
+    %f2 = MADD_S killed %f2, %f7, %f4
+    %f0 = MADD_S killed %f0, %f29, killed %f4
+    %d11 = CVT_D32_S killed %f0
+    %d10 = CVT_D32_S killed %f2
+    %d1 = FMUL_D32 %d10, %d10
+    %d12 = CVT_D32_S killed %f1
+    %d0 = MADD_D32 killed %d1, %d12, %d12
+    %d6 = MADD_D32 killed %d0, %d11, %d11
+    %d0 = FSQRT_D32 %d6
+    FCMP_D32 %d0, %d0, 17, implicit-def %fcc0
+    BC1F %fcc0, %bb.5..lr.ph18.split, implicit-def %at {
+      NOP
+    }
+  
+  bb.4.call.sqrt (freq 9):
+    successors: %bb.5..lr.ph18.split(100)
+    liveins: %d6, %d10, %d11, %d12, %f7, %f8, %f28, %f29, %f30, %f31, %s0, %s1, %s2, %s3
+  
+    %t9 = LW %s1, target-flags(<unknown>) @sqrt :: (load 4 from call-entry @sqrt)
+    %gp = OR %s1, %zero
+    %f26 = FMOV_S killed %f7
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %d6, implicit killed %gp, implicit-def %sp, implicit-def %d0 {
+      %f27 = FMOV_S killed %f8
+    }
+    %d9 = LDC1 %sp, 24 :: (load 8 from stack)
+    %f16 = LWC1 %sp, 32 :: (load 4 from stack)
+    %f15 = LWC1 %sp, 36 :: (load 4 from stack)
+    %f14 = LWC1 %sp, 40 :: (load 4 from stack)
+    %f8 = FMOV_S killed %f27
+    %f7 = FMOV_S killed %f26
+    %d13 = LDC1 %sp, 16 :: (load 8 from stack)
+  
+  bb.5..lr.ph18.split (freq 26):
+    successors: %bb.6..lr.ph18.split(50), %bb.3..lr.ph18(50)
+    liveins: %d0, %d9, %d10, %d11, %d12, %d13, %f7, %f8, %f14, %f15, %f16, %f28, %f29, %f30, %f31, %s0, %s1, %s2, %s3
+  
+    %d1 = FDIV_D32 %d9, %d0
+    %s2 = ADDiu killed %s2, 12
+    %at = ADDiu %s3, 12
+    %s0 = ADDiu killed %s0, -1
+    FCMP_D32 killed %d0, %d13, 23, implicit-def %fcc0
+    %d0 = FMOV_D32 %d9
+    %d0 = MOVF_D32 killed %d1, killed %fcc0, killed %d0
+    %d1 = FMUL_D32 killed %d11, %d0
+    %d2 = FMUL_D32 killed %d10, %d0
+    %d0 = FMUL_D32 killed %d12, killed %d0
+    %f0 = CVT_S_D32 killed %d0
+    SWC1 killed %f0, %s3, -8 :: (store 4 into %ir.scevgep22, !tbaa !1)
+    %f0 = CVT_S_D32 killed %d2
+    SWC1 killed %f0, %s3, -4 :: (store 4 into %ir.scevgep21, !tbaa !1)
+    %f0 = CVT_S_D32 killed %d1
+    SWC1 killed %f0, killed %s3, 0 :: (store 4 into %ir.51, !tbaa !1)
+    BNE %s0, %zero, %bb.3..lr.ph18, implicit-def %at {
+      %s3 = OR killed %at, %zero
+    }
+  
+  bb.6..lr.ph18.split (freq 13):
+    successors: %bb.10..loopexit(100)
+  
+    B %bb.10..loopexit, implicit-def %at {
+      NOP
+    }
+  
+  bb.7..preheader (freq 12):
+    successors: %bb.8..lr.ph.preheader(62), %bb.10..loopexit(37)
+    liveins: %a1, %a3, %f7, %f8, %f14, %f15, %f16, %f28, %f29, %f30, %f31, %s0
+  
+    BEQ %s0, %zero, %bb.10..loopexit, implicit-def %at {
+      NOP
+    }
+  
+  bb.8..lr.ph.preheader (freq 8):
+    successors: %bb.9..lr.ph(100)
+    liveins: %a1, %a3, %f7, %f8, %f14, %f15, %f16, %f28, %f29, %f30, %f31, %s0
+  
+    %v1 = ADDiu killed %a3, 8
+    %v0 = ADDiu killed %a1, 8
+  
+  bb.9..lr.ph (freq 255):
+    successors: %bb.10..loopexit(3), %bb.9..lr.ph(96)
+    liveins: %f7, %f8, %f14, %f15, %f16, %f28, %f29, %f30, %f31, %s0, %v0, %v1
+  
+    %f0 = LWC1 %v1, -4 :: (load 4 from %ir.scevgep12, !tbaa !1)
+    %f1 = FMUL_S %f28, %f0
+    %f2 = FMUL_S %f30, %f0
+    %f0 = FMUL_S %f14, killed %f0
+    %at = ADDiu %v1, 12
+    %a0 = ADDiu %v0, 12
+    %s0 = ADDiu killed %s0, -1
+    %f3 = LWC1 %v1, -8 :: (load 4 from %ir.scevgep13, !tbaa !1)
+    %f4 = LWC1 killed %v1, 0 :: (load 4 from %ir.lsr.iv911, !tbaa !1)
+    %f0 = MADD_S killed %f0, %f16, %f3
+    %f2 = MADD_S killed %f2, %f15, %f3
+    %f1 = MADD_S killed %f1, %f31, killed %f3
+    %f1 = MADD_S killed %f1, %f29, %f4
+    %f2 = MADD_S killed %f2, %f7, %f4
+    %f0 = MADD_S killed %f0, %f8, killed %f4
+    SWC1 killed %f0, %v0, -8 :: (store 4 into %ir.scevgep6, !tbaa !1)
+    SWC1 killed %f2, %v0, -4 :: (store 4 into %ir.scevgep5, !tbaa !1)
+    SWC1 killed %f1, killed %v0, 0 :: (store 4 into %ir.lsr.iv24, !tbaa !1)
+    %v1 = OR killed %at, %zero
+    BNE %s0, %zero, %bb.9..lr.ph, implicit-def %at {
+      %v0 = OR killed %a0, %zero
+    }
+  
+  bb.10..loopexit (freq 34):
+    liveouts:
+  
+    %s0 = LW %sp, 44 :: (load 4 from stack)
+    %s1 = LW %sp, 48 :: (load 4 from stack)
+    %s2 = LW %sp, 52 :: (load 4 from stack)
+    %s3 = LW %sp, 56 :: (load 4 from stack)
+    %ra = LW %sp, 60 :: (load 4 from stack)
+    %d10 = LDC1 %sp, 64 :: (load 8 from stack)
+    %d11 = LDC1 %sp, 72 :: (load 8 from stack)
+    %d12 = LDC1 %sp, 80 :: (load 8 from stack)
+    %d13 = LDC1 %sp, 88 :: (load 8 from stack)
+    %d14 = LDC1 %sp, 96 :: (load 8 from stack)
+    %d15 = LDC1 %sp, 104 :: (load 8 from stack)
+    PseudoReturn %ra {
+      %sp = ADDiu %sp, 112
+    }
+
+...

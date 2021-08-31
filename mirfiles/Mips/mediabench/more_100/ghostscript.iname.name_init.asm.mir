@@ -1,0 +1,1761 @@
+--- |
+  ; ModuleID = '/home/romi/didaktoriko/unison/unison-experiments/experiments/test-input/c/mediabench/mips_zip/build-mips/ghostscript/ghostscript.iname.ll'
+  target datalayout = "E-m:m-p:32:32-i8:8:32-i16:16:32-i64:64-n32-S64"
+  target triple = "mips--linux-gnu"
+  
+  %struct.gs_memory_struct_type_s = type { i32, i8*, %struct.struct_shared_procs_s*, void (i8*, i32)*, %struct.gs_ptr_procs_s* (i8*, i32, i32, i8**)*, void (i8*, i32, %struct.gc_state_s*)*, void (i8*)* }
+  %struct.struct_shared_procs_s = type opaque
+  %struct.gs_ptr_procs_s = type { void (i8*, %struct.gc_state_s*)*, i32 (i8*, %struct.gc_state_s*)*, i8* (i8*, %struct.gc_state_s*)* }
+  %struct.gc_state_s = type opaque
+  %struct.name_table_s = type { i32, i32, i32, i32, %struct.gs_memory_s*, [1024 x i32], [512 x %struct.name_sub_table_s*] }
+  %struct.gs_memory_s = type { %struct.gs_memory_procs_s }
+  %struct.gs_memory_procs_s = type { i8* (%struct.gs_memory_s*, i32, i8*)*, i8* (%struct.gs_memory_s*, i32, i8*)*, i8* (%struct.gs_memory_s*, %struct.gs_memory_struct_type_s*, i8*)*, i8* (%struct.gs_memory_s*, %struct.gs_memory_struct_type_s*, i8*)*, i8* (%struct.gs_memory_s*, i32, i32, i8*)*, i8* (%struct.gs_memory_s*, i32, i32, i8*)*, i8* (%struct.gs_memory_s*, i32, %struct.gs_memory_struct_type_s*, i8*)*, i8* (%struct.gs_memory_s*, i32, %struct.gs_memory_struct_type_s*, i8*)*, i8* (%struct.gs_memory_s*, i8*, i32, i8*)*, i32 (%struct.gs_memory_s*, i8*)*, %struct.gs_memory_struct_type_s* (%struct.gs_memory_s*, i8*)*, void (%struct.gs_memory_s*, i8*, i8*)*, i8* (%struct.gs_memory_s*, i32, i8*)*, i8* (%struct.gs_memory_s*, i32, i8*)*, i8* (%struct.gs_memory_s*, i8*, i32, i32, i8*)*, void (%struct.gs_memory_s*, i8*, i32, i8*)*, void (%struct.gs_memory_s*, %struct.gs_gc_root_s*, %struct.gs_ptr_procs_s*, i8**, i8*)*, void (%struct.gs_memory_s*, %struct.gs_gc_root_s*, i8*)*, void (%struct.gs_memory_s*, %struct.gs_memory_status_s*)*, void (%struct.gs_memory_s*, i32)* }
+  %struct.gs_gc_root_s = type { %struct.gs_gc_root_s*, %struct.gs_ptr_procs_s*, i8** }
+  %struct.gs_memory_status_s = type { i32, i32 }
+  %struct.name_sub_table_s = type { [128 x %struct.name_s] }
+  %struct.name_s = type { i16, i16, i8*, %struct.ref_s* }
+  %struct.ref_s = type { %struct.tas_s, %union.v }
+  %struct.tas_s = type { i16, i16 }
+  %union.v = type { i32 }
+  %struct.gs_ref_memory_s = type opaque
+  %struct.alloc_save_s = type opaque
+  %struct.gs_const_string_s = type { i8*, i32 }
+  
+  @name_max_string = global i32 16383, align 4
+  @st_name_table = internal global %struct.gs_memory_struct_type_s { i32 6164, i8* getelementptr inbounds ([11 x i8], [11 x i8]* @.str.3, i32 0, i32 0), %struct.struct_shared_procs_s* null, void (i8*, i32)* null, %struct.gs_ptr_procs_s* (i8*, i32, i32, i8**)* @name_table_enum_ptrs, void (i8*, i32, %struct.gc_state_s*)* @name_table_reloc_ptrs, void (i8*)* null }, align 4
+  @.str = private unnamed_addr constant [14 x i8] c"name_init(nt)\00", align 1
+  @the_nt = internal global %struct.name_table_s* null, align 4
+  @nt_1char_names = internal global [128 x i8] c"\00\01\02\03\04\05\06\07\08\09\0A\0B\0C\0D\0E\0F\10\11\12\13\14\15\16\17\18\19\1A\1B\1C\1D\1E\1F !\22#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\5C]^_`abcdefghijklmnopqrstuvwxyz{|}~\7F", align 1
+  @the_nt_root = internal global %struct.gs_gc_root_s zeroinitializer, align 4
+  @ptr_struct_procs = external global %struct.gs_ptr_procs_s, align 4
+  @.str.1 = private unnamed_addr constant [11 x i8] c"name table\00", align 1
+  @hash_permutation = internal unnamed_addr constant [256 x i8] c"\01W1\0C\B0\B2f\A6y\C1\06T\F9\E6,\A3\0E\C5\D5\B5\A1U\DAP@\EF\18\E2\EC\8E&\C8n\B1hg\8D\FD\FF2MeQ\12-`\1F\DE\19k\BEFV\ED\F0\22H\F2\14\D6\F4\E3\95\EBa\EA9\16<\FAR\AF\D0\05\7F\C7o>\87\F8\AE\A9\D3:B\9Aj\C3\F5\AB\11\BB\B6\B3\00\F3\848\94K\80\85\9Ed\82~[\0D\99\F6\D8\DBwD\DFNSX\C9cz\0B\5C \88r4\0A\8A\1E0\B7\9C#=\1A\8FJ\FB^\81\A2?\98\AA\07s\A7\F1\CE\03\967;\97\DCZ5\17\83}\AD\0F\EEO_Y\10i\89\E1\E0\D9\A0%{vI\02\9D.t\09\91\86\E4\CF\D4\CA\D7E\E5\1B\BCC|\A8\FC*\04\1Dl\15\F7\13\CD'\CB\E9(\BA\93\C6\C0\9B!\A4\BFb\CC\A5\B4uL\8C$\D2\AC)6\9F\08\B9\E8q\C4\E7/\92x3A\1C\90\FE\DD]\BD\C2\8Bp+Gm\B8\D1", align 1
+  @.str.2 = private unnamed_addr constant [17 x i8] c"name_ref(string)\00", align 1
+  @.str.3 = private unnamed_addr constant [11 x i8] c"name_table\00", align 1
+  @st_name_sub_table = internal global %struct.gs_memory_struct_type_s { i32 1536, i8* getelementptr inbounds ([15 x i8], [15 x i8]* @.str.5, i32 0, i32 0), %struct.struct_shared_procs_s* null, void (i8*, i32)* null, %struct.gs_ptr_procs_s* (i8*, i32, i32, i8**)* @name_sub_enum_ptrs, void (i8*, i32, %struct.gc_state_s*)* @name_sub_reloc_ptrs, void (i8*)* null }, align 4
+  @.str.4 = private unnamed_addr constant [15 x i8] c"name_alloc_sub\00", align 1
+  @.str.5 = private unnamed_addr constant [15 x i8] c"name_sub_table\00", align 1
+  @.str.6 = private unnamed_addr constant [14 x i8] c"name_scan_sub\00", align 1
+  
+  ; Function Attrs: nounwind
+  define %struct.name_table_s* @name_init(i32 signext %count, %struct.gs_memory_s* %mem) #0 {
+    %1 = icmp eq i32 %count, 0
+    br i1 %1, label %5, label %2
+  
+  ; <label>:2                                       ; preds = %0
+    %3 = add i32 %count, -1
+    %4 = icmp ugt i32 %3, 65535
+    br i1 %4, label %64, label %5
+  
+  ; <label>:5                                       ; preds = %2, %0
+    %.01 = phi i32 [ %count, %2 ], [ 65536, %0 ]
+    %6 = getelementptr inbounds %struct.gs_memory_s, %struct.gs_memory_s* %mem, i32 0, i32 0, i32 2
+    %7 = load i8* (%struct.gs_memory_s*, %struct.gs_memory_struct_type_s*, i8*)*, i8* (%struct.gs_memory_s*, %struct.gs_memory_struct_type_s*, i8*)** %6, align 4, !tbaa !1
+    %8 = tail call i8* %7(%struct.gs_memory_s* %mem, %struct.gs_memory_struct_type_s* nonnull @st_name_table, i8* nonnull getelementptr inbounds ([14 x i8], [14 x i8]* @.str, i32 0, i32 0)) #7
+    store i8* %8, i8** bitcast (%struct.name_table_s** @the_nt to i8**), align 4, !tbaa !7
+    tail call void @llvm.memset.p0i8.i32(i8* %8, i8 0, i32 6164, i32 4, i1 false)
+    %9 = add i32 %.01, -1
+    %10 = lshr i32 %9, 7
+    %11 = getelementptr inbounds i8, i8* %8, i32 12
+    %12 = bitcast i8* %11 to i32*
+    store i32 %10, i32* %12, align 4, !tbaa !8
+    %13 = getelementptr inbounds i8, i8* %8, i32 16
+    %14 = bitcast i8* %13 to %struct.gs_memory_s**
+    store %struct.gs_memory_s* %mem, %struct.gs_memory_s** %14, align 4, !tbaa !11
+    %scevgep9 = getelementptr i8, i8* %8, i32 4112
+    br label %15
+  
+  ; <label>:15                                      ; preds = %18, %5
+    %lsr.iv10 = phi i8* [ %scevgep11, %18 ], [ %scevgep9, %5 ]
+    %lsr.iv7 = phi i32 [ %lsr.iv.next8, %18 ], [ -1, %5 ]
+    %16 = add i32 %lsr.iv7, 1
+    %17 = icmp ugt i32 %16, %10
+    br i1 %17, label %name_alloc_sub.exit, label %18
+  
+  ; <label>:18                                      ; preds = %15
+    %19 = bitcast i8* %lsr.iv10 to %struct.name_sub_table_s**
+    %scevgep14 = getelementptr %struct.name_sub_table_s*, %struct.name_sub_table_s** %19, i32 1
+    %20 = load %struct.name_sub_table_s*, %struct.name_sub_table_s** %scevgep14, align 4, !tbaa !7
+    %21 = icmp eq %struct.name_sub_table_s* %20, null
+    %lsr.iv.next8 = add nsw i32 %lsr.iv7, 1
+    %22 = add i32 %lsr.iv.next8, 1
+    %scevgep11 = getelementptr i8, i8* %lsr.iv10, i32 4
+    br i1 %21, label %23, label %15
+  
+  ; <label>:23                                      ; preds = %18
+    %sunkaddr = ptrtoint i8* %8 to i32
+    %sunkaddr15 = add i32 %sunkaddr, 4
+    %sunkaddr16 = inttoptr i32 %sunkaddr15 to i32*
+    store i32 %22, i32* %sunkaddr16, align 4, !tbaa !12
+    %24 = icmp eq i32 %22, 0
+    br i1 %24, label %26, label %25
+  
+  ; <label>:25                                      ; preds = %23
+    %sunkaddr17 = ptrtoint i8* %8 to i32
+    %sunkaddr18 = add i32 %sunkaddr17, 8
+    %sunkaddr19 = inttoptr i32 %sunkaddr18 to i32*
+    store i32 %22, i32* %sunkaddr19, align 4, !tbaa !13
+    br label %26
+  
+  ; <label>:26                                      ; preds = %25, %23
+    %sunkaddr20 = ptrtoint %struct.gs_memory_s* %mem to i32
+    %sunkaddr21 = add i32 %sunkaddr20, 8
+    %sunkaddr22 = inttoptr i32 %sunkaddr21 to i8* (%struct.gs_memory_s*, %struct.gs_memory_struct_type_s*, i8*)**
+    %27 = load i8* (%struct.gs_memory_s*, %struct.gs_memory_struct_type_s*, i8*)*, i8* (%struct.gs_memory_s*, %struct.gs_memory_struct_type_s*, i8*)** %sunkaddr22, align 4, !tbaa !1
+    %28 = tail call i8* %27(%struct.gs_memory_s* %mem, %struct.gs_memory_struct_type_s* nonnull @st_name_sub_table, i8* nonnull getelementptr inbounds ([15 x i8], [15 x i8]* @.str.4, i32 0, i32 0)) #7
+    %29 = icmp eq i8* %28, null
+    br i1 %29, label %name_alloc_sub.exit, label %.loopexit.i
+  
+  .loopexit.i:                                      ; preds = %26
+    %30 = bitcast i8* %8 to %struct.name_table_s*
+    tail call void @llvm.memset.p0i8.i32(i8* nonnull %28, i8 0, i32 1536, i32 4, i1 false) #7
+    %sunkaddr23 = ptrtoint i8* %scevgep11 to i32
+    %sunkaddr24 = inttoptr i32 %sunkaddr23 to i8**
+    store i8* %28, i8** %sunkaddr24, align 4, !tbaa !7
+    tail call fastcc void @name_scan_sub(%struct.name_table_s* nonnull %30, i32 signext %lsr.iv.next8, i32 signext 0) #7
+    br label %name_alloc_sub.exit
+  
+  name_alloc_sub.exit:                              ; preds = %15, %.loopexit.i, %26
+    %sunkaddr25 = ptrtoint i8* %8 to i32
+    %sunkaddr26 = add i32 %sunkaddr25, 4
+    %sunkaddr27 = inttoptr i32 %sunkaddr26 to i32*
+    %31 = load i32, i32* %sunkaddr27, align 4, !tbaa !12
+    %sunkaddr28 = ptrtoint i8* %8 to i32
+    %sunkaddr29 = add i32 %sunkaddr28, 12
+    %sunkaddr30 = inttoptr i32 %sunkaddr29 to i32*
+    %32 = load i32, i32* %sunkaddr30, align 4
+    %33 = shl i32 %31, 2
+    %34 = add i32 %33, 4112
+    %scevgep1 = getelementptr i8, i8* %8, i32 %34
+    br label %65
+  
+  ; <label>:35                                      ; preds = %name_alloc_sub.exit.1, %54
+    %lsr.iv = phi i32 [ 59, %name_alloc_sub.exit.1 ], [ %lsr.iv.next, %54 ]
+    %i.14 = phi i32 [ -1, %name_alloc_sub.exit.1 ], [ %58, %54 ]
+    %36 = bitcast i8* %84 to [512 x %struct.name_sub_table_s*]*
+    %37 = add nsw i32 %i.14, 2
+    %38 = and i32 %lsr.iv, 127
+    %39 = lshr i32 %37, 7
+    %40 = getelementptr inbounds [512 x %struct.name_sub_table_s*], [512 x %struct.name_sub_table_s*]* %36, i32 0, i32 %39
+    %41 = load %struct.name_sub_table_s*, %struct.name_sub_table_s** %40, align 4, !tbaa !7
+    %42 = icmp slt i32 %i.14, 0
+    br i1 %42, label %43, label %48
+  
+  ; <label>:43                                      ; preds = %35
+    %44 = getelementptr inbounds %struct.name_sub_table_s, %struct.name_sub_table_s* %41, i32 0, i32 0, i32 %38, i32 2
+    store i8* getelementptr inbounds ([128 x i8], [128 x i8]* @nt_1char_names, i32 0, i32 0), i8** %44, align 4, !tbaa !14
+    %45 = getelementptr inbounds %struct.name_sub_table_s, %struct.name_sub_table_s* %41, i32 0, i32 0, i32 %38, i32 1
+    %46 = load i16, i16* %45, align 2
+    %47 = and i16 %46, -16384
+    store i16 %47, i16* %45, align 2
+    br label %54
+  
+  ; <label>:48                                      ; preds = %35
+    %49 = getelementptr inbounds %struct.name_sub_table_s, %struct.name_sub_table_s* %41, i32 0, i32 0, i32 %38, i32 2
+    %scevgep = getelementptr [128 x i8], [128 x i8]* @nt_1char_names, i32 0, i32 %i.14
+    store i8* %scevgep, i8** %49, align 4, !tbaa !14
+    %50 = getelementptr inbounds %struct.name_sub_table_s, %struct.name_sub_table_s* %41, i32 0, i32 0, i32 %38, i32 1
+    %51 = load i16, i16* %50, align 2
+    %52 = and i16 %51, -16384
+    %53 = or i16 %52, 1
+    store i16 %53, i16* %50, align 2
+    br label %54
+  
+  ; <label>:54                                      ; preds = %48, %43
+    %.pre-phi = phi i16* [ %50, %48 ], [ %45, %43 ]
+    %55 = phi i16 [ %53, %48 ], [ %47, %43 ]
+    %56 = or i16 %55, -16384
+    store i16 %56, i16* %.pre-phi, align 2
+    %57 = getelementptr inbounds %struct.name_sub_table_s, %struct.name_sub_table_s* %41, i32 0, i32 0, i32 %38, i32 3
+    store %struct.ref_s* null, %struct.ref_s** %57, align 4, !tbaa !17
+    %58 = add nsw i32 %i.14, 1
+    %lsr.iv.next = add nuw nsw i32 %lsr.iv, 59
+    %exitcond = icmp eq i32 %lsr.iv.next, 7670
+    br i1 %exitcond, label %59, label %35
+  
+  ; <label>:59                                      ; preds = %54
+    %60 = bitcast i8* %8 to %struct.name_table_s*
+    %61 = bitcast i8* %8 to i32*
+    store i32 0, i32* %61, align 4, !tbaa !18
+    tail call void @name_trace_finish(%struct.gc_state_s* null)
+    %62 = getelementptr inbounds %struct.gs_memory_s, %struct.gs_memory_s* %mem, i32 0, i32 0, i32 16
+    %63 = load void (%struct.gs_memory_s*, %struct.gs_gc_root_s*, %struct.gs_ptr_procs_s*, i8**, i8*)*, void (%struct.gs_memory_s*, %struct.gs_gc_root_s*, %struct.gs_ptr_procs_s*, i8**, i8*)** %62, align 4, !tbaa !19
+    tail call void %63(%struct.gs_memory_s* %mem, %struct.gs_gc_root_s* nonnull @the_nt_root, %struct.gs_ptr_procs_s* nonnull @ptr_struct_procs, i8** nonnull bitcast (%struct.name_table_s** @the_nt to i8**), i8* nonnull getelementptr inbounds ([11 x i8], [11 x i8]* @.str.1, i32 0, i32 0)) #7
+    br label %64
+  
+  ; <label>:64                                      ; preds = %59, %2
+    %.0 = phi %struct.name_table_s* [ %60, %59 ], [ null, %2 ]
+    ret %struct.name_table_s* %.0
+  
+  ; <label>:65                                      ; preds = %67, %name_alloc_sub.exit
+    %lsr.iv2 = phi i8* [ %scevgep3, %67 ], [ %scevgep1, %name_alloc_sub.exit ]
+    %sub_index.0.i.1 = phi i32 [ %31, %name_alloc_sub.exit ], [ %71, %67 ]
+    %66 = icmp ugt i32 %sub_index.0.i.1, %32
+    br i1 %66, label %name_alloc_sub.exit.1, label %67
+  
+  ; <label>:67                                      ; preds = %65
+    %68 = bitcast i8* %lsr.iv2 to %struct.name_sub_table_s**
+    %scevgep6 = getelementptr %struct.name_sub_table_s*, %struct.name_sub_table_s** %68, i32 1
+    %69 = load %struct.name_sub_table_s*, %struct.name_sub_table_s** %scevgep6, align 4, !tbaa !7
+    %70 = icmp eq %struct.name_sub_table_s* %69, null
+    %71 = add i32 %sub_index.0.i.1, 1
+    %72 = add i32 %71, -1
+    %scevgep3 = getelementptr i8, i8* %lsr.iv2, i32 4
+    br i1 %70, label %73, label %65
+  
+  ; <label>:73                                      ; preds = %67
+    %sunkaddr31 = ptrtoint i8* %8 to i32
+    %sunkaddr32 = add i32 %sunkaddr31, 4
+    %sunkaddr33 = inttoptr i32 %sunkaddr32 to i32*
+    store i32 %71, i32* %sunkaddr33, align 4, !tbaa !12
+    %sunkaddr34 = ptrtoint i8* %8 to i32
+    %sunkaddr35 = add i32 %sunkaddr34, 8
+    %sunkaddr36 = inttoptr i32 %sunkaddr35 to i32*
+    %74 = load i32, i32* %sunkaddr36, align 4, !tbaa !13
+    %75 = icmp ugt i32 %71, %74
+    br i1 %75, label %76, label %77
+  
+  ; <label>:76                                      ; preds = %73
+    %sunkaddr37 = ptrtoint i8* %8 to i32
+    %sunkaddr38 = add i32 %sunkaddr37, 8
+    %sunkaddr39 = inttoptr i32 %sunkaddr38 to i32*
+    store i32 %71, i32* %sunkaddr39, align 4, !tbaa !13
+    br label %77
+  
+  ; <label>:77                                      ; preds = %76, %73
+    %sunkaddr40 = ptrtoint i8* %8 to i32
+    %sunkaddr41 = add i32 %sunkaddr40, 16
+    %sunkaddr42 = inttoptr i32 %sunkaddr41 to %struct.gs_memory_s**
+    %78 = load %struct.gs_memory_s*, %struct.gs_memory_s** %sunkaddr42, align 4, !tbaa !11
+    %79 = getelementptr inbounds %struct.gs_memory_s, %struct.gs_memory_s* %78, i32 0, i32 0, i32 2
+    %80 = load i8* (%struct.gs_memory_s*, %struct.gs_memory_struct_type_s*, i8*)*, i8* (%struct.gs_memory_s*, %struct.gs_memory_struct_type_s*, i8*)** %79, align 4, !tbaa !1
+    %81 = tail call i8* %80(%struct.gs_memory_s* %78, %struct.gs_memory_struct_type_s* nonnull @st_name_sub_table, i8* nonnull getelementptr inbounds ([15 x i8], [15 x i8]* @.str.4, i32 0, i32 0)) #7
+    %82 = icmp eq i8* %81, null
+    br i1 %82, label %name_alloc_sub.exit.1, label %.loopexit.i.1
+  
+  .loopexit.i.1:                                    ; preds = %77
+    %83 = bitcast i8* %8 to %struct.name_table_s*
+    tail call void @llvm.memset.p0i8.i32(i8* nonnull %81, i8 0, i32 1536, i32 4, i1 false) #7
+    %sunkaddr43 = ptrtoint i8* %scevgep3 to i32
+    %sunkaddr44 = inttoptr i32 %sunkaddr43 to i8**
+    store i8* %81, i8** %sunkaddr44, align 4, !tbaa !7
+    tail call fastcc void @name_scan_sub(%struct.name_table_s* nonnull %83, i32 signext %72, i32 signext 0) #7
+    br label %name_alloc_sub.exit.1
+  
+  name_alloc_sub.exit.1:                            ; preds = %65, %.loopexit.i.1, %77
+    %84 = getelementptr inbounds i8, i8* %8, i32 4116
+    br label %35
+  }
+  
+  ; Function Attrs: argmemonly nounwind
+  declare void @llvm.lifetime.start(i64, i8* nocapture) #1
+  
+  ; Function Attrs: argmemonly nounwind
+  declare void @llvm.memset.p0i8.i32(i8* nocapture, i8, i32, i32, i1) #1
+  
+  ; Function Attrs: argmemonly nounwind
+  declare void @llvm.lifetime.end(i64, i8* nocapture) #1
+  
+  ; Function Attrs: nounwind
+  define void @name_trace_finish(%struct.gc_state_s* readnone %gcst) #0 {
+    %1 = load %struct.name_table_s*, %struct.name_table_s** @the_nt, align 4, !tbaa !7
+    %2 = getelementptr inbounds %struct.name_table_s, %struct.name_table_s* %1, i32 0, i32 5, i32 0
+    br label %3
+  
+  ; <label>:3                                       ; preds = %.outer2._crit_edge, %0
+    %phash.022 = phi i32* [ %2, %0 ], [ %28, %.outer2._crit_edge ]
+    %i.021 = phi i32 [ 0, %0 ], [ %29, %.outer2._crit_edge ]
+    %pnprev.020 = phi %struct.name_s* [ undef, %0 ], [ %pnprev.1.ph.lcssa, %.outer2._crit_edge ]
+    %4 = load i32, i32* %phash.022, align 4, !tbaa !20
+    %5 = icmp eq i32 %4, 0
+    br i1 %5, label %.outer2._crit_edge, label %.lr.ph.lr.ph
+  
+  .outer.loopexit:                                  ; preds = %7
+    %6 = icmp eq i16 %14, 0
+    br i1 %6, label %.outer2._crit_edge, label %.lr.ph.lr.ph
+  
+  .lr.ph.lr.ph:                                     ; preds = %3, %.outer.loopexit
+    %prev.0.ph18 = phi i32 [ %nidx.010, %.outer.loopexit ], [ 0, %3 ]
+    %nidx.0.ph17 = phi i32 [ %15, %.outer.loopexit ], [ %4, %3 ]
+    %pnprev.1.ph16 = phi %struct.name_s* [ %12, %.outer.loopexit ], [ %pnprev.020, %3 ]
+    br label %.lr.ph
+  
+  .lr.ph:                                           ; preds = %.outer2, %.lr.ph.lr.ph
+    %prev.0.ph413 = phi i32 [ %prev.0.ph18, %.lr.ph.lr.ph ], [ 0, %.outer2 ]
+    %nidx.0.ph312 = phi i32 [ %nidx.0.ph17, %.lr.ph.lr.ph ], [ %15, %.outer2 ]
+    br label %7
+  
+  ; <label>:7                                       ; preds = %25, %.lr.ph
+    %nidx.010 = phi i32 [ %nidx.0.ph312, %.lr.ph ], [ %15, %25 ]
+    %8 = lshr i32 %nidx.010, 7
+    %9 = getelementptr inbounds %struct.name_table_s, %struct.name_table_s* %1, i32 0, i32 6, i32 %8
+    %10 = load %struct.name_sub_table_s*, %struct.name_sub_table_s** %9, align 4, !tbaa !7
+    %11 = and i32 %nidx.010, 127
+    %12 = getelementptr inbounds %struct.name_sub_table_s, %struct.name_sub_table_s* %10, i32 0, i32 0, i32 %11
+    %13 = bitcast %struct.name_s* %12 to i16*
+    %14 = load i16, i16* %13, align 4, !tbaa !21
+    %15 = zext i16 %14 to i32
+    %16 = getelementptr inbounds %struct.name_sub_table_s, %struct.name_sub_table_s* %10, i32 0, i32 0, i32 %11, i32 1
+    %17 = load i16, i16* %16, align 2
+    %18 = and i16 %17, 16384
+    %19 = icmp eq i16 %18, 0
+    br i1 %19, label %20, label %.outer.loopexit
+  
+  ; <label>:20                                      ; preds = %7
+    %21 = icmp eq i32 %prev.0.ph413, 0
+    %22 = getelementptr inbounds %struct.name_sub_table_s, %struct.name_sub_table_s* %10, i32 0, i32 0, i32 %11, i32 2
+    store i8* null, i8** %22, align 4, !tbaa !14
+    %23 = and i16 %17, -16384
+    store i16 %23, i16* %16, align 2
+    br i1 %21, label %.outer2, label %25
+  
+  .outer2:                                          ; preds = %20
+    store i32 %15, i32* %phash.022, align 4, !tbaa !20
+    %24 = icmp eq i16 %14, 0
+    br i1 %24, label %.outer2._crit_edge, label %.lr.ph
+  
+  ; <label>:25                                      ; preds = %20
+    %26 = bitcast %struct.name_s* %pnprev.1.ph16 to i16*
+    store i16 %14, i16* %26, align 4, !tbaa !21
+    %27 = icmp eq i16 %14, 0
+    br i1 %27, label %.outer2._crit_edge, label %7
+  
+  .outer2._crit_edge:                               ; preds = %.outer.loopexit, %.outer2, %25, %3
+    %pnprev.1.ph.lcssa = phi %struct.name_s* [ %pnprev.020, %3 ], [ %pnprev.1.ph16, %25 ], [ %pnprev.1.ph16, %.outer2 ], [ %12, %.outer.loopexit ]
+    %28 = getelementptr inbounds i32, i32* %phash.022, i32 1
+    %29 = add nuw nsw i32 %i.021, 1
+    %exitcond = icmp eq i32 %29, 1024
+    br i1 %exitcond, label %30, label %3
+  
+  ; <label>:30                                      ; preds = %.outer2._crit_edge
+    %31 = bitcast %struct.name_table_s* %1 to i8*
+    %32 = bitcast %struct.name_table_s* %1 to i32*
+    store i32 0, i32* %32, align 4, !tbaa !18
+    %33 = getelementptr inbounds %struct.name_table_s, %struct.name_table_s* %1, i32 0, i32 2
+    %34 = load i32, i32* %33, align 4, !tbaa !13
+    %35 = add i32 %34, -1
+    %36 = shl i32 %34, 2
+    %37 = add i32 %36, 4112
+    %uglygep = getelementptr i8, i8* %31, i32 %37
+    %uglygep1 = bitcast i8* %uglygep to %struct.name_table_s*
+    br label %38
+  
+  ; <label>:38                                      ; preds = %60, %30
+    %lsr.iv2 = phi %struct.name_table_s* [ %62, %60 ], [ %uglygep1, %30 ]
+    %lsr.iv = phi i32 [ %lsr.iv.next, %60 ], [ %35, %30 ]
+    %39 = icmp eq i32 %lsr.iv, -1
+    br i1 %39, label %63, label %40
+  
+  ; <label>:40                                      ; preds = %38
+    %41 = bitcast %struct.name_table_s* %lsr.iv2 to %struct.name_sub_table_s**
+    %42 = load %struct.name_sub_table_s*, %struct.name_sub_table_s** %41, align 4, !tbaa !7
+    %43 = icmp eq %struct.name_sub_table_s* %42, null
+    br i1 %43, label %60, label %44
+  
+  ; <label>:44                                      ; preds = %40
+    %45 = bitcast %struct.name_table_s* %lsr.iv2 to %struct.name_sub_table_s**
+    %46 = icmp ne %struct.gc_state_s* %gcst, null
+    tail call fastcc void @name_scan_sub(%struct.name_table_s* nonnull %1, i32 signext %lsr.iv, i32 signext 1)
+    %47 = load %struct.name_sub_table_s*, %struct.name_sub_table_s** %45, align 4, !tbaa !7
+    %48 = icmp eq %struct.name_sub_table_s* %47, null
+    %or.cond = and i1 %46, %48
+    br i1 %or.cond, label %49, label %60
+  
+  ; <label>:49                                      ; preds = %44
+    %50 = getelementptr inbounds %struct.name_sub_table_s, %struct.name_sub_table_s* %42, i32 -1, i32 0, i32 126, i32 3
+    %51 = bitcast %struct.ref_s** %50 to i8*
+    %52 = load i8, i8* %51, align 4
+    %53 = icmp slt i8 %52, 0
+    %54 = bitcast %struct.ref_s** %50 to i32*
+    %55 = load i32, i32* %54, align 4
+    br i1 %53, label %56, label %58
+  
+  ; <label>:56                                      ; preds = %49
+    %57 = or i32 %55, 1610612736
+    %sunkaddr = ptrtoint %struct.name_sub_table_s* %42 to i32
+    %sunkaddr6 = add i32 %sunkaddr, -16
+    %sunkaddr7 = inttoptr i32 %sunkaddr6 to i32*
+    store i32 %57, i32* %sunkaddr7, align 4
+    br label %60
+  
+  ; <label>:58                                      ; preds = %49
+    %59 = or i32 %55, 2147483647
+    %sunkaddr8 = ptrtoint %struct.name_sub_table_s* %42 to i32
+    %sunkaddr9 = add i32 %sunkaddr8, -16
+    %sunkaddr10 = inttoptr i32 %sunkaddr9 to i32*
+    store i32 %59, i32* %sunkaddr10, align 4
+    br label %60
+  
+  ; <label>:60                                      ; preds = %58, %56, %44, %40
+    %61 = bitcast %struct.name_table_s* %lsr.iv2 to i8*
+    %lsr.iv.next = add i32 %lsr.iv, -1
+    %uglygep4 = getelementptr i8, i8* %61, i32 -4
+    %62 = bitcast i8* %uglygep4 to %struct.name_table_s*
+    %not. = icmp eq i32 %lsr.iv.next, -1
+    br i1 %not., label %63, label %38
+  
+  ; <label>:63                                      ; preds = %60, %38
+    %64 = getelementptr inbounds %struct.name_table_s, %struct.name_table_s* %1, i32 0, i32 1
+    store i32 0, i32* %64, align 4, !tbaa !12
+    ret void
+  }
+  
+  ; Function Attrs: norecurse nounwind readonly
+  define %struct.name_table_s* @the_name_table() #2 {
+    %1 = load %struct.name_table_s*, %struct.name_table_s** @the_nt, align 4, !tbaa !7
+    ret %struct.name_table_s* %1
+  }
+  
+  ; Function Attrs: norecurse nounwind readonly
+  define %struct.gs_memory_s* @name_memory() #2 {
+    %1 = load %struct.name_table_s*, %struct.name_table_s** @the_nt, align 4, !tbaa !7
+    %2 = getelementptr inbounds %struct.name_table_s, %struct.name_table_s* %1, i32 0, i32 4
+    %3 = load %struct.gs_memory_s*, %struct.gs_memory_s** %2, align 4, !tbaa !11
+    ret %struct.gs_memory_s* %3
+  }
+  
+  ; Function Attrs: nounwind
+  define i32 @name_ref(i8* %ptr, i32 signext %size, %struct.ref_s* nocapture %pref, i32 signext %enterflag) #0 {
+    %1 = load %struct.name_table_s*, %struct.name_table_s** @the_nt, align 4, !tbaa !7
+    switch i32 %size, label %23 [
+      i32 0, label %2
+      i32 1, label %6
+    ]
+  
+  ; <label>:2                                       ; preds = %0
+    %3 = getelementptr inbounds %struct.name_table_s, %struct.name_table_s* %1, i32 0, i32 6, i32 0
+    %4 = load %struct.name_sub_table_s*, %struct.name_sub_table_s** %3, align 4, !tbaa !7
+    %5 = getelementptr inbounds %struct.name_sub_table_s, %struct.name_sub_table_s* %4, i32 0, i32 0, i32 59
+    br label %.thread
+  
+  ; <label>:6                                       ; preds = %0
+    %7 = load i8, i8* %ptr, align 1, !tbaa !22
+    %8 = icmp sgt i8 %7, -1
+    %9 = zext i8 %7 to i32
+    br i1 %8, label %13, label %.thread28
+  
+  .thread28:                                        ; preds = %6
+    %10 = getelementptr inbounds [256 x i8], [256 x i8]* @hash_permutation, i32 0, i32 %9
+    %11 = load i8, i8* %10, align 1, !tbaa !22
+    %12 = zext i8 %11 to i32
+    br label %._crit_edge20
+  
+  ; <label>:13                                      ; preds = %6
+    %14 = add nuw nsw i32 %9, 2
+    %15 = and i32 %14, 384
+    %16 = mul nuw nsw i32 %14, 59
+    %17 = and i32 %16, 127
+    %18 = or i32 %17, %15
+    %19 = lshr i32 %14, 7
+    %20 = getelementptr inbounds %struct.name_table_s, %struct.name_table_s* %1, i32 0, i32 6, i32 %19
+    %21 = load %struct.name_sub_table_s*, %struct.name_sub_table_s** %20, align 4, !tbaa !7
+    %22 = getelementptr inbounds %struct.name_sub_table_s, %struct.name_sub_table_s* %21, i32 0, i32 0, i32 %17
+    br label %.thread
+  
+  ; <label>:23                                      ; preds = %0
+    %.pre = load i8, i8* %ptr, align 1, !tbaa !22
+    %24 = zext i8 %.pre to i32
+    %25 = getelementptr inbounds [256 x i8], [256 x i8]* @hash_permutation, i32 0, i32 %24
+    %26 = load i8, i8* %25, align 1, !tbaa !22
+    %27 = zext i8 %26 to i32
+    %28 = add i32 %size, -1
+    %29 = icmp eq i32 %28, 0
+    br i1 %29, label %._crit_edge20, label %.lr.ph19.preheader
+  
+  .lr.ph19.preheader:                               ; preds = %23
+    %30 = sub i32 1, %size
+    %scevgep5 = getelementptr i8, i8* %ptr, i32 1
+    br label %.lr.ph19
+  
+  .lr.ph19:                                         ; preds = %.lr.ph19, %.lr.ph19.preheader
+    %lsr.iv6 = phi i8* [ %scevgep7, %.lr.ph19 ], [ %scevgep5, %.lr.ph19.preheader ]
+    %lsr.iv4 = phi i32 [ %lsr.iv.next, %.lr.ph19 ], [ %30, %.lr.ph19.preheader ]
+    %hash.016 = phi i32 [ %39, %.lr.ph19 ], [ %27, %.lr.ph19.preheader ]
+    %31 = shl i32 %hash.016, 8
+    %32 = and i32 %hash.016, 255
+    %33 = load i8, i8* %lsr.iv6, align 1, !tbaa !22
+    %34 = zext i8 %33 to i32
+    %35 = xor i32 %34, %32
+    %36 = getelementptr inbounds [256 x i8], [256 x i8]* @hash_permutation, i32 0, i32 %35
+    %37 = load i8, i8* %36, align 1, !tbaa !22
+    %38 = zext i8 %37 to i32
+    %39 = or i32 %38, %31
+    %lsr.iv.next = add i32 %lsr.iv4, 1
+    %scevgep7 = getelementptr i8, i8* %lsr.iv6, i32 1
+    %40 = icmp eq i32 %lsr.iv.next, 0
+    br i1 %40, label %._crit_edge20, label %.lr.ph19
+  
+  ._crit_edge20:                                    ; preds = %.lr.ph19, %23, %.thread28
+    %hash.0.lcssa = phi i32 [ %27, %23 ], [ %12, %.thread28 ], [ %39, %.lr.ph19 ]
+    %41 = and i32 %hash.0.lcssa, 1023
+    %42 = getelementptr inbounds %struct.name_table_s, %struct.name_table_s* %1, i32 0, i32 5, i32 %41
+    %43 = load i32, i32* %42, align 4, !tbaa !20
+    %44 = icmp eq i32 %43, 0
+    br i1 %44, label %._crit_edge, label %.lr.ph
+  
+  .lr.ph:                                           ; preds = %._crit_edge20, %60
+    %nidx.114 = phi i32 [ %63, %60 ], [ %43, %._crit_edge20 ]
+    %45 = lshr i32 %nidx.114, 7
+    %46 = getelementptr inbounds %struct.name_table_s, %struct.name_table_s* %1, i32 0, i32 6, i32 %45
+    %47 = load %struct.name_sub_table_s*, %struct.name_sub_table_s** %46, align 4, !tbaa !7
+    %48 = and i32 %nidx.114, 127
+    %49 = getelementptr inbounds %struct.name_sub_table_s, %struct.name_sub_table_s* %47, i32 0, i32 0, i32 %48
+    %50 = getelementptr inbounds %struct.name_sub_table_s, %struct.name_sub_table_s* %47, i32 0, i32 0, i32 %48, i32 1
+    %51 = load i16, i16* %50, align 2
+    %52 = and i16 %51, 16383
+    %53 = zext i16 %52 to i32
+    %54 = icmp eq i32 %53, %size
+    br i1 %54, label %55, label %60
+  
+  ; <label>:55                                      ; preds = %.lr.ph
+    %56 = getelementptr inbounds %struct.name_sub_table_s, %struct.name_sub_table_s* %47, i32 0, i32 0, i32 %48, i32 2
+    %57 = load i8*, i8** %56, align 4, !tbaa !14
+    %58 = tail call i32 @memcmp(i8* %ptr, i8* %57, i32 signext %size) #8
+    %59 = icmp eq i32 %58, 0
+    br i1 %59, label %.thread, label %60
+  
+  ; <label>:60                                      ; preds = %55, %.lr.ph
+    %61 = bitcast %struct.name_s* %49 to i16*
+    %62 = load i16, i16* %61, align 4, !tbaa !21
+    %63 = zext i16 %62 to i32
+    %64 = icmp eq i16 %62, 0
+    br i1 %64, label %._crit_edge, label %.lr.ph
+  
+  ._crit_edge:                                      ; preds = %60, %._crit_edge20
+    %65 = icmp slt i32 %enterflag, 0
+    br i1 %65, label %.loopexit, label %66
+  
+  ; <label>:66                                      ; preds = %._crit_edge
+    %67 = icmp ugt i32 %size, 16383
+    br i1 %67, label %.loopexit, label %68
+  
+  ; <label>:68                                      ; preds = %66
+    %69 = bitcast %struct.name_table_s* %1 to i32*
+    %70 = load i32, i32* %69, align 4, !tbaa !18
+    %71 = icmp eq i32 %70, 0
+    br i1 %71, label %72, label %104
+  
+  ; <label>:72                                      ; preds = %68
+    %73 = bitcast %struct.name_table_s* %1 to i8*
+    %74 = getelementptr inbounds %struct.name_table_s, %struct.name_table_s* %1, i32 0, i32 1
+    %75 = load i32, i32* %74, align 4, !tbaa !12
+    %76 = getelementptr inbounds %struct.name_table_s, %struct.name_table_s* %1, i32 0, i32 3
+    %77 = load i32, i32* %76, align 4
+    %78 = shl i32 %75, 2
+    %79 = add i32 %78, 4112
+    %uglygep = getelementptr i8, i8* %73, i32 %79
+    %uglygep1 = bitcast i8* %uglygep to %struct.name_table_s*
+    br label %80
+  
+  ; <label>:80                                      ; preds = %82, %72
+    %lsr.iv = phi %struct.name_table_s* [ %88, %82 ], [ %uglygep1, %72 ]
+    %sub_index.0.i = phi i32 [ %75, %72 ], [ %86, %82 ]
+    %81 = icmp ugt i32 %sub_index.0.i, %77
+    br i1 %81, label %.loopexit, label %82
+  
+  ; <label>:82                                      ; preds = %80
+    %83 = bitcast %struct.name_table_s* %lsr.iv to %struct.name_sub_table_s**
+    %scevgep3 = getelementptr %struct.name_sub_table_s*, %struct.name_sub_table_s** %83, i32 1
+    %84 = load %struct.name_sub_table_s*, %struct.name_sub_table_s** %scevgep3, align 4, !tbaa !7
+    %85 = icmp eq %struct.name_sub_table_s* %84, null
+    %86 = add i32 %sub_index.0.i, 1
+    %87 = add i32 %86, -1
+    %scevgep = getelementptr %struct.name_table_s, %struct.name_table_s* %lsr.iv, i32 0, i32 1
+    %88 = bitcast i32* %scevgep to %struct.name_table_s*
+    br i1 %85, label %89, label %80
+  
+  ; <label>:89                                      ; preds = %82
+    %sunkaddr = ptrtoint %struct.name_table_s* %1 to i32
+    %sunkaddr8 = add i32 %sunkaddr, 4
+    %sunkaddr9 = inttoptr i32 %sunkaddr8 to i32*
+    store i32 %86, i32* %sunkaddr9, align 4, !tbaa !12
+    %90 = getelementptr inbounds %struct.name_table_s, %struct.name_table_s* %1, i32 0, i32 2
+    %91 = load i32, i32* %90, align 4, !tbaa !13
+    %92 = icmp ugt i32 %86, %91
+    br i1 %92, label %93, label %94
+  
+  ; <label>:93                                      ; preds = %89
+    %sunkaddr10 = ptrtoint %struct.name_table_s* %1 to i32
+    %sunkaddr11 = add i32 %sunkaddr10, 8
+    %sunkaddr12 = inttoptr i32 %sunkaddr11 to i32*
+    store i32 %86, i32* %sunkaddr12, align 4, !tbaa !13
+    br label %94
+  
+  ; <label>:94                                      ; preds = %93, %89
+    %95 = getelementptr inbounds %struct.name_table_s, %struct.name_table_s* %1, i32 0, i32 4
+    %96 = load %struct.gs_memory_s*, %struct.gs_memory_s** %95, align 4, !tbaa !11
+    %97 = getelementptr inbounds %struct.gs_memory_s, %struct.gs_memory_s* %96, i32 0, i32 0, i32 2
+    %98 = load i8* (%struct.gs_memory_s*, %struct.gs_memory_struct_type_s*, i8*)*, i8* (%struct.gs_memory_s*, %struct.gs_memory_struct_type_s*, i8*)** %97, align 4, !tbaa !1
+    %99 = tail call i8* %98(%struct.gs_memory_s* %96, %struct.gs_memory_struct_type_s* nonnull @st_name_sub_table, i8* nonnull getelementptr inbounds ([15 x i8], [15 x i8]* @.str.4, i32 0, i32 0)) #7
+    %100 = icmp eq i8* %99, null
+    br i1 %100, label %.loopexit, label %.thread8
+  
+  .thread8:                                         ; preds = %94
+    %101 = bitcast i32* %scevgep to %struct.name_table_s*
+    %102 = bitcast %struct.name_table_s* %1 to i32*
+    tail call void @llvm.memset.p0i8.i32(i8* nonnull %99, i8 0, i32 1536, i32 4, i1 false) #7
+    %sunkaddr13 = ptrtoint %struct.name_table_s* %101 to i32
+    %sunkaddr14 = inttoptr i32 %sunkaddr13 to i8**
+    store i8* %99, i8** %sunkaddr14, align 4, !tbaa !7
+    tail call fastcc void @name_scan_sub(%struct.name_table_s* nonnull %1, i32 signext %87, i32 signext 0) #7
+    %103 = load i32, i32* %102, align 4, !tbaa !18
+    br label %104
+  
+  ; <label>:104                                     ; preds = %.thread8, %68
+    %nidx.3 = phi i32 [ %70, %68 ], [ %103, %.thread8 ]
+    %105 = lshr i32 %nidx.3, 7
+    %106 = getelementptr inbounds %struct.name_table_s, %struct.name_table_s* %1, i32 0, i32 6, i32 %105
+    %107 = load %struct.name_sub_table_s*, %struct.name_sub_table_s** %106, align 4, !tbaa !7
+    %108 = and i32 %nidx.3, 127
+    %109 = getelementptr inbounds %struct.name_sub_table_s, %struct.name_sub_table_s* %107, i32 0, i32 0, i32 %108
+    %110 = icmp eq i32 %enterflag, 1
+    br i1 %110, label %111, label %122
+  
+  ; <label>:111                                     ; preds = %104
+    %112 = getelementptr inbounds %struct.name_table_s, %struct.name_table_s* %1, i32 0, i32 4
+    %113 = load %struct.gs_memory_s*, %struct.gs_memory_s** %112, align 4, !tbaa !11
+    %114 = getelementptr inbounds %struct.gs_memory_s, %struct.gs_memory_s* %113, i32 0, i32 0, i32 12
+    %115 = load i8* (%struct.gs_memory_s*, i32, i8*)*, i8* (%struct.gs_memory_s*, i32, i8*)** %114, align 4, !tbaa !23
+    %116 = tail call i8* %115(%struct.gs_memory_s* %113, i32 signext %size, i8* nonnull getelementptr inbounds ([17 x i8], [17 x i8]* @.str.2, i32 0, i32 0)) #7
+    %117 = icmp eq i8* %116, null
+    br i1 %117, label %.loopexit, label %.thread9
+  
+  .thread9:                                         ; preds = %111
+    tail call void @llvm.memcpy.p0i8.p0i8.i32(i8* nonnull %116, i8* %ptr, i32 %size, i32 1, i1 false)
+    %118 = getelementptr inbounds %struct.name_sub_table_s, %struct.name_sub_table_s* %107, i32 0, i32 0, i32 %108, i32 2
+    store i8* %116, i8** %118, align 4, !tbaa !14
+    %119 = getelementptr inbounds %struct.name_sub_table_s, %struct.name_sub_table_s* %107, i32 0, i32 0, i32 %108, i32 1
+    %120 = load i16, i16* %119, align 2
+    %121 = and i16 %120, 32767
+    store i16 %121, i16* %119, align 2
+    br label %131
+  
+  ; <label>:122                                     ; preds = %104
+    %123 = getelementptr inbounds %struct.name_sub_table_s, %struct.name_sub_table_s* %107, i32 0, i32 0, i32 %108, i32 2
+    store i8* %ptr, i8** %123, align 4, !tbaa !14
+    %124 = icmp eq i32 %enterflag, 0
+    %125 = getelementptr inbounds %struct.name_sub_table_s, %struct.name_sub_table_s* %107, i32 0, i32 0, i32 %108, i32 1
+    %126 = zext i1 %124 to i16
+    %127 = load i16, i16* %125, align 2
+    %128 = shl nuw i16 %126, 15
+    %129 = and i16 %127, 32767
+    %130 = or i16 %129, %128
+    store i16 %130, i16* %125, align 2
+    br label %131
+  
+  ; <label>:131                                     ; preds = %122, %.thread9
+    %.pre-phi = phi i16* [ %119, %.thread9 ], [ %125, %122 ]
+    %132 = phi i16 [ %121, %.thread9 ], [ %130, %122 ]
+    %133 = bitcast %struct.name_table_s* %1 to i32*
+    %134 = trunc i32 %size to i16
+    %135 = and i16 %134, 16383
+    %136 = and i16 %132, -16384
+    %137 = or i16 %136, %135
+    store i16 %137, i16* %.pre-phi, align 2
+    %138 = getelementptr inbounds %struct.name_sub_table_s, %struct.name_sub_table_s* %107, i32 0, i32 0, i32 %108, i32 3
+    store %struct.ref_s* null, %struct.ref_s** %138, align 4, !tbaa !17
+    %139 = bitcast %struct.name_s* %109 to i16*
+    %140 = load i16, i16* %139, align 4, !tbaa !21
+    %141 = zext i16 %140 to i32
+    store i32 %141, i32* %133, align 4, !tbaa !18
+    %142 = load i32, i32* %42, align 4, !tbaa !20
+    %143 = trunc i32 %142 to i16
+    store i16 %143, i16* %139, align 4, !tbaa !21
+    store i32 %nidx.3, i32* %42, align 4, !tbaa !20
+    br label %.thread
+  
+  .thread:                                          ; preds = %55, %131, %13, %2
+    %nidx.4 = phi i32 [ %nidx.3, %131 ], [ 59, %2 ], [ %18, %13 ], [ %nidx.114, %55 ]
+    %pname.1 = phi %struct.name_s* [ %109, %131 ], [ %5, %2 ], [ %22, %13 ], [ %49, %55 ]
+    %144 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %pref, i32 0, i32 1
+    %145 = bitcast %union.v* %144 to %struct.name_s**
+    store %struct.name_s* %pname.1, %struct.name_s** %145, align 4, !tbaa !7
+    %146 = bitcast %struct.ref_s* %pref to i16*
+    store i16 3332, i16* %146, align 4, !tbaa !24
+    %147 = trunc i32 %nidx.4 to i16
+    %148 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %pref, i32 0, i32 0, i32 1
+    store i16 %147, i16* %148, align 2, !tbaa !27
+    br label %.loopexit
+  
+  .loopexit:                                        ; preds = %80, %.thread, %111, %94, %66, %._crit_edge
+    %.3 = phi i32 [ 0, %.thread ], [ -21, %._crit_edge ], [ -13, %66 ], [ -25, %94 ], [ -25, %111 ], [ -13, %80 ]
+    ret i32 %.3
+  }
+  
+  ; Function Attrs: nounwind readonly
+  declare i32 @memcmp(i8* nocapture, i8* nocapture, i32 signext) #3
+  
+  ; Function Attrs: argmemonly nounwind
+  declare void @llvm.memcpy.p0i8.p0i8.i32(i8* nocapture, i8* nocapture readonly, i32, i32, i1) #1
+  
+  ; Function Attrs: nounwind
+  define void @name_string_ref(%struct.ref_s* nocapture readonly %pnref, %struct.ref_s* nocapture %psref) #0 {
+    %1 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %pnref, i32 0, i32 1
+    %2 = bitcast %union.v* %1 to %struct.name_s**
+    %3 = load %struct.name_s*, %struct.name_s** %2, align 4, !tbaa !7
+    %4 = load %struct.name_table_s*, %struct.name_table_s** @the_nt, align 4, !tbaa !7
+    %5 = getelementptr inbounds %struct.name_s, %struct.name_s* %3, i32 0, i32 2
+    %6 = bitcast i8** %5 to i32*
+    %7 = load i32, i32* %6, align 4, !tbaa !14
+    %8 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %psref, i32 0, i32 1, i32 0
+    store i32 %7, i32* %8, align 4, !tbaa !7
+    %9 = getelementptr inbounds %struct.name_s, %struct.name_s* %3, i32 0, i32 1
+    %10 = load i16, i16* %9, align 2
+    %11 = icmp slt i16 %10, 0
+    br i1 %11, label %17, label %12
+  
+  ; <label>:12                                      ; preds = %0
+    %13 = getelementptr inbounds %struct.name_table_s, %struct.name_table_s* %4, i32 0, i32 4
+    %14 = bitcast %struct.gs_memory_s** %13 to %struct.gs_ref_memory_s**
+    %15 = load %struct.gs_ref_memory_s*, %struct.gs_ref_memory_s** %14, align 4, !tbaa !11
+    %16 = tail call i32 @imemory_space(%struct.gs_ref_memory_s* %15) #7
+    %phitmp = or i32 %16, 96
+    %phitmp1 = add i32 %phitmp, 4608
+    %phitmp2 = trunc i32 %phitmp1 to i16
+    br label %17
+  
+  ; <label>:17                                      ; preds = %12, %0
+    %18 = phi i16 [ %phitmp2, %12 ], [ 4704, %0 ]
+    %19 = bitcast %struct.ref_s* %psref to i16*
+    store i16 %18, i16* %19, align 4, !tbaa !24
+    %sunkaddr = ptrtoint %struct.name_s* %3 to i32
+    %sunkaddr1 = add i32 %sunkaddr, 2
+    %sunkaddr2 = inttoptr i32 %sunkaddr1 to i16*
+    %20 = load i16, i16* %sunkaddr2, align 2
+    %21 = and i16 %20, 16383
+    %22 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %psref, i32 0, i32 0, i32 1
+    store i16 %21, i16* %22, align 2, !tbaa !27
+    ret void
+  }
+  
+  declare i32 @imemory_space(%struct.gs_ref_memory_s*) #4
+  
+  ; Function Attrs: nounwind
+  define i32 @name_from_string(%struct.ref_s* nocapture readonly %psref, %struct.ref_s* nocapture %pnref) #0 {
+    %1 = bitcast %struct.ref_s* %psref to i32*
+    %2 = load i32, i32* %1, align 4
+    %3 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %psref, i32 0, i32 1
+    %4 = bitcast %union.v* %3 to i8**
+    %5 = load i8*, i8** %4, align 4, !tbaa !7
+    %6 = and i32 %2, 65535
+    %7 = tail call i32 @name_ref(i8* %5, i32 signext %6, %struct.ref_s* %pnref, i32 signext 1)
+    %8 = icmp slt i32 %7, 0
+    %9 = and i32 %2, 8388608
+    %10 = icmp eq i32 %9, 0
+    %or.cond = or i1 %10, %8
+    br i1 %or.cond, label %17, label %11
+  
+  ; <label>:11                                      ; preds = %0
+    %12 = bitcast %struct.ref_s* %pnref to i16*
+    %13 = load i16, i16* %12, align 4, !tbaa !24
+    %14 = zext i16 %13 to i32
+    %15 = or i32 %14, 128
+    %16 = trunc i32 %15 to i16
+    store i16 %16, i16* %12, align 4, !tbaa !24
+    br label %17
+  
+  ; <label>:17                                      ; preds = %11, %0
+    ret i32 %7
+  }
+  
+  ; Function Attrs: nounwind
+  define i32 @name_enter_string(i8* %str, %struct.ref_s* nocapture %pref) #0 {
+    %1 = tail call i32 @strlen(i8* %str) #8
+    %2 = tail call i32 @name_ref(i8* %str, i32 signext %1, %struct.ref_s* %pref, i32 signext 0)
+    ret i32 %2
+  }
+  
+  ; Function Attrs: nounwind readonly
+  declare i32 @strlen(i8* nocapture) #3
+  
+  ; Function Attrs: norecurse nounwind
+  define void @name_invalidate_value_cache(%struct.ref_s* nocapture readonly %pnref) #5 {
+    %1 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %pnref, i32 0, i32 1
+    %2 = bitcast %union.v* %1 to %struct.name_s**
+    %3 = load %struct.name_s*, %struct.name_s** %2, align 4, !tbaa !7
+    %4 = getelementptr inbounds %struct.name_s, %struct.name_s* %3, i32 0, i32 3
+    store %struct.ref_s* inttoptr (i32 1 to %struct.ref_s*), %struct.ref_s** %4, align 4, !tbaa !17
+    ret void
+  }
+  
+  ; Function Attrs: norecurse nounwind readonly
+  define i32 @name_index(%struct.ref_s* nocapture readonly %pnref) #2 {
+    %1 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %pnref, i32 0, i32 0, i32 1
+    %2 = load i16, i16* %1, align 2, !tbaa !27
+    %3 = zext i16 %2 to i32
+    ret i32 %3
+  }
+  
+  ; Function Attrs: norecurse nounwind
+  define void @name_index_ref(i32 signext %index, %struct.ref_s* nocapture %pnref) #5 {
+    %1 = lshr i32 %index, 7
+    %2 = load %struct.name_table_s*, %struct.name_table_s** @the_nt, align 4, !tbaa !7
+    %3 = getelementptr inbounds %struct.name_table_s, %struct.name_table_s* %2, i32 0, i32 6, i32 %1
+    %4 = load %struct.name_sub_table_s*, %struct.name_sub_table_s** %3, align 4, !tbaa !7
+    %5 = and i32 %index, 127
+    %6 = getelementptr inbounds %struct.name_sub_table_s, %struct.name_sub_table_s* %4, i32 0, i32 0, i32 %5
+    %7 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %pnref, i32 0, i32 1
+    %8 = bitcast %union.v* %7 to %struct.name_s**
+    store %struct.name_s* %6, %struct.name_s** %8, align 4, !tbaa !7
+    %9 = bitcast %struct.ref_s* %pnref to i16*
+    store i16 3332, i16* %9, align 4, !tbaa !24
+    %10 = trunc i32 %index to i16
+    %11 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %pnref, i32 0, i32 0, i32 1
+    store i16 %10, i16* %11, align 2, !tbaa !27
+    ret void
+  }
+  
+  ; Function Attrs: norecurse nounwind readonly
+  define %struct.name_s* @name_index_ptr(i32 signext %index) #2 {
+    %1 = lshr i32 %index, 7
+    %2 = load %struct.name_table_s*, %struct.name_table_s** @the_nt, align 4, !tbaa !7
+    %3 = getelementptr inbounds %struct.name_table_s, %struct.name_table_s* %2, i32 0, i32 6, i32 %1
+    %4 = load %struct.name_sub_table_s*, %struct.name_sub_table_s** %3, align 4, !tbaa !7
+    %5 = and i32 %index, 127
+    %6 = getelementptr inbounds %struct.name_sub_table_s, %struct.name_sub_table_s* %4, i32 0, i32 0, i32 %5
+    ret %struct.name_s* %6
+  }
+  
+  ; Function Attrs: norecurse nounwind readonly
+  define i32 @name_next_valid_index(i32 signext %nidx) #2 {
+    %1 = load %struct.name_table_s*, %struct.name_table_s** @the_nt, align 4, !tbaa !7
+    %2 = lshr i32 %nidx, 7
+    %3 = getelementptr inbounds %struct.name_table_s, %struct.name_table_s* %1, i32 0, i32 6, i32 %2
+    %4 = load %struct.name_sub_table_s*, %struct.name_sub_table_s** %3, align 4, !tbaa !7
+    br label %5
+  
+  ; <label>:5                                       ; preds = %.loopexit2, %0
+    %.01 = phi i32 [ %nidx, %0 ], [ %.2, %.loopexit2 ]
+    %sub.0 = phi %struct.name_sub_table_s* [ %4, %0 ], [ %sub.1, %.loopexit2 ]
+    %6 = add i32 %.01, 1
+    %7 = and i32 %6, 127
+    %8 = icmp eq i32 %7, 0
+    br i1 %8, label %.preheader, label %.loopexit2
+  
+  .preheader:                                       ; preds = %5
+    %9 = lshr i32 %6, 7
+    %sunkaddr = ptrtoint %struct.name_table_s* %1 to i32
+    %sunkaddr1 = add i32 %sunkaddr, 8
+    %sunkaddr2 = inttoptr i32 %sunkaddr1 to i32*
+    %10 = load i32, i32* %sunkaddr2, align 4, !tbaa !13
+    %11 = icmp ult i32 %9, %10
+    br i1 %11, label %.lr.ph.preheader, label %.loopexit
+  
+  .lr.ph.preheader:                                 ; preds = %.preheader
+    %12 = add i32 %.01, 129
+    br label %.lr.ph
+  
+  .lr.ph:                                           ; preds = %18, %.lr.ph.preheader
+    %lsr.iv = phi i32 [ %lsr.iv.next, %18 ], [ %12, %.lr.ph.preheader ]
+    %13 = phi i32 [ %19, %18 ], [ %9, %.lr.ph.preheader ]
+    %14 = getelementptr inbounds %struct.name_table_s, %struct.name_table_s* %1, i32 0, i32 6, i32 %13
+    %15 = load %struct.name_sub_table_s*, %struct.name_sub_table_s** %14, align 4, !tbaa !7
+    %16 = icmp eq %struct.name_sub_table_s* %15, null
+    %17 = add i32 %lsr.iv, -128
+    br i1 %16, label %18, label %.loopexit2
+  
+  ; <label>:18                                      ; preds = %.lr.ph
+    %19 = lshr i32 %lsr.iv, 7
+    %20 = icmp ult i32 %19, %10
+    %lsr.iv.next = add i32 %lsr.iv, 128
+    br i1 %20, label %.lr.ph, label %.loopexit
+  
+  .loopexit2:                                       ; preds = %.lr.ph, %5
+    %.2 = phi i32 [ %6, %5 ], [ %17, %.lr.ph ]
+    %sub.1 = phi %struct.name_sub_table_s* [ %sub.0, %5 ], [ %15, %.lr.ph ]
+    %21 = and i32 %.2, 127
+    %22 = getelementptr inbounds %struct.name_sub_table_s, %struct.name_sub_table_s* %sub.1, i32 0, i32 0, i32 %21, i32 2
+    %23 = load i8*, i8** %22, align 4, !tbaa !14
+    %24 = icmp eq i8* %23, null
+    br i1 %24, label %5, label %.loopexit
+  
+  .loopexit:                                        ; preds = %.preheader, %.loopexit2, %18
+    %.0 = phi i32 [ 0, %18 ], [ 0, %.preheader ], [ %.2, %.loopexit2 ]
+    ret i32 %.0
+  }
+  
+  ; Function Attrs: norecurse nounwind
+  define void @name_unmark_all() #5 {
+    %1 = load %struct.name_table_s*, %struct.name_table_s** @the_nt, align 4, !tbaa !7
+    %2 = getelementptr inbounds %struct.name_table_s, %struct.name_table_s* %1, i32 0, i32 2
+    %3 = load i32, i32* %2, align 4, !tbaa !13
+    %4 = icmp eq i32 %3, 0
+    br i1 %4, label %.preheader, label %.lr.ph
+  
+  .lr.ph:                                           ; preds = %0, %.loopexit
+    %5 = phi i32 [ %12, %.loopexit ], [ %3, %0 ]
+    %si.04 = phi i32 [ %13, %.loopexit ], [ 0, %0 ]
+    %6 = getelementptr inbounds %struct.name_table_s, %struct.name_table_s* %1, i32 0, i32 6, i32 %si.04
+    %7 = load %struct.name_sub_table_s*, %struct.name_sub_table_s** %6, align 4, !tbaa !7
+    %8 = icmp eq %struct.name_sub_table_s* %7, null
+    br i1 %8, label %.loopexit, label %.preheader1
+  
+  .preheader1:                                      ; preds = %.lr.ph, %.preheader1
+    %lsr.iv1 = phi i32 [ %lsr.iv.next2, %.preheader1 ], [ 2, %.lr.ph ]
+    %9 = bitcast %struct.name_sub_table_s* %7 to i8*
+    %uglygep4 = getelementptr i8, i8* %9, i32 %lsr.iv1
+    %uglygep45 = bitcast i8* %uglygep4 to i16*
+    %10 = load i16, i16* %uglygep45, align 2
+    %11 = and i16 %10, -16385
+    %uglygep = getelementptr i8, i8* %9, i32 %lsr.iv1
+    %uglygep3 = bitcast i8* %uglygep to i16*
+    store i16 %11, i16* %uglygep3, align 2
+    %lsr.iv.next2 = add nuw nsw i32 %lsr.iv1, 12
+    %exitcond5 = icmp eq i32 %lsr.iv.next2, 1538
+    br i1 %exitcond5, label %.loopexit.loopexit, label %.preheader1
+  
+  .loopexit.loopexit:                               ; preds = %.preheader1
+    %sunkaddr = ptrtoint %struct.name_table_s* %1 to i32
+    %sunkaddr6 = add i32 %sunkaddr, 8
+    %sunkaddr7 = inttoptr i32 %sunkaddr6 to i32*
+    %.pre = load i32, i32* %sunkaddr7, align 4, !tbaa !13
+    br label %.loopexit
+  
+  .loopexit:                                        ; preds = %.loopexit.loopexit, %.lr.ph
+    %12 = phi i32 [ %.pre, %.loopexit.loopexit ], [ %5, %.lr.ph ]
+    %13 = add i32 %si.04, 1
+    %14 = icmp ult i32 %13, %12
+    br i1 %14, label %.lr.ph, label %.preheader
+  
+  .preheader:                                       ; preds = %0, %.loopexit, %.preheader
+    %lsr.iv = phi i32 [ %lsr.iv.next, %.preheader ], [ 59, %.loopexit ], [ 59, %0 ]
+    %ncnt.02 = phi i32 [ %23, %.preheader ], [ 1, %.loopexit ], [ 1, %0 ]
+    %15 = and i32 %lsr.iv, 127
+    %16 = lshr i32 %ncnt.02, 7
+    %17 = load %struct.name_table_s*, %struct.name_table_s** @the_nt, align 4, !tbaa !7
+    %18 = getelementptr inbounds %struct.name_table_s, %struct.name_table_s* %17, i32 0, i32 6, i32 %16
+    %19 = load %struct.name_sub_table_s*, %struct.name_sub_table_s** %18, align 4, !tbaa !7
+    %20 = getelementptr inbounds %struct.name_sub_table_s, %struct.name_sub_table_s* %19, i32 0, i32 0, i32 %15, i32 1
+    %21 = load i16, i16* %20, align 2
+    %22 = or i16 %21, 16384
+    store i16 %22, i16* %20, align 2
+    %23 = add nuw nsw i32 %ncnt.02, 1
+    %lsr.iv.next = add nuw nsw i32 %lsr.iv, 59
+    %exitcond = icmp eq i32 %lsr.iv.next, 7611
+    br i1 %exitcond, label %24, label %.preheader
+  
+  ; <label>:24                                      ; preds = %.preheader
+    ret void
+  }
+  
+  ; Function Attrs: norecurse nounwind
+  define i32 @name_mark_index(i32 signext %nidx) #5 {
+    %1 = lshr i32 %nidx, 7
+    %2 = load %struct.name_table_s*, %struct.name_table_s** @the_nt, align 4, !tbaa !7
+    %3 = getelementptr inbounds %struct.name_table_s, %struct.name_table_s* %2, i32 0, i32 6, i32 %1
+    %4 = load %struct.name_sub_table_s*, %struct.name_sub_table_s** %3, align 4, !tbaa !7
+    %5 = and i32 %nidx, 127
+    %6 = getelementptr inbounds %struct.name_sub_table_s, %struct.name_sub_table_s* %4, i32 0, i32 0, i32 %5, i32 1
+    %7 = load i16, i16* %6, align 2
+    %8 = and i16 %7, 16384
+    %9 = icmp eq i16 %8, 0
+    br i1 %9, label %10, label %12
+  
+  ; <label>:10                                      ; preds = %0
+    %11 = or i16 %7, 16384
+    store i16 %11, i16* %6, align 2
+    br label %12
+  
+  ; <label>:12                                      ; preds = %10, %0
+    %.0 = phi i32 [ 1, %10 ], [ 0, %0 ]
+    ret i32 %.0
+  }
+  
+  ; Function Attrs: norecurse nounwind readonly
+  define i8* @name_ref_sub_table(%struct.ref_s* nocapture readonly %pnref) #2 {
+    %1 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %pnref, i32 0, i32 1
+    %2 = bitcast %union.v* %1 to %struct.name_s**
+    %3 = load %struct.name_s*, %struct.name_s** %2, align 4, !tbaa !7
+    %4 = getelementptr inbounds %struct.ref_s, %struct.ref_s* %pnref, i32 0, i32 0, i32 1
+    %5 = load i16, i16* %4, align 2, !tbaa !27
+    %6 = zext i16 %5 to i32
+    %7 = and i32 %6, 127
+    %8 = sub nsw i32 0, %7
+    %9 = getelementptr inbounds %struct.name_s, %struct.name_s* %3, i32 %8
+    %10 = bitcast %struct.name_s* %9 to i8*
+    ret i8* %10
+  }
+  
+  ; Function Attrs: norecurse nounwind readnone
+  define i8* @name_index_ptr_sub_table(i32 signext %index, %struct.name_s* readnone %pname) #6 {
+    %1 = and i32 %index, 127
+    %2 = sub nsw i32 0, %1
+    %3 = getelementptr inbounds %struct.name_s, %struct.name_s* %pname, i32 %2
+    %4 = bitcast %struct.name_s* %3 to i8*
+    ret i8* %4
+  }
+  
+  ; Function Attrs: nounwind
+  define internal fastcc void @name_scan_sub(%struct.name_table_s* nocapture %nt, i32 signext %sub_index, i32 signext %free_empty) unnamed_addr #0 {
+    %1 = getelementptr inbounds %struct.name_table_s, %struct.name_table_s* %nt, i32 0, i32 6, i32 %sub_index
+    %2 = load %struct.name_sub_table_s*, %struct.name_sub_table_s** %1, align 4, !tbaa !7
+    %3 = shl i32 %sub_index, 7
+    %4 = icmp eq %struct.name_sub_table_s* %2, null
+    br i1 %4, label %62, label %5
+  
+  ; <label>:5                                       ; preds = %0
+    %6 = bitcast %struct.name_table_s* %nt to i32*
+    %7 = load i32, i32* %6, align 4, !tbaa !18
+    %8 = icmp eq i32 %free_empty, 0
+    %9 = zext i1 %8 to i32
+    %10 = icmp eq i32 %3, 0
+    %.3 = select i1 %10, i32 1, i32 %9
+    %11 = shl i32 %sub_index, 7
+    %12 = icmp ugt i32 %11, 1
+    %umax = select i1 %12, i32 %11, i32 1
+    %13 = add i32 %11, 128
+    %14 = mul i32 %sub_index, 7552
+    %15 = add i32 %14, 7493
+    br label %16
+  
+  ; <label>:16                                      ; preds = %28, %5
+    %lsr.iv7 = phi i32 [ %lsr.iv.next8, %28 ], [ %15, %5 ]
+    %lsr.iv6 = phi i32 [ %lsr.iv.next, %28 ], [ %13, %5 ]
+    %keep.0 = phi i32 [ %keep.1, %28 ], [ %.3, %5 ]
+    %free.0 = phi i32 [ %free.1, %28 ], [ %7, %5 ]
+    %17 = add i32 %lsr.iv6, -1
+    %18 = and i32 %lsr.iv7, 127
+    %19 = getelementptr inbounds %struct.name_sub_table_s, %struct.name_sub_table_s* %2, i32 0, i32 0, i32 %18, i32 1
+    %20 = load i16, i16* %19, align 2
+    %21 = and i16 %20, 16384
+    %22 = icmp eq i16 %21, 0
+    br i1 %22, label %23, label %28
+  
+  ; <label>:23                                      ; preds = %16
+    %24 = and i32 %17, -128
+    %25 = or i32 %18, %24
+    %26 = trunc i32 %free.0 to i16
+    %27 = getelementptr inbounds %struct.name_sub_table_s, %struct.name_sub_table_s* %2, i32 0, i32 0, i32 %18, i32 0
+    store i16 %26, i16* %27, align 4, !tbaa !21
+    br label %28
+  
+  ; <label>:28                                      ; preds = %23, %16
+    %keep.1 = phi i32 [ %keep.0, %23 ], [ 1, %16 ]
+    %free.1 = phi i32 [ %25, %23 ], [ %free.0, %16 ]
+    %lsr.iv.next = add i32 %lsr.iv6, -1
+    %lsr.iv.next8 = add i32 %lsr.iv7, -59
+    %not. = icmp eq i32 %umax, %lsr.iv.next
+    br i1 %not., label %29, label %16
+  
+  ; <label>:29                                      ; preds = %28
+    %30 = icmp eq i32 %keep.1, 0
+    br i1 %30, label %33, label %31
+  
+  ; <label>:31                                      ; preds = %29
+    %32 = bitcast %struct.name_table_s* %nt to i32*
+    store i32 %free.1, i32* %32, align 4, !tbaa !18
+    br label %62
+  
+  ; <label>:33                                      ; preds = %29
+    %34 = getelementptr inbounds %struct.name_table_s, %struct.name_table_s* %nt, i32 0, i32 4
+    %35 = load %struct.gs_memory_s*, %struct.gs_memory_s** %34, align 4, !tbaa !11
+    %36 = getelementptr inbounds %struct.gs_memory_s, %struct.gs_memory_s* %35, i32 0, i32 0, i32 11
+    %37 = load void (%struct.gs_memory_s*, i8*, i8*)*, void (%struct.gs_memory_s*, i8*, i8*)** %36, align 4, !tbaa !28
+    %38 = bitcast %struct.name_sub_table_s* %2 to i8*
+    tail call void %37(%struct.gs_memory_s* %35, i8* %38, i8* nonnull getelementptr inbounds ([14 x i8], [14 x i8]* @.str.6, i32 0, i32 0)) #7
+    store %struct.name_sub_table_s* null, %struct.name_sub_table_s** %1, align 4, !tbaa !7
+    %39 = getelementptr inbounds %struct.name_table_s, %struct.name_table_s* %nt, i32 0, i32 2
+    %40 = load i32, i32* %39, align 4, !tbaa !13
+    %41 = add i32 %40, -1
+    %42 = icmp eq i32 %41, %sub_index
+    br i1 %42, label %.preheader.preheader, label %56
+  
+  .preheader.preheader:                             ; preds = %33
+    %43 = bitcast %struct.name_table_s* %nt to i8*
+    %44 = shl i32 %sub_index, 2
+    %45 = add i32 %44, 4112
+    %uglygep = getelementptr i8, i8* %43, i32 %45
+    %uglygep2 = bitcast i8* %uglygep to %struct.name_table_s*
+    br label %.preheader
+  
+  .preheader:                                       ; preds = %.preheader, %.preheader.preheader
+    %lsr.iv = phi %struct.name_table_s* [ %50, %.preheader ], [ %uglygep2, %.preheader.preheader ]
+    %.0 = phi i32 [ %46, %.preheader ], [ %sub_index, %.preheader.preheader ]
+    %lsr.iv5 = bitcast %struct.name_table_s* %lsr.iv to %struct.name_sub_table_s**
+    %lsr.iv3 = bitcast %struct.name_table_s* %lsr.iv to i8*
+    %46 = add i32 %.0, -1
+    %47 = load %struct.name_sub_table_s*, %struct.name_sub_table_s** %lsr.iv5, align 4, !tbaa !7
+    %48 = icmp eq %struct.name_sub_table_s* %47, null
+    %49 = add i32 %46, 1
+    %uglygep4 = getelementptr i8, i8* %lsr.iv3, i32 -4
+    %50 = bitcast i8* %uglygep4 to %struct.name_table_s*
+    br i1 %48, label %.preheader, label %51
+  
+  ; <label>:51                                      ; preds = %.preheader
+    %sunkaddr = ptrtoint %struct.name_table_s* %nt to i32
+    %sunkaddr9 = add i32 %sunkaddr, 8
+    %sunkaddr10 = inttoptr i32 %sunkaddr9 to i32*
+    store i32 %49, i32* %sunkaddr10, align 4, !tbaa !13
+    %52 = getelementptr inbounds %struct.name_table_s, %struct.name_table_s* %nt, i32 0, i32 1
+    %53 = load i32, i32* %52, align 4, !tbaa !12
+    %54 = icmp ugt i32 %53, %46
+    br i1 %54, label %55, label %62
+  
+  ; <label>:55                                      ; preds = %51
+    %sunkaddr11 = ptrtoint %struct.name_table_s* %nt to i32
+    %sunkaddr12 = add i32 %sunkaddr11, 4
+    %sunkaddr13 = inttoptr i32 %sunkaddr12 to i32*
+    store i32 %46, i32* %sunkaddr13, align 4, !tbaa !12
+    br label %62
+  
+  ; <label>:56                                      ; preds = %33
+    %57 = getelementptr inbounds %struct.name_table_s, %struct.name_table_s* %nt, i32 0, i32 1
+    %58 = load i32, i32* %57, align 4, !tbaa !12
+    %59 = icmp eq i32 %58, %sub_index
+    br i1 %59, label %60, label %62
+  
+  ; <label>:60                                      ; preds = %56
+    %61 = add i32 %sub_index, -1
+    %sunkaddr14 = ptrtoint %struct.name_table_s* %nt to i32
+    %sunkaddr15 = add i32 %sunkaddr14, 4
+    %sunkaddr16 = inttoptr i32 %sunkaddr15 to i32*
+    store i32 %61, i32* %sunkaddr16, align 4, !tbaa !12
+    br label %62
+  
+  ; <label>:62                                      ; preds = %60, %56, %55, %51, %31, %0
+    ret void
+  }
+  
+  ; Function Attrs: nounwind
+  define void @name_restore(%struct.alloc_save_s* %save) #0 {
+    %1 = load %struct.name_table_s*, %struct.name_table_s** @the_nt, align 4, !tbaa !7
+    %2 = getelementptr inbounds %struct.name_table_s, %struct.name_table_s* %1, i32 0, i32 2
+    %3 = load i32, i32* %2, align 4, !tbaa !13
+    %4 = icmp eq i32 %3, 0
+    br i1 %4, label %._crit_edge, label %.lr.ph
+  
+  .lr.ph:                                           ; preds = %0, %.loopexit
+    %lsr.iv4 = phi i32 [ %lsr.iv.next5, %.loopexit ], [ 0, %0 ]
+    %5 = phi i32 [ %32, %.loopexit ], [ %3, %0 ]
+    %si.02 = phi i32 [ %33, %.loopexit ], [ 0, %0 ]
+    %6 = getelementptr inbounds %struct.name_table_s, %struct.name_table_s* %1, i32 0, i32 6, i32 %si.02
+    %7 = load %struct.name_sub_table_s*, %struct.name_sub_table_s** %6, align 4, !tbaa !7
+    %8 = icmp eq %struct.name_sub_table_s* %7, null
+    br i1 %8, label %.loopexit, label %9
+  
+  ; <label>:9                                       ; preds = %.lr.ph, %31
+    %lsr.iv6 = phi i32 [ %lsr.iv.next7, %31 ], [ %lsr.iv4, %.lr.ph ]
+    %lsr.iv = phi i32 [ %lsr.iv.next, %31 ], [ 4, %.lr.ph ]
+    %10 = lshr i32 %lsr.iv6, 7
+    %11 = getelementptr inbounds %struct.name_table_s, %struct.name_table_s* %1, i32 0, i32 6, i32 %10
+    %12 = load %struct.name_sub_table_s*, %struct.name_sub_table_s** %11, align 4, !tbaa !7
+    %13 = bitcast %struct.name_sub_table_s* %12 to i8*
+    %uglygep2 = getelementptr i8, i8* %13, i32 %lsr.iv
+    %uglygep23 = bitcast i8* %uglygep2 to i8**
+    %14 = load i8*, i8** %uglygep23, align 4, !tbaa !14
+    %15 = icmp eq i8* %14, null
+    %uglygep = getelementptr i8, i8* %13, i32 %lsr.iv
+    %uglygep1 = bitcast i8* %uglygep to i16*
+    %scevgep = getelementptr i16, i16* %uglygep1, i32 -1
+    %16 = load i16, i16* %scevgep, align 2
+    br i1 %15, label %17, label %19
+  
+  ; <label>:17                                      ; preds = %9
+    %18 = and i16 %16, -16385
+    %sunkaddr = ptrtoint i8* %uglygep to i32
+    %sunkaddr8 = add i32 %sunkaddr, -2
+    %sunkaddr9 = inttoptr i32 %sunkaddr8 to i16*
+    store i16 %18, i16* %sunkaddr9, align 2
+    br label %31
+  
+  ; <label>:19                                      ; preds = %9
+    %20 = icmp slt i16 %16, 0
+    br i1 %20, label %21, label %23
+  
+  ; <label>:21                                      ; preds = %19
+    %22 = or i16 %16, 16384
+    %sunkaddr10 = ptrtoint i8* %uglygep to i32
+    %sunkaddr11 = add i32 %sunkaddr10, -2
+    %sunkaddr12 = inttoptr i32 %sunkaddr11 to i16*
+    store i16 %22, i16* %sunkaddr12, align 2
+    br label %31
+  
+  ; <label>:23                                      ; preds = %19
+    %24 = tail call i32 @alloc_is_since_save(i8* nonnull %14, %struct.alloc_save_s* %save) #7
+    %25 = icmp eq i32 %24, 0
+    %26 = zext i1 %25 to i16
+    %sunkaddr13 = ptrtoint i8* %uglygep to i32
+    %sunkaddr14 = add i32 %sunkaddr13, -2
+    %sunkaddr15 = inttoptr i32 %sunkaddr14 to i16*
+    %27 = load i16, i16* %sunkaddr15, align 2
+    %28 = shl nuw nsw i16 %26, 14
+    %29 = and i16 %27, -16385
+    %30 = or i16 %28, %29
+    store i16 %30, i16* %sunkaddr15, align 2
+    br label %31
+  
+  ; <label>:31                                      ; preds = %23, %21, %17
+    %lsr.iv.next = add nuw nsw i32 %lsr.iv, 12
+    %lsr.iv.next7 = add i32 %lsr.iv6, 1
+    %exitcond = icmp eq i32 %lsr.iv.next, 1540
+    br i1 %exitcond, label %.loopexit.loopexit, label %9
+  
+  .loopexit.loopexit:                               ; preds = %31
+    %sunkaddr16 = ptrtoint %struct.name_table_s* %1 to i32
+    %sunkaddr17 = add i32 %sunkaddr16, 8
+    %sunkaddr18 = inttoptr i32 %sunkaddr17 to i32*
+    %.pre = load i32, i32* %sunkaddr18, align 4, !tbaa !13
+    br label %.loopexit
+  
+  .loopexit:                                        ; preds = %.loopexit.loopexit, %.lr.ph
+    %32 = phi i32 [ %.pre, %.loopexit.loopexit ], [ %5, %.lr.ph ]
+    %33 = add i32 %si.02, 1
+    %lsr.iv.next5 = add i32 %lsr.iv4, 128
+    %34 = icmp ult i32 %33, %32
+    br i1 %34, label %.lr.ph, label %._crit_edge
+  
+  ._crit_edge:                                      ; preds = %.loopexit, %0
+    tail call void @name_trace_finish(%struct.gc_state_s* null)
+    ret void
+  }
+  
+  declare i32 @alloc_is_since_save(i8*, %struct.alloc_save_s*) #4
+  
+  ; Function Attrs: norecurse nounwind
+  define internal %struct.gs_ptr_procs_s* @name_table_enum_ptrs(i8* nocapture readonly %vptr, i32 signext %size, i32 signext %index, i8** nocapture %pep) #5 {
+    %1 = getelementptr inbounds i8, i8* %vptr, i32 8
+    %2 = bitcast i8* %1 to i32*
+    %3 = load i32, i32* %2, align 4, !tbaa !13
+    %4 = icmp ugt i32 %3, %index
+    br i1 %4, label %5, label %12
+  
+  ; <label>:5                                       ; preds = %0
+    %6 = getelementptr inbounds i8, i8* %vptr, i32 4116
+    %7 = bitcast i8* %6 to [512 x %struct.name_sub_table_s*]*
+    %8 = getelementptr inbounds [512 x %struct.name_sub_table_s*], [512 x %struct.name_sub_table_s*]* %7, i32 0, i32 %index
+    %9 = bitcast %struct.name_sub_table_s** %8 to i32*
+    %10 = load i32, i32* %9, align 4, !tbaa !7
+    %11 = bitcast i8** %pep to i32*
+    store i32 %10, i32* %11, align 4, !tbaa !7
+    br label %12
+  
+  ; <label>:12                                      ; preds = %5, %0
+    %.0 = phi %struct.gs_ptr_procs_s* [ @ptr_struct_procs, %5 ], [ null, %0 ]
+    ret %struct.gs_ptr_procs_s* %.0
+  }
+  
+  ; Function Attrs: nounwind
+  define internal void @name_table_reloc_ptrs(i8* nocapture %vptr, i32 signext %size, %struct.gc_state_s* %gcst) #0 {
+    %1 = getelementptr inbounds i8, i8* %vptr, i32 8
+    %2 = bitcast i8* %1 to i32*
+    %3 = load i32, i32* %2, align 4, !tbaa !13
+    %4 = icmp eq i32 %3, 0
+    br i1 %4, label %._crit_edge, label %.lr.ph.preheader
+  
+  .lr.ph.preheader:                                 ; preds = %0
+    %5 = getelementptr inbounds i8, i8* %vptr, i32 4116
+    %6 = bitcast i8* %5 to %struct.name_sub_table_s**
+    br label %.lr.ph
+  
+  .lr.ph:                                           ; preds = %.lr.ph, %.lr.ph.preheader
+    %lsr.iv = phi i32 [ %lsr.iv.next, %.lr.ph ], [ %3, %.lr.ph.preheader ]
+    %sub.01 = phi %struct.name_sub_table_s** [ %10, %.lr.ph ], [ %6, %.lr.ph.preheader ]
+    %7 = bitcast %struct.name_sub_table_s** %sub.01 to i8**
+    %8 = load i8*, i8** %7, align 4, !tbaa !7
+    %9 = tail call i8* @gs_reloc_struct_ptr(i8* %8, %struct.gc_state_s* %gcst) #7
+    store i8* %9, i8** %7, align 4, !tbaa !7
+    %10 = getelementptr inbounds %struct.name_sub_table_s*, %struct.name_sub_table_s** %sub.01, i32 1
+    %lsr.iv.next = add i32 %lsr.iv, -1
+    %exitcond = icmp eq i32 %lsr.iv.next, 0
+    br i1 %exitcond, label %._crit_edge, label %.lr.ph
+  
+  ._crit_edge:                                      ; preds = %.lr.ph, %0
+    ret void
+  }
+  
+  declare i8* @gs_reloc_struct_ptr(i8*, %struct.gc_state_s*) #4
+  
+  ; Function Attrs: norecurse nounwind readnone
+  define internal noalias %struct.gs_ptr_procs_s* @name_sub_enum_ptrs(i8* nocapture readnone %vptr, i32 signext %size, i32 signext %index, i8** nocapture readnone %pep) #6 {
+    ret %struct.gs_ptr_procs_s* null
+  }
+  
+  ; Function Attrs: nounwind
+  define internal void @name_sub_reloc_ptrs(i8* nocapture %vptr, i32 signext %size, %struct.gc_state_s* %gcst) #0 {
+    %nstr = alloca %struct.gs_const_string_s, align 4
+    br label %1
+  
+  ; <label>:1                                       ; preds = %15, %0
+    %lsr.iv = phi i32 [ %lsr.iv.next, %15 ], [ 0, %0 ]
+    %scevgep6 = getelementptr i8, i8* %vptr, i32 %lsr.iv
+    %scevgep67 = bitcast i8* %scevgep6 to i8**
+    %scevgep8 = getelementptr i8*, i8** %scevgep67, i32 1
+    %2 = load i8*, i8** %scevgep8, align 4, !tbaa !14
+    %3 = icmp eq i8* %2, null
+    br i1 %3, label %15, label %4
+  
+  ; <label>:4                                       ; preds = %1
+    %scevgep = getelementptr i8, i8* %vptr, i32 %lsr.iv
+    %scevgep1 = bitcast i8* %scevgep to i16*
+    %scevgep2 = getelementptr i16, i16* %scevgep1, i32 1
+    %5 = load i16, i16* %scevgep2, align 2
+    %6 = icmp slt i16 %5, 0
+    br i1 %6, label %15, label %7
+  
+  ; <label>:7                                       ; preds = %4
+    %8 = ptrtoint i8* %2 to i32
+    %9 = bitcast %struct.gs_const_string_s* %nstr to i32*
+    %10 = bitcast %struct.gs_const_string_s* %nstr to i8*
+    call void @llvm.lifetime.start(i64 8, i8* %10) #7
+    store i32 %8, i32* %9, align 4, !tbaa !29
+    %sunkaddr = ptrtoint i8* %scevgep to i32
+    %sunkaddr9 = add i32 %sunkaddr, 2
+    %sunkaddr10 = inttoptr i32 %sunkaddr9 to i16*
+    %11 = load i16, i16* %sunkaddr10, align 2
+    %12 = and i16 %11, 16383
+    %13 = zext i16 %12 to i32
+    %sunkaddr11 = ptrtoint %struct.gs_const_string_s* %nstr to i32
+    %sunkaddr12 = add i32 %sunkaddr11, 4
+    %sunkaddr13 = inttoptr i32 %sunkaddr12 to i32*
+    store i32 %13, i32* %sunkaddr13, align 4, !tbaa !31
+    call void @gs_reloc_const_string(%struct.gs_const_string_s* nonnull %nstr, %struct.gc_state_s* %gcst) #7
+    %14 = load i32, i32* %9, align 4, !tbaa !29
+    %scevgep3 = getelementptr i8, i8* %vptr, i32 %lsr.iv
+    %scevgep34 = bitcast i8* %scevgep3 to i32*
+    %scevgep5 = getelementptr i32, i32* %scevgep34, i32 1
+    store i32 %14, i32* %scevgep5, align 4, !tbaa !14
+    call void @llvm.lifetime.end(i64 8, i8* %10) #7
+    br label %15
+  
+  ; <label>:15                                      ; preds = %7, %4, %1
+    %lsr.iv.next = add nuw nsw i32 %lsr.iv, 12
+    %exitcond = icmp eq i32 %lsr.iv.next, 1536
+    br i1 %exitcond, label %16, label %1
+  
+  ; <label>:16                                      ; preds = %15
+    ret void
+  }
+  
+  declare void @gs_reloc_const_string(%struct.gs_const_string_s*, %struct.gc_state_s*) #4
+  
+  attributes #0 = { nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #1 = { argmemonly nounwind "target-cpu"="mips32" }
+  attributes #2 = { norecurse nounwind readonly "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #3 = { nounwind readonly "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #4 = { "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #5 = { norecurse nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #6 = { norecurse nounwind readnone "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #7 = { nounwind }
+  attributes #8 = { nounwind readonly }
+  
+  !llvm.ident = !{!0}
+  
+  !0 = !{!"clang version 3.8.0 (http://llvm.org/git/clang.git 2d49f0a0ae8366964a93e3b7b26e29679bee7160) (http://llvm.org/git/llvm.git 60bc66b44837125843b58ed3e0fd2e6bb948d839)"}
+  !1 = !{!2, !4, i64 8}
+  !2 = !{!"gs_memory_s", !3, i64 0}
+  !3 = !{!"gs_memory_procs_s", !4, i64 0, !4, i64 4, !4, i64 8, !4, i64 12, !4, i64 16, !4, i64 20, !4, i64 24, !4, i64 28, !4, i64 32, !4, i64 36, !4, i64 40, !4, i64 44, !4, i64 48, !4, i64 52, !4, i64 56, !4, i64 60, !4, i64 64, !4, i64 68, !4, i64 72, !4, i64 76}
+  !4 = !{!"any pointer", !5, i64 0}
+  !5 = !{!"omnipotent char", !6, i64 0}
+  !6 = !{!"Simple C/C++ TBAA"}
+  !7 = !{!4, !4, i64 0}
+  !8 = !{!9, !10, i64 12}
+  !9 = !{!"name_table_s", !10, i64 0, !10, i64 4, !10, i64 8, !10, i64 12, !4, i64 16, !5, i64 20, !5, i64 4116}
+  !10 = !{!"int", !5, i64 0}
+  !11 = !{!9, !4, i64 16}
+  !12 = !{!9, !10, i64 4}
+  !13 = !{!9, !10, i64 8}
+  !14 = !{!15, !4, i64 4}
+  !15 = !{!"name_s", !16, i64 0, !10, i64 2, !10, i64 2, !10, i64 2, !4, i64 4, !4, i64 8}
+  !16 = !{!"short", !5, i64 0}
+  !17 = !{!15, !4, i64 8}
+  !18 = !{!9, !10, i64 0}
+  !19 = !{!2, !4, i64 64}
+  !20 = !{!10, !10, i64 0}
+  !21 = !{!15, !16, i64 0}
+  !22 = !{!5, !5, i64 0}
+  !23 = !{!2, !4, i64 48}
+  !24 = !{!25, !16, i64 0}
+  !25 = !{!"ref_s", !26, i64 0, !5, i64 4}
+  !26 = !{!"tas_s", !16, i64 0, !16, i64 2}
+  !27 = !{!25, !16, i64 2}
+  !28 = !{!2, !4, i64 44}
+  !29 = !{!30, !4, i64 0}
+  !30 = !{!"gs_const_string_s", !4, i64 0, !10, i64 4}
+  !31 = !{!30, !10, i64 4}
+
+...
+---
+name:            name_init
+alignment:       2
+exposesReturnsTwice: false
+hasInlineAsm:    false
+isSSA:           false
+tracksRegLiveness: false
+tracksSubRegLiveness: false
+liveins:         
+  - { reg: '%a0' }
+  - { reg: '%a1' }
+  - { reg: '%t9' }
+  - { reg: '%v0' }
+calleeSavedRegisters: [ '%fp', '%ra', '%d10', '%d11', '%d12', '%d13', '%d14', 
+                        '%d15', '%f20', '%f21', '%f22', '%f23', '%f24', 
+                        '%f25', '%f26', '%f27', '%f28', '%f29', '%f30', 
+                        '%f31', '%s0', '%s1', '%s2', '%s3', '%s4', '%s5', 
+                        '%s6', '%s7' ]
+frameInfo:       
+  isFrameAddressTaken: false
+  isReturnAddressTaken: false
+  hasStackMap:     false
+  hasPatchPoint:   false
+  stackSize:       56
+  offsetAdjustment: 0
+  maxAlignment:    4
+  adjustsStack:    true
+  hasCalls:        true
+  maxCallFrameSize: 24
+  hasOpaqueSPAdjustment: false
+  hasVAStart:      false
+  hasMustTailInVarArgFunc: false
+stack:           
+  - { id: 0, type: spill-slot, offset: -4, size: 4, alignment: 4, callee-saved-register: '%ra' }
+  - { id: 1, type: spill-slot, offset: -8, size: 4, alignment: 4, callee-saved-register: '%s6' }
+  - { id: 2, type: spill-slot, offset: -12, size: 4, alignment: 4, callee-saved-register: '%s5' }
+  - { id: 3, type: spill-slot, offset: -16, size: 4, alignment: 4, callee-saved-register: '%s4' }
+  - { id: 4, type: spill-slot, offset: -20, size: 4, alignment: 4, callee-saved-register: '%s3' }
+  - { id: 5, type: spill-slot, offset: -24, size: 4, alignment: 4, callee-saved-register: '%s2' }
+  - { id: 6, type: spill-slot, offset: -28, size: 4, alignment: 4, callee-saved-register: '%s1' }
+  - { id: 7, type: spill-slot, offset: -32, size: 4, alignment: 4, callee-saved-register: '%s0' }
+body:             |
+  bb.0 (%ir-block.0, freq 47):
+    successors: %bb.2(37), %bb.1(62)
+    liveins: %a0, %a1, %t9, %ra, %s6, %s5, %s4, %s3, %s2, %s1, %s0
+  
+    %v0 = LUi target-flags(<unknown>) $_gp_disp
+    %v0 = ADDiu %v0, target-flags(<unknown>) $_gp_disp
+    %sp = ADDiu %sp, -56
+    CFI_INSTRUCTION .cfi_def_cfa_offset 56
+    SW killed %ra, %sp, 52 :: (store 4 into stack)
+    SW killed %s6, %sp, 48 :: (store 4 into stack)
+    SW killed %s5, %sp, 44 :: (store 4 into stack)
+    SW killed %s4, %sp, 40 :: (store 4 into stack)
+    SW killed %s3, %sp, 36 :: (store 4 into stack)
+    SW killed %s2, %sp, 32 :: (store 4 into stack)
+    SW killed %s1, %sp, 28 :: (store 4 into stack)
+    SW killed %s0, %sp, 24 :: (store 4 into stack)
+    CFI_INSTRUCTION .cfi_offset %ra_64, -4
+    CFI_INSTRUCTION .cfi_offset %s6_64, -8
+    CFI_INSTRUCTION .cfi_offset %s5_64, -12
+    CFI_INSTRUCTION .cfi_offset %s4_64, -16
+    CFI_INSTRUCTION .cfi_offset %s3_64, -20
+    CFI_INSTRUCTION .cfi_offset %s2_64, -24
+    CFI_INSTRUCTION .cfi_offset %s1_64, -28
+    CFI_INSTRUCTION .cfi_offset %s0_64, -32
+    %s1 = ADDu %v0, %t9
+    %s0 = OR %a1, %zero
+    BEQ %a0, %zero, %bb.2, implicit-def %at {
+      %s3 = LUi 1
+    }
+  
+  bb.1 (%ir-block.2, freq 29):
+    successors: %bb.22(50), %bb.2(50)
+    liveins: %a0, %s0, %s1
+  
+    %at = ADDiu %a0, -1
+    %v0 = ORi %zero, 65535
+    %at = SLTu killed %v0, killed %at
+    %s2 = ADDiu %zero, 0
+    BNE %at, %zero, %bb.22, implicit-def %at {
+      %s3 = OR killed %a0, %zero
+    }
+  
+  bb.2 (%ir-block.5, freq 32):
+    successors: %bb.3(100)
+    liveins: %s0, %s1, %s3
+  
+    %t9 = LW %s0, 8 :: (load 4 from %ir.6, !tbaa !1)
+    %at = LW %s1, target-flags(<unknown>) @st_name_table :: (load 4 from got)
+    %a1 = ADDiu killed %at, target-flags(<unknown>) @st_name_table
+    %at = LW %s1, target-flags(<unknown>) @.str :: (load 4 from got)
+    %a2 = ADDiu killed %at, target-flags(<unknown>) @.str
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit-def %sp, implicit-def %v0 {
+      %a0 = OR %s0, %zero
+    }
+    %s2 = OR %v0, %zero
+    %s5 = LW %s1, target-flags(<unknown>) @the_nt :: (load 4 from got)
+    SW %s2, %s5, target-flags(<unknown>) @the_nt :: (store 4 into `i8** bitcast (%struct.name_table_s** @the_nt to i8**)`, !tbaa !7)
+    %t9 = LW %s1, target-flags(<unknown>) $memset :: (load 4 from call-entry $memset)
+    %a0 = OR %s2, %zero
+    %a1 = ADDiu %zero, 0
+    %a2 = ADDiu %zero, 6164
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit killed %gp, implicit-def %sp {
+      %gp = OR %s1, %zero
+    }
+    %at = ADDiu killed %s3, -1
+    %v0 = SRL killed %at, 7
+    SW %v0, %s2, 12 :: (store 4 into %ir.12, !tbaa !8)
+    %v1 = ADDiu %s2, 4112
+    %s3 = ADDiu %zero, -1
+    SW %s0, %s2, 16 :: (store 4 into %ir.14, !tbaa !11)
+  
+  bb.3 (%ir-block.15, freq 528):
+    successors: %bb.9.name_alloc_sub.exit(3), %bb.4(96)
+    liveins: %s0, %s1, %s2, %s3, %s5, %v0, %v1
+  
+    %a0 = OR killed %s3, %zero
+    %s3 = ADDiu %a0, 1
+    %at = SLTu %v0, %s3
+    BNE %at, %zero, %bb.9.name_alloc_sub.exit, implicit-def %at {
+      NOP
+    }
+  
+  bb.4 (%ir-block.18, freq 511):
+    successors: %bb.5(3), %bb.3(96)
+    liveins: %a0, %s0, %s1, %s2, %s3, %s5, %v0, %v1
+  
+    %s6 = ADDiu %v1, 4
+    %at = LW killed %v1, 4 :: (load 4 from %ir.scevgep14, !tbaa !7)
+    BNE %at, %zero, %bb.3, implicit-def %at {
+      %v1 = OR %s6, %zero
+    }
+  
+  bb.5 (%ir-block.23, freq 16):
+    successors: %bb.7(37), %bb.6(62)
+    liveins: %a0, %s0, %s1, %s2, %s3, %s5, %s6
+  
+    %v0 = ADDiu killed %a0, 2
+    BEQ %v0, %zero, %bb.7, implicit-def %at {
+      SW %v0, %s2, 4 :: (store 4 into %ir.sunkaddr16, !tbaa !12)
+    }
+  
+  bb.6 (%ir-block.25, freq 10):
+    successors: %bb.7(100)
+    liveins: %s0, %s1, %s2, %s3, %s5, %s6, %v0
+  
+    SW killed %v0, %s2, 8 :: (store 4 into %ir.sunkaddr19, !tbaa !13)
+  
+  bb.7 (%ir-block.26, freq 16):
+    successors: %bb.9.name_alloc_sub.exit(37), %bb.8..loopexit.i(62)
+    liveins: %s0, %s1, %s2, %s3, %s5, %s6
+  
+    %t9 = LW %s0, 8 :: (load 4 from %ir.sunkaddr22, !tbaa !1)
+    %at = LW %s1, target-flags(<unknown>) @st_name_sub_table :: (load 4 from got)
+    %a1 = ADDiu killed %at, target-flags(<unknown>) @st_name_sub_table
+    %at = LW %s1, target-flags(<unknown>) @.str.4 :: (load 4 from got)
+    %a2 = ADDiu killed %at, target-flags(<unknown>) @.str.4
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit-def %sp, implicit-def %v0 {
+      %a0 = OR %s0, %zero
+    }
+    %s4 = OR %v0, %zero
+    BEQ %s4, %zero, %bb.9.name_alloc_sub.exit, implicit-def %at {
+      NOP
+    }
+  
+  bb.8..loopexit.i (freq 10):
+    successors: %bb.9.name_alloc_sub.exit(100)
+    liveins: %s0, %s1, %s2, %s3, %s4, %s5, %s6
+  
+    %t9 = LW %s1, target-flags(<unknown>) $memset :: (load 4 from call-entry $memset)
+    %a0 = OR %s4, %zero
+    %a1 = ADDiu %zero, 0
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit-def %sp {
+      %a2 = ADDiu %zero, 1536
+    }
+    SW killed %s4, killed %s6, 0 :: (store 4 into %ir.sunkaddr24, !tbaa !7)
+    %at = LW %s1, target-flags(<unknown>) @name_scan_sub :: (load 4 from got)
+    %t9 = ADDiu killed %at, target-flags(<unknown>) @name_scan_sub
+    %a0 = OR %s2, %zero
+    %a1 = OR killed %s3, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit-def %sp {
+      %a2 = ADDiu %zero, 0
+    }
+  
+  bb.9.name_alloc_sub.exit (freq 32):
+    successors: %bb.10(100)
+    liveins: %s0, %s1, %s2, %s5
+  
+    %v0 = LW %s2, 4 :: (load 4 from %ir.sunkaddr27, !tbaa !12)
+    %at = SLL %v0, 2
+    %at = ADDu killed %at, %s2
+    %a0 = ADDiu killed %at, 4112
+    %v1 = LW %s2, 12 :: (load 4 from %ir.sunkaddr30)
+  
+  bb.10 (%ir-block.65, freq 528):
+    successors: %bb.16.name_alloc_sub.exit.1(3), %bb.11(96)
+    liveins: %a0, %s0, %s1, %s2, %s5, %v0, %v1
+  
+    %s3 = OR killed %v0, %zero
+    %at = SLTu %v1, %s3
+    BNE %at, %zero, %bb.16.name_alloc_sub.exit.1, implicit-def %at {
+      NOP
+    }
+  
+  bb.11 (%ir-block.67, freq 511):
+    successors: %bb.12(3), %bb.10(96)
+    liveins: %a0, %s0, %s1, %s2, %s3, %s5, %v1
+  
+    %s6 = ADDiu %a0, 4
+    %at = LW killed %a0, 4 :: (load 4 from %ir.scevgep6, !tbaa !7)
+    %v0 = ADDiu %s3, 1
+    BNE %at, %zero, %bb.10, implicit-def %at {
+      %a0 = OR %s6, %zero
+    }
+  
+  bb.12 (%ir-block.73, freq 16):
+    successors: %bb.13(50), %bb.14(50)
+    liveins: %s0, %s1, %s2, %s3, %s5, %s6, %v0
+  
+    SW %v0, %s2, 4 :: (store 4 into %ir.sunkaddr33, !tbaa !12)
+    %at = LW %s2, 8 :: (load 4 from %ir.sunkaddr36, !tbaa !13)
+    %at = SLTu killed %at, %v0
+    BEQ %at, %zero, %bb.14, implicit-def %at {
+      NOP
+    }
+  
+  bb.13 (%ir-block.76, freq 8):
+    successors: %bb.14(100)
+    liveins: %s0, %s1, %s2, %s3, %s5, %s6, %v0
+  
+    SW killed %v0, %s2, 8 :: (store 4 into %ir.sunkaddr39, !tbaa !13)
+  
+  bb.14 (%ir-block.77, freq 16):
+    successors: %bb.16.name_alloc_sub.exit.1(37), %bb.15..loopexit.i.1(62)
+    liveins: %s0, %s1, %s2, %s3, %s5, %s6
+  
+    %a0 = LW %s2, 16 :: (load 4 from %ir.sunkaddr42, !tbaa !11)
+    %t9 = LW %a0, 8 :: (load 4 from %ir.79, !tbaa !1)
+    %at = LW %s1, target-flags(<unknown>) @st_name_sub_table :: (load 4 from got)
+    %a1 = ADDiu killed %at, target-flags(<unknown>) @st_name_sub_table
+    %at = LW %s1, target-flags(<unknown>) @.str.4 :: (load 4 from got)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit-def %sp, implicit-def %v0 {
+      %a2 = ADDiu killed %at, target-flags(<unknown>) @.str.4
+    }
+    %s4 = OR %v0, %zero
+    BEQ %s4, %zero, %bb.16.name_alloc_sub.exit.1, implicit-def %at {
+      NOP
+    }
+  
+  bb.15..loopexit.i.1 (freq 10):
+    successors: %bb.16.name_alloc_sub.exit.1(100)
+    liveins: %s0, %s1, %s2, %s3, %s4, %s5, %s6
+  
+    %t9 = LW %s1, target-flags(<unknown>) $memset :: (load 4 from call-entry $memset)
+    %a0 = OR %s4, %zero
+    %a1 = ADDiu %zero, 0
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit-def %sp {
+      %a2 = ADDiu %zero, 1536
+    }
+    SW killed %s4, killed %s6, 0 :: (store 4 into %ir.sunkaddr44, !tbaa !7)
+    %at = LW %s1, target-flags(<unknown>) @name_scan_sub :: (load 4 from got)
+    %t9 = ADDiu killed %at, target-flags(<unknown>) @name_scan_sub
+    %a0 = OR %s2, %zero
+    %a1 = OR killed %s3, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit-def %sp {
+      %a2 = ADDiu %zero, 0
+    }
+  
+  bb.16.name_alloc_sub.exit.1 (freq 32):
+    successors: %bb.17(100)
+    liveins: %s0, %s1, %s2, %s5
+  
+    %v0 = ADDiu %s2, 4116
+    %v1 = ADDiu %zero, -1
+    %a0 = ADDiu %zero, 59
+    %at = LUi 2047
+    %a1 = ORi killed %at, 65532
+    %a2 = LW %s1, target-flags(<unknown>) @nt_1char_names :: (load 4 from got)
+    %a3 = ADDiu %a2, target-flags(<unknown>) @nt_1char_names
+    %t0 = ADDiu %zero, -16384
+    %t1 = ADDiu %zero, 7670
+  
+  bb.17 (%ir-block.35, freq 1040):
+    successors: %bb.19(37), %bb.18(62)
+    liveins: %a0, %a1, %a2, %a3, %s0, %s1, %s2, %s5, %t0, %t1, %v0, %v1
+  
+    %at = ADDiu %v1, 2
+    %at = SRL killed %at, 5
+    %at = AND killed %at, %a1
+    %at = ADDu %v0, killed %at
+    %t2 = LW killed %at, 0 :: (load 4 from %ir.40, !tbaa !7)
+    BLTZ %v1, %bb.19, implicit-def %at {
+      %t3 = ANDi %a0, 127
+    }
+  
+  bb.18 (%ir-block.48, freq 650):
+    successors: %bb.20(100)
+    liveins: %a0, %a1, %a2, %a3, %s0, %s1, %s2, %s5, %t0, %t1, %t2, %t3, %v0, %v1
+  
+    %at = SLL %t3, 2
+    %t4 = SLL %t3, 3
+    %at = ADDu killed %t4, killed %at
+    %at = ADDu %t2, killed %at
+    %t4 = ADDiu %a2, target-flags(<unknown>) @nt_1char_names
+    %t4 = ADDu killed %t4, %v1
+    SW killed %t4, %at, 4 :: (store 4 into %ir.49, !tbaa !14)
+    %t4 = ADDiu %at, 2
+    %t5 = LHu %at, 2 :: (load 2 from %ir.50)
+    %t5 = AND killed %t5, %t0
+    %t5 = ORi killed %t5, 1
+    B %bb.20, implicit-def %at {
+      SH %t5, killed %at, 2 :: (store 2 into %ir.50)
+    }
+  
+  bb.19 (%ir-block.43, freq 390):
+    successors: %bb.20(100)
+    liveins: %a0, %a1, %a2, %a3, %s0, %s1, %s2, %s5, %t0, %t1, %t2, %t3, %v0, %v1
+  
+    %at = SLL %t3, 2
+    %t4 = SLL %t3, 3
+    %at = ADDu killed %t4, killed %at
+    %at = ADDu %t2, killed %at
+    SW %a3, %at, 4 :: (store 4 into %ir.44, !tbaa !14)
+    %t4 = LHu %at, 2 :: (load 2 from %ir.45)
+    %t5 = AND killed %t4, %t0
+    SH %t5, %at, 2 :: (store 2 into %ir.45)
+    %t4 = ADDiu killed %at, 2
+  
+  bb.20 (%ir-block.54, freq 1040):
+    successors: %bb.21(3), %bb.17(96)
+    liveins: %a0, %a1, %a2, %a3, %s0, %s1, %s2, %s5, %t0, %t1, %t2, %t3, %t4, %t5, %v0, %v1
+  
+    %at = ORi killed %t5, 49152
+    SH killed %at, killed %t4, 0 :: (store 2 into %ir..pre-phi)
+    %at = SLL %t3, 2
+    %t3 = SLL killed %t3, 3
+    %at = ADDu killed %t3, killed %at
+    %at = ADDu killed %t2, killed %at
+    SW %zero, killed %at, 8 :: (store 4 into %ir.57, !tbaa !17)
+    %a0 = ADDiu killed %a0, 59
+    BNE %a0, %t1, %bb.17, implicit-def %at {
+      %v1 = ADDiu killed %v1, 1
+    }
+  
+  bb.21 (%ir-block.59, freq 32):
+    successors: %bb.22(100)
+    liveins: %s0, %s1, %s2, %s5
+  
+    SW %zero, %s2, 0 :: (store 4 into %ir.61, !tbaa !18)
+    %t9 = LW %s1, target-flags(<unknown>) @name_trace_finish :: (load 4 from call-entry @name_trace_finish)
+    %a0 = ADDiu %zero, 0
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit killed %gp, implicit-def %sp {
+      %gp = OR %s1, %zero
+    }
+    %t9 = LW %s0, 64 :: (load 4 from %ir.62, !tbaa !19)
+    %at = LW %s1, target-flags(<unknown>) @.str.1 :: (load 4 from got)
+    %at = ADDiu killed %at, target-flags(<unknown>) @.str.1
+    %v0 = LW %s1, target-flags(<unknown>) @the_nt_root :: (load 4 from got)
+    SW killed %at, %sp, 16 :: (store 4 into unknown)
+    %a1 = ADDiu killed %v0, target-flags(<unknown>) @the_nt_root
+    %a3 = ADDiu killed %s5, target-flags(<unknown>) @the_nt
+    %a2 = LW killed %s1, target-flags(<unknown>) @ptr_struct_procs :: (load 4 from got)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit %a3, implicit-def %sp {
+      %a0 = OR killed %s0, %zero
+    }
+  
+  bb.22 (%ir-block.64, freq 47):
+    liveins: %s2
+    liveouts:
+  
+    %v0 = OR killed %s2, %zero
+    %s0 = LW %sp, 24 :: (load 4 from stack)
+    %s1 = LW %sp, 28 :: (load 4 from stack)
+    %s2 = LW %sp, 32 :: (load 4 from stack)
+    %s3 = LW %sp, 36 :: (load 4 from stack)
+    %s4 = LW %sp, 40 :: (load 4 from stack)
+    %s5 = LW %sp, 44 :: (load 4 from stack)
+    %s6 = LW %sp, 48 :: (load 4 from stack)
+    %ra = LW %sp, 52 :: (load 4 from stack)
+    PseudoReturn %ra {
+      %sp = ADDiu %sp, 56
+    }
+
+...

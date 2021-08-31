@@ -1,0 +1,1878 @@
+--- |
+  ; ModuleID = '/home/romi/didaktoriko/unison/unison-experiments/experiments/test-input/c/mediabench/mips_zip/build-mips/jpeg/jpeg.jquant1.ll'
+  target datalayout = "E-m:m-p:32:32-i8:8:32-i16:16:32-i64:64-n32-S64"
+  target triple = "mips--linux-gnu"
+  
+  %struct.jpeg_decompress_struct = type { %struct.jpeg_error_mgr*, %struct.jpeg_memory_mgr*, %struct.jpeg_progress_mgr*, i32, i32, %struct.jpeg_source_mgr*, i32, i32, i32, i32, i32, i32, i32, double, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i8**, i32, i32, i32, i32, i32, [64 x i32]*, [4 x %struct.JQUANT_TBL*], [4 x %struct.JHUFF_TBL*], [4 x %struct.JHUFF_TBL*], i32, %struct.jpeg_component_info*, i32, i32, [16 x i8], [16 x i8], [16 x i8], i32, i32, i8, i16, i16, i32, i8, i32, i32, i32, i32, i32, i8*, i32, [4 x %struct.jpeg_component_info*], i32, i32, i32, [10 x i32], i32, i32, i32, i32, i32, %struct.jpeg_decomp_master*, %struct.jpeg_d_main_controller*, %struct.jpeg_d_coef_controller*, %struct.jpeg_d_post_controller*, %struct.jpeg_input_controller*, %struct.jpeg_marker_reader*, %struct.jpeg_entropy_decoder*, %struct.jpeg_inverse_dct*, %struct.jpeg_upsampler*, %struct.jpeg_color_deconverter*, %struct.jpeg_color_quantizer* }
+  %struct.jpeg_error_mgr = type { void (%struct.jpeg_common_struct*)*, void (%struct.jpeg_common_struct*, i32)*, void (%struct.jpeg_common_struct*)*, void (%struct.jpeg_common_struct*, i8*)*, void (%struct.jpeg_common_struct*)*, i32, %union.anon, i32, i32, i8**, i32, i8**, i32, i32 }
+  %struct.jpeg_common_struct = type { %struct.jpeg_error_mgr*, %struct.jpeg_memory_mgr*, %struct.jpeg_progress_mgr*, i32, i32 }
+  %union.anon = type { [8 x i32], [48 x i8] }
+  %struct.jpeg_memory_mgr = type { i8* (%struct.jpeg_common_struct*, i32, i32)*, i8* (%struct.jpeg_common_struct*, i32, i32)*, i8** (%struct.jpeg_common_struct*, i32, i32, i32)*, [64 x i16]** (%struct.jpeg_common_struct*, i32, i32, i32)*, %struct.jvirt_sarray_control* (%struct.jpeg_common_struct*, i32, i32, i32, i32, i32)*, %struct.jvirt_barray_control* (%struct.jpeg_common_struct*, i32, i32, i32, i32, i32)*, {}*, i8** (%struct.jpeg_common_struct*, %struct.jvirt_sarray_control*, i32, i32, i32)*, [64 x i16]** (%struct.jpeg_common_struct*, %struct.jvirt_barray_control*, i32, i32, i32)*, void (%struct.jpeg_common_struct*, i32)*, {}*, i32 }
+  %struct.jvirt_sarray_control = type opaque
+  %struct.jvirt_barray_control = type opaque
+  %struct.jpeg_progress_mgr = type { {}*, i32, i32, i32, i32 }
+  %struct.jpeg_source_mgr = type { i8*, i32, {}*, i32 (%struct.jpeg_decompress_struct*)*, void (%struct.jpeg_decompress_struct*, i32)*, i32 (%struct.jpeg_decompress_struct*, i32)*, {}* }
+  %struct.JQUANT_TBL = type { [64 x i16], i32 }
+  %struct.JHUFF_TBL = type { [17 x i8], [256 x i8], i32 }
+  %struct.jpeg_component_info = type { i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, %struct.JQUANT_TBL*, i8* }
+  %struct.jpeg_decomp_master = type { {}*, {}*, i32 }
+  %struct.jpeg_d_main_controller = type { void (%struct.jpeg_decompress_struct*, i32)*, void (%struct.jpeg_decompress_struct*, i8**, i32*, i32)* }
+  %struct.jpeg_d_coef_controller = type { {}*, i32 (%struct.jpeg_decompress_struct*)*, {}*, i32 (%struct.jpeg_decompress_struct*, i8***)*, %struct.jvirt_barray_control** }
+  %struct.jpeg_d_post_controller = type { void (%struct.jpeg_decompress_struct*, i32)*, void (%struct.jpeg_decompress_struct*, i8***, i32*, i32, i8**, i32*, i32)* }
+  %struct.jpeg_input_controller = type { i32 (%struct.jpeg_decompress_struct*)*, {}*, {}*, {}*, i32, i32 }
+  %struct.jpeg_marker_reader = type { {}*, i32 (%struct.jpeg_decompress_struct*)*, i32 (%struct.jpeg_decompress_struct*)*, i32 (%struct.jpeg_decompress_struct*)*, [16 x i32 (%struct.jpeg_decompress_struct*)*], i32, i32, i32, i32 }
+  %struct.jpeg_entropy_decoder = type { {}*, i32 (%struct.jpeg_decompress_struct*, [64 x i16]**)* }
+  %struct.jpeg_inverse_dct = type { {}*, [10 x void (%struct.jpeg_decompress_struct*, %struct.jpeg_component_info*, i16*, i8**, i32)*] }
+  %struct.jpeg_upsampler = type { {}*, void (%struct.jpeg_decompress_struct*, i8***, i32*, i32, i8**, i32*, i32)*, i32 }
+  %struct.jpeg_color_deconverter = type { {}*, void (%struct.jpeg_decompress_struct*, i8***, i32, i8**, i32)* }
+  %struct.jpeg_color_quantizer = type { void (%struct.jpeg_decompress_struct*, i32)*, void (%struct.jpeg_decompress_struct*, i8**, i8**, i32)*, {}*, {}* }
+  %struct.my_cquantizer = type { %struct.jpeg_color_quantizer, i8**, i32, i8**, i32, [4 x i32], i32, [4 x [16 x i32]*], [4 x i16*], i32 }
+  
+  @base_dither_matrix = internal unnamed_addr constant [16 x [16 x i8]] [[16 x i8] c"\00\C00\F0\0C\CC<\FC\03\C33\F3\0F\CF?\FF", [16 x i8] c"\80@\B0p\8CL\BC|\83C\B3s\8FO\BF\7F", [16 x i8] c" \E0\10\D0,\EC\1C\DC#\E3\13\D3/\EF\1F\DF", [16 x i8] c"\A0`\90P\ACl\9C\5C\A3c\93S\AFo\9F_", [16 x i8] c"\08\C88\F8\04\C44\F4\0B\CB;\FB\07\C77\F7", [16 x i8] c"\88H\B8x\84D\B4t\8BK\BB{\87G\B7w", [16 x i8] c"(\E8\18\D8$\E4\14\D4+\EB\1B\DB'\E7\17\D7", [16 x i8] c"\A8h\98X\A4d\94T\ABk\9B[\A7g\97W", [16 x i8] c"\02\C22\F2\0E\CE>\FE\01\C11\F1\0D\CD=\FD", [16 x i8] c"\82B\B2r\8EN\BE~\81A\B1q\8DM\BD}", [16 x i8] c"\22\E2\12\D2.\EE\1E\DE!\E1\11\D1-\ED\1D\DD", [16 x i8] c"\A2b\92R\AEn\9E^\A1a\91Q\ADm\9D]", [16 x i8] c"\0A\CA:\FA\06\C66\F6\09\C99\F9\05\C55\F5", [16 x i8] c"\8AJ\BAz\86F\B6v\89I\B9y\85E\B5u", [16 x i8] c"*\EA\1A\DA&\E6\16\D6)\E9\19\D9%\E5\15\D5", [16 x i8] c"\AAj\9AZ\A6f\96V\A9i\99Y\A5e\95U"], align 1
+  @select_ncolors.RGB_order = internal unnamed_addr constant [3 x i32] [i32 1, i32 0, i32 2], align 4
+  
+  ; Function Attrs: nounwind
+  define void @jinit_1pass_quantizer(%struct.jpeg_decompress_struct* %cinfo) #0 {
+    %1 = getelementptr inbounds %struct.jpeg_decompress_struct, %struct.jpeg_decompress_struct* %cinfo, i32 0, i32 1
+    %2 = load %struct.jpeg_memory_mgr*, %struct.jpeg_memory_mgr** %1, align 4, !tbaa !1
+    %3 = bitcast %struct.jpeg_memory_mgr* %2 to i8* (%struct.jpeg_common_struct*, i32, i32)**
+    %4 = load i8* (%struct.jpeg_common_struct*, i32, i32)*, i8* (%struct.jpeg_common_struct*, i32, i32)** %3, align 4, !tbaa !9
+    %5 = bitcast %struct.jpeg_decompress_struct* %cinfo to %struct.jpeg_common_struct*
+    %6 = tail call i8* %4(%struct.jpeg_common_struct* %5, i32 signext 1, i32 signext 88) #4
+    %7 = getelementptr inbounds %struct.jpeg_decompress_struct, %struct.jpeg_decompress_struct* %cinfo, i32 0, i32 83
+    %8 = bitcast %struct.jpeg_color_quantizer** %7 to i8**
+    store i8* %6, i8** %8, align 8, !tbaa !12
+    %9 = bitcast i8* %6 to void (%struct.jpeg_decompress_struct*, i32)**
+    store void (%struct.jpeg_decompress_struct*, i32)* @start_pass_1_quant, void (%struct.jpeg_decompress_struct*, i32)** %9, align 4, !tbaa !13
+    %10 = getelementptr inbounds i8, i8* %6, i32 8
+    %11 = bitcast i8* %10 to void (%struct.jpeg_decompress_struct*)**
+    store void (%struct.jpeg_decompress_struct*)* @finish_pass_1_quant, void (%struct.jpeg_decompress_struct*)** %11, align 4, !tbaa !16
+    %12 = getelementptr inbounds i8, i8* %6, i32 12
+    %13 = bitcast i8* %12 to void (%struct.jpeg_decompress_struct*)**
+    store void (%struct.jpeg_decompress_struct*)* @new_color_map_1_quant, void (%struct.jpeg_decompress_struct*)** %13, align 4, !tbaa !17
+    %14 = getelementptr inbounds i8, i8* %6, i32 68
+    %15 = bitcast i8* %14 to i16**
+    store i16* null, i16** %15, align 4, !tbaa !18
+    %16 = getelementptr inbounds i8, i8* %6, i32 52
+    %17 = bitcast i8* %16 to [16 x i32]**
+    store [16 x i32]* null, [16 x i32]** %17, align 4, !tbaa !18
+    %18 = getelementptr inbounds %struct.jpeg_decompress_struct, %struct.jpeg_decompress_struct* %cinfo, i32 0, i32 28
+    %19 = load i32, i32* %18, align 8, !tbaa !19
+    %20 = icmp sgt i32 %19, 4
+    br i1 %20, label %21, label %29
+  
+  ; <label>:21                                      ; preds = %0
+    %22 = bitcast %struct.jpeg_decompress_struct* %cinfo to %struct.jpeg_common_struct*
+    %23 = bitcast %struct.jpeg_decompress_struct* %cinfo to %struct.jpeg_error_mgr**
+    %24 = load %struct.jpeg_error_mgr*, %struct.jpeg_error_mgr** %23, align 8, !tbaa !20
+    %25 = getelementptr inbounds %struct.jpeg_error_mgr, %struct.jpeg_error_mgr* %24, i32 0, i32 5
+    store i32 54, i32* %25, align 4, !tbaa !21
+    %26 = getelementptr inbounds %struct.jpeg_error_mgr, %struct.jpeg_error_mgr* %24, i32 0, i32 6, i32 0, i32 0
+    store i32 4, i32* %26, align 4, !tbaa !23
+    %27 = bitcast %struct.jpeg_error_mgr* %24 to void (%struct.jpeg_common_struct*)**
+    %28 = load void (%struct.jpeg_common_struct*)*, void (%struct.jpeg_common_struct*)** %27, align 4, !tbaa !24
+    tail call void %28(%struct.jpeg_common_struct* %22) #4
+    br label %29
+  
+  ; <label>:29                                      ; preds = %21, %0
+    %30 = getelementptr inbounds %struct.jpeg_decompress_struct, %struct.jpeg_decompress_struct* %cinfo, i32 0, i32 22
+    %31 = load i32, i32* %30, align 8, !tbaa !25
+    %32 = icmp sgt i32 %31, 256
+    br i1 %32, label %33, label %41
+  
+  ; <label>:33                                      ; preds = %29
+    %34 = bitcast %struct.jpeg_decompress_struct* %cinfo to %struct.jpeg_common_struct*
+    %35 = bitcast %struct.jpeg_decompress_struct* %cinfo to %struct.jpeg_error_mgr**
+    %36 = load %struct.jpeg_error_mgr*, %struct.jpeg_error_mgr** %35, align 8, !tbaa !20
+    %37 = getelementptr inbounds %struct.jpeg_error_mgr, %struct.jpeg_error_mgr* %36, i32 0, i32 5
+    store i32 56, i32* %37, align 4, !tbaa !21
+    %38 = getelementptr inbounds %struct.jpeg_error_mgr, %struct.jpeg_error_mgr* %36, i32 0, i32 6, i32 0, i32 0
+    store i32 256, i32* %38, align 4, !tbaa !23
+    %39 = bitcast %struct.jpeg_error_mgr* %36 to void (%struct.jpeg_common_struct*)**
+    %40 = load void (%struct.jpeg_common_struct*)*, void (%struct.jpeg_common_struct*)** %39, align 4, !tbaa !24
+    tail call void %40(%struct.jpeg_common_struct* nonnull %34) #4
+    %sunkaddr = ptrtoint %struct.jpeg_decompress_struct* %cinfo to i32
+    %sunkaddr14 = add i32 %sunkaddr, 96
+    %sunkaddr15 = inttoptr i32 %sunkaddr14 to i32*
+    %.pre = load i32, i32* %sunkaddr15, align 8, !tbaa !25
+    br label %41
+  
+  ; <label>:41                                      ; preds = %33, %29
+    %42 = phi i32 [ %.pre, %33 ], [ %31, %29 ]
+    %sunkaddr16 = ptrtoint %struct.jpeg_decompress_struct* %cinfo to i32
+    %sunkaddr17 = add i32 %sunkaddr16, 456
+    %sunkaddr18 = inttoptr i32 %sunkaddr17 to %struct.my_cquantizer**
+    %43 = load %struct.my_cquantizer*, %struct.my_cquantizer** %sunkaddr18, align 8, !tbaa !12
+    %sunkaddr19 = ptrtoint %struct.jpeg_decompress_struct* %cinfo to i32
+    %sunkaddr20 = add i32 %sunkaddr19, 120
+    %sunkaddr21 = inttoptr i32 %sunkaddr20 to i32*
+    %44 = load i32, i32* %sunkaddr21, align 8, !tbaa !19
+    %45 = add i32 %44, -1
+    br label %46
+  
+  ; <label>:46                                      ; preds = %._crit_edge.i.i, %41
+    %iroot.0.i.i = phi i32 [ 1, %41 ], [ %48, %._crit_edge.i.i ]
+    %47 = icmp sgt i32 %44, 1
+    %48 = add nuw nsw i32 %iroot.0.i.i, 1
+    br i1 %47, label %.lr.ph9.i.i, label %._crit_edge.i.i
+  
+  .lr.ph9.i.i:                                      ; preds = %46, %.lr.ph9.i.i
+    %lsr.iv12 = phi i32 [ %lsr.iv.next13, %.lr.ph9.i.i ], [ %45, %46 ]
+    %temp.08.i.i = phi i32 [ %49, %.lr.ph9.i.i ], [ %48, %46 ]
+    %49 = mul nsw i32 %temp.08.i.i, %48
+    %lsr.iv.next13 = add i32 %lsr.iv12, -1
+    %exitcond16.i.i = icmp eq i32 %lsr.iv.next13, 0
+    br i1 %exitcond16.i.i, label %._crit_edge.i.i, label %.lr.ph9.i.i
+  
+  ._crit_edge.i.i:                                  ; preds = %.lr.ph9.i.i, %46
+    %temp.0.lcssa.i.i = phi i32 [ %48, %46 ], [ %49, %.lr.ph9.i.i ]
+    %50 = icmp sgt i32 %temp.0.lcssa.i.i, %42
+    br i1 %50, label %51, label %46
+  
+  ; <label>:51                                      ; preds = %._crit_edge.i.i
+    %52 = icmp slt i32 %iroot.0.i.i, 2
+    br i1 %52, label %53, label %.preheader1.i.i
+  
+  ; <label>:53                                      ; preds = %51
+    %54 = bitcast %struct.jpeg_decompress_struct* %cinfo to %struct.jpeg_common_struct*
+    %55 = bitcast %struct.jpeg_decompress_struct* %cinfo to %struct.jpeg_error_mgr**
+    %56 = load %struct.jpeg_error_mgr*, %struct.jpeg_error_mgr** %55, align 8, !tbaa !20
+    %57 = getelementptr inbounds %struct.jpeg_error_mgr, %struct.jpeg_error_mgr* %56, i32 0, i32 5
+    store i32 55, i32* %57, align 4, !tbaa !21
+    %58 = getelementptr inbounds %struct.jpeg_error_mgr, %struct.jpeg_error_mgr* %56, i32 0, i32 6, i32 0, i32 0
+    store i32 %temp.0.lcssa.i.i, i32* %58, align 4, !tbaa !23
+    %59 = bitcast %struct.jpeg_error_mgr* %56 to void (%struct.jpeg_common_struct*)**
+    %60 = load void (%struct.jpeg_common_struct*)*, void (%struct.jpeg_common_struct*)** %59, align 4, !tbaa !24
+    tail call void %60(%struct.jpeg_common_struct* %54) #4
+    br label %.preheader1.i.i
+  
+  .preheader1.i.i:                                  ; preds = %53, %51
+    %61 = icmp sgt i32 %44, 0
+    br i1 %61, label %.lr.ph.i.i.preheader, label %.preheader.i.i
+  
+  .lr.ph.i.i.preheader:                             ; preds = %.preheader1.i.i
+    %scevgep7 = getelementptr %struct.my_cquantizer, %struct.my_cquantizer* %43, i32 0, i32 5, i32 0
+    %scevgep78 = bitcast i32* %scevgep7 to %struct.my_cquantizer*
+    br label %.lr.ph.i.i
+  
+  .preheader.i.i:                                   ; preds = %.lr.ph.i.i, %.preheader1.i.i
+    %total_colors.0.lcssa.i.i = phi i32 [ 1, %.preheader1.i.i ], [ %62, %.lr.ph.i.i ]
+    br label %.outer.i.i
+  
+  .lr.ph.i.i:                                       ; preds = %.lr.ph.i.i, %.lr.ph.i.i.preheader
+    %lsr.iv9 = phi %struct.my_cquantizer* [ %63, %.lr.ph.i.i ], [ %scevgep78, %.lr.ph.i.i.preheader ]
+    %lsr.iv6 = phi i32 [ %lsr.iv.next, %.lr.ph.i.i ], [ %44, %.lr.ph.i.i.preheader ]
+    %total_colors.06.i.i = phi i32 [ %62, %.lr.ph.i.i ], [ 1, %.lr.ph.i.i.preheader ]
+    %lsr.iv911 = bitcast %struct.my_cquantizer* %lsr.iv9 to i32*
+    store i32 %iroot.0.i.i, i32* %lsr.iv911, align 4, !tbaa !23
+    %62 = mul nsw i32 %total_colors.06.i.i, %iroot.0.i.i
+    %lsr.iv.next = add i32 %lsr.iv6, -1
+    %scevgep10 = getelementptr %struct.my_cquantizer, %struct.my_cquantizer* %lsr.iv9, i32 0, i32 0, i32 1
+    %63 = bitcast void (%struct.jpeg_decompress_struct*, i8**, i8**, i32)** %scevgep10 to %struct.my_cquantizer*
+    %exitcond.i.i = icmp eq i32 %lsr.iv.next, 0
+    br i1 %exitcond.i.i, label %.preheader.i.i, label %.lr.ph.i.i
+  
+  ; <label>:64                                      ; preds = %82, %.outer.i.i
+    %i.2.i.i = phi i32 [ 0, %82 ], [ %i.2.ph.i.i, %.outer.i.i ]
+    %changed.0.i.i = phi i32 [ 0, %82 ], [ %changed.0.ph.i.i, %.outer.i.i ]
+    %65 = icmp slt i32 %i.2.i.i, %44
+    br i1 %65, label %66, label %82
+  
+  ; <label>:66                                      ; preds = %64
+    %sunkaddr22 = ptrtoint %struct.jpeg_decompress_struct* %cinfo to i32
+    %sunkaddr23 = add i32 %sunkaddr22, 40
+    %sunkaddr24 = inttoptr i32 %sunkaddr23 to i32*
+    %67 = load i32, i32* %sunkaddr24, align 8, !tbaa !26
+    %68 = icmp eq i32 %67, 2
+    br i1 %68, label %69, label %72
+  
+  ; <label>:69                                      ; preds = %66
+    %70 = getelementptr inbounds [3 x i32], [3 x i32]* @select_ncolors.RGB_order, i32 0, i32 %i.2.i.i
+    %71 = load i32, i32* %70, align 4, !tbaa !23
+    br label %72
+  
+  ; <label>:72                                      ; preds = %69, %66
+    %73 = phi i32 [ %71, %69 ], [ %i.2.i.i, %66 ]
+    %74 = getelementptr inbounds %struct.my_cquantizer, %struct.my_cquantizer* %43, i32 0, i32 5, i32 %73
+    %75 = load i32, i32* %74, align 4, !tbaa !23
+    %76 = sdiv i32 %total_colors.2.ph.i.i, %75
+    %77 = add nsw i32 %75, 1
+    %78 = mul nsw i32 %76, %77
+    %79 = icmp sgt i32 %78, %42
+    br i1 %79, label %82, label %80
+  
+  ; <label>:80                                      ; preds = %72
+    store i32 %77, i32* %74, align 4, !tbaa !23
+    %81 = add nsw i32 %i.2.i.i, 1
+    br label %.outer.i.i
+  
+  .outer.i.i:                                       ; preds = %80, %.preheader.i.i
+    %i.2.ph.i.i = phi i32 [ 0, %.preheader.i.i ], [ %81, %80 ]
+    %total_colors.2.ph.i.i = phi i32 [ %total_colors.0.lcssa.i.i, %.preheader.i.i ], [ %78, %80 ]
+    %changed.0.ph.i.i = phi i32 [ 0, %.preheader.i.i ], [ 1, %80 ]
+    br label %64
+  
+  ; <label>:82                                      ; preds = %72, %64
+    %83 = icmp eq i32 %changed.0.i.i, 0
+    br i1 %83, label %select_ncolors.exit.i, label %64
+  
+  select_ncolors.exit.i:                            ; preds = %82
+    %sunkaddr25 = ptrtoint %struct.jpeg_decompress_struct* %cinfo to i32
+    %sunkaddr26 = add i32 %sunkaddr25, 120
+    %sunkaddr27 = inttoptr i32 %sunkaddr26 to i32*
+    %84 = load i32, i32* %sunkaddr27, align 8, !tbaa !19
+    %85 = icmp eq i32 %84, 3
+    %86 = bitcast %struct.jpeg_decompress_struct* %cinfo to %struct.jpeg_error_mgr**
+    %87 = load %struct.jpeg_error_mgr*, %struct.jpeg_error_mgr** %86, align 8, !tbaa !20
+    %88 = getelementptr inbounds %struct.jpeg_error_mgr, %struct.jpeg_error_mgr* %87, i32 0, i32 1
+    %89 = load void (%struct.jpeg_common_struct*, i32)*, void (%struct.jpeg_common_struct*, i32)** %88, align 4
+    br i1 %85, label %90, label %102
+  
+  ; <label>:90                                      ; preds = %select_ncolors.exit.i
+    %91 = bitcast %struct.jpeg_decompress_struct* %cinfo to %struct.jpeg_common_struct*
+    %92 = getelementptr inbounds %struct.jpeg_error_mgr, %struct.jpeg_error_mgr* %87, i32 0, i32 6, i32 0, i32 0
+    store i32 %total_colors.2.ph.i.i, i32* %92, align 4, !tbaa !23
+    %sunkaddr28 = ptrtoint %struct.my_cquantizer* %43 to i32
+    %sunkaddr29 = add i32 %sunkaddr28, 32
+    %sunkaddr30 = inttoptr i32 %sunkaddr29 to i32*
+    %93 = load i32, i32* %sunkaddr30, align 4, !tbaa !23
+    %94 = getelementptr inbounds %struct.jpeg_error_mgr, %struct.jpeg_error_mgr* %87, i32 0, i32 6, i32 0, i32 1
+    store i32 %93, i32* %94, align 4, !tbaa !23
+    %95 = getelementptr inbounds %struct.my_cquantizer, %struct.my_cquantizer* %43, i32 0, i32 5, i32 1
+    %96 = load i32, i32* %95, align 4, !tbaa !23
+    %97 = getelementptr inbounds %struct.jpeg_error_mgr, %struct.jpeg_error_mgr* %87, i32 0, i32 6, i32 0, i32 2
+    store i32 %96, i32* %97, align 4, !tbaa !23
+    %98 = getelementptr inbounds %struct.my_cquantizer, %struct.my_cquantizer* %43, i32 0, i32 5, i32 2
+    %99 = load i32, i32* %98, align 4, !tbaa !23
+    %100 = getelementptr inbounds %struct.jpeg_error_mgr, %struct.jpeg_error_mgr* %87, i32 0, i32 6, i32 0, i32 3
+    store i32 %99, i32* %100, align 4, !tbaa !23
+    %101 = getelementptr inbounds %struct.jpeg_error_mgr, %struct.jpeg_error_mgr* %87, i32 0, i32 5
+    store i32 93, i32* %101, align 4, !tbaa !21
+    tail call void %89(%struct.jpeg_common_struct* nonnull %91, i32 signext 1) #4
+    br label %106
+  
+  ; <label>:102                                     ; preds = %select_ncolors.exit.i
+    %103 = bitcast %struct.jpeg_decompress_struct* %cinfo to %struct.jpeg_common_struct*
+    %104 = getelementptr inbounds %struct.jpeg_error_mgr, %struct.jpeg_error_mgr* %87, i32 0, i32 5
+    store i32 94, i32* %104, align 4, !tbaa !21
+    %105 = getelementptr inbounds %struct.jpeg_error_mgr, %struct.jpeg_error_mgr* %87, i32 0, i32 6, i32 0, i32 0
+    store i32 %total_colors.2.ph.i.i, i32* %105, align 4, !tbaa !23
+    tail call void %89(%struct.jpeg_common_struct* nonnull %103, i32 signext 1) #4
+    br label %106
+  
+  ; <label>:106                                     ; preds = %102, %90
+    %107 = bitcast %struct.jpeg_decompress_struct* %cinfo to %struct.jpeg_common_struct*
+    %sunkaddr31 = ptrtoint %struct.jpeg_decompress_struct* %cinfo to i32
+    %sunkaddr32 = add i32 %sunkaddr31, 4
+    %sunkaddr33 = inttoptr i32 %sunkaddr32 to %struct.jpeg_memory_mgr**
+    %108 = load %struct.jpeg_memory_mgr*, %struct.jpeg_memory_mgr** %sunkaddr33, align 4, !tbaa !1
+    %109 = getelementptr inbounds %struct.jpeg_memory_mgr, %struct.jpeg_memory_mgr* %108, i32 0, i32 2
+    %110 = load i8** (%struct.jpeg_common_struct*, i32, i32, i32)*, i8** (%struct.jpeg_common_struct*, i32, i32, i32)** %109, align 4, !tbaa !27
+    %sunkaddr34 = ptrtoint %struct.jpeg_decompress_struct* %cinfo to i32
+    %sunkaddr35 = add i32 %sunkaddr34, 120
+    %sunkaddr36 = inttoptr i32 %sunkaddr35 to i32*
+    %111 = load i32, i32* %sunkaddr36, align 8, !tbaa !19
+    %112 = tail call i8** %110(%struct.jpeg_common_struct* nonnull %107, i32 signext 1, i32 signext %total_colors.2.ph.i.i, i32 signext %111) #4
+    %113 = load i32, i32* %sunkaddr36, align 8, !tbaa !19
+    %114 = icmp sgt i32 %113, 0
+    br i1 %114, label %.lr.ph16.i, label %create_colormap.exit
+  
+  .lr.ph16.i:                                       ; preds = %106, %._crit_edge12.i
+    %115 = phi i32 [ %136, %._crit_edge12.i ], [ %113, %106 ]
+    %i.014.i = phi i32 [ %137, %._crit_edge12.i ], [ 0, %106 ]
+    %blkdist.013.i = phi i32 [ %118, %._crit_edge12.i ], [ %total_colors.2.ph.i.i, %106 ]
+    %116 = getelementptr inbounds %struct.my_cquantizer, %struct.my_cquantizer* %43, i32 0, i32 5, i32 %i.014.i
+    %117 = load i32, i32* %116, align 4, !tbaa !23
+    %118 = sdiv i32 %blkdist.013.i, %117
+    %119 = icmp sgt i32 %117, 0
+    br i1 %119, label %.lr.ph11.i, label %._crit_edge12.i
+  
+  .lr.ph11.i:                                       ; preds = %.lr.ph16.i
+    %120 = add nsw i32 %117, -1
+    %121 = sdiv i32 %120, 2
+    %122 = getelementptr inbounds i8*, i8** %112, i32 %i.014.i
+    br label %123
+  
+  ; <label>:123                                     ; preds = %._crit_edge8.i, %.lr.ph11.i
+    %j.09.i = phi i32 [ 0, %.lr.ph11.i ], [ %135, %._crit_edge8.i ]
+    %124 = mul nsw i32 %j.09.i, %118
+    %125 = icmp slt i32 %124, %total_colors.2.ph.i.i
+    br i1 %125, label %.preheader.lr.ph.i, label %._crit_edge8.i
+  
+  .preheader.lr.ph.i:                               ; preds = %123
+    %126 = mul nsw i32 %j.09.i, 255
+    %127 = add nsw i32 %126, %121
+    %128 = sdiv i32 %127, %120
+    br label %.preheader.i
+  
+  .preheader.i:                                     ; preds = %._crit_edge.i, %.preheader.lr.ph.i
+    %ptr.07.i = phi i32 [ %124, %.preheader.lr.ph.i ], [ %133, %._crit_edge.i ]
+    %129 = icmp sgt i32 %118, 0
+    br i1 %129, label %.lr.ph.i, label %._crit_edge.i
+  
+  .lr.ph.i:                                         ; preds = %.preheader.i, %.lr.ph.i
+    %k.06.i = phi i32 [ %132, %.lr.ph.i ], [ 0, %.preheader.i ]
+    %130 = trunc i32 %128 to i8
+    %131 = load i8*, i8** %122, align 4, !tbaa !18
+    %scevgep4 = getelementptr i8, i8* %131, i32 %ptr.07.i
+    %scevgep5 = getelementptr i8, i8* %scevgep4, i32 %k.06.i
+    store i8 %130, i8* %scevgep5, align 1, !tbaa !28
+    %132 = add nuw nsw i32 %k.06.i, 1
+    %exitcond.i = icmp eq i32 %118, %132
+    br i1 %exitcond.i, label %._crit_edge.i, label %.lr.ph.i
+  
+  ._crit_edge.i:                                    ; preds = %.lr.ph.i, %.preheader.i
+    %133 = add nsw i32 %ptr.07.i, %blkdist.013.i
+    %134 = icmp slt i32 %133, %total_colors.2.ph.i.i
+    br i1 %134, label %.preheader.i, label %._crit_edge8.i
+  
+  ._crit_edge8.i:                                   ; preds = %._crit_edge.i, %123
+    %135 = add nuw nsw i32 %j.09.i, 1
+    %exitcond23.i = icmp eq i32 %135, %117
+    br i1 %exitcond23.i, label %._crit_edge12.loopexit.i, label %123
+  
+  ._crit_edge12.loopexit.i:                         ; preds = %._crit_edge8.i
+    %sunkaddr37 = ptrtoint %struct.jpeg_decompress_struct* %cinfo to i32
+    %sunkaddr38 = add i32 %sunkaddr37, 120
+    %sunkaddr39 = inttoptr i32 %sunkaddr38 to i32*
+    %.pre.i = load i32, i32* %sunkaddr39, align 8, !tbaa !19
+    br label %._crit_edge12.i
+  
+  ._crit_edge12.i:                                  ; preds = %._crit_edge12.loopexit.i, %.lr.ph16.i
+    %136 = phi i32 [ %.pre.i, %._crit_edge12.loopexit.i ], [ %115, %.lr.ph16.i ]
+    %137 = add nuw nsw i32 %i.014.i, 1
+    %138 = icmp slt i32 %137, %136
+    br i1 %138, label %.lr.ph16.i, label %create_colormap.exit
+  
+  create_colormap.exit:                             ; preds = %._crit_edge12.i, %106
+    %139 = getelementptr inbounds %struct.my_cquantizer, %struct.my_cquantizer* %43, i32 0, i32 1
+    store i8** %112, i8*** %139, align 4, !tbaa !29
+    %140 = getelementptr inbounds %struct.my_cquantizer, %struct.my_cquantizer* %43, i32 0, i32 2
+    store i32 %total_colors.2.ph.i.i, i32* %140, align 4, !tbaa !30
+    tail call fastcc void @create_colorindex(%struct.jpeg_decompress_struct* %cinfo)
+    %141 = getelementptr inbounds %struct.jpeg_decompress_struct, %struct.jpeg_decompress_struct* %cinfo, i32 0, i32 20
+    %142 = load i32, i32* %141, align 8, !tbaa !31
+    %143 = icmp eq i32 %142, 2
+    br i1 %143, label %144, label %alloc_fs_workspace.exit
+  
+  ; <label>:144                                     ; preds = %create_colormap.exit
+    %sunkaddr40 = ptrtoint %struct.jpeg_decompress_struct* %cinfo to i32
+    %sunkaddr41 = add i32 %sunkaddr40, 456
+    %sunkaddr42 = inttoptr i32 %sunkaddr41 to %struct.my_cquantizer**
+    %145 = load %struct.my_cquantizer*, %struct.my_cquantizer** %sunkaddr42, align 8, !tbaa !12
+    %146 = getelementptr inbounds %struct.jpeg_decompress_struct, %struct.jpeg_decompress_struct* %cinfo, i32 0, i32 26
+    %147 = load i32, i32* %146, align 8, !tbaa !32
+    %148 = shl i32 %147, 1
+    %149 = add i32 %148, 4
+    %sunkaddr43 = ptrtoint %struct.jpeg_decompress_struct* %cinfo to i32
+    %sunkaddr44 = add i32 %sunkaddr43, 120
+    %sunkaddr45 = inttoptr i32 %sunkaddr44 to i32*
+    %150 = load i32, i32* %sunkaddr45, align 8, !tbaa !19
+    %151 = icmp sgt i32 %150, 0
+    br i1 %151, label %.lr.ph.i1.preheader, label %alloc_fs_workspace.exit
+  
+  .lr.ph.i1.preheader:                              ; preds = %144
+    %scevgep = getelementptr %struct.my_cquantizer, %struct.my_cquantizer* %145, i32 0, i32 8, i32 0
+    %scevgep1 = bitcast i16** %scevgep to %struct.my_cquantizer*
+    br label %.lr.ph.i1
+  
+  .lr.ph.i1:                                        ; preds = %.lr.ph.i1, %.lr.ph.i1.preheader
+    %lsr.iv = phi %struct.my_cquantizer* [ %159, %.lr.ph.i1 ], [ %scevgep1, %.lr.ph.i1.preheader ]
+    %i.01.i = phi i32 [ %157, %.lr.ph.i1 ], [ 0, %.lr.ph.i1.preheader ]
+    %152 = bitcast %struct.jpeg_decompress_struct* %cinfo to %struct.jpeg_common_struct*
+    %lsr.iv3 = bitcast %struct.my_cquantizer* %lsr.iv to i8**
+    %sunkaddr46 = ptrtoint %struct.jpeg_decompress_struct* %cinfo to i32
+    %sunkaddr47 = add i32 %sunkaddr46, 4
+    %sunkaddr48 = inttoptr i32 %sunkaddr47 to %struct.jpeg_memory_mgr**
+    %153 = load %struct.jpeg_memory_mgr*, %struct.jpeg_memory_mgr** %sunkaddr48, align 4, !tbaa !1
+    %154 = getelementptr inbounds %struct.jpeg_memory_mgr, %struct.jpeg_memory_mgr* %153, i32 0, i32 1
+    %155 = load i8* (%struct.jpeg_common_struct*, i32, i32)*, i8* (%struct.jpeg_common_struct*, i32, i32)** %154, align 4, !tbaa !33
+    %156 = tail call i8* %155(%struct.jpeg_common_struct* nonnull %152, i32 signext 1, i32 signext %149) #4
+    store i8* %156, i8** %lsr.iv3, align 4, !tbaa !18
+    %157 = add nuw nsw i32 %i.01.i, 1
+    %sunkaddr49 = ptrtoint %struct.jpeg_decompress_struct* %cinfo to i32
+    %sunkaddr50 = add i32 %sunkaddr49, 120
+    %sunkaddr51 = inttoptr i32 %sunkaddr50 to i32*
+    %158 = load i32, i32* %sunkaddr51, align 8, !tbaa !19
+    %scevgep2 = getelementptr %struct.my_cquantizer, %struct.my_cquantizer* %lsr.iv, i32 0, i32 0, i32 1
+    %159 = bitcast void (%struct.jpeg_decompress_struct*, i8**, i8**, i32)** %scevgep2 to %struct.my_cquantizer*
+    %160 = icmp slt i32 %157, %158
+    br i1 %160, label %.lr.ph.i1, label %alloc_fs_workspace.exit
+  
+  alloc_fs_workspace.exit:                          ; preds = %.lr.ph.i1, %144, %create_colormap.exit
+    ret void
+  }
+  
+  ; Function Attrs: nounwind
+  define internal void @start_pass_1_quant(%struct.jpeg_decompress_struct* %cinfo, i32 signext %is_pre_scan) #0 {
+    %1 = getelementptr inbounds %struct.jpeg_decompress_struct, %struct.jpeg_decompress_struct* %cinfo, i32 0, i32 83
+    %2 = bitcast %struct.jpeg_color_quantizer** %1 to %struct.my_cquantizer**
+    %3 = load %struct.my_cquantizer*, %struct.my_cquantizer** %2, align 8, !tbaa !12
+    %4 = getelementptr inbounds %struct.my_cquantizer, %struct.my_cquantizer* %3, i32 0, i32 1
+    %5 = bitcast i8*** %4 to i32*
+    %6 = load i32, i32* %5, align 4, !tbaa !29
+    %7 = getelementptr inbounds %struct.jpeg_decompress_struct, %struct.jpeg_decompress_struct* %cinfo, i32 0, i32 32
+    %8 = bitcast i8*** %7 to i32*
+    store i32 %6, i32* %8, align 8, !tbaa !34
+    %9 = getelementptr inbounds %struct.my_cquantizer, %struct.my_cquantizer* %3, i32 0, i32 2
+    %10 = load i32, i32* %9, align 4, !tbaa !30
+    %11 = getelementptr inbounds %struct.jpeg_decompress_struct, %struct.jpeg_decompress_struct* %cinfo, i32 0, i32 31
+    store i32 %10, i32* %11, align 4, !tbaa !35
+    %12 = getelementptr inbounds %struct.jpeg_decompress_struct, %struct.jpeg_decompress_struct* %cinfo, i32 0, i32 20
+    %13 = load i32, i32* %12, align 8, !tbaa !31
+    switch i32 %13, label %120 [
+      i32 0, label %14
+      i32 1, label %20
+      i32 2, label %86
+    ]
+  
+  ; <label>:14                                      ; preds = %0
+    %15 = getelementptr inbounds %struct.jpeg_decompress_struct, %struct.jpeg_decompress_struct* %cinfo, i32 0, i32 28
+    %16 = load i32, i32* %15, align 8, !tbaa !19
+    %17 = icmp eq i32 %16, 3
+    br i1 %17, label %18, label %19
+  
+  ; <label>:18                                      ; preds = %14
+    %sunkaddr = ptrtoint %struct.my_cquantizer* %3 to i32
+    %sunkaddr25 = add i32 %sunkaddr, 4
+    %sunkaddr26 = inttoptr i32 %sunkaddr25 to void (%struct.jpeg_decompress_struct*, i8**, i8**, i32)**
+    store void (%struct.jpeg_decompress_struct*, i8**, i8**, i32)* @color_quantize3, void (%struct.jpeg_decompress_struct*, i8**, i8**, i32)** %sunkaddr26, align 4, !tbaa !36
+    br label %create_odither_tables.exit
+  
+  ; <label>:19                                      ; preds = %14
+    %sunkaddr27 = ptrtoint %struct.my_cquantizer* %3 to i32
+    %sunkaddr28 = add i32 %sunkaddr27, 4
+    %sunkaddr29 = inttoptr i32 %sunkaddr28 to void (%struct.jpeg_decompress_struct*, i8**, i8**, i32)**
+    store void (%struct.jpeg_decompress_struct*, i8**, i8**, i32)* @color_quantize, void (%struct.jpeg_decompress_struct*, i8**, i8**, i32)** %sunkaddr29, align 4, !tbaa !36
+    br label %create_odither_tables.exit
+  
+  ; <label>:20                                      ; preds = %0
+    %21 = getelementptr inbounds %struct.jpeg_decompress_struct, %struct.jpeg_decompress_struct* %cinfo, i32 0, i32 28
+    %22 = load i32, i32* %21, align 8, !tbaa !19
+    %23 = icmp eq i32 %22, 3
+    %24 = getelementptr inbounds %struct.my_cquantizer, %struct.my_cquantizer* %3, i32 0, i32 0, i32 1
+    %quantize3_ord_dither.quantize_ord_dither = select i1 %23, void (%struct.jpeg_decompress_struct*, i8**, i8**, i32)* @quantize3_ord_dither, void (%struct.jpeg_decompress_struct*, i8**, i8**, i32)* @quantize_ord_dither
+    store void (%struct.jpeg_decompress_struct*, i8**, i8**, i32)* %quantize3_ord_dither.quantize_ord_dither, void (%struct.jpeg_decompress_struct*, i8**, i8**, i32)** %24, align 4, !tbaa !36
+    %25 = getelementptr inbounds %struct.my_cquantizer, %struct.my_cquantizer* %3, i32 0, i32 6
+    store i32 0, i32* %25, align 4, !tbaa !37
+    %26 = getelementptr inbounds %struct.my_cquantizer, %struct.my_cquantizer* %3, i32 0, i32 4
+    %27 = load i32, i32* %26, align 4, !tbaa !38
+    %28 = icmp eq i32 %27, 0
+    br i1 %28, label %29, label %30
+  
+  ; <label>:29                                      ; preds = %20
+    tail call fastcc void @create_colorindex(%struct.jpeg_decompress_struct* nonnull %cinfo)
+    br label %30
+  
+  ; <label>:30                                      ; preds = %29, %20
+    %31 = getelementptr inbounds %struct.my_cquantizer, %struct.my_cquantizer* %3, i32 0, i32 7, i32 0
+    %32 = load [16 x i32]*, [16 x i32]** %31, align 4, !tbaa !18
+    %33 = icmp eq [16 x i32]* %32, null
+    br i1 %33, label %34, label %create_odither_tables.exit
+  
+  ; <label>:34                                      ; preds = %30
+    %sunkaddr30 = ptrtoint %struct.jpeg_decompress_struct* %cinfo to i32
+    %sunkaddr31 = add i32 %sunkaddr30, 456
+    %sunkaddr32 = inttoptr i32 %sunkaddr31 to %struct.my_cquantizer**
+    %35 = load %struct.my_cquantizer*, %struct.my_cquantizer** %sunkaddr32, align 8, !tbaa !12
+    %sunkaddr33 = ptrtoint %struct.jpeg_decompress_struct* %cinfo to i32
+    %sunkaddr34 = add i32 %sunkaddr33, 120
+    %sunkaddr35 = inttoptr i32 %sunkaddr34 to i32*
+    %36 = load i32, i32* %sunkaddr35, align 8, !tbaa !19
+    %37 = icmp sgt i32 %36, 0
+    br i1 %37, label %.lr.ph4.i, label %create_odither_tables.exit
+  
+  .lr.ph4.i:                                        ; preds = %34
+    %scevgep = getelementptr %struct.my_cquantizer, %struct.my_cquantizer* %35, i32 0, i32 5, i32 0
+    br label %38
+  
+  ; <label>:38                                      ; preds = %make_odither_array.exit.i, %.lr.ph4.i
+    %39 = phi i32 [ %36, %.lr.ph4.i ], [ %82, %make_odither_array.exit.i ]
+    %i.03.i = phi i32 [ 0, %.lr.ph4.i ], [ %84, %make_odither_array.exit.i ]
+    %40 = bitcast i32* %scevgep to %struct.my_cquantizer*
+    %41 = getelementptr inbounds %struct.my_cquantizer, %struct.my_cquantizer* %35, i32 0, i32 5, i32 %i.03.i
+    %42 = load i32, i32* %41, align 4, !tbaa !23
+    %43 = icmp sgt i32 %i.03.i, 0
+    br i1 %43, label %.lr.ph.i, label %.thread.i
+  
+  .lr.ph.i:                                         ; preds = %38, %46
+    %lsr.iv = phi %struct.my_cquantizer* [ %48, %46 ], [ %40, %38 ]
+    %j.02.i = phi i32 [ %47, %46 ], [ 0, %38 ]
+    %lsr.iv3 = bitcast %struct.my_cquantizer* %lsr.iv to i32*
+    %44 = load i32, i32* %lsr.iv3, align 4, !tbaa !23
+    %45 = icmp eq i32 %42, %44
+    br i1 %45, label %50, label %46
+  
+  ; <label>:46                                      ; preds = %.lr.ph.i
+    %47 = add nuw nsw i32 %j.02.i, 1
+    %scevgep2 = getelementptr %struct.my_cquantizer, %struct.my_cquantizer* %lsr.iv, i32 0, i32 0, i32 1
+    %48 = bitcast void (%struct.jpeg_decompress_struct*, i8**, i8**, i32)** %scevgep2 to %struct.my_cquantizer*
+    %49 = icmp slt i32 %47, %i.03.i
+    br i1 %49, label %.lr.ph.i, label %.thread.i
+  
+  ; <label>:50                                      ; preds = %.lr.ph.i
+    %51 = getelementptr inbounds %struct.my_cquantizer, %struct.my_cquantizer* %35, i32 0, i32 7, i32 %j.02.i
+    %52 = load [16 x i32]*, [16 x i32]** %51, align 4, !tbaa !18
+    %53 = icmp eq [16 x i32]* %52, null
+    br i1 %53, label %.thread.i, label %make_odither_array.exit.i
+  
+  .thread.i:                                        ; preds = %46, %50, %38
+    %54 = bitcast %struct.jpeg_decompress_struct* %cinfo to %struct.jpeg_common_struct*
+    %sunkaddr36 = ptrtoint %struct.jpeg_decompress_struct* %cinfo to i32
+    %sunkaddr37 = add i32 %sunkaddr36, 4
+    %sunkaddr38 = inttoptr i32 %sunkaddr37 to %struct.jpeg_memory_mgr**
+    %55 = load %struct.jpeg_memory_mgr*, %struct.jpeg_memory_mgr** %sunkaddr38, align 4, !tbaa !1
+    %56 = bitcast %struct.jpeg_memory_mgr* %55 to i8* (%struct.jpeg_common_struct*, i32, i32)**
+    %57 = load i8* (%struct.jpeg_common_struct*, i32, i32)*, i8* (%struct.jpeg_common_struct*, i32, i32)** %56, align 4, !tbaa !9
+    %58 = tail call i8* %57(%struct.jpeg_common_struct* %54, i32 signext 1, i32 signext 1024) #4
+    %59 = shl i32 %42, 9
+    %60 = add i32 %59, -512
+    br label %.preheader.i.i
+  
+  .preheader.i.i:                                   ; preds = %78, %.thread.i
+    %lsr.iv10 = phi [16 x [16 x i8]]* [ %80, %78 ], [ @base_dither_matrix, %.thread.i ]
+    %lsr.iv5 = phi i8* [ %scevgep6, %78 ], [ %58, %.thread.i ]
+    %j.02.i.i = phi i32 [ 0, %.thread.i ], [ %79, %78 ]
+    br label %61
+  
+  ; <label>:61                                      ; preds = %74, %.preheader.i.i
+    %lsr.iv12 = phi [16 x [16 x i8]]* [ %77, %74 ], [ %lsr.iv10, %.preheader.i.i ]
+    %lsr.iv7 = phi i8* [ %scevgep8, %74 ], [ %lsr.iv5, %.preheader.i.i ]
+    %lsr.iv4 = phi i32 [ %lsr.iv.next, %74 ], [ 16, %.preheader.i.i ]
+    %lsr.iv1214 = bitcast [16 x [16 x i8]]* %lsr.iv12 to i8*
+    %62 = load i8, i8* %lsr.iv1214, align 1, !tbaa !28
+    %63 = zext i8 %62 to i32
+    %64 = shl nuw nsw i32 %63, 1
+    %65 = sub nsw i32 255, %64
+    %66 = mul nsw i32 %65, 255
+    %67 = icmp slt i32 %65, 0
+    br i1 %67, label %68, label %72
+  
+  ; <label>:68                                      ; preds = %61
+    %69 = sub nsw i32 0, %66
+    %70 = sdiv i32 %69, %60
+    %71 = sub nsw i32 0, %70
+    br label %74
+  
+  ; <label>:72                                      ; preds = %61
+    %73 = sdiv i32 %66, %60
+    br label %74
+  
+  ; <label>:74                                      ; preds = %72, %68
+    %75 = phi i32 [ %71, %68 ], [ %73, %72 ]
+    %76 = bitcast i8* %lsr.iv7 to i32*
+    store i32 %75, i32* %76, align 4, !tbaa !23
+    %lsr.iv.next = add nsw i32 %lsr.iv4, -1
+    %scevgep8 = getelementptr i8, i8* %lsr.iv7, i32 4
+    %scevgep13 = getelementptr [16 x [16 x i8]], [16 x [16 x i8]]* %lsr.iv12, i32 0, i32 0, i32 1
+    %77 = bitcast i8* %scevgep13 to [16 x [16 x i8]]*
+    %exitcond.i.i = icmp eq i32 %lsr.iv.next, 0
+    br i1 %exitcond.i.i, label %78, label %61
+  
+  ; <label>:78                                      ; preds = %74
+    %79 = add nuw nsw i32 %j.02.i.i, 1
+    %scevgep6 = getelementptr i8, i8* %lsr.iv5, i32 64
+    %scevgep11 = getelementptr [16 x [16 x i8]], [16 x [16 x i8]]* %lsr.iv10, i32 0, i32 1, i32 0
+    %80 = bitcast i8* %scevgep11 to [16 x [16 x i8]]*
+    %exitcond3.i.i = icmp eq i32 %79, 16
+    br i1 %exitcond3.i.i, label %make_odither_array.exit.loopexit.i, label %.preheader.i.i
+  
+  make_odither_array.exit.loopexit.i:               ; preds = %78
+    %81 = bitcast i8* %58 to [16 x i32]*
+    %sunkaddr39 = ptrtoint %struct.jpeg_decompress_struct* %cinfo to i32
+    %sunkaddr40 = add i32 %sunkaddr39, 120
+    %sunkaddr41 = inttoptr i32 %sunkaddr40 to i32*
+    %.pre.i = load i32, i32* %sunkaddr41, align 8, !tbaa !19
+    br label %make_odither_array.exit.i
+  
+  make_odither_array.exit.i:                        ; preds = %make_odither_array.exit.loopexit.i, %50
+    %82 = phi i32 [ %39, %50 ], [ %.pre.i, %make_odither_array.exit.loopexit.i ]
+    %odither.1.i = phi [16 x i32]* [ %52, %50 ], [ %81, %make_odither_array.exit.loopexit.i ]
+    %83 = getelementptr inbounds %struct.my_cquantizer, %struct.my_cquantizer* %35, i32 0, i32 7, i32 %i.03.i
+    store [16 x i32]* %odither.1.i, [16 x i32]** %83, align 4, !tbaa !18
+    %84 = add nuw nsw i32 %i.03.i, 1
+    %85 = icmp slt i32 %84, %82
+    br i1 %85, label %38, label %create_odither_tables.exit
+  
+  ; <label>:86                                      ; preds = %0
+    %87 = getelementptr inbounds %struct.my_cquantizer, %struct.my_cquantizer* %3, i32 0, i32 0, i32 1
+    store void (%struct.jpeg_decompress_struct*, i8**, i8**, i32)* @quantize_fs_dither, void (%struct.jpeg_decompress_struct*, i8**, i8**, i32)** %87, align 4, !tbaa !36
+    %88 = getelementptr inbounds %struct.my_cquantizer, %struct.my_cquantizer* %3, i32 0, i32 9
+    store i32 0, i32* %88, align 4, !tbaa !39
+    %89 = getelementptr inbounds %struct.my_cquantizer, %struct.my_cquantizer* %3, i32 0, i32 8, i32 0
+    %90 = load i16*, i16** %89, align 4, !tbaa !18
+    %91 = icmp eq i16* %90, null
+    br i1 %91, label %92, label %.alloc_fs_workspace.exit_crit_edge
+  
+  .alloc_fs_workspace.exit_crit_edge:               ; preds = %86
+    %.phi.trans.insert = getelementptr inbounds %struct.jpeg_decompress_struct, %struct.jpeg_decompress_struct* %cinfo, i32 0, i32 28
+    %.pre = load i32, i32* %.phi.trans.insert, align 8, !tbaa !19
+    %.pre7 = getelementptr inbounds %struct.jpeg_decompress_struct, %struct.jpeg_decompress_struct* %cinfo, i32 0, i32 26
+    br label %alloc_fs_workspace.exit
+  
+  ; <label>:92                                      ; preds = %86
+    %93 = getelementptr inbounds %struct.jpeg_decompress_struct, %struct.jpeg_decompress_struct* %cinfo, i32 0, i32 26
+    %94 = load i32, i32* %93, align 8, !tbaa !32
+    %95 = shl i32 %94, 1
+    %96 = add i32 %95, 4
+    %97 = getelementptr inbounds %struct.jpeg_decompress_struct, %struct.jpeg_decompress_struct* %cinfo, i32 0, i32 28
+    %98 = load i32, i32* %97, align 8, !tbaa !19
+    %99 = icmp sgt i32 %98, 0
+    br i1 %99, label %.lr.ph.i1, label %create_odither_tables.exit
+  
+  .lr.ph.i1:                                        ; preds = %92
+    %scevgep20 = getelementptr %struct.my_cquantizer, %struct.my_cquantizer* %3, i32 0, i32 8, i32 0
+    %scevgep2021 = bitcast i16** %scevgep20 to %struct.my_cquantizer*
+    br label %100
+  
+  ; <label>:100                                     ; preds = %100, %.lr.ph.i1
+    %lsr.iv22 = phi %struct.my_cquantizer* [ %108, %100 ], [ %scevgep2021, %.lr.ph.i1 ]
+    %i.01.i = phi i32 [ 0, %.lr.ph.i1 ], [ %106, %100 ]
+    %101 = bitcast %struct.jpeg_decompress_struct* %cinfo to %struct.jpeg_common_struct*
+    %lsr.iv2224 = bitcast %struct.my_cquantizer* %lsr.iv22 to i8**
+    %sunkaddr42 = ptrtoint %struct.jpeg_decompress_struct* %cinfo to i32
+    %sunkaddr43 = add i32 %sunkaddr42, 4
+    %sunkaddr44 = inttoptr i32 %sunkaddr43 to %struct.jpeg_memory_mgr**
+    %102 = load %struct.jpeg_memory_mgr*, %struct.jpeg_memory_mgr** %sunkaddr44, align 4, !tbaa !1
+    %103 = getelementptr inbounds %struct.jpeg_memory_mgr, %struct.jpeg_memory_mgr* %102, i32 0, i32 1
+    %104 = load i8* (%struct.jpeg_common_struct*, i32, i32)*, i8* (%struct.jpeg_common_struct*, i32, i32)** %103, align 4, !tbaa !33
+    %105 = tail call i8* %104(%struct.jpeg_common_struct* %101, i32 signext 1, i32 signext %96) #4
+    store i8* %105, i8** %lsr.iv2224, align 4, !tbaa !18
+    %106 = add nuw nsw i32 %i.01.i, 1
+    %sunkaddr45 = ptrtoint %struct.jpeg_decompress_struct* %cinfo to i32
+    %sunkaddr46 = add i32 %sunkaddr45, 120
+    %sunkaddr47 = inttoptr i32 %sunkaddr46 to i32*
+    %107 = load i32, i32* %sunkaddr47, align 8, !tbaa !19
+    %scevgep23 = getelementptr %struct.my_cquantizer, %struct.my_cquantizer* %lsr.iv22, i32 0, i32 0, i32 1
+    %108 = bitcast void (%struct.jpeg_decompress_struct*, i8**, i8**, i32)** %scevgep23 to %struct.my_cquantizer*
+    %109 = icmp slt i32 %106, %107
+    br i1 %109, label %100, label %alloc_fs_workspace.exit
+  
+  alloc_fs_workspace.exit:                          ; preds = %100, %.alloc_fs_workspace.exit_crit_edge
+    %.pre-phi8 = phi i32* [ %.phi.trans.insert, %.alloc_fs_workspace.exit_crit_edge ], [ %97, %100 ]
+    %.pre-phi = phi i32* [ %.pre7, %.alloc_fs_workspace.exit_crit_edge ], [ %93, %100 ]
+    %110 = phi i32 [ %.pre, %.alloc_fs_workspace.exit_crit_edge ], [ %107, %100 ]
+    %111 = load i32, i32* %.pre-phi, align 8, !tbaa !32
+    %112 = shl i32 %111, 1
+    %113 = add i32 %112, 4
+    %114 = icmp sgt i32 %110, 0
+    br i1 %114, label %.lr.ph.preheader, label %create_odither_tables.exit
+  
+  .lr.ph.preheader:                                 ; preds = %alloc_fs_workspace.exit
+    %scevgep15 = getelementptr %struct.my_cquantizer, %struct.my_cquantizer* %3, i32 0, i32 8, i32 0
+    %scevgep1516 = bitcast i16** %scevgep15 to %struct.my_cquantizer*
+    br label %.lr.ph
+  
+  .lr.ph:                                           ; preds = %.lr.ph, %.lr.ph.preheader
+    %lsr.iv17 = phi %struct.my_cquantizer* [ %118, %.lr.ph ], [ %scevgep1516, %.lr.ph.preheader ]
+    %i.04 = phi i32 [ %116, %.lr.ph ], [ 0, %.lr.ph.preheader ]
+    %lsr.iv1719 = bitcast %struct.my_cquantizer* %lsr.iv17 to i8**
+    %115 = load i8*, i8** %lsr.iv1719, align 4, !tbaa !18
+    tail call void @jzero_far(i8* %115, i32 signext %113) #4
+    %116 = add nuw nsw i32 %i.04, 1
+    %117 = load i32, i32* %.pre-phi8, align 8, !tbaa !19
+    %scevgep18 = getelementptr %struct.my_cquantizer, %struct.my_cquantizer* %lsr.iv17, i32 0, i32 0, i32 1
+    %118 = bitcast void (%struct.jpeg_decompress_struct*, i8**, i8**, i32)** %scevgep18 to %struct.my_cquantizer*
+    %119 = icmp slt i32 %116, %117
+    br i1 %119, label %.lr.ph, label %create_odither_tables.exit
+  
+  ; <label>:120                                     ; preds = %0
+    %121 = bitcast %struct.jpeg_decompress_struct* %cinfo to %struct.jpeg_error_mgr**
+    %122 = load %struct.jpeg_error_mgr*, %struct.jpeg_error_mgr** %121, align 8, !tbaa !20
+    %123 = getelementptr inbounds %struct.jpeg_error_mgr, %struct.jpeg_error_mgr* %122, i32 0, i32 5
+    store i32 47, i32* %123, align 4, !tbaa !21
+    %124 = bitcast %struct.jpeg_error_mgr* %122 to void (%struct.jpeg_common_struct*)**
+    %125 = load void (%struct.jpeg_common_struct*)*, void (%struct.jpeg_common_struct*)** %124, align 4, !tbaa !24
+    %126 = bitcast %struct.jpeg_decompress_struct* %cinfo to %struct.jpeg_common_struct*
+    tail call void %125(%struct.jpeg_common_struct* %126) #4
+    br label %create_odither_tables.exit
+  
+  create_odither_tables.exit:                       ; preds = %.lr.ph, %make_odither_array.exit.i, %120, %alloc_fs_workspace.exit, %92, %34, %30, %19, %18
+    ret void
+  }
+  
+  ; Function Attrs: norecurse nounwind readnone
+  define internal void @finish_pass_1_quant(%struct.jpeg_decompress_struct* nocapture %cinfo) #1 {
+    ret void
+  }
+  
+  ; Function Attrs: nounwind
+  define internal void @new_color_map_1_quant(%struct.jpeg_decompress_struct* %cinfo) #0 {
+    %1 = bitcast %struct.jpeg_decompress_struct* %cinfo to %struct.jpeg_error_mgr**
+    %2 = load %struct.jpeg_error_mgr*, %struct.jpeg_error_mgr** %1, align 8, !tbaa !20
+    %3 = getelementptr inbounds %struct.jpeg_error_mgr, %struct.jpeg_error_mgr* %2, i32 0, i32 5
+    store i32 45, i32* %3, align 4, !tbaa !21
+    %4 = bitcast %struct.jpeg_error_mgr* %2 to void (%struct.jpeg_common_struct*)**
+    %5 = load void (%struct.jpeg_common_struct*)*, void (%struct.jpeg_common_struct*)** %4, align 4, !tbaa !24
+    %6 = bitcast %struct.jpeg_decompress_struct* %cinfo to %struct.jpeg_common_struct*
+    tail call void %5(%struct.jpeg_common_struct* %6) #4
+    ret void
+  }
+  
+  ; Function Attrs: nounwind
+  define internal fastcc void @create_colorindex(%struct.jpeg_decompress_struct* %cinfo) unnamed_addr #0 {
+    %1 = getelementptr inbounds %struct.jpeg_decompress_struct, %struct.jpeg_decompress_struct* %cinfo, i32 0, i32 83
+    %2 = bitcast %struct.jpeg_color_quantizer** %1 to %struct.my_cquantizer**
+    %3 = load %struct.my_cquantizer*, %struct.my_cquantizer** %2, align 8, !tbaa !12
+    %4 = getelementptr inbounds %struct.jpeg_decompress_struct, %struct.jpeg_decompress_struct* %cinfo, i32 0, i32 20
+    %5 = load i32, i32* %4, align 8, !tbaa !31
+    %6 = icmp eq i32 %5, 1
+    %7 = getelementptr inbounds %struct.my_cquantizer, %struct.my_cquantizer* %3, i32 0, i32 4
+    %. = zext i1 %6 to i32
+    store i32 %., i32* %7, align 4, !tbaa !38
+    %8 = getelementptr inbounds %struct.jpeg_decompress_struct, %struct.jpeg_decompress_struct* %cinfo, i32 0, i32 1
+    %9 = load %struct.jpeg_memory_mgr*, %struct.jpeg_memory_mgr** %8, align 4, !tbaa !1
+    %10 = getelementptr inbounds %struct.jpeg_memory_mgr, %struct.jpeg_memory_mgr* %9, i32 0, i32 2
+    %11 = load i8** (%struct.jpeg_common_struct*, i32, i32, i32)*, i8** (%struct.jpeg_common_struct*, i32, i32, i32)** %10, align 4, !tbaa !27
+    %12 = bitcast %struct.jpeg_decompress_struct* %cinfo to %struct.jpeg_common_struct*
+    %13 = select i1 %6, i32 766, i32 256
+    %14 = getelementptr inbounds %struct.jpeg_decompress_struct, %struct.jpeg_decompress_struct* %cinfo, i32 0, i32 28
+    %15 = load i32, i32* %14, align 8, !tbaa !19
+    %16 = tail call i8** %11(%struct.jpeg_common_struct* %12, i32 signext 1, i32 signext %13, i32 signext %15) #4
+    %17 = getelementptr inbounds %struct.my_cquantizer, %struct.my_cquantizer* %3, i32 0, i32 3
+    store i8** %16, i8*** %17, align 4, !tbaa !40
+    %18 = load i32, i32* %14, align 8, !tbaa !19
+    %19 = icmp sgt i32 %18, 0
+    br i1 %19, label %.lr.ph12, label %._crit_edge13
+  
+  .lr.ph12:                                         ; preds = %0
+    %20 = getelementptr inbounds %struct.my_cquantizer, %struct.my_cquantizer* %3, i32 0, i32 2
+    %21 = load i32, i32* %20, align 4, !tbaa !30
+    br label %22
+  
+  ; <label>:22                                      ; preds = %.loopexit, %.lr.ph12
+    %blksize.010 = phi i32 [ %21, %.lr.ph12 ], [ %26, %.loopexit ]
+    %i.09 = phi i32 [ 0, %.lr.ph12 ], [ %56, %.loopexit ]
+    %23 = icmp eq i32 %5, 1
+    %24 = getelementptr inbounds %struct.my_cquantizer, %struct.my_cquantizer* %3, i32 0, i32 5, i32 %i.09
+    %25 = load i32, i32* %24, align 4, !tbaa !23
+    %26 = sdiv i32 %blksize.010, %25
+    br i1 %23, label %27, label %32
+  
+  ; <label>:27                                      ; preds = %22
+    %sunkaddr = ptrtoint %struct.my_cquantizer* %3 to i32
+    %sunkaddr7 = add i32 %sunkaddr, 24
+    %sunkaddr8 = inttoptr i32 %sunkaddr7 to i8***
+    %28 = load i8**, i8*** %sunkaddr8, align 4, !tbaa !40
+    %29 = getelementptr inbounds i8*, i8** %28, i32 %i.09
+    %30 = load i8*, i8** %29, align 4, !tbaa !18
+    %31 = getelementptr inbounds i8, i8* %30, i32 255
+    store i8* %31, i8** %29, align 4, !tbaa !18
+    br label %32
+  
+  ; <label>:32                                      ; preds = %27, %22
+    %sunkaddr9 = ptrtoint %struct.my_cquantizer* %3 to i32
+    %sunkaddr10 = add i32 %sunkaddr9, 24
+    %sunkaddr11 = inttoptr i32 %sunkaddr10 to i8***
+    %33 = load i8**, i8*** %sunkaddr11, align 4, !tbaa !40
+    %34 = getelementptr inbounds i8*, i8** %33, i32 %i.09
+    %35 = load i8*, i8** %34, align 4, !tbaa !18
+    %36 = add nsw i32 %25, -1
+    %37 = add nsw i32 %25, 254
+    %38 = shl nsw i32 %36, 1
+    %39 = sdiv i32 %37, %38
+    %40 = add i32 %25, 764
+    br label %.preheader
+  
+  .preheader:                                       ; preds = %._crit_edge, %32
+    %val.07 = phi i32 [ 0, %32 ], [ %val.1.lcssa, %._crit_edge ]
+    %k.06 = phi i32 [ %39, %32 ], [ %k.1.lcssa, %._crit_edge ]
+    %j.05 = phi i32 [ 0, %32 ], [ %50, %._crit_edge ]
+    %41 = icmp sgt i32 %j.05, %k.06
+    br i1 %41, label %.lr.ph.preheader, label %._crit_edge
+  
+  .lr.ph.preheader:                                 ; preds = %.preheader
+    %42 = mul i32 %val.07, 510
+    %43 = add i32 %40, %42
+    br label %.lr.ph
+  
+  .lr.ph:                                           ; preds = %.lr.ph, %.lr.ph.preheader
+    %lsr.iv = phi i32 [ %lsr.iv.next, %.lr.ph ], [ %43, %.lr.ph.preheader ]
+    %val.13 = phi i32 [ %44, %.lr.ph ], [ %val.07, %.lr.ph.preheader ]
+    %44 = add nsw i32 %val.13, 1
+    %45 = sdiv i32 %lsr.iv, %38
+    %46 = icmp sgt i32 %j.05, %45
+    %lsr.iv.next = add i32 %lsr.iv, 510
+    br i1 %46, label %.lr.ph, label %._crit_edge
+  
+  ._crit_edge:                                      ; preds = %.lr.ph, %.preheader
+    %val.1.lcssa = phi i32 [ %val.07, %.preheader ], [ %44, %.lr.ph ]
+    %k.1.lcssa = phi i32 [ %k.06, %.preheader ], [ %45, %.lr.ph ]
+    %47 = mul nsw i32 %val.1.lcssa, %26
+    %48 = trunc i32 %47 to i8
+    %49 = getelementptr inbounds i8, i8* %35, i32 %j.05
+    store i8 %48, i8* %49, align 1, !tbaa !28
+    %50 = add nuw nsw i32 %j.05, 1
+    %exitcond = icmp eq i32 %50, 256
+    br i1 %exitcond, label %51, label %.preheader
+  
+  ; <label>:51                                      ; preds = %._crit_edge
+    %52 = icmp eq i32 %5, 1
+    br i1 %52, label %.preheader2, label %.loopexit
+  
+  .preheader2:                                      ; preds = %51
+    %scevgep = getelementptr i8, i8* %35, i32 256
+    br label %53
+  
+  ; <label>:53                                      ; preds = %53, %.preheader2
+    %lsr.iv3 = phi i8* [ %scevgep4, %53 ], [ %scevgep, %.preheader2 ]
+    %lsr.iv1 = phi i32 [ %lsr.iv.next2, %53 ], [ 255, %.preheader2 ]
+    %54 = load i8, i8* %35, align 1, !tbaa !28
+    %scevgep5 = getelementptr i8, i8* %35, i32 %lsr.iv1
+    %scevgep6 = getelementptr i8, i8* %scevgep5, i32 -256
+    store i8 %54, i8* %scevgep6, align 1, !tbaa !28
+    %sunkaddr12 = ptrtoint i8* %35 to i32
+    %sunkaddr13 = add i32 %sunkaddr12, 255
+    %sunkaddr14 = inttoptr i32 %sunkaddr13 to i8*
+    %55 = load i8, i8* %sunkaddr14, align 1, !tbaa !28
+    store i8 %55, i8* %lsr.iv3, align 1, !tbaa !28
+    %lsr.iv.next2 = add nsw i32 %lsr.iv1, -1
+    %scevgep4 = getelementptr i8, i8* %lsr.iv3, i32 1
+    %exitcond15 = icmp eq i32 %lsr.iv.next2, 0
+    br i1 %exitcond15, label %.loopexit, label %53
+  
+  .loopexit:                                        ; preds = %53, %51
+    %56 = add nuw nsw i32 %i.09, 1
+    %sunkaddr15 = ptrtoint %struct.jpeg_decompress_struct* %cinfo to i32
+    %sunkaddr16 = add i32 %sunkaddr15, 120
+    %sunkaddr17 = inttoptr i32 %sunkaddr16 to i32*
+    %57 = load i32, i32* %sunkaddr17, align 8, !tbaa !19
+    %58 = icmp slt i32 %56, %57
+    br i1 %58, label %22, label %._crit_edge13
+  
+  ._crit_edge13:                                    ; preds = %.loopexit, %0
+    ret void
+  }
+  
+  ; Function Attrs: norecurse nounwind
+  define internal void @color_quantize3(%struct.jpeg_decompress_struct* nocapture readonly %cinfo, i8** nocapture readonly %input_buf, i8** nocapture readonly %output_buf, i32 signext %num_rows) #2 {
+    %1 = getelementptr inbounds %struct.jpeg_decompress_struct, %struct.jpeg_decompress_struct* %cinfo, i32 0, i32 83
+    %2 = bitcast %struct.jpeg_color_quantizer** %1 to %struct.my_cquantizer**
+    %3 = load %struct.my_cquantizer*, %struct.my_cquantizer** %2, align 8, !tbaa !12
+    %4 = getelementptr inbounds %struct.my_cquantizer, %struct.my_cquantizer* %3, i32 0, i32 3
+    %5 = load i8**, i8*** %4, align 4, !tbaa !40
+    %6 = load i8*, i8** %5, align 4, !tbaa !18
+    %7 = getelementptr inbounds i8*, i8** %5, i32 1
+    %8 = load i8*, i8** %7, align 4, !tbaa !18
+    %9 = getelementptr inbounds i8*, i8** %5, i32 2
+    %10 = load i8*, i8** %9, align 4, !tbaa !18
+    %11 = getelementptr inbounds %struct.jpeg_decompress_struct, %struct.jpeg_decompress_struct* %cinfo, i32 0, i32 26
+    %12 = load i32, i32* %11, align 8, !tbaa !32
+    %13 = icmp sgt i32 %num_rows, 0
+    br i1 %13, label %.lr.ph6, label %._crit_edge7
+  
+  .lr.ph6:                                          ; preds = %0
+    br label %14
+  
+  ; <label>:14                                      ; preds = %._crit_edge, %.lr.ph6
+    %row.04 = phi i32 [ 0, %.lr.ph6 ], [ %41, %._crit_edge ]
+    %15 = icmp eq i32 %12, 0
+    br i1 %15, label %._crit_edge, label %.lr.ph.preheader
+  
+  .lr.ph.preheader:                                 ; preds = %14
+    %16 = getelementptr inbounds i8*, i8** %output_buf, i32 %row.04
+    %17 = load i8*, i8** %16, align 4, !tbaa !18
+    %18 = getelementptr inbounds i8*, i8** %input_buf, i32 %row.04
+    %19 = load i8*, i8** %18, align 4, !tbaa !18
+    br label %.lr.ph
+  
+  .lr.ph:                                           ; preds = %.lr.ph, %.lr.ph.preheader
+    %ptrin.03 = phi i8* [ %scevgep2, %.lr.ph ], [ %19, %.lr.ph.preheader ]
+    %col.02 = phi i32 [ %39, %.lr.ph ], [ %12, %.lr.ph.preheader ]
+    %ptrout.01 = phi i8* [ %38, %.lr.ph ], [ %17, %.lr.ph.preheader ]
+    %20 = load i8, i8* %ptrin.03, align 1, !tbaa !28
+    %21 = zext i8 %20 to i32
+    %22 = getelementptr inbounds i8, i8* %6, i32 %21
+    %23 = load i8, i8* %22, align 1, !tbaa !28
+    %24 = zext i8 %23 to i32
+    %scevgep = getelementptr i8, i8* %ptrin.03, i32 1
+    %25 = load i8, i8* %scevgep, align 1, !tbaa !28
+    %26 = zext i8 %25 to i32
+    %27 = getelementptr inbounds i8, i8* %8, i32 %26
+    %28 = load i8, i8* %27, align 1, !tbaa !28
+    %29 = zext i8 %28 to i32
+    %30 = add nuw nsw i32 %29, %24
+    %scevgep1 = getelementptr i8, i8* %ptrin.03, i32 2
+    %31 = load i8, i8* %scevgep1, align 1, !tbaa !28
+    %32 = zext i8 %31 to i32
+    %33 = getelementptr inbounds i8, i8* %10, i32 %32
+    %34 = load i8, i8* %33, align 1, !tbaa !28
+    %35 = zext i8 %34 to i32
+    %36 = add nuw nsw i32 %30, %35
+    %37 = trunc i32 %36 to i8
+    %38 = getelementptr inbounds i8, i8* %ptrout.01, i32 1
+    store i8 %37, i8* %ptrout.01, align 1, !tbaa !28
+    %39 = add i32 %col.02, -1
+    %40 = icmp eq i32 %39, 0
+    %scevgep2 = getelementptr i8, i8* %ptrin.03, i32 3
+    br i1 %40, label %._crit_edge, label %.lr.ph
+  
+  ._crit_edge:                                      ; preds = %.lr.ph, %14
+    %41 = add nuw nsw i32 %row.04, 1
+    %exitcond = icmp eq i32 %41, %num_rows
+    br i1 %exitcond, label %._crit_edge7, label %14
+  
+  ._crit_edge7:                                     ; preds = %._crit_edge, %0
+    ret void
+  }
+  
+  ; Function Attrs: norecurse nounwind
+  define internal void @color_quantize(%struct.jpeg_decompress_struct* nocapture readonly %cinfo, i8** nocapture readonly %input_buf, i8** nocapture readonly %output_buf, i32 signext %num_rows) #2 {
+    %1 = getelementptr inbounds %struct.jpeg_decompress_struct, %struct.jpeg_decompress_struct* %cinfo, i32 0, i32 83
+    %2 = bitcast %struct.jpeg_color_quantizer** %1 to %struct.my_cquantizer**
+    %3 = load %struct.my_cquantizer*, %struct.my_cquantizer** %2, align 8, !tbaa !12
+    %4 = getelementptr inbounds %struct.my_cquantizer, %struct.my_cquantizer* %3, i32 0, i32 3
+    %5 = load i8**, i8*** %4, align 4, !tbaa !40
+    %6 = getelementptr inbounds %struct.jpeg_decompress_struct, %struct.jpeg_decompress_struct* %cinfo, i32 0, i32 26
+    %7 = load i32, i32* %6, align 8, !tbaa !32
+    %8 = getelementptr inbounds %struct.jpeg_decompress_struct, %struct.jpeg_decompress_struct* %cinfo, i32 0, i32 28
+    %9 = load i32, i32* %8, align 8, !tbaa !19
+    %10 = icmp sgt i32 %num_rows, 0
+    br i1 %10, label %.lr.ph11, label %._crit_edge12
+  
+  .lr.ph11:                                         ; preds = %0
+    %11 = icmp sgt i32 %9, 0
+    %smax = select i1 %11, i32 %9, i32 0
+    br label %12
+  
+  ; <label>:12                                      ; preds = %._crit_edge8, %.lr.ph11
+    %row.09 = phi i32 [ 0, %.lr.ph11 ], [ %33, %._crit_edge8 ]
+    %13 = icmp eq i32 %7, 0
+    br i1 %13, label %._crit_edge8, label %.preheader.preheader
+  
+  .preheader.preheader:                             ; preds = %12
+    %14 = getelementptr inbounds i8*, i8** %output_buf, i32 %row.09
+    %15 = load i8*, i8** %14, align 4, !tbaa !18
+    %16 = getelementptr inbounds i8*, i8** %input_buf, i32 %row.09
+    %17 = load i8*, i8** %16, align 4, !tbaa !18
+    br label %.preheader
+  
+  .preheader:                                       ; preds = %._crit_edge, %.preheader.preheader
+    %lsr.iv2 = phi i8* [ %31, %._crit_edge ], [ %17, %.preheader.preheader ]
+    %col.07 = phi i32 [ %30, %._crit_edge ], [ %7, %.preheader.preheader ]
+    %ptrout.06 = phi i8* [ %29, %._crit_edge ], [ %15, %.preheader.preheader ]
+    %18 = icmp sgt i32 %9, 0
+    br i1 %18, label %.lr.ph, label %._crit_edge
+  
+  .lr.ph:                                           ; preds = %.preheader, %.lr.ph
+    %lsr.iv = phi i8** [ %scevgep1, %.lr.ph ], [ %5, %.preheader ]
+    %pixcode.03 = phi i32 [ %25, %.lr.ph ], [ 0, %.preheader ]
+    %ci.02 = phi i32 [ %26, %.lr.ph ], [ 0, %.preheader ]
+    %scevgep5 = getelementptr i8, i8* %lsr.iv2, i32 %ci.02
+    %19 = load i8, i8* %scevgep5, align 1, !tbaa !28
+    %20 = zext i8 %19 to i32
+    %21 = load i8*, i8** %lsr.iv, align 4, !tbaa !18
+    %22 = getelementptr inbounds i8, i8* %21, i32 %20
+    %23 = load i8, i8* %22, align 1, !tbaa !28
+    %24 = zext i8 %23 to i32
+    %25 = add nsw i32 %24, %pixcode.03
+    %26 = add nuw nsw i32 %ci.02, 1
+    %scevgep1 = getelementptr i8*, i8** %lsr.iv, i32 1
+    %exitcond = icmp eq i32 %9, %26
+    br i1 %exitcond, label %._crit_edge, label %.lr.ph
+  
+  ._crit_edge:                                      ; preds = %.lr.ph, %.preheader
+    %pixcode.0.lcssa = phi i32 [ 0, %.preheader ], [ %25, %.lr.ph ]
+    %27 = bitcast i8* %lsr.iv2 to i1*
+    %28 = trunc i32 %pixcode.0.lcssa to i8
+    %29 = getelementptr inbounds i8, i8* %ptrout.06, i32 1
+    store i8 %28, i8* %ptrout.06, align 1, !tbaa !28
+    %30 = add i32 %col.07, -1
+    %scevgep4 = getelementptr i1, i1* %27, i32 %smax
+    %31 = bitcast i1* %scevgep4 to i8*
+    %32 = icmp eq i32 %30, 0
+    br i1 %32, label %._crit_edge8, label %.preheader
+  
+  ._crit_edge8:                                     ; preds = %._crit_edge, %12
+    %33 = add nuw nsw i32 %row.09, 1
+    %exitcond14 = icmp eq i32 %33, %num_rows
+    br i1 %exitcond14, label %._crit_edge12, label %12
+  
+  ._crit_edge12:                                    ; preds = %._crit_edge8, %0
+    ret void
+  }
+  
+  ; Function Attrs: norecurse nounwind
+  define internal void @quantize3_ord_dither(%struct.jpeg_decompress_struct* nocapture readonly %cinfo, i8** nocapture readonly %input_buf, i8** nocapture readonly %output_buf, i32 signext %num_rows) #2 {
+    %1 = getelementptr inbounds %struct.jpeg_decompress_struct, %struct.jpeg_decompress_struct* %cinfo, i32 0, i32 83
+    %2 = bitcast %struct.jpeg_color_quantizer** %1 to %struct.my_cquantizer**
+    %3 = load %struct.my_cquantizer*, %struct.my_cquantizer** %2, align 8, !tbaa !12
+    %4 = getelementptr inbounds %struct.my_cquantizer, %struct.my_cquantizer* %3, i32 0, i32 3
+    %5 = load i8**, i8*** %4, align 4, !tbaa !40
+    %6 = load i8*, i8** %5, align 4, !tbaa !18
+    %7 = getelementptr inbounds i8*, i8** %5, i32 1
+    %8 = load i8*, i8** %7, align 4, !tbaa !18
+    %9 = getelementptr inbounds i8*, i8** %5, i32 2
+    %10 = load i8*, i8** %9, align 4, !tbaa !18
+    %11 = getelementptr inbounds %struct.jpeg_decompress_struct, %struct.jpeg_decompress_struct* %cinfo, i32 0, i32 26
+    %12 = load i32, i32* %11, align 8, !tbaa !32
+    %13 = icmp sgt i32 %num_rows, 0
+    br i1 %13, label %.lr.ph7, label %._crit_edge8
+  
+  .lr.ph7:                                          ; preds = %0
+    %14 = getelementptr inbounds %struct.my_cquantizer, %struct.my_cquantizer* %3, i32 0, i32 6
+    %.pre = load i32, i32* %14, align 4, !tbaa !37
+    br label %15
+  
+  ; <label>:15                                      ; preds = %._crit_edge, %.lr.ph7
+    %16 = phi i32 [ %.pre, %.lr.ph7 ], [ %58, %._crit_edge ]
+    %row.05 = phi i32 [ 0, %.lr.ph7 ], [ %59, %._crit_edge ]
+    %17 = icmp eq i32 %12, 0
+    %sunkaddr = ptrtoint %struct.my_cquantizer* %3 to i32
+    %sunkaddr3 = add i32 %sunkaddr, 52
+    %sunkaddr4 = inttoptr i32 %sunkaddr3 to [16 x i32]**
+    %18 = load [16 x i32]*, [16 x i32]** %sunkaddr4, align 4, !tbaa !18
+    %sunkaddr5 = ptrtoint %struct.my_cquantizer* %3 to i32
+    %sunkaddr6 = add i32 %sunkaddr5, 56
+    %sunkaddr7 = inttoptr i32 %sunkaddr6 to [16 x i32]**
+    %19 = load [16 x i32]*, [16 x i32]** %sunkaddr7, align 4, !tbaa !18
+    %sunkaddr8 = ptrtoint %struct.my_cquantizer* %3 to i32
+    %sunkaddr9 = add i32 %sunkaddr8, 60
+    %sunkaddr10 = inttoptr i32 %sunkaddr9 to [16 x i32]**
+    %20 = load [16 x i32]*, [16 x i32]** %sunkaddr10, align 4, !tbaa !18
+    br i1 %17, label %._crit_edge, label %.lr.ph.preheader
+  
+  .lr.ph.preheader:                                 ; preds = %15
+    %21 = getelementptr inbounds i8*, i8** %output_buf, i32 %row.05
+    %22 = load i8*, i8** %21, align 4, !tbaa !18
+    %23 = getelementptr inbounds i8*, i8** %input_buf, i32 %row.05
+    %24 = load i8*, i8** %23, align 4, !tbaa !18
+    br label %.lr.ph
+  
+  .lr.ph:                                           ; preds = %.lr.ph, %.lr.ph.preheader
+    %input_ptr.04 = phi i8* [ %scevgep2, %.lr.ph ], [ %24, %.lr.ph.preheader ]
+    %col.03 = phi i32 [ %55, %.lr.ph ], [ %12, %.lr.ph.preheader ]
+    %col_index.02 = phi i32 [ %54, %.lr.ph ], [ 0, %.lr.ph.preheader ]
+    %output_ptr.01 = phi i8* [ %52, %.lr.ph ], [ %22, %.lr.ph.preheader ]
+    %25 = load i8, i8* %input_ptr.04, align 1, !tbaa !28
+    %26 = zext i8 %25 to i32
+    %27 = getelementptr inbounds [16 x i32], [16 x i32]* %18, i32 %16, i32 %col_index.02
+    %28 = load i32, i32* %27, align 4, !tbaa !23
+    %29 = add nsw i32 %26, %28
+    %30 = getelementptr inbounds i8, i8* %6, i32 %29
+    %31 = load i8, i8* %30, align 1, !tbaa !28
+    %32 = zext i8 %31 to i32
+    %scevgep = getelementptr i8, i8* %input_ptr.04, i32 1
+    %33 = load i8, i8* %scevgep, align 1, !tbaa !28
+    %34 = zext i8 %33 to i32
+    %35 = getelementptr inbounds [16 x i32], [16 x i32]* %19, i32 %16, i32 %col_index.02
+    %36 = load i32, i32* %35, align 4, !tbaa !23
+    %37 = add nsw i32 %34, %36
+    %38 = getelementptr inbounds i8, i8* %8, i32 %37
+    %39 = load i8, i8* %38, align 1, !tbaa !28
+    %40 = zext i8 %39 to i32
+    %41 = add nuw nsw i32 %40, %32
+    %scevgep1 = getelementptr i8, i8* %input_ptr.04, i32 2
+    %42 = load i8, i8* %scevgep1, align 1, !tbaa !28
+    %43 = zext i8 %42 to i32
+    %44 = getelementptr inbounds [16 x i32], [16 x i32]* %20, i32 %16, i32 %col_index.02
+    %45 = load i32, i32* %44, align 4, !tbaa !23
+    %46 = add nsw i32 %43, %45
+    %47 = getelementptr inbounds i8, i8* %10, i32 %46
+    %48 = load i8, i8* %47, align 1, !tbaa !28
+    %49 = zext i8 %48 to i32
+    %50 = add nuw nsw i32 %41, %49
+    %51 = trunc i32 %50 to i8
+    %52 = getelementptr inbounds i8, i8* %output_ptr.01, i32 1
+    store i8 %51, i8* %output_ptr.01, align 1, !tbaa !28
+    %53 = add nuw nsw i32 %col_index.02, 1
+    %54 = and i32 %53, 15
+    %55 = add i32 %col.03, -1
+    %56 = icmp eq i32 %55, 0
+    %scevgep2 = getelementptr i8, i8* %input_ptr.04, i32 3
+    br i1 %56, label %._crit_edge, label %.lr.ph
+  
+  ._crit_edge:                                      ; preds = %.lr.ph, %15
+    %57 = add nsw i32 %16, 1
+    %58 = and i32 %57, 15
+    %sunkaddr11 = ptrtoint %struct.my_cquantizer* %3 to i32
+    %sunkaddr12 = add i32 %sunkaddr11, 48
+    %sunkaddr13 = inttoptr i32 %sunkaddr12 to i32*
+    store i32 %58, i32* %sunkaddr13, align 4, !tbaa !37
+    %59 = add nuw nsw i32 %row.05, 1
+    %exitcond = icmp eq i32 %59, %num_rows
+    br i1 %exitcond, label %._crit_edge8, label %15
+  
+  ._crit_edge8:                                     ; preds = %._crit_edge, %0
+    ret void
+  }
+  
+  ; Function Attrs: nounwind
+  define internal void @quantize_ord_dither(%struct.jpeg_decompress_struct* nocapture readonly %cinfo, i8** nocapture readonly %input_buf, i8** nocapture readonly %output_buf, i32 signext %num_rows) #0 {
+    %1 = getelementptr inbounds %struct.jpeg_decompress_struct, %struct.jpeg_decompress_struct* %cinfo, i32 0, i32 83
+    %2 = bitcast %struct.jpeg_color_quantizer** %1 to %struct.my_cquantizer**
+    %3 = load %struct.my_cquantizer*, %struct.my_cquantizer** %2, align 8, !tbaa !12
+    %4 = getelementptr inbounds %struct.jpeg_decompress_struct, %struct.jpeg_decompress_struct* %cinfo, i32 0, i32 28
+    %5 = load i32, i32* %4, align 8, !tbaa !19
+    %6 = getelementptr inbounds %struct.jpeg_decompress_struct, %struct.jpeg_decompress_struct* %cinfo, i32 0, i32 26
+    %7 = load i32, i32* %6, align 8, !tbaa !32
+    %8 = icmp sgt i32 %num_rows, 0
+    br i1 %8, label %.lr.ph11, label %._crit_edge12
+  
+  .lr.ph11:                                         ; preds = %0
+    br label %9
+  
+  ; <label>:9                                       ; preds = %._crit_edge8, %.lr.ph11
+    %row.09 = phi i32 [ 0, %.lr.ph11 ], [ %46, %._crit_edge8 ]
+    %10 = icmp sgt i32 %5, 0
+    %11 = getelementptr inbounds i8*, i8** %output_buf, i32 %row.09
+    %12 = load i8*, i8** %11, align 4, !tbaa !18
+    tail call void @jzero_far(i8* %12, i32 signext %7) #4
+    %sunkaddr = ptrtoint %struct.my_cquantizer* %3 to i32
+    %sunkaddr1 = add i32 %sunkaddr, 48
+    %sunkaddr2 = inttoptr i32 %sunkaddr1 to i32*
+    %13 = load i32, i32* %sunkaddr2, align 4, !tbaa !37
+    br i1 %10, label %.lr.ph7, label %._crit_edge8
+  
+  .lr.ph7:                                          ; preds = %9
+    %14 = getelementptr inbounds i8*, i8** %input_buf, i32 %row.09
+    br label %15
+  
+  ; <label>:15                                      ; preds = %._crit_edge, %.lr.ph7
+    %ci.05 = phi i32 [ 0, %.lr.ph7 ], [ %43, %._crit_edge ]
+    %16 = icmp eq i32 %7, 0
+    %sunkaddr3 = ptrtoint %struct.my_cquantizer* %3 to i32
+    %sunkaddr4 = add i32 %sunkaddr3, 24
+    %sunkaddr5 = inttoptr i32 %sunkaddr4 to i8***
+    %17 = load i8**, i8*** %sunkaddr5, align 4, !tbaa !40
+    %18 = getelementptr inbounds i8*, i8** %17, i32 %ci.05
+    %19 = load i8*, i8** %18, align 4, !tbaa !18
+    %20 = getelementptr inbounds %struct.my_cquantizer, %struct.my_cquantizer* %3, i32 0, i32 7, i32 %ci.05
+    %21 = load [16 x i32]*, [16 x i32]** %20, align 4, !tbaa !18
+    br i1 %16, label %._crit_edge, label %.lr.ph.preheader
+  
+  .lr.ph.preheader:                                 ; preds = %15
+    %22 = load i8*, i8** %11, align 4, !tbaa !18
+    %23 = load i8*, i8** %14, align 4, !tbaa !18
+    %24 = getelementptr inbounds i8, i8* %23, i32 %ci.05
+    br label %.lr.ph
+  
+  .lr.ph:                                           ; preds = %.lr.ph, %.lr.ph.preheader
+    %input_ptr.04 = phi i8* [ %37, %.lr.ph ], [ %24, %.lr.ph.preheader ]
+    %col.03 = phi i32 [ %41, %.lr.ph ], [ %7, %.lr.ph.preheader ]
+    %output_ptr.02 = phi i8* [ %38, %.lr.ph ], [ %22, %.lr.ph.preheader ]
+    %col_index.01 = phi i32 [ %40, %.lr.ph ], [ 0, %.lr.ph.preheader ]
+    %25 = load i8, i8* %input_ptr.04, align 1, !tbaa !28
+    %26 = zext i8 %25 to i32
+    %27 = getelementptr inbounds [16 x i32], [16 x i32]* %21, i32 %13, i32 %col_index.01
+    %28 = load i32, i32* %27, align 4, !tbaa !23
+    %29 = add nsw i32 %26, %28
+    %30 = getelementptr inbounds i8, i8* %19, i32 %29
+    %31 = load i8, i8* %30, align 1, !tbaa !28
+    %32 = zext i8 %31 to i32
+    %33 = load i8, i8* %output_ptr.02, align 1, !tbaa !28
+    %34 = zext i8 %33 to i32
+    %35 = add nuw nsw i32 %34, %32
+    %36 = trunc i32 %35 to i8
+    store i8 %36, i8* %output_ptr.02, align 1, !tbaa !28
+    %37 = getelementptr inbounds i8, i8* %input_ptr.04, i32 %5
+    %38 = getelementptr inbounds i8, i8* %output_ptr.02, i32 1
+    %39 = add nuw nsw i32 %col_index.01, 1
+    %40 = and i32 %39, 15
+    %41 = add i32 %col.03, -1
+    %42 = icmp eq i32 %41, 0
+    br i1 %42, label %._crit_edge, label %.lr.ph
+  
+  ._crit_edge:                                      ; preds = %.lr.ph, %15
+    %43 = add nuw nsw i32 %ci.05, 1
+    %exitcond = icmp eq i32 %43, %5
+    br i1 %exitcond, label %._crit_edge8, label %15
+  
+  ._crit_edge8:                                     ; preds = %._crit_edge, %9
+    %44 = add nsw i32 %13, 1
+    %45 = and i32 %44, 15
+    %sunkaddr6 = ptrtoint %struct.my_cquantizer* %3 to i32
+    %sunkaddr7 = add i32 %sunkaddr6, 48
+    %sunkaddr8 = inttoptr i32 %sunkaddr7 to i32*
+    store i32 %45, i32* %sunkaddr8, align 4, !tbaa !37
+    %46 = add nuw nsw i32 %row.09, 1
+    %exitcond13 = icmp eq i32 %46, %num_rows
+    br i1 %exitcond13, label %._crit_edge12, label %9
+  
+  ._crit_edge12:                                    ; preds = %._crit_edge8, %0
+    ret void
+  }
+  
+  ; Function Attrs: nounwind
+  define internal void @quantize_fs_dither(%struct.jpeg_decompress_struct* nocapture readonly %cinfo, i8** nocapture readonly %input_buf, i8** nocapture readonly %output_buf, i32 signext %num_rows) #0 {
+    %1 = getelementptr inbounds %struct.jpeg_decompress_struct, %struct.jpeg_decompress_struct* %cinfo, i32 0, i32 83
+    %2 = bitcast %struct.jpeg_color_quantizer** %1 to %struct.my_cquantizer**
+    %3 = load %struct.my_cquantizer*, %struct.my_cquantizer** %2, align 8, !tbaa !12
+    %4 = getelementptr inbounds %struct.jpeg_decompress_struct, %struct.jpeg_decompress_struct* %cinfo, i32 0, i32 28
+    %5 = load i32, i32* %4, align 8, !tbaa !19
+    %6 = getelementptr inbounds %struct.jpeg_decompress_struct, %struct.jpeg_decompress_struct* %cinfo, i32 0, i32 26
+    %7 = load i32, i32* %6, align 8, !tbaa !32
+    %8 = getelementptr inbounds %struct.jpeg_decompress_struct, %struct.jpeg_decompress_struct* %cinfo, i32 0, i32 61
+    %9 = load i8*, i8** %8, align 8, !tbaa !41
+    %10 = icmp sgt i32 %num_rows, 0
+    br i1 %10, label %.lr.ph15, label %._crit_edge16
+  
+  .lr.ph15:                                         ; preds = %0
+    %11 = add i32 %7, -1
+    %12 = mul i32 %11, %5
+    %13 = sub nsw i32 0, %5
+    %14 = add i32 %7, 1
+    br label %15
+  
+  ; <label>:15                                      ; preds = %._crit_edge12, %.lr.ph15
+    %row.013 = phi i32 [ 0, %.lr.ph15 ], [ %79, %._crit_edge12 ]
+    %16 = icmp sgt i32 %5, 0
+    %17 = getelementptr inbounds i8*, i8** %output_buf, i32 %row.013
+    %18 = load i8*, i8** %17, align 4, !tbaa !18
+    tail call void @jzero_far(i8* %18, i32 signext %7) #4
+    br i1 %16, label %.lr.ph11, label %._crit_edge12
+  
+  .lr.ph11:                                         ; preds = %15
+    %19 = getelementptr inbounds i8*, i8** %input_buf, i32 %row.013
+    br label %20
+  
+  ; <label>:20                                      ; preds = %._crit_edge, %.lr.ph11
+    %ci.09 = phi i32 [ 0, %.lr.ph11 ], [ %76, %._crit_edge ]
+    %21 = load i8*, i8** %19, align 4, !tbaa !18
+    %22 = getelementptr inbounds i8, i8* %21, i32 %ci.09
+    %23 = load i8*, i8** %17, align 4, !tbaa !18
+    %sunkaddr = ptrtoint %struct.my_cquantizer* %3 to i32
+    %sunkaddr5 = add i32 %sunkaddr, 84
+    %sunkaddr6 = inttoptr i32 %sunkaddr5 to i32*
+    %24 = load i32, i32* %sunkaddr6, align 4, !tbaa !39
+    %25 = icmp eq i32 %24, 0
+    %26 = getelementptr inbounds %struct.my_cquantizer, %struct.my_cquantizer* %3, i32 0, i32 8, i32 %ci.09
+    %27 = load i16*, i16** %26, align 4
+    br i1 %25, label %32, label %28
+  
+  ; <label>:28                                      ; preds = %20
+    %29 = getelementptr inbounds i8, i8* %22, i32 %12
+    %30 = getelementptr inbounds i8, i8* %23, i32 %11
+    %31 = getelementptr inbounds i16, i16* %27, i32 %14
+    br label %32
+  
+  ; <label>:32                                      ; preds = %28, %20
+    %output_ptr.0 = phi i8* [ %30, %28 ], [ %23, %20 ]
+    %input_ptr.0 = phi i8* [ %29, %28 ], [ %22, %20 ]
+    %errorptr.0 = phi i16* [ %31, %28 ], [ %27, %20 ]
+    %dir.0 = phi i32 [ -1, %28 ], [ 1, %20 ]
+    %dirnc.0 = phi i32 [ %13, %28 ], [ %5, %20 ]
+    %33 = icmp eq i32 %7, 0
+    %sunkaddr7 = ptrtoint %struct.my_cquantizer* %3 to i32
+    %sunkaddr8 = add i32 %sunkaddr7, 24
+    %sunkaddr9 = inttoptr i32 %sunkaddr8 to i8***
+    %34 = load i8**, i8*** %sunkaddr9, align 4, !tbaa !40
+    %35 = getelementptr inbounds i8*, i8** %34, i32 %ci.09
+    %36 = load i8*, i8** %35, align 4, !tbaa !18
+    %sunkaddr10 = ptrtoint %struct.my_cquantizer* %3 to i32
+    %sunkaddr11 = add i32 %sunkaddr10, 16
+    %sunkaddr12 = inttoptr i32 %sunkaddr11 to i8***
+    %37 = load i8**, i8*** %sunkaddr12, align 4, !tbaa !29
+    %38 = getelementptr inbounds i8*, i8** %37, i32 %ci.09
+    %39 = load i8*, i8** %38, align 4, !tbaa !18
+    br i1 %33, label %._crit_edge, label %.lr.ph.preheader
+  
+  .lr.ph.preheader:                                 ; preds = %32
+    %40 = mul i32 %7, %dir.0
+    %41 = shl i32 %dir.0, 1
+    br label %.lr.ph
+  
+  .lr.ph:                                           ; preds = %.lr.ph, %.lr.ph.preheader
+    %lsr.iv = phi i16* [ %73, %.lr.ph ], [ %errorptr.0, %.lr.ph.preheader ]
+    %cur.07 = phi i32 [ %69, %.lr.ph ], [ 0, %.lr.ph.preheader ]
+    %belowerr.06 = phi i32 [ %63, %.lr.ph ], [ 0, %.lr.ph.preheader ]
+    %col.05 = phi i32 [ %72, %.lr.ph ], [ %7, %.lr.ph.preheader ]
+    %bpreverr.04 = phi i32 [ %68, %.lr.ph ], [ 0, %.lr.ph.preheader ]
+    %input_ptr.12 = phi i8* [ %70, %.lr.ph ], [ %input_ptr.0, %.lr.ph.preheader ]
+    %output_ptr.11 = phi i8* [ %71, %.lr.ph ], [ %output_ptr.0, %.lr.ph.preheader ]
+    %lsr.iv3 = bitcast i16* %lsr.iv to i8*
+    %lsr.iv1 = bitcast i16* %lsr.iv to i1*
+    %uglygep = getelementptr i8, i8* %lsr.iv3, i32 %41
+    %uglygep4 = bitcast i8* %uglygep to i16*
+    %42 = load i16, i16* %uglygep4, align 2, !tbaa !42
+    %43 = sext i16 %42 to i32
+    %44 = add i32 %cur.07, 8
+    %45 = add i32 %44, %43
+    %46 = ashr i32 %45, 4
+    %47 = load i8, i8* %input_ptr.12, align 1, !tbaa !28
+    %48 = zext i8 %47 to i32
+    %49 = add nsw i32 %46, %48
+    %50 = getelementptr inbounds i8, i8* %9, i32 %49
+    %51 = load i8, i8* %50, align 1, !tbaa !28
+    %52 = zext i8 %51 to i32
+    %53 = getelementptr inbounds i8, i8* %36, i32 %52
+    %54 = load i8, i8* %53, align 1, !tbaa !28
+    %55 = zext i8 %54 to i32
+    %56 = load i8, i8* %output_ptr.11, align 1, !tbaa !28
+    %57 = zext i8 %56 to i32
+    %58 = add nuw nsw i32 %57, %55
+    %59 = trunc i32 %58 to i8
+    store i8 %59, i8* %output_ptr.11, align 1, !tbaa !28
+    %60 = getelementptr inbounds i8, i8* %39, i32 %55
+    %61 = load i8, i8* %60, align 1, !tbaa !28
+    %62 = zext i8 %61 to i32
+    %63 = sub nsw i32 %52, %62
+    %64 = mul nsw i32 %63, 3
+    %65 = add nsw i32 %64, %bpreverr.04
+    %66 = trunc i32 %65 to i16
+    store i16 %66, i16* %lsr.iv, align 2, !tbaa !42
+    %67 = mul nsw i32 %63, 5
+    %68 = add nsw i32 %67, %belowerr.06
+    %69 = mul nsw i32 %63, 7
+    %70 = getelementptr inbounds i8, i8* %input_ptr.12, i32 %dirnc.0
+    %71 = getelementptr inbounds i8, i8* %output_ptr.11, i32 %dir.0
+    %72 = add i32 %col.05, -1
+    %scevgep2 = getelementptr i1, i1* %lsr.iv1, i32 %41
+    %73 = bitcast i1* %scevgep2 to i16*
+    %74 = icmp eq i32 %72, 0
+    br i1 %74, label %._crit_edge.loopexit, label %.lr.ph
+  
+  ._crit_edge.loopexit:                             ; preds = %.lr.ph
+    %scevgep = getelementptr i16, i16* %errorptr.0, i32 %40
+    br label %._crit_edge
+  
+  ._crit_edge:                                      ; preds = %._crit_edge.loopexit, %32
+    %bpreverr.0.lcssa = phi i32 [ 0, %32 ], [ %68, %._crit_edge.loopexit ]
+    %errorptr.1.lcssa = phi i16* [ %errorptr.0, %32 ], [ %scevgep, %._crit_edge.loopexit ]
+    %75 = trunc i32 %bpreverr.0.lcssa to i16
+    store i16 %75, i16* %errorptr.1.lcssa, align 2, !tbaa !42
+    %76 = add nuw nsw i32 %ci.09, 1
+    %exitcond = icmp eq i32 %76, %5
+    br i1 %exitcond, label %._crit_edge12, label %20
+  
+  ._crit_edge12:                                    ; preds = %._crit_edge, %15
+    %sunkaddr13 = ptrtoint %struct.my_cquantizer* %3 to i32
+    %sunkaddr14 = add i32 %sunkaddr13, 84
+    %sunkaddr15 = inttoptr i32 %sunkaddr14 to i32*
+    %77 = load i32, i32* %sunkaddr15, align 4, !tbaa !39
+    %not. = icmp eq i32 %77, 0
+    %78 = zext i1 %not. to i32
+    store i32 %78, i32* %sunkaddr15, align 4, !tbaa !39
+    %79 = add nuw nsw i32 %row.013, 1
+    %exitcond18 = icmp eq i32 %79, %num_rows
+    br i1 %exitcond18, label %._crit_edge16, label %15
+  
+  ._crit_edge16:                                    ; preds = %._crit_edge12, %0
+    ret void
+  }
+  
+  declare void @jzero_far(i8*, i32 signext) #3
+  
+  attributes #0 = { nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #1 = { norecurse nounwind readnone "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #2 = { norecurse nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #3 = { "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #4 = { nounwind }
+  
+  !llvm.ident = !{!0}
+  
+  !0 = !{!"clang version 3.8.0 (http://llvm.org/git/clang.git 2d49f0a0ae8366964a93e3b7b26e29679bee7160) (http://llvm.org/git/llvm.git 60bc66b44837125843b58ed3e0fd2e6bb948d839)"}
+  !1 = !{!2, !3, i64 4}
+  !2 = !{!"jpeg_decompress_struct", !3, i64 0, !3, i64 4, !3, i64 8, !6, i64 12, !6, i64 16, !3, i64 20, !6, i64 24, !6, i64 28, !6, i64 32, !4, i64 36, !4, i64 40, !6, i64 44, !6, i64 48, !7, i64 56, !6, i64 64, !6, i64 68, !4, i64 72, !6, i64 76, !6, i64 80, !6, i64 84, !4, i64 88, !6, i64 92, !6, i64 96, !6, i64 100, !6, i64 104, !6, i64 108, !6, i64 112, !6, i64 116, !6, i64 120, !6, i64 124, !6, i64 128, !6, i64 132, !3, i64 136, !6, i64 140, !6, i64 144, !6, i64 148, !6, i64 152, !6, i64 156, !3, i64 160, !4, i64 164, !4, i64 180, !4, i64 196, !6, i64 212, !3, i64 216, !6, i64 220, !6, i64 224, !4, i64 228, !4, i64 244, !4, i64 260, !6, i64 276, !6, i64 280, !4, i64 284, !8, i64 286, !8, i64 288, !6, i64 292, !4, i64 296, !6, i64 300, !6, i64 304, !6, i64 308, !6, i64 312, !6, i64 316, !3, i64 320, !6, i64 324, !4, i64 328, !6, i64 344, !6, i64 348, !6, i64 352, !4, i64 356, !6, i64 396, !6, i64 400, !6, i64 404, !6, i64 408, !6, i64 412, !3, i64 416, !3, i64 420, !3, i64 424, !3, i64 428, !3, i64 432, !3, i64 436, !3, i64 440, !3, i64 444, !3, i64 448, !3, i64 452, !3, i64 456}
+  !3 = !{!"any pointer", !4, i64 0}
+  !4 = !{!"omnipotent char", !5, i64 0}
+  !5 = !{!"Simple C/C++ TBAA"}
+  !6 = !{!"int", !4, i64 0}
+  !7 = !{!"double", !4, i64 0}
+  !8 = !{!"short", !4, i64 0}
+  !9 = !{!10, !3, i64 0}
+  !10 = !{!"jpeg_memory_mgr", !3, i64 0, !3, i64 4, !3, i64 8, !3, i64 12, !3, i64 16, !3, i64 20, !3, i64 24, !3, i64 28, !3, i64 32, !3, i64 36, !3, i64 40, !11, i64 44}
+  !11 = !{!"long", !4, i64 0}
+  !12 = !{!2, !3, i64 456}
+  !13 = !{!14, !3, i64 0}
+  !14 = !{!"", !15, i64 0, !3, i64 16, !6, i64 20, !3, i64 24, !6, i64 28, !4, i64 32, !6, i64 48, !4, i64 52, !4, i64 68, !6, i64 84}
+  !15 = !{!"jpeg_color_quantizer", !3, i64 0, !3, i64 4, !3, i64 8, !3, i64 12}
+  !16 = !{!14, !3, i64 8}
+  !17 = !{!14, !3, i64 12}
+  !18 = !{!3, !3, i64 0}
+  !19 = !{!2, !6, i64 120}
+  !20 = !{!2, !3, i64 0}
+  !21 = !{!22, !6, i64 20}
+  !22 = !{!"jpeg_error_mgr", !3, i64 0, !3, i64 4, !3, i64 8, !3, i64 12, !3, i64 16, !6, i64 20, !4, i64 24, !6, i64 104, !11, i64 108, !3, i64 112, !6, i64 116, !3, i64 120, !6, i64 124, !6, i64 128}
+  !23 = !{!6, !6, i64 0}
+  !24 = !{!22, !3, i64 0}
+  !25 = !{!2, !6, i64 96}
+  !26 = !{!2, !4, i64 40}
+  !27 = !{!10, !3, i64 8}
+  !28 = !{!4, !4, i64 0}
+  !29 = !{!14, !3, i64 16}
+  !30 = !{!14, !6, i64 20}
+  !31 = !{!2, !4, i64 88}
+  !32 = !{!2, !6, i64 112}
+  !33 = !{!10, !3, i64 4}
+  !34 = !{!2, !3, i64 136}
+  !35 = !{!2, !6, i64 132}
+  !36 = !{!14, !3, i64 4}
+  !37 = !{!14, !6, i64 48}
+  !38 = !{!14, !6, i64 28}
+  !39 = !{!14, !6, i64 84}
+  !40 = !{!14, !3, i64 24}
+  !41 = !{!2, !3, i64 320}
+  !42 = !{!8, !8, i64 0}
+
+...
+---
+name:            start_pass_1_quant
+alignment:       2
+exposesReturnsTwice: false
+hasInlineAsm:    false
+isSSA:           false
+tracksRegLiveness: false
+tracksSubRegLiveness: false
+liveins:         
+  - { reg: '%a0' }
+  - { reg: '%t9' }
+  - { reg: '%v0' }
+calleeSavedRegisters: [ '%fp', '%ra', '%d10', '%d11', '%d12', '%d13', '%d14', 
+                        '%d15', '%f20', '%f21', '%f22', '%f23', '%f24', 
+                        '%f25', '%f26', '%f27', '%f28', '%f29', '%f30', 
+                        '%f31', '%s0', '%s1', '%s2', '%s3', '%s4', '%s5', 
+                        '%s6', '%s7' ]
+frameInfo:       
+  isFrameAddressTaken: false
+  isReturnAddressTaken: false
+  hasStackMap:     false
+  hasPatchPoint:   false
+  stackSize:       56
+  offsetAdjustment: 0
+  maxAlignment:    4
+  adjustsStack:    true
+  hasCalls:        true
+  maxCallFrameSize: 16
+  hasOpaqueSPAdjustment: false
+  hasVAStart:      false
+  hasMustTailInVarArgFunc: false
+stack:           
+  - { id: 0, type: spill-slot, offset: -4, size: 4, alignment: 4, callee-saved-register: '%ra' }
+  - { id: 1, type: spill-slot, offset: -8, size: 4, alignment: 4, callee-saved-register: '%fp' }
+  - { id: 2, type: spill-slot, offset: -12, size: 4, alignment: 4, callee-saved-register: '%s7' }
+  - { id: 3, type: spill-slot, offset: -16, size: 4, alignment: 4, callee-saved-register: '%s6' }
+  - { id: 4, type: spill-slot, offset: -20, size: 4, alignment: 4, callee-saved-register: '%s5' }
+  - { id: 5, type: spill-slot, offset: -24, size: 4, alignment: 4, callee-saved-register: '%s4' }
+  - { id: 6, type: spill-slot, offset: -28, size: 4, alignment: 4, callee-saved-register: '%s3' }
+  - { id: 7, type: spill-slot, offset: -32, size: 4, alignment: 4, callee-saved-register: '%s2' }
+  - { id: 8, type: spill-slot, offset: -36, size: 4, alignment: 4, callee-saved-register: '%s1' }
+  - { id: 9, type: spill-slot, offset: -40, size: 4, alignment: 4, callee-saved-register: '%s0' }
+body:             |
+  bb.0 (%ir-block.0, freq 1802):
+    successors: %bb.5(25), %bb.1(75)
+    liveins: %a0, %t9, %ra, %fp, %s7, %s6, %s5, %s4, %s3, %s2, %s1, %s0
+  
+    %v0 = LUi target-flags(<unknown>) $_gp_disp
+    %v0 = ADDiu %v0, target-flags(<unknown>) $_gp_disp
+    %sp = ADDiu %sp, -56
+    CFI_INSTRUCTION .cfi_def_cfa_offset 56
+    SW killed %ra, %sp, 52 :: (store 4 into stack)
+    SW killed %fp, %sp, 48 :: (store 4 into stack)
+    SW killed %s7, %sp, 44 :: (store 4 into stack)
+    SW killed %s6, %sp, 40 :: (store 4 into stack)
+    SW killed %s5, %sp, 36 :: (store 4 into stack)
+    SW killed %s4, %sp, 32 :: (store 4 into stack)
+    SW killed %s3, %sp, 28 :: (store 4 into stack)
+    SW killed %s2, %sp, 24 :: (store 4 into stack)
+    SW killed %s1, %sp, 20 :: (store 4 into stack)
+    SW killed %s0, %sp, 16 :: (store 4 into stack)
+    CFI_INSTRUCTION .cfi_offset %ra_64, -4
+    CFI_INSTRUCTION .cfi_offset %fp_64, -8
+    CFI_INSTRUCTION .cfi_offset %s7_64, -12
+    CFI_INSTRUCTION .cfi_offset %s6_64, -16
+    CFI_INSTRUCTION .cfi_offset %s5_64, -20
+    CFI_INSTRUCTION .cfi_offset %s4_64, -24
+    CFI_INSTRUCTION .cfi_offset %s3_64, -28
+    CFI_INSTRUCTION .cfi_offset %s2_64, -32
+    CFI_INSTRUCTION .cfi_offset %s1_64, -36
+    CFI_INSTRUCTION .cfi_offset %s0_64, -40
+    %s1 = ADDu %v0, %t9
+    %s0 = OR %a0, %zero
+    %s3 = LW %s0, 456 :: (load 4 from %ir.2, align 8, !tbaa !12)
+    %at = LW %s3, 16 :: (load 4 from %ir.5, !tbaa !29)
+    SW killed %at, %s0, 136 :: (store 4 into %ir.8, align 8, !tbaa !34)
+    %at = ADDiu %zero, 2
+    %v0 = LW %s3, 20 :: (load 4 from %ir.9, !tbaa !30)
+    SW killed %v0, %s0, 132 :: (store 4 into %ir.11, !tbaa !35)
+    %v0 = LW %s0, 88 :: (load 4 from %ir.12, align 8, !tbaa !31)
+    BEQ %v0, %at, %bb.5, implicit-def %at {
+      NOP
+    }
+  
+  bb.1 (%ir-block.0, freq 1351):
+    successors: %bb.7(33), %bb.2(66)
+    liveins: %s0, %s1, %s3, %v0
+  
+    %at = ADDiu %zero, 1
+    BEQ %v0, %at, %bb.7, implicit-def %at {
+      NOP
+    }
+  
+  bb.2 (%ir-block.0, freq 901):
+    successors: %bb.3(50), %bb.27(50)
+    liveins: %s0, %s1, %s3, %v0
+  
+    BNE %v0, %zero, %bb.27, implicit-def %at {
+      NOP
+    }
+  
+  bb.3 (%ir-block.14, freq 450):
+    successors: %bb.4(50), %bb.28(50)
+    liveins: %s0, %s1, %s3
+  
+    %at = LW killed %s0, 120 :: (load 4 from %ir.15, align 8, !tbaa !19)
+    %v0 = ADDiu %zero, 3
+    BNE %at, %v0, %bb.28, implicit-def %at {
+      NOP
+    }
+  
+  bb.4 (%ir-block.18, freq 225):
+    successors: %bb.35.create_odither_tables.exit(100)
+    liveins: %s1, %s3
+  
+    %at = LW killed %s1, target-flags(<unknown>) @color_quantize3 :: (load 4 from got)
+    %at = ADDiu killed %at, target-flags(<unknown>) @color_quantize3
+    B %bb.35.create_odither_tables.exit, implicit-def dead %at {
+      SW killed %at, killed %s3, 4 :: (store 4 into %ir.sunkaddr26, !tbaa !36)
+    }
+  
+  bb.5 (%ir-block.86, freq 450):
+    successors: %bb.29(37), %bb.6..alloc_fs_workspace.exit_crit_edge(62)
+    liveins: %s0, %s1, %s3
+  
+    %at = LW %s1, target-flags(<unknown>) @quantize_fs_dither :: (load 4 from got)
+    %at = ADDiu killed %at, target-flags(<unknown>) @quantize_fs_dither
+    SW killed %at, %s3, 4 :: (store 4 into %ir.87, !tbaa !36)
+    SW %zero, %s3, 84 :: (store 4 into %ir.88, !tbaa !39)
+    %at = LW %s3, 68 :: (load 4 from %ir.89, !tbaa !18)
+    BEQ %at, %zero, %bb.29, implicit-def %at {
+      NOP
+    }
+  
+  bb.6..alloc_fs_workspace.exit_crit_edge (freq 281):
+    successors: %bb.32.alloc_fs_workspace.exit(100)
+    liveins: %s0, %s1, %s3
+  
+    %v0 = LW %s0, 120 :: (load 4 from %ir..phi.trans.insert, align 8, !tbaa !19)
+    %s5 = ADDiu %s0, 112
+    B %bb.32.alloc_fs_workspace.exit, implicit-def dead %at {
+      %s4 = ADDiu killed %s0, 120
+    }
+  
+  bb.7 (%ir-block.20, freq 450):
+    successors: %bb.8(37), %bb.9(62)
+    liveins: %s0, %s1, %s3
+  
+    %at = LW %s0, 120 :: (load 4 from %ir.21, align 8, !tbaa !19)
+    %v0 = LW %s1, target-flags(<unknown>) @quantize_ord_dither :: (load 4 from got)
+    %v0 = ADDiu killed %v0, target-flags(<unknown>) @quantize_ord_dither
+    %at = XORi killed %at, 3
+    %v1 = LW %s1, target-flags(<unknown>) @quantize3_ord_dither :: (load 4 from got)
+    %v1 = ADDiu killed %v1, target-flags(<unknown>) @quantize3_ord_dither
+    %v0 = MOVZ_I_I killed %v1, killed %at, killed %v0
+    SW killed %v0, %s3, 4 :: (store 4 into %ir.24, !tbaa !36)
+    SW %zero, %s3, 48 :: (store 4 into %ir.25, !tbaa !37)
+    %at = LW %s3, 28 :: (load 4 from %ir.26, !tbaa !38)
+    BNE %at, %zero, %bb.9, implicit-def %at {
+      NOP
+    }
+  
+  bb.8 (%ir-block.29, freq 168):
+    successors: %bb.9(100)
+    liveins: %s0, %s1, %s3
+  
+    %at = LW %s1, target-flags(<unknown>) @create_colorindex :: (load 4 from got)
+    %t9 = ADDiu killed %at, target-flags(<unknown>) @create_colorindex
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit-def %sp {
+      %a0 = OR %s0, %zero
+    }
+  
+  bb.9 (%ir-block.30, freq 450):
+    successors: %bb.10(37), %bb.35.create_odither_tables.exit(62)
+    liveins: %s0, %s1, %s3
+  
+    %at = LW killed %s3, 52 :: (load 4 from %ir.31, !tbaa !18)
+    BNE %at, %zero, %bb.35.create_odither_tables.exit, implicit-def %at {
+      NOP
+    }
+  
+  bb.10 (%ir-block.34, freq 168):
+    successors: %bb.11..lr.ph4.i(62), %bb.35.create_odither_tables.exit(37)
+    liveins: %s0, %s1
+  
+    %v1 = LW %s0, 120 :: (load 4 from %ir.sunkaddr35, align 8, !tbaa !19)
+    BLEZ %v1, %bb.35.create_odither_tables.exit, implicit-def %at {
+      NOP
+    }
+  
+  bb.11..lr.ph4.i (freq 105):
+    successors: %bb.12(100)
+    liveins: %s0, %s1, %v1
+  
+    %s2 = LW %s0, 456 :: (load 4 from %ir.sunkaddr32, align 8, !tbaa !12)
+    %s3 = ADDiu %s2, 32
+    %s4 = ADDiu %zero, 0
+    %s1 = LW killed %s1, target-flags(<unknown>) @base_dither_matrix :: (load 4 from got)
+    %s5 = ADDiu %zero, 255
+    %s6 = ADDiu %zero, 16
+  
+  bb.12 (%ir-block.38, freq 211):
+    successors: %bb.13..lr.ph.i(62), %bb.17..thread.i(37)
+    liveins: %s0, %s1, %s2, %s3, %s4, %s5, %s6, %v1
+  
+    %at = SLL %s4, 2
+    %s7 = ADDu %s2, killed %at
+    %fp = LW %s7, 32 :: (load 4 from %ir.41, !tbaa !23)
+    %a0 = OR %s3, %zero
+    BLEZ %s4, %bb.17..thread.i, implicit-def %at {
+      %v0 = ADDiu %zero, 0
+    }
+  
+  bb.13..lr.ph.i (freq 256):
+    successors: %bb.16(3), %bb.14(96)
+    liveins: %fp, %a0, %s0, %s1, %s2, %s3, %s4, %s5, %s6, %s7, %v0, %v1
+  
+    %at = LW %a0, 0 :: (load 4 from %ir.lsr.iv3, !tbaa !23)
+    BEQ %fp, %at, %bb.16, implicit-def %at {
+      NOP
+    }
+  
+  bb.14 (%ir-block.46, freq 248):
+    successors: %bb.15(50), %bb.13..lr.ph.i(50)
+    liveins: %fp, %a0, %s0, %s1, %s2, %s3, %s4, %s5, %s6, %s7, %v0, %v1
+  
+    %v0 = ADDiu killed %v0, 1
+    %at = SLT %v0, %s4
+    BNE killed %at, %zero, %bb.13..lr.ph.i, implicit-def dead %at {
+      %a0 = ADDiu killed %a0, 4
+    }
+  
+  bb.15 (%ir-block.46, freq 124):
+    successors: %bb.17..thread.i(100)
+  
+    B %bb.17..thread.i, implicit-def dead %at {
+      NOP
+    }
+  
+  bb.16 (%ir-block.50, freq 8):
+    successors: %bb.17..thread.i(37), %bb.25.make_odither_array.exit.i(62)
+    liveins: %fp, %s0, %s1, %s2, %s3, %s4, %s5, %s6, %s7, %v0, %v1
+  
+    %at = SLL killed %v0, 2
+    %at = ADDu %s2, killed %at
+    %v0 = LW killed %at, 52 :: (load 4 from %ir.51, !tbaa !18)
+    BNE %v0, %zero, %bb.25.make_odither_array.exit.i, implicit-def %at {
+      NOP
+    }
+  
+  bb.17..thread.i (freq 206):
+    successors: %bb.18..preheader.i.i(100)
+    liveins: %fp, %s0, %s1, %s2, %s3, %s4, %s5, %s6, %s7
+  
+    %at = LW %s0, 4 :: (load 4 from %ir.sunkaddr38, !tbaa !1)
+    %t9 = LW killed %at, 0 :: (load 4 from %ir.56, !tbaa !9)
+    %a0 = OR %s0, %zero
+    %a1 = ADDiu %zero, 1
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit-def %sp, implicit-def %v0 {
+      %a2 = ADDiu %zero, 1024
+    }
+    %at = SLL killed %fp, 9
+    %v1 = ADDiu killed %at, -512
+    %a0 = ADDiu %s1, target-flags(<unknown>) @base_dither_matrix
+    %a1 = ADDiu %zero, 0
+    %a2 = OR %v0, %zero
+  
+  bb.18..preheader.i.i (freq 6598):
+    successors: %bb.19(100)
+    liveins: %a0, %a1, %a2, %s0, %s1, %s2, %s3, %s4, %s5, %s6, %s7, %v0, %v1
+  
+    %a3 = ADDiu %zero, 16
+    %t0 = OR %a0, %zero
+    %t1 = OR %a2, %zero
+  
+  bb.19 (%ir-block.61, freq 211148):
+    successors: %bb.21(37), %bb.20(62)
+    liveins: %a0, %a1, %a2, %a3, %s0, %s1, %s2, %s3, %s4, %s5, %s6, %s7, %t0, %t1, %v0, %v1
+  
+    %at = LBu %t0, 0 :: (load 1 from %ir.lsr.iv1214, !tbaa !28)
+    %at = SLL killed %at, 1
+    %at = SUBu %s5, killed %at
+    %t2 = SLL %at, 8
+    BLTZ %at, %bb.21, implicit-def %at {
+      %t2 = SUBu killed %t2, %at
+    }
+  
+  bb.20 (%ir-block.72, freq 131968):
+    successors: %bb.22(100)
+    liveins: %a0, %a1, %a2, %a3, %s0, %s1, %s2, %s3, %s4, %s5, %s6, %s7, %t0, %t1, %t2, %v0, %v1
+  
+    %ac0 = PseudoSDIV killed %t2, %v1
+    TEQ %v1, %zero, 7
+    B %bb.22, implicit-def %at {
+      %t2 = MFLO implicit %ac0
+    }
+  
+  bb.21 (%ir-block.68, freq 79180):
+    successors: %bb.22(100)
+    liveins: %a0, %a1, %a2, %a3, %s0, %s1, %s2, %s3, %s4, %s5, %s6, %s7, %t0, %t1, %t2, %v0, %v1
+  
+    %at = SUBu %zero, killed %t2
+    %ac0 = PseudoSDIV killed %at, %v1
+    TEQ %v1, %zero, 7
+    %at = MFLO implicit %ac0
+    %t2 = SUBu %zero, killed %at
+  
+  bb.22 (%ir-block.74, freq 211148):
+    successors: %bb.23(3), %bb.19(96)
+    liveins: %a0, %a1, %a2, %a3, %s0, %s1, %s2, %s3, %s4, %s5, %s6, %s7, %t0, %t1, %t2, %v0, %v1
+  
+    SW killed %t2, %t1, 0 :: (store 4 into %ir.76, !tbaa !23)
+    %t0 = ADDiu killed %t0, 1
+    %a3 = ADDiu killed %a3, -1
+    BNE %a3, %zero, %bb.19, implicit-def %at {
+      %t1 = ADDiu killed %t1, 4
+    }
+  
+  bb.23 (%ir-block.78, freq 6598):
+    successors: %bb.24.make_odither_array.exit.loopexit.i(3), %bb.18..preheader.i.i(96)
+    liveins: %a0, %a1, %a2, %s0, %s1, %s2, %s3, %s4, %s5, %s6, %s7, %v0, %v1
+  
+    %a0 = ADDiu killed %a0, 16
+    %a1 = ADDiu killed %a1, 1
+    BNE %a1, %s6, %bb.18..preheader.i.i, implicit-def %at {
+      %a2 = ADDiu killed %a2, 64
+    }
+  
+  bb.24.make_odither_array.exit.loopexit.i (freq 206):
+    successors: %bb.25.make_odither_array.exit.i(100)
+    liveins: %s0, %s1, %s2, %s3, %s4, %s5, %s6, %s7, %v0
+  
+    %v1 = LW %s0, 120 :: (load 4 from %ir.sunkaddr41, align 8, !tbaa !19)
+  
+  bb.25.make_odither_array.exit.i (freq 211):
+    successors: %bb.26.make_odither_array.exit.i(50), %bb.12(50)
+    liveins: %s0, %s1, %s2, %s3, %s4, %s5, %s6, %s7, %v0, %v1
+  
+    %s4 = ADDiu killed %s4, 1
+    %at = SLT %s4, %v1
+    BNE killed %at, %zero, %bb.12, implicit-def dead %at {
+      SW killed %v0, killed %s7, 52 :: (store 4 into %ir.83, !tbaa !18)
+    }
+  
+  bb.26.make_odither_array.exit.i (freq 105):
+    successors: %bb.35.create_odither_tables.exit(100)
+  
+    B %bb.35.create_odither_tables.exit, implicit-def dead %at {
+      NOP
+    }
+  
+  bb.27 (%ir-block.120, freq 450):
+    successors: %bb.35.create_odither_tables.exit(100)
+    liveins: %s0
+  
+    %at = LW %s0, 0 :: (load 4 from %ir.121, align 8, !tbaa !20)
+    %v0 = ADDiu %zero, 47
+    SW killed %v0, %at, 20 :: (store 4 into %ir.123, !tbaa !21)
+    %t9 = LW killed %at, 0 :: (load 4 from %ir.124, !tbaa !24)
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit-def %sp {
+      %a0 = OR killed %s0, %zero
+    }
+    B %bb.35.create_odither_tables.exit, implicit-def %at {
+      NOP
+    }
+  
+  bb.28 (%ir-block.19, freq 225):
+    successors: %bb.35.create_odither_tables.exit(100)
+    liveins: %s1, %s3
+  
+    %at = LW killed %s1, target-flags(<unknown>) @color_quantize :: (load 4 from got)
+    %at = ADDiu killed %at, target-flags(<unknown>) @color_quantize
+    B %bb.35.create_odither_tables.exit, implicit-def dead %at {
+      SW killed %at, killed %s3, 4 :: (store 4 into %ir.sunkaddr29, !tbaa !36)
+    }
+  
+  bb.29 (%ir-block.92, freq 168):
+    successors: %bb.30..lr.ph.i1(62), %bb.35.create_odither_tables.exit(37)
+    liveins: %s0, %s1, %s3
+  
+    %at = LW %s0, 120 :: (load 4 from %ir.97, align 8, !tbaa !19)
+    BLEZ %at, %bb.35.create_odither_tables.exit, implicit-def %at {
+      NOP
+    }
+  
+  bb.30..lr.ph.i1 (freq 105):
+    successors: %bb.31(100)
+    liveins: %s0, %s1, %s3
+  
+    %s4 = ADDiu %s0, 120
+    %s5 = ADDiu %s0, 112
+    %at = LW %s0, 112 :: (load 4 from %ir.93, align 8, !tbaa !32)
+    %at = SLL killed %at, 1
+    %s2 = ADDiu killed %at, 4
+    %s7 = ADDiu %s3, 68
+    %s6 = ADDiu %zero, 0
+  
+  bb.31 (%ir-block.100, freq 3379):
+    successors: %bb.31(96), %bb.32.alloc_fs_workspace.exit(3)
+    liveins: %s0, %s1, %s2, %s3, %s4, %s5, %s6, %s7
+  
+    %at = LW %s0, 4 :: (load 4 from %ir.sunkaddr44, !tbaa !1)
+    %t9 = LW killed %at, 4 :: (load 4 from %ir.103, !tbaa !33)
+    %a0 = OR %s0, %zero
+    %a1 = ADDiu %zero, 1
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit %a2, implicit-def %sp, implicit-def %v0 {
+      %a2 = OR %s2, %zero
+    }
+    %at = ADDiu %s7, 4
+    %s6 = ADDiu killed %s6, 1
+    SW killed %v0, killed %s7, 0 :: (store 4 into %ir.lsr.iv2224, !tbaa !18)
+    %v0 = LW %s0, 120 :: (load 4 from %ir.sunkaddr47, align 8, !tbaa !19)
+    %v1 = SLT %s6, %v0
+    BNE killed %v1, %zero, %bb.31, implicit-def %at {
+      %s7 = OR killed %at, %zero
+    }
+  
+  bb.32.alloc_fs_workspace.exit (freq 387):
+    successors: %bb.33..lr.ph.preheader(62), %bb.35.create_odither_tables.exit(37)
+    liveins: %s1, %s3, %s4, %s5, %v0
+  
+    BLEZ %v0, %bb.35.create_odither_tables.exit, implicit-def %at {
+      NOP
+    }
+  
+  bb.33..lr.ph.preheader (freq 242):
+    successors: %bb.34..lr.ph(100)
+    liveins: %s1, %s3, %s4, %s5
+  
+    %at = LW killed %s5, 0 :: (load 4 from %ir..pre-phi, align 8, !tbaa !32)
+    %at = SLL killed %at, 1
+    %s0 = ADDiu killed %at, 4
+    %s2 = ADDiu killed %s3, 68
+    %s3 = ADDiu %zero, 0
+  
+  bb.34..lr.ph (freq 7744):
+    successors: %bb.34..lr.ph(96), %bb.35.create_odither_tables.exit(3)
+    liveins: %s0, %s1, %s2, %s3, %s4
+  
+    %a0 = LW %s2, 0 :: (load 4 from %ir.lsr.iv1719, !tbaa !18)
+    %t9 = LW %s1, target-flags(<unknown>) @jzero_far :: (load 4 from call-entry @jzero_far)
+    %a1 = OR %s0, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit killed %gp, implicit-def %sp {
+      %gp = OR %s1, %zero
+    }
+    %at = LW %s4, 0 :: (load 4 from %ir..pre-phi8, align 8, !tbaa !19)
+    %s3 = ADDiu killed %s3, 1
+    %at = SLT %s3, killed %at
+    BNE %at, %zero, %bb.34..lr.ph, implicit-def %at {
+      %s2 = ADDiu killed %s2, 4
+    }
+  
+  bb.35.create_odither_tables.exit (freq 1802):
+    liveouts:
+  
+    %s0 = LW %sp, 16 :: (load 4 from stack)
+    %s1 = LW %sp, 20 :: (load 4 from stack)
+    %s2 = LW %sp, 24 :: (load 4 from stack)
+    %s3 = LW %sp, 28 :: (load 4 from stack)
+    %s4 = LW %sp, 32 :: (load 4 from stack)
+    %s5 = LW %sp, 36 :: (load 4 from stack)
+    %s6 = LW %sp, 40 :: (load 4 from stack)
+    %s7 = LW %sp, 44 :: (load 4 from stack)
+    %fp = LW %sp, 48 :: (load 4 from stack)
+    %ra = LW %sp, 52 :: (load 4 from stack)
+    PseudoReturn %ra {
+      %sp = ADDiu %sp, 56
+    }
+
+...
