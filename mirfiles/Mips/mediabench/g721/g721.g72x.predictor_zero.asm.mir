@@ -1,0 +1,1619 @@
+--- |
+  ; ModuleID = '/home/romi/didaktoriko/unison/unison-experiments/experiments/test-input/c/mediabench/mips_zip/build-mips/g721/g721.g72x.ll'
+  target datalayout = "E-m:m-p:32:32-i8:8:32-i16:16:32-i64:64-n32-S64"
+  target triple = "mips--linux-gnu"
+  
+  %struct.g72x_state = type { i32, i16, i16, i16, i16, [2 x i16], [6 x i16], [2 x i16], [6 x i16], [2 x i16], i8 }
+  
+  @power2 = internal global [15 x i16] [i16 1, i16 2, i16 4, i16 8, i16 16, i16 32, i16 64, i16 128, i16 256, i16 512, i16 1024, i16 2048, i16 4096, i16 8192, i16 16384], align 4
+  
+  ; Function Attrs: norecurse nounwind
+  define void @g72x_init_state(%struct.g72x_state* nocapture %state_ptr) #0 {
+  .preheader.preheader7:
+    %0 = bitcast %struct.g72x_state* %state_ptr to i32*
+    store i32 34816, i32* %0, align 4, !tbaa !1
+    %1 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 1
+    store i16 544, i16* %1, align 4, !tbaa !7
+    %2 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 2
+    %3 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 7, i32 0
+    store i16 0, i16* %3, align 2, !tbaa !8
+    %4 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 9, i32 0
+    %5 = bitcast i16* %2 to i64*
+    store i64 0, i64* %5, align 2
+    store i16 32, i16* %4, align 2, !tbaa !8
+    %6 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 5, i32 1
+    store i16 0, i16* %6, align 2, !tbaa !8
+    %7 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 7, i32 1
+    store i16 0, i16* %7, align 2, !tbaa !8
+    %8 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 9, i32 1
+    store i16 32, i16* %8, align 2, !tbaa !8
+    %9 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 6, i32 0
+    store i16 0, i16* %9, align 2, !tbaa !8
+    %10 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 8, i32 0
+    store i16 32, i16* %10, align 2, !tbaa !8
+    %11 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 6, i32 1
+    store i16 0, i16* %11, align 2, !tbaa !8
+    %12 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 8, i32 1
+    store i16 32, i16* %12, align 2, !tbaa !8
+    %13 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 6, i32 2
+    store i16 0, i16* %13, align 2, !tbaa !8
+    %14 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 8, i32 2
+    store i16 32, i16* %14, align 2, !tbaa !8
+    %15 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 6, i32 3
+    store i16 0, i16* %15, align 2, !tbaa !8
+    %16 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 8, i32 3
+    store i16 32, i16* %16, align 2, !tbaa !8
+    %17 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 6, i32 4
+    store i16 0, i16* %17, align 2, !tbaa !8
+    %18 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 8, i32 4
+    store i16 32, i16* %18, align 2, !tbaa !8
+    %19 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 6, i32 5
+    store i16 0, i16* %19, align 2, !tbaa !8
+    %20 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 8, i32 5
+    store i16 32, i16* %20, align 2, !tbaa !8
+    %21 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 10
+    store i8 0, i8* %21, align 4, !tbaa !9
+    ret void
+  }
+  
+  ; Function Attrs: norecurse nounwind readonly
+  define i32 @predictor_zero(%struct.g72x_state* nocapture readonly %state_ptr) #1 {
+    %1 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 6, i32 0
+    %2 = bitcast i16* %1 to i32*
+    %3 = load i32, i32* %2, align 4
+    %4 = ashr i32 %3, 18
+    %5 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 8, i32 0
+    %6 = bitcast i16* %5 to i32*
+    %7 = load i32, i32* %6, align 4
+    %8 = ashr i32 %7, 16
+    %9 = tail call fastcc i32 @fmult(i32 signext %4, i32 signext %8)
+    %sext = shl i32 %3, 16
+    %10 = ashr i32 %sext, 18
+    %sext3 = shl i32 %7, 16
+    %11 = ashr exact i32 %sext3, 16
+    %12 = tail call fastcc i32 @fmult(i32 signext %10, i32 signext %11)
+    %13 = add nsw i32 %12, %9
+    %14 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 6, i32 2
+    %15 = load i16, i16* %14, align 2, !tbaa !8
+    %16 = sext i16 %15 to i32
+    %17 = ashr i32 %16, 2
+    %18 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 8, i32 2
+    %19 = load i16, i16* %18, align 2, !tbaa !8
+    %20 = sext i16 %19 to i32
+    %21 = tail call fastcc i32 @fmult(i32 signext %17, i32 signext %20)
+    %22 = add nsw i32 %21, %13
+    %23 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 6, i32 3
+    %24 = load i16, i16* %23, align 2, !tbaa !8
+    %25 = sext i16 %24 to i32
+    %26 = ashr i32 %25, 2
+    %27 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 8, i32 3
+    %28 = load i16, i16* %27, align 2, !tbaa !8
+    %29 = sext i16 %28 to i32
+    %30 = tail call fastcc i32 @fmult(i32 signext %26, i32 signext %29)
+    %31 = add nsw i32 %30, %22
+    %32 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 6, i32 4
+    %33 = load i16, i16* %32, align 2, !tbaa !8
+    %34 = sext i16 %33 to i32
+    %35 = ashr i32 %34, 2
+    %36 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 8, i32 4
+    %37 = load i16, i16* %36, align 2, !tbaa !8
+    %38 = sext i16 %37 to i32
+    %39 = tail call fastcc i32 @fmult(i32 signext %35, i32 signext %38)
+    %40 = add nsw i32 %39, %31
+    %41 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 6, i32 5
+    %42 = load i16, i16* %41, align 2, !tbaa !8
+    %43 = sext i16 %42 to i32
+    %44 = ashr i32 %43, 2
+    %45 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 8, i32 5
+    %46 = load i16, i16* %45, align 2, !tbaa !8
+    %47 = sext i16 %46 to i32
+    %48 = tail call fastcc i32 @fmult(i32 signext %44, i32 signext %47)
+    %49 = add nsw i32 %48, %40
+    ret i32 %49
+  }
+  
+  ; Function Attrs: norecurse nounwind readonly
+  define internal fastcc i32 @fmult(i32 signext %an, i32 signext %srn) unnamed_addr #1 {
+  .lr.ph.i:
+    %0 = icmp sgt i32 %an, 0
+    %1 = sub nsw i32 0, %an
+    %2 = and i32 %1, 8191
+    %3 = select i1 %0, i32 %an, i32 %2
+    %sext = shl i32 %3, 16
+    %4 = ashr exact i32 %sext, 16
+    %5 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 0), align 4, !tbaa !8
+    %6 = sext i16 %5 to i32
+    %7 = icmp sgt i32 %6, %4
+    br i1 %7, label %quan.exit, label %.lr.ph.i.17
+  
+  .lr.ph.i.17:                                      ; preds = %.lr.ph.i
+    %8 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 1), align 2, !tbaa !8
+    %9 = sext i16 %8 to i32
+    %10 = icmp sgt i32 %9, %4
+    br i1 %10, label %quan.exit, label %.lr.ph.i.28
+  
+  quan.exit:                                        ; preds = %.lr.ph.i.1420, %.lr.ph.i.1319, %.lr.ph.i.1218, %.lr.ph.i.1117, %.lr.ph.i.1016, %.lr.ph.i.915, %.lr.ph.i.814, %.lr.ph.i.713, %.lr.ph.i.612, %.lr.ph.i.511, %.lr.ph.i.410, %.lr.ph.i.39, %.lr.ph.i.28, %.lr.ph.i.17, %.lr.ph.i
+    %i.0.lcssa.i = phi i32 [ 65530, %.lr.ph.i ], [ 65531, %.lr.ph.i.17 ], [ 65532, %.lr.ph.i.28 ], [ 65533, %.lr.ph.i.39 ], [ 65534, %.lr.ph.i.410 ], [ 65535, %.lr.ph.i.511 ], [ 65536, %.lr.ph.i.612 ], [ 65537, %.lr.ph.i.713 ], [ 65538, %.lr.ph.i.814 ], [ 65539, %.lr.ph.i.915 ], [ 65540, %.lr.ph.i.1016 ], [ 65541, %.lr.ph.i.1117 ], [ 65542, %.lr.ph.i.1218 ], [ 65543, %.lr.ph.i.1319 ], [ %., %.lr.ph.i.1420 ]
+    %11 = icmp eq i32 %4, 0
+    br i1 %11, label %19, label %12
+  
+  ; <label>:12                                      ; preds = %quan.exit
+    %sext1 = shl i32 %i.0.lcssa.i, 16
+    %13 = ashr exact i32 %sext1, 16
+    %14 = icmp sgt i32 %sext1, -65536
+    %15 = ashr i32 %4, %13
+    %16 = sub nsw i32 0, %13
+    %17 = shl i32 %4, %16
+    %18 = select i1 %14, i32 %15, i32 %17
+    %phitmp = shl i32 %18, 16
+    %phitmp4 = ashr exact i32 %phitmp, 16
+    br label %19
+  
+  ; <label>:19                                      ; preds = %12, %quan.exit
+    %20 = phi i32 [ 32, %quan.exit ], [ %phitmp4, %12 ]
+    %21 = lshr i32 %srn, 6
+    %22 = and i32 %21, 15
+    %23 = add nuw nsw i32 %i.0.lcssa.i, %22
+    %24 = shl i32 %23, 16
+    %sext5 = add i32 %24, -851968
+    %25 = ashr exact i32 %sext5, 16
+    %26 = icmp sgt i32 %sext5, -65536
+    %27 = shl i32 %srn, 12
+    %28 = and i32 %27, 258048
+    %29 = mul i32 %28, %20
+    %30 = add i32 %29, 196608
+    %31 = ashr i32 %30, 16
+    %32 = shl i32 %31, %25
+    %33 = and i32 %32, 32767
+    %34 = sub nsw i32 0, %25
+    %35 = ashr i32 %31, %34
+    %36 = select i1 %26, i32 %33, i32 %35
+    %37 = xor i32 %srn, %an
+    %38 = icmp slt i32 %37, 0
+    %39 = sub nsw i32 0, %36
+    %40 = select i1 %38, i32 %39, i32 %36
+    ret i32 %40
+  
+  .lr.ph.i.28:                                      ; preds = %.lr.ph.i.17
+    %41 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 2), align 4, !tbaa !8
+    %42 = sext i16 %41 to i32
+    %43 = icmp sgt i32 %42, %4
+    br i1 %43, label %quan.exit, label %.lr.ph.i.39
+  
+  .lr.ph.i.39:                                      ; preds = %.lr.ph.i.28
+    %44 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 3), align 2, !tbaa !8
+    %45 = sext i16 %44 to i32
+    %46 = icmp sgt i32 %45, %4
+    br i1 %46, label %quan.exit, label %.lr.ph.i.410
+  
+  .lr.ph.i.410:                                     ; preds = %.lr.ph.i.39
+    %47 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 4), align 4, !tbaa !8
+    %48 = sext i16 %47 to i32
+    %49 = icmp sgt i32 %48, %4
+    br i1 %49, label %quan.exit, label %.lr.ph.i.511
+  
+  .lr.ph.i.511:                                     ; preds = %.lr.ph.i.410
+    %50 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 5), align 2, !tbaa !8
+    %51 = sext i16 %50 to i32
+    %52 = icmp sgt i32 %51, %4
+    br i1 %52, label %quan.exit, label %.lr.ph.i.612
+  
+  .lr.ph.i.612:                                     ; preds = %.lr.ph.i.511
+    %53 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 6), align 4, !tbaa !8
+    %54 = sext i16 %53 to i32
+    %55 = icmp sgt i32 %54, %4
+    br i1 %55, label %quan.exit, label %.lr.ph.i.713
+  
+  .lr.ph.i.713:                                     ; preds = %.lr.ph.i.612
+    %56 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 7), align 2, !tbaa !8
+    %57 = sext i16 %56 to i32
+    %58 = icmp sgt i32 %57, %4
+    br i1 %58, label %quan.exit, label %.lr.ph.i.814
+  
+  .lr.ph.i.814:                                     ; preds = %.lr.ph.i.713
+    %59 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 8), align 4, !tbaa !8
+    %60 = sext i16 %59 to i32
+    %61 = icmp sgt i32 %60, %4
+    br i1 %61, label %quan.exit, label %.lr.ph.i.915
+  
+  .lr.ph.i.915:                                     ; preds = %.lr.ph.i.814
+    %62 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 9), align 2, !tbaa !8
+    %63 = sext i16 %62 to i32
+    %64 = icmp sgt i32 %63, %4
+    br i1 %64, label %quan.exit, label %.lr.ph.i.1016
+  
+  .lr.ph.i.1016:                                    ; preds = %.lr.ph.i.915
+    %65 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 10), align 4, !tbaa !8
+    %66 = sext i16 %65 to i32
+    %67 = icmp sgt i32 %66, %4
+    br i1 %67, label %quan.exit, label %.lr.ph.i.1117
+  
+  .lr.ph.i.1117:                                    ; preds = %.lr.ph.i.1016
+    %68 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 11), align 2, !tbaa !8
+    %69 = sext i16 %68 to i32
+    %70 = icmp sgt i32 %69, %4
+    br i1 %70, label %quan.exit, label %.lr.ph.i.1218
+  
+  .lr.ph.i.1218:                                    ; preds = %.lr.ph.i.1117
+    %71 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 12), align 4, !tbaa !8
+    %72 = sext i16 %71 to i32
+    %73 = icmp sgt i32 %72, %4
+    br i1 %73, label %quan.exit, label %.lr.ph.i.1319
+  
+  .lr.ph.i.1319:                                    ; preds = %.lr.ph.i.1218
+    %74 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 13), align 2, !tbaa !8
+    %75 = sext i16 %74 to i32
+    %76 = icmp sgt i32 %75, %4
+    br i1 %76, label %quan.exit, label %.lr.ph.i.1420
+  
+  .lr.ph.i.1420:                                    ; preds = %.lr.ph.i.1319
+    %77 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 14), align 4, !tbaa !8
+    %78 = sext i16 %77 to i32
+    %79 = icmp sgt i32 %78, %4
+    %. = select i1 %79, i32 65544, i32 65545
+    br label %quan.exit
+  }
+  
+  ; Function Attrs: norecurse nounwind readonly
+  define i32 @predictor_pole(%struct.g72x_state* nocapture readonly %state_ptr) #1 {
+    %1 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 5, i32 1
+    %2 = load i16, i16* %1, align 2, !tbaa !8
+    %3 = sext i16 %2 to i32
+    %4 = ashr i32 %3, 2
+    %5 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 9, i32 1
+    %6 = load i16, i16* %5, align 2, !tbaa !8
+    %7 = sext i16 %6 to i32
+    %8 = tail call fastcc i32 @fmult(i32 signext %4, i32 signext %7)
+    %9 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 5, i32 0
+    %10 = load i16, i16* %9, align 4, !tbaa !8
+    %11 = sext i16 %10 to i32
+    %12 = ashr i32 %11, 2
+    %13 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 9, i32 0
+    %14 = load i16, i16* %13, align 4, !tbaa !8
+    %15 = sext i16 %14 to i32
+    %16 = tail call fastcc i32 @fmult(i32 signext %12, i32 signext %15)
+    %17 = add nsw i32 %16, %8
+    ret i32 %17
+  }
+  
+  ; Function Attrs: norecurse nounwind readonly
+  define i32 @step_size(%struct.g72x_state* nocapture readonly %state_ptr) #1 {
+    %1 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 4
+    %2 = load i16, i16* %1, align 2, !tbaa !10
+    %3 = sext i16 %2 to i32
+    %4 = icmp sgt i16 %2, 255
+    br i1 %4, label %5, label %9
+  
+  ; <label>:5                                       ; preds = %0
+    %6 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 1
+    %7 = load i16, i16* %6, align 4, !tbaa !7
+    %8 = sext i16 %7 to i32
+    br label %30
+  
+  ; <label>:9                                       ; preds = %0
+    %10 = bitcast %struct.g72x_state* %state_ptr to i32*
+    %11 = load i32, i32* %10, align 4, !tbaa !1
+    %12 = ashr i32 %11, 6
+    %13 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 1
+    %14 = load i16, i16* %13, align 4, !tbaa !7
+    %15 = sext i16 %14 to i32
+    %16 = sub nsw i32 %15, %12
+    %17 = ashr i32 %3, 2
+    %18 = icmp sgt i32 %16, 0
+    br i1 %18, label %19, label %23
+  
+  ; <label>:19                                      ; preds = %9
+    %20 = mul nsw i32 %16, %17
+    %21 = ashr i32 %20, 6
+    %22 = add nsw i32 %21, %12
+    br label %30
+  
+  ; <label>:23                                      ; preds = %9
+    %24 = icmp slt i32 %16, 0
+    br i1 %24, label %25, label %30
+  
+  ; <label>:25                                      ; preds = %23
+    %26 = mul nsw i32 %16, %17
+    %27 = add nsw i32 %26, 63
+    %28 = ashr i32 %27, 6
+    %29 = add nsw i32 %28, %12
+    br label %30
+  
+  ; <label>:30                                      ; preds = %25, %23, %19, %5
+    %.0 = phi i32 [ %8, %5 ], [ %22, %19 ], [ %29, %25 ], [ %12, %23 ]
+    ret i32 %.0
+  }
+  
+  ; Function Attrs: norecurse nounwind readonly
+  define i32 @quantize(i32 signext %d, i32 signext %y, i16* nocapture readonly %table, i32 signext %size) #1 {
+  .lr.ph.i:
+    %ispos = icmp sgt i32 %d, -1
+    %neg = sub i32 0, %d
+    %0 = select i1 %ispos, i32 %d, i32 %neg
+    %sext = shl i32 %0, 16
+    %1 = ashr i32 %sext, 17
+    %2 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 0), align 4, !tbaa !8
+    %3 = sext i16 %2 to i32
+    %4 = icmp sgt i32 %3, %1
+    br i1 %4, label %quan.exit, label %.lr.ph.i.19
+  
+  .lr.ph.i.19:                                      ; preds = %.lr.ph.i
+    %5 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 1), align 2, !tbaa !8
+    %6 = sext i16 %5 to i32
+    %7 = icmp sgt i32 %6, %1
+    br i1 %7, label %quan.exit, label %.lr.ph.i.210
+  
+  quan.exit:                                        ; preds = %.lr.ph.i.1422, %.lr.ph.i.1321, %.lr.ph.i.1220, %.lr.ph.i.1119, %.lr.ph.i.1018, %.lr.ph.i.917, %.lr.ph.i.816, %.lr.ph.i.715, %.lr.ph.i.614, %.lr.ph.i.513, %.lr.ph.i.412, %.lr.ph.i.311, %.lr.ph.i.210, %.lr.ph.i.19, %.lr.ph.i
+    %i.0.lcssa.i = phi i32 [ 0, %.lr.ph.i ], [ 1, %.lr.ph.i.19 ], [ 2, %.lr.ph.i.210 ], [ 3, %.lr.ph.i.311 ], [ 4, %.lr.ph.i.412 ], [ 5, %.lr.ph.i.513 ], [ 6, %.lr.ph.i.614 ], [ 7, %.lr.ph.i.715 ], [ 8, %.lr.ph.i.816 ], [ 9, %.lr.ph.i.917 ], [ 10, %.lr.ph.i.1018 ], [ 11, %.lr.ph.i.1119 ], [ 12, %.lr.ph.i.1220 ], [ 13, %.lr.ph.i.1321 ], [ %., %.lr.ph.i.1422 ]
+    %8 = ashr exact i32 %sext, 9
+    %9 = ashr i32 %8, %i.0.lcssa.i
+    %10 = and i32 %9, 127
+    %11 = shl nuw nsw i32 %i.0.lcssa.i, 7
+    %12 = or i32 %10, %11
+    %13 = lshr i32 %y, 2
+    %14 = sub nsw i32 %12, %13
+    %sext3 = shl i32 %14, 16
+    %15 = ashr exact i32 %sext3, 16
+    %16 = icmp sgt i32 %size, 0
+    br i1 %16, label %.lr.ph.i6, label %quan.exit8
+  
+  .lr.ph.i6:                                        ; preds = %quan.exit, %20
+    %i.02.i4 = phi i32 [ %22, %20 ], [ 0, %quan.exit ]
+    %.01.i5 = phi i16* [ %21, %20 ], [ %table, %quan.exit ]
+    %17 = load i16, i16* %.01.i5, align 2, !tbaa !8
+    %18 = sext i16 %17 to i32
+    %19 = icmp sgt i32 %18, %15
+    br i1 %19, label %quan.exit8, label %20
+  
+  ; <label>:20                                      ; preds = %.lr.ph.i6
+    %21 = getelementptr inbounds i16, i16* %.01.i5, i32 1
+    %22 = add nuw nsw i32 %i.02.i4, 1
+    %23 = icmp slt i32 %22, %size
+    br i1 %23, label %.lr.ph.i6, label %quan.exit8
+  
+  quan.exit8:                                       ; preds = %20, %.lr.ph.i6, %quan.exit
+    %i.0.lcssa.i7 = phi i32 [ 0, %quan.exit ], [ %22, %20 ], [ %i.02.i4, %.lr.ph.i6 ]
+    %24 = icmp slt i32 %d, 0
+    br i1 %24, label %25, label %29
+  
+  ; <label>:25                                      ; preds = %quan.exit8
+    %26 = shl i32 %size, 1
+    %27 = or i32 %26, 1
+    %28 = sub nsw i32 %27, %i.0.lcssa.i7
+    br label %34
+  
+  ; <label>:29                                      ; preds = %quan.exit8
+    %30 = icmp eq i32 %i.0.lcssa.i7, 0
+    br i1 %30, label %31, label %34
+  
+  ; <label>:31                                      ; preds = %29
+    %32 = shl i32 %size, 1
+    %33 = or i32 %32, 1
+    br label %34
+  
+  ; <label>:34                                      ; preds = %31, %29, %25
+    %.0 = phi i32 [ %28, %25 ], [ %33, %31 ], [ %i.0.lcssa.i7, %29 ]
+    ret i32 %.0
+  
+  .lr.ph.i.210:                                     ; preds = %.lr.ph.i.19
+    %35 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 2), align 4, !tbaa !8
+    %36 = sext i16 %35 to i32
+    %37 = icmp sgt i32 %36, %1
+    br i1 %37, label %quan.exit, label %.lr.ph.i.311
+  
+  .lr.ph.i.311:                                     ; preds = %.lr.ph.i.210
+    %38 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 3), align 2, !tbaa !8
+    %39 = sext i16 %38 to i32
+    %40 = icmp sgt i32 %39, %1
+    br i1 %40, label %quan.exit, label %.lr.ph.i.412
+  
+  .lr.ph.i.412:                                     ; preds = %.lr.ph.i.311
+    %41 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 4), align 4, !tbaa !8
+    %42 = sext i16 %41 to i32
+    %43 = icmp sgt i32 %42, %1
+    br i1 %43, label %quan.exit, label %.lr.ph.i.513
+  
+  .lr.ph.i.513:                                     ; preds = %.lr.ph.i.412
+    %44 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 5), align 2, !tbaa !8
+    %45 = sext i16 %44 to i32
+    %46 = icmp sgt i32 %45, %1
+    br i1 %46, label %quan.exit, label %.lr.ph.i.614
+  
+  .lr.ph.i.614:                                     ; preds = %.lr.ph.i.513
+    %47 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 6), align 4, !tbaa !8
+    %48 = sext i16 %47 to i32
+    %49 = icmp sgt i32 %48, %1
+    br i1 %49, label %quan.exit, label %.lr.ph.i.715
+  
+  .lr.ph.i.715:                                     ; preds = %.lr.ph.i.614
+    %50 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 7), align 2, !tbaa !8
+    %51 = sext i16 %50 to i32
+    %52 = icmp sgt i32 %51, %1
+    br i1 %52, label %quan.exit, label %.lr.ph.i.816
+  
+  .lr.ph.i.816:                                     ; preds = %.lr.ph.i.715
+    %53 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 8), align 4, !tbaa !8
+    %54 = sext i16 %53 to i32
+    %55 = icmp sgt i32 %54, %1
+    br i1 %55, label %quan.exit, label %.lr.ph.i.917
+  
+  .lr.ph.i.917:                                     ; preds = %.lr.ph.i.816
+    %56 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 9), align 2, !tbaa !8
+    %57 = sext i16 %56 to i32
+    %58 = icmp sgt i32 %57, %1
+    br i1 %58, label %quan.exit, label %.lr.ph.i.1018
+  
+  .lr.ph.i.1018:                                    ; preds = %.lr.ph.i.917
+    %59 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 10), align 4, !tbaa !8
+    %60 = sext i16 %59 to i32
+    %61 = icmp sgt i32 %60, %1
+    br i1 %61, label %quan.exit, label %.lr.ph.i.1119
+  
+  .lr.ph.i.1119:                                    ; preds = %.lr.ph.i.1018
+    %62 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 11), align 2, !tbaa !8
+    %63 = sext i16 %62 to i32
+    %64 = icmp sgt i32 %63, %1
+    br i1 %64, label %quan.exit, label %.lr.ph.i.1220
+  
+  .lr.ph.i.1220:                                    ; preds = %.lr.ph.i.1119
+    %65 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 12), align 4, !tbaa !8
+    %66 = sext i16 %65 to i32
+    %67 = icmp sgt i32 %66, %1
+    br i1 %67, label %quan.exit, label %.lr.ph.i.1321
+  
+  .lr.ph.i.1321:                                    ; preds = %.lr.ph.i.1220
+    %68 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 13), align 2, !tbaa !8
+    %69 = sext i16 %68 to i32
+    %70 = icmp sgt i32 %69, %1
+    br i1 %70, label %quan.exit, label %.lr.ph.i.1422
+  
+  .lr.ph.i.1422:                                    ; preds = %.lr.ph.i.1321
+    %71 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 14), align 4, !tbaa !8
+    %72 = sext i16 %71 to i32
+    %73 = icmp sgt i32 %72, %1
+    %. = select i1 %73, i32 14, i32 15
+    br label %quan.exit
+  }
+  
+  ; Function Attrs: norecurse nounwind readnone
+  define i32 @reconstruct(i32 signext %sign, i32 signext %dqln, i32 signext %y) #2 {
+    %1 = lshr i32 %y, 2
+    %2 = add i32 %1, %dqln
+    %sext.mask = and i32 %2, 32768
+    %3 = icmp eq i32 %sext.mask, 0
+    br i1 %3, label %7, label %4
+  
+  ; <label>:4                                       ; preds = %0
+    %5 = icmp ne i32 %sign, 0
+    %6 = select i1 %5, i32 -32768, i32 0
+    br label %19
+  
+  ; <label>:7                                       ; preds = %0
+    %8 = lshr i32 %2, 7
+    %9 = and i32 %8, 15
+    %10 = shl i32 %2, 7
+    %11 = and i32 %10, 16256
+    %12 = or i32 %11, 16384
+    %13 = sub nsw i32 14, %9
+    %14 = lshr i32 %12, %13
+    %15 = icmp ne i32 %sign, 0
+    %sext1 = shl i32 %14, 16
+    %16 = ashr exact i32 %sext1, 16
+    %17 = add nsw i32 %16, -32768
+    %18 = select i1 %15, i32 %17, i32 %16
+    br label %19
+  
+  ; <label>:19                                      ; preds = %7, %4
+    %.0 = phi i32 [ %6, %4 ], [ %18, %7 ]
+    ret i32 %.0
+  }
+  
+  ; Function Attrs: norecurse nounwind
+  define void @update(i32 signext %code_size, i32 signext %y, i32 signext %wi, i32 signext %fi, i32 signext %dq, i32 signext %sr, i32 signext %dqsez, %struct.g72x_state* %state_ptr) #0 {
+    %dqsez.lobit = lshr i32 %dqsez, 31
+    %1 = and i32 %dq, 32767
+    %2 = bitcast %struct.g72x_state* %state_ptr to i32*
+    %3 = load i32, i32* %2, align 4, !tbaa !1
+    %4 = lshr i32 %3, 10
+    %5 = and i32 %4, 31
+    %6 = or i32 %5, 32
+    %7 = shl i32 %3, 1
+    %8 = ashr i32 %7, 16
+    %9 = shl i32 %6, %8
+    %10 = icmp sgt i32 %8, 9
+    %sext1 = shl i32 %9, 16
+    %11 = ashr exact i32 %sext1, 16
+    %12 = select i1 %10, i32 31744, i32 %11
+    %13 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 10
+    %14 = load i8, i8* %13, align 4, !tbaa !9
+    %15 = icmp eq i8 %14, 0
+    br i1 %15, label %22, label %16
+  
+  ; <label>:16                                      ; preds = %0
+    %17 = lshr i32 %12, 1
+    %18 = add i32 %17, %12
+    %19 = shl i32 %18, 15
+    %20 = ashr i32 %19, 16
+    %21 = icmp sgt i32 %1, %20
+    %. = zext i1 %21 to i32
+    br label %22
+  
+  ; <label>:22                                      ; preds = %16, %0
+    %tr.0 = phi i32 [ 0, %0 ], [ %., %16 ]
+    %23 = sub nsw i32 %wi, %y
+    %24 = lshr i32 %23, 5
+    %25 = add i32 %24, %y
+    %26 = trunc i32 %25 to i16
+    %27 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 1
+    store i16 %26, i16* %27, align 4, !tbaa !7
+    %sext3 = shl i32 %25, 16
+    %28 = icmp slt i32 %sext3, 35651584
+    br i1 %28, label %29, label %30
+  
+  ; <label>:29                                      ; preds = %22
+    %sunkaddr = ptrtoint %struct.g72x_state* %state_ptr to i32
+    %sunkaddr9 = add i32 %sunkaddr, 4
+    %sunkaddr10 = inttoptr i32 %sunkaddr9 to i16*
+    store i16 544, i16* %sunkaddr10, align 4, !tbaa !7
+    br label %33
+  
+  ; <label>:30                                      ; preds = %22
+    %31 = icmp sgt i32 %sext3, 335544320
+    br i1 %31, label %32, label %33
+  
+  ; <label>:32                                      ; preds = %30
+    %sunkaddr11 = ptrtoint %struct.g72x_state* %state_ptr to i32
+    %sunkaddr12 = add i32 %sunkaddr11, 4
+    %sunkaddr13 = inttoptr i32 %sunkaddr12 to i16*
+    store i16 5120, i16* %sunkaddr13, align 4, !tbaa !7
+    br label %33
+  
+  ; <label>:33                                      ; preds = %32, %30, %29
+    %34 = phi i32 [ %25, %30 ], [ 5120, %32 ], [ 544, %29 ]
+    %35 = bitcast %struct.g72x_state* %state_ptr to i32*
+    %sext73 = shl i32 %34, 16
+    %36 = ashr exact i32 %sext73, 16
+    %37 = sub nsw i32 0, %3
+    %38 = ashr i32 %37, 6
+    %39 = add i32 %3, %36
+    %40 = add i32 %39, %38
+    store i32 %40, i32* %35, align 4, !tbaa !1
+    %41 = icmp eq i32 %tr.0, 1
+    br i1 %41, label %42, label %45
+  
+  ; <label>:42                                      ; preds = %33
+    %43 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 5, i32 0
+    %44 = bitcast i16* %43 to i8*
+    call void @llvm.memset.p0i8.i64(i8* %44, i8 0, i64 16, i32 4, i1 false)
+    br label %.loopexit
+  
+  ; <label>:45                                      ; preds = %33
+    %46 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 7, i32 0
+    %47 = bitcast i16* %46 to i32*
+    %48 = load i32, i32* %47, align 4
+    %49 = lshr i32 %48, 16
+    %50 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 5
+    %51 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 5, i32 1
+    %52 = load i16, i16* %51, align 2, !tbaa !8
+    %53 = sext i16 %52 to i32
+    %54 = lshr i32 %53, 7
+    %55 = sub nsw i32 %53, %54
+    %56 = icmp eq i32 %dqsez, 0
+    br i1 %56, label %95, label %57
+  
+  ; <label>:57                                      ; preds = %45
+    %58 = icmp ne i32 %dqsez.lobit, %49
+    %59 = bitcast [2 x i16]* %50 to i16*
+    %60 = load i16, i16* %59, align 4, !tbaa !8
+    %61 = sext i16 %60 to i32
+    %62 = sext i16 %60 to i32
+    %63 = sub nsw i32 0, %62
+    %64 = select i1 %58, i32 %62, i32 %63
+    %sext13 = shl i32 %64, 16
+    %65 = icmp slt i32 %sext13, -536805376
+    br i1 %65, label %66, label %69
+  
+  ; <label>:66                                      ; preds = %57
+    %sext17 = shl i32 %55, 16
+    %67 = ashr exact i32 %sext17, 16
+    %68 = add nsw i32 %67, -256
+    br label %77
+  
+  ; <label>:69                                      ; preds = %57
+    %70 = icmp sgt i32 %sext13, 536805376
+    br i1 %70, label %71, label %74
+  
+  ; <label>:71                                      ; preds = %69
+    %sext16 = shl i32 %55, 16
+    %72 = ashr exact i32 %sext16, 16
+    %73 = add nsw i32 %72, 255
+    br label %77
+  
+  ; <label>:74                                      ; preds = %69
+    %75 = ashr i32 %sext13, 21
+    %76 = add nsw i32 %75, %55
+    br label %77
+  
+  ; <label>:77                                      ; preds = %74, %71, %66
+    %a2p.0.in = phi i32 [ %68, %66 ], [ %73, %71 ], [ %76, %74 ]
+    %sext81 = shl i32 %48, 16
+    %78 = ashr exact i32 %sext81, 16
+    %79 = icmp eq i32 %dqsez.lobit, %78
+    %sext15 = shl i32 %a2p.0.in, 16
+    %80 = ashr exact i32 %sext15, 16
+    br i1 %79, label %88, label %81
+  
+  ; <label>:81                                      ; preds = %77
+    %82 = icmp slt i32 %sext15, -796852224
+    br i1 %82, label %101, label %83
+  
+  ; <label>:83                                      ; preds = %81
+    %84 = icmp sgt i32 %sext15, 813629440
+    br i1 %84, label %101, label %85
+  
+  ; <label>:85                                      ; preds = %83
+    %86 = add nsw i32 %80, 65408
+    %87 = trunc i32 %86 to i16
+    br label %101
+  
+  ; <label>:88                                      ; preds = %77
+    %89 = icmp slt i32 %sext15, -813629440
+    br i1 %89, label %101, label %90
+  
+  ; <label>:90                                      ; preds = %88
+    %91 = icmp sgt i32 %sext15, 796852224
+    br i1 %91, label %101, label %92
+  
+  ; <label>:92                                      ; preds = %90
+    %93 = add nsw i32 %80, 128
+    %94 = trunc i32 %93 to i16
+    br label %101
+  
+  ; <label>:95                                      ; preds = %45
+    %96 = trunc i32 %55 to i16
+    %.phi.trans.insert14 = bitcast [2 x i16]* %50 to i16*
+    %sunkaddr63 = ptrtoint %struct.g72x_state* %state_ptr to i32
+    %sunkaddr64 = add i32 %sunkaddr63, 12
+    %sunkaddr65 = inttoptr i32 %sunkaddr64 to i16*
+    %.pre = load i16, i16* %sunkaddr65, align 4, !tbaa !8
+    %sunkaddr15 = ptrtoint %struct.g72x_state* %state_ptr to i32
+    %sunkaddr16 = add i32 %sunkaddr15, 14
+    %sunkaddr17 = inttoptr i32 %sunkaddr16 to i16*
+    store i16 %96, i16* %sunkaddr17, align 2, !tbaa !8
+    %97 = sext i16 %.pre to i32
+    %98 = lshr i32 %97, 8
+    %99 = sub nsw i32 %97, %98
+    %100 = trunc i32 %99 to i16
+    %sunkaddr18 = ptrtoint %struct.g72x_state* %state_ptr to i32
+    %sunkaddr19 = add i32 %sunkaddr18, 12
+    %sunkaddr20 = inttoptr i32 %sunkaddr19 to i16*
+    store i16 %100, i16* %sunkaddr20, align 4, !tbaa !8
+    br label %115
+  
+  ; <label>:101                                     ; preds = %92, %90, %88, %85, %83, %81
+    %a2p.1.ph = phi i16 [ %94, %92 ], [ %87, %85 ], [ -12288, %81 ], [ 12288, %83 ], [ -12288, %88 ], [ 12288, %90 ]
+    %sunkaddr21 = ptrtoint %struct.g72x_state* %state_ptr to i32
+    %sunkaddr22 = add i32 %sunkaddr21, 14
+    %sunkaddr23 = inttoptr i32 %sunkaddr22 to i16*
+    store i16 %a2p.1.ph, i16* %sunkaddr23, align 2, !tbaa !8
+    %102 = lshr i32 %61, 8
+    %103 = sub nsw i32 %61, %102
+    %104 = trunc i32 %103 to i16
+    %sunkaddr24 = ptrtoint %struct.g72x_state* %state_ptr to i32
+    %sunkaddr25 = add i32 %sunkaddr24, 12
+    %sunkaddr26 = inttoptr i32 %sunkaddr25 to i16*
+    store i16 %104, i16* %sunkaddr26, align 4, !tbaa !8
+    %105 = icmp eq i32 %dqsez.lobit, %49
+    %sext11 = shl i32 %103, 16
+    %106 = ashr exact i32 %sext11, 16
+    br i1 %105, label %107, label %111
+  
+  ; <label>:107                                     ; preds = %101
+    %108 = bitcast [2 x i16]* %50 to i16*
+    %109 = add nsw i32 %106, 192
+    %110 = trunc i32 %109 to i16
+    store i16 %110, i16* %108, align 4, !tbaa !8
+    br label %115
+  
+  ; <label>:111                                     ; preds = %101
+    %112 = bitcast [2 x i16]* %50 to i16*
+    %113 = add nsw i32 %106, 65344
+    %114 = trunc i32 %113 to i16
+    store i16 %114, i16* %112, align 4, !tbaa !8
+    br label %115
+  
+  ; <label>:115                                     ; preds = %111, %107, %95
+    %a2p.184 = phi i16 [ %a2p.1.ph, %107 ], [ %a2p.1.ph, %111 ], [ %96, %95 ]
+    %.pre-phi82 = phi i16* [ %108, %107 ], [ %112, %111 ], [ %.phi.trans.insert14, %95 ]
+    %116 = phi i32 [ %109, %107 ], [ %113, %111 ], [ %99, %95 ]
+    %117 = zext i16 %a2p.184 to i32
+    %118 = sub nsw i32 15360, %117
+    %sext74 = shl i32 %116, 16
+    %119 = ashr exact i32 %sext74, 16
+    %sext4 = shl i32 %118, 16
+    %120 = ashr exact i32 %sext4, 16
+    %121 = sub nsw i32 0, %120
+    %122 = icmp slt i32 %119, %121
+    br i1 %122, label %123, label %125
+  
+  ; <label>:123                                     ; preds = %115
+    %124 = trunc i32 %121 to i16
+    store i16 %124, i16* %.pre-phi82, align 4, !tbaa !8
+    br label %.preheader
+  
+  ; <label>:125                                     ; preds = %115
+    %126 = icmp sgt i32 %119, %120
+    br i1 %126, label %127, label %.preheader
+  
+  ; <label>:127                                     ; preds = %125
+    %128 = trunc i32 %118 to i16
+    store i16 %128, i16* %.pre-phi82, align 4, !tbaa !8
+    br label %.preheader
+  
+  .preheader:                                       ; preds = %127, %125, %123
+    %129 = icmp eq i32 %code_size, 5
+    %.pn.v = select i1 %129, i32 9, i32 8
+    br label %130
+  
+  ; <label>:130                                     ; preds = %148, %.preheader
+    %lsr.iv = phi i32 [ %lsr.iv.next, %148 ], [ 0, %.preheader ]
+    %131 = icmp eq i32 %1, 0
+    %132 = bitcast %struct.g72x_state* %state_ptr to i8*
+    %uglygep3 = getelementptr i8, i8* %132, i32 %lsr.iv
+    %uglygep34 = bitcast i8* %uglygep3 to i16*
+    %scevgep5 = getelementptr i16, i16* %uglygep34, i32 8
+    %133 = load i16, i16* %scevgep5, align 2, !tbaa !8
+    %134 = sext i16 %133 to i32
+    %.pn = lshr i32 %134, %.pn.v
+    %storemerge.in = sub nsw i32 %134, %.pn
+    %storemerge = trunc i32 %storemerge.in to i16
+    %uglygep6 = getelementptr i8, i8* %132, i32 %lsr.iv
+    %uglygep67 = bitcast i8* %uglygep6 to i16*
+    %scevgep8 = getelementptr i16, i16* %uglygep67, i32 8
+    store i16 %storemerge, i16* %scevgep8, align 2, !tbaa !8
+    br i1 %131, label %148, label %135
+  
+  ; <label>:135                                     ; preds = %130
+    %136 = bitcast %struct.g72x_state* %state_ptr to i8*
+    %uglygep = getelementptr i8, i8* %136, i32 %lsr.iv
+    %uglygep2 = bitcast i8* %uglygep to i16*
+    %scevgep = getelementptr i16, i16* %uglygep2, i32 16
+    %137 = load i16, i16* %scevgep, align 2, !tbaa !8
+    %138 = sext i16 %137 to i32
+    %139 = xor i32 %138, %dq
+    %140 = icmp sgt i32 %139, -1
+    %sext = shl i32 %storemerge.in, 16
+    %141 = ashr exact i32 %sext, 16
+    br i1 %140, label %142, label %145
+  
+  ; <label>:142                                     ; preds = %135
+    %143 = add nsw i32 %141, 128
+    %144 = trunc i32 %143 to i16
+    %sunkaddr27 = ptrtoint i8* %uglygep3 to i32
+    %sunkaddr28 = add i32 %sunkaddr27, 16
+    %sunkaddr29 = inttoptr i32 %sunkaddr28 to i16*
+    store i16 %144, i16* %sunkaddr29, align 2, !tbaa !8
+    br label %148
+  
+  ; <label>:145                                     ; preds = %135
+    %146 = add nsw i32 %141, 65408
+    %147 = trunc i32 %146 to i16
+    %sunkaddr30 = ptrtoint i8* %uglygep3 to i32
+    %sunkaddr31 = add i32 %sunkaddr30, 16
+    %sunkaddr32 = inttoptr i32 %sunkaddr31 to i16*
+    store i16 %147, i16* %sunkaddr32, align 2, !tbaa !8
+    br label %148
+  
+  ; <label>:148                                     ; preds = %145, %142, %130
+    %lsr.iv.next = add nuw nsw i32 %lsr.iv, 2
+    %exitcond = icmp eq i32 %lsr.iv.next, 12
+    br i1 %exitcond, label %.loopexit, label %130
+  
+  .loopexit:                                        ; preds = %148, %42
+    %a2p.2 = phi i16 [ undef, %42 ], [ %a2p.184, %148 ]
+    %149 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 8, i32 4
+    %150 = load i16, i16* %149, align 2, !tbaa !8
+    %151 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 8, i32 5
+    store i16 %150, i16* %151, align 2, !tbaa !8
+    %152 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 8, i32 3
+    %153 = load i16, i16* %152, align 2, !tbaa !8
+    store i16 %153, i16* %149, align 2, !tbaa !8
+    %154 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 8, i32 2
+    %155 = load i16, i16* %154, align 2, !tbaa !8
+    store i16 %155, i16* %152, align 2, !tbaa !8
+    %156 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 8, i32 1
+    %157 = load i16, i16* %156, align 2, !tbaa !8
+    store i16 %157, i16* %154, align 2, !tbaa !8
+    %158 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 8, i32 0
+    %159 = load i16, i16* %158, align 2, !tbaa !8
+    store i16 %159, i16* %156, align 2, !tbaa !8
+    %160 = icmp eq i32 %1, 0
+    br i1 %160, label %164, label %.lr.ph.i.preheader
+  
+  .lr.ph.i.preheader:                               ; preds = %.loopexit
+    %161 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 0), align 4, !tbaa !8
+    %162 = sext i16 %161 to i32
+    %163 = icmp sgt i32 %162, %1
+    br i1 %163, label %quan.exit, label %.lr.ph.i.159
+  
+  ; <label>:164                                     ; preds = %.loopexit
+    %165 = ashr i32 %dq, 31
+    %166 = and i32 %165, 64512
+    %167 = or i32 %166, 32
+    br label %179
+  
+  .lr.ph.i.159:                                     ; preds = %.lr.ph.i.preheader
+    %168 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 1), align 2, !tbaa !8
+    %169 = sext i16 %168 to i32
+    %170 = icmp sgt i32 %169, %1
+    br i1 %170, label %quan.exit, label %.lr.ph.i.260
+  
+  quan.exit:                                        ; preds = %.lr.ph.i.1472, %.lr.ph.i.1371, %.lr.ph.i.1270, %.lr.ph.i.1169, %.lr.ph.i.1068, %.lr.ph.i.967, %.lr.ph.i.866, %.lr.ph.i.765, %.lr.ph.i.664, %.lr.ph.i.563, %.lr.ph.i.462, %.lr.ph.i.361, %.lr.ph.i.260, %.lr.ph.i.159, %.lr.ph.i.preheader
+    %i.0.lcssa.i = phi i32 [ 0, %.lr.ph.i.preheader ], [ 65536, %.lr.ph.i.159 ], [ 131072, %.lr.ph.i.260 ], [ 196608, %.lr.ph.i.361 ], [ 262144, %.lr.ph.i.462 ], [ 327680, %.lr.ph.i.563 ], [ 393216, %.lr.ph.i.664 ], [ 458752, %.lr.ph.i.765 ], [ 524288, %.lr.ph.i.866 ], [ 589824, %.lr.ph.i.967 ], [ 655360, %.lr.ph.i.1068 ], [ 720896, %.lr.ph.i.1169 ], [ 786432, %.lr.ph.i.1270 ], [ 851968, %.lr.ph.i.1371 ], [ %.88, %.lr.ph.i.1472 ]
+    %171 = icmp sgt i32 %dq, -1
+    %172 = lshr exact i32 %i.0.lcssa.i, 16
+    %173 = lshr exact i32 %i.0.lcssa.i, 10
+    %174 = shl nuw nsw i32 %1, 6
+    %175 = lshr i32 %174, %172
+    %176 = add nuw nsw i32 %175, %173
+    %177 = add nuw nsw i32 %176, 64512
+    %178 = select i1 %171, i32 %176, i32 %177
+    br label %179
+  
+  ; <label>:179                                     ; preds = %quan.exit, %164
+    %storemerge75.in = phi i32 [ %178, %quan.exit ], [ %167, %164 ]
+    %storemerge75 = trunc i32 %storemerge75.in to i16
+    %sunkaddr33 = ptrtoint %struct.g72x_state* %state_ptr to i32
+    %sunkaddr34 = add i32 %sunkaddr33, 32
+    %sunkaddr35 = inttoptr i32 %sunkaddr34 to i16*
+    store i16 %storemerge75, i16* %sunkaddr35, align 4, !tbaa !8
+    %180 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 9, i32 0
+    %181 = load i16, i16* %180, align 4, !tbaa !8
+    %182 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 9, i32 1
+    store i16 %181, i16* %182, align 2, !tbaa !8
+    %183 = icmp eq i32 %sr, 0
+    br i1 %183, label %184, label %185
+  
+  ; <label>:184                                     ; preds = %179
+    %sunkaddr36 = ptrtoint %struct.g72x_state* %state_ptr to i32
+    %sunkaddr37 = add i32 %sunkaddr36, 44
+    %sunkaddr38 = inttoptr i32 %sunkaddr37 to i16*
+    store i16 32, i16* %sunkaddr38, align 4, !tbaa !8
+    br label %215
+  
+  ; <label>:185                                     ; preds = %179
+    %186 = icmp sgt i32 %sr, 0
+    br i1 %186, label %.lr.ph.i25.preheader, label %198
+  
+  .lr.ph.i25.preheader:                             ; preds = %185
+    %187 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 0), align 4, !tbaa !8
+    %188 = sext i16 %187 to i32
+    %189 = icmp sgt i32 %188, %sr
+    br i1 %189, label %quan.exit27, label %.lr.ph.i25.131
+  
+  .lr.ph.i25.131:                                   ; preds = %.lr.ph.i25.preheader
+    %190 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 1), align 2, !tbaa !8
+    %191 = sext i16 %190 to i32
+    %192 = icmp sgt i32 %191, %sr
+    br i1 %192, label %quan.exit27, label %.lr.ph.i25.232
+  
+  quan.exit27:                                      ; preds = %.lr.ph.i25.1444, %.lr.ph.i25.1343, %.lr.ph.i25.1242, %.lr.ph.i25.1141, %.lr.ph.i25.1040, %.lr.ph.i25.939, %.lr.ph.i25.838, %.lr.ph.i25.737, %.lr.ph.i25.636, %.lr.ph.i25.535, %.lr.ph.i25.434, %.lr.ph.i25.333, %.lr.ph.i25.232, %.lr.ph.i25.131, %.lr.ph.i25.preheader
+    %i.0.lcssa.i26 = phi i32 [ 0, %.lr.ph.i25.preheader ], [ 1, %.lr.ph.i25.131 ], [ 2, %.lr.ph.i25.232 ], [ 3, %.lr.ph.i25.333 ], [ 4, %.lr.ph.i25.434 ], [ 5, %.lr.ph.i25.535 ], [ 6, %.lr.ph.i25.636 ], [ 7, %.lr.ph.i25.737 ], [ 8, %.lr.ph.i25.838 ], [ 9, %.lr.ph.i25.939 ], [ 10, %.lr.ph.i25.1040 ], [ 11, %.lr.ph.i25.1141 ], [ 12, %.lr.ph.i25.1242 ], [ 13, %.lr.ph.i25.1343 ], [ %.86, %.lr.ph.i25.1444 ]
+    %193 = shl nuw nsw i32 %i.0.lcssa.i26, 6
+    %194 = shl i32 %sr, 6
+    %195 = ashr i32 %194, %i.0.lcssa.i26
+    %196 = add i32 %195, %193
+    %197 = trunc i32 %196 to i16
+    %sunkaddr39 = ptrtoint %struct.g72x_state* %state_ptr to i32
+    %sunkaddr40 = add i32 %sunkaddr39, 44
+    %sunkaddr41 = inttoptr i32 %sunkaddr40 to i16*
+    store i16 %197, i16* %sunkaddr41, align 4, !tbaa !8
+    br label %215
+  
+  ; <label>:198                                     ; preds = %185
+    %199 = icmp sgt i32 %sr, -32768
+    br i1 %199, label %.lr.ph.i20, label %214
+  
+  .lr.ph.i20:                                       ; preds = %198
+    %200 = sub nsw i32 0, %sr
+    %sext7 = shl i32 %200, 16
+    %201 = ashr exact i32 %sext7, 16
+    %202 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 0), align 4, !tbaa !8
+    %203 = sext i16 %202 to i32
+    %204 = icmp sgt i32 %203, %201
+    br i1 %204, label %quan.exit22, label %.lr.ph.i20.145
+  
+  .lr.ph.i20.145:                                   ; preds = %.lr.ph.i20
+    %205 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 1), align 2, !tbaa !8
+    %206 = sext i16 %205 to i32
+    %207 = icmp sgt i32 %206, %201
+    br i1 %207, label %quan.exit22, label %.lr.ph.i20.246
+  
+  quan.exit22:                                      ; preds = %.lr.ph.i20.1458, %.lr.ph.i20.1357, %.lr.ph.i20.1256, %.lr.ph.i20.1155, %.lr.ph.i20.1054, %.lr.ph.i20.953, %.lr.ph.i20.852, %.lr.ph.i20.751, %.lr.ph.i20.650, %.lr.ph.i20.549, %.lr.ph.i20.448, %.lr.ph.i20.347, %.lr.ph.i20.246, %.lr.ph.i20.145, %.lr.ph.i20
+    %i.0.lcssa.i21 = phi i32 [ 0, %.lr.ph.i20 ], [ 1, %.lr.ph.i20.145 ], [ 2, %.lr.ph.i20.246 ], [ 3, %.lr.ph.i20.347 ], [ 4, %.lr.ph.i20.448 ], [ 5, %.lr.ph.i20.549 ], [ 6, %.lr.ph.i20.650 ], [ 7, %.lr.ph.i20.751 ], [ 8, %.lr.ph.i20.852 ], [ 9, %.lr.ph.i20.953 ], [ 10, %.lr.ph.i20.1054 ], [ 11, %.lr.ph.i20.1155 ], [ 12, %.lr.ph.i20.1256 ], [ 13, %.lr.ph.i20.1357 ], [ %.87, %.lr.ph.i20.1458 ]
+    %208 = shl nuw nsw i32 %i.0.lcssa.i21, 6
+    %209 = ashr exact i32 %sext7, 10
+    %210 = ashr i32 %209, %i.0.lcssa.i21
+    %211 = or i32 %208, 64512
+    %212 = add nsw i32 %211, %210
+    %213 = trunc i32 %212 to i16
+    %sunkaddr42 = ptrtoint %struct.g72x_state* %state_ptr to i32
+    %sunkaddr43 = add i32 %sunkaddr42, 44
+    %sunkaddr44 = inttoptr i32 %sunkaddr43 to i16*
+    store i16 %213, i16* %sunkaddr44, align 4, !tbaa !8
+    br label %215
+  
+  ; <label>:214                                     ; preds = %198
+    %sunkaddr45 = ptrtoint %struct.g72x_state* %state_ptr to i32
+    %sunkaddr46 = add i32 %sunkaddr45, 44
+    %sunkaddr47 = inttoptr i32 %sunkaddr46 to i16*
+    store i16 -992, i16* %sunkaddr47, align 4, !tbaa !8
+    br label %215
+  
+  ; <label>:215                                     ; preds = %214, %quan.exit22, %quan.exit27, %184
+    %216 = icmp eq i32 %tr.0, 1
+    %217 = trunc i32 %dqsez.lobit to i16
+    %218 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 7, i32 0
+    %219 = load i16, i16* %218, align 4, !tbaa !8
+    %220 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 7, i32 1
+    store i16 %219, i16* %220, align 2, !tbaa !8
+    store i16 %217, i16* %218, align 4, !tbaa !8
+    br i1 %216, label %221, label %222
+  
+  ; <label>:221                                     ; preds = %215
+    %sunkaddr48 = ptrtoint %struct.g72x_state* %state_ptr to i32
+    %sunkaddr49 = add i32 %sunkaddr48, 48
+    %sunkaddr50 = inttoptr i32 %sunkaddr49 to i8*
+    store i8 0, i8* %sunkaddr50, align 4, !tbaa !9
+    br label %226
+  
+  ; <label>:222                                     ; preds = %215
+    %223 = icmp slt i16 %a2p.2, -11776
+    br i1 %223, label %224, label %225
+  
+  ; <label>:224                                     ; preds = %222
+    %sunkaddr51 = ptrtoint %struct.g72x_state* %state_ptr to i32
+    %sunkaddr52 = add i32 %sunkaddr51, 48
+    %sunkaddr53 = inttoptr i32 %sunkaddr52 to i8*
+    store i8 1, i8* %sunkaddr53, align 4, !tbaa !9
+    br label %226
+  
+  ; <label>:225                                     ; preds = %222
+    %sunkaddr54 = ptrtoint %struct.g72x_state* %state_ptr to i32
+    %sunkaddr55 = add i32 %sunkaddr54, 48
+    %sunkaddr56 = inttoptr i32 %sunkaddr55 to i8*
+    store i8 0, i8* %sunkaddr56, align 4, !tbaa !9
+    br label %226
+  
+  ; <label>:226                                     ; preds = %225, %224, %221
+    %227 = phi i8 [ 1, %224 ], [ 0, %225 ], [ 0, %221 ]
+    %228 = icmp eq i32 %tr.0, 1
+    %229 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 2
+    %230 = load i16, i16* %229, align 2, !tbaa !11
+    %231 = sext i16 %230 to i32
+    %232 = sub nsw i32 %fi, %231
+    %233 = lshr i32 %232, 5
+    %234 = add nsw i32 %233, %231
+    %235 = trunc i32 %234 to i16
+    store i16 %235, i16* %229, align 2, !tbaa !11
+    %236 = shl i32 %fi, 2
+    %237 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 3
+    %238 = bitcast i16* %237 to i32*
+    %239 = load i32, i32* %238, align 4
+    %240 = ashr i32 %239, 16
+    %241 = sub nsw i32 %236, %240
+    %242 = lshr i32 %241, 7
+    %243 = add nsw i32 %242, %240
+    %244 = trunc i32 %243 to i16
+    store i16 %244, i16* %237, align 4, !tbaa !12
+    br i1 %228, label %245, label %247
+  
+  ; <label>:245                                     ; preds = %226
+    %246 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 4
+    store i16 256, i16* %246, align 2, !tbaa !10
+    br label %283
+  
+  ; <label>:247                                     ; preds = %226
+    %248 = icmp slt i32 %y, 1536
+    br i1 %248, label %249, label %256
+  
+  ; <label>:249                                     ; preds = %247
+    %250 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 4
+    %sext80 = shl i32 %239, 16
+    %251 = ashr exact i32 %sext80, 16
+    %252 = sub nsw i32 512, %251
+    %253 = lshr i32 %252, 4
+    %254 = add nsw i32 %253, %251
+    %255 = trunc i32 %254 to i16
+    store i16 %255, i16* %250, align 2, !tbaa !10
+    br label %283
+  
+  ; <label>:256                                     ; preds = %247
+    %257 = icmp eq i8 %227, 1
+    br i1 %257, label %258, label %265
+  
+  ; <label>:258                                     ; preds = %256
+    %259 = getelementptr inbounds %struct.g72x_state, %struct.g72x_state* %state_ptr, i32 0, i32 4
+    %sext79 = shl i32 %239, 16
+    %260 = ashr exact i32 %sext79, 16
+    %261 = sub nsw i32 512, %260
+    %262 = lshr i32 %261, 4
+    %263 = add nsw i32 %262, %260
+    %264 = trunc i32 %263 to i16
+    store i16 %264, i16* %259, align 2, !tbaa !10
+    br label %283
+  
+  ; <label>:265                                     ; preds = %256
+    %sext77 = shl i32 %234, 16
+    %266 = ashr exact i32 %sext77, 14
+    %sext6 = shl i32 %243, 16
+    %267 = ashr exact i32 %sext6, 16
+    %268 = sub nsw i32 %266, %267
+    %ispos = icmp sgt i32 %268, -1
+    %neg = sub nsw i32 0, %268
+    %269 = select i1 %ispos, i32 %268, i32 %neg
+    %270 = ashr i32 %sext6, 19
+    %271 = icmp slt i32 %269, %270
+    %sext78 = shl i32 %239, 16
+    %272 = ashr exact i32 %sext78, 16
+    br i1 %271, label %278, label %273
+  
+  ; <label>:273                                     ; preds = %265
+    %274 = sub nsw i32 512, %272
+    %275 = lshr i32 %274, 4
+    %276 = add nsw i32 %275, %272
+    %277 = trunc i32 %276 to i16
+    %sunkaddr57 = ptrtoint %struct.g72x_state* %state_ptr to i32
+    %sunkaddr58 = add i32 %sunkaddr57, 10
+    %sunkaddr59 = inttoptr i32 %sunkaddr58 to i16*
+    store i16 %277, i16* %sunkaddr59, align 2, !tbaa !10
+    br label %283
+  
+  ; <label>:278                                     ; preds = %265
+    %279 = sub nsw i32 0, %272
+    %280 = lshr i32 %279, 4
+    %281 = add nsw i32 %280, %272
+    %282 = trunc i32 %281 to i16
+    %sunkaddr60 = ptrtoint %struct.g72x_state* %state_ptr to i32
+    %sunkaddr61 = add i32 %sunkaddr60, 10
+    %sunkaddr62 = inttoptr i32 %sunkaddr61 to i16*
+    store i16 %282, i16* %sunkaddr62, align 2, !tbaa !10
+    br label %283
+  
+  ; <label>:283                                     ; preds = %278, %273, %258, %249, %245
+    ret void
+  
+  .lr.ph.i25.232:                                   ; preds = %.lr.ph.i25.131
+    %284 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 2), align 4, !tbaa !8
+    %285 = sext i16 %284 to i32
+    %286 = icmp sgt i32 %285, %sr
+    br i1 %286, label %quan.exit27, label %.lr.ph.i25.333
+  
+  .lr.ph.i25.333:                                   ; preds = %.lr.ph.i25.232
+    %287 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 3), align 2, !tbaa !8
+    %288 = sext i16 %287 to i32
+    %289 = icmp sgt i32 %288, %sr
+    br i1 %289, label %quan.exit27, label %.lr.ph.i25.434
+  
+  .lr.ph.i25.434:                                   ; preds = %.lr.ph.i25.333
+    %290 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 4), align 4, !tbaa !8
+    %291 = sext i16 %290 to i32
+    %292 = icmp sgt i32 %291, %sr
+    br i1 %292, label %quan.exit27, label %.lr.ph.i25.535
+  
+  .lr.ph.i25.535:                                   ; preds = %.lr.ph.i25.434
+    %293 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 5), align 2, !tbaa !8
+    %294 = sext i16 %293 to i32
+    %295 = icmp sgt i32 %294, %sr
+    br i1 %295, label %quan.exit27, label %.lr.ph.i25.636
+  
+  .lr.ph.i25.636:                                   ; preds = %.lr.ph.i25.535
+    %296 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 6), align 4, !tbaa !8
+    %297 = sext i16 %296 to i32
+    %298 = icmp sgt i32 %297, %sr
+    br i1 %298, label %quan.exit27, label %.lr.ph.i25.737
+  
+  .lr.ph.i25.737:                                   ; preds = %.lr.ph.i25.636
+    %299 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 7), align 2, !tbaa !8
+    %300 = sext i16 %299 to i32
+    %301 = icmp sgt i32 %300, %sr
+    br i1 %301, label %quan.exit27, label %.lr.ph.i25.838
+  
+  .lr.ph.i25.838:                                   ; preds = %.lr.ph.i25.737
+    %302 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 8), align 4, !tbaa !8
+    %303 = sext i16 %302 to i32
+    %304 = icmp sgt i32 %303, %sr
+    br i1 %304, label %quan.exit27, label %.lr.ph.i25.939
+  
+  .lr.ph.i25.939:                                   ; preds = %.lr.ph.i25.838
+    %305 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 9), align 2, !tbaa !8
+    %306 = sext i16 %305 to i32
+    %307 = icmp sgt i32 %306, %sr
+    br i1 %307, label %quan.exit27, label %.lr.ph.i25.1040
+  
+  .lr.ph.i25.1040:                                  ; preds = %.lr.ph.i25.939
+    %308 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 10), align 4, !tbaa !8
+    %309 = sext i16 %308 to i32
+    %310 = icmp sgt i32 %309, %sr
+    br i1 %310, label %quan.exit27, label %.lr.ph.i25.1141
+  
+  .lr.ph.i25.1141:                                  ; preds = %.lr.ph.i25.1040
+    %311 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 11), align 2, !tbaa !8
+    %312 = sext i16 %311 to i32
+    %313 = icmp sgt i32 %312, %sr
+    br i1 %313, label %quan.exit27, label %.lr.ph.i25.1242
+  
+  .lr.ph.i25.1242:                                  ; preds = %.lr.ph.i25.1141
+    %314 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 12), align 4, !tbaa !8
+    %315 = sext i16 %314 to i32
+    %316 = icmp sgt i32 %315, %sr
+    br i1 %316, label %quan.exit27, label %.lr.ph.i25.1343
+  
+  .lr.ph.i25.1343:                                  ; preds = %.lr.ph.i25.1242
+    %317 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 13), align 2, !tbaa !8
+    %318 = sext i16 %317 to i32
+    %319 = icmp sgt i32 %318, %sr
+    br i1 %319, label %quan.exit27, label %.lr.ph.i25.1444
+  
+  .lr.ph.i25.1444:                                  ; preds = %.lr.ph.i25.1343
+    %320 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 14), align 4, !tbaa !8
+    %321 = sext i16 %320 to i32
+    %322 = icmp sgt i32 %321, %sr
+    %.86 = select i1 %322, i32 14, i32 15
+    br label %quan.exit27
+  
+  .lr.ph.i20.246:                                   ; preds = %.lr.ph.i20.145
+    %323 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 2), align 4, !tbaa !8
+    %324 = sext i16 %323 to i32
+    %325 = icmp sgt i32 %324, %201
+    br i1 %325, label %quan.exit22, label %.lr.ph.i20.347
+  
+  .lr.ph.i20.347:                                   ; preds = %.lr.ph.i20.246
+    %326 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 3), align 2, !tbaa !8
+    %327 = sext i16 %326 to i32
+    %328 = icmp sgt i32 %327, %201
+    br i1 %328, label %quan.exit22, label %.lr.ph.i20.448
+  
+  .lr.ph.i20.448:                                   ; preds = %.lr.ph.i20.347
+    %329 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 4), align 4, !tbaa !8
+    %330 = sext i16 %329 to i32
+    %331 = icmp sgt i32 %330, %201
+    br i1 %331, label %quan.exit22, label %.lr.ph.i20.549
+  
+  .lr.ph.i20.549:                                   ; preds = %.lr.ph.i20.448
+    %332 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 5), align 2, !tbaa !8
+    %333 = sext i16 %332 to i32
+    %334 = icmp sgt i32 %333, %201
+    br i1 %334, label %quan.exit22, label %.lr.ph.i20.650
+  
+  .lr.ph.i20.650:                                   ; preds = %.lr.ph.i20.549
+    %335 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 6), align 4, !tbaa !8
+    %336 = sext i16 %335 to i32
+    %337 = icmp sgt i32 %336, %201
+    br i1 %337, label %quan.exit22, label %.lr.ph.i20.751
+  
+  .lr.ph.i20.751:                                   ; preds = %.lr.ph.i20.650
+    %338 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 7), align 2, !tbaa !8
+    %339 = sext i16 %338 to i32
+    %340 = icmp sgt i32 %339, %201
+    br i1 %340, label %quan.exit22, label %.lr.ph.i20.852
+  
+  .lr.ph.i20.852:                                   ; preds = %.lr.ph.i20.751
+    %341 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 8), align 4, !tbaa !8
+    %342 = sext i16 %341 to i32
+    %343 = icmp sgt i32 %342, %201
+    br i1 %343, label %quan.exit22, label %.lr.ph.i20.953
+  
+  .lr.ph.i20.953:                                   ; preds = %.lr.ph.i20.852
+    %344 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 9), align 2, !tbaa !8
+    %345 = sext i16 %344 to i32
+    %346 = icmp sgt i32 %345, %201
+    br i1 %346, label %quan.exit22, label %.lr.ph.i20.1054
+  
+  .lr.ph.i20.1054:                                  ; preds = %.lr.ph.i20.953
+    %347 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 10), align 4, !tbaa !8
+    %348 = sext i16 %347 to i32
+    %349 = icmp sgt i32 %348, %201
+    br i1 %349, label %quan.exit22, label %.lr.ph.i20.1155
+  
+  .lr.ph.i20.1155:                                  ; preds = %.lr.ph.i20.1054
+    %350 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 11), align 2, !tbaa !8
+    %351 = sext i16 %350 to i32
+    %352 = icmp sgt i32 %351, %201
+    br i1 %352, label %quan.exit22, label %.lr.ph.i20.1256
+  
+  .lr.ph.i20.1256:                                  ; preds = %.lr.ph.i20.1155
+    %353 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 12), align 4, !tbaa !8
+    %354 = sext i16 %353 to i32
+    %355 = icmp sgt i32 %354, %201
+    br i1 %355, label %quan.exit22, label %.lr.ph.i20.1357
+  
+  .lr.ph.i20.1357:                                  ; preds = %.lr.ph.i20.1256
+    %356 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 13), align 2, !tbaa !8
+    %357 = sext i16 %356 to i32
+    %358 = icmp sgt i32 %357, %201
+    br i1 %358, label %quan.exit22, label %.lr.ph.i20.1458
+  
+  .lr.ph.i20.1458:                                  ; preds = %.lr.ph.i20.1357
+    %359 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 14), align 4, !tbaa !8
+    %360 = sext i16 %359 to i32
+    %361 = icmp sgt i32 %360, %201
+    %.87 = select i1 %361, i32 14, i32 15
+    br label %quan.exit22
+  
+  .lr.ph.i.260:                                     ; preds = %.lr.ph.i.159
+    %362 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 2), align 4, !tbaa !8
+    %363 = sext i16 %362 to i32
+    %364 = icmp sgt i32 %363, %1
+    br i1 %364, label %quan.exit, label %.lr.ph.i.361
+  
+  .lr.ph.i.361:                                     ; preds = %.lr.ph.i.260
+    %365 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 3), align 2, !tbaa !8
+    %366 = sext i16 %365 to i32
+    %367 = icmp sgt i32 %366, %1
+    br i1 %367, label %quan.exit, label %.lr.ph.i.462
+  
+  .lr.ph.i.462:                                     ; preds = %.lr.ph.i.361
+    %368 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 4), align 4, !tbaa !8
+    %369 = sext i16 %368 to i32
+    %370 = icmp sgt i32 %369, %1
+    br i1 %370, label %quan.exit, label %.lr.ph.i.563
+  
+  .lr.ph.i.563:                                     ; preds = %.lr.ph.i.462
+    %371 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 5), align 2, !tbaa !8
+    %372 = sext i16 %371 to i32
+    %373 = icmp sgt i32 %372, %1
+    br i1 %373, label %quan.exit, label %.lr.ph.i.664
+  
+  .lr.ph.i.664:                                     ; preds = %.lr.ph.i.563
+    %374 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 6), align 4, !tbaa !8
+    %375 = sext i16 %374 to i32
+    %376 = icmp sgt i32 %375, %1
+    br i1 %376, label %quan.exit, label %.lr.ph.i.765
+  
+  .lr.ph.i.765:                                     ; preds = %.lr.ph.i.664
+    %377 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 7), align 2, !tbaa !8
+    %378 = sext i16 %377 to i32
+    %379 = icmp sgt i32 %378, %1
+    br i1 %379, label %quan.exit, label %.lr.ph.i.866
+  
+  .lr.ph.i.866:                                     ; preds = %.lr.ph.i.765
+    %380 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 8), align 4, !tbaa !8
+    %381 = sext i16 %380 to i32
+    %382 = icmp sgt i32 %381, %1
+    br i1 %382, label %quan.exit, label %.lr.ph.i.967
+  
+  .lr.ph.i.967:                                     ; preds = %.lr.ph.i.866
+    %383 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 9), align 2, !tbaa !8
+    %384 = sext i16 %383 to i32
+    %385 = icmp sgt i32 %384, %1
+    br i1 %385, label %quan.exit, label %.lr.ph.i.1068
+  
+  .lr.ph.i.1068:                                    ; preds = %.lr.ph.i.967
+    %386 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 10), align 4, !tbaa !8
+    %387 = sext i16 %386 to i32
+    %388 = icmp sgt i32 %387, %1
+    br i1 %388, label %quan.exit, label %.lr.ph.i.1169
+  
+  .lr.ph.i.1169:                                    ; preds = %.lr.ph.i.1068
+    %389 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 11), align 2, !tbaa !8
+    %390 = sext i16 %389 to i32
+    %391 = icmp sgt i32 %390, %1
+    br i1 %391, label %quan.exit, label %.lr.ph.i.1270
+  
+  .lr.ph.i.1270:                                    ; preds = %.lr.ph.i.1169
+    %392 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 12), align 4, !tbaa !8
+    %393 = sext i16 %392 to i32
+    %394 = icmp sgt i32 %393, %1
+    br i1 %394, label %quan.exit, label %.lr.ph.i.1371
+  
+  .lr.ph.i.1371:                                    ; preds = %.lr.ph.i.1270
+    %395 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 13), align 2, !tbaa !8
+    %396 = sext i16 %395 to i32
+    %397 = icmp sgt i32 %396, %1
+    br i1 %397, label %quan.exit, label %.lr.ph.i.1472
+  
+  .lr.ph.i.1472:                                    ; preds = %.lr.ph.i.1371
+    %398 = load i16, i16* getelementptr inbounds ([15 x i16], [15 x i16]* @power2, i32 0, i32 14), align 4, !tbaa !8
+    %399 = sext i16 %398 to i32
+    %400 = icmp sgt i32 %399, %1
+    %.88 = select i1 %400, i32 917504, i32 983040
+    br label %quan.exit
+  }
+  
+  ; Function Attrs: nounwind
+  define i32 @tandem_adjust_alaw(i32 signext %sr, i32 signext %se, i32 signext %y, i32 signext %i, i32 signext %sign, i16* nocapture readonly %qtab) #3 {
+    %1 = icmp slt i32 %sr, -32767
+    %sr.op = lshr i32 %sr, 1
+    %sr.op.op = shl i32 %sr.op, 3
+    %2 = select i1 %1, i32 -8, i32 %sr.op.op
+    %3 = tail call i32 bitcast (i32 (...)* @linear2alaw to i32 (i32)*)(i32 signext %2) #6
+    %4 = and i32 %3, 255
+    %5 = tail call i32 bitcast (i32 (...)* @alaw2linear to i32 (i32)*)(i32 signext %4) #6
+    %6 = lshr i32 %5, 2
+    %7 = sub i32 %6, %se
+    %sext = shl i32 %7, 16
+    %8 = ashr exact i32 %sext, 16
+    %9 = add nsw i32 %sign, -1
+    %10 = tail call i32 @quantize(i32 signext %8, i32 signext %y, i16* %qtab, i32 signext %9)
+    %sext2 = shl i32 %10, 24
+    %11 = ashr exact i32 %sext2, 24
+    %12 = icmp eq i32 %11, %i
+    br i1 %12, label %46, label %13
+  
+  ; <label>:13                                      ; preds = %0
+    %14 = xor i32 %sign, %i
+    %15 = xor i32 %11, %sign
+    %16 = icmp sgt i32 %15, %14
+    %17 = and i32 %3, 128
+    br i1 %16, label %18, label %32
+  
+  ; <label>:18                                      ; preds = %13
+    %19 = icmp ne i32 %17, 0
+    br i1 %19, label %20, label %26
+  
+  ; <label>:20                                      ; preds = %18
+    %21 = icmp eq i32 %4, 213
+    br i1 %21, label %46, label %22
+  
+  ; <label>:22                                      ; preds = %20
+    %23 = xor i32 %4, 85
+    %24 = add nsw i32 %23, -1
+    %25 = xor i32 %24, 85
+    br label %46
+  
+  ; <label>:26                                      ; preds = %18
+    %27 = icmp eq i32 %4, 42
+    br i1 %27, label %46, label %28
+  
+  ; <label>:28                                      ; preds = %26
+    %29 = xor i32 %4, 85
+    %30 = add nuw nsw i32 %29, 1
+    %31 = xor i32 %30, 85
+    br label %46
+  
+  ; <label>:32                                      ; preds = %13
+    %33 = icmp ne i32 %17, 0
+    br i1 %33, label %34, label %40
+  
+  ; <label>:34                                      ; preds = %32
+    %35 = icmp eq i32 %4, 170
+    br i1 %35, label %46, label %36
+  
+  ; <label>:36                                      ; preds = %34
+    %37 = xor i32 %4, 85
+    %38 = add nuw nsw i32 %37, 1
+    %39 = xor i32 %38, 85
+    br label %46
+  
+  ; <label>:40                                      ; preds = %32
+    %41 = icmp eq i32 %4, 85
+    br i1 %41, label %46, label %42
+  
+  ; <label>:42                                      ; preds = %40
+    %43 = xor i32 %4, 85
+    %44 = add nsw i32 %43, -1
+    %45 = xor i32 %44, 85
+    br label %46
+  
+  ; <label>:46                                      ; preds = %42, %40, %36, %34, %28, %26, %22, %20, %0
+    %.0 = phi i32 [ %4, %0 ], [ %25, %22 ], [ 85, %20 ], [ %31, %28 ], [ 42, %26 ], [ %39, %36 ], [ 170, %34 ], [ %45, %42 ], [ 213, %40 ]
+    ret i32 %.0
+  }
+  
+  declare i32 @linear2alaw(...) #4
+  
+  declare i32 @alaw2linear(...) #4
+  
+  ; Function Attrs: nounwind
+  define i32 @tandem_adjust_ulaw(i32 signext %sr, i32 signext %se, i32 signext %y, i32 signext %i, i32 signext %sign, i16* nocapture readonly %qtab) #3 {
+    %1 = icmp slt i32 %sr, -32767
+    %sr.op = shl i32 %sr, 2
+    %2 = select i1 %1, i32 0, i32 %sr.op
+    %3 = tail call i32 bitcast (i32 (...)* @linear2ulaw to i32 (i32)*)(i32 signext %2) #6
+    %4 = and i32 %3, 255
+    %5 = tail call i32 bitcast (i32 (...)* @ulaw2linear to i32 (i32)*)(i32 signext %4) #6
+    %6 = lshr i32 %5, 2
+    %7 = sub i32 %6, %se
+    %sext = shl i32 %7, 16
+    %8 = ashr exact i32 %sext, 16
+    %9 = add nsw i32 %sign, -1
+    %10 = tail call i32 @quantize(i32 signext %8, i32 signext %y, i16* %qtab, i32 signext %9)
+    %sext2 = shl i32 %10, 24
+    %11 = ashr exact i32 %sext2, 24
+    %12 = icmp eq i32 %11, %i
+    br i1 %12, label %34, label %13
+  
+  ; <label>:13                                      ; preds = %0
+    %14 = xor i32 %sign, %i
+    %15 = xor i32 %11, %sign
+    %16 = icmp sgt i32 %15, %14
+    %17 = and i32 %3, 128
+    br i1 %16, label %18, label %26
+  
+  ; <label>:18                                      ; preds = %13
+    %19 = icmp ne i32 %17, 0
+    br i1 %19, label %20, label %23
+  
+  ; <label>:20                                      ; preds = %18
+    %21 = icmp eq i32 %4, 255
+    %22 = add nuw nsw i32 %4, 1
+    %. = select i1 %21, i32 126, i32 %22
+    br label %34
+  
+  ; <label>:23                                      ; preds = %18
+    %24 = icmp eq i32 %4, 0
+    %25 = add nsw i32 %4, -1
+    %.3 = select i1 %24, i32 0, i32 %25
+    br label %34
+  
+  ; <label>:26                                      ; preds = %13
+    %27 = icmp ne i32 %17, 0
+    br i1 %27, label %28, label %31
+  
+  ; <label>:28                                      ; preds = %26
+    %29 = icmp eq i32 %4, 128
+    %30 = add nsw i32 %4, -1
+    %.4 = select i1 %29, i32 128, i32 %30
+    br label %34
+  
+  ; <label>:31                                      ; preds = %26
+    %32 = icmp eq i32 %4, 127
+    %33 = add nuw nsw i32 %4, 1
+    %.5 = select i1 %32, i32 254, i32 %33
+    br label %34
+  
+  ; <label>:34                                      ; preds = %31, %28, %23, %20, %0
+    %.0 = phi i32 [ %4, %0 ], [ %., %20 ], [ %.3, %23 ], [ %.4, %28 ], [ %.5, %31 ]
+    ret i32 %.0
+  }
+  
+  declare i32 @linear2ulaw(...) #4
+  
+  declare i32 @ulaw2linear(...) #4
+  
+  ; Function Attrs: argmemonly nounwind
+  declare void @llvm.memset.p0i8.i64(i8* nocapture, i8, i64, i32, i1) #5
+  
+  attributes #0 = { norecurse nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #1 = { norecurse nounwind readonly "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #2 = { norecurse nounwind readnone "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #3 = { nounwind "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #4 = { "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #5 = { argmemonly nounwind "target-cpu"="mips32" }
+  attributes #6 = { nounwind }
+  
+  !llvm.ident = !{!0}
+  
+  !0 = !{!"clang version 3.8.0 (http://llvm.org/git/clang.git 2d49f0a0ae8366964a93e3b7b26e29679bee7160) (http://llvm.org/git/llvm.git 60bc66b44837125843b58ed3e0fd2e6bb948d839)"}
+  !1 = !{!2, !3, i64 0}
+  !2 = !{!"g72x_state", !3, i64 0, !6, i64 4, !6, i64 6, !6, i64 8, !6, i64 10, !4, i64 12, !4, i64 16, !4, i64 28, !4, i64 32, !4, i64 44, !4, i64 48}
+  !3 = !{!"long", !4, i64 0}
+  !4 = !{!"omnipotent char", !5, i64 0}
+  !5 = !{!"Simple C/C++ TBAA"}
+  !6 = !{!"short", !4, i64 0}
+  !7 = !{!2, !6, i64 4}
+  !8 = !{!6, !6, i64 0}
+  !9 = !{!2, !4, i64 48}
+  !10 = !{!2, !6, i64 10}
+  !11 = !{!2, !6, i64 6}
+  !12 = !{!2, !6, i64 8}
+
+...
+---
+name:            predictor_zero
+alignment:       2
+exposesReturnsTwice: false
+hasInlineAsm:    false
+isSSA:           false
+tracksRegLiveness: false
+tracksSubRegLiveness: false
+liveins:         
+  - { reg: '%a0' }
+  - { reg: '%t9' }
+  - { reg: '%v0' }
+calleeSavedRegisters: [ '%fp', '%ra', '%d10', '%d11', '%d12', '%d13', '%d14', 
+                        '%d15', '%f20', '%f21', '%f22', '%f23', '%f24', 
+                        '%f25', '%f26', '%f27', '%f28', '%f29', '%f30', 
+                        '%f31', '%s0', '%s1', '%s2', '%s3', '%s4', '%s5', 
+                        '%s6', '%s7' ]
+frameInfo:       
+  isFrameAddressTaken: false
+  isReturnAddressTaken: false
+  hasStackMap:     false
+  hasPatchPoint:   false
+  stackSize:       24
+  offsetAdjustment: 0
+  maxAlignment:    4
+  adjustsStack:    true
+  hasCalls:        true
+  maxCallFrameSize: 0
+  hasOpaqueSPAdjustment: false
+  hasVAStart:      false
+  hasMustTailInVarArgFunc: false
+stack:           
+  - { id: 0, type: spill-slot, offset: -4, size: 4, alignment: 4, callee-saved-register: '%ra' }
+  - { id: 1, type: spill-slot, offset: -8, size: 4, alignment: 4, callee-saved-register: '%s4' }
+  - { id: 2, type: spill-slot, offset: -12, size: 4, alignment: 4, callee-saved-register: '%s3' }
+  - { id: 3, type: spill-slot, offset: -16, size: 4, alignment: 4, callee-saved-register: '%s2' }
+  - { id: 4, type: spill-slot, offset: -20, size: 4, alignment: 4, callee-saved-register: '%s1' }
+  - { id: 5, type: spill-slot, offset: -24, size: 4, alignment: 4, callee-saved-register: '%s0' }
+body:             |
+  bb.0 (%ir-block.0, freq 8):
+    liveins: %a0, %t9, %ra, %s4, %s3, %s2, %s1, %s0
+    liveouts:
+  
+    %v0 = LUi target-flags(<unknown>) $_gp_disp
+    %v0 = ADDiu %v0, target-flags(<unknown>) $_gp_disp
+    %sp = ADDiu %sp, -24
+    CFI_INSTRUCTION .cfi_def_cfa_offset 24
+    SW killed %ra, %sp, 20 :: (store 4 into stack)
+    SW killed %s4, %sp, 16 :: (store 4 into stack)
+    SW killed %s3, %sp, 12 :: (store 4 into stack)
+    SW killed %s2, %sp, 8 :: (store 4 into stack)
+    SW killed %s1, %sp, 4 :: (store 4 into stack)
+    SW killed %s0, %sp, 0 :: (store 4 into stack)
+    CFI_INSTRUCTION .cfi_offset %ra_64, -4
+    CFI_INSTRUCTION .cfi_offset %s4_64, -8
+    CFI_INSTRUCTION .cfi_offset %s3_64, -12
+    CFI_INSTRUCTION .cfi_offset %s2_64, -16
+    CFI_INSTRUCTION .cfi_offset %s1_64, -20
+    CFI_INSTRUCTION .cfi_offset %s0_64, -24
+    %at = ADDu %v0, %t9
+    %s0 = OR %a0, %zero
+    %s3 = LW %s0, 32 :: (load 4 from %ir.6)
+    %s4 = LW %s0, 16 :: (load 4 from %ir.2)
+    %a0 = SRA %s4, 18
+    %at = LW killed %at, target-flags(<unknown>) @fmult :: (load 4 from got)
+    %s1 = ADDiu killed %at, target-flags(<unknown>) @fmult
+    %t9 = OR %s1, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit-def %sp, implicit-def %v0 {
+      %a1 = SRA %s3, 16
+    }
+    %s2 = OR %v0, %zero
+    %at = SLL killed %s4, 16
+    %a0 = SRA killed %at, 18
+    %t9 = OR %s1, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit-def %sp, implicit-def %v0 {
+      %a1 = SEH killed %s3
+    }
+    %s2 = ADDu killed %v0, killed %s2
+    %a1 = LH %s0, 36 :: (load 2 from %ir.18, !tbaa !8)
+    %at = LH %s0, 20 :: (load 2 from %ir.14, !tbaa !8)
+    %t9 = OR %s1, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit-def %sp, implicit-def %v0 {
+      %a0 = SRA killed %at, 2
+    }
+    %s2 = ADDu killed %v0, killed %s2
+    %a1 = LH %s0, 38 :: (load 2 from %ir.27, !tbaa !8)
+    %at = LH %s0, 22 :: (load 2 from %ir.23, !tbaa !8)
+    %t9 = OR %s1, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit-def %sp, implicit-def %v0 {
+      %a0 = SRA killed %at, 2
+    }
+    %s2 = ADDu killed %v0, killed %s2
+    %a1 = LH %s0, 40 :: (load 2 from %ir.36, !tbaa !8)
+    %at = LH %s0, 24 :: (load 2 from %ir.32, !tbaa !8)
+    %t9 = OR %s1, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit-def %sp, implicit-def %v0 {
+      %a0 = SRA killed %at, 2
+    }
+    %s2 = ADDu killed %v0, killed %s2
+    %a1 = LH %s0, 42 :: (load 2 from %ir.45, !tbaa !8)
+    %at = LH killed %s0, 26 :: (load 2 from %ir.41, !tbaa !8)
+    %t9 = OR killed %s1, %zero
+    JALRPseudo %t9, csr_o32, implicit-def dead %ra, implicit %a0, implicit %a1, implicit-def %sp, implicit-def %v0 {
+      %a0 = SRA killed %at, 2
+    }
+    %v0 = ADDu killed %v0, killed %s2
+    %s0 = LW %sp, 0 :: (load 4 from stack)
+    %s1 = LW %sp, 4 :: (load 4 from stack)
+    %s2 = LW %sp, 8 :: (load 4 from stack)
+    %s3 = LW %sp, 12 :: (load 4 from stack)
+    %s4 = LW %sp, 16 :: (load 4 from stack)
+    %ra = LW %sp, 20 :: (load 4 from stack)
+    PseudoReturn %ra {
+      %sp = ADDiu %sp, 24
+    }
+
+...

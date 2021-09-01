@@ -1,0 +1,515 @@
+--- |
+  ; ModuleID = '/home/romi/didaktoriko/unison/unison-experiments/experiments/test-input/c/mediabench/mips_zip/build-mips/g721/g721.g711.ll'
+  target datalayout = "E-m:m-p:32:32-i8:8:32-i16:16:32-i64:64-n32-S64"
+  target triple = "mips--linux-gnu"
+  
+  @_u2a = global [128 x i8] c"\01\01\02\02\03\03\04\04\05\05\06\06\07\07\08\08\09\0A\0B\0C\0D\0E\0F\10\11\12\13\14\15\16\17\18\19\1B\1D\1F!\22#$%&'()*+,.0123456789:;<=>@ABCDEFGHIJKLMNOQRSTUVWXYZ[\5C]^_`abcdefghijklmnopqrstuvwxyz{|}~\7F\80", align 1
+  @_a2u = global [128 x i8] c"\01\03\05\07\09\0B\0D\0F\10\11\12\13\14\15\16\17\18\19\1A\1B\1C\1D\1E\1F  !!\22\22##$%&'()*+,-./001123456789:;<=>?@@ABCDEFGHIJKLMNOOPQRSTUVWXYZ[\5C]^_`abcdefghijklmnopqrstuvwxyz{|}~\7F", align 1
+  @seg_end = internal global [8 x i16] [i16 255, i16 511, i16 1023, i16 2047, i16 4095, i16 8191, i16 16383, i16 32767], align 4
+  
+  ; Function Attrs: norecurse nounwind readonly
+  define zeroext i8 @linear2alaw(i32 signext %pcm_val) #0 {
+    %1 = icmp sgt i32 %pcm_val, -1
+    %2 = sub i32 -8, %pcm_val
+    %.01 = select i1 %1, i32 %pcm_val, i32 %2
+    %3 = ashr i32 %pcm_val, 31
+    %4 = and i32 %3, -128
+    %5 = add nsw i32 %4, 213
+    %6 = load i32, i32* bitcast ([8 x i16]* @seg_end to i32*), align 4
+    %7 = ashr i32 %6, 16
+    %8 = icmp slt i32 %7, %.01
+    br i1 %8, label %9, label %34
+  
+  ; <label>:9                                       ; preds = %0
+    %sext = shl i32 %6, 16
+    %10 = ashr exact i32 %sext, 16
+    %11 = icmp slt i32 %10, %.01
+    br i1 %11, label %12, label %34
+  
+  ; <label>:12                                      ; preds = %9
+    %13 = load i32, i32* bitcast (i16* getelementptr inbounds ([8 x i16], [8 x i16]* @seg_end, i32 0, i32 2) to i32*), align 4
+    %14 = ashr i32 %13, 16
+    %15 = icmp slt i32 %14, %.01
+    br i1 %15, label %16, label %38
+  
+  ; <label>:16                                      ; preds = %12
+    %sext4 = shl i32 %13, 16
+    %17 = ashr exact i32 %sext4, 16
+    %18 = icmp slt i32 %17, %.01
+    br i1 %18, label %19, label %38
+  
+  ; <label>:19                                      ; preds = %16
+    %20 = load i32, i32* bitcast (i16* getelementptr inbounds ([8 x i16], [8 x i16]* @seg_end, i32 0, i32 4) to i32*), align 4
+    %21 = ashr i32 %20, 16
+    %22 = icmp slt i32 %21, %.01
+    br i1 %22, label %23, label %38
+  
+  ; <label>:23                                      ; preds = %19
+    %sext6 = shl i32 %20, 16
+    %24 = ashr exact i32 %sext6, 16
+    %25 = icmp slt i32 %24, %.01
+    br i1 %25, label %26, label %38
+  
+  ; <label>:26                                      ; preds = %23
+    %27 = load i32, i32* bitcast (i16* getelementptr inbounds ([8 x i16], [8 x i16]* @seg_end, i32 0, i32 6) to i32*), align 4
+    %28 = ashr i32 %27, 16
+    %29 = icmp slt i32 %28, %.01
+    br i1 %29, label %30, label %38
+  
+  ; <label>:30                                      ; preds = %26
+    %sext8 = shl i32 %27, 16
+    %31 = ashr exact i32 %sext8, 16
+    %32 = icmp slt i32 %31, %.01
+    br i1 %32, label %search.exit, label %38
+  
+  search.exit:                                      ; preds = %30
+    %33 = xor i32 %5, 127
+    br label %46
+  
+  ; <label>:34                                      ; preds = %9, %0
+    %.ph = phi i32 [ 16, %9 ], [ 0, %0 ]
+    %35 = lshr i32 %.01, 4
+    %36 = and i32 %35, 15
+    %37 = or i32 %.ph, %36
+    br label %44
+  
+  ; <label>:38                                      ; preds = %30, %26, %23, %19, %16, %12
+    %.ph.ph = phi i32 [ 7, %30 ], [ 2, %12 ], [ 3, %16 ], [ 4, %19 ], [ 5, %23 ], [ 6, %26 ]
+    %39 = shl nuw nsw i32 %.ph.ph, 4
+    %40 = add nuw nsw i32 %.ph.ph, 3
+    %41 = ashr i32 %.01, %40
+    %42 = and i32 %41, 15
+    %43 = or i32 %42, %39
+    br label %44
+  
+  ; <label>:44                                      ; preds = %38, %34
+    %aval.0.in = phi i32 [ %37, %34 ], [ %43, %38 ]
+    %45 = xor i32 %aval.0.in, %5
+    br label %46
+  
+  ; <label>:46                                      ; preds = %44, %search.exit
+    %.0.in = phi i32 [ %33, %search.exit ], [ %45, %44 ]
+    %.0 = trunc i32 %.0.in to i8
+    ret i8 %.0
+  }
+  
+  ; Function Attrs: norecurse nounwind readnone
+  define i32 @alaw2linear(i8 zeroext %a_val) #1 {
+    %1 = zext i8 %a_val to i32
+    %2 = xor i32 %1, 85
+    %3 = shl nuw nsw i32 %2, 4
+    %4 = and i32 %3, 240
+    %5 = lshr i32 %2, 4
+    %6 = and i32 %5, 7
+    switch i32 %6, label %11 [
+      i32 0, label %7
+      i32 1, label %9
+    ]
+  
+  ; <label>:7                                       ; preds = %0
+    %8 = or i32 %4, 8
+    br label %15
+  
+  ; <label>:9                                       ; preds = %0
+    %10 = or i32 %4, 264
+    br label %15
+  
+  ; <label>:11                                      ; preds = %0
+    %12 = or i32 %4, 264
+    %13 = add nsw i32 %6, -1
+    %14 = shl i32 %12, %13
+    br label %15
+  
+  ; <label>:15                                      ; preds = %11, %9, %7
+    %t.0 = phi i32 [ %14, %11 ], [ %10, %9 ], [ %8, %7 ]
+    %16 = and i32 %1, 128
+    %17 = icmp ne i32 %16, 0
+    %18 = sub nsw i32 0, %t.0
+    %19 = select i1 %17, i32 %t.0, i32 %18
+    ret i32 %19
+  }
+  
+  ; Function Attrs: norecurse nounwind readonly
+  define zeroext i8 @linear2ulaw(i32 signext %pcm_val) #0 {
+    %1 = icmp slt i32 %pcm_val, 0
+    %2 = ashr i32 %pcm_val, 31
+    %3 = and i32 %2, -128
+    %4 = add nsw i32 %3, 255
+    %5 = sub i32 0, %pcm_val
+    %.01.p = select i1 %1, i32 %5, i32 %pcm_val
+    %.01 = add i32 %.01.p, 132
+    %6 = load i32, i32* bitcast ([8 x i16]* @seg_end to i32*), align 4
+    %7 = ashr i32 %6, 16
+    %8 = icmp slt i32 %7, %.01
+    br i1 %8, label %9, label %34
+  
+  ; <label>:9                                       ; preds = %0
+    %sext = shl i32 %6, 16
+    %10 = ashr exact i32 %sext, 16
+    %11 = icmp slt i32 %10, %.01
+    br i1 %11, label %12, label %34
+  
+  ; <label>:12                                      ; preds = %9
+    %13 = load i32, i32* bitcast (i16* getelementptr inbounds ([8 x i16], [8 x i16]* @seg_end, i32 0, i32 2) to i32*), align 4
+    %14 = ashr i32 %13, 16
+    %15 = icmp slt i32 %14, %.01
+    br i1 %15, label %16, label %34
+  
+  ; <label>:16                                      ; preds = %12
+    %sext3 = shl i32 %13, 16
+    %17 = ashr exact i32 %sext3, 16
+    %18 = icmp slt i32 %17, %.01
+    br i1 %18, label %19, label %34
+  
+  ; <label>:19                                      ; preds = %16
+    %20 = load i32, i32* bitcast (i16* getelementptr inbounds ([8 x i16], [8 x i16]* @seg_end, i32 0, i32 4) to i32*), align 4
+    %21 = ashr i32 %20, 16
+    %22 = icmp slt i32 %21, %.01
+    br i1 %22, label %23, label %34
+  
+  ; <label>:23                                      ; preds = %19
+    %sext5 = shl i32 %20, 16
+    %24 = ashr exact i32 %sext5, 16
+    %25 = icmp slt i32 %24, %.01
+    br i1 %25, label %26, label %34
+  
+  ; <label>:26                                      ; preds = %23
+    %27 = load i32, i32* bitcast (i16* getelementptr inbounds ([8 x i16], [8 x i16]* @seg_end, i32 0, i32 6) to i32*), align 4
+    %28 = ashr i32 %27, 16
+    %29 = icmp slt i32 %28, %.01
+    br i1 %29, label %30, label %34
+  
+  ; <label>:30                                      ; preds = %26
+    %sext7 = shl i32 %27, 16
+    %31 = ashr exact i32 %sext7, 16
+    %32 = icmp slt i32 %31, %.01
+    br i1 %32, label %search.exit, label %34
+  
+  search.exit:                                      ; preds = %30
+    %33 = and i32 %4, 128
+    br label %41
+  
+  ; <label>:34                                      ; preds = %30, %26, %23, %19, %16, %12, %9, %0
+    %.ph = phi i32 [ 6, %26 ], [ 5, %23 ], [ 4, %19 ], [ 3, %16 ], [ 2, %12 ], [ 1, %9 ], [ 0, %0 ], [ 7, %30 ]
+    %35 = shl nuw nsw i32 %.ph, 4
+    %36 = add nuw nsw i32 %.ph, 3
+    %37 = ashr i32 %.01, %36
+    %38 = and i32 %37, 15
+    %39 = or i32 %38, %35
+    %40 = xor i32 %39, %4
+    br label %41
+  
+  ; <label>:41                                      ; preds = %34, %search.exit
+    %.0.in = phi i32 [ %33, %search.exit ], [ %40, %34 ]
+    %.0 = trunc i32 %.0.in to i8
+    ret i8 %.0
+  }
+  
+  ; Function Attrs: norecurse nounwind readnone
+  define i32 @ulaw2linear(i8 zeroext %u_val) #1 {
+    %1 = zext i8 %u_val to i32
+    %2 = xor i32 %1, 255
+    %3 = shl nuw nsw i32 %2, 3
+    %4 = and i32 %3, 120
+    %5 = or i32 %4, 132
+    %6 = lshr i32 %2, 4
+    %7 = and i32 %6, 7
+    %8 = shl i32 %5, %7
+    %9 = and i32 %2, 128
+    %10 = icmp ne i32 %9, 0
+    %11 = sub nsw i32 132, %8
+    %12 = add nsw i32 %8, -132
+    %13 = select i1 %10, i32 %11, i32 %12
+    ret i32 %13
+  }
+  
+  ; Function Attrs: norecurse nounwind readonly
+  define zeroext i8 @alaw2ulaw(i8 zeroext %aval) #0 {
+    %1 = zext i8 %aval to i32
+    %2 = and i32 %1, 128
+    %3 = icmp eq i32 %2, 0
+    br i1 %3, label %10, label %4
+  
+  ; <label>:4                                       ; preds = %0
+    %5 = xor i32 %1, 213
+    %6 = getelementptr inbounds [128 x i8], [128 x i8]* @_a2u, i32 0, i32 %5
+    %7 = load i8, i8* %6, align 1, !tbaa !1
+    %8 = zext i8 %7 to i32
+    %9 = xor i32 %8, 255
+    br label %16
+  
+  ; <label>:10                                      ; preds = %0
+    %11 = xor i32 %1, 85
+    %12 = getelementptr inbounds [128 x i8], [128 x i8]* @_a2u, i32 0, i32 %11
+    %13 = load i8, i8* %12, align 1, !tbaa !1
+    %14 = zext i8 %13 to i32
+    %15 = xor i32 %14, 127
+    br label %16
+  
+  ; <label>:16                                      ; preds = %10, %4
+    %17 = phi i32 [ %9, %4 ], [ %15, %10 ]
+    %18 = trunc i32 %17 to i8
+    ret i8 %18
+  }
+  
+  ; Function Attrs: norecurse nounwind readonly
+  define zeroext i8 @ulaw2alaw(i8 zeroext %uval) #0 {
+    %1 = zext i8 %uval to i32
+    %2 = and i32 %1, 128
+    %3 = icmp eq i32 %2, 0
+    br i1 %3, label %11, label %4
+  
+  ; <label>:4                                       ; preds = %0
+    %5 = xor i32 %1, 255
+    %6 = getelementptr inbounds [128 x i8], [128 x i8]* @_u2a, i32 0, i32 %5
+    %7 = load i8, i8* %6, align 1, !tbaa !1
+    %8 = zext i8 %7 to i32
+    %9 = add nsw i32 %8, -1
+    %10 = xor i32 %9, 213
+    br label %18
+  
+  ; <label>:11                                      ; preds = %0
+    %12 = xor i32 %1, 127
+    %13 = getelementptr inbounds [128 x i8], [128 x i8]* @_u2a, i32 0, i32 %12
+    %14 = load i8, i8* %13, align 1, !tbaa !1
+    %15 = zext i8 %14 to i32
+    %16 = add nsw i32 %15, -1
+    %17 = xor i32 %16, 85
+    br label %18
+  
+  ; <label>:18                                      ; preds = %11, %4
+    %19 = phi i32 [ %10, %4 ], [ %17, %11 ]
+    %20 = trunc i32 %19 to i8
+    ret i8 %20
+  }
+  
+  attributes #0 = { norecurse nounwind readonly "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  attributes #1 = { norecurse nounwind readnone "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="mips32" "target-features"="+mips32r2" "unsafe-fp-math"="false" "use-soft-float"="false" }
+  
+  !llvm.ident = !{!0}
+  
+  !0 = !{!"clang version 3.8.0 (http://llvm.org/git/clang.git 2d49f0a0ae8366964a93e3b7b26e29679bee7160) (http://llvm.org/git/llvm.git 60bc66b44837125843b58ed3e0fd2e6bb948d839)"}
+  !1 = !{!2, !2, i64 0}
+  !2 = !{!"omnipotent char", !3, i64 0}
+  !3 = !{!"Simple C/C++ TBAA"}
+
+...
+---
+name:            linear2alaw
+alignment:       2
+exposesReturnsTwice: false
+hasInlineAsm:    false
+isSSA:           true
+tracksRegLiveness: true
+tracksSubRegLiveness: false
+registers:       
+  - { id: 0, class: gpr32 }
+  - { id: 1, class: gpr32 }
+  - { id: 2, class: gpr32 }
+  - { id: 3, class: gpr32 }
+  - { id: 4, class: gpr32 }
+  - { id: 5, class: gpr32 }
+  - { id: 6, class: gpr32 }
+  - { id: 7, class: gpr32 }
+  - { id: 8, class: gpr32 }
+  - { id: 9, class: gpr32 }
+  - { id: 10, class: gpr32 }
+  - { id: 11, class: gpr32 }
+  - { id: 12, class: gpr32 }
+  - { id: 13, class: gpr32 }
+  - { id: 14, class: gpr32 }
+  - { id: 15, class: gpr32 }
+  - { id: 16, class: gpr32 }
+  - { id: 17, class: gpr32 }
+  - { id: 18, class: gpr32 }
+  - { id: 19, class: gpr32 }
+  - { id: 20, class: gpr32 }
+  - { id: 21, class: gpr32 }
+  - { id: 22, class: gpr32 }
+  - { id: 23, class: gpr32 }
+  - { id: 24, class: gpr32 }
+  - { id: 25, class: gpr32 }
+  - { id: 26, class: gpr32 }
+  - { id: 27, class: gpr32 }
+  - { id: 28, class: gpr32 }
+  - { id: 29, class: gpr32 }
+  - { id: 30, class: gpr32 }
+  - { id: 31, class: gpr32 }
+  - { id: 32, class: gpr32 }
+  - { id: 33, class: gpr32 }
+  - { id: 34, class: gpr32 }
+  - { id: 35, class: gpr32 }
+  - { id: 36, class: gpr32 }
+  - { id: 37, class: gpr32 }
+  - { id: 38, class: gpr32 }
+  - { id: 39, class: gpr32 }
+  - { id: 40, class: gpr32 }
+  - { id: 41, class: gpr32 }
+  - { id: 42, class: gpr32 }
+  - { id: 43, class: gpr32 }
+  - { id: 44, class: gpr32 }
+  - { id: 45, class: gpr32 }
+  - { id: 46, class: gpr32 }
+  - { id: 47, class: gpr32 }
+  - { id: 48, class: gpr32 }
+  - { id: 49, class: gpr32 }
+  - { id: 50, class: gpr32 }
+  - { id: 51, class: gpr32 }
+  - { id: 52, class: gpr32 }
+  - { id: 53, class: gpr32 }
+  - { id: 54, class: gpr32 }
+  - { id: 55, class: gpr32 }
+  - { id: 56, class: gpr32 }
+  - { id: 57, class: gpr32 }
+  - { id: 58, class: gpr32 }
+  - { id: 59, class: gpr32 }
+  - { id: 60, class: gpr32 }
+liveins:         
+  - { reg: '%a0', virtual-reg: '%14' }
+  - { reg: '%t9' }
+  - { reg: '%v0' }
+frameInfo:       
+  isFrameAddressTaken: false
+  isReturnAddressTaken: false
+  hasStackMap:     false
+  hasPatchPoint:   false
+  stackSize:       0
+  offsetAdjustment: 0
+  maxAlignment:    1
+  adjustsStack:    false
+  hasCalls:        false
+  maxCallFrameSize: 0
+  hasOpaqueSPAdjustment: false
+  hasVAStart:      false
+  hasMustTailInVarArgFunc: false
+body:             |
+  bb.0 (%ir-block.0, freq 2047):
+    successors: %bb.1(50), %bb.9(50)
+    liveins: %a0, %t9, %v0
+  
+    %16 = ADDu %v0, %t9
+    %14 = COPY %a0
+    %17 = ADDiu %zero, -8
+    %18 = SUBu killed %17, %14
+    %19 = SLTi %14, 0
+    %20 = SRA %14, 31
+    %21 = ADDiu %zero, -128
+    %22 = AND killed %20, killed %21
+    %0 = MOVZ_I_I %14, killed %19, %18
+    %23 = LW %16, target-flags(<unknown>) @seg_end, <0x39e9340> = !{!"unison-memory-partition", i32 0} :: (load 4 from got)
+    %2 = LW %23, target-flags(<unknown>) @seg_end, <0x39e26b0> = !{!"unison-memory-partition", i32 1} :: (load 4 from `i32* bitcast ([8 x i16]* @seg_end to i32*)`)
+    %24 = SRA %2, 16
+    %25 = SLT killed %24, %0
+    %1 = ADDiu killed %22, 213
+    %15 = ADDiu %zero, 0
+    BEQ killed %25, %zero, %bb.9, implicit-def dead %at
+    B %bb.1, implicit-def dead %at
+  
+  bb.1 (%ir-block.9, freq 1023):
+    successors: %bb.2(50), %bb.9(50)
+  
+    %27 = SEH %2
+    %28 = SLT killed %27, %0
+    %26 = ADDiu %zero, 16
+    BEQ killed %28, %zero, %bb.9, implicit-def dead %at
+    B %bb.2, implicit-def dead %at
+  
+  bb.2 (%ir-block.12, freq 511):
+    successors: %bb.3(50), %bb.10(50)
+  
+    %32 = ADDiu %23, target-flags(<unknown>) @seg_end
+    %3 = LW killed %32, 4, <0x39e9340> = !{!"unison-memory-partition", i32 0} :: (load 4 from `i32* bitcast (i16* getelementptr inbounds ([8 x i16], [8 x i16]* @seg_end, i32 0, i32 2) to i32*)`)
+    %30 = ADDiu %zero, 2
+    %33 = SRA %3, 16
+    %34 = SLT killed %33, %0
+    BEQ killed %34, %zero, %bb.10, implicit-def dead %at
+    B %bb.3, implicit-def dead %at
+  
+  bb.3 (%ir-block.16, freq 255):
+    successors: %bb.4(50), %bb.10(50)
+  
+    %36 = SEH %3
+    %37 = SLT killed %36, %0
+    %35 = ADDiu %zero, 3
+    BEQ killed %37, %zero, %bb.10, implicit-def dead %at
+    B %bb.4, implicit-def dead %at
+  
+  bb.4 (%ir-block.19, freq 127):
+    successors: %bb.5(50), %bb.10(50)
+  
+    %40 = ADDiu %23, target-flags(<unknown>) @seg_end
+    %4 = LW killed %40, 8, <0x39e9340> = !{!"unison-memory-partition", i32 0} :: (load 4 from `i32* bitcast (i16* getelementptr inbounds ([8 x i16], [8 x i16]* @seg_end, i32 0, i32 4) to i32*)`)
+    %38 = ADDiu %zero, 4
+    %41 = SRA %4, 16
+    %42 = SLT killed %41, %0
+    BEQ killed %42, %zero, %bb.10, implicit-def dead %at
+    B %bb.5, implicit-def dead %at
+  
+  bb.5 (%ir-block.23, freq 63):
+    successors: %bb.6(50), %bb.10(50)
+  
+    %44 = SEH %4
+    %45 = SLT killed %44, %0
+    %43 = ADDiu %zero, 5
+    BEQ killed %45, %zero, %bb.10, implicit-def dead %at
+    B %bb.6, implicit-def dead %at
+  
+  bb.6 (%ir-block.26, freq 31):
+    successors: %bb.7(50), %bb.10(50)
+  
+    %48 = ADDiu %23, target-flags(<unknown>) @seg_end
+    %5 = LW killed %48, 12, <0x39e9340> = !{!"unison-memory-partition", i32 0} :: (load 4 from `i32* bitcast (i16* getelementptr inbounds ([8 x i16], [8 x i16]* @seg_end, i32 0, i32 6) to i32*)`)
+    %46 = ADDiu %zero, 6
+    %49 = SRA %5, 16
+    %50 = SLT killed %49, %0
+    BEQ killed %50, %zero, %bb.10, implicit-def dead %at
+    B %bb.7, implicit-def dead %at
+  
+  bb.7 (%ir-block.30, freq 15):
+    successors: %bb.8.search.exit(50), %bb.10(50)
+  
+    %52 = SEH %5
+    %53 = SLT killed %52, %0
+    %51 = ADDiu %zero, 7
+    BEQ killed %53, %zero, %bb.10, implicit-def dead %at
+    B %bb.8.search.exit, implicit-def dead %at
+  
+  bb.8.search.exit (freq 8):
+    successors: %bb.12(100)
+  
+    %6 = XORi %1, 127
+    B %bb.12, implicit-def dead %at
+  
+  bb.9 (%ir-block.34, freq 1535):
+    successors: %bb.11(100)
+  
+    %7 = PHI %15, %bb.0, %26, %bb.1
+    %29 = EXT %0, 4, 4
+    %8 = OR %7, killed %29
+    B %bb.11, implicit-def dead %at
+  
+  bb.10 (%ir-block.38, freq 503):
+    successors: %bb.11(100)
+  
+    %9 = PHI %30, %bb.2, %35, %bb.3, %38, %bb.4, %43, %bb.5, %46, %bb.6, %51, %bb.7
+    %54 = ADDiu %9, 3
+    %55 = SRAV %0, killed %54
+    %56 = ANDi killed %55, 15
+    %57 = SLL %9, 4
+    %10 = OR killed %56, killed %57
+  
+  bb.11 (%ir-block.44, freq 2039):
+    successors: %bb.12(100)
+  
+    %11 = PHI %8, %bb.9, %10, %bb.10
+    %12 = XOR %11, %1
+  
+  bb.12 (%ir-block.46, freq 2047):
+    liveouts: %v0
+  
+    %13 = PHI %12, %bb.11, %6, %bb.8.search.exit
+    %58 = ANDi %13, 255
+    %v0 = COPY %58
+    RetRA implicit %v0
+
+...
